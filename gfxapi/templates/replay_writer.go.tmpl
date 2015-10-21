@@ -80,6 +80,7 @@
     {{end}}
         ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
       ϟc := getState(ϟs)
+      ϟobservations := ϟa.Extras().Observations()
       _ = ϟc
 
       {{Global "CurrentCommand" $}}
@@ -249,7 +250,7 @@
   ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 
   {{/* Merge the observed writes into the application pool */}}
-  ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+  ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 
   {{/* Perform the fenced statement */}}
   {{if not (IsNil $.Statement)}}

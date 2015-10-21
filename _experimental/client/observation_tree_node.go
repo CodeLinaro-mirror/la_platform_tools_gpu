@@ -40,7 +40,7 @@ func (n observationTreeNode) ItemIndex(item gxui.AdapterItem) int { return -1 }
 
 func (n observationTreeNode) Create(theme gxui.Theme) gxui.Control {
 	atom := n.ctx.atoms[n.item.atomIndex]
-	observations := atom.Observations()
+	observations := atom.Extras().Observations()
 	var r memory.Range
 	var c gxui.Color
 	if n.item.isRead {

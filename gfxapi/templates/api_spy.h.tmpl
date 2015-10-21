@@ -62,6 +62,8 @@
     {{ForEach (AllCommands $) "MethodDefinitions" | JoinWith "\n"}}
 ¶
   «protected:»
+    static const size_t kMaxExtras = 16; // Per atom
+¶
     {{Template "ApiClassnames.Imports"}} mImports;
 ¶
     // Globals
@@ -147,7 +149,7 @@
 {{define "C++.CoderArguments"}}
   {{AssertType $ "Function"}}
 
-  observations {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
+  mScratch.vector<gapic::Encodable*>(kMaxExtras) {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
 {{end}}
 
 
@@ -181,7 +183,7 @@
       }
 ¶
     {{end}}
-    {{if GetAnnotation $ "EndOfFrame"}} onPreEndOfFrameCommand(); {{end}}
+    {{if GetAnnotation $ "EndOfFrame"}} onPreEndOfFrame(); {{end}}
     Observations observations;
     do {
       {{Global "CurrentCommand" $}}
@@ -190,9 +192,10 @@
     observe(observations.mWrites);
 ¶
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
+    coder.mextras.append(&observations);
     mEncoder->Variant(&coder);
-    {{if GetAnnotation $ "DrawCall"}} onPostDrawCallCommand(); {{end}}
-
+    {{if GetAnnotation $ "DrawCall"}} onPostDrawCall(); {{end}}
+    mScratch.reset();
     {{if not (IsVoid $.Return.Type)}}¶
       return result;
     {{end}}

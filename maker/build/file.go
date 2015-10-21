@@ -137,6 +137,11 @@ func (f File) MkdirAll() {
 	}
 }
 
+// Remove deletes the file.
+func (f File) Remove() {
+	os.Remove(string(f))
+}
+
 // CopyTo copied this File to dst, replacing any existing file at dst.
 func (f File) CopyTo(dst File) error {
 	s, err := os.Open(f.Absolute())

@@ -107,11 +107,12 @@ var _ = replay.Replayer(&CmdClone{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdClone) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -128,11 +129,12 @@ var _ = replay.Replayer(&CmdMake{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdMake) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -148,15 +150,16 @@ var _ = replay.Replayer(&CmdCopy{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
 	ϟdst, ϟsrc := ϟc.U8s, ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs)
 	ϟcount := min(ϟdst.Count, ϟsrc.Count)
 	ϟdst, ϟsrc = ϟdst.Slice(0, ϟcount, ϟs), ϟsrc.Slice(0, ϟcount, ϟs)
 	ϟsrcElems := ϟsrc.Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -174,11 +177,12 @@ var _ = replay.Replayer(&CmdCharsliceToString{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdCharsliceToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.Str = string(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.Len), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -195,11 +199,12 @@ var _ = replay.Replayer(&CmdCharptrToString{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdCharptrToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.Str = strings.TrimRight(string(ϟa.S.StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -215,14 +220,15 @@ var _ = replay.Replayer(&CmdSliceCasts{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdSliceCasts) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = AsU8ˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
 	ϟc.U16s = ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs)
 	ϟc.U32s = AsU32ˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
 	ϟc.Ints = AsIntˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -239,10 +245,11 @@ var _ = replay.Replayer(&CmdVoid{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -258,10 +265,11 @@ var _ = replay.Replayer(&CmdUnknownRet{}) // interface compliance check
 // The cmdUnknownRet() return value will be stored on the stack.
 func (ϟa *CmdUnknownRet) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -277,10 +285,11 @@ var _ = replay.Replayer(&CmdUnknownWritePtr{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdUnknownWritePtr) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -297,12 +306,13 @@ var _ = replay.Replayer(&CmdUnknownWriteSlice{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdUnknownWriteSlice) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	count := int32(5)                                        // s32
 	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Intˢ
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
 		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // int
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -324,10 +334,11 @@ var _ = replay.Replayer(&CmdVoidU8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -343,10 +354,11 @@ var _ = replay.Replayer(&CmdVoidS8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -362,10 +374,11 @@ var _ = replay.Replayer(&CmdVoidU16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -381,10 +394,11 @@ var _ = replay.Replayer(&CmdVoidS16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -400,10 +414,11 @@ var _ = replay.Replayer(&CmdVoidF32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -419,10 +434,11 @@ var _ = replay.Replayer(&CmdVoidU32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -438,10 +454,11 @@ var _ = replay.Replayer(&CmdVoidS32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -457,10 +474,11 @@ var _ = replay.Replayer(&CmdVoidF64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -476,10 +494,11 @@ var _ = replay.Replayer(&CmdVoidU64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -495,10 +514,11 @@ var _ = replay.Replayer(&CmdVoidS64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -514,10 +534,11 @@ var _ = replay.Replayer(&CmdVoidBool{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -533,10 +554,11 @@ var _ = replay.Replayer(&CmdVoidString{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -552,10 +574,11 @@ var _ = replay.Replayer(&CmdVoid3Strings{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -573,8 +596,9 @@ var _ = replay.Replayer(&CmdVoid3InArrays{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(10), ϟs)
 	ϟa.B.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.C.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -583,7 +607,7 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟdst, ϟsrc = ϟdst.Slice(0, ϟcount, ϟs), ϟsrc.Slice(0, ϟcount, ϟs)
 	ϟsrcElems := ϟsrc.Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -602,15 +626,16 @@ var _ = replay.Replayer(&CmdVoidInArrayOfStrings{}) // interface compliance chec
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidInArrayOfStrings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	names := ϟa.Strings.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᶜᵖˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		name := strings.TrimRight(string(Charᵖ(names.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
 		_ = name
 	}
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = names
 	return nil
 }
@@ -628,11 +653,12 @@ var _ = replay.Replayer(&CmdVoidReadU8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u8
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -649,11 +675,12 @@ var _ = replay.Replayer(&CmdVoidReadS8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s8
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -670,11 +697,12 @@ var _ = replay.Replayer(&CmdVoidReadU16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -691,11 +719,12 @@ var _ = replay.Replayer(&CmdVoidReadS16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s16
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -712,11 +741,12 @@ var _ = replay.Replayer(&CmdVoidReadF32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -733,11 +763,12 @@ var _ = replay.Replayer(&CmdVoidReadU32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u32
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -754,11 +785,12 @@ var _ = replay.Replayer(&CmdVoidReadS32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s32
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -775,11 +807,12 @@ var _ = replay.Replayer(&CmdVoidReadF64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f64
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -796,11 +829,12 @@ var _ = replay.Replayer(&CmdVoidReadU64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u64
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -817,11 +851,12 @@ var _ = replay.Replayer(&CmdVoidReadS64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s64
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -838,11 +873,12 @@ var _ = replay.Replayer(&CmdVoidReadBool{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = x
 	return nil
 }
@@ -859,13 +895,14 @@ var _ = replay.Replayer(&CmdVoidReadPtrs{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidReadPtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
 	y := ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
 	z := ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = x, y, z
 	return nil
 }
@@ -884,10 +921,11 @@ var _ = replay.Replayer(&CmdVoidWriteU8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -904,10 +942,11 @@ var _ = replay.Replayer(&CmdVoidWriteS8{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -924,10 +963,11 @@ var _ = replay.Replayer(&CmdVoidWriteU16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -944,10 +984,11 @@ var _ = replay.Replayer(&CmdVoidWriteS16{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -964,10 +1005,11 @@ var _ = replay.Replayer(&CmdVoidWriteF32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -984,10 +1026,11 @@ var _ = replay.Replayer(&CmdVoidWriteU32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1004,10 +1047,11 @@ var _ = replay.Replayer(&CmdVoidWriteS32{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1024,10 +1068,11 @@ var _ = replay.Replayer(&CmdVoidWriteF64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1044,10 +1089,11 @@ var _ = replay.Replayer(&CmdVoidWriteU64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1064,10 +1110,11 @@ var _ = replay.Replayer(&CmdVoidWriteS64{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1084,10 +1131,11 @@ var _ = replay.Replayer(&CmdVoidWriteBool{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWriteBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(true, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1104,10 +1152,11 @@ var _ = replay.Replayer(&CmdVoidWritePtrs{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidWritePtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(10), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(20), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(false, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -1129,10 +1178,11 @@ var _ = replay.Replayer(&CmdU8{}) // interface compliance check
 // The cmdU8() return value will be stored on the stack.
 func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1149,10 +1199,11 @@ var _ = replay.Replayer(&CmdS8{}) // interface compliance check
 // The cmdS8() return value will be stored on the stack.
 func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1169,10 +1220,11 @@ var _ = replay.Replayer(&CmdU16{}) // interface compliance check
 // The cmdU16() return value will be stored on the stack.
 func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1189,10 +1241,11 @@ var _ = replay.Replayer(&CmdS16{}) // interface compliance check
 // The cmdS16() return value will be stored on the stack.
 func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1209,10 +1262,11 @@ var _ = replay.Replayer(&CmdF32{}) // interface compliance check
 // The cmdF32() return value will be stored on the stack.
 func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1229,10 +1283,11 @@ var _ = replay.Replayer(&CmdU32{}) // interface compliance check
 // The cmdU32() return value will be stored on the stack.
 func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1249,10 +1304,11 @@ var _ = replay.Replayer(&CmdS32{}) // interface compliance check
 // The cmdS32() return value will be stored on the stack.
 func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1269,10 +1325,11 @@ var _ = replay.Replayer(&CmdF64{}) // interface compliance check
 // The cmdF64() return value will be stored on the stack.
 func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1289,10 +1346,11 @@ var _ = replay.Replayer(&CmdU64{}) // interface compliance check
 // The cmdU64() return value will be stored on the stack.
 func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1309,10 +1367,11 @@ var _ = replay.Replayer(&CmdS64{}) // interface compliance check
 // The cmdS64() return value will be stored on the stack.
 func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1329,10 +1388,11 @@ var _ = replay.Replayer(&CmdBool{}) // interface compliance check
 // The cmdBool() return value will be stored on the stack.
 func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1349,10 +1409,11 @@ var _ = replay.Replayer(&CmdString{}) // interface compliance check
 // The cmdString() return value will be stored on the stack.
 func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1369,10 +1430,11 @@ var _ = replay.Replayer(&CmdPointer{}) // interface compliance check
 // The cmdPointer() return value will be stored on the stack.
 func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1388,10 +1450,11 @@ var _ = replay.Replayer(&CmdVoid3Remapped{}) // interface compliance check
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1421,11 +1484,12 @@ var _ = replay.Replayer(&CmdVoidInArrayOfRemapped{}) // interface compliance che
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidInArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 
@@ -1441,10 +1505,11 @@ var _ = replay.Replayer(&CmdVoidOutArrayOfRemapped{}) // interface compliance ch
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -1461,12 +1526,13 @@ var _ = replay.Replayer(&CmdVoidOutArrayOfUnknownRemapped{}) // interface compli
 // necessary state-mutation and memory observations to ϟs.
 func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	count := int32(5)                                        // s32
 	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Remappedˢ
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
 		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // remapped
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -1489,10 +1555,11 @@ var _ = replay.Replayer(&CmdRemapped{}) // interface compliance check
 // The cmdRemapped() return value will be stored on the stack.
 func (ϟa *CmdRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
+	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 

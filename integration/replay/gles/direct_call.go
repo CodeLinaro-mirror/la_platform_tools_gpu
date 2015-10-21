@@ -47,9 +47,9 @@ func (c directCall) Replay(i atom.ID, s *gfxapi.State, d database.Database, l lo
 }
 
 // atom.Atom compliance
-func (c directCall) API() gfxapi.ID                   { return c.atom.API() }
-func (c directCall) Flags() atom.Flags                { return c.atom.Flags() }
-func (c directCall) Observations() *atom.Observations { return c.atom.Observations() }
+func (c directCall) API() gfxapi.ID      { return c.atom.API() }
+func (c directCall) Flags() atom.Flags   { return c.atom.Flags() }
+func (c directCall) Extras() atom.Extras { return c.atom.Extras() }
 func (c directCall) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error {
 	return c.atom.Mutate(s, d, l)
 }

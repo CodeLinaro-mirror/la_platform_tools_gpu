@@ -29,21 +29,37 @@ type Observations struct {
 	Writes []Observation
 }
 
-func (o Observations) String() string {
+func (o *Observations) String() string {
 	return fmt.Sprintf("Reads: %v, Writes: %v", o.Reads, o.Writes)
 }
 
+// AddRead appends the read to the list of observations.
+func (o *Observations) AddRead(rng memory.Range, id binary.ID) {
+	o.Reads = append(o.Reads, Observation{Range: rng, ID: id})
+}
+
+// AddWrite appends the write to the list of observations.
+func (o *Observations) AddWrite(rng memory.Range, id binary.ID) {
+	o.Writes = append(o.Writes, Observation{Range: rng, ID: id})
+}
+
 // ApplyReads applies all the observed reads to memory pool p.
-func (o Observations) ApplyReads(p *memory.Pool) {
-	for _, r := range o.Reads {
-		p.Write(r.Range.Base, memory.Resource(r.ID, r.Range.Size))
+// This is a no-op when called when o is nil.
+func (o *Observations) ApplyReads(p *memory.Pool) {
+	if o != nil {
+		for _, r := range o.Reads {
+			p.Write(r.Range.Base, memory.Resource(r.ID, r.Range.Size))
+		}
 	}
 }
 
 // ApplyReads applies all the observed writes to the memory pool p.
-func (o Observations) ApplyWrites(p *memory.Pool) {
-	for _, w := range o.Writes {
-		p.Write(w.Range.Base, memory.Resource(w.ID, w.Range.Size))
+// This is a no-op when called when o is nil.
+func (o *Observations) ApplyWrites(p *memory.Pool) {
+	if o != nil {
+		for _, w := range o.Writes {
+			p.Write(w.Range.Base, memory.Resource(w.ID, w.Range.Size))
+		}
 	}
 }
 

@@ -259,7 +259,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					// By moving the draw call's observations earlier, populate the element array buffer.
 					size, base := DataTypeSize(a.IndicesType)*int(a.IndicesCount), a.Indices.Pointer
 					glBufferData := NewGlBufferData(GLenum_GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(size), base, GLenum_GL_STATIC_DRAW)
-					glBufferData.observations = a.observations
+					glBufferData.extras = a.extras
 					out.Write(atom.NoID, glBufferData)
 
 					// Clean-up
@@ -274,7 +274,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 						// The indices are also in client memory, so we need to apply the
 						// atom's reads now so that the indices can be read from the
 						// application pool.
-						a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
+						a.Extras().Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 						limits := e.calcIndexLimits(U8ᵖ(a.Indices), a.IndicesType, 0, uint32(a.IndicesCount))
 						defer moveClientVBsToVAs(int(limits.Min), int(limits.Max), i, a, s, c, d, l, out)()
 					}
@@ -404,7 +404,7 @@ func moveClientVBsToVAs(
 	// Apply the memory observations that were made by the draw call now.
 	// We need to do this as the glBufferData calls below will require the data.
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-		a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
+		a.Extras().Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 		return nil
 	}))
 

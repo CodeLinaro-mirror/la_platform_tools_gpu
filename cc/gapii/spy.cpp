@@ -287,7 +287,7 @@ void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
                          preserve_buffers_on_swap);
 }
 
-void Spy::onPostDrawCallCommand() {
+void Spy::onPostDrawCall() {
     if (mObserveDrawFrequency != 0 && (mNumDraws % mObserveDrawFrequency == 0)) {
         GAPID_INFO("Observe framebuffer after draw call %d", mNumDraws);
         observeFramebuffer();
@@ -296,7 +296,7 @@ void Spy::onPostDrawCallCommand() {
     mNumDrawsPerFrame++;
 }
 
-void Spy::onPreEndOfFrameCommand() {
+void Spy::onPreEndOfFrame() {
     if (mObserveFrameFrequency != 0 && (mNumFrames % mObserveFrameFrequency == 0)) {
         GAPID_INFO("Observe framebuffer after frame %d", mNumFrames);
         observeFramebuffer();
@@ -319,7 +319,7 @@ void Spy::observeFramebuffer() {
     if (data != nullptr) {
         mImports.glReadPixels(0, 0, int32_t(w), int32_t(h),
                 GLenum::GL_RGBA, GLenum::GL_UNSIGNED_BYTE, data);
-        gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Array<uint8_t>(data, size));
+        gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Vector<uint8_t>(data, size));
         mEncoder->Variant(&coder);
         delete [] data;
     } else {

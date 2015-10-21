@@ -19,9 +19,16 @@
 using gapic::coder::memory::Range;
 using gapic::Interval;
 
+namespace {
+
+const size_t SCRATCH_BUFFER_SIZE = 64*1024;
+
+}  // anonymous namespace
+
 namespace gapii {
 
-// Inline methods
+SpyBase::SpyBase() : mScratch(SCRATCH_BUFFER_SIZE) {}
+
 void SpyBase::init(std::shared_ptr<gapic::Encoder> encoder) {
     mEncoder = encoder;
 }
@@ -29,30 +36,30 @@ void SpyBase::init(std::shared_ptr<gapic::Encoder> encoder) {
 void SpyBase::read(const void* base, uint64_t size) {
     if (size > 0) {
         uintptr_t start = reinterpret_cast<uintptr_t>(base);
-        mPendingObservations.merge(Interval<uintptr_t>{start, start + size});
+        uintptr_t end = start + static_cast<uintptr_t>(size);
+        mPendingObservations.merge(Interval<uintptr_t>{start, end});
     }
 }
 
 void SpyBase::write(const void* base, uint64_t size) {
     if (size > 0) {
         uintptr_t start = reinterpret_cast<uintptr_t>(base);
-        mPendingObservations.merge(Interval<uintptr_t>{start, start + size});
+        uintptr_t end = start + static_cast<uintptr_t>(size);
+        mPendingObservations.merge(Interval<uintptr_t>{start, end});
     }
 }
 
-void SpyBase::observe(gapic::Array<Observation>& observations) {
-    std::vector<Observation>& v = observations.vector();
-    v.clear();
-    v.reserve(mPendingObservations.count());
+void SpyBase::observe(gapic::Vector<Observation>& observations) {
+    observations = mScratch.vector<Observation>(mPendingObservations.count());
     for (auto p : mPendingObservations) {
-        gapic::Array<uint8_t> array(reinterpret_cast<uint8_t*>(p.start), p.end - p.start);
-        gapic::Id id = gapic::Id::Hash(array.data(), array.size());
+        gapic::Vector<uint8_t> data(reinterpret_cast<uint8_t*>(p.start), p.end - p.start);
+        gapic::Id id = gapic::Id::Hash(data.data(), data.count());
         if (mResources.count(id) == 0) {
-            gapic::coder::atom::Resource resource(id, array);
+            gapic::coder::atom::Resource resource(id, data);
             mEncoder->Variant(&resource);
             mResources.emplace(id);
         }
-        v.push_back(Observation(Range(p.start, array.size()), id));
+        observations.append(Observation(Range(p.start, data.count()), id));
     }
     mPendingObservations.clear();
 }

@@ -115,6 +115,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 	}
 
 	depfile := depFileFor(output, cfg, env).Absolute()
+	build.File(depfile).Remove()
 
 	a := append([]string{
 		"-c", // Compile to .o
@@ -137,10 +138,9 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 	}
 	a = append(a, input.Name(), "-o", output.Absolute())
 	dir := build.File(input.Dir())
-	if err := tools.cc.ExecAt(env, dir, a...); err != nil {
-		return err
-	}
-	return cpp.MakeDepsAbsolute(depfile, dir.Absolute(), env)
+	err = tools.cc.ExecAt(env, dir, a...)
+	cpp.MakeDepsAbsolute(depfile, dir.Absolute(), env)
+	return err
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {

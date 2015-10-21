@@ -7,9 +7,10 @@
 #ifndef GAPIC_CODER_GLES_H
 #define GAPIC_CODER_GLES_H
 
-#include "gapic/schema.h"
-#include "gapic/coder/atom.h"
-#include "gapic/coder/memory.h"
+#include <gapic/schema.h>
+#include <gapic/vector.h>
+#include <gapic/coder/atom.h>
+#include <gapic/coder/memory.h>
 namespace gapic {
 
 class Encodable;
@@ -20,8 +21,8 @@ namespace gles {
     class Architecture: public Encodable {
     public:
         Architecture() = default;
-        Architecture(atom::Observations observations, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
-            mobservations(observations),
+        Architecture(gapic::Vector<gapic::Encodable*> extras, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
+            mextras(extras),
             mPointerAlignment(PointerAlignment),
             mPointerSize(PointerSize),
             mIntegerSize(IntegerSize),
@@ -31,7 +32,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPointerAlignment;
         uint32_t mPointerSize;
         uint32_t mIntegerSize;
@@ -294,8 +295,8 @@ namespace gles {
     class CGLCreateContext: public Encodable {
     public:
         CGLCreateContext() = default;
-        CGLCreateContext(atom::Observations observations, CGLTexelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
-            mobservations(observations),
+        CGLCreateContext(gapic::Vector<gapic::Encodable*> extras, CGLTexelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
+            mextras(extras),
             mPix(Pix),
             mShare(Share),
             mCtx(Ctx),
@@ -305,7 +306,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         CGLTexelFormatObj mPix;
         CGLContextObj mShare;
         CGLContextObj__P mCtx;
@@ -315,12 +316,15 @@ namespace gles {
     class CGLFlushDrawable: public Encodable {
     public:
         CGLFlushDrawable() = default;
-        CGLFlushDrawable(atom::Observations observations, CGLContextObj Ctx, int64_t Result) :
-            mobservations(observations),
+        CGLFlushDrawable(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, int64_t Result) :
+            mextras(extras),
             mCtx(Ctx),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCtx);
             e->Int64(this->mResult);
         }
@@ -328,7 +332,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         CGLContextObj mCtx;
         int64_t mResult;
     };
@@ -381,8 +385,8 @@ namespace gles {
     class CGLGetSurface: public Encodable {
     public:
         CGLGetSurface() = default;
-        CGLGetSurface(atom::Observations observations, CGLContextObj Ctx, CGSConnectionID__P Cid, CGSWindowID__P Wid, CGSSurfaceID__P Sid, int64_t Result) :
-            mobservations(observations),
+        CGLGetSurface(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, CGSConnectionID__P Cid, CGSWindowID__P Wid, CGSSurfaceID__P Sid, int64_t Result) :
+            mextras(extras),
             mCtx(Ctx),
             mCid(Cid),
             mWid(Wid),
@@ -393,7 +397,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         CGLContextObj mCtx;
         CGSConnectionID__P mCid;
         CGSWindowID__P mWid;
@@ -404,12 +408,15 @@ namespace gles {
     class CGLSetCurrentContext: public Encodable {
     public:
         CGLSetCurrentContext() = default;
-        CGLSetCurrentContext(atom::Observations observations, CGLContextObj Ctx, int64_t Result) :
-            mobservations(observations),
+        CGLSetCurrentContext(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, int64_t Result) :
+            mextras(extras),
             mCtx(Ctx),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCtx);
             e->Int64(this->mResult);
         }
@@ -417,7 +424,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         CGLContextObj mCtx;
         int64_t mResult;
     };
@@ -470,8 +477,8 @@ namespace gles {
     class CGSGetSurfaceBounds: public Encodable {
     public:
         CGSGetSurfaceBounds() = default;
-        CGSGetSurfaceBounds(atom::Observations observations, CGSConnectionID Cid, int32_t Wid, int32_t Sid, F64__P Bounds, int64_t Result) :
-            mobservations(observations),
+        CGSGetSurfaceBounds(gapic::Vector<gapic::Encodable*> extras, CGSConnectionID Cid, int32_t Wid, int32_t Sid, F64__P Bounds, int64_t Result) :
+            mextras(extras),
             mCid(Cid),
             mWid(Wid),
             mSid(Sid),
@@ -482,7 +489,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         CGSConnectionID mCid;
         int32_t mWid;
         int32_t mSid;
@@ -1232,8 +1239,8 @@ namespace gles {
     class ContextInfo: public Encodable {
     public:
         ContextInfo() = default;
-        ContextInfo(atom::Observations observations, uint32_t ConstantCount, GLenum__P ConstantNames, U32__P ConstantOffsets, U32__P ConstantSizes, U8__P ConstantData, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
-            mobservations(observations),
+        ContextInfo(gapic::Vector<gapic::Encodable*> extras, uint32_t ConstantCount, GLenum__P ConstantNames, U32__P ConstantOffsets, U32__P ConstantSizes, U8__P ConstantData, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
+            mextras(extras),
             mConstantCount(ConstantCount),
             mConstantNames(ConstantNames),
             mConstantOffsets(ConstantOffsets),
@@ -1251,7 +1258,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mConstantCount;
         GLenum__P mConstantNames;
         U32__P mConstantOffsets;
@@ -1359,8 +1366,8 @@ namespace gles {
     class EglCreateContext: public Encodable {
     public:
         EglCreateContext() = default;
-        EglCreateContext(atom::Observations observations, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLint__P AttribList, EGLContext Result) :
-            mobservations(observations),
+        EglCreateContext(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLint__P AttribList, EGLContext Result) :
+            mextras(extras),
             mDisplay(Display),
             mConfig(Config),
             mShareContext(ShareContext),
@@ -1371,7 +1378,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         EGLDisplay mDisplay;
         EGLConfig mConfig;
         EGLContext mShareContext;
@@ -1382,8 +1389,8 @@ namespace gles {
     class EglInitialize: public Encodable {
     public:
         EglInitialize() = default;
-        EglInitialize(atom::Observations observations, EGLDisplay Dpy, EGLint__P Major, EGLint__P Minor, int64_t Result) :
-            mobservations(observations),
+        EglInitialize(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Dpy, EGLint__P Major, EGLint__P Minor, int64_t Result) :
+            mextras(extras),
             mDpy(Dpy),
             mMajor(Major),
             mMinor(Minor),
@@ -1393,7 +1400,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         EGLDisplay mDpy;
         EGLint__P mMajor;
         EGLint__P mMinor;
@@ -1403,8 +1410,8 @@ namespace gles {
     class EglMakeCurrent: public Encodable {
     public:
         EglMakeCurrent() = default;
-        EglMakeCurrent(atom::Observations observations, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, int64_t Result) :
-            mobservations(observations),
+        EglMakeCurrent(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
             mRead(Read),
@@ -1415,7 +1422,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         EGLDisplay mDisplay;
         EGLSurface mDraw;
         EGLSurface mRead;
@@ -1426,8 +1433,8 @@ namespace gles {
     class EglQuerySurface: public Encodable {
     public:
         EglQuerySurface() = default;
-        EglQuerySurface(atom::Observations observations, EGLDisplay Display, EGLSurface Surface, int64_t Attribute, EGLint__P Value, int64_t Result) :
-            mobservations(observations),
+        EglQuerySurface(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLSurface Surface, int64_t Attribute, EGLint__P Value, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mSurface(Surface),
             mAttribute(Attribute),
@@ -1438,7 +1445,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         EGLDisplay mDisplay;
         EGLSurface mSurface;
         int64_t mAttribute;
@@ -1464,8 +1471,8 @@ namespace gles {
     class EglSwapBuffers: public Encodable {
     public:
         EglSwapBuffers() = default;
-        EglSwapBuffers(atom::Observations observations, EGLDisplay Display, Void__P Surface, int64_t Result) :
-            mobservations(observations),
+        EglSwapBuffers(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, Void__P Surface, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mSurface(Surface),
             mResult(Result) {}
@@ -1474,7 +1481,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         EGLDisplay mDisplay;
         Void__P mSurface;
         int64_t mResult;
@@ -1498,16 +1505,19 @@ namespace gles {
     class FlushPostBuffer: public Encodable {
     public:
         FlushPostBuffer() = default;
-        FlushPostBuffer(atom::Observations observations) :
-            mobservations(observations) {}
+        FlushPostBuffer(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class FramebufferId__S: public Encodable {
@@ -2296,12 +2306,15 @@ namespace gles {
     class GlActiveShaderProgram: public Encodable {
     public:
         GlActiveShaderProgram() = default;
-        GlActiveShaderProgram(atom::Observations observations, uint32_t Pipeline, uint32_t Program) :
-            mobservations(observations),
+        GlActiveShaderProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Program) :
+            mextras(extras),
             mPipeline(Pipeline),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
             e->Uint32(this->mProgram);
         }
@@ -2309,7 +2322,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mProgram;
     };
@@ -2317,12 +2330,15 @@ namespace gles {
     class GlActiveShaderProgramEXT: public Encodable {
     public:
         GlActiveShaderProgramEXT() = default;
-        GlActiveShaderProgramEXT(atom::Observations observations, uint32_t Pipeline, uint32_t Program) :
-            mobservations(observations),
+        GlActiveShaderProgramEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Program) :
+            mextras(extras),
             mPipeline(Pipeline),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
             e->Uint32(this->mProgram);
         }
@@ -2330,7 +2346,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mProgram;
     };
@@ -2338,30 +2354,36 @@ namespace gles {
     class GlActiveTexture: public Encodable {
     public:
         GlActiveTexture() = default;
-        GlActiveTexture(atom::Observations observations, uint32_t Unit) :
-            mobservations(observations),
+        GlActiveTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit) :
+            mextras(extras),
             mUnit(Unit) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mUnit);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mUnit;
     };
 
     class GlAlphaFunc: public Encodable {
     public:
         GlAlphaFunc() = default;
-        GlAlphaFunc(atom::Observations observations, uint32_t Func, float Ref) :
-            mobservations(observations),
+        GlAlphaFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, float Ref) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunc);
             e->Float32(this->mRef);
         }
@@ -2369,7 +2391,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         float mRef;
     };
@@ -2377,12 +2399,15 @@ namespace gles {
     class GlAlphaFuncQCOM: public Encodable {
     public:
         GlAlphaFuncQCOM() = default;
-        GlAlphaFuncQCOM(atom::Observations observations, uint32_t Func, float Ref) :
-            mobservations(observations),
+        GlAlphaFuncQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, float Ref) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunc);
             e->Float32(this->mRef);
         }
@@ -2390,7 +2415,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         float mRef;
     };
@@ -2398,12 +2423,15 @@ namespace gles {
     class GlAlphaFuncx: public Encodable {
     public:
         GlAlphaFuncx() = default;
-        GlAlphaFuncx(atom::Observations observations, uint32_t Func, int32_t Ref) :
-            mobservations(observations),
+        GlAlphaFuncx(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunc);
             e->Int32(this->mRef);
         }
@@ -2411,7 +2439,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         int32_t mRef;
     };
@@ -2419,12 +2447,15 @@ namespace gles {
     class GlAlphaFuncxOES: public Encodable {
     public:
         GlAlphaFuncxOES() = default;
-        GlAlphaFuncxOES(atom::Observations observations, uint32_t Func, int32_t Ref) :
-            mobservations(observations),
+        GlAlphaFuncxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunc);
             e->Int32(this->mRef);
         }
@@ -2432,7 +2463,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         int32_t mRef;
     };
@@ -2440,27 +2471,33 @@ namespace gles {
     class GlApplyFramebufferAttachmentCMAAINTEL: public Encodable {
     public:
         GlApplyFramebufferAttachmentCMAAINTEL() = default;
-        GlApplyFramebufferAttachmentCMAAINTEL(atom::Observations observations) :
-            mobservations(observations) {}
+        GlApplyFramebufferAttachmentCMAAINTEL(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlAttachShader: public Encodable {
     public:
         GlAttachShader() = default;
-        GlAttachShader(atom::Observations observations, uint32_t Program, uint32_t Shader) :
-            mobservations(observations),
+        GlAttachShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shader) :
+            mextras(extras),
             mProgram(Program),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
@@ -2468,7 +2505,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mShader;
     };
@@ -2476,12 +2513,15 @@ namespace gles {
     class GlBeginConditionalRenderNV: public Encodable {
     public:
         GlBeginConditionalRenderNV() = default;
-        GlBeginConditionalRenderNV(atom::Observations observations, uint32_t Id, uint32_t Mode) :
-            mobservations(observations),
+        GlBeginConditionalRenderNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Id, uint32_t Mode) :
+            mextras(extras),
             mId(Id),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mId);
             e->Uint32(this->mMode);
         }
@@ -2489,7 +2529,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mId;
         uint32_t mMode;
     };
@@ -2497,48 +2537,57 @@ namespace gles {
     class GlBeginPerfMonitorAMD: public Encodable {
     public:
         GlBeginPerfMonitorAMD() = default;
-        GlBeginPerfMonitorAMD(atom::Observations observations, uint32_t Monitor) :
-            mobservations(observations),
+        GlBeginPerfMonitorAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor) :
+            mextras(extras),
             mMonitor(Monitor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMonitor);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMonitor;
     };
 
     class GlBeginPerfQueryINTEL: public Encodable {
     public:
         GlBeginPerfQueryINTEL() = default;
-        GlBeginPerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
-            mobservations(observations),
+        GlBeginPerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+            mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQueryHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryHandle;
     };
 
     class GlBeginQuery: public Encodable {
     public:
         GlBeginQuery() = default;
-        GlBeginQuery(atom::Observations observations, uint32_t Target, uint32_t Query) :
-            mobservations(observations),
+        GlBeginQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Query) :
+            mextras(extras),
             mTarget(Target),
             mQuery(Query) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
@@ -2546,7 +2595,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mQuery;
     };
@@ -2554,12 +2603,15 @@ namespace gles {
     class GlBeginQueryEXT: public Encodable {
     public:
         GlBeginQueryEXT() = default;
-        GlBeginQueryEXT(atom::Observations observations, uint32_t Target, uint32_t Query) :
-            mobservations(observations),
+        GlBeginQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Query) :
+            mextras(extras),
             mTarget(Target),
             mQuery(Query) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
@@ -2567,7 +2619,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mQuery;
     };
@@ -2575,26 +2627,29 @@ namespace gles {
     class GlBeginTransformFeedback: public Encodable {
     public:
         GlBeginTransformFeedback() = default;
-        GlBeginTransformFeedback(atom::Observations observations, uint32_t PrimitiveMode) :
-            mobservations(observations),
+        GlBeginTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t PrimitiveMode) :
+            mextras(extras),
             mPrimitiveMode(PrimitiveMode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPrimitiveMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPrimitiveMode;
     };
 
     class GlBindAttribLocation: public Encodable {
     public:
         GlBindAttribLocation() = default;
-        GlBindAttribLocation(atom::Observations observations, uint32_t Program, uint32_t Location, char* Name) :
-            mobservations(observations),
+        GlBindAttribLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Location, char* Name) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mName(Name) {}
@@ -2603,7 +2658,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mLocation;
         char* mName;
@@ -2612,12 +2667,15 @@ namespace gles {
     class GlBindBuffer: public Encodable {
     public:
         GlBindBuffer() = default;
-        GlBindBuffer(atom::Observations observations, uint32_t Target, uint32_t Buffer) :
-            mobservations(observations),
+        GlBindBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Buffer) :
+            mextras(extras),
             mTarget(Target),
             mBuffer(Buffer) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mBuffer);
         }
@@ -2625,7 +2683,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mBuffer;
     };
@@ -2633,8 +2691,8 @@ namespace gles {
     class GlBindBufferBase: public Encodable {
     public:
         GlBindBufferBase() = default;
-        GlBindBufferBase(atom::Observations observations, uint32_t Target, uint32_t Index, uint32_t Buffer) :
-            mobservations(observations),
+        GlBindBufferBase(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint32_t Buffer) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mBuffer(Buffer) {}
@@ -2643,7 +2701,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint32_t mBuffer;
@@ -2652,8 +2710,8 @@ namespace gles {
     class GlBindBufferRange: public Encodable {
     public:
         GlBindBufferRange() = default;
-        GlBindBufferRange(atom::Observations observations, uint32_t Target, uint32_t Index, uint32_t Buffer, int32_t Offset, int32_t Size) :
-            mobservations(observations),
+        GlBindBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint32_t Buffer, int32_t Offset, int32_t Size) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mBuffer(Buffer),
@@ -2664,7 +2722,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint32_t mBuffer;
@@ -2675,8 +2733,8 @@ namespace gles {
     class GlBindFragDataLocationEXT: public Encodable {
     public:
         GlBindFragDataLocationEXT() = default;
-        GlBindFragDataLocationEXT(atom::Observations observations, uint32_t Program, uint32_t Color, char* Name) :
-            mobservations(observations),
+        GlBindFragDataLocationEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Color, char* Name) :
+            mextras(extras),
             mProgram(Program),
             mColor(Color),
             mName(Name) {}
@@ -2685,7 +2743,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mColor;
         char* mName;
@@ -2694,8 +2752,8 @@ namespace gles {
     class GlBindFragDataLocationIndexedEXT: public Encodable {
     public:
         GlBindFragDataLocationIndexedEXT() = default;
-        GlBindFragDataLocationIndexedEXT(atom::Observations observations, uint32_t Program, uint32_t ColorNumber, uint32_t Index, char* Name) :
-            mobservations(observations),
+        GlBindFragDataLocationIndexedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ColorNumber, uint32_t Index, char* Name) :
+            mextras(extras),
             mProgram(Program),
             mColorNumber(ColorNumber),
             mIndex(Index),
@@ -2705,7 +2763,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mColorNumber;
         uint32_t mIndex;
@@ -2715,12 +2773,15 @@ namespace gles {
     class GlBindFramebuffer: public Encodable {
     public:
         GlBindFramebuffer() = default;
-        GlBindFramebuffer(atom::Observations observations, uint32_t Target, uint32_t Framebuffer) :
-            mobservations(observations),
+        GlBindFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Framebuffer) :
+            mextras(extras),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mFramebuffer);
         }
@@ -2728,7 +2789,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mFramebuffer;
     };
@@ -2736,12 +2797,15 @@ namespace gles {
     class GlBindFramebufferOES: public Encodable {
     public:
         GlBindFramebufferOES() = default;
-        GlBindFramebufferOES(atom::Observations observations, uint32_t Target, uint32_t Framebuffer) :
-            mobservations(observations),
+        GlBindFramebufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Framebuffer) :
+            mextras(extras),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mFramebuffer);
         }
@@ -2749,7 +2813,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mFramebuffer;
     };
@@ -2757,8 +2821,8 @@ namespace gles {
     class GlBindImageTexture: public Encodable {
     public:
         GlBindImageTexture() = default;
-        GlBindImageTexture(atom::Observations observations, uint32_t Unit, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Access, uint32_t Format) :
-            mobservations(observations),
+        GlBindImageTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Access, uint32_t Format) :
+            mextras(extras),
             mUnit(Unit),
             mTexture(Texture),
             mLevel(Level),
@@ -2771,7 +2835,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mUnit;
         uint32_t mTexture;
         int32_t mLevel;
@@ -2784,48 +2848,57 @@ namespace gles {
     class GlBindProgramPipeline: public Encodable {
     public:
         GlBindProgramPipeline() = default;
-        GlBindProgramPipeline(atom::Observations observations, uint32_t Pipeline) :
-            mobservations(observations),
+        GlBindProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+            mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
     };
 
     class GlBindProgramPipelineEXT: public Encodable {
     public:
         GlBindProgramPipelineEXT() = default;
-        GlBindProgramPipelineEXT(atom::Observations observations, uint32_t Pipeline) :
-            mobservations(observations),
+        GlBindProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+            mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
     };
 
     class GlBindRenderbuffer: public Encodable {
     public:
         GlBindRenderbuffer() = default;
-        GlBindRenderbuffer(atom::Observations observations, uint32_t Target, uint32_t Renderbuffer) :
-            mobservations(observations),
+        GlBindRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Renderbuffer) :
+            mextras(extras),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mRenderbuffer);
         }
@@ -2833,7 +2906,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mRenderbuffer;
     };
@@ -2841,12 +2914,15 @@ namespace gles {
     class GlBindRenderbufferOES: public Encodable {
     public:
         GlBindRenderbufferOES() = default;
-        GlBindRenderbufferOES(atom::Observations observations, uint32_t Target, uint32_t Renderbuffer) :
-            mobservations(observations),
+        GlBindRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Renderbuffer) :
+            mextras(extras),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mRenderbuffer);
         }
@@ -2854,7 +2930,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mRenderbuffer;
     };
@@ -2862,12 +2938,15 @@ namespace gles {
     class GlBindSampler: public Encodable {
     public:
         GlBindSampler() = default;
-        GlBindSampler(atom::Observations observations, uint32_t Unit, uint32_t Sampler) :
-            mobservations(observations),
+        GlBindSampler(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit, uint32_t Sampler) :
+            mextras(extras),
             mUnit(Unit),
             mSampler(Sampler) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mUnit);
             e->Uint32(this->mSampler);
         }
@@ -2875,7 +2954,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mUnit;
         uint32_t mSampler;
     };
@@ -2883,12 +2962,15 @@ namespace gles {
     class GlBindTexture: public Encodable {
     public:
         GlBindTexture() = default;
-        GlBindTexture(atom::Observations observations, uint32_t Target, uint32_t Texture) :
-            mobservations(observations),
+        GlBindTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Texture) :
+            mextras(extras),
             mTarget(Target),
             mTexture(Texture) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mTexture);
         }
@@ -2896,7 +2978,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mTexture;
     };
@@ -2904,12 +2986,15 @@ namespace gles {
     class GlBindTransformFeedback: public Encodable {
     public:
         GlBindTransformFeedback() = default;
-        GlBindTransformFeedback(atom::Observations observations, uint32_t Target, uint32_t Id) :
-            mobservations(observations),
+        GlBindTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Id) :
+            mextras(extras),
             mTarget(Target),
             mId(Id) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mId);
         }
@@ -2917,7 +3002,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mId;
     };
@@ -2925,44 +3010,50 @@ namespace gles {
     class GlBindVertexArray: public Encodable {
     public:
         GlBindVertexArray() = default;
-        GlBindVertexArray(atom::Observations observations, uint32_t Array) :
-            mobservations(observations),
+        GlBindVertexArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+            mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
     };
 
     class GlBindVertexArrayOES: public Encodable {
     public:
         GlBindVertexArrayOES() = default;
-        GlBindVertexArrayOES(atom::Observations observations, uint32_t Array) :
-            mobservations(observations),
+        GlBindVertexArrayOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+            mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
     };
 
     class GlBindVertexBuffer: public Encodable {
     public:
         GlBindVertexBuffer() = default;
-        GlBindVertexBuffer(atom::Observations observations, uint32_t BindingIndex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
-            mobservations(observations),
+        GlBindVertexBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t BindingIndex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
+            mextras(extras),
             mBindingIndex(BindingIndex),
             mBuffer(Buffer),
             mOffset(Offset),
@@ -2972,7 +3063,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBindingIndex;
         uint32_t mBuffer;
         int32_t mOffset;
@@ -2982,53 +3073,62 @@ namespace gles {
     class GlBlendBarrier: public Encodable {
     public:
         GlBlendBarrier() = default;
-        GlBlendBarrier(atom::Observations observations) :
-            mobservations(observations) {}
+        GlBlendBarrier(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlBlendBarrierKHR: public Encodable {
     public:
         GlBlendBarrierKHR() = default;
-        GlBlendBarrierKHR(atom::Observations observations) :
-            mobservations(observations) {}
+        GlBlendBarrierKHR(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlBlendBarrierNV: public Encodable {
     public:
         GlBlendBarrierNV() = default;
-        GlBlendBarrierNV(atom::Observations observations) :
-            mobservations(observations) {}
+        GlBlendBarrierNV(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlBlendColor: public Encodable {
     public:
         GlBlendColor() = default;
-        GlBlendColor(atom::Observations observations, float Red, float Green, float Blue, float Alpha) :
-            mobservations(observations),
+        GlBlendColor(gapic::Vector<gapic::Encodable*> extras, float Red, float Green, float Blue, float Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -3038,7 +3138,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mRed;
         float mGreen;
         float mBlue;
@@ -3048,48 +3148,57 @@ namespace gles {
     class GlBlendEquation: public Encodable {
     public:
         GlBlendEquation() = default;
-        GlBlendEquation(atom::Observations observations, uint32_t Equation) :
-            mobservations(observations),
+        GlBlendEquation(gapic::Vector<gapic::Encodable*> extras, uint32_t Equation) :
+            mextras(extras),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mEquation);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mEquation;
     };
 
     class GlBlendEquationOES: public Encodable {
     public:
         GlBlendEquationOES() = default;
-        GlBlendEquationOES(atom::Observations observations, uint32_t Mode) :
-            mobservations(observations),
+        GlBlendEquationOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+            mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
     };
 
     class GlBlendEquationSeparate: public Encodable {
     public:
         GlBlendEquationSeparate() = default;
-        GlBlendEquationSeparate(atom::Observations observations, uint32_t Rgb, uint32_t Alpha) :
-            mobservations(observations),
+        GlBlendEquationSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Rgb, uint32_t Alpha) :
+            mextras(extras),
             mRgb(Rgb),
             mAlpha(Alpha) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mRgb);
             e->Uint32(this->mAlpha);
         }
@@ -3097,7 +3206,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mRgb;
         uint32_t mAlpha;
     };
@@ -3105,12 +3214,15 @@ namespace gles {
     class GlBlendEquationSeparateOES: public Encodable {
     public:
         GlBlendEquationSeparateOES() = default;
-        GlBlendEquationSeparateOES(atom::Observations observations, uint32_t ModeRGB, uint32_t ModeAlpha) :
-            mobservations(observations),
+        GlBlendEquationSeparateOES(gapic::Vector<gapic::Encodable*> extras, uint32_t ModeRGB, uint32_t ModeAlpha) :
+            mextras(extras),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mModeRGB);
             e->Uint32(this->mModeAlpha);
         }
@@ -3118,7 +3230,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mModeRGB;
         uint32_t mModeAlpha;
     };
@@ -3126,8 +3238,8 @@ namespace gles {
     class GlBlendEquationSeparatei: public Encodable {
     public:
         GlBlendEquationSeparatei() = default;
-        GlBlendEquationSeparatei(atom::Observations observations, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
-            mobservations(observations),
+        GlBlendEquationSeparatei(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
@@ -3136,7 +3248,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mModeRGB;
         uint32_t mModeAlpha;
@@ -3145,8 +3257,8 @@ namespace gles {
     class GlBlendEquationSeparateiEXT: public Encodable {
     public:
         GlBlendEquationSeparateiEXT() = default;
-        GlBlendEquationSeparateiEXT(atom::Observations observations, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
-            mobservations(observations),
+        GlBlendEquationSeparateiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
@@ -3155,7 +3267,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mModeRGB;
         uint32_t mModeAlpha;
@@ -3164,8 +3276,8 @@ namespace gles {
     class GlBlendEquationSeparateiOES: public Encodable {
     public:
         GlBlendEquationSeparateiOES() = default;
-        GlBlendEquationSeparateiOES(atom::Observations observations, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
-            mobservations(observations),
+        GlBlendEquationSeparateiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
@@ -3174,7 +3286,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mModeRGB;
         uint32_t mModeAlpha;
@@ -3183,12 +3295,15 @@ namespace gles {
     class GlBlendEquationi: public Encodable {
     public:
         GlBlendEquationi() = default;
-        GlBlendEquationi(atom::Observations observations, uint32_t Buf, uint32_t Mode) :
-            mobservations(observations),
+        GlBlendEquationi(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+            mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
@@ -3196,7 +3311,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mMode;
     };
@@ -3204,12 +3319,15 @@ namespace gles {
     class GlBlendEquationiEXT: public Encodable {
     public:
         GlBlendEquationiEXT() = default;
-        GlBlendEquationiEXT(atom::Observations observations, uint32_t Buf, uint32_t Mode) :
-            mobservations(observations),
+        GlBlendEquationiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+            mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
@@ -3217,7 +3335,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mMode;
     };
@@ -3225,12 +3343,15 @@ namespace gles {
     class GlBlendEquationiOES: public Encodable {
     public:
         GlBlendEquationiOES() = default;
-        GlBlendEquationiOES(atom::Observations observations, uint32_t Buf, uint32_t Mode) :
-            mobservations(observations),
+        GlBlendEquationiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+            mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
@@ -3238,7 +3359,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mMode;
     };
@@ -3246,12 +3367,15 @@ namespace gles {
     class GlBlendFunc: public Encodable {
     public:
         GlBlendFunc() = default;
-        GlBlendFunc(atom::Observations observations, uint32_t SrcFactor, uint32_t DstFactor) :
-            mobservations(observations),
+        GlBlendFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcFactor, uint32_t DstFactor) :
+            mextras(extras),
             mSrcFactor(SrcFactor),
             mDstFactor(DstFactor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mSrcFactor);
             e->Uint32(this->mDstFactor);
         }
@@ -3259,7 +3383,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcFactor;
         uint32_t mDstFactor;
     };
@@ -3267,8 +3391,8 @@ namespace gles {
     class GlBlendFuncSeparate: public Encodable {
     public:
         GlBlendFuncSeparate() = default;
-        GlBlendFuncSeparate(atom::Observations observations, uint32_t SrcFactorRgb, uint32_t DstFactorRgb, uint32_t SrcFactorAlpha, uint32_t DstFactorAlpha) :
-            mobservations(observations),
+        GlBlendFuncSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcFactorRgb, uint32_t DstFactorRgb, uint32_t SrcFactorAlpha, uint32_t DstFactorAlpha) :
+            mextras(extras),
             mSrcFactorRgb(SrcFactorRgb),
             mDstFactorRgb(DstFactorRgb),
             mSrcFactorAlpha(SrcFactorAlpha),
@@ -3278,7 +3402,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcFactorRgb;
         uint32_t mDstFactorRgb;
         uint32_t mSrcFactorAlpha;
@@ -3288,8 +3412,8 @@ namespace gles {
     class GlBlendFuncSeparateOES: public Encodable {
     public:
         GlBlendFuncSeparateOES() = default;
-        GlBlendFuncSeparateOES(atom::Observations observations, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
-            mobservations(observations),
+        GlBlendFuncSeparateOES(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+            mextras(extras),
             mSrcRGB(SrcRGB),
             mDstRGB(DstRGB),
             mSrcAlpha(SrcAlpha),
@@ -3299,7 +3423,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcRGB;
         uint32_t mDstRGB;
         uint32_t mSrcAlpha;
@@ -3309,8 +3433,8 @@ namespace gles {
     class GlBlendFuncSeparatei: public Encodable {
     public:
         GlBlendFuncSeparatei() = default;
-        GlBlendFuncSeparatei(atom::Observations observations, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
-            mobservations(observations),
+        GlBlendFuncSeparatei(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
             mDstRGB(DstRGB),
@@ -3321,7 +3445,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrcRGB;
         uint32_t mDstRGB;
@@ -3332,8 +3456,8 @@ namespace gles {
     class GlBlendFuncSeparateiEXT: public Encodable {
     public:
         GlBlendFuncSeparateiEXT() = default;
-        GlBlendFuncSeparateiEXT(atom::Observations observations, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
-            mobservations(observations),
+        GlBlendFuncSeparateiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
             mDstRGB(DstRGB),
@@ -3344,7 +3468,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrcRGB;
         uint32_t mDstRGB;
@@ -3355,8 +3479,8 @@ namespace gles {
     class GlBlendFuncSeparateiOES: public Encodable {
     public:
         GlBlendFuncSeparateiOES() = default;
-        GlBlendFuncSeparateiOES(atom::Observations observations, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
-            mobservations(observations),
+        GlBlendFuncSeparateiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+            mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
             mDstRGB(DstRGB),
@@ -3367,7 +3491,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrcRGB;
         uint32_t mDstRGB;
@@ -3378,8 +3502,8 @@ namespace gles {
     class GlBlendFunci: public Encodable {
     public:
         GlBlendFunci() = default;
-        GlBlendFunci(atom::Observations observations, uint32_t Buf, uint32_t Src, uint32_t Dst) :
-            mobservations(observations),
+        GlBlendFunci(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+            mextras(extras),
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
@@ -3388,7 +3512,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrc;
         uint32_t mDst;
@@ -3397,8 +3521,8 @@ namespace gles {
     class GlBlendFunciEXT: public Encodable {
     public:
         GlBlendFunciEXT() = default;
-        GlBlendFunciEXT(atom::Observations observations, uint32_t Buf, uint32_t Src, uint32_t Dst) :
-            mobservations(observations),
+        GlBlendFunciEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+            mextras(extras),
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
@@ -3407,7 +3531,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrc;
         uint32_t mDst;
@@ -3416,8 +3540,8 @@ namespace gles {
     class GlBlendFunciOES: public Encodable {
     public:
         GlBlendFunciOES() = default;
-        GlBlendFunciOES(atom::Observations observations, uint32_t Buf, uint32_t Src, uint32_t Dst) :
-            mobservations(observations),
+        GlBlendFunciOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+            mextras(extras),
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
@@ -3426,7 +3550,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuf;
         uint32_t mSrc;
         uint32_t mDst;
@@ -3435,12 +3559,15 @@ namespace gles {
     class GlBlendParameteriNV: public Encodable {
     public:
         GlBlendParameteriNV() = default;
-        GlBlendParameteriNV(atom::Observations observations, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlBlendParameteriNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
@@ -3448,7 +3575,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mValue;
     };
@@ -3456,8 +3583,8 @@ namespace gles {
     class GlBlitFramebuffer: public Encodable {
     public:
         GlBlitFramebuffer() = default;
-        GlBlitFramebuffer(atom::Observations observations, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
-            mobservations(observations),
+        GlBlitFramebuffer(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+            mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
             mSrcX1(SrcX1),
@@ -3473,7 +3600,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSrcX0;
         int32_t mSrcY0;
         int32_t mSrcX1;
@@ -3489,8 +3616,8 @@ namespace gles {
     class GlBlitFramebufferANGLE: public Encodable {
     public:
         GlBlitFramebufferANGLE() = default;
-        GlBlitFramebufferANGLE(atom::Observations observations, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
-            mobservations(observations),
+        GlBlitFramebufferANGLE(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+            mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
             mSrcX1(SrcX1),
@@ -3506,7 +3633,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSrcX0;
         int32_t mSrcY0;
         int32_t mSrcX1;
@@ -3522,8 +3649,8 @@ namespace gles {
     class GlBlitFramebufferNV: public Encodable {
     public:
         GlBlitFramebufferNV() = default;
-        GlBlitFramebufferNV(atom::Observations observations, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
-            mobservations(observations),
+        GlBlitFramebufferNV(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+            mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
             mSrcX1(SrcX1),
@@ -3539,7 +3666,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSrcX0;
         int32_t mSrcY0;
         int32_t mSrcX1;
@@ -3555,8 +3682,8 @@ namespace gles {
     class GlBufferData: public Encodable {
     public:
         GlBufferData() = default;
-        GlBufferData(atom::Observations observations, uint32_t Target, int32_t Size, BufferDataPointer Data, uint32_t Usage) :
-            mobservations(observations),
+        GlBufferData(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Size, BufferDataPointer Data, uint32_t Usage) :
+            mextras(extras),
             mTarget(Target),
             mSize(Size),
             mData(Data),
@@ -3566,7 +3693,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSize;
         BufferDataPointer mData;
@@ -3591,8 +3718,8 @@ namespace gles {
     class GlBufferStorageEXT: public Encodable {
     public:
         GlBufferStorageEXT() = default;
-        GlBufferStorageEXT(atom::Observations observations, uint32_t Target, int32_t Size, Void__CP Data, uint32_t Flag) :
-            mobservations(observations),
+        GlBufferStorageEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Size, Void__CP Data, uint32_t Flag) :
+            mextras(extras),
             mTarget(Target),
             mSize(Size),
             mData(Data),
@@ -3602,7 +3729,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSize;
         Void__CP mData;
@@ -3612,8 +3739,8 @@ namespace gles {
     class GlBufferSubData: public Encodable {
     public:
         GlBufferSubData() = default;
-        GlBufferSubData(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Size, BufferDataPointer Data) :
-            mobservations(observations),
+        GlBufferSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Size, BufferDataPointer Data) :
+            mextras(extras),
             mTarget(Target),
             mOffset(Offset),
             mSize(Size),
@@ -3623,7 +3750,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mOffset;
         int32_t mSize;
@@ -3633,12 +3760,15 @@ namespace gles {
     class GlCheckFramebufferStatus: public Encodable {
     public:
         GlCheckFramebufferStatus() = default;
-        GlCheckFramebufferStatus(atom::Observations observations, uint32_t Target, uint32_t Result) :
-            mobservations(observations),
+        GlCheckFramebufferStatus(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Result) :
+            mextras(extras),
             mTarget(Target),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mResult);
         }
@@ -3646,7 +3776,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mResult;
     };
@@ -3654,12 +3784,15 @@ namespace gles {
     class GlCheckFramebufferStatusOES: public Encodable {
     public:
         GlCheckFramebufferStatusOES() = default;
-        GlCheckFramebufferStatusOES(atom::Observations observations, uint32_t Target, uint32_t Result) :
-            mobservations(observations),
+        GlCheckFramebufferStatusOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Result) :
+            mextras(extras),
             mTarget(Target),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mResult);
         }
@@ -3667,7 +3800,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mResult;
     };
@@ -3675,26 +3808,29 @@ namespace gles {
     class GlClear: public Encodable {
     public:
         GlClear() = default;
-        GlClear(atom::Observations observations, uint32_t Mask) :
-            mobservations(observations),
+        GlClear(gapic::Vector<gapic::Encodable*> extras, uint32_t Mask) :
+            mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMask);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMask;
     };
 
     class GlClearBufferfi: public Encodable {
     public:
         GlClearBufferfi() = default;
-        GlClearBufferfi(atom::Observations observations, uint32_t Buffer, int32_t Drawbuffer, float Depth, int32_t Stencil) :
-            mobservations(observations),
+        GlClearBufferfi(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, float Depth, int32_t Stencil) :
+            mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mDepth(Depth),
@@ -3704,7 +3840,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
         float mDepth;
@@ -3714,8 +3850,8 @@ namespace gles {
     class GlClearBufferfv: public Encodable {
     public:
         GlClearBufferfv() = default;
-        GlClearBufferfv(atom::Observations observations, uint32_t Buffer, int32_t Drawbuffer, GLfloat__CP Value) :
-            mobservations(observations),
+        GlClearBufferfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLfloat__CP Value) :
+            mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
@@ -3724,7 +3860,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
         GLfloat__CP mValue;
@@ -3733,8 +3869,8 @@ namespace gles {
     class GlClearBufferiv: public Encodable {
     public:
         GlClearBufferiv() = default;
-        GlClearBufferiv(atom::Observations observations, uint32_t Buffer, int32_t Drawbuffer, GLint__CP Value) :
-            mobservations(observations),
+        GlClearBufferiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLint__CP Value) :
+            mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
@@ -3743,7 +3879,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
         GLint__CP mValue;
@@ -3752,8 +3888,8 @@ namespace gles {
     class GlClearBufferuiv: public Encodable {
     public:
         GlClearBufferuiv() = default;
-        GlClearBufferuiv(atom::Observations observations, uint32_t Buffer, int32_t Drawbuffer, GLuint__CP Value) :
-            mobservations(observations),
+        GlClearBufferuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLuint__CP Value) :
+            mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
@@ -3762,7 +3898,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
         GLuint__CP mValue;
@@ -3771,8 +3907,8 @@ namespace gles {
     class GlClearColor: public Encodable {
     public:
         GlClearColor() = default;
-        GlClearColor(atom::Observations observations, float R, float G, float B, float A) :
-            mobservations(observations),
+        GlClearColor(gapic::Vector<gapic::Encodable*> extras, float R, float G, float B, float A) :
+            mextras(extras),
             mR(R),
             mG(G),
             mB(B),
@@ -3782,7 +3918,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mR;
         float mG;
         float mB;
@@ -3792,8 +3928,8 @@ namespace gles {
     class GlClearColorx: public Encodable {
     public:
         GlClearColorx() = default;
-        GlClearColorx(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
-            mobservations(observations),
+        GlClearColorx(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -3803,7 +3939,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mRed;
         int32_t mGreen;
         int32_t mBlue;
@@ -3813,8 +3949,8 @@ namespace gles {
     class GlClearColorxOES: public Encodable {
     public:
         GlClearColorxOES() = default;
-        GlClearColorxOES(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
-            mobservations(observations),
+        GlClearColorxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -3824,7 +3960,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mRed;
         int32_t mGreen;
         int32_t mBlue;
@@ -3834,116 +3970,134 @@ namespace gles {
     class GlClearDepthf: public Encodable {
     public:
         GlClearDepthf() = default;
-        GlClearDepthf(atom::Observations observations, float Depth) :
-            mobservations(observations),
+        GlClearDepthf(gapic::Vector<gapic::Encodable*> extras, float Depth) :
+            mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mDepth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mDepth;
     };
 
     class GlClearDepthfOES: public Encodable {
     public:
         GlClearDepthfOES() = default;
-        GlClearDepthfOES(atom::Observations observations, float Depth) :
-            mobservations(observations),
+        GlClearDepthfOES(gapic::Vector<gapic::Encodable*> extras, float Depth) :
+            mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mDepth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mDepth;
     };
 
     class GlClearDepthx: public Encodable {
     public:
         GlClearDepthx() = default;
-        GlClearDepthx(atom::Observations observations, int32_t Depth) :
-            mobservations(observations),
+        GlClearDepthx(gapic::Vector<gapic::Encodable*> extras, int32_t Depth) :
+            mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mDepth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mDepth;
     };
 
     class GlClearDepthxOES: public Encodable {
     public:
         GlClearDepthxOES() = default;
-        GlClearDepthxOES(atom::Observations observations, int32_t Depth) :
-            mobservations(observations),
+        GlClearDepthxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Depth) :
+            mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mDepth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mDepth;
     };
 
     class GlClearStencil: public Encodable {
     public:
         GlClearStencil() = default;
-        GlClearStencil(atom::Observations observations, int32_t Stencil) :
-            mobservations(observations),
+        GlClearStencil(gapic::Vector<gapic::Encodable*> extras, int32_t Stencil) :
+            mextras(extras),
             mStencil(Stencil) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mStencil);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mStencil;
     };
 
     class GlClientActiveTexture: public Encodable {
     public:
         GlClientActiveTexture() = default;
-        GlClientActiveTexture(atom::Observations observations, uint32_t Texture) :
-            mobservations(observations),
+        GlClientActiveTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture) :
+            mextras(extras),
             mTexture(Texture) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTexture);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
     };
 
     class GlClientWaitSync: public Encodable {
     public:
         GlClientWaitSync() = default;
-        GlClientWaitSync(atom::Observations observations, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout, uint32_t Result) :
-            mobservations(observations),
+        GlClientWaitSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout, uint32_t Result) :
+            mextras(extras),
             mSync(Sync),
             mSyncFlags(SyncFlags),
             mTimeout(Timeout),
@@ -3953,7 +4107,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mSyncFlags;
         uint64_t mTimeout;
@@ -3963,8 +4117,8 @@ namespace gles {
     class GlClientWaitSyncAPPLE: public Encodable {
     public:
         GlClientWaitSyncAPPLE() = default;
-        GlClientWaitSyncAPPLE(atom::Observations observations, uint64_t Sync, uint32_t Flag, uint64_t Timeout, uint32_t Result) :
-            mobservations(observations),
+        GlClientWaitSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout, uint32_t Result) :
+            mextras(extras),
             mSync(Sync),
             mFlag(Flag),
             mTimeout(Timeout),
@@ -3974,7 +4128,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mFlag;
         uint64_t mTimeout;
@@ -3984,12 +4138,15 @@ namespace gles {
     class GlClipPlanef: public Encodable {
     public:
         GlClipPlanef() = default;
-        GlClipPlanef(atom::Observations observations, uint32_t P, GLfloat__CP Eqn) :
-            mobservations(observations),
+        GlClipPlanef(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfloat__CP Eqn) :
+            mextras(extras),
             mP(P),
             mEqn(Eqn) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mP);
             e->Struct(this->mEqn);
         }
@@ -3997,7 +4154,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mP;
         GLfloat__CP mEqn;
     };
@@ -4005,12 +4162,15 @@ namespace gles {
     class GlClipPlanefIMG: public Encodable {
     public:
         GlClipPlanefIMG() = default;
-        GlClipPlanefIMG(atom::Observations observations, uint32_t P, GLfloat__CP Eqn) :
-            mobservations(observations),
+        GlClipPlanefIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfloat__CP Eqn) :
+            mextras(extras),
             mP(P),
             mEqn(Eqn) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mP);
             e->Struct(this->mEqn);
         }
@@ -4018,7 +4178,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mP;
         GLfloat__CP mEqn;
     };
@@ -4026,12 +4186,15 @@ namespace gles {
     class GlClipPlanefOES: public Encodable {
     public:
         GlClipPlanefOES() = default;
-        GlClipPlanefOES(atom::Observations observations, uint32_t Plane, GLfloat__CP Equation) :
-            mobservations(observations),
+        GlClipPlanefOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__CP Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -4039,7 +4202,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfloat__CP mEquation;
     };
@@ -4047,12 +4210,15 @@ namespace gles {
     class GlClipPlanex: public Encodable {
     public:
         GlClipPlanex() = default;
-        GlClipPlanex(atom::Observations observations, uint32_t Plane, GLfixed__CP Equation) :
-            mobservations(observations),
+        GlClipPlanex(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__CP Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -4060,7 +4226,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfixed__CP mEquation;
     };
@@ -4068,12 +4234,15 @@ namespace gles {
     class GlClipPlanexIMG: public Encodable {
     public:
         GlClipPlanexIMG() = default;
-        GlClipPlanexIMG(atom::Observations observations, uint32_t P, GLfixed__CP Eqn) :
-            mobservations(observations),
+        GlClipPlanexIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfixed__CP Eqn) :
+            mextras(extras),
             mP(P),
             mEqn(Eqn) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mP);
             e->Struct(this->mEqn);
         }
@@ -4081,7 +4250,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mP;
         GLfixed__CP mEqn;
     };
@@ -4089,12 +4258,15 @@ namespace gles {
     class GlClipPlanexOES: public Encodable {
     public:
         GlClipPlanexOES() = default;
-        GlClipPlanexOES(atom::Observations observations, uint32_t Plane, GLfixed__CP Equation) :
-            mobservations(observations),
+        GlClipPlanexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__CP Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -4102,7 +4274,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfixed__CP mEquation;
     };
@@ -4110,8 +4282,8 @@ namespace gles {
     class GlColor4f: public Encodable {
     public:
         GlColor4f() = default;
-        GlColor4f(atom::Observations observations, float Red, float Green, float Blue, float Alpha) :
-            mobservations(observations),
+        GlColor4f(gapic::Vector<gapic::Encodable*> extras, float Red, float Green, float Blue, float Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -4121,7 +4293,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mRed;
         float mGreen;
         float mBlue;
@@ -4131,8 +4303,8 @@ namespace gles {
     class GlColor4ub: public Encodable {
     public:
         GlColor4ub() = default;
-        GlColor4ub(atom::Observations observations, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
-            mobservations(observations),
+        GlColor4ub(gapic::Vector<gapic::Encodable*> extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -4142,7 +4314,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mRed;
         uint8_t mGreen;
         uint8_t mBlue;
@@ -4152,8 +4324,8 @@ namespace gles {
     class GlColor4x: public Encodable {
     public:
         GlColor4x() = default;
-        GlColor4x(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
-            mobservations(observations),
+        GlColor4x(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -4163,7 +4335,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mRed;
         int32_t mGreen;
         int32_t mBlue;
@@ -4173,8 +4345,8 @@ namespace gles {
     class GlColor4xOES: public Encodable {
     public:
         GlColor4xOES() = default;
-        GlColor4xOES(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
-            mobservations(observations),
+        GlColor4xOES(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -4184,7 +4356,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mRed;
         int32_t mGreen;
         int32_t mBlue;
@@ -4194,8 +4366,8 @@ namespace gles {
     class GlColorMask: public Encodable {
     public:
         GlColorMask() = default;
-        GlColorMask(atom::Observations observations, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
-            mobservations(observations),
+        GlColorMask(gapic::Vector<gapic::Encodable*> extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
+            mextras(extras),
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
@@ -4205,7 +4377,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mRed;
         uint8_t mGreen;
         uint8_t mBlue;
@@ -4215,8 +4387,8 @@ namespace gles {
     class GlColorMaski: public Encodable {
     public:
         GlColorMaski() = default;
-        GlColorMaski(atom::Observations observations, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
-            mobservations(observations),
+        GlColorMaski(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+            mextras(extras),
             mIndex(Index),
             mR(R),
             mG(G),
@@ -4227,7 +4399,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint8_t mR;
         uint8_t mG;
@@ -4238,8 +4410,8 @@ namespace gles {
     class GlColorMaskiEXT: public Encodable {
     public:
         GlColorMaskiEXT() = default;
-        GlColorMaskiEXT(atom::Observations observations, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
-            mobservations(observations),
+        GlColorMaskiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+            mextras(extras),
             mIndex(Index),
             mR(R),
             mG(G),
@@ -4250,7 +4422,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint8_t mR;
         uint8_t mG;
@@ -4261,8 +4433,8 @@ namespace gles {
     class GlColorMaskiOES: public Encodable {
     public:
         GlColorMaskiOES() = default;
-        GlColorMaskiOES(atom::Observations observations, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
-            mobservations(observations),
+        GlColorMaskiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+            mextras(extras),
             mIndex(Index),
             mR(R),
             mG(G),
@@ -4273,7 +4445,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint8_t mR;
         uint8_t mG;
@@ -4284,8 +4456,8 @@ namespace gles {
     class GlColorPointer: public Encodable {
     public:
         GlColorPointer() = default;
-        GlColorPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlColorPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -4295,7 +4467,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -4305,8 +4477,8 @@ namespace gles {
     class GlColorPointerBounds: public Encodable {
     public:
         GlColorPointerBounds() = default;
-        GlColorPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlColorPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -4317,7 +4489,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -4328,18 +4500,21 @@ namespace gles {
     class GlCompileShader: public Encodable {
     public:
         GlCompileShader() = default;
-        GlCompileShader(atom::Observations observations, uint32_t Shader) :
-            mobservations(observations),
+        GlCompileShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader) :
+            mextras(extras),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mShader);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
     };
 
@@ -4361,8 +4536,8 @@ namespace gles {
     class GlCompressedTexImage2D: public Encodable {
     public:
         GlCompressedTexImage2D() = default;
-        GlCompressedTexImage2D(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mFormat(Format),
@@ -4376,7 +4551,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mFormat;
@@ -4390,8 +4565,8 @@ namespace gles {
     class GlCompressedTexImage3D: public Encodable {
     public:
         GlCompressedTexImage3D() = default;
-        GlCompressedTexImage3D(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mInternalformat(Internalformat),
@@ -4406,7 +4581,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mInternalformat;
@@ -4421,8 +4596,8 @@ namespace gles {
     class GlCompressedTexImage3DOES: public Encodable {
     public:
         GlCompressedTexImage3DOES() = default;
-        GlCompressedTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mInternalformat(Internalformat),
@@ -4437,7 +4612,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mInternalformat;
@@ -4452,8 +4627,8 @@ namespace gles {
     class GlCompressedTexSubImage2D: public Encodable {
     public:
         GlCompressedTexSubImage2D() = default;
-        GlCompressedTexSubImage2D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4468,7 +4643,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4483,8 +4658,8 @@ namespace gles {
     class GlCompressedTexSubImage3D: public Encodable {
     public:
         GlCompressedTexSubImage3D() = default;
-        GlCompressedTexSubImage3D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4501,7 +4676,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4518,8 +4693,8 @@ namespace gles {
     class GlCompressedTexSubImage3DOES: public Encodable {
     public:
         GlCompressedTexSubImage3DOES() = default;
-        GlCompressedTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
-            mobservations(observations),
+        GlCompressedTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4536,7 +4711,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4553,8 +4728,8 @@ namespace gles {
     class GlCopyBufferSubData: public Encodable {
     public:
         GlCopyBufferSubData() = default;
-        GlCopyBufferSubData(atom::Observations observations, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
-            mobservations(observations),
+        GlCopyBufferSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
+            mextras(extras),
             mReadTarget(ReadTarget),
             mWriteTarget(WriteTarget),
             mReadOffset(ReadOffset),
@@ -4565,7 +4740,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mReadTarget;
         uint32_t mWriteTarget;
         int32_t mReadOffset;
@@ -4576,8 +4751,8 @@ namespace gles {
     class GlCopyBufferSubDataNV: public Encodable {
     public:
         GlCopyBufferSubDataNV() = default;
-        GlCopyBufferSubDataNV(atom::Observations observations, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
-            mobservations(observations),
+        GlCopyBufferSubDataNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
+            mextras(extras),
             mReadTarget(ReadTarget),
             mWriteTarget(WriteTarget),
             mReadOffset(ReadOffset),
@@ -4588,7 +4763,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mReadTarget;
         uint32_t mWriteTarget;
         int32_t mReadOffset;
@@ -4599,8 +4774,8 @@ namespace gles {
     class GlCopyImageSubData: public Encodable {
     public:
         GlCopyImageSubData() = default;
-        GlCopyImageSubData(atom::Observations observations, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
-            mobservations(observations),
+        GlCopyImageSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+            mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
             mSrcLevel(SrcLevel),
@@ -4621,7 +4796,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
         int32_t mSrcLevel;
@@ -4642,8 +4817,8 @@ namespace gles {
     class GlCopyImageSubDataEXT: public Encodable {
     public:
         GlCopyImageSubDataEXT() = default;
-        GlCopyImageSubDataEXT(atom::Observations observations, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
-            mobservations(observations),
+        GlCopyImageSubDataEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+            mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
             mSrcLevel(SrcLevel),
@@ -4664,7 +4839,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
         int32_t mSrcLevel;
@@ -4685,8 +4860,8 @@ namespace gles {
     class GlCopyImageSubDataOES: public Encodable {
     public:
         GlCopyImageSubDataOES() = default;
-        GlCopyImageSubDataOES(atom::Observations observations, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
-            mobservations(observations),
+        GlCopyImageSubDataOES(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+            mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
             mSrcLevel(SrcLevel),
@@ -4707,7 +4882,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
         int32_t mSrcLevel;
@@ -4728,12 +4903,15 @@ namespace gles {
     class GlCopyPathNV: public Encodable {
     public:
         GlCopyPathNV() = default;
-        GlCopyPathNV(atom::Observations observations, uint32_t ResultPath, uint32_t SrcPath) :
-            mobservations(observations),
+        GlCopyPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t SrcPath) :
+            mextras(extras),
             mResultPath(ResultPath),
             mSrcPath(SrcPath) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResultPath);
             e->Uint32(this->mSrcPath);
         }
@@ -4741,7 +4919,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResultPath;
         uint32_t mSrcPath;
     };
@@ -4749,8 +4927,8 @@ namespace gles {
     class GlCopyTexImage2D: public Encodable {
     public:
         GlCopyTexImage2D() = default;
-        GlCopyTexImage2D(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
-            mobservations(observations),
+        GlCopyTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mFormat(Format),
@@ -4764,7 +4942,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mFormat;
@@ -4778,8 +4956,8 @@ namespace gles {
     class GlCopyTexSubImage2D: public Encodable {
     public:
         GlCopyTexSubImage2D() = default;
-        GlCopyTexSubImage2D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlCopyTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4793,7 +4971,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4807,8 +4985,8 @@ namespace gles {
     class GlCopyTexSubImage3D: public Encodable {
     public:
         GlCopyTexSubImage3D() = default;
-        GlCopyTexSubImage3D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlCopyTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4823,7 +5001,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4838,8 +5016,8 @@ namespace gles {
     class GlCopyTexSubImage3DOES: public Encodable {
     public:
         GlCopyTexSubImage3DOES() = default;
-        GlCopyTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlCopyTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -4854,7 +5032,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -4869,8 +5047,8 @@ namespace gles {
     class GlCopyTextureLevelsAPPLE: public Encodable {
     public:
         GlCopyTextureLevelsAPPLE() = default;
-        GlCopyTextureLevelsAPPLE(atom::Observations observations, uint32_t DestinationTexture, uint32_t SourceTexture, int32_t SourceBaseLevel, int32_t SourceLevelCount) :
-            mobservations(observations),
+        GlCopyTextureLevelsAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t DestinationTexture, uint32_t SourceTexture, int32_t SourceBaseLevel, int32_t SourceLevelCount) :
+            mextras(extras),
             mDestinationTexture(DestinationTexture),
             mSourceTexture(SourceTexture),
             mSourceBaseLevel(SourceBaseLevel),
@@ -4880,7 +5058,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDestinationTexture;
         uint32_t mSourceTexture;
         int32_t mSourceBaseLevel;
@@ -4890,8 +5068,8 @@ namespace gles {
     class GlCoverFillPathInstancedNV: public Encodable {
     public:
         GlCoverFillPathInstancedNV() = default;
-        GlCoverFillPathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlCoverFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -4904,7 +5082,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -4917,12 +5095,15 @@ namespace gles {
     class GlCoverFillPathNV: public Encodable {
     public:
         GlCoverFillPathNV() = default;
-        GlCoverFillPathNV(atom::Observations observations, uint32_t Path, uint32_t CoverMode) :
-            mobservations(observations),
+        GlCoverFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t CoverMode) :
+            mextras(extras),
             mPath(Path),
             mCoverMode(CoverMode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Uint32(this->mCoverMode);
         }
@@ -4930,7 +5111,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mCoverMode;
     };
@@ -4938,8 +5119,8 @@ namespace gles {
     class GlCoverStrokePathInstancedNV: public Encodable {
     public:
         GlCoverStrokePathInstancedNV() = default;
-        GlCoverStrokePathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlCoverStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -4952,7 +5133,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -4965,12 +5146,15 @@ namespace gles {
     class GlCoverStrokePathNV: public Encodable {
     public:
         GlCoverStrokePathNV() = default;
-        GlCoverStrokePathNV(atom::Observations observations, uint32_t Path, uint32_t CoverMode) :
-            mobservations(observations),
+        GlCoverStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t CoverMode) :
+            mextras(extras),
             mPath(Path),
             mCoverMode(CoverMode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Uint32(this->mCoverMode);
         }
@@ -4978,7 +5162,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mCoverMode;
     };
@@ -4986,48 +5170,57 @@ namespace gles {
     class GlCoverageMaskNV: public Encodable {
     public:
         GlCoverageMaskNV() = default;
-        GlCoverageMaskNV(atom::Observations observations, uint8_t Mask) :
-            mobservations(observations),
+        GlCoverageMaskNV(gapic::Vector<gapic::Encodable*> extras, uint8_t Mask) :
+            mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint8(this->mMask);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mMask;
     };
 
     class GlCoverageModulationNV: public Encodable {
     public:
         GlCoverageModulationNV() = default;
-        GlCoverageModulationNV(atom::Observations observations, uint32_t Components) :
-            mobservations(observations),
+        GlCoverageModulationNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Components) :
+            mextras(extras),
             mComponents(Components) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mComponents);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mComponents;
     };
 
     class GlCoverageModulationTableNV: public Encodable {
     public:
         GlCoverageModulationTableNV() = default;
-        GlCoverageModulationTableNV(atom::Observations observations, int32_t N, GLfloat__CP V) :
-            mobservations(observations),
+        GlCoverageModulationTableNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLfloat__CP V) :
+            mextras(extras),
             mN(N),
             mV(V) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mV);
         }
@@ -5035,7 +5228,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLfloat__CP mV;
     };
@@ -5043,30 +5236,36 @@ namespace gles {
     class GlCoverageOperationNV: public Encodable {
     public:
         GlCoverageOperationNV() = default;
-        GlCoverageOperationNV(atom::Observations observations, uint32_t Operation) :
-            mobservations(observations),
+        GlCoverageOperationNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Operation) :
+            mextras(extras),
             mOperation(Operation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mOperation);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mOperation;
     };
 
     class GlCreatePerfQueryINTEL: public Encodable {
     public:
         GlCreatePerfQueryINTEL() = default;
-        GlCreatePerfQueryINTEL(atom::Observations observations, uint32_t QueryId, GLuint__P QueryHandle) :
-            mobservations(observations),
+        GlCreatePerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, GLuint__P QueryHandle) :
+            mextras(extras),
             mQueryId(QueryId),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQueryId);
             e->Struct(this->mQueryHandle);
         }
@@ -5074,7 +5273,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryId;
         GLuint__P mQueryHandle;
     };
@@ -5082,30 +5281,36 @@ namespace gles {
     class GlCreateProgram: public Encodable {
     public:
         GlCreateProgram() = default;
-        GlCreateProgram(atom::Observations observations, uint32_t Result) :
-            mobservations(observations),
+        GlCreateProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+            mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResult);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResult;
     };
 
     class GlCreateShader: public Encodable {
     public:
         GlCreateShader() = default;
-        GlCreateShader(atom::Observations observations, uint32_t Type, uint32_t Result) :
-            mobservations(observations),
+        GlCreateShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Result) :
+            mextras(extras),
             mType(Type),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mType);
             e->Uint32(this->mResult);
         }
@@ -5113,7 +5318,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         uint32_t mResult;
     };
@@ -5121,8 +5326,8 @@ namespace gles {
     class GlCreateShaderProgramv: public Encodable {
     public:
         GlCreateShaderProgramv() = default;
-        GlCreateShaderProgramv(atom::Observations observations, uint32_t Type, int32_t Count, GLchar__CP__CP Strings, uint32_t Result) :
-            mobservations(observations),
+        GlCreateShaderProgramv(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Count, GLchar__CP__CP Strings, uint32_t Result) :
+            mextras(extras),
             mType(Type),
             mCount(Count),
             mStrings(Strings),
@@ -5132,7 +5337,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mCount;
         GLchar__CP__CP mStrings;
@@ -5142,8 +5347,8 @@ namespace gles {
     class GlCreateShaderProgramvEXT: public Encodable {
     public:
         GlCreateShaderProgramvEXT() = default;
-        GlCreateShaderProgramvEXT(atom::Observations observations, uint32_t Type, int32_t Count, GLchar__CP__P Strings, uint32_t Result) :
-            mobservations(observations),
+        GlCreateShaderProgramvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Count, GLchar__CP__P Strings, uint32_t Result) :
+            mextras(extras),
             mType(Type),
             mCount(Count),
             mStrings(Strings),
@@ -5153,7 +5358,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mCount;
         GLchar__CP__P mStrings;
@@ -5163,48 +5368,57 @@ namespace gles {
     class GlCullFace: public Encodable {
     public:
         GlCullFace() = default;
-        GlCullFace(atom::Observations observations, uint32_t Mode) :
-            mobservations(observations),
+        GlCullFace(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+            mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
     };
 
     class GlCurrentPaletteMatrixOES: public Encodable {
     public:
         GlCurrentPaletteMatrixOES() = default;
-        GlCurrentPaletteMatrixOES(atom::Observations observations, uint32_t Matrixpaletteindex) :
-            mobservations(observations),
+        GlCurrentPaletteMatrixOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Matrixpaletteindex) :
+            mextras(extras),
             mMatrixpaletteindex(Matrixpaletteindex) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixpaletteindex);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixpaletteindex;
     };
 
     class GlDebugMessageCallback: public Encodable {
     public:
         GlDebugMessageCallback() = default;
-        GlDebugMessageCallback(atom::Observations observations, GLDEBUGPROC Callback, Void__CP UserParam) :
-            mobservations(observations),
+        GlDebugMessageCallback(gapic::Vector<gapic::Encodable*> extras, GLDEBUGPROC Callback, Void__CP UserParam) :
+            mextras(extras),
             mCallback(Callback),
             mUserParam(UserParam) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCallback);
             e->Struct(this->mUserParam);
         }
@@ -5212,7 +5426,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLDEBUGPROC mCallback;
         Void__CP mUserParam;
     };
@@ -5220,12 +5434,15 @@ namespace gles {
     class GlDebugMessageCallbackKHR: public Encodable {
     public:
         GlDebugMessageCallbackKHR() = default;
-        GlDebugMessageCallbackKHR(atom::Observations observations, GLDEBUGPROC Callback, Void__CP UserParam) :
-            mobservations(observations),
+        GlDebugMessageCallbackKHR(gapic::Vector<gapic::Encodable*> extras, GLDEBUGPROC Callback, Void__CP UserParam) :
+            mextras(extras),
             mCallback(Callback),
             mUserParam(UserParam) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCallback);
             e->Struct(this->mUserParam);
         }
@@ -5233,7 +5450,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLDEBUGPROC mCallback;
         Void__CP mUserParam;
     };
@@ -5241,8 +5458,8 @@ namespace gles {
     class GlDebugMessageControl: public Encodable {
     public:
         GlDebugMessageControl() = default;
-        GlDebugMessageControl(atom::Observations observations, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
-            mobservations(observations),
+        GlDebugMessageControl(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
+            mextras(extras),
             mSource(Source),
             mType(Type),
             mSeverity(Severity),
@@ -5254,7 +5471,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mType;
         uint32_t mSeverity;
@@ -5266,8 +5483,8 @@ namespace gles {
     class GlDebugMessageControlKHR: public Encodable {
     public:
         GlDebugMessageControlKHR() = default;
-        GlDebugMessageControlKHR(atom::Observations observations, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
-            mobservations(observations),
+        GlDebugMessageControlKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
+            mextras(extras),
             mSource(Source),
             mType(Type),
             mSeverity(Severity),
@@ -5279,7 +5496,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mType;
         uint32_t mSeverity;
@@ -5291,8 +5508,8 @@ namespace gles {
     class GlDebugMessageInsert: public Encodable {
     public:
         GlDebugMessageInsert() = default;
-        GlDebugMessageInsert(atom::Observations observations, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
-            mobservations(observations),
+        GlDebugMessageInsert(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
+            mextras(extras),
             mSource(Source),
             mType(Type),
             mId(Id),
@@ -5304,7 +5521,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mType;
         uint32_t mId;
@@ -5316,8 +5533,8 @@ namespace gles {
     class GlDebugMessageInsertKHR: public Encodable {
     public:
         GlDebugMessageInsertKHR() = default;
-        GlDebugMessageInsertKHR(atom::Observations observations, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
-            mobservations(observations),
+        GlDebugMessageInsertKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
+            mextras(extras),
             mSource(Source),
             mType(Type),
             mId(Id),
@@ -5329,7 +5546,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mType;
         uint32_t mId;
@@ -5341,12 +5558,15 @@ namespace gles {
     class GlDeleteBuffers: public Encodable {
     public:
         GlDeleteBuffers() = default;
-        GlDeleteBuffers(atom::Observations observations, int32_t Count, BufferId__CP Buffers) :
-            mobservations(observations),
+        GlDeleteBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, BufferId__CP Buffers) :
+            mextras(extras),
             mCount(Count),
             mBuffers(Buffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mBuffers);
         }
@@ -5354,7 +5574,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         BufferId__CP mBuffers;
     };
@@ -5362,12 +5582,15 @@ namespace gles {
     class GlDeleteFencesNV: public Encodable {
     public:
         GlDeleteFencesNV() = default;
-        GlDeleteFencesNV(atom::Observations observations, int32_t N, GLuint__CP Fences) :
-            mobservations(observations),
+        GlDeleteFencesNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Fences) :
+            mextras(extras),
             mN(N),
             mFences(Fences) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mFences);
         }
@@ -5375,7 +5598,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__CP mFences;
     };
@@ -5383,12 +5606,15 @@ namespace gles {
     class GlDeleteFramebuffers: public Encodable {
     public:
         GlDeleteFramebuffers() = default;
-        GlDeleteFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__CP Framebuffers) :
-            mobservations(observations),
+        GlDeleteFramebuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, FramebufferId__CP Framebuffers) :
+            mextras(extras),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mFramebuffers);
         }
@@ -5396,7 +5622,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         FramebufferId__CP mFramebuffers;
     };
@@ -5404,12 +5630,15 @@ namespace gles {
     class GlDeleteFramebuffersOES: public Encodable {
     public:
         GlDeleteFramebuffersOES() = default;
-        GlDeleteFramebuffersOES(atom::Observations observations, int32_t N, GLuint__CP Framebuffers) :
-            mobservations(observations),
+        GlDeleteFramebuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Framebuffers) :
+            mextras(extras),
             mN(N),
             mFramebuffers(Framebuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mFramebuffers);
         }
@@ -5417,7 +5646,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__CP mFramebuffers;
     };
@@ -5425,12 +5654,15 @@ namespace gles {
     class GlDeletePathsNV: public Encodable {
     public:
         GlDeletePathsNV() = default;
-        GlDeletePathsNV(atom::Observations observations, uint32_t Path, int32_t Range) :
-            mobservations(observations),
+        GlDeletePathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Range) :
+            mextras(extras),
             mPath(Path),
             mRange(Range) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Int32(this->mRange);
         }
@@ -5438,7 +5670,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mRange;
     };
@@ -5446,12 +5678,15 @@ namespace gles {
     class GlDeletePerfMonitorsAMD: public Encodable {
     public:
         GlDeletePerfMonitorsAMD() = default;
-        GlDeletePerfMonitorsAMD(atom::Observations observations, int32_t N, GLuint__P Monitors) :
-            mobservations(observations),
+        GlDeletePerfMonitorsAMD(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Monitors) :
+            mextras(extras),
             mN(N),
             mMonitors(Monitors) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mMonitors);
         }
@@ -5459,7 +5694,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__P mMonitors;
     };
@@ -5467,36 +5702,42 @@ namespace gles {
     class GlDeletePerfQueryINTEL: public Encodable {
     public:
         GlDeletePerfQueryINTEL() = default;
-        GlDeletePerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
-            mobservations(observations),
+        GlDeletePerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+            mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQueryHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryHandle;
     };
 
     class GlDeleteProgram: public Encodable {
     public:
         GlDeleteProgram() = default;
-        GlDeleteProgram(atom::Observations observations, uint32_t Program) :
-            mobservations(observations),
+        GlDeleteProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+            mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
     };
 
@@ -5518,12 +5759,15 @@ namespace gles {
     class GlDeleteProgramPipelines: public Encodable {
     public:
         GlDeleteProgramPipelines() = default;
-        GlDeleteProgramPipelines(atom::Observations observations, int32_t N, PipelineId__CP Pipelines) :
-            mobservations(observations),
+        GlDeleteProgramPipelines(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__CP Pipelines) :
+            mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mPipelines);
         }
@@ -5531,7 +5775,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         PipelineId__CP mPipelines;
     };
@@ -5539,12 +5783,15 @@ namespace gles {
     class GlDeleteProgramPipelinesEXT: public Encodable {
     public:
         GlDeleteProgramPipelinesEXT() = default;
-        GlDeleteProgramPipelinesEXT(atom::Observations observations, int32_t N, PipelineId__CP Pipelines) :
-            mobservations(observations),
+        GlDeleteProgramPipelinesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__CP Pipelines) :
+            mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mPipelines);
         }
@@ -5552,7 +5799,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         PipelineId__CP mPipelines;
     };
@@ -5575,12 +5822,15 @@ namespace gles {
     class GlDeleteQueries: public Encodable {
     public:
         GlDeleteQueries() = default;
-        GlDeleteQueries(atom::Observations observations, int32_t Count, QueryId__CP Queries) :
-            mobservations(observations),
+        GlDeleteQueries(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__CP Queries) :
+            mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mQueries);
         }
@@ -5588,7 +5838,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         QueryId__CP mQueries;
     };
@@ -5596,12 +5846,15 @@ namespace gles {
     class GlDeleteQueriesEXT: public Encodable {
     public:
         GlDeleteQueriesEXT() = default;
-        GlDeleteQueriesEXT(atom::Observations observations, int32_t Count, QueryId__CP Queries) :
-            mobservations(observations),
+        GlDeleteQueriesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__CP Queries) :
+            mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mQueries);
         }
@@ -5609,7 +5862,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         QueryId__CP mQueries;
     };
@@ -5632,12 +5885,15 @@ namespace gles {
     class GlDeleteRenderbuffers: public Encodable {
     public:
         GlDeleteRenderbuffers() = default;
-        GlDeleteRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__CP Renderbuffers) :
-            mobservations(observations),
+        GlDeleteRenderbuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, RenderbufferId__CP Renderbuffers) :
+            mextras(extras),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mRenderbuffers);
         }
@@ -5645,7 +5901,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         RenderbufferId__CP mRenderbuffers;
     };
@@ -5653,12 +5909,15 @@ namespace gles {
     class GlDeleteRenderbuffersOES: public Encodable {
     public:
         GlDeleteRenderbuffersOES() = default;
-        GlDeleteRenderbuffersOES(atom::Observations observations, int32_t N, GLuint__CP Renderbuffers) :
-            mobservations(observations),
+        GlDeleteRenderbuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Renderbuffers) :
+            mextras(extras),
             mN(N),
             mRenderbuffers(Renderbuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mRenderbuffers);
         }
@@ -5666,7 +5925,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__CP mRenderbuffers;
     };
@@ -5689,12 +5948,15 @@ namespace gles {
     class GlDeleteSamplers: public Encodable {
     public:
         GlDeleteSamplers() = default;
-        GlDeleteSamplers(atom::Observations observations, int32_t Count, SamplerId__CP Samplers) :
-            mobservations(observations),
+        GlDeleteSamplers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, SamplerId__CP Samplers) :
+            mextras(extras),
             mCount(Count),
             mSamplers(Samplers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mSamplers);
         }
@@ -5702,7 +5964,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         SamplerId__CP mSamplers;
     };
@@ -5710,54 +5972,63 @@ namespace gles {
     class GlDeleteShader: public Encodable {
     public:
         GlDeleteShader() = default;
-        GlDeleteShader(atom::Observations observations, uint32_t Shader) :
-            mobservations(observations),
+        GlDeleteShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader) :
+            mextras(extras),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mShader);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
     };
 
     class GlDeleteSync: public Encodable {
     public:
         GlDeleteSync() = default;
-        GlDeleteSync(atom::Observations observations, uint64_t Sync) :
-            mobservations(observations),
+        GlDeleteSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync) :
+            mextras(extras),
             mSync(Sync) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mSync);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
     };
 
     class GlDeleteSyncAPPLE: public Encodable {
     public:
         GlDeleteSyncAPPLE() = default;
-        GlDeleteSyncAPPLE(atom::Observations observations, uint64_t Sync) :
-            mobservations(observations),
+        GlDeleteSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync) :
+            mextras(extras),
             mSync(Sync) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mSync);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
     };
 
@@ -5779,12 +6050,15 @@ namespace gles {
     class GlDeleteTextures: public Encodable {
     public:
         GlDeleteTextures() = default;
-        GlDeleteTextures(atom::Observations observations, int32_t Count, TextureId__CP Textures) :
-            mobservations(observations),
+        GlDeleteTextures(gapic::Vector<gapic::Encodable*> extras, int32_t Count, TextureId__CP Textures) :
+            mextras(extras),
             mCount(Count),
             mTextures(Textures) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mTextures);
         }
@@ -5792,7 +6066,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         TextureId__CP mTextures;
     };
@@ -5815,12 +6089,15 @@ namespace gles {
     class GlDeleteTransformFeedbacks: public Encodable {
     public:
         GlDeleteTransformFeedbacks() = default;
-        GlDeleteTransformFeedbacks(atom::Observations observations, int32_t N, TransformFeedbackId__CP Ids) :
-            mobservations(observations),
+        GlDeleteTransformFeedbacks(gapic::Vector<gapic::Encodable*> extras, int32_t N, TransformFeedbackId__CP Ids) :
+            mextras(extras),
             mN(N),
             mIds(Ids) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mIds);
         }
@@ -5828,7 +6105,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         TransformFeedbackId__CP mIds;
     };
@@ -5851,12 +6128,15 @@ namespace gles {
     class GlDeleteVertexArrays: public Encodable {
     public:
         GlDeleteVertexArrays() = default;
-        GlDeleteVertexArrays(atom::Observations observations, int32_t Count, VertexArrayId__CP Arrays) :
-            mobservations(observations),
+        GlDeleteVertexArrays(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__CP Arrays) :
+            mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mArrays);
         }
@@ -5864,7 +6144,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         VertexArrayId__CP mArrays;
     };
@@ -5872,12 +6152,15 @@ namespace gles {
     class GlDeleteVertexArraysOES: public Encodable {
     public:
         GlDeleteVertexArraysOES() = default;
-        GlDeleteVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__CP Arrays) :
-            mobservations(observations),
+        GlDeleteVertexArraysOES(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__CP Arrays) :
+            mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mArrays);
         }
@@ -5885,7 +6168,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         VertexArrayId__CP mArrays;
     };
@@ -5893,44 +6176,50 @@ namespace gles {
     class GlDepthFunc: public Encodable {
     public:
         GlDepthFunc() = default;
-        GlDepthFunc(atom::Observations observations, uint32_t Function) :
-            mobservations(observations),
+        GlDepthFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Function) :
+            mextras(extras),
             mFunction(Function) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunction);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunction;
     };
 
     class GlDepthMask: public Encodable {
     public:
         GlDepthMask() = default;
-        GlDepthMask(atom::Observations observations, uint8_t Enabled) :
-            mobservations(observations),
+        GlDepthMask(gapic::Vector<gapic::Encodable*> extras, uint8_t Enabled) :
+            mextras(extras),
             mEnabled(Enabled) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint8(this->mEnabled);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mEnabled;
     };
 
     class GlDepthRangeArrayfvNV: public Encodable {
     public:
         GlDepthRangeArrayfvNV() = default;
-        GlDepthRangeArrayfvNV(atom::Observations observations, uint32_t First, int32_t Count, GLfloat__CP V) :
-            mobservations(observations),
+        GlDepthRangeArrayfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLfloat__CP V) :
+            mextras(extras),
             mFirst(First),
             mCount(Count),
             mV(V) {}
@@ -5939,7 +6228,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirst;
         int32_t mCount;
         GLfloat__CP mV;
@@ -5948,8 +6237,8 @@ namespace gles {
     class GlDepthRangeIndexedfNV: public Encodable {
     public:
         GlDepthRangeIndexedfNV() = default;
-        GlDepthRangeIndexedfNV(atom::Observations observations, uint32_t Index, float N, float F) :
-            mobservations(observations),
+        GlDepthRangeIndexedfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, float N, float F) :
+            mextras(extras),
             mIndex(Index),
             mN(N),
             mF(F) {}
@@ -5958,7 +6247,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         float mN;
         float mF;
@@ -5967,12 +6256,15 @@ namespace gles {
     class GlDepthRangef: public Encodable {
     public:
         GlDepthRangef() = default;
-        GlDepthRangef(atom::Observations observations, float Near, float Far) :
-            mobservations(observations),
+        GlDepthRangef(gapic::Vector<gapic::Encodable*> extras, float Near, float Far) :
+            mextras(extras),
             mNear(Near),
             mFar(Far) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mNear);
             e->Float32(this->mFar);
         }
@@ -5980,7 +6272,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mNear;
         float mFar;
     };
@@ -5988,12 +6280,15 @@ namespace gles {
     class GlDepthRangefOES: public Encodable {
     public:
         GlDepthRangefOES() = default;
-        GlDepthRangefOES(atom::Observations observations, float N, float F) :
-            mobservations(observations),
+        GlDepthRangefOES(gapic::Vector<gapic::Encodable*> extras, float N, float F) :
+            mextras(extras),
             mN(N),
             mF(F) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mN);
             e->Float32(this->mF);
         }
@@ -6001,7 +6296,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mN;
         float mF;
     };
@@ -6009,12 +6304,15 @@ namespace gles {
     class GlDepthRangex: public Encodable {
     public:
         GlDepthRangex() = default;
-        GlDepthRangex(atom::Observations observations, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlDepthRangex(gapic::Vector<gapic::Encodable*> extras, int32_t N, int32_t F) :
+            mextras(extras),
             mN(N),
             mF(F) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Int32(this->mF);
         }
@@ -6022,7 +6320,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         int32_t mF;
     };
@@ -6030,12 +6328,15 @@ namespace gles {
     class GlDepthRangexOES: public Encodable {
     public:
         GlDepthRangexOES() = default;
-        GlDepthRangexOES(atom::Observations observations, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlDepthRangexOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, int32_t F) :
+            mextras(extras),
             mN(N),
             mF(F) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Int32(this->mF);
         }
@@ -6043,7 +6344,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         int32_t mF;
     };
@@ -6051,12 +6352,15 @@ namespace gles {
     class GlDetachShader: public Encodable {
     public:
         GlDetachShader() = default;
-        GlDetachShader(atom::Observations observations, uint32_t Program, uint32_t Shader) :
-            mobservations(observations),
+        GlDetachShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shader) :
+            mextras(extras),
             mProgram(Program),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
@@ -6064,7 +6368,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mShader;
     };
@@ -6072,84 +6376,99 @@ namespace gles {
     class GlDisable: public Encodable {
     public:
         GlDisable() = default;
-        GlDisable(atom::Observations observations, uint32_t Capability) :
-            mobservations(observations),
+        GlDisable(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability) :
+            mextras(extras),
             mCapability(Capability) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mCapability);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCapability;
     };
 
     class GlDisableClientState: public Encodable {
     public:
         GlDisableClientState() = default;
-        GlDisableClientState(atom::Observations observations, uint32_t Array) :
-            mobservations(observations),
+        GlDisableClientState(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+            mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
     };
 
     class GlDisableDriverControlQCOM: public Encodable {
     public:
         GlDisableDriverControlQCOM() = default;
-        GlDisableDriverControlQCOM(atom::Observations observations, uint32_t DriverControl) :
-            mobservations(observations),
+        GlDisableDriverControlQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl) :
+            mextras(extras),
             mDriverControl(DriverControl) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mDriverControl);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDriverControl;
     };
 
     class GlDisableVertexAttribArray: public Encodable {
     public:
         GlDisableVertexAttribArray() = default;
-        GlDisableVertexAttribArray(atom::Observations observations, uint32_t Location) :
-            mobservations(observations),
+        GlDisableVertexAttribArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Location) :
+            mextras(extras),
             mLocation(Location) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
     };
 
     class GlDisablei: public Encodable {
     public:
         GlDisablei() = default;
-        GlDisablei(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlDisablei(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -6157,7 +6476,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -6165,12 +6484,15 @@ namespace gles {
     class GlDisableiEXT: public Encodable {
     public:
         GlDisableiEXT() = default;
-        GlDisableiEXT(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlDisableiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -6178,7 +6500,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -6186,12 +6508,15 @@ namespace gles {
     class GlDisableiNV: public Encodable {
     public:
         GlDisableiNV() = default;
-        GlDisableiNV(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlDisableiNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -6199,7 +6524,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -6207,12 +6532,15 @@ namespace gles {
     class GlDisableiOES: public Encodable {
     public:
         GlDisableiOES() = default;
-        GlDisableiOES(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlDisableiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -6220,7 +6548,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -6228,8 +6556,8 @@ namespace gles {
     class GlDiscardFramebufferEXT: public Encodable {
     public:
         GlDiscardFramebufferEXT() = default;
-        GlDiscardFramebufferEXT(atom::Observations observations, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments) :
-            mobservations(observations),
+        GlDiscardFramebufferEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments) :
+            mextras(extras),
             mTarget(Target),
             mNumAttachments(NumAttachments),
             mAttachments(Attachments) {}
@@ -6238,7 +6566,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mNumAttachments;
         GLenum__CP mAttachments;
@@ -6247,8 +6575,8 @@ namespace gles {
     class GlDispatchCompute: public Encodable {
     public:
         GlDispatchCompute() = default;
-        GlDispatchCompute(atom::Observations observations, uint32_t NumGroupsX, uint32_t NumGroupsY, uint32_t NumGroupsZ) :
-            mobservations(observations),
+        GlDispatchCompute(gapic::Vector<gapic::Encodable*> extras, uint32_t NumGroupsX, uint32_t NumGroupsY, uint32_t NumGroupsZ) :
+            mextras(extras),
             mNumGroupsX(NumGroupsX),
             mNumGroupsY(NumGroupsY),
             mNumGroupsZ(NumGroupsZ) {}
@@ -6257,7 +6585,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mNumGroupsX;
         uint32_t mNumGroupsY;
         uint32_t mNumGroupsZ;
@@ -6266,26 +6594,29 @@ namespace gles {
     class GlDispatchComputeIndirect: public Encodable {
     public:
         GlDispatchComputeIndirect() = default;
-        GlDispatchComputeIndirect(atom::Observations observations, int32_t Indirect) :
-            mobservations(observations),
+        GlDispatchComputeIndirect(gapic::Vector<gapic::Encodable*> extras, int32_t Indirect) :
+            mextras(extras),
             mIndirect(Indirect) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mIndirect);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mIndirect;
     };
 
     class GlDrawArrays: public Encodable {
     public:
         GlDrawArrays() = default;
-        GlDrawArrays(atom::Observations observations, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount) :
-            mobservations(observations),
+        GlDrawArrays(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
             mIndicesCount(IndicesCount) {}
@@ -6294,7 +6625,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mFirstIndex;
         int32_t mIndicesCount;
@@ -6303,12 +6634,15 @@ namespace gles {
     class GlDrawArraysIndirect: public Encodable {
     public:
         GlDrawArraysIndirect() = default;
-        GlDrawArraysIndirect(atom::Observations observations, uint32_t DrawMode, Void__CP Indirect) :
-            mobservations(observations),
+        GlDrawArraysIndirect(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, Void__CP Indirect) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndirect(Indirect) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mDrawMode);
             e->Struct(this->mIndirect);
         }
@@ -6316,7 +6650,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         Void__CP mIndirect;
     };
@@ -6324,8 +6658,8 @@ namespace gles {
     class GlDrawArraysInstanced: public Encodable {
     public:
         GlDrawArraysInstanced() = default;
-        GlDrawArraysInstanced(atom::Observations observations, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount, int32_t InstanceCount) :
-            mobservations(observations),
+        GlDrawArraysInstanced(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount, int32_t InstanceCount) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
             mIndicesCount(IndicesCount),
@@ -6335,7 +6669,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mFirstIndex;
         int32_t mIndicesCount;
@@ -6345,8 +6679,8 @@ namespace gles {
     class GlDrawArraysInstancedANGLE: public Encodable {
     public:
         GlDrawArraysInstancedANGLE() = default;
-        GlDrawArraysInstancedANGLE(atom::Observations observations, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawArraysInstancedANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mFirst(First),
             mCount(Count),
@@ -6356,7 +6690,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mFirst;
         int32_t mCount;
@@ -6366,8 +6700,8 @@ namespace gles {
     class GlDrawArraysInstancedBaseInstanceEXT: public Encodable {
     public:
         GlDrawArraysInstancedBaseInstanceEXT() = default;
-        GlDrawArraysInstancedBaseInstanceEXT(atom::Observations observations, uint32_t Mode, int32_t First, int32_t Count, int32_t Instancecount, uint32_t Baseinstance) :
-            mobservations(observations),
+        GlDrawArraysInstancedBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Instancecount, uint32_t Baseinstance) :
+            mextras(extras),
             mMode(Mode),
             mFirst(First),
             mCount(Count),
@@ -6378,7 +6712,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mFirst;
         int32_t mCount;
@@ -6389,8 +6723,8 @@ namespace gles {
     class GlDrawArraysInstancedEXT: public Encodable {
     public:
         GlDrawArraysInstancedEXT() = default;
-        GlDrawArraysInstancedEXT(atom::Observations observations, uint32_t Mode, int32_t Start, int32_t Count, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawArraysInstancedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Start, int32_t Count, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mStart(Start),
             mCount(Count),
@@ -6400,7 +6734,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mStart;
         int32_t mCount;
@@ -6410,8 +6744,8 @@ namespace gles {
     class GlDrawArraysInstancedNV: public Encodable {
     public:
         GlDrawArraysInstancedNV() = default;
-        GlDrawArraysInstancedNV(atom::Observations observations, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawArraysInstancedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mFirst(First),
             mCount(Count),
@@ -6421,7 +6755,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mFirst;
         int32_t mCount;
@@ -6431,12 +6765,15 @@ namespace gles {
     class GlDrawBuffers: public Encodable {
     public:
         GlDrawBuffers() = default;
-        GlDrawBuffers(atom::Observations observations, int32_t N, GLenum__CP Bufs) :
-            mobservations(observations),
+        GlDrawBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+            mextras(extras),
             mN(N),
             mBufs(Bufs) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mBufs);
         }
@@ -6444,7 +6781,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLenum__CP mBufs;
     };
@@ -6452,12 +6789,15 @@ namespace gles {
     class GlDrawBuffersEXT: public Encodable {
     public:
         GlDrawBuffersEXT() = default;
-        GlDrawBuffersEXT(atom::Observations observations, int32_t N, GLenum__CP Bufs) :
-            mobservations(observations),
+        GlDrawBuffersEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+            mextras(extras),
             mN(N),
             mBufs(Bufs) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mBufs);
         }
@@ -6465,7 +6805,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLenum__CP mBufs;
     };
@@ -6473,8 +6813,8 @@ namespace gles {
     class GlDrawBuffersIndexedEXT: public Encodable {
     public:
         GlDrawBuffersIndexedEXT() = default;
-        GlDrawBuffersIndexedEXT(atom::Observations observations, int32_t N, GLenum__CP Location, GLint__CP Indices) :
-            mobservations(observations),
+        GlDrawBuffersIndexedEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Location, GLint__CP Indices) :
+            mextras(extras),
             mN(N),
             mLocation(Location),
             mIndices(Indices) {}
@@ -6483,7 +6823,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLenum__CP mLocation;
         GLint__CP mIndices;
@@ -6492,12 +6832,15 @@ namespace gles {
     class GlDrawBuffersNV: public Encodable {
     public:
         GlDrawBuffersNV() = default;
-        GlDrawBuffersNV(atom::Observations observations, int32_t N, GLenum__CP Bufs) :
-            mobservations(observations),
+        GlDrawBuffersNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+            mextras(extras),
             mN(N),
             mBufs(Bufs) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mBufs);
         }
@@ -6505,7 +6848,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLenum__CP mBufs;
     };
@@ -6528,8 +6871,8 @@ namespace gles {
     class GlDrawElements: public Encodable {
     public:
         GlDrawElements() = default;
-        GlDrawElements(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
-            mobservations(observations),
+        GlDrawElements(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
@@ -6539,7 +6882,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
         uint32_t mIndicesType;
@@ -6549,8 +6892,8 @@ namespace gles {
     class GlDrawElementsBaseVertex: public Encodable {
     public:
         GlDrawElementsBaseVertex() = default;
-        GlDrawElementsBaseVertex(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
-            mobservations(observations),
+        GlDrawElementsBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
@@ -6561,7 +6904,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
         uint32_t mIndicesType;
@@ -6572,8 +6915,8 @@ namespace gles {
     class GlDrawElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsBaseVertexEXT() = default;
-        GlDrawElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6584,7 +6927,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6595,8 +6938,8 @@ namespace gles {
     class GlDrawElementsBaseVertexOES: public Encodable {
     public:
         GlDrawElementsBaseVertexOES() = default;
-        GlDrawElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6607,7 +6950,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6618,8 +6961,8 @@ namespace gles {
     class GlDrawElementsIndirect: public Encodable {
     public:
         GlDrawElementsIndirect() = default;
-        GlDrawElementsIndirect(atom::Observations observations, uint32_t DrawMode, uint32_t IndicesType, Void__CP Indirect) :
-            mobservations(observations),
+        GlDrawElementsIndirect(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t IndicesType, Void__CP Indirect) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndicesType(IndicesType),
             mIndirect(Indirect) {}
@@ -6628,7 +6971,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         uint32_t mIndicesType;
         Void__CP mIndirect;
@@ -6637,8 +6980,8 @@ namespace gles {
     class GlDrawElementsInstanced: public Encodable {
     public:
         GlDrawElementsInstanced() = default;
-        GlDrawElementsInstanced(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount) :
-            mobservations(observations),
+        GlDrawElementsInstanced(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
@@ -6649,7 +6992,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
         uint32_t mIndicesType;
@@ -6660,8 +7003,8 @@ namespace gles {
     class GlDrawElementsInstancedANGLE: public Encodable {
     public:
         GlDrawElementsInstancedANGLE() = default;
-        GlDrawElementsInstancedANGLE(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawElementsInstancedANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6672,7 +7015,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6683,8 +7026,8 @@ namespace gles {
     class GlDrawElementsInstancedBaseInstanceEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseInstanceEXT() = default;
-        GlDrawElementsInstancedBaseInstanceEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, uint32_t Baseinstance) :
-            mobservations(observations),
+        GlDrawElementsInstancedBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, uint32_t Baseinstance) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6696,7 +7039,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6708,8 +7051,8 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertex: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertex() = default;
-        GlDrawElementsInstancedBaseVertex(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount, int32_t BaseVertex) :
-            mobservations(observations),
+        GlDrawElementsInstancedBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount, int32_t BaseVertex) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
@@ -6721,7 +7064,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
         uint32_t mIndicesType;
@@ -6733,8 +7076,8 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexBaseInstanceEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexBaseInstanceEXT() = default;
-        GlDrawElementsInstancedBaseVertexBaseInstanceEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex, uint32_t Baseinstance) :
-            mobservations(observations),
+        GlDrawElementsInstancedBaseVertexBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex, uint32_t Baseinstance) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6747,7 +7090,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6760,8 +7103,8 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexEXT() = default;
-        GlDrawElementsInstancedBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawElementsInstancedBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6773,7 +7116,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6785,8 +7128,8 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexOES: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexOES() = default;
-        GlDrawElementsInstancedBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawElementsInstancedBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6798,7 +7141,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6810,8 +7153,8 @@ namespace gles {
     class GlDrawElementsInstancedEXT: public Encodable {
     public:
         GlDrawElementsInstancedEXT() = default;
-        GlDrawElementsInstancedEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawElementsInstancedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6822,7 +7165,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6833,8 +7176,8 @@ namespace gles {
     class GlDrawElementsInstancedNV: public Encodable {
     public:
         GlDrawElementsInstancedNV() = default;
-        GlDrawElementsInstancedNV(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
-            mobservations(observations),
+        GlDrawElementsInstancedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -6845,7 +7188,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
@@ -6856,8 +7199,8 @@ namespace gles {
     class GlDrawRangeElements: public Encodable {
     public:
         GlDrawRangeElements() = default;
-        GlDrawRangeElements(atom::Observations observations, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
-            mobservations(observations),
+        GlDrawRangeElements(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mStart(Start),
             mEnd(End),
@@ -6869,7 +7212,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         uint32_t mStart;
         uint32_t mEnd;
@@ -6881,8 +7224,8 @@ namespace gles {
     class GlDrawRangeElementsBaseVertex: public Encodable {
     public:
         GlDrawRangeElementsBaseVertex() = default;
-        GlDrawRangeElementsBaseVertex(atom::Observations observations, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
-            mobservations(observations),
+        GlDrawRangeElementsBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
+            mextras(extras),
             mDrawMode(DrawMode),
             mStart(Start),
             mEnd(End),
@@ -6895,7 +7238,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDrawMode;
         uint32_t mStart;
         uint32_t mEnd;
@@ -6908,8 +7251,8 @@ namespace gles {
     class GlDrawRangeElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexEXT() = default;
-        GlDrawRangeElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawRangeElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mStart(Start),
             mEnd(End),
@@ -6922,7 +7265,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         uint32_t mStart;
         uint32_t mEnd;
@@ -6935,8 +7278,8 @@ namespace gles {
     class GlDrawRangeElementsBaseVertexOES: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexOES() = default;
-        GlDrawRangeElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
-            mobservations(observations),
+        GlDrawRangeElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mStart(Start),
             mEnd(End),
@@ -6949,7 +7292,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         uint32_t mStart;
         uint32_t mEnd;
@@ -6962,8 +7305,8 @@ namespace gles {
     class GlDrawTexfOES: public Encodable {
     public:
         GlDrawTexfOES() = default;
-        GlDrawTexfOES(atom::Observations observations, float X, float Y, float Z, float Width, float Height) :
-            mobservations(observations),
+        GlDrawTexfOES(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z, float Width, float Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z),
@@ -6974,7 +7317,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mX;
         float mY;
         float mZ;
@@ -6985,26 +7328,29 @@ namespace gles {
     class GlDrawTexfvOES: public Encodable {
     public:
         GlDrawTexfvOES() = default;
-        GlDrawTexfvOES(atom::Observations observations, GLfloat__CP Coords) :
-            mobservations(observations),
+        GlDrawTexfvOES(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP Coords) :
+            mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCoords);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfloat__CP mCoords;
     };
 
     class GlDrawTexiOES: public Encodable {
     public:
         GlDrawTexiOES() = default;
-        GlDrawTexiOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlDrawTexiOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z),
@@ -7015,7 +7361,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -7026,26 +7372,29 @@ namespace gles {
     class GlDrawTexivOES: public Encodable {
     public:
         GlDrawTexivOES() = default;
-        GlDrawTexivOES(atom::Observations observations, GLint__CP Coords) :
-            mobservations(observations),
+        GlDrawTexivOES(gapic::Vector<gapic::Encodable*> extras, GLint__CP Coords) :
+            mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCoords);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLint__CP mCoords;
     };
 
     class GlDrawTexsOES: public Encodable {
     public:
         GlDrawTexsOES() = default;
-        GlDrawTexsOES(atom::Observations observations, int16_t X, int16_t Y, int16_t Z, int16_t Width, int16_t Height) :
-            mobservations(observations),
+        GlDrawTexsOES(gapic::Vector<gapic::Encodable*> extras, int16_t X, int16_t Y, int16_t Z, int16_t Width, int16_t Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z),
@@ -7056,7 +7405,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int16_t mX;
         int16_t mY;
         int16_t mZ;
@@ -7067,26 +7416,29 @@ namespace gles {
     class GlDrawTexsvOES: public Encodable {
     public:
         GlDrawTexsvOES() = default;
-        GlDrawTexsvOES(atom::Observations observations, GLshort__CP Coords) :
-            mobservations(observations),
+        GlDrawTexsvOES(gapic::Vector<gapic::Encodable*> extras, GLshort__CP Coords) :
+            mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCoords);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLshort__CP mCoords;
     };
 
     class GlDrawTexxOES: public Encodable {
     public:
         GlDrawTexxOES() = default;
-        GlDrawTexxOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlDrawTexxOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z),
@@ -7097,7 +7449,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -7108,30 +7460,36 @@ namespace gles {
     class GlDrawTexxvOES: public Encodable {
     public:
         GlDrawTexxvOES() = default;
-        GlDrawTexxvOES(atom::Observations observations, GLfixed__CP Coords) :
-            mobservations(observations),
+        GlDrawTexxvOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP Coords) :
+            mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mCoords);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__CP mCoords;
     };
 
     class GlEGLImageTargetRenderbufferStorageOES: public Encodable {
     public:
         GlEGLImageTargetRenderbufferStorageOES() = default;
-        GlEGLImageTargetRenderbufferStorageOES(atom::Observations observations, uint32_t Target, GLeglImageOES Image) :
-            mobservations(observations),
+        GlEGLImageTargetRenderbufferStorageOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, GLeglImageOES Image) :
+            mextras(extras),
             mTarget(Target),
             mImage(Image) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Struct(this->mImage);
         }
@@ -7139,7 +7497,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         GLeglImageOES mImage;
     };
@@ -7147,12 +7505,15 @@ namespace gles {
     class GlEGLImageTargetTexture2DOES: public Encodable {
     public:
         GlEGLImageTargetTexture2DOES() = default;
-        GlEGLImageTargetTexture2DOES(atom::Observations observations, uint32_t Target, GLeglImageOES Image) :
-            mobservations(observations),
+        GlEGLImageTargetTexture2DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, GLeglImageOES Image) :
+            mextras(extras),
             mTarget(Target),
             mImage(Image) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Struct(this->mImage);
         }
@@ -7160,7 +7521,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         GLeglImageOES mImage;
     };
@@ -7168,84 +7529,99 @@ namespace gles {
     class GlEnable: public Encodable {
     public:
         GlEnable() = default;
-        GlEnable(atom::Observations observations, uint32_t Capability) :
-            mobservations(observations),
+        GlEnable(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability) :
+            mextras(extras),
             mCapability(Capability) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mCapability);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCapability;
     };
 
     class GlEnableClientState: public Encodable {
     public:
         GlEnableClientState() = default;
-        GlEnableClientState(atom::Observations observations, uint32_t Array) :
-            mobservations(observations),
+        GlEnableClientState(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+            mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
     };
 
     class GlEnableDriverControlQCOM: public Encodable {
     public:
         GlEnableDriverControlQCOM() = default;
-        GlEnableDriverControlQCOM(atom::Observations observations, uint32_t DriverControl) :
-            mobservations(observations),
+        GlEnableDriverControlQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl) :
+            mextras(extras),
             mDriverControl(DriverControl) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mDriverControl);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDriverControl;
     };
 
     class GlEnableVertexAttribArray: public Encodable {
     public:
         GlEnableVertexAttribArray() = default;
-        GlEnableVertexAttribArray(atom::Observations observations, uint32_t Location) :
-            mobservations(observations),
+        GlEnableVertexAttribArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Location) :
+            mextras(extras),
             mLocation(Location) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
     };
 
     class GlEnablei: public Encodable {
     public:
         GlEnablei() = default;
-        GlEnablei(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlEnablei(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -7253,7 +7629,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -7261,12 +7637,15 @@ namespace gles {
     class GlEnableiEXT: public Encodable {
     public:
         GlEnableiEXT() = default;
-        GlEnableiEXT(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlEnableiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -7274,7 +7653,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -7282,12 +7661,15 @@ namespace gles {
     class GlEnableiNV: public Encodable {
     public:
         GlEnableiNV() = default;
-        GlEnableiNV(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlEnableiNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -7295,7 +7677,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -7303,12 +7685,15 @@ namespace gles {
     class GlEnableiOES: public Encodable {
     public:
         GlEnableiOES() = default;
-        GlEnableiOES(atom::Observations observations, uint32_t Target, uint32_t Index) :
-            mobservations(observations),
+        GlEnableiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
@@ -7316,7 +7701,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
     };
@@ -7324,121 +7709,142 @@ namespace gles {
     class GlEndConditionalRenderNV: public Encodable {
     public:
         GlEndConditionalRenderNV() = default;
-        GlEndConditionalRenderNV(atom::Observations observations) :
-            mobservations(observations) {}
+        GlEndConditionalRenderNV(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlEndPerfMonitorAMD: public Encodable {
     public:
         GlEndPerfMonitorAMD() = default;
-        GlEndPerfMonitorAMD(atom::Observations observations, uint32_t Monitor) :
-            mobservations(observations),
+        GlEndPerfMonitorAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor) :
+            mextras(extras),
             mMonitor(Monitor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMonitor);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMonitor;
     };
 
     class GlEndPerfQueryINTEL: public Encodable {
     public:
         GlEndPerfQueryINTEL() = default;
-        GlEndPerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
-            mobservations(observations),
+        GlEndPerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+            mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQueryHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryHandle;
     };
 
     class GlEndQuery: public Encodable {
     public:
         GlEndQuery() = default;
-        GlEndQuery(atom::Observations observations, uint32_t Target) :
-            mobservations(observations),
+        GlEndQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+            mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
     };
 
     class GlEndQueryEXT: public Encodable {
     public:
         GlEndQueryEXT() = default;
-        GlEndQueryEXT(atom::Observations observations, uint32_t Target) :
-            mobservations(observations),
+        GlEndQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+            mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
     };
 
     class GlEndTilingQCOM: public Encodable {
     public:
         GlEndTilingQCOM() = default;
-        GlEndTilingQCOM(atom::Observations observations, uint32_t PreserveMask) :
-            mobservations(observations),
+        GlEndTilingQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t PreserveMask) :
+            mextras(extras),
             mPreserveMask(PreserveMask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPreserveMask);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPreserveMask;
     };
 
     class GlEndTransformFeedback: public Encodable {
     public:
         GlEndTransformFeedback() = default;
-        GlEndTransformFeedback(atom::Observations observations) :
-            mobservations(observations) {}
+        GlEndTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class Void__P__P: public Encodable {
@@ -7459,12 +7865,15 @@ namespace gles {
     class GlExtGetBufferPointervQCOM: public Encodable {
     public:
         GlExtGetBufferPointervQCOM() = default;
-        GlExtGetBufferPointervQCOM(atom::Observations observations, uint32_t Target, Void__P__P Params) :
-            mobservations(observations),
+        GlExtGetBufferPointervQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, Void__P__P Params) :
+            mextras(extras),
             mTarget(Target),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Struct(this->mParams);
         }
@@ -7472,7 +7881,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         Void__P__P mParams;
     };
@@ -7480,8 +7889,8 @@ namespace gles {
     class GlExtGetBuffersQCOM: public Encodable {
     public:
         GlExtGetBuffersQCOM() = default;
-        GlExtGetBuffersQCOM(atom::Observations observations, BufferId__P Buffers, int32_t MaxBuffers, GLint__P NumBuffers) :
-            mobservations(observations),
+        GlExtGetBuffersQCOM(gapic::Vector<gapic::Encodable*> extras, BufferId__P Buffers, int32_t MaxBuffers, GLint__P NumBuffers) :
+            mextras(extras),
             mBuffers(Buffers),
             mMaxBuffers(MaxBuffers),
             mNumBuffers(NumBuffers) {}
@@ -7490,7 +7899,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         BufferId__P mBuffers;
         int32_t mMaxBuffers;
         GLint__P mNumBuffers;
@@ -7499,8 +7908,8 @@ namespace gles {
     class GlExtGetFramebuffersQCOM: public Encodable {
     public:
         GlExtGetFramebuffersQCOM() = default;
-        GlExtGetFramebuffersQCOM(atom::Observations observations, FramebufferId__P Framebuffers, int32_t MaxFramebuffers, GLint__P NumFramebuffers) :
-            mobservations(observations),
+        GlExtGetFramebuffersQCOM(gapic::Vector<gapic::Encodable*> extras, FramebufferId__P Framebuffers, int32_t MaxFramebuffers, GLint__P NumFramebuffers) :
+            mextras(extras),
             mFramebuffers(Framebuffers),
             mMaxFramebuffers(MaxFramebuffers),
             mNumFramebuffers(NumFramebuffers) {}
@@ -7509,7 +7918,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         FramebufferId__P mFramebuffers;
         int32_t mMaxFramebuffers;
         GLint__P mNumFramebuffers;
@@ -7518,8 +7927,8 @@ namespace gles {
     class GlExtGetProgramBinarySourceQCOM: public Encodable {
     public:
         GlExtGetProgramBinarySourceQCOM() = default;
-        GlExtGetProgramBinarySourceQCOM(atom::Observations observations, uint32_t Program, uint32_t Shadertype, GLchar__P Source, GLint__P Length) :
-            mobservations(observations),
+        GlExtGetProgramBinarySourceQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shadertype, GLchar__P Source, GLint__P Length) :
+            mextras(extras),
             mProgram(Program),
             mShadertype(Shadertype),
             mSource(Source),
@@ -7529,7 +7938,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mShadertype;
         GLchar__P mSource;
@@ -7554,8 +7963,8 @@ namespace gles {
     class GlExtGetProgramsQCOM: public Encodable {
     public:
         GlExtGetProgramsQCOM() = default;
-        GlExtGetProgramsQCOM(atom::Observations observations, ProgramId__P Programs, int32_t MaxPrograms, GLint__P NumPrograms) :
-            mobservations(observations),
+        GlExtGetProgramsQCOM(gapic::Vector<gapic::Encodable*> extras, ProgramId__P Programs, int32_t MaxPrograms, GLint__P NumPrograms) :
+            mextras(extras),
             mPrograms(Programs),
             mMaxPrograms(MaxPrograms),
             mNumPrograms(NumPrograms) {}
@@ -7564,7 +7973,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         ProgramId__P mPrograms;
         int32_t mMaxPrograms;
         GLint__P mNumPrograms;
@@ -7588,8 +7997,8 @@ namespace gles {
     class GlExtGetRenderbuffersQCOM: public Encodable {
     public:
         GlExtGetRenderbuffersQCOM() = default;
-        GlExtGetRenderbuffersQCOM(atom::Observations observations, RenderbufferId__P Renderbuffers, int32_t MaxRenderbuffers, GLint__P NumRenderbuffers) :
-            mobservations(observations),
+        GlExtGetRenderbuffersQCOM(gapic::Vector<gapic::Encodable*> extras, RenderbufferId__P Renderbuffers, int32_t MaxRenderbuffers, GLint__P NumRenderbuffers) :
+            mextras(extras),
             mRenderbuffers(Renderbuffers),
             mMaxRenderbuffers(MaxRenderbuffers),
             mNumRenderbuffers(NumRenderbuffers) {}
@@ -7598,7 +8007,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         RenderbufferId__P mRenderbuffers;
         int32_t mMaxRenderbuffers;
         GLint__P mNumRenderbuffers;
@@ -7622,8 +8031,8 @@ namespace gles {
     class GlExtGetShadersQCOM: public Encodable {
     public:
         GlExtGetShadersQCOM() = default;
-        GlExtGetShadersQCOM(atom::Observations observations, ShaderId__P Shaders, int32_t MaxShaders, GLint__P NumShaders) :
-            mobservations(observations),
+        GlExtGetShadersQCOM(gapic::Vector<gapic::Encodable*> extras, ShaderId__P Shaders, int32_t MaxShaders, GLint__P NumShaders) :
+            mextras(extras),
             mShaders(Shaders),
             mMaxShaders(MaxShaders),
             mNumShaders(NumShaders) {}
@@ -7632,7 +8041,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         ShaderId__P mShaders;
         int32_t mMaxShaders;
         GLint__P mNumShaders;
@@ -7641,8 +8050,8 @@ namespace gles {
     class GlExtGetTexLevelParameterivQCOM: public Encodable {
     public:
         GlExtGetTexLevelParameterivQCOM() = default;
-        GlExtGetTexLevelParameterivQCOM(atom::Observations observations, uint32_t Texture, uint32_t Face, int32_t Level, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlExtGetTexLevelParameterivQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Face, int32_t Level, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTexture(Texture),
             mFace(Face),
             mLevel(Level),
@@ -7653,7 +8062,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mFace;
         int32_t mLevel;
@@ -7664,8 +8073,8 @@ namespace gles {
     class GlExtGetTexSubImageQCOM: public Encodable {
     public:
         GlExtGetTexSubImageQCOM() = default;
-        GlExtGetTexSubImageQCOM(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, Void__P Texels) :
-            mobservations(observations),
+        GlExtGetTexSubImageQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, Void__P Texels) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -7682,7 +8091,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -7714,8 +8123,8 @@ namespace gles {
     class GlExtGetTexturesQCOM: public Encodable {
     public:
         GlExtGetTexturesQCOM() = default;
-        GlExtGetTexturesQCOM(atom::Observations observations, TextureId__P Textures, int32_t MaxTextures, GLint__P NumTextures) :
-            mobservations(observations),
+        GlExtGetTexturesQCOM(gapic::Vector<gapic::Encodable*> extras, TextureId__P Textures, int32_t MaxTextures, GLint__P NumTextures) :
+            mextras(extras),
             mTextures(Textures),
             mMaxTextures(MaxTextures),
             mNumTextures(NumTextures) {}
@@ -7724,7 +8133,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         TextureId__P mTextures;
         int32_t mMaxTextures;
         GLint__P mNumTextures;
@@ -7733,12 +8142,15 @@ namespace gles {
     class GlExtIsProgramBinaryQCOM: public Encodable {
     public:
         GlExtIsProgramBinaryQCOM() = default;
-        GlExtIsProgramBinaryQCOM(atom::Observations observations, uint32_t Program, uint8_t Result) :
-            mobservations(observations),
+        GlExtIsProgramBinaryQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint8_t Result) :
+            mextras(extras),
             mProgram(Program),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
             e->Uint8(this->mResult);
         }
@@ -7746,7 +8158,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint8_t mResult;
     };
@@ -7754,8 +8166,8 @@ namespace gles {
     class GlExtTexObjectStateOverrideiQCOM: public Encodable {
     public:
         GlExtTexObjectStateOverrideiQCOM() = default;
-        GlExtTexObjectStateOverrideiQCOM(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlExtTexObjectStateOverrideiQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -7764,7 +8176,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -7773,8 +8185,8 @@ namespace gles {
     class GlFenceSync: public Encodable {
     public:
         GlFenceSync() = default;
-        GlFenceSync(atom::Observations observations, uint32_t Condition, uint32_t SyncFlags, uint64_t Result) :
-            mobservations(observations),
+        GlFenceSync(gapic::Vector<gapic::Encodable*> extras, uint32_t Condition, uint32_t SyncFlags, uint64_t Result) :
+            mextras(extras),
             mCondition(Condition),
             mSyncFlags(SyncFlags),
             mResult(Result) {}
@@ -7783,7 +8195,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCondition;
         uint32_t mSyncFlags;
         uint64_t mResult;
@@ -7792,8 +8204,8 @@ namespace gles {
     class GlFenceSyncAPPLE: public Encodable {
     public:
         GlFenceSyncAPPLE() = default;
-        GlFenceSyncAPPLE(atom::Observations observations, uint32_t Condition, uint32_t Flag, uint64_t Result) :
-            mobservations(observations),
+        GlFenceSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Condition, uint32_t Flag, uint64_t Result) :
+            mextras(extras),
             mCondition(Condition),
             mFlag(Flag),
             mResult(Result) {}
@@ -7802,7 +8214,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCondition;
         uint32_t mFlag;
         uint64_t mResult;
@@ -7811,56 +8223,65 @@ namespace gles {
     class GlFinish: public Encodable {
     public:
         GlFinish() = default;
-        GlFinish(atom::Observations observations) :
-            mobservations(observations) {}
+        GlFinish(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlFinishFenceNV: public Encodable {
     public:
         GlFinishFenceNV() = default;
-        GlFinishFenceNV(atom::Observations observations, uint32_t Fence) :
-            mobservations(observations),
+        GlFinishFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence) :
+            mextras(extras),
             mFence(Fence) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFence);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFence;
     };
 
     class GlFlush: public Encodable {
     public:
         GlFlush() = default;
-        GlFlush(atom::Observations observations) :
-            mobservations(observations) {}
+        GlFlush(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlFlushMappedBufferRange: public Encodable {
     public:
         GlFlushMappedBufferRange() = default;
-        GlFlushMappedBufferRange(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length) :
-            mobservations(observations),
+        GlFlushMappedBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length) :
+            mextras(extras),
             mTarget(Target),
             mOffset(Offset),
             mLength(Length) {}
@@ -7869,7 +8290,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mOffset;
         int32_t mLength;
@@ -7878,8 +8299,8 @@ namespace gles {
     class GlFlushMappedBufferRangeEXT: public Encodable {
     public:
         GlFlushMappedBufferRangeEXT() = default;
-        GlFlushMappedBufferRangeEXT(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length) :
-            mobservations(observations),
+        GlFlushMappedBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length) :
+            mextras(extras),
             mTarget(Target),
             mOffset(Offset),
             mLength(Length) {}
@@ -7888,7 +8309,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mOffset;
         int32_t mLength;
@@ -7897,12 +8318,15 @@ namespace gles {
     class GlFogf: public Encodable {
     public:
         GlFogf() = default;
-        GlFogf(atom::Observations observations, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlFogf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Float32(this->mParam);
         }
@@ -7910,7 +8334,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         float mParam;
     };
@@ -7918,12 +8342,15 @@ namespace gles {
     class GlFogfv: public Encodable {
     public:
         GlFogfv() = default;
-        GlFogfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlFogfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -7931,7 +8358,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfloat__CP mParams;
     };
@@ -7939,12 +8366,15 @@ namespace gles {
     class GlFogx: public Encodable {
     public:
         GlFogx() = default;
-        GlFogx(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlFogx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -7952,7 +8382,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -7960,12 +8390,15 @@ namespace gles {
     class GlFogxOES: public Encodable {
     public:
         GlFogxOES() = default;
-        GlFogxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlFogxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -7973,7 +8406,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -7981,12 +8414,15 @@ namespace gles {
     class GlFogxv: public Encodable {
     public:
         GlFogxv() = default;
-        GlFogxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlFogxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParam);
         }
@@ -7994,7 +8430,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParam;
     };
@@ -8002,12 +8438,15 @@ namespace gles {
     class GlFogxvOES: public Encodable {
     public:
         GlFogxvOES() = default;
-        GlFogxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlFogxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParam);
         }
@@ -8015,7 +8454,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParam;
     };
@@ -8023,26 +8462,29 @@ namespace gles {
     class GlFragmentCoverageColorNV: public Encodable {
     public:
         GlFragmentCoverageColorNV() = default;
-        GlFragmentCoverageColorNV(atom::Observations observations, uint32_t Color) :
-            mobservations(observations),
+        GlFragmentCoverageColorNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Color) :
+            mextras(extras),
             mColor(Color) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mColor);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mColor;
     };
 
     class GlFramebufferParameteri: public Encodable {
     public:
         GlFramebufferParameteri() = default;
-        GlFramebufferParameteri(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlFramebufferParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -8051,7 +8493,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -8060,8 +8502,8 @@ namespace gles {
     class GlFramebufferRenderbuffer: public Encodable {
     public:
         GlFramebufferRenderbuffer() = default;
-        GlFramebufferRenderbuffer(atom::Observations observations, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t RenderbufferTarget, uint32_t Renderbuffer) :
-            mobservations(observations),
+        GlFramebufferRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t RenderbufferTarget, uint32_t Renderbuffer) :
+            mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
             mRenderbufferTarget(RenderbufferTarget),
@@ -8071,7 +8513,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebufferTarget;
         uint32_t mFramebufferAttachment;
         uint32_t mRenderbufferTarget;
@@ -8081,8 +8523,8 @@ namespace gles {
     class GlFramebufferRenderbufferOES: public Encodable {
     public:
         GlFramebufferRenderbufferOES() = default;
-        GlFramebufferRenderbufferOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Renderbuffertarget, uint32_t Renderbuffer) :
-            mobservations(observations),
+        GlFramebufferRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Renderbuffertarget, uint32_t Renderbuffer) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mRenderbuffertarget(Renderbuffertarget),
@@ -8092,7 +8534,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mRenderbuffertarget;
@@ -8102,8 +8544,8 @@ namespace gles {
     class GlFramebufferSampleLocationsfvNV: public Encodable {
     public:
         GlFramebufferSampleLocationsfvNV() = default;
-        GlFramebufferSampleLocationsfvNV(atom::Observations observations, uint32_t Target, uint32_t Start, int32_t Count, GLfloat__CP V) :
-            mobservations(observations),
+        GlFramebufferSampleLocationsfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Start, int32_t Count, GLfloat__CP V) :
+            mextras(extras),
             mTarget(Target),
             mStart(Start),
             mCount(Count),
@@ -8113,7 +8555,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mStart;
         int32_t mCount;
@@ -8123,8 +8565,8 @@ namespace gles {
     class GlFramebufferTexture: public Encodable {
     public:
         GlFramebufferTexture() = default;
-        GlFramebufferTexture(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
-            mobservations(observations),
+        GlFramebufferTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTexture(Texture),
@@ -8134,7 +8576,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTexture;
@@ -8144,8 +8586,8 @@ namespace gles {
     class GlFramebufferTexture2D: public Encodable {
     public:
         GlFramebufferTexture2D() = default;
-        GlFramebufferTexture2D(atom::Observations observations, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
-            mobservations(observations),
+        GlFramebufferTexture2D(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
+            mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
             mTextureTarget(TextureTarget),
@@ -8156,7 +8598,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebufferTarget;
         uint32_t mFramebufferAttachment;
         uint32_t mTextureTarget;
@@ -8167,8 +8609,8 @@ namespace gles {
     class GlFramebufferTexture2DMultisampleEXT: public Encodable {
     public:
         GlFramebufferTexture2DMultisampleEXT() = default;
-        GlFramebufferTexture2DMultisampleEXT(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
-            mobservations(observations),
+        GlFramebufferTexture2DMultisampleEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTextarget(Textarget),
@@ -8180,7 +8622,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTextarget;
@@ -8192,8 +8634,8 @@ namespace gles {
     class GlFramebufferTexture2DMultisampleIMG: public Encodable {
     public:
         GlFramebufferTexture2DMultisampleIMG() = default;
-        GlFramebufferTexture2DMultisampleIMG(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
-            mobservations(observations),
+        GlFramebufferTexture2DMultisampleIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTextarget(Textarget),
@@ -8205,7 +8647,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTextarget;
@@ -8217,8 +8659,8 @@ namespace gles {
     class GlFramebufferTexture2DOES: public Encodable {
     public:
         GlFramebufferTexture2DOES() = default;
-        GlFramebufferTexture2DOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level) :
-            mobservations(observations),
+        GlFramebufferTexture2DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTextarget(Textarget),
@@ -8229,7 +8671,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTextarget;
@@ -8240,8 +8682,8 @@ namespace gles {
     class GlFramebufferTexture3DOES: public Encodable {
     public:
         GlFramebufferTexture3DOES() = default;
-        GlFramebufferTexture3DOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Zoffset) :
-            mobservations(observations),
+        GlFramebufferTexture3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Zoffset) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTextarget(Textarget),
@@ -8253,7 +8695,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTextarget;
@@ -8265,8 +8707,8 @@ namespace gles {
     class GlFramebufferTextureEXT: public Encodable {
     public:
         GlFramebufferTextureEXT() = default;
-        GlFramebufferTextureEXT(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
-            mobservations(observations),
+        GlFramebufferTextureEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTexture(Texture),
@@ -8276,7 +8718,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTexture;
@@ -8286,8 +8728,8 @@ namespace gles {
     class GlFramebufferTextureLayer: public Encodable {
     public:
         GlFramebufferTextureLayer() = default;
-        GlFramebufferTextureLayer(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t Layer) :
-            mobservations(observations),
+        GlFramebufferTextureLayer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t Layer) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTexture(Texture),
@@ -8298,7 +8740,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTexture;
@@ -8309,8 +8751,8 @@ namespace gles {
     class GlFramebufferTextureMultiviewOVR: public Encodable {
     public:
         GlFramebufferTextureMultiviewOVR() = default;
-        GlFramebufferTextureMultiviewOVR(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t BaseViewIndex, int32_t NumViews) :
-            mobservations(observations),
+        GlFramebufferTextureMultiviewOVR(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t BaseViewIndex, int32_t NumViews) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTexture(Texture),
@@ -8322,7 +8764,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTexture;
@@ -8334,8 +8776,8 @@ namespace gles {
     class GlFramebufferTextureOES: public Encodable {
     public:
         GlFramebufferTextureOES() = default;
-        GlFramebufferTextureOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
-            mobservations(observations),
+        GlFramebufferTextureOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mTexture(Texture),
@@ -8345,7 +8787,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mTexture;
@@ -8355,26 +8797,29 @@ namespace gles {
     class GlFrontFace: public Encodable {
     public:
         GlFrontFace() = default;
-        GlFrontFace(atom::Observations observations, uint32_t Orientation) :
-            mobservations(observations),
+        GlFrontFace(gapic::Vector<gapic::Encodable*> extras, uint32_t Orientation) :
+            mextras(extras),
             mOrientation(Orientation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mOrientation);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mOrientation;
     };
 
     class GlFrustumf: public Encodable {
     public:
         GlFrustumf() = default;
-        GlFrustumf(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
-            mobservations(observations),
+        GlFrustumf(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -8386,7 +8831,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mL;
         float mR;
         float mB;
@@ -8398,8 +8843,8 @@ namespace gles {
     class GlFrustumfOES: public Encodable {
     public:
         GlFrustumfOES() = default;
-        GlFrustumfOES(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
-            mobservations(observations),
+        GlFrustumfOES(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -8411,7 +8856,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mL;
         float mR;
         float mB;
@@ -8423,8 +8868,8 @@ namespace gles {
     class GlFrustumx: public Encodable {
     public:
         GlFrustumx() = default;
-        GlFrustumx(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlFrustumx(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -8436,7 +8881,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mL;
         int32_t mR;
         int32_t mB;
@@ -8448,8 +8893,8 @@ namespace gles {
     class GlFrustumxOES: public Encodable {
     public:
         GlFrustumxOES() = default;
-        GlFrustumxOES(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlFrustumxOES(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -8461,7 +8906,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mL;
         int32_t mR;
         int32_t mB;
@@ -8473,12 +8918,15 @@ namespace gles {
     class GlGenBuffers: public Encodable {
     public:
         GlGenBuffers() = default;
-        GlGenBuffers(atom::Observations observations, int32_t Count, BufferId__P Buffers) :
-            mobservations(observations),
+        GlGenBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, BufferId__P Buffers) :
+            mextras(extras),
             mCount(Count),
             mBuffers(Buffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mBuffers);
         }
@@ -8486,7 +8934,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         BufferId__P mBuffers;
     };
@@ -8494,12 +8942,15 @@ namespace gles {
     class GlGenFencesNV: public Encodable {
     public:
         GlGenFencesNV() = default;
-        GlGenFencesNV(atom::Observations observations, int32_t N, GLuint__P Fences) :
-            mobservations(observations),
+        GlGenFencesNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Fences) :
+            mextras(extras),
             mN(N),
             mFences(Fences) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mFences);
         }
@@ -8507,7 +8958,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__P mFences;
     };
@@ -8515,12 +8966,15 @@ namespace gles {
     class GlGenFramebuffers: public Encodable {
     public:
         GlGenFramebuffers() = default;
-        GlGenFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__P Framebuffers) :
-            mobservations(observations),
+        GlGenFramebuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, FramebufferId__P Framebuffers) :
+            mextras(extras),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mFramebuffers);
         }
@@ -8528,7 +8982,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         FramebufferId__P mFramebuffers;
     };
@@ -8536,12 +8990,15 @@ namespace gles {
     class GlGenFramebuffersOES: public Encodable {
     public:
         GlGenFramebuffersOES() = default;
-        GlGenFramebuffersOES(atom::Observations observations, int32_t N, GLuint__P Framebuffers) :
-            mobservations(observations),
+        GlGenFramebuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Framebuffers) :
+            mextras(extras),
             mN(N),
             mFramebuffers(Framebuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mFramebuffers);
         }
@@ -8549,7 +9006,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__P mFramebuffers;
     };
@@ -8557,12 +9014,15 @@ namespace gles {
     class GlGenPathsNV: public Encodable {
     public:
         GlGenPathsNV() = default;
-        GlGenPathsNV(atom::Observations observations, int32_t Range, uint32_t Result) :
-            mobservations(observations),
+        GlGenPathsNV(gapic::Vector<gapic::Encodable*> extras, int32_t Range, uint32_t Result) :
+            mextras(extras),
             mRange(Range),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mRange);
             e->Uint32(this->mResult);
         }
@@ -8570,7 +9030,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mRange;
         uint32_t mResult;
     };
@@ -8578,12 +9038,15 @@ namespace gles {
     class GlGenPerfMonitorsAMD: public Encodable {
     public:
         GlGenPerfMonitorsAMD() = default;
-        GlGenPerfMonitorsAMD(atom::Observations observations, int32_t N, GLuint__P Monitors) :
-            mobservations(observations),
+        GlGenPerfMonitorsAMD(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Monitors) :
+            mextras(extras),
             mN(N),
             mMonitors(Monitors) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mMonitors);
         }
@@ -8591,7 +9054,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__P mMonitors;
     };
@@ -8614,12 +9077,15 @@ namespace gles {
     class GlGenProgramPipelines: public Encodable {
     public:
         GlGenProgramPipelines() = default;
-        GlGenProgramPipelines(atom::Observations observations, int32_t N, PipelineId__P Pipelines) :
-            mobservations(observations),
+        GlGenProgramPipelines(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__P Pipelines) :
+            mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mPipelines);
         }
@@ -8627,7 +9093,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         PipelineId__P mPipelines;
     };
@@ -8635,12 +9101,15 @@ namespace gles {
     class GlGenProgramPipelinesEXT: public Encodable {
     public:
         GlGenProgramPipelinesEXT() = default;
-        GlGenProgramPipelinesEXT(atom::Observations observations, int32_t N, PipelineId__P Pipelines) :
-            mobservations(observations),
+        GlGenProgramPipelinesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__P Pipelines) :
+            mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mPipelines);
         }
@@ -8648,7 +9117,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         PipelineId__P mPipelines;
     };
@@ -8671,12 +9140,15 @@ namespace gles {
     class GlGenQueries: public Encodable {
     public:
         GlGenQueries() = default;
-        GlGenQueries(atom::Observations observations, int32_t Count, QueryId__P Queries) :
-            mobservations(observations),
+        GlGenQueries(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__P Queries) :
+            mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mQueries);
         }
@@ -8684,7 +9156,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         QueryId__P mQueries;
     };
@@ -8692,12 +9164,15 @@ namespace gles {
     class GlGenQueriesEXT: public Encodable {
     public:
         GlGenQueriesEXT() = default;
-        GlGenQueriesEXT(atom::Observations observations, int32_t Count, QueryId__P Queries) :
-            mobservations(observations),
+        GlGenQueriesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__P Queries) :
+            mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mQueries);
         }
@@ -8705,7 +9180,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         QueryId__P mQueries;
     };
@@ -8713,12 +9188,15 @@ namespace gles {
     class GlGenRenderbuffers: public Encodable {
     public:
         GlGenRenderbuffers() = default;
-        GlGenRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__P Renderbuffers) :
-            mobservations(observations),
+        GlGenRenderbuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, RenderbufferId__P Renderbuffers) :
+            mextras(extras),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mRenderbuffers);
         }
@@ -8726,7 +9204,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         RenderbufferId__P mRenderbuffers;
     };
@@ -8734,12 +9212,15 @@ namespace gles {
     class GlGenRenderbuffersOES: public Encodable {
     public:
         GlGenRenderbuffersOES() = default;
-        GlGenRenderbuffersOES(atom::Observations observations, int32_t N, GLuint__P Renderbuffers) :
-            mobservations(observations),
+        GlGenRenderbuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Renderbuffers) :
+            mextras(extras),
             mN(N),
             mRenderbuffers(Renderbuffers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mRenderbuffers);
         }
@@ -8747,7 +9228,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         GLuint__P mRenderbuffers;
     };
@@ -8770,12 +9251,15 @@ namespace gles {
     class GlGenSamplers: public Encodable {
     public:
         GlGenSamplers() = default;
-        GlGenSamplers(atom::Observations observations, int32_t Count, SamplerId__P Samplers) :
-            mobservations(observations),
+        GlGenSamplers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, SamplerId__P Samplers) :
+            mextras(extras),
             mCount(Count),
             mSamplers(Samplers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mSamplers);
         }
@@ -8783,7 +9267,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         SamplerId__P mSamplers;
     };
@@ -8791,12 +9275,15 @@ namespace gles {
     class GlGenTextures: public Encodable {
     public:
         GlGenTextures() = default;
-        GlGenTextures(atom::Observations observations, int32_t Count, TextureId__P Textures) :
-            mobservations(observations),
+        GlGenTextures(gapic::Vector<gapic::Encodable*> extras, int32_t Count, TextureId__P Textures) :
+            mextras(extras),
             mCount(Count),
             mTextures(Textures) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mTextures);
         }
@@ -8804,7 +9291,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         TextureId__P mTextures;
     };
@@ -8827,12 +9314,15 @@ namespace gles {
     class GlGenTransformFeedbacks: public Encodable {
     public:
         GlGenTransformFeedbacks() = default;
-        GlGenTransformFeedbacks(atom::Observations observations, int32_t N, TransformFeedbackId__P Ids) :
-            mobservations(observations),
+        GlGenTransformFeedbacks(gapic::Vector<gapic::Encodable*> extras, int32_t N, TransformFeedbackId__P Ids) :
+            mextras(extras),
             mN(N),
             mIds(Ids) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mN);
             e->Struct(this->mIds);
         }
@@ -8840,7 +9330,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mN;
         TransformFeedbackId__P mIds;
     };
@@ -8863,12 +9353,15 @@ namespace gles {
     class GlGenVertexArrays: public Encodable {
     public:
         GlGenVertexArrays() = default;
-        GlGenVertexArrays(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
-            mobservations(observations),
+        GlGenVertexArrays(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__P Arrays) :
+            mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mArrays);
         }
@@ -8876,7 +9369,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         VertexArrayId__P mArrays;
     };
@@ -8884,12 +9377,15 @@ namespace gles {
     class GlGenVertexArraysOES: public Encodable {
     public:
         GlGenVertexArraysOES() = default;
-        GlGenVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
-            mobservations(observations),
+        GlGenVertexArraysOES(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__P Arrays) :
+            mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mCount);
             e->Struct(this->mArrays);
         }
@@ -8897,7 +9393,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         VertexArrayId__P mArrays;
     };
@@ -8905,44 +9401,50 @@ namespace gles {
     class GlGenerateMipmap: public Encodable {
     public:
         GlGenerateMipmap() = default;
-        GlGenerateMipmap(atom::Observations observations, uint32_t Target) :
-            mobservations(observations),
+        GlGenerateMipmap(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+            mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
     };
 
     class GlGenerateMipmapOES: public Encodable {
     public:
         GlGenerateMipmapOES() = default;
-        GlGenerateMipmapOES(atom::Observations observations, uint32_t Target) :
-            mobservations(observations),
+        GlGenerateMipmapOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+            mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
     };
 
     class GlGetActiveAttrib: public Encodable {
     public:
         GlGetActiveAttrib() = default;
-        GlGetActiveAttrib(atom::Observations observations, uint32_t Program, uint32_t Location, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
-            mobservations(observations),
+        GlGetActiveAttrib(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Location, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufferSize(BufferSize),
@@ -8955,7 +9457,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mLocation;
         int32_t mBufferSize;
@@ -8968,8 +9470,8 @@ namespace gles {
     class GlGetActiveUniform: public Encodable {
     public:
         GlGetActiveUniform() = default;
-        GlGetActiveUniform(atom::Observations observations, uint32_t Program, uint32_t Index, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
-            mobservations(observations),
+        GlGetActiveUniform(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Index, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
+            mextras(extras),
             mProgram(Program),
             mIndex(Index),
             mBufferSize(BufferSize),
@@ -8982,7 +9484,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mIndex;
         int32_t mBufferSize;
@@ -8995,8 +9497,8 @@ namespace gles {
     class GlGetActiveUniformBlockName: public Encodable {
     public:
         GlGetActiveUniformBlockName() = default;
-        GlGetActiveUniformBlockName(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLchar__P Name) :
-            mobservations(observations),
+        GlGetActiveUniformBlockName(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLchar__P Name) :
+            mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
             mBufferSize(BufferSize),
@@ -9007,7 +9509,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
         int32_t mBufferSize;
@@ -9018,8 +9520,8 @@ namespace gles {
     class GlGetActiveUniformBlockiv: public Encodable {
     public:
         GlGetActiveUniformBlockiv() = default;
-        GlGetActiveUniformBlockiv(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, uint32_t ParameterName, GLint__P Parameters) :
-            mobservations(observations),
+        GlGetActiveUniformBlockiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t ParameterName, GLint__P Parameters) :
+            mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
             mParameterName(ParameterName),
@@ -9029,7 +9531,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
         uint32_t mParameterName;
@@ -9054,8 +9556,8 @@ namespace gles {
     class GlGetActiveUniformsiv: public Encodable {
     public:
         GlGetActiveUniformsiv() = default;
-        GlGetActiveUniformsiv(atom::Observations observations, uint32_t Program, int32_t UniformCount, UniformIndex__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
-            mobservations(observations),
+        GlGetActiveUniformsiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t UniformCount, UniformIndex__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
+            mextras(extras),
             mProgram(Program),
             mUniformCount(UniformCount),
             mUniformIndices(UniformIndices),
@@ -9066,7 +9568,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mUniformCount;
         UniformIndex__CP mUniformIndices;
@@ -9077,8 +9579,8 @@ namespace gles {
     class GlGetAttachedShaders: public Encodable {
     public:
         GlGetAttachedShaders() = default;
-        GlGetAttachedShaders(atom::Observations observations, uint32_t Program, int32_t BufferLength, GLsizei__P ShadersLengthWritten, ShaderId__P Shaders) :
-            mobservations(observations),
+        GlGetAttachedShaders(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferLength, GLsizei__P ShadersLengthWritten, ShaderId__P Shaders) :
+            mextras(extras),
             mProgram(Program),
             mBufferLength(BufferLength),
             mShadersLengthWritten(ShadersLengthWritten),
@@ -9088,7 +9590,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mBufferLength;
         GLsizei__P mShadersLengthWritten;
@@ -9098,8 +9600,8 @@ namespace gles {
     class GlGetAttribLocation: public Encodable {
     public:
         GlGetAttribLocation() = default;
-        GlGetAttribLocation(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetAttribLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
@@ -9108,7 +9610,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         char* mName;
         int32_t mResult;
@@ -9117,8 +9619,8 @@ namespace gles {
     class GlGetBooleani_v: public Encodable {
     public:
         GlGetBooleani_v() = default;
-        GlGetBooleani_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLboolean__P Values) :
-            mobservations(observations),
+        GlGetBooleani_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLboolean__P Values) :
+            mextras(extras),
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
@@ -9127,7 +9629,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         uint32_t mIndex;
         GLboolean__P mValues;
@@ -9136,12 +9638,15 @@ namespace gles {
     class GlGetBooleanv: public Encodable {
     public:
         GlGetBooleanv() = default;
-        GlGetBooleanv(atom::Observations observations, uint32_t Param, GLboolean__P Values) :
-            mobservations(observations),
+        GlGetBooleanv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLboolean__P Values) :
+            mextras(extras),
             mParam(Param),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParam);
             e->Struct(this->mValues);
         }
@@ -9149,7 +9654,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         GLboolean__P mValues;
     };
@@ -9157,8 +9662,8 @@ namespace gles {
     class GlGetBufferParameteri64v: public Encodable {
     public:
         GlGetBufferParameteri64v() = default;
-        GlGetBufferParameteri64v(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint64__P Params) :
-            mobservations(observations),
+        GlGetBufferParameteri64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint64__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -9167,7 +9672,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint64__P mParams;
@@ -9176,8 +9681,8 @@ namespace gles {
     class GlGetBufferParameteriv: public Encodable {
     public:
         GlGetBufferParameteriv() = default;
-        GlGetBufferParameteriv(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetBufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
@@ -9186,7 +9691,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValue;
@@ -9195,8 +9700,8 @@ namespace gles {
     class GlGetBufferPointerv: public Encodable {
     public:
         GlGetBufferPointerv() = default;
-        GlGetBufferPointerv(atom::Observations observations, uint32_t Target, uint32_t Pname, Void__P__P Params) :
-            mobservations(observations),
+        GlGetBufferPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -9205,7 +9710,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         Void__P__P mParams;
@@ -9214,8 +9719,8 @@ namespace gles {
     class GlGetBufferPointervOES: public Encodable {
     public:
         GlGetBufferPointervOES() = default;
-        GlGetBufferPointervOES(atom::Observations observations, uint32_t Target, uint32_t Pname, Void__P__P Params) :
-            mobservations(observations),
+        GlGetBufferPointervOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -9224,7 +9729,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         Void__P__P mParams;
@@ -9233,12 +9738,15 @@ namespace gles {
     class GlGetClipPlanef: public Encodable {
     public:
         GlGetClipPlanef() = default;
-        GlGetClipPlanef(atom::Observations observations, uint32_t Plane, GLfloat__P Equation) :
-            mobservations(observations),
+        GlGetClipPlanef(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__P Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -9246,7 +9754,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfloat__P mEquation;
     };
@@ -9254,12 +9762,15 @@ namespace gles {
     class GlGetClipPlanefOES: public Encodable {
     public:
         GlGetClipPlanefOES() = default;
-        GlGetClipPlanefOES(atom::Observations observations, uint32_t Plane, GLfloat__P Equation) :
-            mobservations(observations),
+        GlGetClipPlanefOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__P Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -9267,7 +9778,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfloat__P mEquation;
     };
@@ -9275,12 +9786,15 @@ namespace gles {
     class GlGetClipPlanex: public Encodable {
     public:
         GlGetClipPlanex() = default;
-        GlGetClipPlanex(atom::Observations observations, uint32_t Plane, GLfixed__P Equation) :
-            mobservations(observations),
+        GlGetClipPlanex(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__P Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -9288,7 +9802,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfixed__P mEquation;
     };
@@ -9296,12 +9810,15 @@ namespace gles {
     class GlGetClipPlanexOES: public Encodable {
     public:
         GlGetClipPlanexOES() = default;
-        GlGetClipPlanexOES(atom::Observations observations, uint32_t Plane, GLfixed__P Equation) :
-            mobservations(observations),
+        GlGetClipPlanexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__P Equation) :
+            mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPlane);
             e->Struct(this->mEquation);
         }
@@ -9309,7 +9826,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPlane;
         GLfixed__P mEquation;
     };
@@ -9317,12 +9834,15 @@ namespace gles {
     class GlGetCoverageModulationTableNV: public Encodable {
     public:
         GlGetCoverageModulationTableNV() = default;
-        GlGetCoverageModulationTableNV(atom::Observations observations, int32_t Bufsize, GLfloat__P V) :
-            mobservations(observations),
+        GlGetCoverageModulationTableNV(gapic::Vector<gapic::Encodable*> extras, int32_t Bufsize, GLfloat__P V) :
+            mextras(extras),
             mBufsize(Bufsize),
             mV(V) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mBufsize);
             e->Struct(this->mV);
         }
@@ -9330,7 +9850,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mBufsize;
         GLfloat__P mV;
     };
@@ -9338,8 +9858,8 @@ namespace gles {
     class GlGetDebugMessageLog: public Encodable {
     public:
         GlGetDebugMessageLog() = default;
-        GlGetDebugMessageLog(atom::Observations observations, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
-            mobservations(observations),
+        GlGetDebugMessageLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
+            mextras(extras),
             mCount(Count),
             mBufSize(BufSize),
             mSources(Sources),
@@ -9354,7 +9874,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCount;
         int32_t mBufSize;
         GLenum__P mSources;
@@ -9369,8 +9889,8 @@ namespace gles {
     class GlGetDebugMessageLogKHR: public Encodable {
     public:
         GlGetDebugMessageLogKHR() = default;
-        GlGetDebugMessageLogKHR(atom::Observations observations, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
-            mobservations(observations),
+        GlGetDebugMessageLogKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
+            mextras(extras),
             mCount(Count),
             mBufSize(BufSize),
             mSources(Sources),
@@ -9385,7 +9905,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCount;
         int32_t mBufSize;
         GLenum__P mSources;
@@ -9400,8 +9920,8 @@ namespace gles {
     class GlGetDriverControlStringQCOM: public Encodable {
     public:
         GlGetDriverControlStringQCOM() = default;
-        GlGetDriverControlStringQCOM(atom::Observations observations, uint32_t DriverControl, int32_t BufSize, GLsizei__P Length, GLchar__P DriverControlString) :
-            mobservations(observations),
+        GlGetDriverControlStringQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl, int32_t BufSize, GLsizei__P Length, GLchar__P DriverControlString) :
+            mextras(extras),
             mDriverControl(DriverControl),
             mBufSize(BufSize),
             mLength(Length),
@@ -9411,7 +9931,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mDriverControl;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -9421,8 +9941,8 @@ namespace gles {
     class GlGetDriverControlsQCOM: public Encodable {
     public:
         GlGetDriverControlsQCOM() = default;
-        GlGetDriverControlsQCOM(atom::Observations observations, GLint__P Num, int32_t Size, GLuint__P DriverControls) :
-            mobservations(observations),
+        GlGetDriverControlsQCOM(gapic::Vector<gapic::Encodable*> extras, GLint__P Num, int32_t Size, GLuint__P DriverControls) :
+            mextras(extras),
             mNum(Num),
             mSize(Size),
             mDriverControls(DriverControls) {}
@@ -9431,7 +9951,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLint__P mNum;
         int32_t mSize;
         GLuint__P mDriverControls;
@@ -9440,26 +9960,29 @@ namespace gles {
     class GlGetError: public Encodable {
     public:
         GlGetError() = default;
-        GlGetError(atom::Observations observations, uint32_t Result) :
-            mobservations(observations),
+        GlGetError(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+            mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResult);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResult;
     };
 
     class GlGetFenceivNV: public Encodable {
     public:
         GlGetFenceivNV() = default;
-        GlGetFenceivNV(atom::Observations observations, uint32_t Fence, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetFenceivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mFence(Fence),
             mPname(Pname),
             mParams(Params) {}
@@ -9468,7 +9991,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFence;
         uint32_t mPname;
         GLint__P mParams;
@@ -9477,30 +10000,36 @@ namespace gles {
     class GlGetFirstPerfQueryIdINTEL: public Encodable {
     public:
         GlGetFirstPerfQueryIdINTEL() = default;
-        GlGetFirstPerfQueryIdINTEL(atom::Observations observations, GLuint__P QueryId) :
-            mobservations(observations),
+        GlGetFirstPerfQueryIdINTEL(gapic::Vector<gapic::Encodable*> extras, GLuint__P QueryId) :
+            mextras(extras),
             mQueryId(QueryId) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mQueryId);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLuint__P mQueryId;
     };
 
     class GlGetFixedv: public Encodable {
     public:
         GlGetFixedv() = default;
-        GlGetFixedv(atom::Observations observations, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetFixedv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -9508,7 +10037,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__P mParams;
     };
@@ -9516,12 +10045,15 @@ namespace gles {
     class GlGetFixedvOES: public Encodable {
     public:
         GlGetFixedvOES() = default;
-        GlGetFixedvOES(atom::Observations observations, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetFixedvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -9529,7 +10061,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__P mParams;
     };
@@ -9537,8 +10069,8 @@ namespace gles {
     class GlGetFloati_vNV: public Encodable {
     public:
         GlGetFloati_vNV() = default;
-        GlGetFloati_vNV(atom::Observations observations, uint32_t Target, uint32_t Index, GLfloat__P Data) :
-            mobservations(observations),
+        GlGetFloati_vNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, GLfloat__P Data) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mData(Data) {}
@@ -9547,7 +10079,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         GLfloat__P mData;
@@ -9556,12 +10088,15 @@ namespace gles {
     class GlGetFloatv: public Encodable {
     public:
         GlGetFloatv() = default;
-        GlGetFloatv(atom::Observations observations, uint32_t Param, GLfloat__P Values) :
-            mobservations(observations),
+        GlGetFloatv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLfloat__P Values) :
+            mextras(extras),
             mParam(Param),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParam);
             e->Struct(this->mValues);
         }
@@ -9569,7 +10104,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         GLfloat__P mValues;
     };
@@ -9577,8 +10112,8 @@ namespace gles {
     class GlGetFragDataIndexEXT: public Encodable {
     public:
         GlGetFragDataIndexEXT() = default;
-        GlGetFragDataIndexEXT(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetFragDataIndexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
@@ -9587,7 +10122,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         char* mName;
         int32_t mResult;
@@ -9596,8 +10131,8 @@ namespace gles {
     class GlGetFragDataLocation: public Encodable {
     public:
         GlGetFragDataLocation() = default;
-        GlGetFragDataLocation(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetFragDataLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
@@ -9606,7 +10141,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         char* mName;
         int32_t mResult;
@@ -9615,8 +10150,8 @@ namespace gles {
     class GlGetFramebufferAttachmentParameteriv: public Encodable {
     public:
         GlGetFramebufferAttachmentParameteriv() = default;
-        GlGetFramebufferAttachmentParameteriv(atom::Observations observations, uint32_t FramebufferTarget, uint32_t Attachment, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetFramebufferAttachmentParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t Attachment, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mAttachment(Attachment),
             mParameter(Parameter),
@@ -9626,7 +10161,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebufferTarget;
         uint32_t mAttachment;
         uint32_t mParameter;
@@ -9636,8 +10171,8 @@ namespace gles {
     class GlGetFramebufferAttachmentParameterivOES: public Encodable {
     public:
         GlGetFramebufferAttachmentParameterivOES() = default;
-        GlGetFramebufferAttachmentParameterivOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetFramebufferAttachmentParameterivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
             mPname(Pname),
@@ -9647,7 +10182,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAttachment;
         uint32_t mPname;
@@ -9657,8 +10192,8 @@ namespace gles {
     class GlGetFramebufferParameteriv: public Encodable {
     public:
         GlGetFramebufferParameteriv() = default;
-        GlGetFramebufferParameteriv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetFramebufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -9667,7 +10202,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -9676,62 +10211,71 @@ namespace gles {
     class GlGetGraphicsResetStatus: public Encodable {
     public:
         GlGetGraphicsResetStatus() = default;
-        GlGetGraphicsResetStatus(atom::Observations observations, uint32_t Result) :
-            mobservations(observations),
+        GlGetGraphicsResetStatus(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+            mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResult);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResult;
     };
 
     class GlGetGraphicsResetStatusEXT: public Encodable {
     public:
         GlGetGraphicsResetStatusEXT() = default;
-        GlGetGraphicsResetStatusEXT(atom::Observations observations, uint32_t Result) :
-            mobservations(observations),
+        GlGetGraphicsResetStatusEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+            mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResult);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResult;
     };
 
     class GlGetGraphicsResetStatusKHR: public Encodable {
     public:
         GlGetGraphicsResetStatusKHR() = default;
-        GlGetGraphicsResetStatusKHR(atom::Observations observations, uint32_t Result) :
-            mobservations(observations),
+        GlGetGraphicsResetStatusKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+            mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mResult);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResult;
     };
 
     class GlGetImageHandleNV: public Encodable {
     public:
         GlGetImageHandleNV() = default;
-        GlGetImageHandleNV(atom::Observations observations, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Format, uint64_t Result) :
-            mobservations(observations),
+        GlGetImageHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Format, uint64_t Result) :
+            mextras(extras),
             mTexture(Texture),
             mLevel(Level),
             mLayered(Layered),
@@ -9743,7 +10287,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         int32_t mLevel;
         uint8_t mLayered;
@@ -9755,8 +10299,8 @@ namespace gles {
     class GlGetInteger64i_v: public Encodable {
     public:
         GlGetInteger64i_v() = default;
-        GlGetInteger64i_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLint64__P Values) :
-            mobservations(observations),
+        GlGetInteger64i_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLint64__P Values) :
+            mextras(extras),
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
@@ -9765,7 +10309,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         uint32_t mIndex;
         GLint64__P mValues;
@@ -9774,12 +10318,15 @@ namespace gles {
     class GlGetInteger64v: public Encodable {
     public:
         GlGetInteger64v() = default;
-        GlGetInteger64v(atom::Observations observations, uint32_t Param, GLint64__P Values) :
-            mobservations(observations),
+        GlGetInteger64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLint64__P Values) :
+            mextras(extras),
             mParam(Param),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParam);
             e->Struct(this->mValues);
         }
@@ -9787,7 +10334,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         GLint64__P mValues;
     };
@@ -9795,12 +10342,15 @@ namespace gles {
     class GlGetInteger64vAPPLE: public Encodable {
     public:
         GlGetInteger64vAPPLE() = default;
-        GlGetInteger64vAPPLE(atom::Observations observations, uint32_t Pname, GLint64__P Params) :
-            mobservations(observations),
+        GlGetInteger64vAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLint64__P Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -9808,7 +10358,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLint64__P mParams;
     };
@@ -9816,8 +10366,8 @@ namespace gles {
     class GlGetIntegeri_v: public Encodable {
     public:
         GlGetIntegeri_v() = default;
-        GlGetIntegeri_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLint__P Values) :
-            mobservations(observations),
+        GlGetIntegeri_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLint__P Values) :
+            mextras(extras),
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
@@ -9826,7 +10376,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         uint32_t mIndex;
         GLint__P mValues;
@@ -9835,8 +10385,8 @@ namespace gles {
     class GlGetIntegeri_vEXT: public Encodable {
     public:
         GlGetIntegeri_vEXT() = default;
-        GlGetIntegeri_vEXT(atom::Observations observations, uint32_t Target, uint32_t Index, GLint__P Data) :
-            mobservations(observations),
+        GlGetIntegeri_vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, GLint__P Data) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mData(Data) {}
@@ -9845,7 +10395,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         GLint__P mData;
@@ -9854,12 +10404,15 @@ namespace gles {
     class GlGetIntegerv: public Encodable {
     public:
         GlGetIntegerv() = default;
-        GlGetIntegerv(atom::Observations observations, uint32_t Param, GLint__P Values) :
-            mobservations(observations),
+        GlGetIntegerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLint__P Values) :
+            mextras(extras),
             mParam(Param),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParam);
             e->Struct(this->mValues);
         }
@@ -9867,7 +10420,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         GLint__P mValues;
     };
@@ -9875,8 +10428,8 @@ namespace gles {
     class GlGetInternalformatSampleivNV: public Encodable {
     public:
         GlGetInternalformatSampleivNV() = default;
-        GlGetInternalformatSampleivNV(atom::Observations observations, uint32_t Target, uint32_t Internalformat, int32_t Samples, uint32_t Pname, int32_t BufSize, GLint__P Params) :
-            mobservations(observations),
+        GlGetInternalformatSampleivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, int32_t Samples, uint32_t Pname, int32_t BufSize, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mSamples(Samples),
@@ -9888,7 +10441,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         int32_t mSamples;
@@ -9900,8 +10453,8 @@ namespace gles {
     class GlGetInternalformativ: public Encodable {
     public:
         GlGetInternalformativ() = default;
-        GlGetInternalformativ(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Pname, int32_t BufSize, GLint__P Params) :
-            mobservations(observations),
+        GlGetInternalformativ(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Pname, int32_t BufSize, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mPname(Pname),
@@ -9912,7 +10465,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mPname;
@@ -9923,8 +10476,8 @@ namespace gles {
     class GlGetLightfv: public Encodable {
     public:
         GlGetLightfv() = default;
-        GlGetLightfv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetLightfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -9933,7 +10486,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -9942,8 +10495,8 @@ namespace gles {
     class GlGetLightxv: public Encodable {
     public:
         GlGetLightxv() = default;
-        GlGetLightxv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetLightxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -9952,7 +10505,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -9961,8 +10514,8 @@ namespace gles {
     class GlGetLightxvOES: public Encodable {
     public:
         GlGetLightxvOES() = default;
-        GlGetLightxvOES(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetLightxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -9971,7 +10524,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -9980,8 +10533,8 @@ namespace gles {
     class GlGetMaterialfv: public Encodable {
     public:
         GlGetMaterialfv() = default;
-        GlGetMaterialfv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetMaterialfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParams(Params) {}
@@ -9990,7 +10543,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -9999,8 +10552,8 @@ namespace gles {
     class GlGetMaterialxv: public Encodable {
     public:
         GlGetMaterialxv() = default;
-        GlGetMaterialxv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetMaterialxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParams(Params) {}
@@ -10009,7 +10562,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -10018,8 +10571,8 @@ namespace gles {
     class GlGetMaterialxvOES: public Encodable {
     public:
         GlGetMaterialxvOES() = default;
-        GlGetMaterialxvOES(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetMaterialxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParams(Params) {}
@@ -10028,7 +10581,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -10037,8 +10590,8 @@ namespace gles {
     class GlGetMultisamplefv: public Encodable {
     public:
         GlGetMultisamplefv() = default;
-        GlGetMultisamplefv(atom::Observations observations, uint32_t Pname, uint32_t Index, GLfloat__P Val) :
-            mobservations(observations),
+        GlGetMultisamplefv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, uint32_t Index, GLfloat__P Val) :
+            mextras(extras),
             mPname(Pname),
             mIndex(Index),
             mVal(Val) {}
@@ -10047,7 +10600,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         uint32_t mIndex;
         GLfloat__P mVal;
@@ -10056,12 +10609,15 @@ namespace gles {
     class GlGetNextPerfQueryIdINTEL: public Encodable {
     public:
         GlGetNextPerfQueryIdINTEL() = default;
-        GlGetNextPerfQueryIdINTEL(atom::Observations observations, uint32_t QueryId, GLuint__P NextQueryId) :
-            mobservations(observations),
+        GlGetNextPerfQueryIdINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, GLuint__P NextQueryId) :
+            mextras(extras),
             mQueryId(QueryId),
             mNextQueryId(NextQueryId) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQueryId);
             e->Struct(this->mNextQueryId);
         }
@@ -10069,7 +10625,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryId;
         GLuint__P mNextQueryId;
     };
@@ -10077,8 +10633,8 @@ namespace gles {
     class GlGetObjectLabel: public Encodable {
     public:
         GlGetObjectLabel() = default;
-        GlGetObjectLabel(atom::Observations observations, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
-            mobservations(observations),
+        GlGetObjectLabel(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+            mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
             mBufSize(BufSize),
@@ -10089,7 +10645,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIdentifier;
         uint32_t mName;
         int32_t mBufSize;
@@ -10100,8 +10656,8 @@ namespace gles {
     class GlGetObjectLabelEXT: public Encodable {
     public:
         GlGetObjectLabelEXT() = default;
-        GlGetObjectLabelEXT(atom::Observations observations, uint32_t Type, uint32_t Object, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
-            mobservations(observations),
+        GlGetObjectLabelEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Object, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+            mextras(extras),
             mType(Type),
             mObject(Object),
             mBufSize(BufSize),
@@ -10112,7 +10668,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         uint32_t mObject;
         int32_t mBufSize;
@@ -10123,8 +10679,8 @@ namespace gles {
     class GlGetObjectLabelKHR: public Encodable {
     public:
         GlGetObjectLabelKHR() = default;
-        GlGetObjectLabelKHR(atom::Observations observations, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
-            mobservations(observations),
+        GlGetObjectLabelKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+            mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
             mBufSize(BufSize),
@@ -10135,7 +10691,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIdentifier;
         uint32_t mName;
         int32_t mBufSize;
@@ -10146,8 +10702,8 @@ namespace gles {
     class GlGetObjectPtrLabel: public Encodable {
     public:
         GlGetObjectPtrLabel() = default;
-        GlGetObjectPtrLabel(atom::Observations observations, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
-            mobservations(observations),
+        GlGetObjectPtrLabel(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+            mextras(extras),
             mPtr(Ptr),
             mBufSize(BufSize),
             mLength(Length),
@@ -10157,7 +10713,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__CP mPtr;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10167,8 +10723,8 @@ namespace gles {
     class GlGetObjectPtrLabelKHR: public Encodable {
     public:
         GlGetObjectPtrLabelKHR() = default;
-        GlGetObjectPtrLabelKHR(atom::Observations observations, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
-            mobservations(observations),
+        GlGetObjectPtrLabelKHR(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+            mextras(extras),
             mPtr(Ptr),
             mBufSize(BufSize),
             mLength(Length),
@@ -10178,7 +10734,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__CP mPtr;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10188,12 +10744,15 @@ namespace gles {
     class GlGetPathCommandsNV: public Encodable {
     public:
         GlGetPathCommandsNV() = default;
-        GlGetPathCommandsNV(atom::Observations observations, uint32_t Path, GLubyte__P Commands) :
-            mobservations(observations),
+        GlGetPathCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLubyte__P Commands) :
+            mextras(extras),
             mPath(Path),
             mCommands(Commands) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Struct(this->mCommands);
         }
@@ -10201,7 +10760,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         GLubyte__P mCommands;
     };
@@ -10209,12 +10768,15 @@ namespace gles {
     class GlGetPathCoordsNV: public Encodable {
     public:
         GlGetPathCoordsNV() = default;
-        GlGetPathCoordsNV(atom::Observations observations, uint32_t Path, GLfloat__P Coords) :
-            mobservations(observations),
+        GlGetPathCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLfloat__P Coords) :
+            mextras(extras),
             mPath(Path),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Struct(this->mCoords);
         }
@@ -10222,7 +10784,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         GLfloat__P mCoords;
     };
@@ -10230,12 +10792,15 @@ namespace gles {
     class GlGetPathDashArrayNV: public Encodable {
     public:
         GlGetPathDashArrayNV() = default;
-        GlGetPathDashArrayNV(atom::Observations observations, uint32_t Path, GLfloat__P DashArray) :
-            mobservations(observations),
+        GlGetPathDashArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLfloat__P DashArray) :
+            mextras(extras),
             mPath(Path),
             mDashArray(DashArray) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Struct(this->mDashArray);
         }
@@ -10243,7 +10808,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         GLfloat__P mDashArray;
     };
@@ -10251,8 +10816,8 @@ namespace gles {
     class GlGetPathLengthNV: public Encodable {
     public:
         GlGetPathLengthNV() = default;
-        GlGetPathLengthNV(atom::Observations observations, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Result) :
-            mobservations(observations),
+        GlGetPathLengthNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Result) :
+            mextras(extras),
             mPath(Path),
             mStartSegment(StartSegment),
             mNumSegments(NumSegments),
@@ -10262,7 +10827,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mStartSegment;
         int32_t mNumSegments;
@@ -10272,8 +10837,8 @@ namespace gles {
     class GlGetPathMetricRangeNV: public Encodable {
     public:
         GlGetPathMetricRangeNV() = default;
-        GlGetPathMetricRangeNV(atom::Observations observations, uint32_t MetricQueryMask, uint32_t FirstPathName, int32_t NumPaths, int32_t Stride, GLfloat__P Metrics) :
-            mobservations(observations),
+        GlGetPathMetricRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MetricQueryMask, uint32_t FirstPathName, int32_t NumPaths, int32_t Stride, GLfloat__P Metrics) :
+            mextras(extras),
             mMetricQueryMask(MetricQueryMask),
             mFirstPathName(FirstPathName),
             mNumPaths(NumPaths),
@@ -10284,7 +10849,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMetricQueryMask;
         uint32_t mFirstPathName;
         int32_t mNumPaths;
@@ -10295,8 +10860,8 @@ namespace gles {
     class GlGetPathMetricsNV: public Encodable {
     public:
         GlGetPathMetricsNV() = default;
-        GlGetPathMetricsNV(atom::Observations observations, uint32_t MetricQueryMask, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Stride, GLfloat__P Metrics) :
-            mobservations(observations),
+        GlGetPathMetricsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MetricQueryMask, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Stride, GLfloat__P Metrics) :
+            mextras(extras),
             mMetricQueryMask(MetricQueryMask),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -10309,7 +10874,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMetricQueryMask;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -10322,8 +10887,8 @@ namespace gles {
     class GlGetPathParameterfvNV: public Encodable {
     public:
         GlGetPathParameterfvNV() = default;
-        GlGetPathParameterfvNV(atom::Observations observations, uint32_t Path, uint32_t Pname, GLfloat__P Value) :
-            mobservations(observations),
+        GlGetPathParameterfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLfloat__P Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -10332,7 +10897,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         GLfloat__P mValue;
@@ -10341,8 +10906,8 @@ namespace gles {
     class GlGetPathParameterivNV: public Encodable {
     public:
         GlGetPathParameterivNV() = default;
-        GlGetPathParameterivNV(atom::Observations observations, uint32_t Path, uint32_t Pname, GLint__P Value) :
-            mobservations(observations),
+        GlGetPathParameterivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLint__P Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -10351,7 +10916,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         GLint__P mValue;
@@ -10360,8 +10925,8 @@ namespace gles {
     class GlGetPathSpacingNV: public Encodable {
     public:
         GlGetPathSpacingNV() = default;
-        GlGetPathSpacingNV(atom::Observations observations, uint32_t PathListMode, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, float AdvanceScale, float KerningScale, uint32_t TransformType, GLfloat__P ReturnedSpacing) :
-            mobservations(observations),
+        GlGetPathSpacingNV(gapic::Vector<gapic::Encodable*> extras, uint32_t PathListMode, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, float AdvanceScale, float KerningScale, uint32_t TransformType, GLfloat__P ReturnedSpacing) :
+            mextras(extras),
             mPathListMode(PathListMode),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -10376,7 +10941,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPathListMode;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -10391,8 +10956,8 @@ namespace gles {
     class GlGetPerfCounterInfoINTEL: public Encodable {
     public:
         GlGetPerfCounterInfoINTEL() = default;
-        GlGetPerfCounterInfoINTEL(atom::Observations observations, uint32_t QueryId, uint32_t CounterId, uint32_t CounterNameLength, GLchar__P CounterName, uint32_t CounterDescLength, GLchar__P CounterDesc, GLuint__P CounterOffset, GLuint__P CounterDataSize, GLuint__P CounterTypeEnum, GLuint__P CounterDataTypeEnum, GLuint64__P RawCounterMaxValue) :
-            mobservations(observations),
+        GlGetPerfCounterInfoINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, uint32_t CounterId, uint32_t CounterNameLength, GLchar__P CounterName, uint32_t CounterDescLength, GLchar__P CounterDesc, GLuint__P CounterOffset, GLuint__P CounterDataSize, GLuint__P CounterTypeEnum, GLuint__P CounterDataTypeEnum, GLuint64__P RawCounterMaxValue) :
+            mextras(extras),
             mQueryId(QueryId),
             mCounterId(CounterId),
             mCounterNameLength(CounterNameLength),
@@ -10409,7 +10974,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryId;
         uint32_t mCounterId;
         uint32_t mCounterNameLength;
@@ -10426,8 +10991,8 @@ namespace gles {
     class GlGetPerfMonitorCounterDataAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterDataAMD() = default;
-        GlGetPerfMonitorCounterDataAMD(atom::Observations observations, uint32_t Monitor, uint32_t Pname, int32_t DataSize, GLuint__P Data, GLint__P BytesWritten) :
-            mobservations(observations),
+        GlGetPerfMonitorCounterDataAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor, uint32_t Pname, int32_t DataSize, GLuint__P Data, GLint__P BytesWritten) :
+            mextras(extras),
             mMonitor(Monitor),
             mPname(Pname),
             mDataSize(DataSize),
@@ -10438,7 +11003,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMonitor;
         uint32_t mPname;
         int32_t mDataSize;
@@ -10449,8 +11014,8 @@ namespace gles {
     class GlGetPerfMonitorCounterInfoAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterInfoAMD() = default;
-        GlGetPerfMonitorCounterInfoAMD(atom::Observations observations, uint32_t Group, uint32_t Counter, uint32_t Pname, Void__P Data) :
-            mobservations(observations),
+        GlGetPerfMonitorCounterInfoAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, uint32_t Counter, uint32_t Pname, Void__P Data) :
+            mextras(extras),
             mGroup(Group),
             mCounter(Counter),
             mPname(Pname),
@@ -10460,7 +11025,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mGroup;
         uint32_t mCounter;
         uint32_t mPname;
@@ -10470,8 +11035,8 @@ namespace gles {
     class GlGetPerfMonitorCounterStringAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterStringAMD() = default;
-        GlGetPerfMonitorCounterStringAMD(atom::Observations observations, uint32_t Group, uint32_t Counter, int32_t BufSize, GLsizei__P Length, GLchar__P CounterString) :
-            mobservations(observations),
+        GlGetPerfMonitorCounterStringAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, uint32_t Counter, int32_t BufSize, GLsizei__P Length, GLchar__P CounterString) :
+            mextras(extras),
             mGroup(Group),
             mCounter(Counter),
             mBufSize(BufSize),
@@ -10482,7 +11047,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mGroup;
         uint32_t mCounter;
         int32_t mBufSize;
@@ -10493,8 +11058,8 @@ namespace gles {
     class GlGetPerfMonitorCountersAMD: public Encodable {
     public:
         GlGetPerfMonitorCountersAMD() = default;
-        GlGetPerfMonitorCountersAMD(atom::Observations observations, uint32_t Group, GLint__P NumCounters, GLint__P MaxActiveCounters, int32_t CounterSize, GLuint__P Counters) :
-            mobservations(observations),
+        GlGetPerfMonitorCountersAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, GLint__P NumCounters, GLint__P MaxActiveCounters, int32_t CounterSize, GLuint__P Counters) :
+            mextras(extras),
             mGroup(Group),
             mNumCounters(NumCounters),
             mMaxActiveCounters(MaxActiveCounters),
@@ -10505,7 +11070,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mGroup;
         GLint__P mNumCounters;
         GLint__P mMaxActiveCounters;
@@ -10516,8 +11081,8 @@ namespace gles {
     class GlGetPerfMonitorGroupStringAMD: public Encodable {
     public:
         GlGetPerfMonitorGroupStringAMD() = default;
-        GlGetPerfMonitorGroupStringAMD(atom::Observations observations, uint32_t Group, int32_t BufSize, GLsizei__P Length, GLchar__P GroupString) :
-            mobservations(observations),
+        GlGetPerfMonitorGroupStringAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, int32_t BufSize, GLsizei__P Length, GLchar__P GroupString) :
+            mextras(extras),
             mGroup(Group),
             mBufSize(BufSize),
             mLength(Length),
@@ -10527,7 +11092,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mGroup;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10537,8 +11102,8 @@ namespace gles {
     class GlGetPerfMonitorGroupsAMD: public Encodable {
     public:
         GlGetPerfMonitorGroupsAMD() = default;
-        GlGetPerfMonitorGroupsAMD(atom::Observations observations, GLint__P NumGroups, int32_t GroupsSize, GLuint__P Groups) :
-            mobservations(observations),
+        GlGetPerfMonitorGroupsAMD(gapic::Vector<gapic::Encodable*> extras, GLint__P NumGroups, int32_t GroupsSize, GLuint__P Groups) :
+            mextras(extras),
             mNumGroups(NumGroups),
             mGroupsSize(GroupsSize),
             mGroups(Groups) {}
@@ -10547,7 +11112,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLint__P mNumGroups;
         int32_t mGroupsSize;
         GLuint__P mGroups;
@@ -10556,8 +11121,8 @@ namespace gles {
     class GlGetPerfQueryDataINTEL: public Encodable {
     public:
         GlGetPerfQueryDataINTEL() = default;
-        GlGetPerfQueryDataINTEL(atom::Observations observations, uint32_t QueryHandle, uint32_t Flag, int32_t DataSize, GLvoid__P Data, GLuint__P BytesWritten) :
-            mobservations(observations),
+        GlGetPerfQueryDataINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle, uint32_t Flag, int32_t DataSize, GLvoid__P Data, GLuint__P BytesWritten) :
+            mextras(extras),
             mQueryHandle(QueryHandle),
             mFlag(Flag),
             mDataSize(DataSize),
@@ -10568,7 +11133,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryHandle;
         uint32_t mFlag;
         int32_t mDataSize;
@@ -10579,12 +11144,15 @@ namespace gles {
     class GlGetPerfQueryIdByNameINTEL: public Encodable {
     public:
         GlGetPerfQueryIdByNameINTEL() = default;
-        GlGetPerfQueryIdByNameINTEL(atom::Observations observations, GLchar__P QueryName, GLuint__P QueryId) :
-            mobservations(observations),
+        GlGetPerfQueryIdByNameINTEL(gapic::Vector<gapic::Encodable*> extras, GLchar__P QueryName, GLuint__P QueryId) :
+            mextras(extras),
             mQueryName(QueryName),
             mQueryId(QueryId) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mQueryName);
             e->Struct(this->mQueryId);
         }
@@ -10592,7 +11160,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLchar__P mQueryName;
         GLuint__P mQueryId;
     };
@@ -10600,8 +11168,8 @@ namespace gles {
     class GlGetPerfQueryInfoINTEL: public Encodable {
     public:
         GlGetPerfQueryInfoINTEL() = default;
-        GlGetPerfQueryInfoINTEL(atom::Observations observations, uint32_t QueryId, uint32_t QueryNameLength, GLchar__P QueryName, GLuint__P DataSize, GLuint__P NoCounters, GLuint__P NoInstances, GLuint__P CapsMask) :
-            mobservations(observations),
+        GlGetPerfQueryInfoINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, uint32_t QueryNameLength, GLchar__P QueryName, GLuint__P DataSize, GLuint__P NoCounters, GLuint__P NoInstances, GLuint__P CapsMask) :
+            mextras(extras),
             mQueryId(QueryId),
             mQueryNameLength(QueryNameLength),
             mQueryName(QueryName),
@@ -10614,7 +11182,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQueryId;
         uint32_t mQueryNameLength;
         GLchar__P mQueryName;
@@ -10627,12 +11195,15 @@ namespace gles {
     class GlGetPointerv: public Encodable {
     public:
         GlGetPointerv() = default;
-        GlGetPointerv(atom::Observations observations, uint32_t Pname, Void__P__P Params) :
-            mobservations(observations),
+        GlGetPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, Void__P__P Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -10640,7 +11211,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         Void__P__P mParams;
     };
@@ -10648,12 +11219,15 @@ namespace gles {
     class GlGetPointervKHR: public Encodable {
     public:
         GlGetPointervKHR() = default;
-        GlGetPointervKHR(atom::Observations observations, uint32_t Pname, Void__P__P Params) :
-            mobservations(observations),
+        GlGetPointervKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, Void__P__P Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -10661,7 +11235,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         Void__P__P mParams;
     };
@@ -10669,8 +11243,8 @@ namespace gles {
     class GlGetProgramBinary: public Encodable {
     public:
         GlGetProgramBinary() = default;
-        GlGetProgramBinary(atom::Observations observations, uint32_t Program, int32_t BufSize, GLsizei__P Length, GLenum__P BinaryFormat, Void__P Binary) :
-            mobservations(observations),
+        GlGetProgramBinary(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufSize, GLsizei__P Length, GLenum__P BinaryFormat, Void__P Binary) :
+            mextras(extras),
             mProgram(Program),
             mBufSize(BufSize),
             mLength(Length),
@@ -10681,7 +11255,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10692,8 +11266,8 @@ namespace gles {
     class GlGetProgramBinaryOES: public Encodable {
     public:
         GlGetProgramBinaryOES() = default;
-        GlGetProgramBinaryOES(atom::Observations observations, uint32_t Program, int32_t BufferSize, GLsizei__P BytesWritten, GLenum__P BinaryFormat, Void__P Binary) :
-            mobservations(observations),
+        GlGetProgramBinaryOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferSize, GLsizei__P BytesWritten, GLenum__P BinaryFormat, Void__P Binary) :
+            mextras(extras),
             mProgram(Program),
             mBufferSize(BufferSize),
             mBytesWritten(BytesWritten),
@@ -10704,7 +11278,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mBufferSize;
         GLsizei__P mBytesWritten;
@@ -10715,8 +11289,8 @@ namespace gles {
     class GlGetProgramInfoLog: public Encodable {
     public:
         GlGetProgramInfoLog() = default;
-        GlGetProgramInfoLog(atom::Observations observations, uint32_t Program, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
-            mobservations(observations),
+        GlGetProgramInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
+            mextras(extras),
             mProgram(Program),
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
@@ -10726,7 +11300,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mBufferLength;
         GLsizei__P mStringLengthWritten;
@@ -10736,8 +11310,8 @@ namespace gles {
     class GlGetProgramInterfaceiv: public Encodable {
     public:
         GlGetProgramInterfaceiv() = default;
-        GlGetProgramInterfaceiv(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetProgramInterfaceiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mPname(Pname),
@@ -10747,7 +11321,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         uint32_t mPname;
@@ -10757,8 +11331,8 @@ namespace gles {
     class GlGetProgramPipelineInfoLog: public Encodable {
     public:
         GlGetProgramPipelineInfoLog() = default;
-        GlGetProgramPipelineInfoLog(atom::Observations observations, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
-            mobservations(observations),
+        GlGetProgramPipelineInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
+            mextras(extras),
             mPipeline(Pipeline),
             mBufSize(BufSize),
             mLength(Length),
@@ -10768,7 +11342,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10778,8 +11352,8 @@ namespace gles {
     class GlGetProgramPipelineInfoLogEXT: public Encodable {
     public:
         GlGetProgramPipelineInfoLogEXT() = default;
-        GlGetProgramPipelineInfoLogEXT(atom::Observations observations, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
-            mobservations(observations),
+        GlGetProgramPipelineInfoLogEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
+            mextras(extras),
             mPipeline(Pipeline),
             mBufSize(BufSize),
             mLength(Length),
@@ -10789,7 +11363,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         int32_t mBufSize;
         GLsizei__P mLength;
@@ -10799,8 +11373,8 @@ namespace gles {
     class GlGetProgramPipelineiv: public Encodable {
     public:
         GlGetProgramPipelineiv() = default;
-        GlGetProgramPipelineiv(atom::Observations observations, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetProgramPipelineiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mPipeline(Pipeline),
             mPname(Pname),
             mParams(Params) {}
@@ -10809,7 +11383,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mPname;
         GLint__P mParams;
@@ -10818,8 +11392,8 @@ namespace gles {
     class GlGetProgramPipelineivEXT: public Encodable {
     public:
         GlGetProgramPipelineivEXT() = default;
-        GlGetProgramPipelineivEXT(atom::Observations observations, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetProgramPipelineivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mPipeline(Pipeline),
             mPname(Pname),
             mParams(Params) {}
@@ -10828,7 +11402,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mPname;
         GLint__P mParams;
@@ -10837,8 +11411,8 @@ namespace gles {
     class GlGetProgramResourceIndex: public Encodable {
     public:
         GlGetProgramResourceIndex() = default;
-        GlGetProgramResourceIndex(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, char* Name, uint32_t Result) :
-            mobservations(observations),
+        GlGetProgramResourceIndex(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, uint32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mName(Name),
@@ -10848,7 +11422,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         char* mName;
@@ -10858,8 +11432,8 @@ namespace gles {
     class GlGetProgramResourceLocation: public Encodable {
     public:
         GlGetProgramResourceLocation() = default;
-        GlGetProgramResourceLocation(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetProgramResourceLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mName(Name),
@@ -10869,7 +11443,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         char* mName;
@@ -10879,8 +11453,8 @@ namespace gles {
     class GlGetProgramResourceLocationIndexEXT: public Encodable {
     public:
         GlGetProgramResourceLocationIndexEXT() = default;
-        GlGetProgramResourceLocationIndexEXT(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetProgramResourceLocationIndexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mName(Name),
@@ -10890,7 +11464,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         char* mName;
@@ -10900,8 +11474,8 @@ namespace gles {
     class GlGetProgramResourceName: public Encodable {
     public:
         GlGetProgramResourceName() = default;
-        GlGetProgramResourceName(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLchar__P Name) :
-            mobservations(observations),
+        GlGetProgramResourceName(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLchar__P Name) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mIndex(Index),
@@ -10913,7 +11487,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         uint32_t mIndex;
@@ -10925,8 +11499,8 @@ namespace gles {
     class GlGetProgramResourcefvNV: public Encodable {
     public:
         GlGetProgramResourcefvNV() = default;
-        GlGetProgramResourcefvNV(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetProgramResourcefvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLfloat__P Params) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mIndex(Index),
@@ -10940,7 +11514,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         uint32_t mIndex;
@@ -10954,8 +11528,8 @@ namespace gles {
     class GlGetProgramResourceiv: public Encodable {
     public:
         GlGetProgramResourceiv() = default;
-        GlGetProgramResourceiv(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLint__P Params) :
-            mobservations(observations),
+        GlGetProgramResourceiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLint__P Params) :
+            mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mIndex(Index),
@@ -10969,7 +11543,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mProgramInterface;
         uint32_t mIndex;
@@ -10983,8 +11557,8 @@ namespace gles {
     class GlGetProgramiv: public Encodable {
     public:
         GlGetProgramiv() = default;
-        GlGetProgramiv(atom::Observations observations, uint32_t Program, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetProgramiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mProgram(Program),
             mParameter(Parameter),
             mValue(Value) {}
@@ -10993,7 +11567,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mParameter;
         GLint__P mValue;
@@ -11017,8 +11591,8 @@ namespace gles {
     class GlGetQueryObjecti64v: public Encodable {
     public:
         GlGetQueryObjecti64v() = default;
-        GlGetQueryObjecti64v(atom::Observations observations, uint32_t Query, uint32_t Parameter, S64__P Value) :
-            mobservations(observations),
+        GlGetQueryObjecti64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, S64__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11027,7 +11601,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         S64__P mValue;
@@ -11036,8 +11610,8 @@ namespace gles {
     class GlGetQueryObjecti64vEXT: public Encodable {
     public:
         GlGetQueryObjecti64vEXT() = default;
-        GlGetQueryObjecti64vEXT(atom::Observations observations, uint32_t Query, uint32_t Parameter, GLint64__P Value) :
-            mobservations(observations),
+        GlGetQueryObjecti64vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLint64__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11046,7 +11620,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         GLint64__P mValue;
@@ -11055,8 +11629,8 @@ namespace gles {
     class GlGetQueryObjectivEXT: public Encodable {
     public:
         GlGetQueryObjectivEXT() = default;
-        GlGetQueryObjectivEXT(atom::Observations observations, uint32_t Query, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetQueryObjectivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11065,7 +11639,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         GLint__P mValue;
@@ -11089,8 +11663,8 @@ namespace gles {
     class GlGetQueryObjectui64v: public Encodable {
     public:
         GlGetQueryObjectui64v() = default;
-        GlGetQueryObjectui64v(atom::Observations observations, uint32_t Query, uint32_t Parameter, U64__P Value) :
-            mobservations(observations),
+        GlGetQueryObjectui64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, U64__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11099,7 +11673,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         U64__P mValue;
@@ -11108,8 +11682,8 @@ namespace gles {
     class GlGetQueryObjectui64vEXT: public Encodable {
     public:
         GlGetQueryObjectui64vEXT() = default;
-        GlGetQueryObjectui64vEXT(atom::Observations observations, uint32_t Query, uint32_t Parameter, GLuint64__P Value) :
-            mobservations(observations),
+        GlGetQueryObjectui64vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint64__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11118,7 +11692,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         GLuint64__P mValue;
@@ -11127,8 +11701,8 @@ namespace gles {
     class GlGetQueryObjectuiv: public Encodable {
     public:
         GlGetQueryObjectuiv() = default;
-        GlGetQueryObjectuiv(atom::Observations observations, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
-            mobservations(observations),
+        GlGetQueryObjectuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11137,7 +11711,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         GLuint__P mValue;
@@ -11146,8 +11720,8 @@ namespace gles {
     class GlGetQueryObjectuivEXT: public Encodable {
     public:
         GlGetQueryObjectuivEXT() = default;
-        GlGetQueryObjectuivEXT(atom::Observations observations, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
-            mobservations(observations),
+        GlGetQueryObjectuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
+            mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11156,7 +11730,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mParameter;
         GLuint__P mValue;
@@ -11165,8 +11739,8 @@ namespace gles {
     class GlGetQueryiv: public Encodable {
     public:
         GlGetQueryiv() = default;
-        GlGetQueryiv(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetQueryiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11175,7 +11749,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValue;
@@ -11184,8 +11758,8 @@ namespace gles {
     class GlGetQueryivEXT: public Encodable {
     public:
         GlGetQueryivEXT() = default;
-        GlGetQueryivEXT(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetQueryivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11194,7 +11768,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValue;
@@ -11203,8 +11777,8 @@ namespace gles {
     class GlGetRenderbufferParameteriv: public Encodable {
     public:
         GlGetRenderbufferParameteriv() = default;
-        GlGetRenderbufferParameteriv(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLint__P Values) :
-            mobservations(observations),
+        GlGetRenderbufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
@@ -11213,7 +11787,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValues;
@@ -11222,8 +11796,8 @@ namespace gles {
     class GlGetRenderbufferParameterivOES: public Encodable {
     public:
         GlGetRenderbufferParameterivOES() = default;
-        GlGetRenderbufferParameterivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetRenderbufferParameterivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11232,7 +11806,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -11241,8 +11815,8 @@ namespace gles {
     class GlGetSamplerParameterIiv: public Encodable {
     public:
         GlGetSamplerParameterIiv() = default;
-        GlGetSamplerParameterIiv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11251,7 +11825,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__P mParams;
@@ -11260,8 +11834,8 @@ namespace gles {
     class GlGetSamplerParameterIivEXT: public Encodable {
     public:
         GlGetSamplerParameterIivEXT() = default;
-        GlGetSamplerParameterIivEXT(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11270,7 +11844,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__P mParams;
@@ -11279,8 +11853,8 @@ namespace gles {
     class GlGetSamplerParameterIivOES: public Encodable {
     public:
         GlGetSamplerParameterIivOES() = default;
-        GlGetSamplerParameterIivOES(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11289,7 +11863,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__P mParams;
@@ -11298,8 +11872,8 @@ namespace gles {
     class GlGetSamplerParameterIuiv: public Encodable {
     public:
         GlGetSamplerParameterIuiv() = default;
-        GlGetSamplerParameterIuiv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11308,7 +11882,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11317,8 +11891,8 @@ namespace gles {
     class GlGetSamplerParameterIuivEXT: public Encodable {
     public:
         GlGetSamplerParameterIuivEXT() = default;
-        GlGetSamplerParameterIuivEXT(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11327,7 +11901,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11336,8 +11910,8 @@ namespace gles {
     class GlGetSamplerParameterIuivOES: public Encodable {
     public:
         GlGetSamplerParameterIuivOES() = default;
-        GlGetSamplerParameterIuivOES(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11346,7 +11920,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11355,8 +11929,8 @@ namespace gles {
     class GlGetSamplerParameterfv: public Encodable {
     public:
         GlGetSamplerParameterfv() = default;
-        GlGetSamplerParameterfv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11365,7 +11939,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -11374,8 +11948,8 @@ namespace gles {
     class GlGetSamplerParameteriv: public Encodable {
     public:
         GlGetSamplerParameteriv() = default;
-        GlGetSamplerParameteriv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetSamplerParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
@@ -11384,7 +11958,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__P mParams;
@@ -11393,8 +11967,8 @@ namespace gles {
     class GlGetShaderInfoLog: public Encodable {
     public:
         GlGetShaderInfoLog() = default;
-        GlGetShaderInfoLog(atom::Observations observations, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
-            mobservations(observations),
+        GlGetShaderInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
+            mextras(extras),
             mShader(Shader),
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
@@ -11404,7 +11978,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         int32_t mBufferLength;
         GLsizei__P mStringLengthWritten;
@@ -11414,8 +11988,8 @@ namespace gles {
     class GlGetShaderPrecisionFormat: public Encodable {
     public:
         GlGetShaderPrecisionFormat() = default;
-        GlGetShaderPrecisionFormat(atom::Observations observations, uint32_t ShaderType, uint32_t PrecisionType, GLint__P Range, GLint__P Precision) :
-            mobservations(observations),
+        GlGetShaderPrecisionFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t ShaderType, uint32_t PrecisionType, GLint__P Range, GLint__P Precision) :
+            mextras(extras),
             mShaderType(ShaderType),
             mPrecisionType(PrecisionType),
             mRange(Range),
@@ -11425,7 +11999,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShaderType;
         uint32_t mPrecisionType;
         GLint__P mRange;
@@ -11435,8 +12009,8 @@ namespace gles {
     class GlGetShaderSource: public Encodable {
     public:
         GlGetShaderSource() = default;
-        GlGetShaderSource(atom::Observations observations, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Source) :
-            mobservations(observations),
+        GlGetShaderSource(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Source) :
+            mextras(extras),
             mShader(Shader),
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
@@ -11446,7 +12020,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         int32_t mBufferLength;
         GLsizei__P mStringLengthWritten;
@@ -11456,8 +12030,8 @@ namespace gles {
     class GlGetShaderiv: public Encodable {
     public:
         GlGetShaderiv() = default;
-        GlGetShaderiv(atom::Observations observations, uint32_t Shader, uint32_t Parameter, GLint__P Value) :
-            mobservations(observations),
+        GlGetShaderiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, uint32_t Parameter, GLint__P Value) :
+            mextras(extras),
             mShader(Shader),
             mParameter(Parameter),
             mValue(Value) {}
@@ -11466,7 +12040,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         uint32_t mParameter;
         GLint__P mValue;
@@ -11475,12 +12049,15 @@ namespace gles {
     class GlGetString: public Encodable {
     public:
         GlGetString() = default;
-        GlGetString(atom::Observations observations, uint32_t Param, GLubyte__CP Result) :
-            mobservations(observations),
+        GlGetString(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLubyte__CP Result) :
+            mextras(extras),
             mParam(Param),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParam);
             e->Struct(this->mResult);
         }
@@ -11488,7 +12065,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParam;
         GLubyte__CP mResult;
     };
@@ -11496,8 +12073,8 @@ namespace gles {
     class GlGetStringi: public Encodable {
     public:
         GlGetStringi() = default;
-        GlGetStringi(atom::Observations observations, uint32_t Name, uint32_t Index, GLubyte__CP Result) :
-            mobservations(observations),
+        GlGetStringi(gapic::Vector<gapic::Encodable*> extras, uint32_t Name, uint32_t Index, GLubyte__CP Result) :
+            mextras(extras),
             mName(Name),
             mIndex(Index),
             mResult(Result) {}
@@ -11506,7 +12083,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mName;
         uint32_t mIndex;
         GLubyte__CP mResult;
@@ -11515,8 +12092,8 @@ namespace gles {
     class GlGetSynciv: public Encodable {
     public:
         GlGetSynciv() = default;
-        GlGetSynciv(atom::Observations observations, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
-            mobservations(observations),
+        GlGetSynciv(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
+            mextras(extras),
             mSync(Sync),
             mPname(Pname),
             mBufSize(BufSize),
@@ -11527,7 +12104,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mPname;
         int32_t mBufSize;
@@ -11538,8 +12115,8 @@ namespace gles {
     class GlGetSyncivAPPLE: public Encodable {
     public:
         GlGetSyncivAPPLE() = default;
-        GlGetSyncivAPPLE(atom::Observations observations, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
-            mobservations(observations),
+        GlGetSyncivAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
+            mextras(extras),
             mSync(Sync),
             mPname(Pname),
             mBufSize(BufSize),
@@ -11550,7 +12127,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mPname;
         int32_t mBufSize;
@@ -11561,8 +12138,8 @@ namespace gles {
     class GlGetTexEnvfv: public Encodable {
     public:
         GlGetTexEnvfv() = default;
-        GlGetTexEnvfv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetTexEnvfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11571,7 +12148,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -11580,8 +12157,8 @@ namespace gles {
     class GlGetTexEnviv: public Encodable {
     public:
         GlGetTexEnviv() = default;
-        GlGetTexEnviv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexEnviv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11590,7 +12167,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -11599,8 +12176,8 @@ namespace gles {
     class GlGetTexEnvxv: public Encodable {
     public:
         GlGetTexEnvxv() = default;
-        GlGetTexEnvxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetTexEnvxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11609,7 +12186,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -11618,8 +12195,8 @@ namespace gles {
     class GlGetTexEnvxvOES: public Encodable {
     public:
         GlGetTexEnvxvOES() = default;
-        GlGetTexEnvxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetTexEnvxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11628,7 +12205,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -11637,8 +12214,8 @@ namespace gles {
     class GlGetTexGenfvOES: public Encodable {
     public:
         GlGetTexGenfvOES() = default;
-        GlGetTexGenfvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetTexGenfvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -11647,7 +12224,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -11656,8 +12233,8 @@ namespace gles {
     class GlGetTexGenivOES: public Encodable {
     public:
         GlGetTexGenivOES() = default;
-        GlGetTexGenivOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexGenivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -11666,7 +12243,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLint__P mParams;
@@ -11675,8 +12252,8 @@ namespace gles {
     class GlGetTexGenxvOES: public Encodable {
     public:
         GlGetTexGenxvOES() = default;
-        GlGetTexGenxvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetTexGenxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -11685,7 +12262,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -11694,8 +12271,8 @@ namespace gles {
     class GlGetTexLevelParameterfv: public Encodable {
     public:
         GlGetTexLevelParameterfv() = default;
-        GlGetTexLevelParameterfv(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetTexLevelParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mPname(Pname),
@@ -11705,7 +12282,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mPname;
@@ -11715,8 +12292,8 @@ namespace gles {
     class GlGetTexLevelParameteriv: public Encodable {
     public:
         GlGetTexLevelParameteriv() = default;
-        GlGetTexLevelParameteriv(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexLevelParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mPname(Pname),
@@ -11726,7 +12303,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mPname;
@@ -11736,8 +12313,8 @@ namespace gles {
     class GlGetTexParameterIiv: public Encodable {
     public:
         GlGetTexParameterIiv() = default;
-        GlGetTexParameterIiv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11746,7 +12323,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -11755,8 +12332,8 @@ namespace gles {
     class GlGetTexParameterIivEXT: public Encodable {
     public:
         GlGetTexParameterIivEXT() = default;
-        GlGetTexParameterIivEXT(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11765,7 +12342,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -11774,8 +12351,8 @@ namespace gles {
     class GlGetTexParameterIivOES: public Encodable {
     public:
         GlGetTexParameterIivOES() = default;
-        GlGetTexParameterIivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11784,7 +12361,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__P mParams;
@@ -11793,8 +12370,8 @@ namespace gles {
     class GlGetTexParameterIuiv: public Encodable {
     public:
         GlGetTexParameterIuiv() = default;
-        GlGetTexParameterIuiv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11803,7 +12380,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11812,8 +12389,8 @@ namespace gles {
     class GlGetTexParameterIuivEXT: public Encodable {
     public:
         GlGetTexParameterIuivEXT() = default;
-        GlGetTexParameterIuivEXT(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11822,7 +12399,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11831,8 +12408,8 @@ namespace gles {
     class GlGetTexParameterIuivOES: public Encodable {
     public:
         GlGetTexParameterIuivOES() = default;
-        GlGetTexParameterIuivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetTexParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11841,7 +12418,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__P mParams;
@@ -11850,8 +12427,8 @@ namespace gles {
     class GlGetTexParameterfv: public Encodable {
     public:
         GlGetTexParameterfv() = default;
-        GlGetTexParameterfv(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLfloat__P Values) :
-            mobservations(observations),
+        GlGetTexParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLfloat__P Values) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
@@ -11860,7 +12437,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLfloat__P mValues;
@@ -11869,8 +12446,8 @@ namespace gles {
     class GlGetTexParameteriv: public Encodable {
     public:
         GlGetTexParameteriv() = default;
-        GlGetTexParameteriv(atom::Observations observations, uint32_t Target, uint32_t Parameter, GLint__P Values) :
-            mobservations(observations),
+        GlGetTexParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
@@ -11879,7 +12456,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValues;
@@ -11888,8 +12465,8 @@ namespace gles {
     class GlGetTexParameterxv: public Encodable {
     public:
         GlGetTexParameterxv() = default;
-        GlGetTexParameterxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetTexParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11898,7 +12475,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -11907,8 +12484,8 @@ namespace gles {
     class GlGetTexParameterxvOES: public Encodable {
     public:
         GlGetTexParameterxvOES() = default;
-        GlGetTexParameterxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
-            mobservations(observations),
+        GlGetTexParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -11917,7 +12494,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__P mParams;
@@ -11926,12 +12503,15 @@ namespace gles {
     class GlGetTextureHandleNV: public Encodable {
     public:
         GlGetTextureHandleNV() = default;
-        GlGetTextureHandleNV(atom::Observations observations, uint32_t Texture, uint64_t Result) :
-            mobservations(observations),
+        GlGetTextureHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint64_t Result) :
+            mextras(extras),
             mTexture(Texture),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTexture);
             e->Uint64(this->mResult);
         }
@@ -11939,7 +12519,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint64_t mResult;
     };
@@ -11947,8 +12527,8 @@ namespace gles {
     class GlGetTextureSamplerHandleNV: public Encodable {
     public:
         GlGetTextureSamplerHandleNV() = default;
-        GlGetTextureSamplerHandleNV(atom::Observations observations, uint32_t Texture, uint32_t Sampler, uint64_t Result) :
-            mobservations(observations),
+        GlGetTextureSamplerHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Sampler, uint64_t Result) :
+            mextras(extras),
             mTexture(Texture),
             mSampler(Sampler),
             mResult(Result) {}
@@ -11957,7 +12537,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mSampler;
         uint64_t mResult;
@@ -11966,8 +12546,8 @@ namespace gles {
     class GlGetTransformFeedbackVarying: public Encodable {
     public:
         GlGetTransformFeedbackVarying() = default;
-        GlGetTransformFeedbackVarying(atom::Observations observations, uint32_t Program, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLsizei__P Size, GLenum__P Type, GLchar__P Name) :
-            mobservations(observations),
+        GlGetTransformFeedbackVarying(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLsizei__P Size, GLenum__P Type, GLchar__P Name) :
+            mextras(extras),
             mProgram(Program),
             mIndex(Index),
             mBufSize(BufSize),
@@ -11980,7 +12560,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mIndex;
         int32_t mBufSize;
@@ -11993,8 +12573,8 @@ namespace gles {
     class GlGetTranslatedShaderSourceANGLE: public Encodable {
     public:
         GlGetTranslatedShaderSourceANGLE() = default;
-        GlGetTranslatedShaderSourceANGLE(atom::Observations observations, uint32_t Shader, int32_t Bufsize, GLsizei__P Length, GLchar__P Source) :
-            mobservations(observations),
+        GlGetTranslatedShaderSourceANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t Bufsize, GLsizei__P Length, GLchar__P Source) :
+            mextras(extras),
             mShader(Shader),
             mBufsize(Bufsize),
             mLength(Length),
@@ -12004,7 +12584,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         int32_t mBufsize;
         GLsizei__P mLength;
@@ -12014,8 +12594,8 @@ namespace gles {
     class GlGetUniformBlockIndex: public Encodable {
     public:
         GlGetUniformBlockIndex() = default;
-        GlGetUniformBlockIndex(atom::Observations observations, uint32_t Program, char* UniformBlockName, uint32_t Result) :
-            mobservations(observations),
+        GlGetUniformBlockIndex(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* UniformBlockName, uint32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mUniformBlockName(UniformBlockName),
             mResult(Result) {}
@@ -12024,7 +12604,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         char* mUniformBlockName;
         uint32_t mResult;
@@ -12048,8 +12628,8 @@ namespace gles {
     class GlGetUniformIndices: public Encodable {
     public:
         GlGetUniformIndices() = default;
-        GlGetUniformIndices(atom::Observations observations, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, UniformIndex__P UniformIndices) :
-            mobservations(observations),
+        GlGetUniformIndices(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, UniformIndex__P UniformIndices) :
+            mextras(extras),
             mProgram(Program),
             mUniformCount(UniformCount),
             mUniformNames(UniformNames),
@@ -12059,7 +12639,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mUniformCount;
         GLchar__CP__CP mUniformNames;
@@ -12069,8 +12649,8 @@ namespace gles {
     class GlGetUniformLocation: public Encodable {
     public:
         GlGetUniformLocation() = default;
-        GlGetUniformLocation(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
-            mobservations(observations),
+        GlGetUniformLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+            mextras(extras),
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
@@ -12079,7 +12659,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         char* mName;
         int32_t mResult;
@@ -12088,8 +12668,8 @@ namespace gles {
     class GlGetUniformfv: public Encodable {
     public:
         GlGetUniformfv() = default;
-        GlGetUniformfv(atom::Observations observations, uint32_t Program, int32_t Location, GLfloat__P Values) :
-            mobservations(observations),
+        GlGetUniformfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLfloat__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
@@ -12098,7 +12678,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         GLfloat__P mValues;
@@ -12107,8 +12687,8 @@ namespace gles {
     class GlGetUniformiv: public Encodable {
     public:
         GlGetUniformiv() = default;
-        GlGetUniformiv(atom::Observations observations, uint32_t Program, int32_t Location, GLint__P Values) :
-            mobservations(observations),
+        GlGetUniformiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLint__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
@@ -12117,7 +12697,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         GLint__P mValues;
@@ -12126,8 +12706,8 @@ namespace gles {
     class GlGetUniformuiv: public Encodable {
     public:
         GlGetUniformuiv() = default;
-        GlGetUniformuiv(atom::Observations observations, uint32_t Program, int32_t Location, GLuint__P Values) :
-            mobservations(observations),
+        GlGetUniformuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLuint__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
@@ -12136,7 +12716,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         GLuint__P mValues;
@@ -12145,8 +12725,8 @@ namespace gles {
     class GlGetVertexAttribIiv: public Encodable {
     public:
         GlGetVertexAttribIiv() = default;
-        GlGetVertexAttribIiv(atom::Observations observations, uint32_t Index, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetVertexAttribIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
@@ -12155,7 +12735,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mPname;
         GLint__P mParams;
@@ -12164,8 +12744,8 @@ namespace gles {
     class GlGetVertexAttribIuiv: public Encodable {
     public:
         GlGetVertexAttribIuiv() = default;
-        GlGetVertexAttribIuiv(atom::Observations observations, uint32_t Index, uint32_t Pname, GLuint__P Params) :
-            mobservations(observations),
+        GlGetVertexAttribIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLuint__P Params) :
+            mextras(extras),
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
@@ -12174,7 +12754,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mPname;
         GLuint__P mParams;
@@ -12183,8 +12763,8 @@ namespace gles {
     class GlGetVertexAttribPointerv: public Encodable {
     public:
         GlGetVertexAttribPointerv() = default;
-        GlGetVertexAttribPointerv(atom::Observations observations, uint32_t Index, uint32_t Pname, Void__P__P Pointer) :
-            mobservations(observations),
+        GlGetVertexAttribPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, Void__P__P Pointer) :
+            mextras(extras),
             mIndex(Index),
             mPname(Pname),
             mPointer(Pointer) {}
@@ -12193,7 +12773,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mPname;
         Void__P__P mPointer;
@@ -12202,8 +12782,8 @@ namespace gles {
     class GlGetVertexAttribfv: public Encodable {
     public:
         GlGetVertexAttribfv() = default;
-        GlGetVertexAttribfv(atom::Observations observations, uint32_t Index, uint32_t Pname, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetVertexAttribfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLfloat__P Params) :
+            mextras(extras),
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
@@ -12212,7 +12792,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mPname;
         GLfloat__P mParams;
@@ -12221,8 +12801,8 @@ namespace gles {
     class GlGetVertexAttribiv: public Encodable {
     public:
         GlGetVertexAttribiv() = default;
-        GlGetVertexAttribiv(atom::Observations observations, uint32_t Index, uint32_t Pname, GLint__P Params) :
-            mobservations(observations),
+        GlGetVertexAttribiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
+            mextras(extras),
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
@@ -12231,7 +12811,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mPname;
         GLint__P mParams;
@@ -12240,8 +12820,8 @@ namespace gles {
     class GlGetnUniformfv: public Encodable {
     public:
         GlGetnUniformfv() = default;
-        GlGetnUniformfv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Values) :
-            mobservations(observations),
+        GlGetnUniformfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12251,7 +12831,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12261,8 +12841,8 @@ namespace gles {
     class GlGetnUniformfvEXT: public Encodable {
     public:
         GlGetnUniformfvEXT() = default;
-        GlGetnUniformfvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetnUniformfvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12272,7 +12852,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12282,8 +12862,8 @@ namespace gles {
     class GlGetnUniformfvKHR: public Encodable {
     public:
         GlGetnUniformfvKHR() = default;
-        GlGetnUniformfvKHR(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
-            mobservations(observations),
+        GlGetnUniformfvKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12293,7 +12873,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12303,8 +12883,8 @@ namespace gles {
     class GlGetnUniformiv: public Encodable {
     public:
         GlGetnUniformiv() = default;
-        GlGetnUniformiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Values) :
-            mobservations(observations),
+        GlGetnUniformiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12314,7 +12894,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12324,8 +12904,8 @@ namespace gles {
     class GlGetnUniformivEXT: public Encodable {
     public:
         GlGetnUniformivEXT() = default;
-        GlGetnUniformivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
-            mobservations(observations),
+        GlGetnUniformivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12335,7 +12915,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12345,8 +12925,8 @@ namespace gles {
     class GlGetnUniformivKHR: public Encodable {
     public:
         GlGetnUniformivKHR() = default;
-        GlGetnUniformivKHR(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
-            mobservations(observations),
+        GlGetnUniformivKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12356,7 +12936,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12366,8 +12946,8 @@ namespace gles {
     class GlGetnUniformuiv: public Encodable {
     public:
         GlGetnUniformuiv() = default;
-        GlGetnUniformuiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Values) :
-            mobservations(observations),
+        GlGetnUniformuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12377,7 +12957,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12387,8 +12967,8 @@ namespace gles {
     class GlGetnUniformuivKHR: public Encodable {
     public:
         GlGetnUniformuivKHR() = default;
-        GlGetnUniformuivKHR(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Params) :
-            mobservations(observations),
+        GlGetnUniformuivKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Params) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mBufSize(BufSize),
@@ -12398,7 +12978,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mBufSize;
@@ -12408,12 +12988,15 @@ namespace gles {
     class GlHint: public Encodable {
     public:
         GlHint() = default;
-        GlHint(atom::Observations observations, uint32_t Target, uint32_t Mode) :
-            mobservations(observations),
+        GlHint(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Mode) :
+            mextras(extras),
             mTarget(Target),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint32(this->mMode);
         }
@@ -12421,7 +13004,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mMode;
     };
@@ -12429,12 +13012,15 @@ namespace gles {
     class GlInsertEventMarkerEXT: public Encodable {
     public:
         GlInsertEventMarkerEXT() = default;
-        GlInsertEventMarkerEXT(atom::Observations observations, int32_t Length, GLchar__CP Marker) :
-            mobservations(observations),
+        GlInsertEventMarkerEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Length, GLchar__CP Marker) :
+            mextras(extras),
             mLength(Length),
             mMarker(Marker) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLength);
             e->Struct(this->mMarker);
         }
@@ -12442,7 +13028,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLength;
         GLchar__CP mMarker;
     };
@@ -12450,8 +13036,8 @@ namespace gles {
     class GlInterpolatePathsNV: public Encodable {
     public:
         GlInterpolatePathsNV() = default;
-        GlInterpolatePathsNV(atom::Observations observations, uint32_t ResultPath, uint32_t PathA, uint32_t PathB, float Weight) :
-            mobservations(observations),
+        GlInterpolatePathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t PathA, uint32_t PathB, float Weight) :
+            mextras(extras),
             mResultPath(ResultPath),
             mPathA(PathA),
             mPathB(PathB),
@@ -12461,7 +13047,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResultPath;
         uint32_t mPathA;
         uint32_t mPathB;
@@ -12471,8 +13057,8 @@ namespace gles {
     class GlInvalidateFramebuffer: public Encodable {
     public:
         GlInvalidateFramebuffer() = default;
-        GlInvalidateFramebuffer(atom::Observations observations, uint32_t Target, int32_t Count, GLenum__CP Attachments) :
-            mobservations(observations),
+        GlInvalidateFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Count, GLenum__CP Attachments) :
+            mextras(extras),
             mTarget(Target),
             mCount(Count),
             mAttachments(Attachments) {}
@@ -12481,7 +13067,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mCount;
         GLenum__CP mAttachments;
@@ -12490,8 +13076,8 @@ namespace gles {
     class GlInvalidateSubFramebuffer: public Encodable {
     public:
         GlInvalidateSubFramebuffer() = default;
-        GlInvalidateSubFramebuffer(atom::Observations observations, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlInvalidateSubFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mNumAttachments(NumAttachments),
             mAttachments(Attachments),
@@ -12504,7 +13090,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mNumAttachments;
         GLenum__CP mAttachments;
@@ -12517,12 +13103,15 @@ namespace gles {
     class GlIsBuffer: public Encodable {
     public:
         GlIsBuffer() = default;
-        GlIsBuffer(atom::Observations observations, uint32_t Buffer, uint8_t Result) :
-            mobservations(observations),
+        GlIsBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, uint8_t Result) :
+            mextras(extras),
             mBuffer(Buffer),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBuffer);
             e->Uint8(this->mResult);
         }
@@ -12530,7 +13119,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBuffer;
         uint8_t mResult;
     };
@@ -12538,12 +13127,15 @@ namespace gles {
     class GlIsEnabled: public Encodable {
     public:
         GlIsEnabled() = default;
-        GlIsEnabled(atom::Observations observations, uint32_t Capability, uint8_t Result) :
-            mobservations(observations),
+        GlIsEnabled(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability, uint8_t Result) :
+            mextras(extras),
             mCapability(Capability),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mCapability);
             e->Uint8(this->mResult);
         }
@@ -12551,7 +13143,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCapability;
         uint8_t mResult;
     };
@@ -12559,8 +13151,8 @@ namespace gles {
     class GlIsEnabledi: public Encodable {
     public:
         GlIsEnabledi() = default;
-        GlIsEnabledi(atom::Observations observations, uint32_t Target, uint32_t Index, uint8_t Result) :
-            mobservations(observations),
+        GlIsEnabledi(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
@@ -12569,7 +13161,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint8_t mResult;
@@ -12578,8 +13170,8 @@ namespace gles {
     class GlIsEnablediEXT: public Encodable {
     public:
         GlIsEnablediEXT() = default;
-        GlIsEnablediEXT(atom::Observations observations, uint32_t Target, uint32_t Index, uint8_t Result) :
-            mobservations(observations),
+        GlIsEnablediEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
@@ -12588,7 +13180,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint8_t mResult;
@@ -12597,8 +13189,8 @@ namespace gles {
     class GlIsEnablediNV: public Encodable {
     public:
         GlIsEnablediNV() = default;
-        GlIsEnablediNV(atom::Observations observations, uint32_t Target, uint32_t Index, uint8_t Result) :
-            mobservations(observations),
+        GlIsEnablediNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
@@ -12607,7 +13199,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint8_t mResult;
@@ -12616,8 +13208,8 @@ namespace gles {
     class GlIsEnablediOES: public Encodable {
     public:
         GlIsEnablediOES() = default;
-        GlIsEnablediOES(atom::Observations observations, uint32_t Target, uint32_t Index, uint8_t Result) :
-            mobservations(observations),
+        GlIsEnablediOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
@@ -12626,7 +13218,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mIndex;
         uint8_t mResult;
@@ -12635,12 +13227,15 @@ namespace gles {
     class GlIsFenceNV: public Encodable {
     public:
         GlIsFenceNV() = default;
-        GlIsFenceNV(atom::Observations observations, uint32_t Fence, uint8_t Result) :
-            mobservations(observations),
+        GlIsFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint8_t Result) :
+            mextras(extras),
             mFence(Fence),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFence);
             e->Uint8(this->mResult);
         }
@@ -12648,7 +13243,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFence;
         uint8_t mResult;
     };
@@ -12656,12 +13251,15 @@ namespace gles {
     class GlIsFramebuffer: public Encodable {
     public:
         GlIsFramebuffer() = default;
-        GlIsFramebuffer(atom::Observations observations, uint32_t Framebuffer, uint8_t Result) :
-            mobservations(observations),
+        GlIsFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint8_t Result) :
+            mextras(extras),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFramebuffer);
             e->Uint8(this->mResult);
         }
@@ -12669,7 +13267,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebuffer;
         uint8_t mResult;
     };
@@ -12677,12 +13275,15 @@ namespace gles {
     class GlIsFramebufferOES: public Encodable {
     public:
         GlIsFramebufferOES() = default;
-        GlIsFramebufferOES(atom::Observations observations, uint32_t Framebuffer, uint8_t Result) :
-            mobservations(observations),
+        GlIsFramebufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint8_t Result) :
+            mextras(extras),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFramebuffer);
             e->Uint8(this->mResult);
         }
@@ -12690,7 +13291,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebuffer;
         uint8_t mResult;
     };
@@ -12698,12 +13299,15 @@ namespace gles {
     class GlIsImageHandleResidentNV: public Encodable {
     public:
         GlIsImageHandleResidentNV() = default;
-        GlIsImageHandleResidentNV(atom::Observations observations, uint64_t Handle, uint8_t Result) :
-            mobservations(observations),
+        GlIsImageHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint8_t Result) :
+            mextras(extras),
             mHandle(Handle),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
             e->Uint8(this->mResult);
         }
@@ -12711,7 +13315,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
         uint8_t mResult;
     };
@@ -12719,12 +13323,15 @@ namespace gles {
     class GlIsPathNV: public Encodable {
     public:
         GlIsPathNV() = default;
-        GlIsPathNV(atom::Observations observations, uint32_t Path, uint8_t Result) :
-            mobservations(observations),
+        GlIsPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint8_t Result) :
+            mextras(extras),
             mPath(Path),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPath);
             e->Uint8(this->mResult);
         }
@@ -12732,7 +13339,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint8_t mResult;
     };
@@ -12740,8 +13347,8 @@ namespace gles {
     class GlIsPointInFillPathNV: public Encodable {
     public:
         GlIsPointInFillPathNV() = default;
-        GlIsPointInFillPathNV(atom::Observations observations, uint32_t Path, uint32_t Mask, float X, float Y, uint8_t Result) :
-            mobservations(observations),
+        GlIsPointInFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Mask, float X, float Y, uint8_t Result) :
+            mextras(extras),
             mPath(Path),
             mMask(Mask),
             mX(X),
@@ -12752,7 +13359,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mMask;
         float mX;
@@ -12763,8 +13370,8 @@ namespace gles {
     class GlIsPointInStrokePathNV: public Encodable {
     public:
         GlIsPointInStrokePathNV() = default;
-        GlIsPointInStrokePathNV(atom::Observations observations, uint32_t Path, float X, float Y, uint8_t Result) :
-            mobservations(observations),
+        GlIsPointInStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, float X, float Y, uint8_t Result) :
+            mextras(extras),
             mPath(Path),
             mX(X),
             mY(Y),
@@ -12774,7 +13381,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         float mX;
         float mY;
@@ -12784,12 +13391,15 @@ namespace gles {
     class GlIsProgram: public Encodable {
     public:
         GlIsProgram() = default;
-        GlIsProgram(atom::Observations observations, uint32_t Program, uint8_t Result) :
-            mobservations(observations),
+        GlIsProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint8_t Result) :
+            mextras(extras),
             mProgram(Program),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
             e->Uint8(this->mResult);
         }
@@ -12797,7 +13407,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint8_t mResult;
     };
@@ -12805,12 +13415,15 @@ namespace gles {
     class GlIsProgramPipeline: public Encodable {
     public:
         GlIsProgramPipeline() = default;
-        GlIsProgramPipeline(atom::Observations observations, uint32_t Pipeline, uint8_t Result) :
-            mobservations(observations),
+        GlIsProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint8_t Result) :
+            mextras(extras),
             mPipeline(Pipeline),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
             e->Uint8(this->mResult);
         }
@@ -12818,7 +13431,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint8_t mResult;
     };
@@ -12826,12 +13439,15 @@ namespace gles {
     class GlIsProgramPipelineEXT: public Encodable {
     public:
         GlIsProgramPipelineEXT() = default;
-        GlIsProgramPipelineEXT(atom::Observations observations, uint32_t Pipeline, uint8_t Result) :
-            mobservations(observations),
+        GlIsProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint8_t Result) :
+            mextras(extras),
             mPipeline(Pipeline),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
             e->Uint8(this->mResult);
         }
@@ -12839,7 +13455,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint8_t mResult;
     };
@@ -12847,12 +13463,15 @@ namespace gles {
     class GlIsQuery: public Encodable {
     public:
         GlIsQuery() = default;
-        GlIsQuery(atom::Observations observations, uint32_t Query, uint8_t Result) :
-            mobservations(observations),
+        GlIsQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint8_t Result) :
+            mextras(extras),
             mQuery(Query),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQuery);
             e->Uint8(this->mResult);
         }
@@ -12860,7 +13479,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint8_t mResult;
     };
@@ -12868,12 +13487,15 @@ namespace gles {
     class GlIsQueryEXT: public Encodable {
     public:
         GlIsQueryEXT() = default;
-        GlIsQueryEXT(atom::Observations observations, uint32_t Query, uint8_t Result) :
-            mobservations(observations),
+        GlIsQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint8_t Result) :
+            mextras(extras),
             mQuery(Query),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQuery);
             e->Uint8(this->mResult);
         }
@@ -12881,7 +13503,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint8_t mResult;
     };
@@ -12889,12 +13511,15 @@ namespace gles {
     class GlIsRenderbuffer: public Encodable {
     public:
         GlIsRenderbuffer() = default;
-        GlIsRenderbuffer(atom::Observations observations, uint32_t Renderbuffer, uint8_t Result) :
-            mobservations(observations),
+        GlIsRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Renderbuffer, uint8_t Result) :
+            mextras(extras),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mRenderbuffer);
             e->Uint8(this->mResult);
         }
@@ -12902,7 +13527,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mRenderbuffer;
         uint8_t mResult;
     };
@@ -12910,12 +13535,15 @@ namespace gles {
     class GlIsRenderbufferOES: public Encodable {
     public:
         GlIsRenderbufferOES() = default;
-        GlIsRenderbufferOES(atom::Observations observations, uint32_t Renderbuffer, uint8_t Result) :
-            mobservations(observations),
+        GlIsRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Renderbuffer, uint8_t Result) :
+            mextras(extras),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mRenderbuffer);
             e->Uint8(this->mResult);
         }
@@ -12923,7 +13551,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mRenderbuffer;
         uint8_t mResult;
     };
@@ -12931,12 +13559,15 @@ namespace gles {
     class GlIsSampler: public Encodable {
     public:
         GlIsSampler() = default;
-        GlIsSampler(atom::Observations observations, uint32_t Sampler, uint8_t Result) :
-            mobservations(observations),
+        GlIsSampler(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint8_t Result) :
+            mextras(extras),
             mSampler(Sampler),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mSampler);
             e->Uint8(this->mResult);
         }
@@ -12944,7 +13575,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint8_t mResult;
     };
@@ -12952,12 +13583,15 @@ namespace gles {
     class GlIsShader: public Encodable {
     public:
         GlIsShader() = default;
-        GlIsShader(atom::Observations observations, uint32_t Shader, uint8_t Result) :
-            mobservations(observations),
+        GlIsShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, uint8_t Result) :
+            mextras(extras),
             mShader(Shader),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mShader);
             e->Uint8(this->mResult);
         }
@@ -12965,7 +13599,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         uint8_t mResult;
     };
@@ -12973,12 +13607,15 @@ namespace gles {
     class GlIsSync: public Encodable {
     public:
         GlIsSync() = default;
-        GlIsSync(atom::Observations observations, uint64_t Sync, uint8_t Result) :
-            mobservations(observations),
+        GlIsSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint8_t Result) :
+            mextras(extras),
             mSync(Sync),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mSync);
             e->Uint8(this->mResult);
         }
@@ -12986,7 +13623,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint8_t mResult;
     };
@@ -12994,12 +13631,15 @@ namespace gles {
     class GlIsSyncAPPLE: public Encodable {
     public:
         GlIsSyncAPPLE() = default;
-        GlIsSyncAPPLE(atom::Observations observations, uint64_t Sync, uint8_t Result) :
-            mobservations(observations),
+        GlIsSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint8_t Result) :
+            mextras(extras),
             mSync(Sync),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mSync);
             e->Uint8(this->mResult);
         }
@@ -13007,7 +13647,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint8_t mResult;
     };
@@ -13015,12 +13655,15 @@ namespace gles {
     class GlIsTexture: public Encodable {
     public:
         GlIsTexture() = default;
-        GlIsTexture(atom::Observations observations, uint32_t Texture, uint8_t Result) :
-            mobservations(observations),
+        GlIsTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint8_t Result) :
+            mextras(extras),
             mTexture(Texture),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTexture);
             e->Uint8(this->mResult);
         }
@@ -13028,7 +13671,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint8_t mResult;
     };
@@ -13036,12 +13679,15 @@ namespace gles {
     class GlIsTextureHandleResidentNV: public Encodable {
     public:
         GlIsTextureHandleResidentNV() = default;
-        GlIsTextureHandleResidentNV(atom::Observations observations, uint64_t Handle, uint8_t Result) :
-            mobservations(observations),
+        GlIsTextureHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint8_t Result) :
+            mextras(extras),
             mHandle(Handle),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
             e->Uint8(this->mResult);
         }
@@ -13049,7 +13695,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
         uint8_t mResult;
     };
@@ -13057,12 +13703,15 @@ namespace gles {
     class GlIsTransformFeedback: public Encodable {
     public:
         GlIsTransformFeedback() = default;
-        GlIsTransformFeedback(atom::Observations observations, uint32_t Id, uint8_t Result) :
-            mobservations(observations),
+        GlIsTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t Id, uint8_t Result) :
+            mextras(extras),
             mId(Id),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mId);
             e->Uint8(this->mResult);
         }
@@ -13070,7 +13719,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mId;
         uint8_t mResult;
     };
@@ -13078,12 +13727,15 @@ namespace gles {
     class GlIsVertexArray: public Encodable {
     public:
         GlIsVertexArray() = default;
-        GlIsVertexArray(atom::Observations observations, uint32_t Array, uint8_t Result) :
-            mobservations(observations),
+        GlIsVertexArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Array, uint8_t Result) :
+            mextras(extras),
             mArray(Array),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
             e->Uint8(this->mResult);
         }
@@ -13091,7 +13743,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
         uint8_t mResult;
     };
@@ -13099,12 +13751,15 @@ namespace gles {
     class GlIsVertexArrayOES: public Encodable {
     public:
         GlIsVertexArrayOES() = default;
-        GlIsVertexArrayOES(atom::Observations observations, uint32_t Array, uint8_t Result) :
-            mobservations(observations),
+        GlIsVertexArrayOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Array, uint8_t Result) :
+            mextras(extras),
             mArray(Array),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mArray);
             e->Uint8(this->mResult);
         }
@@ -13112,7 +13767,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mArray;
         uint8_t mResult;
     };
@@ -13120,8 +13775,8 @@ namespace gles {
     class GlLabelObjectEXT: public Encodable {
     public:
         GlLabelObjectEXT() = default;
-        GlLabelObjectEXT(atom::Observations observations, uint32_t Type, uint32_t Object, int32_t Length, GLchar__CP Label) :
-            mobservations(observations),
+        GlLabelObjectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Object, int32_t Length, GLchar__CP Label) :
+            mextras(extras),
             mType(Type),
             mObject(Object),
             mLength(Length),
@@ -13131,7 +13786,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         uint32_t mObject;
         int32_t mLength;
@@ -13141,12 +13796,15 @@ namespace gles {
     class GlLightModelf: public Encodable {
     public:
         GlLightModelf() = default;
-        GlLightModelf(atom::Observations observations, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlLightModelf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Float32(this->mParam);
         }
@@ -13154,7 +13812,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         float mParam;
     };
@@ -13162,12 +13820,15 @@ namespace gles {
     class GlLightModelfv: public Encodable {
     public:
         GlLightModelfv() = default;
-        GlLightModelfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlLightModelfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -13175,7 +13836,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfloat__CP mParams;
     };
@@ -13183,12 +13844,15 @@ namespace gles {
     class GlLightModelx: public Encodable {
     public:
         GlLightModelx() = default;
-        GlLightModelx(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlLightModelx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -13196,7 +13860,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -13204,12 +13868,15 @@ namespace gles {
     class GlLightModelxOES: public Encodable {
     public:
         GlLightModelxOES() = default;
-        GlLightModelxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlLightModelxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -13217,7 +13884,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -13225,12 +13892,15 @@ namespace gles {
     class GlLightModelxv: public Encodable {
     public:
         GlLightModelxv() = default;
-        GlLightModelxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlLightModelxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParam);
         }
@@ -13238,7 +13908,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParam;
     };
@@ -13246,12 +13916,15 @@ namespace gles {
     class GlLightModelxvOES: public Encodable {
     public:
         GlLightModelxvOES() = default;
-        GlLightModelxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlLightModelxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParam);
         }
@@ -13259,7 +13932,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParam;
     };
@@ -13267,8 +13940,8 @@ namespace gles {
     class GlLightf: public Encodable {
     public:
         GlLightf() = default;
-        GlLightf(atom::Observations observations, uint32_t Light, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlLightf(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, float Param) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParam(Param) {}
@@ -13277,7 +13950,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         float mParam;
@@ -13286,8 +13959,8 @@ namespace gles {
     class GlLightfv: public Encodable {
     public:
         GlLightfv() = default;
-        GlLightfv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlLightfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -13296,7 +13969,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfloat__CP mParams;
@@ -13305,8 +13978,8 @@ namespace gles {
     class GlLightx: public Encodable {
     public:
         GlLightx() = default;
-        GlLightx(atom::Observations observations, uint32_t Light, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlLightx(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParam(Param) {}
@@ -13315,7 +13988,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         int32_t mParam;
@@ -13324,8 +13997,8 @@ namespace gles {
     class GlLightxOES: public Encodable {
     public:
         GlLightxOES() = default;
-        GlLightxOES(atom::Observations observations, uint32_t Light, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlLightxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParam(Param) {}
@@ -13334,7 +14007,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         int32_t mParam;
@@ -13343,8 +14016,8 @@ namespace gles {
     class GlLightxv: public Encodable {
     public:
         GlLightxv() = default;
-        GlLightxv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlLightxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -13353,7 +14026,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -13362,8 +14035,8 @@ namespace gles {
     class GlLightxvOES: public Encodable {
     public:
         GlLightxvOES() = default;
-        GlLightxvOES(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlLightxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mLight(Light),
             mPname(Pname),
             mParams(Params) {}
@@ -13372,7 +14045,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLight;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -13381,204 +14054,240 @@ namespace gles {
     class GlLineWidth: public Encodable {
     public:
         GlLineWidth() = default;
-        GlLineWidth(atom::Observations observations, float Width) :
-            mobservations(observations),
+        GlLineWidth(gapic::Vector<gapic::Encodable*> extras, float Width) :
+            mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mWidth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mWidth;
     };
 
     class GlLineWidthx: public Encodable {
     public:
         GlLineWidthx() = default;
-        GlLineWidthx(atom::Observations observations, int32_t Width) :
-            mobservations(observations),
+        GlLineWidthx(gapic::Vector<gapic::Encodable*> extras, int32_t Width) :
+            mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mWidth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mWidth;
     };
 
     class GlLineWidthxOES: public Encodable {
     public:
         GlLineWidthxOES() = default;
-        GlLineWidthxOES(atom::Observations observations, int32_t Width) :
-            mobservations(observations),
+        GlLineWidthxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Width) :
+            mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mWidth);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mWidth;
     };
 
     class GlLinkProgram: public Encodable {
     public:
         GlLinkProgram() = default;
-        GlLinkProgram(atom::Observations observations, uint32_t Program) :
-            mobservations(observations),
+        GlLinkProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+            mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
     };
 
     class GlLoadIdentity: public Encodable {
     public:
         GlLoadIdentity() = default;
-        GlLoadIdentity(atom::Observations observations) :
-            mobservations(observations) {}
+        GlLoadIdentity(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlLoadMatrixf: public Encodable {
     public:
         GlLoadMatrixf() = default;
-        GlLoadMatrixf(atom::Observations observations, GLfloat__CP M) :
-            mobservations(observations),
+        GlLoadMatrixf(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfloat__CP mM;
     };
 
     class GlLoadMatrixx: public Encodable {
     public:
         GlLoadMatrixx() = default;
-        GlLoadMatrixx(atom::Observations observations, GLfixed__CP M) :
-            mobservations(observations),
+        GlLoadMatrixx(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__CP mM;
     };
 
     class GlLoadMatrixxOES: public Encodable {
     public:
         GlLoadMatrixxOES() = default;
-        GlLoadMatrixxOES(atom::Observations observations, GLfixed__CP M) :
-            mobservations(observations),
+        GlLoadMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__CP mM;
     };
 
     class GlLoadPaletteFromModelViewMatrixOES: public Encodable {
     public:
         GlLoadPaletteFromModelViewMatrixOES() = default;
-        GlLoadPaletteFromModelViewMatrixOES(atom::Observations observations) :
-            mobservations(observations) {}
+        GlLoadPaletteFromModelViewMatrixOES(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlLogicOp: public Encodable {
     public:
         GlLogicOp() = default;
-        GlLogicOp(atom::Observations observations, uint32_t Opcode) :
-            mobservations(observations),
+        GlLogicOp(gapic::Vector<gapic::Encodable*> extras, uint32_t Opcode) :
+            mextras(extras),
             mOpcode(Opcode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mOpcode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mOpcode;
     };
 
     class GlMakeImageHandleNonResidentNV: public Encodable {
     public:
         GlMakeImageHandleNonResidentNV() = default;
-        GlMakeImageHandleNonResidentNV(atom::Observations observations, uint64_t Handle) :
-            mobservations(observations),
+        GlMakeImageHandleNonResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+            mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
     };
 
     class GlMakeImageHandleResidentNV: public Encodable {
     public:
         GlMakeImageHandleResidentNV() = default;
-        GlMakeImageHandleResidentNV(atom::Observations observations, uint64_t Handle, uint32_t Access) :
-            mobservations(observations),
+        GlMakeImageHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint32_t Access) :
+            mextras(extras),
             mHandle(Handle),
             mAccess(Access) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
             e->Uint32(this->mAccess);
         }
@@ -13586,7 +14295,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
         uint32_t mAccess;
     };
@@ -13594,44 +14303,50 @@ namespace gles {
     class GlMakeTextureHandleNonResidentNV: public Encodable {
     public:
         GlMakeTextureHandleNonResidentNV() = default;
-        GlMakeTextureHandleNonResidentNV(atom::Observations observations, uint64_t Handle) :
-            mobservations(observations),
+        GlMakeTextureHandleNonResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+            mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
     };
 
     class GlMakeTextureHandleResidentNV: public Encodable {
     public:
         GlMakeTextureHandleResidentNV() = default;
-        GlMakeTextureHandleResidentNV(atom::Observations observations, uint64_t Handle) :
-            mobservations(observations),
+        GlMakeTextureHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+            mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mHandle);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mHandle;
     };
 
     class GlMapBufferOES: public Encodable {
     public:
         GlMapBufferOES() = default;
-        GlMapBufferOES(atom::Observations observations, uint32_t Target, uint32_t Access, Void__P Result) :
-            mobservations(observations),
+        GlMapBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Access, Void__P Result) :
+            mextras(extras),
             mTarget(Target),
             mAccess(Access),
             mResult(Result) {}
@@ -13640,7 +14355,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mAccess;
         Void__P mResult;
@@ -13649,8 +14364,8 @@ namespace gles {
     class GlMapBufferRange: public Encodable {
     public:
         GlMapBufferRange() = default;
-        GlMapBufferRange(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
-            mobservations(observations),
+        GlMapBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
+            mextras(extras),
             mTarget(Target),
             mOffset(Offset),
             mLength(Length),
@@ -13661,7 +14376,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mOffset;
         int32_t mLength;
@@ -13672,8 +14387,8 @@ namespace gles {
     class GlMapBufferRangeEXT: public Encodable {
     public:
         GlMapBufferRangeEXT() = default;
-        GlMapBufferRangeEXT(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
-            mobservations(observations),
+        GlMapBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
+            mextras(extras),
             mTarget(Target),
             mOffset(Offset),
             mLength(Length),
@@ -13684,7 +14399,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mOffset;
         int32_t mLength;
@@ -13695,8 +14410,8 @@ namespace gles {
     class GlMaterialf: public Encodable {
     public:
         GlMaterialf() = default;
-        GlMaterialf(atom::Observations observations, uint32_t Face, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlMaterialf(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, float Param) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParam(Param) {}
@@ -13705,7 +14420,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         float mParam;
@@ -13714,8 +14429,8 @@ namespace gles {
     class GlMaterialfv: public Encodable {
     public:
         GlMaterialfv() = default;
-        GlMaterialfv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlMaterialfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParams(Params) {}
@@ -13724,7 +14439,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfloat__CP mParams;
@@ -13733,8 +14448,8 @@ namespace gles {
     class GlMaterialx: public Encodable {
     public:
         GlMaterialx() = default;
-        GlMaterialx(atom::Observations observations, uint32_t Face, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlMaterialx(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParam(Param) {}
@@ -13743,7 +14458,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         int32_t mParam;
@@ -13752,8 +14467,8 @@ namespace gles {
     class GlMaterialxOES: public Encodable {
     public:
         GlMaterialxOES() = default;
-        GlMaterialxOES(atom::Observations observations, uint32_t Face, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlMaterialxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParam(Param) {}
@@ -13762,7 +14477,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         int32_t mParam;
@@ -13771,8 +14486,8 @@ namespace gles {
     class GlMaterialxv: public Encodable {
     public:
         GlMaterialxv() = default;
-        GlMaterialxv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlMaterialxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParam(Param) {}
@@ -13781,7 +14496,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfixed__CP mParam;
@@ -13790,8 +14505,8 @@ namespace gles {
     class GlMaterialxvOES: public Encodable {
     public:
         GlMaterialxvOES() = default;
-        GlMaterialxvOES(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
-            mobservations(observations),
+        GlMaterialxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+            mextras(extras),
             mFace(Face),
             mPname(Pname),
             mParam(Param) {}
@@ -13800,7 +14515,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mPname;
         GLfixed__CP mParam;
@@ -13809,8 +14524,8 @@ namespace gles {
     class GlMatrixIndexPointerOES: public Encodable {
     public:
         GlMatrixIndexPointerOES() = default;
-        GlMatrixIndexPointerOES(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlMatrixIndexPointerOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -13820,7 +14535,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -13830,8 +14545,8 @@ namespace gles {
     class GlMatrixIndexPointerOESBounds: public Encodable {
     public:
         GlMatrixIndexPointerOESBounds() = default;
-        GlMatrixIndexPointerOESBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlMatrixIndexPointerOESBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -13842,7 +14557,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -13853,12 +14568,15 @@ namespace gles {
     class GlMatrixLoad3x2fNV: public Encodable {
     public:
         GlMatrixLoad3x2fNV() = default;
-        GlMatrixLoad3x2fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixLoad3x2fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13866,7 +14584,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13874,12 +14592,15 @@ namespace gles {
     class GlMatrixLoad3x3fNV: public Encodable {
     public:
         GlMatrixLoad3x3fNV() = default;
-        GlMatrixLoad3x3fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixLoad3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13887,7 +14608,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13895,12 +14616,15 @@ namespace gles {
     class GlMatrixLoadTranspose3x3fNV: public Encodable {
     public:
         GlMatrixLoadTranspose3x3fNV() = default;
-        GlMatrixLoadTranspose3x3fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixLoadTranspose3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13908,7 +14632,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13916,30 +14640,36 @@ namespace gles {
     class GlMatrixMode: public Encodable {
     public:
         GlMatrixMode() = default;
-        GlMatrixMode(atom::Observations observations, uint32_t Mode) :
-            mobservations(observations),
+        GlMatrixMode(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+            mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
     };
 
     class GlMatrixMult3x2fNV: public Encodable {
     public:
         GlMatrixMult3x2fNV() = default;
-        GlMatrixMult3x2fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixMult3x2fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13947,7 +14677,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13955,12 +14685,15 @@ namespace gles {
     class GlMatrixMult3x3fNV: public Encodable {
     public:
         GlMatrixMult3x3fNV() = default;
-        GlMatrixMult3x3fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixMult3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13968,7 +14701,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13976,12 +14709,15 @@ namespace gles {
     class GlMatrixMultTranspose3x3fNV: public Encodable {
     public:
         GlMatrixMultTranspose3x3fNV() = default;
-        GlMatrixMultTranspose3x3fNV(atom::Observations observations, uint32_t MatrixMode, GLfloat__CP M) :
-            mobservations(observations),
+        GlMatrixMultTranspose3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+            mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMatrixMode);
             e->Struct(this->mM);
         }
@@ -13989,7 +14725,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
     };
@@ -13997,134 +14733,155 @@ namespace gles {
     class GlMemoryBarrier: public Encodable {
     public:
         GlMemoryBarrier() = default;
-        GlMemoryBarrier(atom::Observations observations, uint32_t Barriers) :
-            mobservations(observations),
+        GlMemoryBarrier(gapic::Vector<gapic::Encodable*> extras, uint32_t Barriers) :
+            mextras(extras),
             mBarriers(Barriers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBarriers);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBarriers;
     };
 
     class GlMemoryBarrierByRegion: public Encodable {
     public:
         GlMemoryBarrierByRegion() = default;
-        GlMemoryBarrierByRegion(atom::Observations observations, uint32_t Barriers) :
-            mobservations(observations),
+        GlMemoryBarrierByRegion(gapic::Vector<gapic::Encodable*> extras, uint32_t Barriers) :
+            mextras(extras),
             mBarriers(Barriers) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBarriers);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBarriers;
     };
 
     class GlMinSampleShading: public Encodable {
     public:
         GlMinSampleShading() = default;
-        GlMinSampleShading(atom::Observations observations, float Value) :
-            mobservations(observations),
+        GlMinSampleShading(gapic::Vector<gapic::Encodable*> extras, float Value) :
+            mextras(extras),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mValue);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mValue;
     };
 
     class GlMinSampleShadingOES: public Encodable {
     public:
         GlMinSampleShadingOES() = default;
-        GlMinSampleShadingOES(atom::Observations observations, float Value) :
-            mobservations(observations),
+        GlMinSampleShadingOES(gapic::Vector<gapic::Encodable*> extras, float Value) :
+            mextras(extras),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mValue);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mValue;
     };
 
     class GlMultMatrixf: public Encodable {
     public:
         GlMultMatrixf() = default;
-        GlMultMatrixf(atom::Observations observations, GLfloat__CP M) :
-            mobservations(observations),
+        GlMultMatrixf(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfloat__CP mM;
     };
 
     class GlMultMatrixx: public Encodable {
     public:
         GlMultMatrixx() = default;
-        GlMultMatrixx(atom::Observations observations, GLfixed__CP M) :
-            mobservations(observations),
+        GlMultMatrixx(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__CP mM;
     };
 
     class GlMultMatrixxOES: public Encodable {
     public:
         GlMultMatrixxOES() = default;
-        GlMultMatrixxOES(atom::Observations observations, GLfixed__CP M) :
-            mobservations(observations),
+        GlMultMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+            mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mM);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__CP mM;
     };
 
     class GlMultiDrawArraysEXT: public Encodable {
     public:
         GlMultiDrawArraysEXT() = default;
-        GlMultiDrawArraysEXT(atom::Observations observations, uint32_t Mode, GLint__CP First, GLsizei__CP Count, int32_t Primcount) :
-            mobservations(observations),
+        GlMultiDrawArraysEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLint__CP First, GLsizei__CP Count, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mFirst(First),
             mCount(Count),
@@ -14134,7 +14891,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         GLint__CP mFirst;
         GLsizei__CP mCount;
@@ -14144,8 +14901,8 @@ namespace gles {
     class GlMultiDrawArraysIndirectEXT: public Encodable {
     public:
         GlMultiDrawArraysIndirectEXT() = default;
-        GlMultiDrawArraysIndirectEXT(atom::Observations observations, uint32_t Mode, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
-            mobservations(observations),
+        GlMultiDrawArraysIndirectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
+            mextras(extras),
             mMode(Mode),
             mIndirect(Indirect),
             mDrawcount(Drawcount),
@@ -14155,7 +14912,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         Void__CP mIndirect;
         int32_t mDrawcount;
@@ -14180,8 +14937,8 @@ namespace gles {
     class GlMultiDrawElementsBaseVertexEXT: public Encodable {
     public:
         GlMultiDrawElementsBaseVertexEXT() = default;
-        GlMultiDrawElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
-            mobservations(observations),
+        GlMultiDrawElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -14193,7 +14950,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         GLsizei__CP mCount;
         uint32_t mType;
@@ -14205,8 +14962,8 @@ namespace gles {
     class GlMultiDrawElementsBaseVertexOES: public Encodable {
     public:
         GlMultiDrawElementsBaseVertexOES() = default;
-        GlMultiDrawElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
-            mobservations(observations),
+        GlMultiDrawElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -14218,7 +14975,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         GLsizei__CP mCount;
         uint32_t mType;
@@ -14230,8 +14987,8 @@ namespace gles {
     class GlMultiDrawElementsEXT: public Encodable {
     public:
         GlMultiDrawElementsEXT() = default;
-        GlMultiDrawElementsEXT(atom::Observations observations, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount) :
-            mobservations(observations),
+        GlMultiDrawElementsEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount) :
+            mextras(extras),
             mMode(Mode),
             mCount(Count),
             mType(Type),
@@ -14242,7 +14999,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         GLsizei__CP mCount;
         uint32_t mType;
@@ -14253,8 +15010,8 @@ namespace gles {
     class GlMultiDrawElementsIndirectEXT: public Encodable {
     public:
         GlMultiDrawElementsIndirectEXT() = default;
-        GlMultiDrawElementsIndirectEXT(atom::Observations observations, uint32_t Mode, uint32_t Type, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
-            mobservations(observations),
+        GlMultiDrawElementsIndirectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Type, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
+            mextras(extras),
             mMode(Mode),
             mType(Type),
             mIndirect(Indirect),
@@ -14265,7 +15022,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
         uint32_t mType;
         Void__CP mIndirect;
@@ -14276,8 +15033,8 @@ namespace gles {
     class GlMultiTexCoord4f: public Encodable {
     public:
         GlMultiTexCoord4f() = default;
-        GlMultiTexCoord4f(atom::Observations observations, uint32_t Target, float V0, float V1, float V2, float V3) :
-            mobservations(observations),
+        GlMultiTexCoord4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, float V0, float V1, float V2, float V3) :
+            mextras(extras),
             mTarget(Target),
             mV0(V0),
             mV1(V1),
@@ -14288,7 +15045,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         float mV0;
         float mV1;
@@ -14299,8 +15056,8 @@ namespace gles {
     class GlMultiTexCoord4x: public Encodable {
     public:
         GlMultiTexCoord4x() = default;
-        GlMultiTexCoord4x(atom::Observations observations, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
-            mobservations(observations),
+        GlMultiTexCoord4x(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+            mextras(extras),
             mTexture(Texture),
             mV0(V0),
             mV1(V1),
@@ -14311,7 +15068,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         int32_t mV0;
         int32_t mV1;
@@ -14322,8 +15079,8 @@ namespace gles {
     class GlMultiTexCoord4xOES: public Encodable {
     public:
         GlMultiTexCoord4xOES() = default;
-        GlMultiTexCoord4xOES(atom::Observations observations, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
-            mobservations(observations),
+        GlMultiTexCoord4xOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+            mextras(extras),
             mTexture(Texture),
             mV0(V0),
             mV1(V1),
@@ -14334,7 +15091,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         int32_t mV0;
         int32_t mV1;
@@ -14345,8 +15102,8 @@ namespace gles {
     class GlNamedFramebufferSampleLocationsfvNV: public Encodable {
     public:
         GlNamedFramebufferSampleLocationsfvNV() = default;
-        GlNamedFramebufferSampleLocationsfvNV(atom::Observations observations, uint32_t Framebuffer, uint32_t Start, int32_t Count, GLfloat__CP V) :
-            mobservations(observations),
+        GlNamedFramebufferSampleLocationsfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint32_t Start, int32_t Count, GLfloat__CP V) :
+            mextras(extras),
             mFramebuffer(Framebuffer),
             mStart(Start),
             mCount(Count),
@@ -14356,7 +15113,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFramebuffer;
         uint32_t mStart;
         int32_t mCount;
@@ -14366,8 +15123,8 @@ namespace gles {
     class GlNormal3f: public Encodable {
     public:
         GlNormal3f() = default;
-        GlNormal3f(atom::Observations observations, float Nx, float Ny, float Nz) :
-            mobservations(observations),
+        GlNormal3f(gapic::Vector<gapic::Encodable*> extras, float Nx, float Ny, float Nz) :
+            mextras(extras),
             mNx(Nx),
             mNy(Ny),
             mNz(Nz) {}
@@ -14376,7 +15133,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mNx;
         float mNy;
         float mNz;
@@ -14385,8 +15142,8 @@ namespace gles {
     class GlNormal3x: public Encodable {
     public:
         GlNormal3x() = default;
-        GlNormal3x(atom::Observations observations, int32_t Nx, int32_t Ny, int32_t Nz) :
-            mobservations(observations),
+        GlNormal3x(gapic::Vector<gapic::Encodable*> extras, int32_t Nx, int32_t Ny, int32_t Nz) :
+            mextras(extras),
             mNx(Nx),
             mNy(Ny),
             mNz(Nz) {}
@@ -14395,7 +15152,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNx;
         int32_t mNy;
         int32_t mNz;
@@ -14404,8 +15161,8 @@ namespace gles {
     class GlNormal3xOES: public Encodable {
     public:
         GlNormal3xOES() = default;
-        GlNormal3xOES(atom::Observations observations, int32_t Nx, int32_t Ny, int32_t Nz) :
-            mobservations(observations),
+        GlNormal3xOES(gapic::Vector<gapic::Encodable*> extras, int32_t Nx, int32_t Ny, int32_t Nz) :
+            mextras(extras),
             mNx(Nx),
             mNy(Ny),
             mNz(Nz) {}
@@ -14414,7 +15171,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNx;
         int32_t mNy;
         int32_t mNz;
@@ -14423,8 +15180,8 @@ namespace gles {
     class GlNormalPointer: public Encodable {
     public:
         GlNormalPointer() = default;
-        GlNormalPointer(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlNormalPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mType(Type),
             mStride(Stride),
             mPointer(Pointer) {}
@@ -14433,7 +15190,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mStride;
         Void__CP mPointer;
@@ -14442,8 +15199,8 @@ namespace gles {
     class GlNormalPointerBounds: public Encodable {
     public:
         GlNormalPointerBounds() = default;
-        GlNormalPointerBounds(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlNormalPointerBounds(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mType(Type),
             mStride(Stride),
             mPointer(Pointer),
@@ -14453,7 +15210,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mStride;
         Void__CP mPointer;
@@ -14463,8 +15220,8 @@ namespace gles {
     class GlObjectLabel: public Encodable {
     public:
         GlObjectLabel() = default;
-        GlObjectLabel(atom::Observations observations, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
-            mobservations(observations),
+        GlObjectLabel(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
+            mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
             mLength(Length),
@@ -14474,7 +15231,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIdentifier;
         uint32_t mName;
         int32_t mLength;
@@ -14484,8 +15241,8 @@ namespace gles {
     class GlObjectLabelKHR: public Encodable {
     public:
         GlObjectLabelKHR() = default;
-        GlObjectLabelKHR(atom::Observations observations, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
-            mobservations(observations),
+        GlObjectLabelKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
+            mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
             mLength(Length),
@@ -14495,7 +15252,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIdentifier;
         uint32_t mName;
         int32_t mLength;
@@ -14505,8 +15262,8 @@ namespace gles {
     class GlObjectPtrLabel: public Encodable {
     public:
         GlObjectPtrLabel() = default;
-        GlObjectPtrLabel(atom::Observations observations, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
-            mobservations(observations),
+        GlObjectPtrLabel(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
+            mextras(extras),
             mPtr(Ptr),
             mLength(Length),
             mLabel(Label) {}
@@ -14515,7 +15272,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__CP mPtr;
         int32_t mLength;
         GLchar__CP mLabel;
@@ -14524,8 +15281,8 @@ namespace gles {
     class GlObjectPtrLabelKHR: public Encodable {
     public:
         GlObjectPtrLabelKHR() = default;
-        GlObjectPtrLabelKHR(atom::Observations observations, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
-            mobservations(observations),
+        GlObjectPtrLabelKHR(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
+            mextras(extras),
             mPtr(Ptr),
             mLength(Length),
             mLabel(Label) {}
@@ -14534,7 +15291,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__CP mPtr;
         int32_t mLength;
         GLchar__CP mLabel;
@@ -14543,8 +15300,8 @@ namespace gles {
     class GlOrthof: public Encodable {
     public:
         GlOrthof() = default;
-        GlOrthof(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
-            mobservations(observations),
+        GlOrthof(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -14556,7 +15313,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mL;
         float mR;
         float mB;
@@ -14568,8 +15325,8 @@ namespace gles {
     class GlOrthofOES: public Encodable {
     public:
         GlOrthofOES() = default;
-        GlOrthofOES(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
-            mobservations(observations),
+        GlOrthofOES(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -14581,7 +15338,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mL;
         float mR;
         float mB;
@@ -14593,8 +15350,8 @@ namespace gles {
     class GlOrthox: public Encodable {
     public:
         GlOrthox() = default;
-        GlOrthox(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlOrthox(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -14606,7 +15363,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mL;
         int32_t mR;
         int32_t mB;
@@ -14618,8 +15375,8 @@ namespace gles {
     class GlOrthoxOES: public Encodable {
     public:
         GlOrthoxOES() = default;
-        GlOrthoxOES(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
-            mobservations(observations),
+        GlOrthoxOES(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mextras(extras),
             mL(L),
             mR(R),
             mB(B),
@@ -14631,7 +15388,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mL;
         int32_t mR;
         int32_t mB;
@@ -14643,12 +15400,15 @@ namespace gles {
     class GlPatchParameteri: public Encodable {
     public:
         GlPatchParameteri() = default;
-        GlPatchParameteri(atom::Observations observations, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlPatchParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
@@ -14656,7 +15416,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mValue;
     };
@@ -14664,12 +15424,15 @@ namespace gles {
     class GlPatchParameteriEXT: public Encodable {
     public:
         GlPatchParameteriEXT() = default;
-        GlPatchParameteriEXT(atom::Observations observations, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlPatchParameteriEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
@@ -14677,7 +15440,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mValue;
     };
@@ -14685,12 +15448,15 @@ namespace gles {
     class GlPatchParameteriOES: public Encodable {
     public:
         GlPatchParameteriOES() = default;
-        GlPatchParameteriOES(atom::Observations observations, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlPatchParameteriOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
@@ -14698,7 +15464,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mValue;
     };
@@ -14706,8 +15472,8 @@ namespace gles {
     class GlPathCommandsNV: public Encodable {
     public:
         GlPathCommandsNV() = default;
-        GlPathCommandsNV(atom::Observations observations, uint32_t Path, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
-            mobservations(observations),
+        GlPathCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+            mextras(extras),
             mPath(Path),
             mNumCommands(NumCommands),
             mCommands(Commands),
@@ -14719,7 +15485,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mNumCommands;
         GLubyte__CP mCommands;
@@ -14731,8 +15497,8 @@ namespace gles {
     class GlPathCoordsNV: public Encodable {
     public:
         GlPathCoordsNV() = default;
-        GlPathCoordsNV(atom::Observations observations, uint32_t Path, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
-            mobservations(observations),
+        GlPathCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+            mextras(extras),
             mPath(Path),
             mNumCoords(NumCoords),
             mCoordType(CoordType),
@@ -14742,7 +15508,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mNumCoords;
         uint32_t mCoordType;
@@ -14752,26 +15518,29 @@ namespace gles {
     class GlPathCoverDepthFuncNV: public Encodable {
     public:
         GlPathCoverDepthFuncNV() = default;
-        GlPathCoverDepthFuncNV(atom::Observations observations, uint32_t Func) :
-            mobservations(observations),
+        GlPathCoverDepthFuncNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Func) :
+            mextras(extras),
             mFunc(Func) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFunc);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
     };
 
     class GlPathDashArrayNV: public Encodable {
     public:
         GlPathDashArrayNV() = default;
-        GlPathDashArrayNV(atom::Observations observations, uint32_t Path, int32_t DashCount, GLfloat__CP DashArray) :
-            mobservations(observations),
+        GlPathDashArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t DashCount, GLfloat__CP DashArray) :
+            mextras(extras),
             mPath(Path),
             mDashCount(DashCount),
             mDashArray(DashArray) {}
@@ -14780,7 +15549,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mDashCount;
         GLfloat__CP mDashArray;
@@ -14789,8 +15558,8 @@ namespace gles {
     class GlPathGlyphIndexArrayNV: public Encodable {
     public:
         GlPathGlyphIndexArrayNV() = default;
-        GlPathGlyphIndexArrayNV(atom::Observations observations, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
-            mobservations(observations),
+        GlPathGlyphIndexArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
+            mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
             mFontName(FontName),
@@ -14805,7 +15574,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
         Void__CP mFontName;
@@ -14820,8 +15589,8 @@ namespace gles {
     class GlPathGlyphIndexRangeNV: public Encodable {
     public:
         GlPathGlyphIndexRangeNV() = default;
-        GlPathGlyphIndexRangeNV(atom::Observations observations, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t PathParameterTemplate, float EmScale, uint32_t BaseAndCount, uint32_t Result) :
-            mobservations(observations),
+        GlPathGlyphIndexRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t PathParameterTemplate, float EmScale, uint32_t BaseAndCount, uint32_t Result) :
+            mextras(extras),
             mFontTarget(FontTarget),
             mFontName(FontName),
             mFontStyle(FontStyle),
@@ -14834,7 +15603,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFontTarget;
         Void__CP mFontName;
         uint32_t mFontStyle;
@@ -14847,8 +15616,8 @@ namespace gles {
     class GlPathGlyphRangeNV: public Encodable {
     public:
         GlPathGlyphRangeNV() = default;
-        GlPathGlyphRangeNV(atom::Observations observations, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyph, int32_t NumGlyphs, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
-            mobservations(observations),
+        GlPathGlyphRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyph, int32_t NumGlyphs, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
+            mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
             mFontName(FontName),
@@ -14863,7 +15632,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
         Void__CP mFontName;
@@ -14878,8 +15647,8 @@ namespace gles {
     class GlPathGlyphsNV: public Encodable {
     public:
         GlPathGlyphsNV() = default;
-        GlPathGlyphsNV(atom::Observations observations, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, int32_t NumGlyphs, uint32_t Type, Void__CP Charcodes, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
-            mobservations(observations),
+        GlPathGlyphsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, int32_t NumGlyphs, uint32_t Type, Void__CP Charcodes, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
+            mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
             mFontName(FontName),
@@ -14895,7 +15664,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
         Void__CP mFontName;
@@ -14911,8 +15680,8 @@ namespace gles {
     class GlPathMemoryGlyphIndexArrayNV: public Encodable {
     public:
         GlPathMemoryGlyphIndexArrayNV() = default;
-        GlPathMemoryGlyphIndexArrayNV(atom::Observations observations, uint32_t FirstPathName, uint32_t FontTarget, int32_t FontSize, Void__CP FontData, int32_t FaceIndex, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
-            mobservations(observations),
+        GlPathMemoryGlyphIndexArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, int32_t FontSize, Void__CP FontData, int32_t FaceIndex, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
+            mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
             mFontSize(FontSize),
@@ -14928,7 +15697,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
         int32_t mFontSize;
@@ -14944,8 +15713,8 @@ namespace gles {
     class GlPathParameterfNV: public Encodable {
     public:
         GlPathParameterfNV() = default;
-        GlPathParameterfNV(atom::Observations observations, uint32_t Path, uint32_t Pname, float Value) :
-            mobservations(observations),
+        GlPathParameterfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, float Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -14954,7 +15723,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         float mValue;
@@ -14963,8 +15732,8 @@ namespace gles {
     class GlPathParameterfvNV: public Encodable {
     public:
         GlPathParameterfvNV() = default;
-        GlPathParameterfvNV(atom::Observations observations, uint32_t Path, uint32_t Pname, GLfloat__CP Value) :
-            mobservations(observations),
+        GlPathParameterfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLfloat__CP Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -14973,7 +15742,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         GLfloat__CP mValue;
@@ -14982,8 +15751,8 @@ namespace gles {
     class GlPathParameteriNV: public Encodable {
     public:
         GlPathParameteriNV() = default;
-        GlPathParameteriNV(atom::Observations observations, uint32_t Path, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlPathParameteriNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -14992,7 +15761,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         int32_t mValue;
@@ -15001,8 +15770,8 @@ namespace gles {
     class GlPathParameterivNV: public Encodable {
     public:
         GlPathParameterivNV() = default;
-        GlPathParameterivNV(atom::Observations observations, uint32_t Path, uint32_t Pname, GLint__CP Value) :
-            mobservations(observations),
+        GlPathParameterivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLint__CP Value) :
+            mextras(extras),
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
@@ -15011,7 +15780,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mPname;
         GLint__CP mValue;
@@ -15020,12 +15789,15 @@ namespace gles {
     class GlPathStencilDepthOffsetNV: public Encodable {
     public:
         GlPathStencilDepthOffsetNV() = default;
-        GlPathStencilDepthOffsetNV(atom::Observations observations, float Factor, float Units) :
-            mobservations(observations),
+        GlPathStencilDepthOffsetNV(gapic::Vector<gapic::Encodable*> extras, float Factor, float Units) :
+            mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mFactor);
             e->Float32(this->mUnits);
         }
@@ -15033,7 +15805,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mFactor;
         float mUnits;
     };
@@ -15041,8 +15813,8 @@ namespace gles {
     class GlPathStencilFuncNV: public Encodable {
     public:
         GlPathStencilFuncNV() = default;
-        GlPathStencilFuncNV(atom::Observations observations, uint32_t Func, int32_t Ref, uint32_t Mask) :
-            mobservations(observations),
+        GlPathStencilFuncNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref),
             mMask(Mask) {}
@@ -15051,7 +15823,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         int32_t mRef;
         uint32_t mMask;
@@ -15060,8 +15832,8 @@ namespace gles {
     class GlPathStringNV: public Encodable {
     public:
         GlPathStringNV() = default;
-        GlPathStringNV(atom::Observations observations, uint32_t Path, uint32_t Format, int32_t Length, Void__CP PathString) :
-            mobservations(observations),
+        GlPathStringNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Format, int32_t Length, Void__CP PathString) :
+            mextras(extras),
             mPath(Path),
             mFormat(Format),
             mLength(Length),
@@ -15071,7 +15843,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mFormat;
         int32_t mLength;
@@ -15081,8 +15853,8 @@ namespace gles {
     class GlPathSubCommandsNV: public Encodable {
     public:
         GlPathSubCommandsNV() = default;
-        GlPathSubCommandsNV(atom::Observations observations, uint32_t Path, int32_t CommandStart, int32_t CommandsToDelete, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
-            mobservations(observations),
+        GlPathSubCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t CommandStart, int32_t CommandsToDelete, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+            mextras(extras),
             mPath(Path),
             mCommandStart(CommandStart),
             mCommandsToDelete(CommandsToDelete),
@@ -15096,7 +15868,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mCommandStart;
         int32_t mCommandsToDelete;
@@ -15110,8 +15882,8 @@ namespace gles {
     class GlPathSubCoordsNV: public Encodable {
     public:
         GlPathSubCoordsNV() = default;
-        GlPathSubCoordsNV(atom::Observations observations, uint32_t Path, int32_t CoordStart, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
-            mobservations(observations),
+        GlPathSubCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t CoordStart, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+            mextras(extras),
             mPath(Path),
             mCoordStart(CoordStart),
             mNumCoords(NumCoords),
@@ -15122,7 +15894,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mCoordStart;
         int32_t mNumCoords;
@@ -15133,27 +15905,33 @@ namespace gles {
     class GlPauseTransformFeedback: public Encodable {
     public:
         GlPauseTransformFeedback() = default;
-        GlPauseTransformFeedback(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPauseTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlPixelStorei: public Encodable {
     public:
         GlPixelStorei() = default;
-        GlPixelStorei(atom::Observations observations, uint32_t Parameter, int32_t Value) :
-            mobservations(observations),
+        GlPixelStorei(gapic::Vector<gapic::Encodable*> extras, uint32_t Parameter, int32_t Value) :
+            mextras(extras),
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mParameter);
             e->Int32(this->mValue);
         }
@@ -15161,7 +15939,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mParameter;
         int32_t mValue;
     };
@@ -15169,8 +15947,8 @@ namespace gles {
     class GlPointAlongPathNV: public Encodable {
     public:
         GlPointAlongPathNV() = default;
-        GlPointAlongPathNV(atom::Observations observations, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Distance, GLfloat__P X, GLfloat__P Y, GLfloat__P TangentX, GLfloat__P TangentY, uint8_t Result) :
-            mobservations(observations),
+        GlPointAlongPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Distance, GLfloat__P X, GLfloat__P Y, GLfloat__P TangentX, GLfloat__P TangentY, uint8_t Result) :
+            mextras(extras),
             mPath(Path),
             mStartSegment(StartSegment),
             mNumSegments(NumSegments),
@@ -15185,7 +15963,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mStartSegment;
         int32_t mNumSegments;
@@ -15200,12 +15978,15 @@ namespace gles {
     class GlPointParameterf: public Encodable {
     public:
         GlPointParameterf() = default;
-        GlPointParameterf(atom::Observations observations, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlPointParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Float32(this->mParam);
         }
@@ -15213,7 +15994,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         float mParam;
     };
@@ -15221,12 +16002,15 @@ namespace gles {
     class GlPointParameterfv: public Encodable {
     public:
         GlPointParameterfv() = default;
-        GlPointParameterfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlPointParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -15234,7 +16018,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfloat__CP mParams;
     };
@@ -15242,12 +16026,15 @@ namespace gles {
     class GlPointParameterx: public Encodable {
     public:
         GlPointParameterx() = default;
-        GlPointParameterx(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlPointParameterx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -15255,7 +16042,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -15263,12 +16050,15 @@ namespace gles {
     class GlPointParameterxOES: public Encodable {
     public:
         GlPointParameterxOES() = default;
-        GlPointParameterxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlPointParameterxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Int32(this->mParam);
         }
@@ -15276,7 +16066,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         int32_t mParam;
     };
@@ -15284,12 +16074,15 @@ namespace gles {
     class GlPointParameterxv: public Encodable {
     public:
         GlPointParameterxv() = default;
-        GlPointParameterxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlPointParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -15297,7 +16090,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParams;
     };
@@ -15305,12 +16098,15 @@ namespace gles {
     class GlPointParameterxvOES: public Encodable {
     public:
         GlPointParameterxvOES() = default;
-        GlPointParameterxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlPointParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPname);
             e->Struct(this->mParams);
         }
@@ -15318,7 +16114,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPname;
         GLfixed__CP mParams;
     };
@@ -15326,26 +16122,29 @@ namespace gles {
     class GlPointSize: public Encodable {
     public:
         GlPointSize() = default;
-        GlPointSize(atom::Observations observations, float Size) :
-            mobservations(observations),
+        GlPointSize(gapic::Vector<gapic::Encodable*> extras, float Size) :
+            mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mSize);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mSize;
     };
 
     class GlPointSizePointerOES: public Encodable {
     public:
         GlPointSizePointerOES() = default;
-        GlPointSizePointerOES(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlPointSizePointerOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mType(Type),
             mStride(Stride),
             mPointer(Pointer) {}
@@ -15354,7 +16153,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mStride;
         Void__CP mPointer;
@@ -15363,8 +16162,8 @@ namespace gles {
     class GlPointSizePointerOESBounds: public Encodable {
     public:
         GlPointSizePointerOESBounds() = default;
-        GlPointSizePointerOESBounds(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlPointSizePointerOESBounds(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mType(Type),
             mStride(Stride),
             mPointer(Pointer),
@@ -15374,7 +16173,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mType;
         int32_t mStride;
         Void__CP mPointer;
@@ -15384,48 +16183,57 @@ namespace gles {
     class GlPointSizex: public Encodable {
     public:
         GlPointSizex() = default;
-        GlPointSizex(atom::Observations observations, int32_t Size) :
-            mobservations(observations),
+        GlPointSizex(gapic::Vector<gapic::Encodable*> extras, int32_t Size) :
+            mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mSize);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
     };
 
     class GlPointSizexOES: public Encodable {
     public:
         GlPointSizexOES() = default;
-        GlPointSizexOES(atom::Observations observations, int32_t Size) :
-            mobservations(observations),
+        GlPointSizexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size) :
+            mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mSize);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
     };
 
     class GlPolygonModeNV: public Encodable {
     public:
         GlPolygonModeNV() = default;
-        GlPolygonModeNV(atom::Observations observations, uint32_t Face, uint32_t Mode) :
-            mobservations(observations),
+        GlPolygonModeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Mode) :
+            mextras(extras),
             mFace(Face),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFace);
             e->Uint32(this->mMode);
         }
@@ -15433,7 +16241,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mMode;
     };
@@ -15441,12 +16249,15 @@ namespace gles {
     class GlPolygonOffset: public Encodable {
     public:
         GlPolygonOffset() = default;
-        GlPolygonOffset(atom::Observations observations, float ScaleFactor, float Units) :
-            mobservations(observations),
+        GlPolygonOffset(gapic::Vector<gapic::Encodable*> extras, float ScaleFactor, float Units) :
+            mextras(extras),
             mScaleFactor(ScaleFactor),
             mUnits(Units) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mScaleFactor);
             e->Float32(this->mUnits);
         }
@@ -15454,7 +16265,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mScaleFactor;
         float mUnits;
     };
@@ -15462,12 +16273,15 @@ namespace gles {
     class GlPolygonOffsetx: public Encodable {
     public:
         GlPolygonOffsetx() = default;
-        GlPolygonOffsetx(atom::Observations observations, int32_t Factor, int32_t Units) :
-            mobservations(observations),
+        GlPolygonOffsetx(gapic::Vector<gapic::Encodable*> extras, int32_t Factor, int32_t Units) :
+            mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mFactor);
             e->Int32(this->mUnits);
         }
@@ -15475,7 +16289,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mFactor;
         int32_t mUnits;
     };
@@ -15483,12 +16297,15 @@ namespace gles {
     class GlPolygonOffsetxOES: public Encodable {
     public:
         GlPolygonOffsetxOES() = default;
-        GlPolygonOffsetxOES(atom::Observations observations, int32_t Factor, int32_t Units) :
-            mobservations(observations),
+        GlPolygonOffsetxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Factor, int32_t Units) :
+            mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mFactor);
             e->Int32(this->mUnits);
         }
@@ -15496,7 +16313,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mFactor;
         int32_t mUnits;
     };
@@ -15504,68 +16321,80 @@ namespace gles {
     class GlPopDebugGroup: public Encodable {
     public:
         GlPopDebugGroup() = default;
-        GlPopDebugGroup(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPopDebugGroup(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlPopDebugGroupKHR: public Encodable {
     public:
         GlPopDebugGroupKHR() = default;
-        GlPopDebugGroupKHR(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPopDebugGroupKHR(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlPopGroupMarkerEXT: public Encodable {
     public:
         GlPopGroupMarkerEXT() = default;
-        GlPopGroupMarkerEXT(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPopGroupMarkerEXT(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlPopMatrix: public Encodable {
     public:
         GlPopMatrix() = default;
-        GlPopMatrix(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPopMatrix(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlPrimitiveBoundingBox: public Encodable {
     public:
         GlPrimitiveBoundingBox() = default;
-        GlPrimitiveBoundingBox(atom::Observations observations, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
-            mobservations(observations),
+        GlPrimitiveBoundingBox(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+            mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
             mMinZ(MinZ),
@@ -15579,7 +16408,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mMinX;
         float mMinY;
         float mMinZ;
@@ -15593,8 +16422,8 @@ namespace gles {
     class GlPrimitiveBoundingBoxEXT: public Encodable {
     public:
         GlPrimitiveBoundingBoxEXT() = default;
-        GlPrimitiveBoundingBoxEXT(atom::Observations observations, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
-            mobservations(observations),
+        GlPrimitiveBoundingBoxEXT(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+            mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
             mMinZ(MinZ),
@@ -15608,7 +16437,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mMinX;
         float mMinY;
         float mMinZ;
@@ -15622,8 +16451,8 @@ namespace gles {
     class GlPrimitiveBoundingBoxOES: public Encodable {
     public:
         GlPrimitiveBoundingBoxOES() = default;
-        GlPrimitiveBoundingBoxOES(atom::Observations observations, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
-            mobservations(observations),
+        GlPrimitiveBoundingBoxOES(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+            mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
             mMinZ(MinZ),
@@ -15637,7 +16466,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mMinX;
         float mMinY;
         float mMinZ;
@@ -15651,8 +16480,8 @@ namespace gles {
     class GlProgramBinary: public Encodable {
     public:
         GlProgramBinary() = default;
-        GlProgramBinary(atom::Observations observations, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t Length) :
-            mobservations(observations),
+        GlProgramBinary(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t Length) :
+            mextras(extras),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
@@ -15662,7 +16491,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mBinaryFormat;
         Void__CP mBinary;
@@ -15672,8 +16501,8 @@ namespace gles {
     class GlProgramBinaryOES: public Encodable {
     public:
         GlProgramBinaryOES() = default;
-        GlProgramBinaryOES(atom::Observations observations, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
-            mobservations(observations),
+        GlProgramBinaryOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
+            mextras(extras),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
@@ -15683,7 +16512,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mBinaryFormat;
         Void__CP mBinary;
@@ -15693,8 +16522,8 @@ namespace gles {
     class GlProgramParameteri: public Encodable {
     public:
         GlProgramParameteri() = default;
-        GlProgramParameteri(atom::Observations observations, uint32_t Program, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlProgramParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mProgram(Program),
             mPname(Pname),
             mValue(Value) {}
@@ -15703,7 +16532,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mPname;
         int32_t mValue;
@@ -15712,8 +16541,8 @@ namespace gles {
     class GlProgramParameteriEXT: public Encodable {
     public:
         GlProgramParameteriEXT() = default;
-        GlProgramParameteriEXT(atom::Observations observations, uint32_t Program, uint32_t Pname, int32_t Value) :
-            mobservations(observations),
+        GlProgramParameteriEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Pname, int32_t Value) :
+            mextras(extras),
             mProgram(Program),
             mPname(Pname),
             mValue(Value) {}
@@ -15722,7 +16551,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mPname;
         int32_t mValue;
@@ -15731,8 +16560,8 @@ namespace gles {
     class GlProgramPathFragmentInputGenNV: public Encodable {
     public:
         GlProgramPathFragmentInputGenNV() = default;
-        GlProgramPathFragmentInputGenNV(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t GenMode, int32_t Components, GLfloat__CP Coeffs) :
-            mobservations(observations),
+        GlProgramPathFragmentInputGenNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t GenMode, int32_t Components, GLfloat__CP Coeffs) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mGenMode(GenMode),
@@ -15743,7 +16572,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mGenMode;
@@ -15754,8 +16583,8 @@ namespace gles {
     class GlProgramUniform1f: public Encodable {
     public:
         GlProgramUniform1f() = default;
-        GlProgramUniform1f(atom::Observations observations, uint32_t Program, int32_t Location, float Value0) :
-            mobservations(observations),
+        GlProgramUniform1f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
@@ -15764,7 +16593,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mValue0;
@@ -15773,8 +16602,8 @@ namespace gles {
     class GlProgramUniform1fEXT: public Encodable {
     public:
         GlProgramUniform1fEXT() = default;
-        GlProgramUniform1fEXT(atom::Observations observations, uint32_t Program, int32_t Location, float V0) :
-            mobservations(observations),
+        GlProgramUniform1fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
@@ -15783,7 +16612,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mV0;
@@ -15792,8 +16621,8 @@ namespace gles {
     class GlProgramUniform1fv: public Encodable {
     public:
         GlProgramUniform1fv() = default;
-        GlProgramUniform1fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniform1fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15803,7 +16632,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15813,8 +16642,8 @@ namespace gles {
     class GlProgramUniform1fvEXT: public Encodable {
     public:
         GlProgramUniform1fvEXT() = default;
-        GlProgramUniform1fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniform1fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15824,7 +16653,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15834,8 +16663,8 @@ namespace gles {
     class GlProgramUniform1i: public Encodable {
     public:
         GlProgramUniform1i() = default;
-        GlProgramUniform1i(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Value0) :
-            mobservations(observations),
+        GlProgramUniform1i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
@@ -15844,7 +16673,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mValue0;
@@ -15853,8 +16682,8 @@ namespace gles {
     class GlProgramUniform1iEXT: public Encodable {
     public:
         GlProgramUniform1iEXT() = default;
-        GlProgramUniform1iEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t V0) :
-            mobservations(observations),
+        GlProgramUniform1iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
@@ -15863,7 +16692,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mV0;
@@ -15872,8 +16701,8 @@ namespace gles {
     class GlProgramUniform1iv: public Encodable {
     public:
         GlProgramUniform1iv() = default;
-        GlProgramUniform1iv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform1iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15883,7 +16712,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15893,8 +16722,8 @@ namespace gles {
     class GlProgramUniform1ivEXT: public Encodable {
     public:
         GlProgramUniform1ivEXT() = default;
-        GlProgramUniform1ivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform1ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15904,7 +16733,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15914,8 +16743,8 @@ namespace gles {
     class GlProgramUniform1ui: public Encodable {
     public:
         GlProgramUniform1ui() = default;
-        GlProgramUniform1ui(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t Value0) :
-            mobservations(observations),
+        GlProgramUniform1ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
@@ -15924,7 +16753,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mValue0;
@@ -15933,8 +16762,8 @@ namespace gles {
     class GlProgramUniform1uiEXT: public Encodable {
     public:
         GlProgramUniform1uiEXT() = default;
-        GlProgramUniform1uiEXT(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t V0) :
-            mobservations(observations),
+        GlProgramUniform1uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
@@ -15943,7 +16772,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mV0;
@@ -15952,8 +16781,8 @@ namespace gles {
     class GlProgramUniform1uiv: public Encodable {
     public:
         GlProgramUniform1uiv() = default;
-        GlProgramUniform1uiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform1uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15963,7 +16792,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15973,8 +16802,8 @@ namespace gles {
     class GlProgramUniform1uivEXT: public Encodable {
     public:
         GlProgramUniform1uivEXT() = default;
-        GlProgramUniform1uivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform1uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -15984,7 +16813,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -15994,8 +16823,8 @@ namespace gles {
     class GlProgramUniform2f: public Encodable {
     public:
         GlProgramUniform2f() = default;
-        GlProgramUniform2f(atom::Observations observations, uint32_t Program, int32_t Location, float Value0, float Value1) :
-            mobservations(observations),
+        GlProgramUniform2f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16005,7 +16834,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mValue0;
@@ -16015,8 +16844,8 @@ namespace gles {
     class GlProgramUniform2fEXT: public Encodable {
     public:
         GlProgramUniform2fEXT() = default;
-        GlProgramUniform2fEXT(atom::Observations observations, uint32_t Program, int32_t Location, float V0, float V1) :
-            mobservations(observations),
+        GlProgramUniform2fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16026,7 +16855,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mV0;
@@ -16036,8 +16865,8 @@ namespace gles {
     class GlProgramUniform2fv: public Encodable {
     public:
         GlProgramUniform2fv() = default;
-        GlProgramUniform2fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniform2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16047,7 +16876,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16057,8 +16886,8 @@ namespace gles {
     class GlProgramUniform2fvEXT: public Encodable {
     public:
         GlProgramUniform2fvEXT() = default;
-        GlProgramUniform2fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniform2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16068,7 +16897,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16078,8 +16907,8 @@ namespace gles {
     class GlProgramUniform2i: public Encodable {
     public:
         GlProgramUniform2i() = default;
-        GlProgramUniform2i(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1) :
-            mobservations(observations),
+        GlProgramUniform2i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16089,7 +16918,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mValue0;
@@ -16099,8 +16928,8 @@ namespace gles {
     class GlProgramUniform2iEXT: public Encodable {
     public:
         GlProgramUniform2iEXT() = default;
-        GlProgramUniform2iEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t V0, int32_t V1) :
-            mobservations(observations),
+        GlProgramUniform2iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16110,7 +16939,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mV0;
@@ -16120,8 +16949,8 @@ namespace gles {
     class GlProgramUniform2iv: public Encodable {
     public:
         GlProgramUniform2iv() = default;
-        GlProgramUniform2iv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform2iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16131,7 +16960,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16141,8 +16970,8 @@ namespace gles {
     class GlProgramUniform2ivEXT: public Encodable {
     public:
         GlProgramUniform2ivEXT() = default;
-        GlProgramUniform2ivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform2ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16152,7 +16981,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16162,8 +16991,8 @@ namespace gles {
     class GlProgramUniform2ui: public Encodable {
     public:
         GlProgramUniform2ui() = default;
-        GlProgramUniform2ui(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1) :
-            mobservations(observations),
+        GlProgramUniform2ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16173,7 +17002,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16183,8 +17012,8 @@ namespace gles {
     class GlProgramUniform2uiEXT: public Encodable {
     public:
         GlProgramUniform2uiEXT() = default;
-        GlProgramUniform2uiEXT(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1) :
-            mobservations(observations),
+        GlProgramUniform2uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16194,7 +17023,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mV0;
@@ -16204,8 +17033,8 @@ namespace gles {
     class GlProgramUniform2uiv: public Encodable {
     public:
         GlProgramUniform2uiv() = default;
-        GlProgramUniform2uiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform2uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16215,7 +17044,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16225,8 +17054,8 @@ namespace gles {
     class GlProgramUniform2uivEXT: public Encodable {
     public:
         GlProgramUniform2uivEXT() = default;
-        GlProgramUniform2uivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform2uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16236,7 +17065,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16246,8 +17075,8 @@ namespace gles {
     class GlProgramUniform3f: public Encodable {
     public:
         GlProgramUniform3f() = default;
-        GlProgramUniform3f(atom::Observations observations, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2) :
-            mobservations(observations),
+        GlProgramUniform3f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16258,7 +17087,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mValue0;
@@ -16269,8 +17098,8 @@ namespace gles {
     class GlProgramUniform3fEXT: public Encodable {
     public:
         GlProgramUniform3fEXT() = default;
-        GlProgramUniform3fEXT(atom::Observations observations, uint32_t Program, int32_t Location, float V0, float V1, float V2) :
-            mobservations(observations),
+        GlProgramUniform3fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1, float V2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16281,7 +17110,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mV0;
@@ -16292,8 +17121,8 @@ namespace gles {
     class GlProgramUniform3fv: public Encodable {
     public:
         GlProgramUniform3fv() = default;
-        GlProgramUniform3fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniform3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16303,7 +17132,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16313,8 +17142,8 @@ namespace gles {
     class GlProgramUniform3fvEXT: public Encodable {
     public:
         GlProgramUniform3fvEXT() = default;
-        GlProgramUniform3fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniform3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16324,7 +17153,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16334,8 +17163,8 @@ namespace gles {
     class GlProgramUniform3i: public Encodable {
     public:
         GlProgramUniform3i() = default;
-        GlProgramUniform3i(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
-            mobservations(observations),
+        GlProgramUniform3i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16346,7 +17175,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mValue0;
@@ -16357,8 +17186,8 @@ namespace gles {
     class GlProgramUniform3iEXT: public Encodable {
     public:
         GlProgramUniform3iEXT() = default;
-        GlProgramUniform3iEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2) :
-            mobservations(observations),
+        GlProgramUniform3iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16369,7 +17198,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mV0;
@@ -16380,8 +17209,8 @@ namespace gles {
     class GlProgramUniform3iv: public Encodable {
     public:
         GlProgramUniform3iv() = default;
-        GlProgramUniform3iv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform3iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16391,7 +17220,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16401,8 +17230,8 @@ namespace gles {
     class GlProgramUniform3ivEXT: public Encodable {
     public:
         GlProgramUniform3ivEXT() = default;
-        GlProgramUniform3ivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform3ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16412,7 +17241,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16422,8 +17251,8 @@ namespace gles {
     class GlProgramUniform3ui: public Encodable {
     public:
         GlProgramUniform3ui() = default;
-        GlProgramUniform3ui(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
-            mobservations(observations),
+        GlProgramUniform3ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16434,7 +17263,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16445,8 +17274,8 @@ namespace gles {
     class GlProgramUniform3uiEXT: public Encodable {
     public:
         GlProgramUniform3uiEXT() = default;
-        GlProgramUniform3uiEXT(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2) :
-            mobservations(observations),
+        GlProgramUniform3uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16457,7 +17286,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mV0;
@@ -16468,8 +17297,8 @@ namespace gles {
     class GlProgramUniform3uiv: public Encodable {
     public:
         GlProgramUniform3uiv() = default;
-        GlProgramUniform3uiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform3uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16479,7 +17308,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16489,8 +17318,8 @@ namespace gles {
     class GlProgramUniform3uivEXT: public Encodable {
     public:
         GlProgramUniform3uivEXT() = default;
-        GlProgramUniform3uivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform3uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16500,7 +17329,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16510,8 +17339,8 @@ namespace gles {
     class GlProgramUniform4f: public Encodable {
     public:
         GlProgramUniform4f() = default;
-        GlProgramUniform4f(atom::Observations observations, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
-            mobservations(observations),
+        GlProgramUniform4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16523,7 +17352,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mValue0;
@@ -16535,8 +17364,8 @@ namespace gles {
     class GlProgramUniform4fEXT: public Encodable {
     public:
         GlProgramUniform4fEXT() = default;
-        GlProgramUniform4fEXT(atom::Observations observations, uint32_t Program, int32_t Location, float V0, float V1, float V2, float V3) :
-            mobservations(observations),
+        GlProgramUniform4fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1, float V2, float V3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16548,7 +17377,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         float mV0;
@@ -16560,8 +17389,8 @@ namespace gles {
     class GlProgramUniform4fv: public Encodable {
     public:
         GlProgramUniform4fv() = default;
-        GlProgramUniform4fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniform4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16571,7 +17400,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16581,8 +17410,8 @@ namespace gles {
     class GlProgramUniform4fvEXT: public Encodable {
     public:
         GlProgramUniform4fvEXT() = default;
-        GlProgramUniform4fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniform4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16592,7 +17421,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16602,8 +17431,8 @@ namespace gles {
     class GlProgramUniform4i: public Encodable {
     public:
         GlProgramUniform4i() = default;
-        GlProgramUniform4i(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
-            mobservations(observations),
+        GlProgramUniform4i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16615,7 +17444,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mValue0;
@@ -16627,8 +17456,8 @@ namespace gles {
     class GlProgramUniform4iEXT: public Encodable {
     public:
         GlProgramUniform4iEXT() = default;
-        GlProgramUniform4iEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
-            mobservations(observations),
+        GlProgramUniform4iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16640,7 +17469,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mV0;
@@ -16652,8 +17481,8 @@ namespace gles {
     class GlProgramUniform4iv: public Encodable {
     public:
         GlProgramUniform4iv() = default;
-        GlProgramUniform4iv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform4iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16663,7 +17492,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16673,8 +17502,8 @@ namespace gles {
     class GlProgramUniform4ivEXT: public Encodable {
     public:
         GlProgramUniform4ivEXT() = default;
-        GlProgramUniform4ivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform4ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16684,7 +17513,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16694,8 +17523,8 @@ namespace gles {
     class GlProgramUniform4ui: public Encodable {
     public:
         GlProgramUniform4ui() = default;
-        GlProgramUniform4ui(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
-            mobservations(observations),
+        GlProgramUniform4ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0),
@@ -16707,7 +17536,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16719,8 +17548,8 @@ namespace gles {
     class GlProgramUniform4uiEXT: public Encodable {
     public:
         GlProgramUniform4uiEXT() = default;
-        GlProgramUniform4uiEXT(atom::Observations observations, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2, uint32_t V3) :
-            mobservations(observations),
+        GlProgramUniform4uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2, uint32_t V3) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mV0(V0),
@@ -16732,7 +17561,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint32_t mV0;
@@ -16744,8 +17573,8 @@ namespace gles {
     class GlProgramUniform4uiv: public Encodable {
     public:
         GlProgramUniform4uiv() = default;
-        GlProgramUniform4uiv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlProgramUniform4uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16755,7 +17584,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16765,8 +17594,8 @@ namespace gles {
     class GlProgramUniform4uivEXT: public Encodable {
     public:
         GlProgramUniform4uivEXT() = default;
-        GlProgramUniform4uivEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
-            mobservations(observations),
+        GlProgramUniform4uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16776,7 +17605,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16786,8 +17615,8 @@ namespace gles {
     class GlProgramUniformHandleui64NV: public Encodable {
     public:
         GlProgramUniformHandleui64NV() = default;
-        GlProgramUniformHandleui64NV(atom::Observations observations, uint32_t Program, int32_t Location, uint64_t Value) :
-            mobservations(observations),
+        GlProgramUniformHandleui64NV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint64_t Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mValue(Value) {}
@@ -16796,7 +17625,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         uint64_t mValue;
@@ -16805,8 +17634,8 @@ namespace gles {
     class GlProgramUniformHandleui64vNV: public Encodable {
     public:
         GlProgramUniformHandleui64vNV() = default;
-        GlProgramUniformHandleui64vNV(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, GLuint64__CP Values) :
-            mobservations(observations),
+        GlProgramUniformHandleui64vNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint64__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16816,7 +17645,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16826,8 +17655,8 @@ namespace gles {
     class GlProgramUniformMatrix2fv: public Encodable {
     public:
         GlProgramUniformMatrix2fv() = default;
-        GlProgramUniformMatrix2fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16838,7 +17667,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16849,8 +17678,8 @@ namespace gles {
     class GlProgramUniformMatrix2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2fvEXT() = default;
-        GlProgramUniformMatrix2fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16861,7 +17690,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16872,8 +17701,8 @@ namespace gles {
     class GlProgramUniformMatrix2x3fv: public Encodable {
     public:
         GlProgramUniformMatrix2x3fv() = default;
-        GlProgramUniformMatrix2x3fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix2x3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16884,7 +17713,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16895,8 +17724,8 @@ namespace gles {
     class GlProgramUniformMatrix2x3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2x3fvEXT() = default;
-        GlProgramUniformMatrix2x3fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix2x3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16907,7 +17736,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16918,8 +17747,8 @@ namespace gles {
     class GlProgramUniformMatrix2x4fv: public Encodable {
     public:
         GlProgramUniformMatrix2x4fv() = default;
-        GlProgramUniformMatrix2x4fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix2x4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16930,7 +17759,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16941,8 +17770,8 @@ namespace gles {
     class GlProgramUniformMatrix2x4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2x4fvEXT() = default;
-        GlProgramUniformMatrix2x4fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix2x4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16953,7 +17782,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16964,8 +17793,8 @@ namespace gles {
     class GlProgramUniformMatrix3fv: public Encodable {
     public:
         GlProgramUniformMatrix3fv() = default;
-        GlProgramUniformMatrix3fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16976,7 +17805,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -16987,8 +17816,8 @@ namespace gles {
     class GlProgramUniformMatrix3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3fvEXT() = default;
-        GlProgramUniformMatrix3fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -16999,7 +17828,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17010,8 +17839,8 @@ namespace gles {
     class GlProgramUniformMatrix3x2fv: public Encodable {
     public:
         GlProgramUniformMatrix3x2fv() = default;
-        GlProgramUniformMatrix3x2fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix3x2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17022,7 +17851,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17033,8 +17862,8 @@ namespace gles {
     class GlProgramUniformMatrix3x2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3x2fvEXT() = default;
-        GlProgramUniformMatrix3x2fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix3x2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17045,7 +17874,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17056,8 +17885,8 @@ namespace gles {
     class GlProgramUniformMatrix3x4fv: public Encodable {
     public:
         GlProgramUniformMatrix3x4fv() = default;
-        GlProgramUniformMatrix3x4fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix3x4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17068,7 +17897,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17079,8 +17908,8 @@ namespace gles {
     class GlProgramUniformMatrix3x4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3x4fvEXT() = default;
-        GlProgramUniformMatrix3x4fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix3x4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17091,7 +17920,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17102,8 +17931,8 @@ namespace gles {
     class GlProgramUniformMatrix4fv: public Encodable {
     public:
         GlProgramUniformMatrix4fv() = default;
-        GlProgramUniformMatrix4fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17114,7 +17943,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17125,8 +17954,8 @@ namespace gles {
     class GlProgramUniformMatrix4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4fvEXT() = default;
-        GlProgramUniformMatrix4fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17137,7 +17966,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17148,8 +17977,8 @@ namespace gles {
     class GlProgramUniformMatrix4x2fv: public Encodable {
     public:
         GlProgramUniformMatrix4x2fv() = default;
-        GlProgramUniformMatrix4x2fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix4x2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17160,7 +17989,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17171,8 +18000,8 @@ namespace gles {
     class GlProgramUniformMatrix4x2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4x2fvEXT() = default;
-        GlProgramUniformMatrix4x2fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix4x2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17183,7 +18012,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17194,8 +18023,8 @@ namespace gles {
     class GlProgramUniformMatrix4x3fv: public Encodable {
     public:
         GlProgramUniformMatrix4x3fv() = default;
-        GlProgramUniformMatrix4x3fv(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlProgramUniformMatrix4x3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17206,7 +18035,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17217,8 +18046,8 @@ namespace gles {
     class GlProgramUniformMatrix4x3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4x3fvEXT() = default;
-        GlProgramUniformMatrix4x3fvEXT(atom::Observations observations, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlProgramUniformMatrix4x3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mProgram(Program),
             mLocation(Location),
             mCount(Count),
@@ -17229,7 +18058,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mLocation;
         int32_t mCount;
@@ -17240,8 +18069,8 @@ namespace gles {
     class GlPushDebugGroup: public Encodable {
     public:
         GlPushDebugGroup() = default;
-        GlPushDebugGroup(atom::Observations observations, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
-            mobservations(observations),
+        GlPushDebugGroup(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
+            mextras(extras),
             mSource(Source),
             mId(Id),
             mLength(Length),
@@ -17251,7 +18080,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mId;
         int32_t mLength;
@@ -17261,8 +18090,8 @@ namespace gles {
     class GlPushDebugGroupKHR: public Encodable {
     public:
         GlPushDebugGroupKHR() = default;
-        GlPushDebugGroupKHR(atom::Observations observations, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
-            mobservations(observations),
+        GlPushDebugGroupKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
+            mextras(extras),
             mSource(Source),
             mId(Id),
             mLength(Length),
@@ -17272,7 +18101,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSource;
         uint32_t mId;
         int32_t mLength;
@@ -17282,12 +18111,15 @@ namespace gles {
     class GlPushGroupMarkerEXT: public Encodable {
     public:
         GlPushGroupMarkerEXT() = default;
-        GlPushGroupMarkerEXT(atom::Observations observations, int32_t Length, GLchar__CP Marker) :
-            mobservations(observations),
+        GlPushGroupMarkerEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Length, GLchar__CP Marker) :
+            mextras(extras),
             mLength(Length),
             mMarker(Marker) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLength);
             e->Struct(this->mMarker);
         }
@@ -17295,7 +18127,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLength;
         GLchar__CP mMarker;
     };
@@ -17303,27 +18135,33 @@ namespace gles {
     class GlPushMatrix: public Encodable {
     public:
         GlPushMatrix() = default;
-        GlPushMatrix(atom::Observations observations) :
-            mobservations(observations) {}
+        GlPushMatrix(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlQueryCounterEXT: public Encodable {
     public:
         GlQueryCounterEXT() = default;
-        GlQueryCounterEXT(atom::Observations observations, uint32_t Query, uint32_t Target) :
-            mobservations(observations),
+        GlQueryCounterEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Target) :
+            mextras(extras),
             mQuery(Query),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mQuery);
             e->Uint32(this->mTarget);
         }
@@ -17331,7 +18169,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mQuery;
         uint32_t mTarget;
     };
@@ -17339,8 +18177,8 @@ namespace gles {
     class GlQueryMatrixxOES: public Encodable {
     public:
         GlQueryMatrixxOES() = default;
-        GlQueryMatrixxOES(atom::Observations observations, GLfixed__P Mantissa, GLint__P Exponent, uint32_t Result) :
-            mobservations(observations),
+        GlQueryMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__P Mantissa, GLint__P Exponent, uint32_t Result) :
+            mextras(extras),
             mMantissa(Mantissa),
             mExponent(Exponent),
             mResult(Result) {}
@@ -17349,7 +18187,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         GLfixed__P mMantissa;
         GLint__P mExponent;
         uint32_t mResult;
@@ -17358,12 +18196,15 @@ namespace gles {
     class GlRasterSamplesEXT: public Encodable {
     public:
         GlRasterSamplesEXT() = default;
-        GlRasterSamplesEXT(atom::Observations observations, uint32_t Samples, uint8_t Fixedsamplelocations) :
-            mobservations(observations),
+        GlRasterSamplesEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Samples, uint8_t Fixedsamplelocations) :
+            mextras(extras),
             mSamples(Samples),
             mFixedsamplelocations(Fixedsamplelocations) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mSamples);
             e->Uint8(this->mFixedsamplelocations);
         }
@@ -17371,7 +18212,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSamples;
         uint8_t mFixedsamplelocations;
     };
@@ -17379,30 +18220,36 @@ namespace gles {
     class GlReadBuffer: public Encodable {
     public:
         GlReadBuffer() = default;
-        GlReadBuffer(atom::Observations observations, uint32_t Src) :
-            mobservations(observations),
+        GlReadBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Src) :
+            mextras(extras),
             mSrc(Src) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mSrc);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrc;
     };
 
     class GlReadBufferIndexedEXT: public Encodable {
     public:
         GlReadBufferIndexedEXT() = default;
-        GlReadBufferIndexedEXT(atom::Observations observations, uint32_t Src, int32_t Index) :
-            mobservations(observations),
+        GlReadBufferIndexedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Src, int32_t Index) :
+            mextras(extras),
             mSrc(Src),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mSrc);
             e->Int32(this->mIndex);
         }
@@ -17410,7 +18257,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSrc;
         int32_t mIndex;
     };
@@ -17418,26 +18265,29 @@ namespace gles {
     class GlReadBufferNV: public Encodable {
     public:
         GlReadBufferNV() = default;
-        GlReadBufferNV(atom::Observations observations, uint32_t Mode) :
-            mobservations(observations),
+        GlReadBufferNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+            mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
     };
 
     class GlReadPixels: public Encodable {
     public:
         GlReadPixels() = default;
-        GlReadPixels(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__P Data) :
-            mobservations(observations),
+        GlReadPixels(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__P Data) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -17450,7 +18300,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -17463,8 +18313,8 @@ namespace gles {
     class GlReadnPixels: public Encodable {
     public:
         GlReadnPixels() = default;
-        GlReadnPixels(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
-            mobservations(observations),
+        GlReadnPixels(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -17478,7 +18328,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -17492,8 +18342,8 @@ namespace gles {
     class GlReadnPixelsEXT: public Encodable {
     public:
         GlReadnPixelsEXT() = default;
-        GlReadnPixelsEXT(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
-            mobservations(observations),
+        GlReadnPixelsEXT(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -17507,7 +18357,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -17521,8 +18371,8 @@ namespace gles {
     class GlReadnPixelsKHR: public Encodable {
     public:
         GlReadnPixelsKHR() = default;
-        GlReadnPixelsKHR(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
-            mobservations(observations),
+        GlReadnPixelsKHR(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -17536,7 +18386,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -17550,23 +18400,26 @@ namespace gles {
     class GlReleaseShaderCompiler: public Encodable {
     public:
         GlReleaseShaderCompiler() = default;
-        GlReleaseShaderCompiler(atom::Observations observations) :
-            mobservations(observations) {}
+        GlReleaseShaderCompiler(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlRenderbufferStorage: public Encodable {
     public:
         GlRenderbufferStorage() = default;
-        GlRenderbufferStorage(atom::Observations observations, uint32_t Target, uint32_t Format, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorage(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Format, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mFormat(Format),
             mWidth(Width),
@@ -17576,7 +18429,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mFormat;
         int32_t mWidth;
@@ -17586,8 +18439,8 @@ namespace gles {
     class GlRenderbufferStorageMultisample: public Encodable {
     public:
         GlRenderbufferStorageMultisample() = default;
-        GlRenderbufferStorageMultisample(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Format, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Format, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mFormat(Format),
@@ -17598,7 +18451,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mFormat;
@@ -17609,8 +18462,8 @@ namespace gles {
     class GlRenderbufferStorageMultisampleANGLE: public Encodable {
     public:
         GlRenderbufferStorageMultisampleANGLE() = default;
-        GlRenderbufferStorageMultisampleANGLE(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisampleANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -17621,7 +18474,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -17632,8 +18485,8 @@ namespace gles {
     class GlRenderbufferStorageMultisampleAPPLE: public Encodable {
     public:
         GlRenderbufferStorageMultisampleAPPLE() = default;
-        GlRenderbufferStorageMultisampleAPPLE(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisampleAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -17644,7 +18497,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -17655,8 +18508,8 @@ namespace gles {
     class GlRenderbufferStorageMultisampleEXT: public Encodable {
     public:
         GlRenderbufferStorageMultisampleEXT() = default;
-        GlRenderbufferStorageMultisampleEXT(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisampleEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -17667,7 +18520,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -17678,8 +18531,8 @@ namespace gles {
     class GlRenderbufferStorageMultisampleIMG: public Encodable {
     public:
         GlRenderbufferStorageMultisampleIMG() = default;
-        GlRenderbufferStorageMultisampleIMG(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisampleIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -17690,7 +18543,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -17701,8 +18554,8 @@ namespace gles {
     class GlRenderbufferStorageMultisampleNV: public Encodable {
     public:
         GlRenderbufferStorageMultisampleNV() = default;
-        GlRenderbufferStorageMultisampleNV(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageMultisampleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -17713,7 +18566,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -17724,8 +18577,8 @@ namespace gles {
     class GlRenderbufferStorageOES: public Encodable {
     public:
         GlRenderbufferStorageOES() = default;
-        GlRenderbufferStorageOES(atom::Observations observations, uint32_t Target, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlRenderbufferStorageOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mWidth(Width),
@@ -17735,7 +18588,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         int32_t mWidth;
@@ -17745,53 +18598,62 @@ namespace gles {
     class GlResolveDepthValuesNV: public Encodable {
     public:
         GlResolveDepthValuesNV() = default;
-        GlResolveDepthValuesNV(atom::Observations observations) :
-            mobservations(observations) {}
+        GlResolveDepthValuesNV(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlResolveMultisampleFramebufferAPPLE: public Encodable {
     public:
         GlResolveMultisampleFramebufferAPPLE() = default;
-        GlResolveMultisampleFramebufferAPPLE(atom::Observations observations) :
-            mobservations(observations) {}
+        GlResolveMultisampleFramebufferAPPLE(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlResumeTransformFeedback: public Encodable {
     public:
         GlResumeTransformFeedback() = default;
-        GlResumeTransformFeedback(atom::Observations observations) :
-            mobservations(observations) {}
+        GlResumeTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+            mextras(extras) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
     };
 
     class GlRotatef: public Encodable {
     public:
         GlRotatef() = default;
-        GlRotatef(atom::Observations observations, float Angle, float X, float Y, float Z) :
-            mobservations(observations),
+        GlRotatef(gapic::Vector<gapic::Encodable*> extras, float Angle, float X, float Y, float Z) :
+            mextras(extras),
             mAngle(Angle),
             mX(X),
             mY(Y),
@@ -17801,7 +18663,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mAngle;
         float mX;
         float mY;
@@ -17811,8 +18673,8 @@ namespace gles {
     class GlRotatex: public Encodable {
     public:
         GlRotatex() = default;
-        GlRotatex(atom::Observations observations, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlRotatex(gapic::Vector<gapic::Encodable*> extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mAngle(Angle),
             mX(X),
             mY(Y),
@@ -17822,7 +18684,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mAngle;
         int32_t mX;
         int32_t mY;
@@ -17832,8 +18694,8 @@ namespace gles {
     class GlRotatexOES: public Encodable {
     public:
         GlRotatexOES() = default;
-        GlRotatexOES(atom::Observations observations, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlRotatexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mAngle(Angle),
             mX(X),
             mY(Y),
@@ -17843,7 +18705,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mAngle;
         int32_t mX;
         int32_t mY;
@@ -17853,12 +18715,15 @@ namespace gles {
     class GlSampleCoverage: public Encodable {
     public:
         GlSampleCoverage() = default;
-        GlSampleCoverage(atom::Observations observations, float Value, uint8_t Invert) :
-            mobservations(observations),
+        GlSampleCoverage(gapic::Vector<gapic::Encodable*> extras, float Value, uint8_t Invert) :
+            mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Float32(this->mValue);
             e->Uint8(this->mInvert);
         }
@@ -17866,7 +18731,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mValue;
         uint8_t mInvert;
     };
@@ -17874,12 +18739,15 @@ namespace gles {
     class GlSampleCoveragex: public Encodable {
     public:
         GlSampleCoveragex() = default;
-        GlSampleCoveragex(atom::Observations observations, int32_t Value, uint8_t Invert) :
-            mobservations(observations),
+        GlSampleCoveragex(gapic::Vector<gapic::Encodable*> extras, int32_t Value, uint8_t Invert) :
+            mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mValue);
             e->Uint8(this->mInvert);
         }
@@ -17887,7 +18755,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mValue;
         uint8_t mInvert;
     };
@@ -17895,12 +18763,15 @@ namespace gles {
     class GlSampleCoveragexOES: public Encodable {
     public:
         GlSampleCoveragexOES() = default;
-        GlSampleCoveragexOES(atom::Observations observations, int32_t Value, uint8_t Invert) :
-            mobservations(observations),
+        GlSampleCoveragexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Value, uint8_t Invert) :
+            mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mValue);
             e->Uint8(this->mInvert);
         }
@@ -17908,7 +18779,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mValue;
         uint8_t mInvert;
     };
@@ -17916,12 +18787,15 @@ namespace gles {
     class GlSampleMaski: public Encodable {
     public:
         GlSampleMaski() = default;
-        GlSampleMaski(atom::Observations observations, uint32_t MaskNumber, uint32_t Mask) :
-            mobservations(observations),
+        GlSampleMaski(gapic::Vector<gapic::Encodable*> extras, uint32_t MaskNumber, uint32_t Mask) :
+            mextras(extras),
             mMaskNumber(MaskNumber),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMaskNumber);
             e->Uint32(this->mMask);
         }
@@ -17929,7 +18803,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMaskNumber;
         uint32_t mMask;
     };
@@ -17937,8 +18811,8 @@ namespace gles {
     class GlSamplerParameterIiv: public Encodable {
     public:
         GlSamplerParameterIiv() = default;
-        GlSamplerParameterIiv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -17947,7 +18821,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__CP mParam;
@@ -17956,8 +18830,8 @@ namespace gles {
     class GlSamplerParameterIivEXT: public Encodable {
     public:
         GlSamplerParameterIivEXT() = default;
-        GlSamplerParameterIivEXT(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -17966,7 +18840,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__CP mParam;
@@ -17975,8 +18849,8 @@ namespace gles {
     class GlSamplerParameterIivOES: public Encodable {
     public:
         GlSamplerParameterIivOES() = default;
-        GlSamplerParameterIivOES(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -17985,7 +18859,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__CP mParam;
@@ -17994,8 +18868,8 @@ namespace gles {
     class GlSamplerParameterIuiv: public Encodable {
     public:
         GlSamplerParameterIuiv() = default;
-        GlSamplerParameterIuiv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18004,7 +18878,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__CP mParam;
@@ -18013,8 +18887,8 @@ namespace gles {
     class GlSamplerParameterIuivEXT: public Encodable {
     public:
         GlSamplerParameterIuivEXT() = default;
-        GlSamplerParameterIuivEXT(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18023,7 +18897,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__CP mParam;
@@ -18032,8 +18906,8 @@ namespace gles {
     class GlSamplerParameterIuivOES: public Encodable {
     public:
         GlSamplerParameterIuivOES() = default;
-        GlSamplerParameterIuivOES(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18042,7 +18916,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLuint__CP mParam;
@@ -18051,8 +18925,8 @@ namespace gles {
     class GlSamplerParameterf: public Encodable {
     public:
         GlSamplerParameterf() = default;
-        GlSamplerParameterf(atom::Observations observations, uint32_t Sampler, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlSamplerParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, float Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18061,7 +18935,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         float mParam;
@@ -18070,8 +18944,8 @@ namespace gles {
     class GlSamplerParameterfv: public Encodable {
     public:
         GlSamplerParameterfv() = default;
-        GlSamplerParameterfv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLfloat__CP Param) :
-            mobservations(observations),
+        GlSamplerParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLfloat__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18080,7 +18954,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLfloat__CP mParam;
@@ -18089,8 +18963,8 @@ namespace gles {
     class GlSamplerParameteri: public Encodable {
     public:
         GlSamplerParameteri() = default;
-        GlSamplerParameteri(atom::Observations observations, uint32_t Sampler, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlSamplerParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18099,7 +18973,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         int32_t mParam;
@@ -18108,8 +18982,8 @@ namespace gles {
     class GlSamplerParameteriv: public Encodable {
     public:
         GlSamplerParameteriv() = default;
-        GlSamplerParameteriv(atom::Observations observations, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
-            mobservations(observations),
+        GlSamplerParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+            mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
@@ -18118,7 +18992,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mSampler;
         uint32_t mPname;
         GLint__CP mParam;
@@ -18127,8 +19001,8 @@ namespace gles {
     class GlScalef: public Encodable {
     public:
         GlScalef() = default;
-        GlScalef(atom::Observations observations, float X, float Y, float Z) :
-            mobservations(observations),
+        GlScalef(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -18137,7 +19011,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mX;
         float mY;
         float mZ;
@@ -18146,8 +19020,8 @@ namespace gles {
     class GlScalex: public Encodable {
     public:
         GlScalex() = default;
-        GlScalex(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlScalex(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -18156,7 +19030,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -18165,8 +19039,8 @@ namespace gles {
     class GlScalexOES: public Encodable {
     public:
         GlScalexOES() = default;
-        GlScalexOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlScalexOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -18175,7 +19049,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -18184,8 +19058,8 @@ namespace gles {
     class GlScissor: public Encodable {
     public:
         GlScissor() = default;
-        GlScissor(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlScissor(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -18195,7 +19069,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -18205,8 +19079,8 @@ namespace gles {
     class GlScissorArrayvNV: public Encodable {
     public:
         GlScissorArrayvNV() = default;
-        GlScissorArrayvNV(atom::Observations observations, uint32_t First, int32_t Count, GLint__CP V) :
-            mobservations(observations),
+        GlScissorArrayvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLint__CP V) :
+            mextras(extras),
             mFirst(First),
             mCount(Count),
             mV(V) {}
@@ -18215,7 +19089,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirst;
         int32_t mCount;
         GLint__CP mV;
@@ -18224,8 +19098,8 @@ namespace gles {
     class GlScissorIndexedNV: public Encodable {
     public:
         GlScissorIndexedNV() = default;
-        GlScissorIndexedNV(atom::Observations observations, uint32_t Index, int32_t Left, int32_t Bottom, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlScissorIndexedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Left, int32_t Bottom, int32_t Width, int32_t Height) :
+            mextras(extras),
             mIndex(Index),
             mLeft(Left),
             mBottom(Bottom),
@@ -18236,7 +19110,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         int32_t mLeft;
         int32_t mBottom;
@@ -18247,12 +19121,15 @@ namespace gles {
     class GlScissorIndexedvNV: public Encodable {
     public:
         GlScissorIndexedvNV() = default;
-        GlScissorIndexedvNV(atom::Observations observations, uint32_t Index, GLint__CP V) :
-            mobservations(observations),
+        GlScissorIndexedvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLint__CP V) :
+            mextras(extras),
             mIndex(Index),
             mV(V) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Struct(this->mV);
         }
@@ -18260,7 +19137,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         GLint__CP mV;
     };
@@ -18268,8 +19145,8 @@ namespace gles {
     class GlSelectPerfMonitorCountersAMD: public Encodable {
     public:
         GlSelectPerfMonitorCountersAMD() = default;
-        GlSelectPerfMonitorCountersAMD(atom::Observations observations, uint32_t Monitor, uint8_t Enable, uint32_t Group, int32_t NumCounters, GLuint__P CounterList) :
-            mobservations(observations),
+        GlSelectPerfMonitorCountersAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor, uint8_t Enable, uint32_t Group, int32_t NumCounters, GLuint__P CounterList) :
+            mextras(extras),
             mMonitor(Monitor),
             mEnable(Enable),
             mGroup(Group),
@@ -18280,7 +19157,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMonitor;
         uint8_t mEnable;
         uint32_t mGroup;
@@ -18291,12 +19168,15 @@ namespace gles {
     class GlSetFenceNV: public Encodable {
     public:
         GlSetFenceNV() = default;
-        GlSetFenceNV(atom::Observations observations, uint32_t Fence, uint32_t Condition) :
-            mobservations(observations),
+        GlSetFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint32_t Condition) :
+            mextras(extras),
             mFence(Fence),
             mCondition(Condition) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFence);
             e->Uint32(this->mCondition);
         }
@@ -18304,7 +19184,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFence;
         uint32_t mCondition;
     };
@@ -18312,18 +19192,21 @@ namespace gles {
     class GlShadeModel: public Encodable {
     public:
         GlShadeModel() = default;
-        GlShadeModel(atom::Observations observations, uint32_t Mode) :
-            mobservations(observations),
+        GlShadeModel(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+            mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMode);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMode;
     };
 
@@ -18345,8 +19228,8 @@ namespace gles {
     class GlShaderBinary: public Encodable {
     public:
         GlShaderBinary() = default;
-        GlShaderBinary(atom::Observations observations, int32_t Count, ShaderId__CP Shaders, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
-            mobservations(observations),
+        GlShaderBinary(gapic::Vector<gapic::Encodable*> extras, int32_t Count, ShaderId__CP Shaders, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
+            mextras(extras),
             mCount(Count),
             mShaders(Shaders),
             mBinaryFormat(BinaryFormat),
@@ -18357,7 +19240,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mCount;
         ShaderId__CP mShaders;
         uint32_t mBinaryFormat;
@@ -18368,8 +19251,8 @@ namespace gles {
     class GlShaderSource: public Encodable {
     public:
         GlShaderSource() = default;
-        GlShaderSource(atom::Observations observations, uint32_t Shader, int32_t Count, GLchar__CP__CP Source, GLint__CP Length) :
-            mobservations(observations),
+        GlShaderSource(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t Count, GLchar__CP__CP Source, GLint__CP Length) :
+            mextras(extras),
             mShader(Shader),
             mCount(Count),
             mSource(Source),
@@ -18379,7 +19262,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mShader;
         int32_t mCount;
         GLchar__CP__CP mSource;
@@ -18389,8 +19272,8 @@ namespace gles {
     class GlStartTilingQCOM: public Encodable {
     public:
         GlStartTilingQCOM() = default;
-        GlStartTilingQCOM(atom::Observations observations, uint32_t X, uint32_t Y, uint32_t Width, uint32_t Height, uint32_t PreserveMask) :
-            mobservations(observations),
+        GlStartTilingQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t X, uint32_t Y, uint32_t Width, uint32_t Height, uint32_t PreserveMask) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -18401,7 +19284,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mX;
         uint32_t mY;
         uint32_t mWidth;
@@ -18412,8 +19295,8 @@ namespace gles {
     class GlStencilFillPathInstancedNV: public Encodable {
     public:
         GlStencilFillPathInstancedNV() = default;
-        GlStencilFillPathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlStencilFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -18427,7 +19310,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -18441,8 +19324,8 @@ namespace gles {
     class GlStencilFillPathNV: public Encodable {
     public:
         GlStencilFillPathNV() = default;
-        GlStencilFillPathNV(atom::Observations observations, uint32_t Path, uint32_t FillMode, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t FillMode, uint32_t Mask) :
+            mextras(extras),
             mPath(Path),
             mFillMode(FillMode),
             mMask(Mask) {}
@@ -18451,7 +19334,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mFillMode;
         uint32_t mMask;
@@ -18460,8 +19343,8 @@ namespace gles {
     class GlStencilFunc: public Encodable {
     public:
         GlStencilFunc() = default;
-        GlStencilFunc(atom::Observations observations, uint32_t Func, int32_t Ref, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
+            mextras(extras),
             mFunc(Func),
             mRef(Ref),
             mMask(Mask) {}
@@ -18470,7 +19353,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFunc;
         int32_t mRef;
         uint32_t mMask;
@@ -18479,8 +19362,8 @@ namespace gles {
     class GlStencilFuncSeparate: public Encodable {
     public:
         GlStencilFuncSeparate() = default;
-        GlStencilFuncSeparate(atom::Observations observations, uint32_t Face, uint32_t Function, int32_t ReferenceValue, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilFuncSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Function, int32_t ReferenceValue, uint32_t Mask) :
+            mextras(extras),
             mFace(Face),
             mFunction(Function),
             mReferenceValue(ReferenceValue),
@@ -18490,7 +19373,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mFunction;
         int32_t mReferenceValue;
@@ -18500,30 +19383,36 @@ namespace gles {
     class GlStencilMask: public Encodable {
     public:
         GlStencilMask() = default;
-        GlStencilMask(atom::Observations observations, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilMask(gapic::Vector<gapic::Encodable*> extras, uint32_t Mask) :
+            mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mMask);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mMask;
     };
 
     class GlStencilMaskSeparate: public Encodable {
     public:
         GlStencilMaskSeparate() = default;
-        GlStencilMaskSeparate(atom::Observations observations, uint32_t Face, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilMaskSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Mask) :
+            mextras(extras),
             mFace(Face),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFace);
             e->Uint32(this->mMask);
         }
@@ -18531,7 +19420,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mMask;
     };
@@ -18539,8 +19428,8 @@ namespace gles {
     class GlStencilOp: public Encodable {
     public:
         GlStencilOp() = default;
-        GlStencilOp(atom::Observations observations, uint32_t Fail, uint32_t Zfail, uint32_t Zpass) :
-            mobservations(observations),
+        GlStencilOp(gapic::Vector<gapic::Encodable*> extras, uint32_t Fail, uint32_t Zfail, uint32_t Zpass) :
+            mextras(extras),
             mFail(Fail),
             mZfail(Zfail),
             mZpass(Zpass) {}
@@ -18549,7 +19438,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFail;
         uint32_t mZfail;
         uint32_t mZpass;
@@ -18558,8 +19447,8 @@ namespace gles {
     class GlStencilOpSeparate: public Encodable {
     public:
         GlStencilOpSeparate() = default;
-        GlStencilOpSeparate(atom::Observations observations, uint32_t Face, uint32_t StencilFail, uint32_t StencilPassDepthFail, uint32_t StencilPassDepthPass) :
-            mobservations(observations),
+        GlStencilOpSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t StencilFail, uint32_t StencilPassDepthFail, uint32_t StencilPassDepthPass) :
+            mextras(extras),
             mFace(Face),
             mStencilFail(StencilFail),
             mStencilPassDepthFail(StencilPassDepthFail),
@@ -18569,7 +19458,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFace;
         uint32_t mStencilFail;
         uint32_t mStencilPassDepthFail;
@@ -18579,8 +19468,8 @@ namespace gles {
     class GlStencilStrokePathInstancedNV: public Encodable {
     public:
         GlStencilStrokePathInstancedNV() = default;
-        GlStencilStrokePathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlStencilStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -18594,7 +19483,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -18608,8 +19497,8 @@ namespace gles {
     class GlStencilStrokePathNV: public Encodable {
     public:
         GlStencilStrokePathNV() = default;
-        GlStencilStrokePathNV(atom::Observations observations, uint32_t Path, int32_t Reference, uint32_t Mask) :
-            mobservations(observations),
+        GlStencilStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Reference, uint32_t Mask) :
+            mextras(extras),
             mPath(Path),
             mReference(Reference),
             mMask(Mask) {}
@@ -18618,7 +19507,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mReference;
         uint32_t mMask;
@@ -18627,8 +19516,8 @@ namespace gles {
     class GlStencilThenCoverFillPathInstancedNV: public Encodable {
     public:
         GlStencilThenCoverFillPathInstancedNV() = default;
-        GlStencilThenCoverFillPathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlStencilThenCoverFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -18643,7 +19532,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -18658,8 +19547,8 @@ namespace gles {
     class GlStencilThenCoverFillPathNV: public Encodable {
     public:
         GlStencilThenCoverFillPathNV() = default;
-        GlStencilThenCoverFillPathNV(atom::Observations observations, uint32_t Path, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode) :
-            mobservations(observations),
+        GlStencilThenCoverFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode) :
+            mextras(extras),
             mPath(Path),
             mFillMode(FillMode),
             mMask(Mask),
@@ -18669,7 +19558,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         uint32_t mFillMode;
         uint32_t mMask;
@@ -18679,8 +19568,8 @@ namespace gles {
     class GlStencilThenCoverStrokePathInstancedNV: public Encodable {
     public:
         GlStencilThenCoverStrokePathInstancedNV() = default;
-        GlStencilThenCoverStrokePathInstancedNV(atom::Observations observations, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlStencilThenCoverStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
             mPaths(Paths),
@@ -18695,7 +19584,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mNumPaths;
         uint32_t mPathNameType;
         Void__CP mPaths;
@@ -18710,8 +19599,8 @@ namespace gles {
     class GlStencilThenCoverStrokePathNV: public Encodable {
     public:
         GlStencilThenCoverStrokePathNV() = default;
-        GlStencilThenCoverStrokePathNV(atom::Observations observations, uint32_t Path, int32_t Reference, uint32_t Mask, uint32_t CoverMode) :
-            mobservations(observations),
+        GlStencilThenCoverStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Reference, uint32_t Mask, uint32_t CoverMode) :
+            mextras(extras),
             mPath(Path),
             mReference(Reference),
             mMask(Mask),
@@ -18721,7 +19610,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPath;
         int32_t mReference;
         uint32_t mMask;
@@ -18731,12 +19620,15 @@ namespace gles {
     class GlSubpixelPrecisionBiasNV: public Encodable {
     public:
         GlSubpixelPrecisionBiasNV() = default;
-        GlSubpixelPrecisionBiasNV(atom::Observations observations, uint32_t Xbits, uint32_t Ybits) :
-            mobservations(observations),
+        GlSubpixelPrecisionBiasNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Xbits, uint32_t Ybits) :
+            mextras(extras),
             mXbits(Xbits),
             mYbits(Ybits) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mXbits);
             e->Uint32(this->mYbits);
         }
@@ -18744,7 +19636,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mXbits;
         uint32_t mYbits;
     };
@@ -18752,12 +19644,15 @@ namespace gles {
     class GlTestFenceNV: public Encodable {
     public:
         GlTestFenceNV() = default;
-        GlTestFenceNV(atom::Observations observations, uint32_t Fence, uint8_t Result) :
-            mobservations(observations),
+        GlTestFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint8_t Result) :
+            mextras(extras),
             mFence(Fence),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mFence);
             e->Uint8(this->mResult);
         }
@@ -18765,7 +19660,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFence;
         uint8_t mResult;
     };
@@ -18773,8 +19668,8 @@ namespace gles {
     class GlTexBuffer: public Encodable {
     public:
         GlTexBuffer() = default;
-        GlTexBuffer(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
-            mobservations(observations),
+        GlTexBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
@@ -18783,7 +19678,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18792,8 +19687,8 @@ namespace gles {
     class GlTexBufferEXT: public Encodable {
     public:
         GlTexBufferEXT() = default;
-        GlTexBufferEXT(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
-            mobservations(observations),
+        GlTexBufferEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
@@ -18802,7 +19697,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18811,8 +19706,8 @@ namespace gles {
     class GlTexBufferOES: public Encodable {
     public:
         GlTexBufferOES() = default;
-        GlTexBufferOES(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
-            mobservations(observations),
+        GlTexBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
@@ -18821,7 +19716,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18830,8 +19725,8 @@ namespace gles {
     class GlTexBufferRange: public Encodable {
     public:
         GlTexBufferRange() = default;
-        GlTexBufferRange(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
-            mobservations(observations),
+        GlTexBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer),
@@ -18842,7 +19737,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18853,8 +19748,8 @@ namespace gles {
     class GlTexBufferRangeEXT: public Encodable {
     public:
         GlTexBufferRangeEXT() = default;
-        GlTexBufferRangeEXT(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
-            mobservations(observations),
+        GlTexBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer),
@@ -18865,7 +19760,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18876,8 +19771,8 @@ namespace gles {
     class GlTexBufferRangeOES: public Encodable {
     public:
         GlTexBufferRangeOES() = default;
-        GlTexBufferRangeOES(atom::Observations observations, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
-            mobservations(observations),
+        GlTexBufferRangeOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+            mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer),
@@ -18888,7 +19783,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mInternalformat;
         uint32_t mBuffer;
@@ -18899,8 +19794,8 @@ namespace gles {
     class GlTexCoordPointer: public Encodable {
     public:
         GlTexCoordPointer() = default;
-        GlTexCoordPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlTexCoordPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -18910,7 +19805,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -18920,8 +19815,8 @@ namespace gles {
     class GlTexCoordPointerBounds: public Encodable {
     public:
         GlTexCoordPointerBounds() = default;
-        GlTexCoordPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlTexCoordPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -18932,7 +19827,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -18943,8 +19838,8 @@ namespace gles {
     class GlTexEnvf: public Encodable {
     public:
         GlTexEnvf() = default;
-        GlTexEnvf(atom::Observations observations, uint32_t Target, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlTexEnvf(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, float Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -18953,7 +19848,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         float mParam;
@@ -18962,8 +19857,8 @@ namespace gles {
     class GlTexEnvfv: public Encodable {
     public:
         GlTexEnvfv() = default;
-        GlTexEnvfv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlTexEnvfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -18972,7 +19867,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfloat__CP mParams;
@@ -18981,8 +19876,8 @@ namespace gles {
     class GlTexEnvi: public Encodable {
     public:
         GlTexEnvi() = default;
-        GlTexEnvi(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexEnvi(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -18991,7 +19886,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -19000,8 +19895,8 @@ namespace gles {
     class GlTexEnviv: public Encodable {
     public:
         GlTexEnviv() = default;
-        GlTexEnviv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexEnviv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19010,7 +19905,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19019,8 +19914,8 @@ namespace gles {
     class GlTexEnvx: public Encodable {
     public:
         GlTexEnvx() = default;
-        GlTexEnvx(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexEnvx(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -19029,7 +19924,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -19038,8 +19933,8 @@ namespace gles {
     class GlTexEnvxOES: public Encodable {
     public:
         GlTexEnvxOES() = default;
-        GlTexEnvxOES(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexEnvxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -19048,7 +19943,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -19057,8 +19952,8 @@ namespace gles {
     class GlTexEnvxv: public Encodable {
     public:
         GlTexEnvxv() = default;
-        GlTexEnvxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlTexEnvxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19067,7 +19962,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -19076,8 +19971,8 @@ namespace gles {
     class GlTexEnvxvOES: public Encodable {
     public:
         GlTexEnvxvOES() = default;
-        GlTexEnvxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlTexEnvxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19086,7 +19981,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -19095,8 +19990,8 @@ namespace gles {
     class GlTexGenfOES: public Encodable {
     public:
         GlTexGenfOES() = default;
-        GlTexGenfOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, float Param) :
-            mobservations(observations),
+        GlTexGenfOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, float Param) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParam(Param) {}
@@ -19105,7 +20000,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         float mParam;
@@ -19114,8 +20009,8 @@ namespace gles {
     class GlTexGenfvOES: public Encodable {
     public:
         GlTexGenfvOES() = default;
-        GlTexGenfvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlTexGenfvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -19124,7 +20019,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLfloat__CP mParams;
@@ -19133,8 +20028,8 @@ namespace gles {
     class GlTexGeniOES: public Encodable {
     public:
         GlTexGeniOES() = default;
-        GlTexGeniOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexGeniOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParam(Param) {}
@@ -19143,7 +20038,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         int32_t mParam;
@@ -19152,8 +20047,8 @@ namespace gles {
     class GlTexGenivOES: public Encodable {
     public:
         GlTexGenivOES() = default;
-        GlTexGenivOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexGenivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -19162,7 +20057,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19171,8 +20066,8 @@ namespace gles {
     class GlTexGenxOES: public Encodable {
     public:
         GlTexGenxOES() = default;
-        GlTexGenxOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexGenxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParam(Param) {}
@@ -19181,7 +20076,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         int32_t mParam;
@@ -19190,8 +20085,8 @@ namespace gles {
     class GlTexGenxvOES: public Encodable {
     public:
         GlTexGenxvOES() = default;
-        GlTexGenxvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlTexGenxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mCoord(Coord),
             mPname(Pname),
             mParams(Params) {}
@@ -19200,7 +20095,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mCoord;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -19209,8 +20104,8 @@ namespace gles {
     class GlTexImage2D: public Encodable {
     public:
         GlTexImage2D() = default;
-        GlTexImage2D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t InternalFormat, int32_t Width, int32_t Height, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
-            mobservations(observations),
+        GlTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t InternalFormat, int32_t Width, int32_t Height, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mInternalFormat(InternalFormat),
@@ -19225,7 +20120,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mInternalFormat;
@@ -19240,8 +20135,8 @@ namespace gles {
     class GlTexImage3D: public Encodable {
     public:
         GlTexImage3D() = default;
-        GlTexImage3D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
-            mobservations(observations),
+        GlTexImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mInternalformat(Internalformat),
@@ -19257,7 +20152,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mInternalformat;
@@ -19273,8 +20168,8 @@ namespace gles {
     class GlTexImage3DOES: public Encodable {
     public:
         GlTexImage3DOES() = default;
-        GlTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
-            mobservations(observations),
+        GlTexImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mInternalformat(Internalformat),
@@ -19290,7 +20185,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         uint32_t mInternalformat;
@@ -19306,8 +20201,8 @@ namespace gles {
     class GlTexPageCommitmentEXT: public Encodable {
     public:
         GlTexPageCommitmentEXT() = default;
-        GlTexPageCommitmentEXT(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint8_t Commit) :
-            mobservations(observations),
+        GlTexPageCommitmentEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint8_t Commit) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -19322,7 +20217,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -19337,8 +20232,8 @@ namespace gles {
     class GlTexParameterIiv: public Encodable {
     public:
         GlTexParameterIiv() = default;
-        GlTexParameterIiv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19347,7 +20242,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19356,8 +20251,8 @@ namespace gles {
     class GlTexParameterIivEXT: public Encodable {
     public:
         GlTexParameterIivEXT() = default;
-        GlTexParameterIivEXT(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19366,7 +20261,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19375,8 +20270,8 @@ namespace gles {
     class GlTexParameterIivOES: public Encodable {
     public:
         GlTexParameterIivOES() = default;
-        GlTexParameterIivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19385,7 +20280,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19394,8 +20289,8 @@ namespace gles {
     class GlTexParameterIuiv: public Encodable {
     public:
         GlTexParameterIuiv() = default;
-        GlTexParameterIuiv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19404,7 +20299,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__CP mParams;
@@ -19413,8 +20308,8 @@ namespace gles {
     class GlTexParameterIuivEXT: public Encodable {
     public:
         GlTexParameterIuivEXT() = default;
-        GlTexParameterIuivEXT(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19423,7 +20318,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__CP mParams;
@@ -19432,8 +20327,8 @@ namespace gles {
     class GlTexParameterIuivOES: public Encodable {
     public:
         GlTexParameterIuivOES() = default;
-        GlTexParameterIuivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
-            mobservations(observations),
+        GlTexParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19442,7 +20337,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLuint__CP mParams;
@@ -19451,8 +20346,8 @@ namespace gles {
     class GlTexParameterf: public Encodable {
     public:
         GlTexParameterf() = default;
-        GlTexParameterf(atom::Observations observations, uint32_t Target, uint32_t Parameter, float Value) :
-            mobservations(observations),
+        GlTexParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, float Value) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
@@ -19461,7 +20356,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         float mValue;
@@ -19470,8 +20365,8 @@ namespace gles {
     class GlTexParameterfv: public Encodable {
     public:
         GlTexParameterfv() = default;
-        GlTexParameterfv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
-            mobservations(observations),
+        GlTexParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19480,7 +20375,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfloat__CP mParams;
@@ -19489,8 +20384,8 @@ namespace gles {
     class GlTexParameteri: public Encodable {
     public:
         GlTexParameteri() = default;
-        GlTexParameteri(atom::Observations observations, uint32_t Target, uint32_t Parameter, int32_t Value) :
-            mobservations(observations),
+        GlTexParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, int32_t Value) :
+            mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
@@ -19499,7 +20394,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mParameter;
         int32_t mValue;
@@ -19508,8 +20403,8 @@ namespace gles {
     class GlTexParameteriv: public Encodable {
     public:
         GlTexParameteriv() = default;
-        GlTexParameteriv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
-            mobservations(observations),
+        GlTexParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19518,7 +20413,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
@@ -19527,8 +20422,8 @@ namespace gles {
     class GlTexParameterx: public Encodable {
     public:
         GlTexParameterx() = default;
-        GlTexParameterx(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexParameterx(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -19537,7 +20432,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -19546,8 +20441,8 @@ namespace gles {
     class GlTexParameterxOES: public Encodable {
     public:
         GlTexParameterxOES() = default;
-        GlTexParameterxOES(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
-            mobservations(observations),
+        GlTexParameterxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
@@ -19556,7 +20451,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         int32_t mParam;
@@ -19565,8 +20460,8 @@ namespace gles {
     class GlTexParameterxv: public Encodable {
     public:
         GlTexParameterxv() = default;
-        GlTexParameterxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlTexParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19575,7 +20470,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -19584,8 +20479,8 @@ namespace gles {
     class GlTexParameterxvOES: public Encodable {
     public:
         GlTexParameterxvOES() = default;
-        GlTexParameterxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
-            mobservations(observations),
+        GlTexParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mextras(extras),
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
@@ -19594,7 +20489,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint32_t mPname;
         GLfixed__CP mParams;
@@ -19603,8 +20498,8 @@ namespace gles {
     class GlTexStorage1DEXT: public Encodable {
     public:
         GlTexStorage1DEXT() = default;
-        GlTexStorage1DEXT(atom::Observations observations, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
-            mobservations(observations),
+        GlTexStorage1DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
+            mextras(extras),
             mTarget(Target),
             mLevels(Levels),
             mFormat(Format),
@@ -19614,7 +20509,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevels;
         uint32_t mFormat;
@@ -19624,8 +20519,8 @@ namespace gles {
     class GlTexStorage2D: public Encodable {
     public:
         GlTexStorage2D() = default;
-        GlTexStorage2D(atom::Observations observations, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlTexStorage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mLevels(Levels),
             mInternalformat(Internalformat),
@@ -19636,7 +20531,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevels;
         uint32_t mInternalformat;
@@ -19647,8 +20542,8 @@ namespace gles {
     class GlTexStorage2DEXT: public Encodable {
     public:
         GlTexStorage2DEXT() = default;
-        GlTexStorage2DEXT(atom::Observations observations, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlTexStorage2DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTarget(Target),
             mLevels(Levels),
             mFormat(Format),
@@ -19659,7 +20554,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevels;
         uint32_t mFormat;
@@ -19670,8 +20565,8 @@ namespace gles {
     class GlTexStorage2DMultisample: public Encodable {
     public:
         GlTexStorage2DMultisample() = default;
-        GlTexStorage2DMultisample(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, uint8_t Fixedsamplelocations) :
-            mobservations(observations),
+        GlTexStorage2DMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, uint8_t Fixedsamplelocations) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -19683,7 +20578,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -19695,8 +20590,8 @@ namespace gles {
     class GlTexStorage3D: public Encodable {
     public:
         GlTexStorage3D() = default;
-        GlTexStorage3D(atom::Observations observations, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth) :
-            mobservations(observations),
+        GlTexStorage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth) :
+            mextras(extras),
             mTarget(Target),
             mLevels(Levels),
             mInternalformat(Internalformat),
@@ -19708,7 +20603,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevels;
         uint32_t mInternalformat;
@@ -19720,8 +20615,8 @@ namespace gles {
     class GlTexStorage3DEXT: public Encodable {
     public:
         GlTexStorage3DEXT() = default;
-        GlTexStorage3DEXT(atom::Observations observations, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
-            mobservations(observations),
+        GlTexStorage3DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
+            mextras(extras),
             mTarget(Target),
             mLevels(Levels),
             mFormat(Format),
@@ -19733,7 +20628,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevels;
         uint32_t mFormat;
@@ -19745,8 +20640,8 @@ namespace gles {
     class GlTexStorage3DMultisample: public Encodable {
     public:
         GlTexStorage3DMultisample() = default;
-        GlTexStorage3DMultisample(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
-            mobservations(observations),
+        GlTexStorage3DMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -19759,7 +20654,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -19772,8 +20667,8 @@ namespace gles {
     class GlTexStorage3DMultisampleOES: public Encodable {
     public:
         GlTexStorage3DMultisampleOES() = default;
-        GlTexStorage3DMultisampleOES(atom::Observations observations, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
-            mobservations(observations),
+        GlTexStorage3DMultisampleOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
+            mextras(extras),
             mTarget(Target),
             mSamples(Samples),
             mInternalformat(Internalformat),
@@ -19786,7 +20681,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mSamples;
         uint32_t mInternalformat;
@@ -19799,8 +20694,8 @@ namespace gles {
     class GlTexSubImage2D: public Encodable {
     public:
         GlTexSubImage2D() = default;
-        GlTexSubImage2D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, TexturePointer Data) :
-            mobservations(observations),
+        GlTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -19815,7 +20710,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -19830,8 +20725,8 @@ namespace gles {
     class GlTexSubImage3D: public Encodable {
     public:
         GlTexSubImage3D() = default;
-        GlTexSubImage3D(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Data) :
-            mobservations(observations),
+        GlTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Data) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -19848,7 +20743,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -19865,8 +20760,8 @@ namespace gles {
     class GlTexSubImage3DOES: public Encodable {
     public:
         GlTexSubImage3DOES() = default;
-        GlTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
-            mobservations(observations),
+        GlTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
+            mextras(extras),
             mTarget(Target),
             mLevel(Level),
             mXoffset(Xoffset),
@@ -19883,7 +20778,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -19900,8 +20795,8 @@ namespace gles {
     class GlTextureStorage1DEXT: public Encodable {
     public:
         GlTextureStorage1DEXT() = default;
-        GlTextureStorage1DEXT(atom::Observations observations, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
-            mobservations(observations),
+        GlTextureStorage1DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
+            mextras(extras),
             mTexture(Texture),
             mTarget(Target),
             mLevels(Levels),
@@ -19912,7 +20807,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mTarget;
         int32_t mLevels;
@@ -19923,8 +20818,8 @@ namespace gles {
     class GlTextureStorage2DEXT: public Encodable {
     public:
         GlTextureStorage2DEXT() = default;
-        GlTextureStorage2DEXT(atom::Observations observations, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlTextureStorage2DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
+            mextras(extras),
             mTexture(Texture),
             mTarget(Target),
             mLevels(Levels),
@@ -19936,7 +20831,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mTarget;
         int32_t mLevels;
@@ -19948,8 +20843,8 @@ namespace gles {
     class GlTextureStorage3DEXT: public Encodable {
     public:
         GlTextureStorage3DEXT() = default;
-        GlTextureStorage3DEXT(atom::Observations observations, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
-            mobservations(observations),
+        GlTextureStorage3DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
+            mextras(extras),
             mTexture(Texture),
             mTarget(Target),
             mLevels(Levels),
@@ -19962,7 +20857,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mTarget;
         int32_t mLevels;
@@ -19975,8 +20870,8 @@ namespace gles {
     class GlTextureViewEXT: public Encodable {
     public:
         GlTextureViewEXT() = default;
-        GlTextureViewEXT(atom::Observations observations, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
-            mobservations(observations),
+        GlTextureViewEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
+            mextras(extras),
             mTexture(Texture),
             mTarget(Target),
             mOrigtexture(Origtexture),
@@ -19990,7 +20885,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mTarget;
         uint32_t mOrigtexture;
@@ -20004,8 +20899,8 @@ namespace gles {
     class GlTextureViewOES: public Encodable {
     public:
         GlTextureViewOES() = default;
-        GlTextureViewOES(atom::Observations observations, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
-            mobservations(observations),
+        GlTextureViewOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
+            mextras(extras),
             mTexture(Texture),
             mTarget(Target),
             mOrigtexture(Origtexture),
@@ -20019,7 +20914,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTexture;
         uint32_t mTarget;
         uint32_t mOrigtexture;
@@ -20033,8 +20928,8 @@ namespace gles {
     class GlTransformFeedbackVaryings: public Encodable {
     public:
         GlTransformFeedbackVaryings() = default;
-        GlTransformFeedbackVaryings(atom::Observations observations, uint32_t Program, int32_t Count, GLchar__CP__CP Varyings, uint32_t BufferMode) :
-            mobservations(observations),
+        GlTransformFeedbackVaryings(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Count, GLchar__CP__CP Varyings, uint32_t BufferMode) :
+            mextras(extras),
             mProgram(Program),
             mCount(Count),
             mVaryings(Varyings),
@@ -20044,7 +20939,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         int32_t mCount;
         GLchar__CP__CP mVaryings;
@@ -20054,8 +20949,8 @@ namespace gles {
     class GlTransformPathNV: public Encodable {
     public:
         GlTransformPathNV() = default;
-        GlTransformPathNV(atom::Observations observations, uint32_t ResultPath, uint32_t SrcPath, uint32_t TransformType, GLfloat__CP TransformValues) :
-            mobservations(observations),
+        GlTransformPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t SrcPath, uint32_t TransformType, GLfloat__CP TransformValues) :
+            mextras(extras),
             mResultPath(ResultPath),
             mSrcPath(SrcPath),
             mTransformType(TransformType),
@@ -20065,7 +20960,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResultPath;
         uint32_t mSrcPath;
         uint32_t mTransformType;
@@ -20075,8 +20970,8 @@ namespace gles {
     class GlTranslatef: public Encodable {
     public:
         GlTranslatef() = default;
-        GlTranslatef(atom::Observations observations, float X, float Y, float Z) :
-            mobservations(observations),
+        GlTranslatef(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -20085,7 +20980,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         float mX;
         float mY;
         float mZ;
@@ -20094,8 +20989,8 @@ namespace gles {
     class GlTranslatex: public Encodable {
     public:
         GlTranslatex() = default;
-        GlTranslatex(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlTranslatex(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -20104,7 +20999,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -20113,8 +21008,8 @@ namespace gles {
     class GlTranslatexOES: public Encodable {
     public:
         GlTranslatexOES() = default;
-        GlTranslatexOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
-            mobservations(observations),
+        GlTranslatexOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mZ(Z) {}
@@ -20123,7 +21018,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -20132,12 +21027,15 @@ namespace gles {
     class GlUniform1f: public Encodable {
     public:
         GlUniform1f() = default;
-        GlUniform1f(atom::Observations observations, int32_t Location, float Value) :
-            mobservations(observations),
+        GlUniform1f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLocation);
             e->Float32(this->mValue);
         }
@@ -20145,7 +21043,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         float mValue;
     };
@@ -20153,8 +21051,8 @@ namespace gles {
     class GlUniform1fv: public Encodable {
     public:
         GlUniform1fv() = default;
-        GlUniform1fv(atom::Observations observations, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniform1fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20163,7 +21061,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLfloat__CP mValues;
@@ -20172,12 +21070,15 @@ namespace gles {
     class GlUniform1i: public Encodable {
     public:
         GlUniform1i() = default;
-        GlUniform1i(atom::Observations observations, int32_t Location, int32_t Value) :
-            mobservations(observations),
+        GlUniform1i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLocation);
             e->Int32(this->mValue);
         }
@@ -20185,7 +21086,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mValue;
     };
@@ -20193,8 +21094,8 @@ namespace gles {
     class GlUniform1iv: public Encodable {
     public:
         GlUniform1iv() = default;
-        GlUniform1iv(atom::Observations observations, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlUniform1iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20203,7 +21104,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLint__CP mValues;
@@ -20212,12 +21113,15 @@ namespace gles {
     class GlUniform1ui: public Encodable {
     public:
         GlUniform1ui() = default;
-        GlUniform1ui(atom::Observations observations, int32_t Location, uint32_t Value0) :
-            mobservations(observations),
+        GlUniform1ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLocation);
             e->Uint32(this->mValue0);
         }
@@ -20225,7 +21129,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         uint32_t mValue0;
     };
@@ -20233,8 +21137,8 @@ namespace gles {
     class GlUniform1uiv: public Encodable {
     public:
         GlUniform1uiv() = default;
-        GlUniform1uiv(atom::Observations observations, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlUniform1uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20243,7 +21147,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLuint__CP mValues;
@@ -20252,8 +21156,8 @@ namespace gles {
     class GlUniform2f: public Encodable {
     public:
         GlUniform2f() = default;
-        GlUniform2f(atom::Observations observations, int32_t Location, float Value0, float Value1) :
-            mobservations(observations),
+        GlUniform2f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
@@ -20262,7 +21166,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         float mValue0;
         float mValue1;
@@ -20271,8 +21175,8 @@ namespace gles {
     class GlUniform2fv: public Encodable {
     public:
         GlUniform2fv() = default;
-        GlUniform2fv(atom::Observations observations, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniform2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20281,7 +21185,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLfloat__CP mValues;
@@ -20290,8 +21194,8 @@ namespace gles {
     class GlUniform2i: public Encodable {
     public:
         GlUniform2i() = default;
-        GlUniform2i(atom::Observations observations, int32_t Location, int32_t Value0, int32_t Value1) :
-            mobservations(observations),
+        GlUniform2i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
@@ -20300,7 +21204,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -20309,8 +21213,8 @@ namespace gles {
     class GlUniform2iv: public Encodable {
     public:
         GlUniform2iv() = default;
-        GlUniform2iv(atom::Observations observations, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlUniform2iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20319,7 +21223,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLint__CP mValues;
@@ -20328,8 +21232,8 @@ namespace gles {
     class GlUniform2ui: public Encodable {
     public:
         GlUniform2ui() = default;
-        GlUniform2ui(atom::Observations observations, int32_t Location, uint32_t Value0, uint32_t Value1) :
-            mobservations(observations),
+        GlUniform2ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
@@ -20338,7 +21242,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         uint32_t mValue0;
         uint32_t mValue1;
@@ -20347,8 +21251,8 @@ namespace gles {
     class GlUniform2uiv: public Encodable {
     public:
         GlUniform2uiv() = default;
-        GlUniform2uiv(atom::Observations observations, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlUniform2uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20357,7 +21261,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLuint__CP mValues;
@@ -20366,8 +21270,8 @@ namespace gles {
     class GlUniform3f: public Encodable {
     public:
         GlUniform3f() = default;
-        GlUniform3f(atom::Observations observations, int32_t Location, float Value0, float Value1, float Value2) :
-            mobservations(observations),
+        GlUniform3f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1, float Value2) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20377,7 +21281,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         float mValue0;
         float mValue1;
@@ -20387,8 +21291,8 @@ namespace gles {
     class GlUniform3fv: public Encodable {
     public:
         GlUniform3fv() = default;
-        GlUniform3fv(atom::Observations observations, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniform3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20397,7 +21301,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLfloat__CP mValues;
@@ -20406,8 +21310,8 @@ namespace gles {
     class GlUniform3i: public Encodable {
     public:
         GlUniform3i() = default;
-        GlUniform3i(atom::Observations observations, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
-            mobservations(observations),
+        GlUniform3i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20417,7 +21321,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -20427,8 +21331,8 @@ namespace gles {
     class GlUniform3iv: public Encodable {
     public:
         GlUniform3iv() = default;
-        GlUniform3iv(atom::Observations observations, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlUniform3iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20437,7 +21341,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLint__CP mValues;
@@ -20446,8 +21350,8 @@ namespace gles {
     class GlUniform3ui: public Encodable {
     public:
         GlUniform3ui() = default;
-        GlUniform3ui(atom::Observations observations, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
-            mobservations(observations),
+        GlUniform3ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20457,7 +21361,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         uint32_t mValue0;
         uint32_t mValue1;
@@ -20467,8 +21371,8 @@ namespace gles {
     class GlUniform3uiv: public Encodable {
     public:
         GlUniform3uiv() = default;
-        GlUniform3uiv(atom::Observations observations, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlUniform3uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20477,7 +21381,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLuint__CP mValues;
@@ -20486,8 +21390,8 @@ namespace gles {
     class GlUniform4f: public Encodable {
     public:
         GlUniform4f() = default;
-        GlUniform4f(atom::Observations observations, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
-            mobservations(observations),
+        GlUniform4f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20498,7 +21402,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         float mValue0;
         float mValue1;
@@ -20509,8 +21413,8 @@ namespace gles {
     class GlUniform4fv: public Encodable {
     public:
         GlUniform4fv() = default;
-        GlUniform4fv(atom::Observations observations, int32_t Location, int32_t Count, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniform4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20519,7 +21423,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLfloat__CP mValues;
@@ -20528,8 +21432,8 @@ namespace gles {
     class GlUniform4i: public Encodable {
     public:
         GlUniform4i() = default;
-        GlUniform4i(atom::Observations observations, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
-            mobservations(observations),
+        GlUniform4i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20540,7 +21444,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -20551,8 +21455,8 @@ namespace gles {
     class GlUniform4iv: public Encodable {
     public:
         GlUniform4iv() = default;
-        GlUniform4iv(atom::Observations observations, int32_t Location, int32_t Count, GLint__CP Values) :
-            mobservations(observations),
+        GlUniform4iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20561,7 +21465,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLint__CP mValues;
@@ -20570,8 +21474,8 @@ namespace gles {
     class GlUniform4ui: public Encodable {
     public:
         GlUniform4ui() = default;
-        GlUniform4ui(atom::Observations observations, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
-            mobservations(observations),
+        GlUniform4ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -20582,7 +21486,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         uint32_t mValue0;
         uint32_t mValue1;
@@ -20593,8 +21497,8 @@ namespace gles {
     class GlUniform4uiv: public Encodable {
     public:
         GlUniform4uiv() = default;
-        GlUniform4uiv(atom::Observations observations, int32_t Location, int32_t Count, GLuint__CP Values) :
-            mobservations(observations),
+        GlUniform4uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
@@ -20603,7 +21507,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLuint__CP mValues;
@@ -20612,8 +21516,8 @@ namespace gles {
     class GlUniformBlockBinding: public Encodable {
     public:
         GlUniformBlockBinding() = default;
-        GlUniformBlockBinding(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, uint32_t UniformBlockBinding) :
-            mobservations(observations),
+        GlUniformBlockBinding(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t UniformBlockBinding) :
+            mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
             mUniformBlockBinding(UniformBlockBinding) {}
@@ -20622,7 +21526,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
         uint32_t mUniformBlockBinding;
@@ -20631,12 +21535,15 @@ namespace gles {
     class GlUniformHandleui64NV: public Encodable {
     public:
         GlUniformHandleui64NV() = default;
-        GlUniformHandleui64NV(atom::Observations observations, int32_t Location, uint64_t Value) :
-            mobservations(observations),
+        GlUniformHandleui64NV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint64_t Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Int32(this->mLocation);
             e->Uint64(this->mValue);
         }
@@ -20644,7 +21551,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         uint64_t mValue;
     };
@@ -20652,8 +21559,8 @@ namespace gles {
     class GlUniformHandleui64vNV: public Encodable {
     public:
         GlUniformHandleui64vNV() = default;
-        GlUniformHandleui64vNV(atom::Observations observations, int32_t Location, int32_t Count, GLuint64__CP Value) :
-            mobservations(observations),
+        GlUniformHandleui64vNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint64__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
@@ -20662,7 +21569,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         GLuint64__CP mValue;
@@ -20671,8 +21578,8 @@ namespace gles {
     class GlUniformMatrix2fv: public Encodable {
     public:
         GlUniformMatrix2fv() = default;
-        GlUniformMatrix2fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20682,7 +21589,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20692,8 +21599,8 @@ namespace gles {
     class GlUniformMatrix2x3fv: public Encodable {
     public:
         GlUniformMatrix2x3fv() = default;
-        GlUniformMatrix2x3fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix2x3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20703,7 +21610,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20713,8 +21620,8 @@ namespace gles {
     class GlUniformMatrix2x3fvNV: public Encodable {
     public:
         GlUniformMatrix2x3fvNV() = default;
-        GlUniformMatrix2x3fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix2x3fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20724,7 +21631,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20734,8 +21641,8 @@ namespace gles {
     class GlUniformMatrix2x4fv: public Encodable {
     public:
         GlUniformMatrix2x4fv() = default;
-        GlUniformMatrix2x4fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix2x4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20745,7 +21652,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20755,8 +21662,8 @@ namespace gles {
     class GlUniformMatrix2x4fvNV: public Encodable {
     public:
         GlUniformMatrix2x4fvNV() = default;
-        GlUniformMatrix2x4fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix2x4fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20766,7 +21673,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20776,8 +21683,8 @@ namespace gles {
     class GlUniformMatrix3fv: public Encodable {
     public:
         GlUniformMatrix3fv() = default;
-        GlUniformMatrix3fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20787,7 +21694,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20797,8 +21704,8 @@ namespace gles {
     class GlUniformMatrix3x2fv: public Encodable {
     public:
         GlUniformMatrix3x2fv() = default;
-        GlUniformMatrix3x2fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix3x2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20808,7 +21715,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20818,8 +21725,8 @@ namespace gles {
     class GlUniformMatrix3x2fvNV: public Encodable {
     public:
         GlUniformMatrix3x2fvNV() = default;
-        GlUniformMatrix3x2fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix3x2fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20829,7 +21736,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20839,8 +21746,8 @@ namespace gles {
     class GlUniformMatrix3x4fv: public Encodable {
     public:
         GlUniformMatrix3x4fv() = default;
-        GlUniformMatrix3x4fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix3x4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20850,7 +21757,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20860,8 +21767,8 @@ namespace gles {
     class GlUniformMatrix3x4fvNV: public Encodable {
     public:
         GlUniformMatrix3x4fvNV() = default;
-        GlUniformMatrix3x4fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix3x4fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20871,7 +21778,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20881,8 +21788,8 @@ namespace gles {
     class GlUniformMatrix4fv: public Encodable {
     public:
         GlUniformMatrix4fv() = default;
-        GlUniformMatrix4fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20892,7 +21799,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20902,8 +21809,8 @@ namespace gles {
     class GlUniformMatrix4x2fv: public Encodable {
     public:
         GlUniformMatrix4x2fv() = default;
-        GlUniformMatrix4x2fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix4x2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20913,7 +21820,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20923,8 +21830,8 @@ namespace gles {
     class GlUniformMatrix4x2fvNV: public Encodable {
     public:
         GlUniformMatrix4x2fvNV() = default;
-        GlUniformMatrix4x2fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix4x2fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20934,7 +21841,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20944,8 +21851,8 @@ namespace gles {
     class GlUniformMatrix4x3fv: public Encodable {
     public:
         GlUniformMatrix4x3fv() = default;
-        GlUniformMatrix4x3fv(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
-            mobservations(observations),
+        GlUniformMatrix4x3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20955,7 +21862,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20965,8 +21872,8 @@ namespace gles {
     class GlUniformMatrix4x3fvNV: public Encodable {
     public:
         GlUniformMatrix4x3fvNV() = default;
-        GlUniformMatrix4x3fvNV(atom::Observations observations, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
-            mobservations(observations),
+        GlUniformMatrix4x3fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mCount(Count),
             mTranspose(Transpose),
@@ -20976,7 +21883,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mLocation;
         int32_t mCount;
         uint8_t mTranspose;
@@ -20986,12 +21893,15 @@ namespace gles {
     class GlUnmapBuffer: public Encodable {
     public:
         GlUnmapBuffer() = default;
-        GlUnmapBuffer(atom::Observations observations, uint32_t Target, uint8_t Result) :
-            mobservations(observations),
+        GlUnmapBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint8(this->mResult);
         }
@@ -20999,7 +21909,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint8_t mResult;
     };
@@ -21007,12 +21917,15 @@ namespace gles {
     class GlUnmapBufferOES: public Encodable {
     public:
         GlUnmapBufferOES() = default;
-        GlUnmapBufferOES(atom::Observations observations, uint32_t Target, uint8_t Result) :
-            mobservations(observations),
+        GlUnmapBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint8_t Result) :
+            mextras(extras),
             mTarget(Target),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mTarget);
             e->Uint8(this->mResult);
         }
@@ -21020,7 +21933,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mTarget;
         uint8_t mResult;
     };
@@ -21028,26 +21941,29 @@ namespace gles {
     class GlUseProgram: public Encodable {
     public:
         GlUseProgram() = default;
-        GlUseProgram(atom::Observations observations, uint32_t Program) :
-            mobservations(observations),
+        GlUseProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+            mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
     };
 
     class GlUseProgramStages: public Encodable {
     public:
         GlUseProgramStages() = default;
-        GlUseProgramStages(atom::Observations observations, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
-            mobservations(observations),
+        GlUseProgramStages(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
+            mextras(extras),
             mPipeline(Pipeline),
             mStages(Stages),
             mProgram(Program) {}
@@ -21056,7 +21972,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mStages;
         uint32_t mProgram;
@@ -21065,8 +21981,8 @@ namespace gles {
     class GlUseProgramStagesEXT: public Encodable {
     public:
         GlUseProgramStagesEXT() = default;
-        GlUseProgramStagesEXT(atom::Observations observations, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
-            mobservations(observations),
+        GlUseProgramStagesEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
+            mextras(extras),
             mPipeline(Pipeline),
             mStages(Stages),
             mProgram(Program) {}
@@ -21075,7 +21991,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
         uint32_t mStages;
         uint32_t mProgram;
@@ -21084,66 +22000,78 @@ namespace gles {
     class GlValidateProgram: public Encodable {
     public:
         GlValidateProgram() = default;
-        GlValidateProgram(atom::Observations observations, uint32_t Program) :
-            mobservations(observations),
+        GlValidateProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+            mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mProgram);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mProgram;
     };
 
     class GlValidateProgramPipeline: public Encodable {
     public:
         GlValidateProgramPipeline() = default;
-        GlValidateProgramPipeline(atom::Observations observations, uint32_t Pipeline) :
-            mobservations(observations),
+        GlValidateProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+            mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
     };
 
     class GlValidateProgramPipelineEXT: public Encodable {
     public:
         GlValidateProgramPipelineEXT() = default;
-        GlValidateProgramPipelineEXT(atom::Observations observations, uint32_t Pipeline) :
-            mobservations(observations),
+        GlValidateProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+            mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mPipeline);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mPipeline;
     };
 
     class GlVertexAttrib1f: public Encodable {
     public:
         GlVertexAttrib1f() = default;
-        GlVertexAttrib1f(atom::Observations observations, uint32_t Location, float Value0) :
-            mobservations(observations),
+        GlVertexAttrib1f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
             e->Float32(this->mValue0);
         }
@@ -21151,7 +22079,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         float mValue0;
     };
@@ -21159,12 +22087,15 @@ namespace gles {
     class GlVertexAttrib1fv: public Encodable {
     public:
         GlVertexAttrib1fv() = default;
-        GlVertexAttrib1fv(atom::Observations observations, uint32_t Location, GLfloat__CP Value) :
-            mobservations(observations),
+        GlVertexAttrib1fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
             e->Struct(this->mValue);
         }
@@ -21172,7 +22103,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         GLfloat__CP mValue;
     };
@@ -21180,8 +22111,8 @@ namespace gles {
     class GlVertexAttrib2f: public Encodable {
     public:
         GlVertexAttrib2f() = default;
-        GlVertexAttrib2f(atom::Observations observations, uint32_t Location, float Value0, float Value1) :
-            mobservations(observations),
+        GlVertexAttrib2f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
@@ -21190,7 +22121,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         float mValue0;
         float mValue1;
@@ -21199,12 +22130,15 @@ namespace gles {
     class GlVertexAttrib2fv: public Encodable {
     public:
         GlVertexAttrib2fv() = default;
-        GlVertexAttrib2fv(atom::Observations observations, uint32_t Location, GLfloat__CP Value) :
-            mobservations(observations),
+        GlVertexAttrib2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
             e->Struct(this->mValue);
         }
@@ -21212,7 +22146,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         GLfloat__CP mValue;
     };
@@ -21220,8 +22154,8 @@ namespace gles {
     class GlVertexAttrib3f: public Encodable {
     public:
         GlVertexAttrib3f() = default;
-        GlVertexAttrib3f(atom::Observations observations, uint32_t Location, float Value0, float Value1, float Value2) :
-            mobservations(observations),
+        GlVertexAttrib3f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1, float Value2) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -21231,7 +22165,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         float mValue0;
         float mValue1;
@@ -21241,12 +22175,15 @@ namespace gles {
     class GlVertexAttrib3fv: public Encodable {
     public:
         GlVertexAttrib3fv() = default;
-        GlVertexAttrib3fv(atom::Observations observations, uint32_t Location, GLfloat__CP Value) :
-            mobservations(observations),
+        GlVertexAttrib3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
             e->Struct(this->mValue);
         }
@@ -21254,7 +22191,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         GLfloat__CP mValue;
     };
@@ -21262,8 +22199,8 @@ namespace gles {
     class GlVertexAttrib4f: public Encodable {
     public:
         GlVertexAttrib4f() = default;
-        GlVertexAttrib4f(atom::Observations observations, uint32_t Location, float Value0, float Value1, float Value2, float Value3) :
-            mobservations(observations),
+        GlVertexAttrib4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1, float Value2, float Value3) :
+            mextras(extras),
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1),
@@ -21274,7 +22211,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         float mValue0;
         float mValue1;
@@ -21285,12 +22222,15 @@ namespace gles {
     class GlVertexAttrib4fv: public Encodable {
     public:
         GlVertexAttrib4fv() = default;
-        GlVertexAttrib4fv(atom::Observations observations, uint32_t Location, GLfloat__CP Value) :
-            mobservations(observations),
+        GlVertexAttrib4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+            mextras(extras),
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mLocation);
             e->Struct(this->mValue);
         }
@@ -21298,7 +22238,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         GLfloat__CP mValue;
     };
@@ -21306,12 +22246,15 @@ namespace gles {
     class GlVertexAttribBinding: public Encodable {
     public:
         GlVertexAttribBinding() = default;
-        GlVertexAttribBinding(atom::Observations observations, uint32_t Index, uint32_t BindingIndex) :
-            mobservations(observations),
+        GlVertexAttribBinding(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t BindingIndex) :
+            mextras(extras),
             mIndex(Index),
             mBindingIndex(BindingIndex) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Uint32(this->mBindingIndex);
         }
@@ -21319,7 +22262,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mBindingIndex;
     };
@@ -21327,12 +22270,15 @@ namespace gles {
     class GlVertexAttribDivisor: public Encodable {
     public:
         GlVertexAttribDivisor() = default;
-        GlVertexAttribDivisor(atom::Observations observations, uint32_t Index, uint32_t Divisor) :
-            mobservations(observations),
+        GlVertexAttribDivisor(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+            mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
@@ -21340,7 +22286,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mDivisor;
     };
@@ -21348,12 +22294,15 @@ namespace gles {
     class GlVertexAttribDivisorANGLE: public Encodable {
     public:
         GlVertexAttribDivisorANGLE() = default;
-        GlVertexAttribDivisorANGLE(atom::Observations observations, uint32_t Index, uint32_t Divisor) :
-            mobservations(observations),
+        GlVertexAttribDivisorANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+            mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
@@ -21361,7 +22310,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mDivisor;
     };
@@ -21369,12 +22318,15 @@ namespace gles {
     class GlVertexAttribDivisorEXT: public Encodable {
     public:
         GlVertexAttribDivisorEXT() = default;
-        GlVertexAttribDivisorEXT(atom::Observations observations, uint32_t Index, uint32_t Divisor) :
-            mobservations(observations),
+        GlVertexAttribDivisorEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+            mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
@@ -21382,7 +22334,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mDivisor;
     };
@@ -21390,12 +22342,15 @@ namespace gles {
     class GlVertexAttribDivisorNV: public Encodable {
     public:
         GlVertexAttribDivisorNV() = default;
-        GlVertexAttribDivisorNV(atom::Observations observations, uint32_t Index, uint32_t Divisor) :
-            mobservations(observations),
+        GlVertexAttribDivisorNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+            mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
@@ -21403,7 +22358,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mDivisor;
     };
@@ -21411,8 +22366,8 @@ namespace gles {
     class GlVertexAttribFormat: public Encodable {
     public:
         GlVertexAttribFormat() = default;
-        GlVertexAttribFormat(atom::Observations observations, uint32_t Index, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
-            mobservations(observations),
+        GlVertexAttribFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
+            mextras(extras),
             mIndex(Index),
             mSize(Size),
             mType(Type),
@@ -21423,7 +22378,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         int32_t mSize;
         uint32_t mType;
@@ -21434,8 +22389,8 @@ namespace gles {
     class GlVertexAttribI4i: public Encodable {
     public:
         GlVertexAttribI4i() = default;
-        GlVertexAttribI4i(atom::Observations observations, uint32_t Index, int32_t X, int32_t Y, int32_t Z, int32_t W) :
-            mobservations(observations),
+        GlVertexAttribI4i(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t X, int32_t Y, int32_t Z, int32_t W) :
+            mextras(extras),
             mIndex(Index),
             mX(X),
             mY(Y),
@@ -21446,7 +22401,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         int32_t mX;
         int32_t mY;
@@ -21457,12 +22412,15 @@ namespace gles {
     class GlVertexAttribI4iv: public Encodable {
     public:
         GlVertexAttribI4iv() = default;
-        GlVertexAttribI4iv(atom::Observations observations, uint32_t Index, GLint__CP Values) :
-            mobservations(observations),
+        GlVertexAttribI4iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLint__CP Values) :
+            mextras(extras),
             mIndex(Index),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Struct(this->mValues);
         }
@@ -21470,7 +22428,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         GLint__CP mValues;
     };
@@ -21478,8 +22436,8 @@ namespace gles {
     class GlVertexAttribI4ui: public Encodable {
     public:
         GlVertexAttribI4ui() = default;
-        GlVertexAttribI4ui(atom::Observations observations, uint32_t Index, uint32_t X, uint32_t Y, uint32_t Z, uint32_t W) :
-            mobservations(observations),
+        GlVertexAttribI4ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t X, uint32_t Y, uint32_t Z, uint32_t W) :
+            mextras(extras),
             mIndex(Index),
             mX(X),
             mY(Y),
@@ -21490,7 +22448,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         uint32_t mX;
         uint32_t mY;
@@ -21501,12 +22459,15 @@ namespace gles {
     class GlVertexAttribI4uiv: public Encodable {
     public:
         GlVertexAttribI4uiv() = default;
-        GlVertexAttribI4uiv(atom::Observations observations, uint32_t Index, GLuint__CP Values) :
-            mobservations(observations),
+        GlVertexAttribI4uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLuint__CP Values) :
+            mextras(extras),
             mIndex(Index),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Struct(this->mValues);
         }
@@ -21514,7 +22475,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         GLuint__CP mValues;
     };
@@ -21522,8 +22483,8 @@ namespace gles {
     class GlVertexAttribIFormat: public Encodable {
     public:
         GlVertexAttribIFormat() = default;
-        GlVertexAttribIFormat(atom::Observations observations, uint32_t Index, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
-            mobservations(observations),
+        GlVertexAttribIFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
+            mextras(extras),
             mIndex(Index),
             mSize(Size),
             mType(Type),
@@ -21533,7 +22494,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         int32_t mSize;
         uint32_t mType;
@@ -21543,8 +22504,8 @@ namespace gles {
     class GlVertexAttribIPointer: public Encodable {
     public:
         GlVertexAttribIPointer() = default;
-        GlVertexAttribIPointer(atom::Observations observations, uint32_t Location, int32_t Size, uint32_t Type, int32_t Stride, VertexPointer Data) :
-            mobservations(observations),
+        GlVertexAttribIPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, int32_t Size, uint32_t Type, int32_t Stride, VertexPointer Data) :
+            mextras(extras),
             mLocation(Location),
             mSize(Size),
             mType(Type),
@@ -21555,7 +22516,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         int32_t mSize;
         uint32_t mType;
@@ -21566,8 +22527,8 @@ namespace gles {
     class GlVertexAttribPointer: public Encodable {
     public:
         GlVertexAttribPointer() = default;
-        GlVertexAttribPointer(atom::Observations observations, uint32_t Location, int32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, VertexPointer Data) :
-            mobservations(observations),
+        GlVertexAttribPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, int32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, VertexPointer Data) :
+            mextras(extras),
             mLocation(Location),
             mSize(Size),
             mType(Type),
@@ -21579,7 +22540,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mLocation;
         int32_t mSize;
         uint32_t mType;
@@ -21591,12 +22552,15 @@ namespace gles {
     class GlVertexBindingDivisor: public Encodable {
     public:
         GlVertexBindingDivisor() = default;
-        GlVertexBindingDivisor(atom::Observations observations, uint32_t BindingIndex, uint32_t Divisor) :
-            mobservations(observations),
+        GlVertexBindingDivisor(gapic::Vector<gapic::Encodable*> extras, uint32_t BindingIndex, uint32_t Divisor) :
+            mextras(extras),
             mBindingIndex(BindingIndex),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mBindingIndex);
             e->Uint32(this->mDivisor);
         }
@@ -21604,7 +22568,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mBindingIndex;
         uint32_t mDivisor;
     };
@@ -21612,8 +22576,8 @@ namespace gles {
     class GlVertexPointer: public Encodable {
     public:
         GlVertexPointer() = default;
-        GlVertexPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlVertexPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -21623,7 +22587,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -21633,8 +22597,8 @@ namespace gles {
     class GlVertexPointerBounds: public Encodable {
     public:
         GlVertexPointerBounds() = default;
-        GlVertexPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlVertexPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -21645,7 +22609,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -21656,8 +22620,8 @@ namespace gles {
     class GlViewport: public Encodable {
     public:
         GlViewport() = default;
-        GlViewport(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mobservations(observations),
+        GlViewport(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+            mextras(extras),
             mX(X),
             mY(Y),
             mWidth(Width),
@@ -21667,7 +22631,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -21677,8 +22641,8 @@ namespace gles {
     class GlViewportArrayvNV: public Encodable {
     public:
         GlViewportArrayvNV() = default;
-        GlViewportArrayvNV(atom::Observations observations, uint32_t First, int32_t Count, GLfloat__CP V) :
-            mobservations(observations),
+        GlViewportArrayvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLfloat__CP V) :
+            mextras(extras),
             mFirst(First),
             mCount(Count),
             mV(V) {}
@@ -21687,7 +22651,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mFirst;
         int32_t mCount;
         GLfloat__CP mV;
@@ -21696,8 +22660,8 @@ namespace gles {
     class GlViewportIndexedfNV: public Encodable {
     public:
         GlViewportIndexedfNV() = default;
-        GlViewportIndexedfNV(atom::Observations observations, uint32_t Index, float X, float Y, float W, float H) :
-            mobservations(observations),
+        GlViewportIndexedfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, float X, float Y, float W, float H) :
+            mextras(extras),
             mIndex(Index),
             mX(X),
             mY(Y),
@@ -21708,7 +22672,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         float mX;
         float mY;
@@ -21719,12 +22683,15 @@ namespace gles {
     class GlViewportIndexedfvNV: public Encodable {
     public:
         GlViewportIndexedfvNV() = default;
-        GlViewportIndexedfvNV(atom::Observations observations, uint32_t Index, GLfloat__CP V) :
-            mobservations(observations),
+        GlViewportIndexedfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLfloat__CP V) :
+            mextras(extras),
             mIndex(Index),
             mV(V) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mIndex);
             e->Struct(this->mV);
         }
@@ -21732,7 +22699,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mIndex;
         GLfloat__CP mV;
     };
@@ -21740,8 +22707,8 @@ namespace gles {
     class GlWaitSync: public Encodable {
     public:
         GlWaitSync() = default;
-        GlWaitSync(atom::Observations observations, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout) :
-            mobservations(observations),
+        GlWaitSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout) :
+            mextras(extras),
             mSync(Sync),
             mSyncFlags(SyncFlags),
             mTimeout(Timeout) {}
@@ -21750,7 +22717,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mSyncFlags;
         uint64_t mTimeout;
@@ -21759,8 +22726,8 @@ namespace gles {
     class GlWaitSyncAPPLE: public Encodable {
     public:
         GlWaitSyncAPPLE() = default;
-        GlWaitSyncAPPLE(atom::Observations observations, uint64_t Sync, uint32_t Flag, uint64_t Timeout) :
-            mobservations(observations),
+        GlWaitSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout) :
+            mextras(extras),
             mSync(Sync),
             mFlag(Flag),
             mTimeout(Timeout) {}
@@ -21769,7 +22736,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mSync;
         uint32_t mFlag;
         uint64_t mTimeout;
@@ -21778,8 +22745,8 @@ namespace gles {
     class GlWeightPathsNV: public Encodable {
     public:
         GlWeightPathsNV() = default;
-        GlWeightPathsNV(atom::Observations observations, uint32_t ResultPath, int32_t NumPaths, GLuint__CP Paths, GLfloat__CP Weights) :
-            mobservations(observations),
+        GlWeightPathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, int32_t NumPaths, GLuint__CP Paths, GLfloat__CP Weights) :
+            mextras(extras),
             mResultPath(ResultPath),
             mNumPaths(NumPaths),
             mPaths(Paths),
@@ -21789,7 +22756,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mResultPath;
         int32_t mNumPaths;
         GLuint__CP mPaths;
@@ -21799,8 +22766,8 @@ namespace gles {
     class GlWeightPointerOES: public Encodable {
     public:
         GlWeightPointerOES() = default;
-        GlWeightPointerOES(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
-            mobservations(observations),
+        GlWeightPointerOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -21810,7 +22777,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -21820,8 +22787,8 @@ namespace gles {
     class GlWeightPointerOESBounds: public Encodable {
     public:
         GlWeightPointerOESBounds() = default;
-        GlWeightPointerOESBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
-            mobservations(observations),
+        GlWeightPointerOESBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mextras(extras),
             mSize(Size),
             mType(Type),
             mStride(Stride),
@@ -21832,7 +22799,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
@@ -21843,8 +22810,8 @@ namespace gles {
     class GlXCreateContext: public Encodable {
     public:
         GlXCreateContext() = default;
-        GlXCreateContext(atom::Observations observations, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
-            mobservations(observations),
+        GlXCreateContext(gapic::Vector<gapic::Encodable*> extras, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
+            mextras(extras),
             mDpy(Dpy),
             mVis(Vis),
             mShareList(ShareList),
@@ -21855,7 +22822,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDpy;
         Void__P mVis;
         GLXContext mShareList;
@@ -21866,8 +22833,8 @@ namespace gles {
     class GlXCreateNewContext: public Encodable {
     public:
         GlXCreateNewContext() = default;
-        GlXCreateNewContext(atom::Observations observations, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
-            mobservations(observations),
+        GlXCreateNewContext(gapic::Vector<gapic::Encodable*> extras, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
+            mextras(extras),
             mDisplay(Display),
             mFbconfig(Fbconfig),
             mType(Type),
@@ -21879,7 +22846,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDisplay;
         Void__P mFbconfig;
         uint32_t mType;
@@ -21891,8 +22858,8 @@ namespace gles {
     class GlXMakeContextCurrent: public Encodable {
     public:
         GlXMakeContextCurrent() = default;
-        GlXMakeContextCurrent(atom::Observations observations, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
-            mobservations(observations),
+        GlXMakeContextCurrent(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
             mRead(Read),
@@ -21903,7 +22870,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDisplay;
         GLXDrawable mDraw;
         GLXDrawable mRead;
@@ -21914,8 +22881,8 @@ namespace gles {
     class GlXMakeCurrent: public Encodable {
     public:
         GlXMakeCurrent() = default;
-        GlXMakeCurrent(atom::Observations observations, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
-            mobservations(observations),
+        GlXMakeCurrent(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mDrawable(Drawable),
             mCtx(Ctx),
@@ -21925,7 +22892,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDisplay;
         GLXDrawable mDrawable;
         GLXContext mCtx;
@@ -21950,8 +22917,8 @@ namespace gles {
     class GlXQueryDrawable: public Encodable {
     public:
         GlXQueryDrawable() = default;
-        GlXQueryDrawable(atom::Observations observations, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
-            mobservations(observations),
+        GlXQueryDrawable(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
+            mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
             mAttribute(Attribute),
@@ -21962,7 +22929,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDisplay;
         GLXDrawable mDraw;
         int64_t mAttribute;
@@ -21973,12 +22940,15 @@ namespace gles {
     class GlXSwapBuffers: public Encodable {
     public:
         GlXSwapBuffers() = default;
-        GlXSwapBuffers(atom::Observations observations, Void__P Display, GLXDrawable Drawable) :
-            mobservations(observations),
+        GlXSwapBuffers(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Drawable) :
+            mextras(extras),
             mDisplay(Display),
             mDrawable(Drawable) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mDisplay);
             e->Struct(this->mDrawable);
         }
@@ -21986,7 +22956,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         Void__P mDisplay;
         GLXDrawable mDrawable;
     };
@@ -22573,36 +23543,42 @@ namespace gles {
     class ReplayBindRenderer: public Encodable {
     public:
         ReplayBindRenderer() = default;
-        ReplayBindRenderer(atom::Observations observations, uint32_t Id) :
-            mobservations(observations),
+        ReplayBindRenderer(gapic::Vector<gapic::Encodable*> extras, uint32_t Id) :
+            mextras(extras),
             mId(Id) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mId);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mId;
     };
 
     class ReplayCreateRenderer: public Encodable {
     public:
         ReplayCreateRenderer() = default;
-        ReplayCreateRenderer(atom::Observations observations, uint32_t Id) :
-            mobservations(observations),
+        ReplayCreateRenderer(gapic::Vector<gapic::Encodable*> extras, uint32_t Id) :
+            mextras(extras),
             mId(Id) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint32(this->mId);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint32_t mId;
     };
 
@@ -22654,18 +23630,21 @@ namespace gles {
     class StartTimer: public Encodable {
     public:
         StartTimer() = default;
-        StartTimer(atom::Observations observations, uint8_t Index) :
-            mobservations(observations),
+        StartTimer(gapic::Vector<gapic::Encodable*> extras, uint8_t Index) :
+            mextras(extras),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint8(this->mIndex);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mIndex;
     };
 
@@ -22674,12 +23653,15 @@ namespace gles {
     class StopTimer: public Encodable {
     public:
         StopTimer() = default;
-        StopTimer(atom::Observations observations, uint8_t Index, uint64_t Result) :
-            mobservations(observations),
+        StopTimer(gapic::Vector<gapic::Encodable*> extras, uint8_t Index, uint64_t Result) :
+            mextras(extras),
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint8(this->mIndex);
             e->Uint64(this->mResult);
         }
@@ -22687,7 +23669,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint8_t mIndex;
         uint64_t mResult;
     };
@@ -22695,18 +23677,21 @@ namespace gles {
     class SwitchThread: public Encodable {
     public:
         SwitchThread() = default;
-        SwitchThread(atom::Observations observations, uint64_t ThreadID) :
-            mobservations(observations),
+        SwitchThread(gapic::Vector<gapic::Encodable*> extras, uint64_t ThreadID) :
+            mextras(extras),
             mThreadID(ThreadID) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Uint64(this->mThreadID);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         uint64_t mThreadID;
     };
 
@@ -23448,12 +24433,15 @@ namespace gles {
     class WglCreateContext: public Encodable {
     public:
         WglCreateContext() = default;
-        WglCreateContext(atom::Observations observations, HDC Hdc, HGLRC Result) :
-            mobservations(observations),
+        WglCreateContext(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC Result) :
+            mextras(extras),
             mHdc(Hdc),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mHdc);
             e->Struct(this->mResult);
         }
@@ -23461,7 +24449,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         HDC mHdc;
         HGLRC mResult;
     };
@@ -23469,8 +24457,8 @@ namespace gles {
     class WglCreateContextAttribsARB: public Encodable {
     public:
         WglCreateContextAttribsARB() = default;
-        WglCreateContextAttribsARB(atom::Observations observations, HDC Hdc, HGLRC HShareContext, Int__P AttribList, HGLRC Result) :
-            mobservations(observations),
+        WglCreateContextAttribsARB(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC HShareContext, Int__P AttribList, HGLRC Result) :
+            mextras(extras),
             mHdc(Hdc),
             mHShareContext(HShareContext),
             mAttribList(AttribList),
@@ -23480,7 +24468,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         HDC mHdc;
         HGLRC mHShareContext;
         Int__P mAttribList;
@@ -23490,8 +24478,8 @@ namespace gles {
     class WglMakeCurrent: public Encodable {
     public:
         WglMakeCurrent() = default;
-        WglMakeCurrent(atom::Observations observations, HDC Hdc, HGLRC Hglrc, int64_t Result) :
-            mobservations(observations),
+        WglMakeCurrent(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC Hglrc, int64_t Result) :
+            mextras(extras),
             mHdc(Hdc),
             mHglrc(Hglrc),
             mResult(Result) {}
@@ -23500,7 +24488,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         HDC mHdc;
         HGLRC mHglrc;
         int64_t mResult;
@@ -23509,18 +24497,21 @@ namespace gles {
     class WglSwapBuffers: public Encodable {
     public:
         WglSwapBuffers() = default;
-        WglSwapBuffers(atom::Observations observations, HDC Hdc) :
-            mobservations(observations),
+        WglSwapBuffers(gapic::Vector<gapic::Encodable*> extras, HDC Hdc) :
+            mextras(extras),
             mHdc(Hdc) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mobservations);
+            e->Uint32(this->mextras.count());
+            for (auto v : this->mextras) {
+                e->Object(v);
+            }
             e->Struct(this->mHdc);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        atom::Observations mobservations;
+        gapic::Vector<gapic::Encodable*> mextras;
         HDC mHdc;
     };
 

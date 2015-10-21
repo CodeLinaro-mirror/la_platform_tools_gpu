@@ -339,5 +339,7 @@ int pixelSize(uint32_t format, uint32_t type) {
         return 4;
     case GLenum::GL_FLOAT_32_UNSIGNED_INT_24_8_REV:
         return 8;
+    default:
+        return 0; // TODO: Assert?
     }
 }

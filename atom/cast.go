@@ -29,10 +29,10 @@ import (
 // Dynamic conforms to the Atom interface, and provides a number of methods
 // for accessing the parameters, return value and observations.
 type Dynamic struct {
-	object       *schema.Object
-	info         *atomInfo
-	observations *Observations
-	flags        Flags
+	object *schema.Object
+	info   *atomInfo
+	extras Extras
+	flags  Flags
 }
 
 var _ Atom = &Dynamic{} // Verify that Dynamic implements Atom.
@@ -47,9 +47,8 @@ func (a *Dynamic) Flags() Flags {
 	return a.flags
 }
 
-// Observations returns all the memory observations made by the atom.
-func (a *Dynamic) Observations() *Observations {
-	return a.observations
+func (a *Dynamic) Extras() Extras {
+	return a.extras
 }
 
 // Mutate is not supported by the Dynamic type, but is exposed in order to comform
@@ -110,23 +109,25 @@ func (a *Dynamic) String() string {
 
 // atomInfo is a cache of precalculated atom information from the schema.
 type atomInfo struct {
-	meta         *Metadata
-	observations int   // index on fields, or -1
-	parameters   []int // indices on fields
-	result       int   // index on fields, or -1
+	meta       *Metadata
+	extras     int   // index on fields, or -1
+	parameters []int // indices on fields
+	result     int   // index on fields, or -1
 }
 
-var observationsSig = (*Observations)(nil).Class().Schema().Signature()
+var extraType = (*Observations)(nil).Class().Schema().Signature()
 
 func newAtomInfo(entity *binary.Entity) *atomInfo {
 	meta := FindMetadata(entity)
-	class := &atomInfo{meta: meta, observations: -1}
-	// Find the observations, if present
+	class := &atomInfo{meta: meta, extras: -1}
+	// Find the extras, if present
 	for i, f := range entity.Fields {
-		if s, ok := f.Type.(*schema.Struct); ok {
-			if s.Entity.Signature() == observationsSig {
-				class.observations = i
-				continue
+		if s, ok := f.Type.(*schema.Slice); ok {
+			if _, ok := s.ValueType.(*schema.Interface); ok {
+				if f.Declared == "extras" {
+					class.extras = i
+					continue
+				}
 			}
 		}
 		if f.Name() == "Result" {
@@ -150,15 +151,18 @@ func Wrap(obj *schema.Object) (Atom, error) {
 		wrappers[entity.Signature()] = info
 	}
 	a := &Dynamic{info: info, object: obj}
-	if info.observations >= 0 {
-		if info.observations >= len(a.object.Fields) {
-			return a, fmt.Errorf("Missing Observations field in %s", entity.Name())
+	if info.extras >= 0 {
+		if info.extras >= len(a.object.Fields) {
+			return a, fmt.Errorf("Missing extras field in %s", entity.Name())
 		}
-		value := a.object.Fields[info.observations]
-		if observations, ok := value.(*Observations); !ok {
-			return a, fmt.Errorf("Observations field is of type %T in %s", value, entity.Name())
+		value := a.object.Fields[info.extras]
+		if extras, ok := value.([]interface{}); !ok {
+			return a, fmt.Errorf("Extras field is of type %T in %s", value, entity.Name())
 		} else {
-			a.observations = observations
+			a.extras = make(Extras, len(extras))
+			for i := range extras {
+				a.extras[i] = extras[i].(Extra)
+			}
 		}
 	}
 	if info.meta != nil {

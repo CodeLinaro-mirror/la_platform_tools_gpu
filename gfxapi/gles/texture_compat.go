@@ -38,7 +38,7 @@ func decompressTexImage2D(i atom.ID, a *GlCompressedTexImage2D, s *gfxapi.State,
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, 0))
 		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, pb))
 	} else {
-		a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
+		a.Extras().Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 	}
 
 	id, err := database.Store(&image.LazyConverter{
@@ -101,7 +101,7 @@ func convertTexImage2D(i atom.ID, a *GlTexImage2D, s *gfxapi.State, d database.D
 			))
 			return nil
 		}
-		a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
+		a.Extras().Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 	}
 
 	srcFmt := imageFormat(a.Format, a.Type)
@@ -159,7 +159,7 @@ func convertTexSubImage2D(i atom.ID, a *GlTexSubImage2D, s *gfxapi.State, d data
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, 0))
 		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, pb))
 	} else {
-		a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
+		a.Extras().Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 	}
 
 	id, err := database.Store(&image.LazyConverter{

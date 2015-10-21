@@ -594,7 +594,7 @@
 
   type {{$name}} struct {
     binary.Generate
-    observations atom.Observations
+    extras atom.Extras
     {{range $p := $.Command.FullParameters}}
       {{Template "Go.Public" $p.Name}} {{Template "Go.Type" $p}}
     {{end}}
@@ -618,7 +618,7 @@
   // the data id.
   // The {{$name}} pointer is returned so that calls can be chained.
   func (a *{{$name}}) AddRead(rng memory.Range, id binary.ID) *{{$name}} {
-    a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+    a.extras.GetOrAppendObservations().AddRead(rng, id)
     return a
   }
 
@@ -626,7 +626,7 @@
   // the data id.
   // The {{$name}} pointer is returned so that calls can be chained.
   func (a *{{$name}}) AddWrite(rng memory.Range, id binary.ID) *{{$name}} {
-    a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+    a.extras.GetOrAppendObservations().AddWrite(rng, id)
     return a
   }
 
@@ -635,7 +635,7 @@
       {{if GetAnnotation $.Command "DrawCall"}} | atom.DrawCall §{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}} | atom.EndOfFrame §{{end}}
   }
-  func (a *{{$name}}) Observations() *atom.Observations { return &a.observations }
+  func (a *{{$name}}) Extras() atom.Extras { return a.extras }
 {{end}}
 
 

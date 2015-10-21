@@ -42,25 +42,6 @@ public:
     virtual const schema::Entity* Schema() const = 0;
 };
 
-template<class T>
-class Array {
-public:
-    inline Array() : mData(nullptr), mSize(0) {}
-    inline Array(const T* data, uint32_t size) : mData(data), mSize(size) {}
-    inline const T* data() const { return mData != nullptr ? mData : mVector.data(); }
-    inline uint32_t size() const { return mData != nullptr ? mSize : mVector.size(); }
-    inline const T& operator[](uint32_t index) const { GAPID_ASSERT(index < size()); return data()[index]; }
-    inline std::vector<T>& vector() { GAPID_ASSERT(mData == nullptr); return mVector; }
-
-    // Support for range-based for looping
-    inline const T* begin() const { return data(); }
-    inline const T* end() const { return data() + size(); }
-private:
-    std::vector<T> mVector;
-    const T* mData;
-    uint32_t mSize;
-};
-
 // Encoder provides methods for encoding values to the provided StreamWriter
 // using variable-length-encoding.
 class Encoder {

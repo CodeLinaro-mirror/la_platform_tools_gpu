@@ -29,17 +29,19 @@ func getState(s *gfxapi.State) *State {
 
 func (ϟa *GlBlendBarrierKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_0_ext := ExtensionId_GL_KHR_blend_equation_advanced // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_0_ext
 	return nil
 }
 func (ϟa *GlBlendEquationSeparateiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_2_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	BlendEquationSeparatei_3_buf := ϟa.Buf                             // DrawBufferIndex
 	BlendEquationSeparatei_3_modeRGB := ϟa.ModeRGB                     // GLenum
@@ -58,14 +60,15 @@ func (ϟa *GlBlendEquationSeparateiEXT) Mutate(ϟs *gfxapi.State, ϟd database.D
 		return
 		_ = glErrorInvalidEnum_5_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_2_ext, BlendEquationSeparatei_3_buf, BlendEquationSeparatei_3_modeRGB, BlendEquationSeparatei_3_modeAlpha
 	return nil
 }
 func (ϟa *GlBlendEquationiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_6_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	BlendEquationi_7_buf := ϟa.Buf                                     // DrawBufferIndex
 	BlendEquationi_7_mode := ϟa.Mode                                   // GLenum
@@ -76,14 +79,15 @@ func (ϟa *GlBlendEquationiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_8_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_6_ext, BlendEquationi_7_buf, BlendEquationi_7_mode
 	return nil
 }
 func (ϟa *GlBlendFuncSeparateiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_9_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	BlendFuncSeparatei_10_buf := ϟa.Buf                                // DrawBufferIndex
 	BlendFuncSeparatei_10_srcRGB := ϟa.SrcRGB                          // GLenum
@@ -118,14 +122,15 @@ func (ϟa *GlBlendFuncSeparateiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_14_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_9_ext, BlendFuncSeparatei_10_buf, BlendFuncSeparatei_10_srcRGB, BlendFuncSeparatei_10_dstRGB, BlendFuncSeparatei_10_srcAlpha, BlendFuncSeparatei_10_dstAlpha
 	return nil
 }
 func (ϟa *GlBlendFunciEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_15_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	BlendFunci_16_buf := ϟa.Buf                                         // DrawBufferIndex
 	BlendFunci_16_src := ϟa.Src                                         // GLenum
@@ -144,28 +149,30 @@ func (ϟa *GlBlendFunciEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_18_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_15_ext, BlendFunci_16_buf, BlendFunci_16_src, BlendFunci_16_dst
 	return nil
 }
 func (ϟa *GlColorMaskiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_19_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	ColorMaski_20_index := ϟa.Index                                     // DrawBufferIndex
 	ColorMaski_20_r := ϟa.R                                             // GLboolean
 	ColorMaski_20_g := ϟa.G                                             // GLboolean
 	ColorMaski_20_b := ϟa.B                                             // GLboolean
 	ColorMaski_20_a := ϟa.A                                             // GLboolean
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_19_ext, ColorMaski_20_index, ColorMaski_20_r, ColorMaski_20_g, ColorMaski_20_b, ColorMaski_20_a
 	return nil
 }
 func (ϟa *GlCopyImageSubDataEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_21_ext := ExtensionId_GL_EXT_copy_image // ExtensionId
 	CopyImageSubData_22_srcName := ϟa.SrcName                 // GLuint
 	CopyImageSubData_22_srcTarget := ϟa.SrcTarget             // GLenum
@@ -196,25 +203,27 @@ func (ϟa *GlCopyImageSubDataEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_24_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_21_ext, CopyImageSubData_22_srcName, CopyImageSubData_22_srcTarget, CopyImageSubData_22_srcLevel, CopyImageSubData_22_srcX, CopyImageSubData_22_srcY, CopyImageSubData_22_srcZ, CopyImageSubData_22_dstName, CopyImageSubData_22_dstTarget, CopyImageSubData_22_dstLevel, CopyImageSubData_22_dstX, CopyImageSubData_22_dstY, CopyImageSubData_22_dstZ, CopyImageSubData_22_srcWidth, CopyImageSubData_22_srcHeight, CopyImageSubData_22_srcDepth
 	return nil
 }
 func (ϟa *GlDebugMessageCallbackKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_25_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	DebugMessageCallback_26_callback := ϟa.Callback      // GLDEBUGPROC
 	DebugMessageCallback_26_userParam := ϟa.UserParam    // Voidᶜᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_25_ext, DebugMessageCallback_26_callback, DebugMessageCallback_26_userParam
 	return nil
 }
 func (ϟa *GlDebugMessageControlKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_27_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	DebugMessageControl_28_source := ϟa.Source           // GLenum
 	DebugMessageControl_28_type := ϟa.Type               // GLenum
@@ -244,14 +253,15 @@ func (ϟa *GlDebugMessageControlKHR) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		_ = glErrorInvalidEnum_31_param
 	}
 	DebugMessageControl_28_ids.Slice(uint64(GLsizei(int32(0))), uint64(DebugMessageControl_28_count), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_27_ext, DebugMessageControl_28_source, DebugMessageControl_28_type, DebugMessageControl_28_severity, DebugMessageControl_28_count, DebugMessageControl_28_ids, DebugMessageControl_28_enabled
 	return nil
 }
 func (ϟa *GlDebugMessageInsertKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_32_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	DebugMessageInsert_33_source := ϟa.Source            // GLenum
 	DebugMessageInsert_33_type := ϟa.Type                // GLenum
@@ -290,14 +300,15 @@ func (ϟa *GlDebugMessageInsertKHR) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 			readString_37_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_37_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_32_ext, DebugMessageInsert_33_source, DebugMessageInsert_33_type, DebugMessageInsert_33_id, DebugMessageInsert_33_severity, DebugMessageInsert_33_length, DebugMessageInsert_33_message, readString_37_length, readString_37_buffer
 	return nil
 }
 func (ϟa *GlDisableiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_38_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	Disablei_39_target := ϟa.Target                                     // GLenum
 	Disablei_39_index := ϟa.Index                                       // GLuint
@@ -308,14 +319,15 @@ func (ϟa *GlDisableiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		return
 		_ = glErrorInvalidEnum_40_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_38_ext, Disablei_39_target, Disablei_39_index
 	return nil
 }
 func (ϟa *GlEnableiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_41_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	Enablei_42_target := ϟa.Target                                      // GLenum
 	Enablei_42_index := ϟa.Index                                        // GLuint
@@ -326,14 +338,15 @@ func (ϟa *GlEnableiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_43_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_41_ext, Enablei_42_target, Enablei_42_index
 	return nil
 }
 func (ϟa *GlFramebufferTextureEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_44_ext := ExtensionId_GL_EXT_geometry_shader // ExtensionId
 	FramebufferTexture_45_target := ϟa.Target                      // GLenum
 	FramebufferTexture_45_attachment := ϟa.Attachment              // GLenum
@@ -353,14 +366,15 @@ func (ϟa *GlFramebufferTextureEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_47_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = requiresExtension_44_ext, FramebufferTexture_45_target, FramebufferTexture_45_attachment, FramebufferTexture_45_texture, FramebufferTexture_45_level
 	return nil
 }
 func (ϟa *GlGetDebugMessageLogKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_48_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	GetDebugMessageLog_49_count := ϟa.Count              // GLuint
 	GetDebugMessageLog_49_bufSize := ϟa.BufSize          // GLsizei
@@ -370,7 +384,7 @@ func (ϟa *GlGetDebugMessageLogKHR) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	GetDebugMessageLog_49_severities := ϟa.Severities    // GLenumᵖ
 	GetDebugMessageLog_49_lengths := ϟa.Lengths          // GLsizeiᵖ
 	GetDebugMessageLog_49_messageLog := ϟa.MessageLog    // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	l := GLuint(ϟa.Result) // GLuint
 	if (GetDebugMessageLog_49_sources) != (GLenumᵖ{}) {
 		GetDebugMessageLog_49_sources.Slice(uint64(GLuint(uint32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -397,8 +411,9 @@ func (ϟa *GlGetDebugMessageLogKHR) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 }
 func (ϟa *GlGetObjectLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_50_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	GetObjectLabel_51_identifier := ϟa.Identifier        // GLenum
 	GetObjectLabel_51_name := ϟa.Name                    // GLuint
@@ -415,7 +430,7 @@ func (ϟa *GlGetObjectLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	writeString_53_buffer_size := GetObjectLabel_51_bufSize         // GLsizei
 	writeString_53_buffer_bytes_written := GetObjectLabel_51_length // GLsizeiᵖ
 	writeString_53_buffer := GetObjectLabel_51_label                // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_53_buffer) != (GLcharᵖ{})) && ((writeString_53_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_53_buffer_size // GLsizei
 		if (writeString_53_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -433,8 +448,9 @@ func (ϟa *GlGetObjectLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlGetObjectPtrLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_54_ext := ExtensionId_GL_KHR_debug               // ExtensionId
 	GetObjectPtrLabel_55_ptr := ϟa.Ptr                                 // Voidᶜᵖ
 	GetObjectPtrLabel_55_bufSize := ϟa.BufSize                         // GLsizei
@@ -443,7 +459,7 @@ func (ϟa *GlGetObjectPtrLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	writeString_56_buffer_size := GetObjectPtrLabel_55_bufSize         // GLsizei
 	writeString_56_buffer_bytes_written := GetObjectPtrLabel_55_length // GLsizeiᵖ
 	writeString_56_buffer := GetObjectPtrLabel_55_label                // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_56_buffer) != (GLcharᵖ{})) && ((writeString_56_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_56_buffer_size // GLsizei
 		if (writeString_56_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -461,8 +477,9 @@ func (ϟa *GlGetObjectPtrLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlGetPointervKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_57_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	GetPointerv_58_pname := ϟa.Pname                     // GLenum
 	GetPointerv_58_params := ϟa.Params                   // Voidᵖᵖ
@@ -473,15 +490,16 @@ func (ϟa *GlGetPointervKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_59_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetPointerv_58_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _ = requiresExtension_57_ext, GetPointerv_58_pname, GetPointerv_58_params
 	return nil
 }
 func (ϟa *GlGetSamplerParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_60_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_61_major := uint32(3)                            // u32
 	minRequiredVersion_61_minor := uint32(0)                            // u32
@@ -491,7 +509,7 @@ func (ϟa *GlGetSamplerParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.D
 	GetSamplerParameter_63_sampler := GetSamplerParameterIiv_62_sampler // SamplerId
 	GetSamplerParameter_63_pname := GetSamplerParameterIiv_62_pname     // GLenum
 	GetSamplerParameter_63_params := GetSamplerParameterIiv_62_params   // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_63_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_63_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -507,8 +525,9 @@ func (ϟa *GlGetSamplerParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.D
 }
 func (ϟa *GlGetSamplerParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_65_ext := ExtensionId_GL_EXT_texture_border_clamp  // ExtensionId
 	minRequiredVersion_66_major := uint32(3)                             // u32
 	minRequiredVersion_66_minor := uint32(0)                             // u32
@@ -518,7 +537,7 @@ func (ϟa *GlGetSamplerParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.
 	GetSamplerParameter_68_sampler := GetSamplerParameterIuiv_67_sampler // SamplerId
 	GetSamplerParameter_68_pname := GetSamplerParameterIuiv_67_pname     // GLenum
 	GetSamplerParameter_68_params := GetSamplerParameterIuiv_67_params   // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_68_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_68_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -534,8 +553,9 @@ func (ϟa *GlGetSamplerParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.
 }
 func (ϟa *GlGetTexParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_70_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_71_major := uint32(3)                            // u32
 	minRequiredVersion_71_minor := uint32(0)                            // u32
@@ -566,7 +586,7 @@ func (ϟa *GlGetTexParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_78_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_73_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_73_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -595,8 +615,9 @@ func (ϟa *GlGetTexParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 }
 func (ϟa *GlGetTexParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_83_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_84_major := uint32(3)                            // u32
 	minRequiredVersion_84_minor := uint32(0)                            // u32
@@ -627,7 +648,7 @@ func (ϟa *GlGetTexParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_91_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_86_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_86_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -656,8 +677,9 @@ func (ϟa *GlGetTexParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 }
 func (ϟa *GlIsEnablediEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_96_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
 	IsEnabledi_97_target := ϟa.Target                                   // GLenum
 	IsEnabledi_97_index := ϟa.Index                                     // GLuint
@@ -668,7 +690,7 @@ func (ϟa *GlIsEnablediEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_98_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsEnabledi_97_result := ϟa.Result // GLboolean
 	ϟa.Result = IsEnabledi_97_result
 	_, _, _, _ = requiresExtension_96_ext, IsEnabledi_97_target, IsEnabledi_97_index, IsEnabledi_97_result
@@ -676,18 +698,20 @@ func (ϟa *GlIsEnablediEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlMinSampleShadingOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_99_ext := ExtensionId_GL_OES_sample_shading // ExtensionId
 	MinSampleShading_100_value := ϟa.Value                        // GLfloat
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = requiresExtension_99_ext, MinSampleShading_100_value
 	return nil
 }
 func (ϟa *GlObjectLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_101_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	ObjectLabel_102_identifier := ϟa.Identifier           // GLenum
 	ObjectLabel_102_name := ϟa.Name                       // GLuint
@@ -710,14 +734,15 @@ func (ϟa *GlObjectLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 			readString_104_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_104_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_101_ext, ObjectLabel_102_identifier, ObjectLabel_102_name, ObjectLabel_102_length, ObjectLabel_102_label, readString_104_length, readString_104_buffer
 	return nil
 }
 func (ϟa *GlObjectPtrLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_105_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	ObjectPtrLabel_106_ptr := ϟa.Ptr                      // Voidᶜᵖ
 	ObjectPtrLabel_106_length := ϟa.Length                // GLsizei
@@ -732,14 +757,15 @@ func (ϟa *GlObjectPtrLabelKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 			readString_107_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_107_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_105_ext, ObjectPtrLabel_106_ptr, ObjectPtrLabel_106_length, ObjectPtrLabel_106_label, readString_107_length, readString_107_buffer
 	return nil
 }
 func (ϟa *GlPatchParameteriEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_108_ext := ExtensionId_GL_EXT_tessellation_shader                             // ExtensionId
 	PatchParameteri_109_pname := ϟa.Pname                                                           // GLenum
 	PatchParameteri_109_value := ϟa.Value                                                           // GLint
@@ -747,23 +773,25 @@ func (ϟa *GlPatchParameteriEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	if glErrorInvalidEnumIf_110_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_108_ext, PatchParameteri_109_pname, PatchParameteri_109_value, glErrorInvalidEnumIf_110_condition
 	return nil
 }
 func (ϟa *GlPopDebugGroupKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_111_ext := ExtensionId_GL_KHR_debug // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_111_ext
 	return nil
 }
 func (ϟa *GlPrimitiveBoundingBoxEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_113_ext := ExtensionId_GL_EXT_primitive_bounding_box // ExtensionId
 	PrimitiveBoundingBox_114_minX := ϟa.MinX                               // GLfloat
 	PrimitiveBoundingBox_114_minY := ϟa.MinY                               // GLfloat
@@ -773,14 +801,15 @@ func (ϟa *GlPrimitiveBoundingBoxEXT) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	PrimitiveBoundingBox_114_maxY := ϟa.MaxY                               // GLfloat
 	PrimitiveBoundingBox_114_maxZ := ϟa.MaxZ                               // GLfloat
 	PrimitiveBoundingBox_114_maxW := ϟa.MaxW                               // GLfloat
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_113_ext, PrimitiveBoundingBox_114_minX, PrimitiveBoundingBox_114_minY, PrimitiveBoundingBox_114_minZ, PrimitiveBoundingBox_114_minW, PrimitiveBoundingBox_114_maxX, PrimitiveBoundingBox_114_maxY, PrimitiveBoundingBox_114_maxZ, PrimitiveBoundingBox_114_maxW
 	return nil
 }
 func (ϟa *GlPushDebugGroupKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_115_ext := ExtensionId_GL_KHR_debug // ExtensionId
 	PushDebugGroup_116_source := ϟa.Source                // GLenum
 	PushDebugGroup_116_id := ϟa.Id                        // GLuint
@@ -803,14 +832,15 @@ func (ϟa *GlPushDebugGroupKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 			readString_118_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_118_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_115_ext, PushDebugGroup_116_source, PushDebugGroup_116_id, PushDebugGroup_116_length, PushDebugGroup_116_message, readString_118_length, readString_118_buffer
 	return nil
 }
 func (ϟa *GlSamplerParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_119_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_120_major := uint32(3)                            // u32
 	minRequiredVersion_120_minor := uint32(0)                            // u32
@@ -835,14 +865,15 @@ func (ϟa *GlSamplerParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_125_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = requiresExtension_119_ext, minRequiredVersion_120_major, minRequiredVersion_120_minor, SamplerParameterIiv_121_sampler, SamplerParameterIiv_121_pname, SamplerParameterIiv_121_param, SamplerParameterv_122_sampler, SamplerParameterv_122_pname, SamplerParameterv_122_params, minRequiredVersion_123_major, minRequiredVersion_123_minor
 	return nil
 }
 func (ϟa *GlSamplerParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_126_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_127_major := uint32(3)                            // u32
 	minRequiredVersion_127_minor := uint32(0)                            // u32
@@ -867,14 +898,15 @@ func (ϟa *GlSamplerParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_132_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = requiresExtension_126_ext, minRequiredVersion_127_major, minRequiredVersion_127_minor, SamplerParameterIuiv_128_sampler, SamplerParameterIuiv_128_pname, SamplerParameterIuiv_128_param, SamplerParameterv_129_sampler, SamplerParameterv_129_pname, SamplerParameterv_129_params, minRequiredVersion_130_major, minRequiredVersion_130_minor
 	return nil
 }
 func (ϟa *GlTexBufferEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_133_ext := ExtensionId_GL_EXT_texture_buffer // ExtensionId
 	TexBuffer_134_target := ϟa.Target                              // GLenum
 	TexBuffer_134_internalformat := ϟa.Internalformat              // GLenum
@@ -893,14 +925,15 @@ func (ϟa *GlTexBufferEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_136_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_133_ext, TexBuffer_134_target, TexBuffer_134_internalformat, TexBuffer_134_buffer
 	return nil
 }
 func (ϟa *GlTexBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_137_ext := ExtensionId_GL_EXT_texture_buffer // ExtensionId
 	TexBufferRange_138_target := ϟa.Target                         // GLenum
 	TexBufferRange_138_internalformat := ϟa.Internalformat         // GLenum
@@ -921,14 +954,15 @@ func (ϟa *GlTexBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_140_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_137_ext, TexBufferRange_138_target, TexBufferRange_138_internalformat, TexBufferRange_138_buffer, TexBufferRange_138_offset, TexBufferRange_138_size
 	return nil
 }
 func (ϟa *GlTexParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_141_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_142_major := uint32(3)                            // u32
 	minRequiredVersion_142_minor := uint32(0)                            // u32
@@ -980,14 +1014,15 @@ func (ϟa *GlTexParameterIivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_152_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_141_ext, minRequiredVersion_142_major, minRequiredVersion_142_minor, TexParameterIiv_143_target, TexParameterIiv_143_pname, TexParameterIiv_143_params, TexParameterv_144_target, TexParameterv_144_pname, TexParameterv_144_params
 	return nil
 }
 func (ϟa *GlTexParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_153_ext := ExtensionId_GL_EXT_texture_border_clamp // ExtensionId
 	minRequiredVersion_154_major := uint32(3)                            // u32
 	minRequiredVersion_154_minor := uint32(0)                            // u32
@@ -1039,14 +1074,15 @@ func (ϟa *GlTexParameterIuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_164_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_153_ext, minRequiredVersion_154_major, minRequiredVersion_154_minor, TexParameterIuiv_155_target, TexParameterIuiv_155_pname, TexParameterIuiv_155_params, TexParameterv_156_target, TexParameterv_156_pname, TexParameterv_156_params
 	return nil
 }
 func (ϟa *GlTexStorage3DMultisampleOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_165_ext := ExtensionId_GL_OES_texture_storage_multisample_2d_array // ExtensionId
 	TexStorage3DMultisample_166_target := ϟa.Target                                      // GLenum
 	TexStorage3DMultisample_166_samples := ϟa.Samples                                    // GLsizei
@@ -1069,14 +1105,15 @@ func (ϟa *GlTexStorage3DMultisampleOES) Mutate(ϟs *gfxapi.State, ϟd database.
 		return
 		_ = glErrorInvalidEnum_168_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = requiresExtension_165_ext, TexStorage3DMultisample_166_target, TexStorage3DMultisample_166_samples, TexStorage3DMultisample_166_internalformat, TexStorage3DMultisample_166_width, TexStorage3DMultisample_166_height, TexStorage3DMultisample_166_depth, TexStorage3DMultisample_166_fixedsamplelocations
 	return nil
 }
 func (ϟa *GlBeginQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_169_major := uint32(3) // u32
 	minRequiredVersion_169_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1090,14 +1127,15 @@ func (ϟa *GlBeginQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_171_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_169_major, minRequiredVersion_169_minor
 	return nil
 }
 func (ϟa *GlDeleteQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_172_major := uint32(3)                              // u32
 	minRequiredVersion_172_minor := uint32(0)                              // u32
 	q := ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // QueryIdˢ
@@ -1112,14 +1150,15 @@ func (ϟa *GlDeleteQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_172_major, minRequiredVersion_172_minor, q, context, GetContext_173_result, ctx
 	return nil
 }
 func (ϟa *GlEndQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_175_major := uint32(3) // u32
 	minRequiredVersion_175_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1133,14 +1172,15 @@ func (ϟa *GlEndQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		return
 		_ = glErrorInvalidEnum_177_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_175_major, minRequiredVersion_175_minor
 	return nil
 }
 func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_178_major := uint32(3)                              // u32
 	minRequiredVersion_178_minor := uint32(0)                              // u32
 	q := ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // QueryIdˢ
@@ -1152,7 +1192,7 @@ func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	}
 	GetContext_179_result := context // Contextʳ
 	ctx := GetContext_179_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
 		ctx.Instances.Queries[id] = &Query{}
@@ -1164,8 +1204,9 @@ func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlGetQueryObjectuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_181_major := uint32(3) // u32
 	minRequiredVersion_181_minor := uint32(0) // u32
 	switch ϟa.Parameter {
@@ -1175,15 +1216,16 @@ func (ϟa *GlGetQueryObjectuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_182_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_181_major, minRequiredVersion_181_minor
 	return nil
 }
 func (ϟa *GlGetQueryiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_183_major := uint32(3) // u32
 	minRequiredVersion_183_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1204,15 +1246,16 @@ func (ϟa *GlGetQueryiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_186_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_183_major, minRequiredVersion_183_minor
 	return nil
 }
 func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_187_major := uint32(3)    // u32
 	minRequiredVersion_187_minor := uint32(0)    // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -1223,7 +1266,7 @@ func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	}
 	GetContext_188_result := context // Contextʳ
 	ctx := GetContext_188_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Queries.Contains(ϟa.Query) {
 			return 1
@@ -1236,8 +1279,9 @@ func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 }
 func (ϟa *GlBindBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_190_major := uint32(1) // u32
 	minRequiredVersion_190_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1271,14 +1315,15 @@ func (ϟa *GlBindBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		ctx.Instances.Buffers[ϟa.Buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	}
 	ctx.BoundBuffers[ϟa.Target] = ϟa.Buffer
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_190_major, minRequiredVersion_190_minor, context, GetContext_195_result, ctx
 	return nil
 }
 func (ϟa *GlBindBufferBase) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_197_major := uint32(3) // u32
 	minRequiredVersion_197_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1292,14 +1337,15 @@ func (ϟa *GlBindBufferBase) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_199_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_197_major, minRequiredVersion_197_minor
 	return nil
 }
 func (ϟa *GlBindBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_200_major := uint32(3) // u32
 	minRequiredVersion_200_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1313,14 +1359,15 @@ func (ϟa *GlBindBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 		_ = glErrorInvalidEnum_202_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_200_major, minRequiredVersion_200_minor
 	return nil
 }
 func (ϟa *GlBufferData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_203_major := uint32(1) // u32
 	minRequiredVersion_203_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1377,14 +1424,15 @@ func (ϟa *GlBufferData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	}()
 	b.Size = ϟa.Size
 	b.Usage = ϟa.Usage
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_203_major, minRequiredVersion_203_minor, context, GetContext_210_result, ctx, id, b
 	return nil
 }
 func (ϟa *GlBufferSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_212_major := uint32(1) // u32
 	minRequiredVersion_212_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1407,14 +1455,15 @@ func (ϟa *GlBufferSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		_ = glErrorInvalidEnum_216_param
 	}
 	ϟa.Data.Slice(uint64(GLsizeiptr(int32(0))), uint64(ϟa.Size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_212_major, minRequiredVersion_212_minor
 	return nil
 }
 func (ϟa *GlCopyBufferSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_217_major := uint32(3)           // u32
 	minRequiredVersion_217_minor := uint32(0)           // u32
 	CopyBufferSubData_218_readTarget := ϟa.ReadTarget   // GLenum
@@ -1444,14 +1493,15 @@ func (ϟa *GlCopyBufferSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_222_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_217_major, minRequiredVersion_217_minor, CopyBufferSubData_218_readTarget, CopyBufferSubData_218_writeTarget, CopyBufferSubData_218_readOffset, CopyBufferSubData_218_writeOffset, CopyBufferSubData_218_size
 	return nil
 }
 func (ϟa *GlDeleteBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_223_major := uint32(1)                              // u32
 	minRequiredVersion_223_minor := uint32(0)                              // u32
 	b := ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // BufferIdˢ
@@ -1466,14 +1516,15 @@ func (ϟa *GlDeleteBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Buffers, b.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_223_major, minRequiredVersion_223_minor, b, context, GetContext_224_result, ctx
 	return nil
 }
 func (ϟa *GlGenBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_226_major := uint32(1)                              // u32
 	minRequiredVersion_226_minor := uint32(0)                              // u32
 	b := ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // BufferIdˢ
@@ -1485,7 +1536,7 @@ func (ϟa *GlGenBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	}
 	GetContext_227_result := context // Contextʳ
 	ctx := GetContext_227_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := BufferId(ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // BufferId
 		ctx.Instances.Buffers[id] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
@@ -1497,8 +1548,9 @@ func (ϟa *GlGenBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlGetBufferParameteri64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_229_major := uint32(3) // u32
 	minRequiredVersion_229_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1519,15 +1571,16 @@ func (ϟa *GlGetBufferParameteri64v) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_232_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_229_major, minRequiredVersion_229_minor
 	return nil
 }
 func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_233_major := uint32(1) // u32
 	minRequiredVersion_233_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -1566,7 +1619,7 @@ func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	ctx := GetContext_239_result          // Contextʳ
 	id := ctx.BoundBuffers.Get(ϟa.Target) // BufferId
 	b := ctx.Instances.Buffers.Get(id)    // Bufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_BUFFER_SIZE:
@@ -1584,8 +1637,9 @@ func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlGetBufferPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_241_major := uint32(3) // u32
 	minRequiredVersion_241_minor := uint32(0) // u32
 	GetBufferPointerv_242_target := ϟa.Target // GLenum
@@ -1609,15 +1663,16 @@ func (ϟa *GlGetBufferPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_245_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetBufferPointerv_242_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _ = minRequiredVersion_241_major, minRequiredVersion_241_minor, GetBufferPointerv_242_target, GetBufferPointerv_242_pname, GetBufferPointerv_242_params
 	return nil
 }
 func (ϟa *GlIsBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_246_major := uint32(1)    // u32
 	minRequiredVersion_246_minor := uint32(0)    // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -1628,7 +1683,7 @@ func (ϟa *GlIsBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	}
 	GetContext_247_result := context // Contextʳ
 	ctx := GetContext_247_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Buffers.Contains(ϟa.Buffer) {
 			return 1
@@ -1641,8 +1696,9 @@ func (ϟa *GlIsBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 }
 func (ϟa *GlMapBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_249_major := uint32(3) // u32
 	minRequiredVersion_249_minor := uint32(0) // u32
 	MapBufferRange_250_target := ϟa.Target    // GLenum
@@ -1687,7 +1743,7 @@ func (ϟa *GlMapBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	GetContext_255_result := context                                                // Contextʳ
 	ctx := GetContext_255_result                                                    // Contextʳ
 	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(MapBufferRange_250_target)) // Bufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ptr := U8ᵖ(ϟa.Result) // U8ᵖ
 	b.MappingAccess = MapBufferRange_250_access
 	b.MappingData = ptr.Slice(uint64(GLsizeiptr(int32(0))), uint64(MapBufferRange_250_length), ϟs)
@@ -1705,8 +1761,9 @@ func (ϟa *GlMapBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlUnmapBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_257_major := uint32(3) // u32
 	minRequiredVersion_257_minor := uint32(0) // u32
 	UnmapBuffer_258_target := ϟa.Target       // GLenum
@@ -1734,7 +1791,7 @@ func (ϟa *GlUnmapBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_262_result := context                                             // Contextʳ
 	ctx := GetContext_262_result                                                 // Contextʳ
 	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(UnmapBuffer_258_target)) // Bufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	b.Data.Slice(uint64(b.MappingOffset), uint64((b.MappingOffset)+(int32(b.MappingData.Count))), ϟs).Copy(b.MappingData, ϟa, ϟs, ϟd, ϟl, ϟb)
 	externs{ϟa, ϟs, ϟd, ϟl, ϟb}.unmapMemory(b.MappingData)
 	b.MappingOffset = int32(0)
@@ -1746,20 +1803,22 @@ func (ϟa *GlUnmapBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlDebugMessageCallback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_264_major := uint32(3)          // u32
 	minRequiredVersion_264_minor := uint32(2)          // u32
 	DebugMessageCallback_265_callback := ϟa.Callback   // GLDEBUGPROC
 	DebugMessageCallback_265_userParam := ϟa.UserParam // Voidᶜᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_264_major, minRequiredVersion_264_minor, DebugMessageCallback_265_callback, DebugMessageCallback_265_userParam
 	return nil
 }
 func (ϟa *GlDebugMessageControl) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_266_major := uint32(3)       // u32
 	minRequiredVersion_266_minor := uint32(2)       // u32
 	DebugMessageControl_267_source := ϟa.Source     // GLenum
@@ -1790,14 +1849,15 @@ func (ϟa *GlDebugMessageControl) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		_ = glErrorInvalidEnum_270_param
 	}
 	DebugMessageControl_267_ids.Slice(uint64(GLsizei(int32(0))), uint64(DebugMessageControl_267_count), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_266_major, minRequiredVersion_266_minor, DebugMessageControl_267_source, DebugMessageControl_267_type, DebugMessageControl_267_severity, DebugMessageControl_267_count, DebugMessageControl_267_ids, DebugMessageControl_267_enabled
 	return nil
 }
 func (ϟa *GlDebugMessageInsert) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_271_major := uint32(3)      // u32
 	minRequiredVersion_271_minor := uint32(2)      // u32
 	DebugMessageInsert_272_source := ϟa.Source     // GLenum
@@ -1837,14 +1897,15 @@ func (ϟa *GlDebugMessageInsert) Mutate(ϟs *gfxapi.State, ϟd database.Database
 			readString_276_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_276_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_271_major, minRequiredVersion_271_minor, DebugMessageInsert_272_source, DebugMessageInsert_272_type, DebugMessageInsert_272_id, DebugMessageInsert_272_severity, DebugMessageInsert_272_length, DebugMessageInsert_272_message, readString_276_length, readString_276_buffer
 	return nil
 }
 func (ϟa *GlGetDebugMessageLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_277_major := uint32(3)          // u32
 	minRequiredVersion_277_minor := uint32(2)          // u32
 	GetDebugMessageLog_278_count := ϟa.Count           // GLuint
@@ -1855,7 +1916,7 @@ func (ϟa *GlGetDebugMessageLog) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	GetDebugMessageLog_278_severities := ϟa.Severities // GLenumᵖ
 	GetDebugMessageLog_278_lengths := ϟa.Lengths       // GLsizeiᵖ
 	GetDebugMessageLog_278_messageLog := ϟa.MessageLog // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	l := GLuint(ϟa.Result) // GLuint
 	if (GetDebugMessageLog_278_sources) != (GLenumᵖ{}) {
 		GetDebugMessageLog_278_sources.Slice(uint64(GLuint(uint32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -1882,8 +1943,9 @@ func (ϟa *GlGetDebugMessageLog) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetObjectLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_279_major := uint32(3)      // u32
 	minRequiredVersion_279_minor := uint32(2)      // u32
 	GetObjectLabel_280_identifier := ϟa.Identifier // GLenum
@@ -1901,7 +1963,7 @@ func (ϟa *GlGetObjectLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	writeString_282_buffer_size := GetObjectLabel_280_bufSize         // GLsizei
 	writeString_282_buffer_bytes_written := GetObjectLabel_280_length // GLsizeiᵖ
 	writeString_282_buffer := GetObjectLabel_280_label                // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_282_buffer) != (GLcharᵖ{})) && ((writeString_282_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_282_buffer_size // GLsizei
 		if (writeString_282_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -1919,8 +1981,9 @@ func (ϟa *GlGetObjectLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlGetObjectPtrLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_283_major := uint32(3)                            // u32
 	minRequiredVersion_283_minor := uint32(2)                            // u32
 	GetObjectPtrLabel_284_ptr := ϟa.Ptr                                  // Voidᶜᵖ
@@ -1930,7 +1993,7 @@ func (ϟa *GlGetObjectPtrLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	writeString_285_buffer_size := GetObjectPtrLabel_284_bufSize         // GLsizei
 	writeString_285_buffer_bytes_written := GetObjectPtrLabel_284_length // GLsizeiᵖ
 	writeString_285_buffer := GetObjectPtrLabel_284_label                // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_285_buffer) != (GLcharᵖ{})) && ((writeString_285_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_285_buffer_size // GLsizei
 		if (writeString_285_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -1948,8 +2011,9 @@ func (ϟa *GlGetObjectPtrLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlGetPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_286_major := uint32(1) // u32
 	minRequiredVersion_286_minor := uint32(0) // u32
 	GetPointerv_287_pname := ϟa.Pname         // GLenum
@@ -1961,15 +2025,16 @@ func (ϟa *GlGetPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		return
 		_ = glErrorInvalidEnum_288_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetPointerv_287_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _ = minRequiredVersion_286_major, minRequiredVersion_286_minor, GetPointerv_287_pname, GetPointerv_287_params
 	return nil
 }
 func (ϟa *GlObjectLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_289_major := uint32(3)   // u32
 	minRequiredVersion_289_minor := uint32(2)   // u32
 	ObjectLabel_290_identifier := ϟa.Identifier // GLenum
@@ -1993,14 +2058,15 @@ func (ϟa *GlObjectLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 			readString_292_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_292_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_289_major, minRequiredVersion_289_minor, ObjectLabel_290_identifier, ObjectLabel_290_name, ObjectLabel_290_length, ObjectLabel_290_label, readString_292_length, readString_292_buffer
 	return nil
 }
 func (ϟa *GlObjectPtrLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_293_major := uint32(3)          // u32
 	minRequiredVersion_293_minor := uint32(2)          // u32
 	ObjectPtrLabel_294_ptr := ϟa.Ptr                   // Voidᶜᵖ
@@ -2016,24 +2082,26 @@ func (ϟa *GlObjectPtrLabel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 			readString_295_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_295_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_293_major, minRequiredVersion_293_minor, ObjectPtrLabel_294_ptr, ObjectPtrLabel_294_length, ObjectPtrLabel_294_label, readString_295_length, readString_295_buffer
 	return nil
 }
 func (ϟa *GlPopDebugGroup) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_296_major := uint32(3) // u32
 	minRequiredVersion_296_minor := uint32(2) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_296_major, minRequiredVersion_296_minor
 	return nil
 }
 func (ϟa *GlPushDebugGroup) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_298_major := uint32(3) // u32
 	minRequiredVersion_298_minor := uint32(2) // u32
 	PushDebugGroup_299_source := ϟa.Source    // GLenum
@@ -2057,14 +2125,15 @@ func (ϟa *GlPushDebugGroup) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 			readString_301_buffer.Slice(uint64(GLsizei(int32(0))), uint64(readString_301_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_298_major, minRequiredVersion_298_minor, PushDebugGroup_299_source, PushDebugGroup_299_id, PushDebugGroup_299_length, PushDebugGroup_299_message, readString_301_length, readString_301_buffer
 	return nil
 }
 func (ϟa *GlDrawArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_302_major := uint32(1)       // u32
 	minRequiredVersion_302_minor := uint32(0)       // u32
 	checkPrimitiveType_303_draw_mode := ϟa.DrawMode // GLenum
@@ -2152,14 +2221,15 @@ func (ϟa *GlDrawArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 			_ = vao3
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_302_major, minRequiredVersion_302_minor, checkPrimitiveType_303_draw_mode, glErrorInvalidValueIf_306_condition, glErrorInvalidValueIf_307_condition, context, GetContext_308_result, ctx, ReadVertexArrays_310_ctx, ReadVertexArrays_310_first_index, ReadVertexArrays_310_index_count, ReadVertexArrays_310_instance_count
 	return nil
 }
 func (ϟa *GlDrawArraysIndirect) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_312_major := uint32(3)       // u32
 	minRequiredVersion_312_minor := uint32(1)       // u32
 	checkPrimitiveType_313_draw_mode := ϟa.DrawMode // GLenum
@@ -2190,14 +2260,15 @@ func (ϟa *GlDrawArraysIndirect) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	if glErrorInvalidOperationIf_319_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_312_major, minRequiredVersion_312_minor, checkPrimitiveType_313_draw_mode, context, GetContext_316_result, ctx, glErrorInvalidOperationIf_318_condition, glErrorInvalidOperationIf_319_condition
 	return nil
 }
 func (ϟa *GlDrawArraysInstanced) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_320_major := uint32(3)                             // u32
 	minRequiredVersion_320_minor := uint32(0)                             // u32
 	DrawArraysInstanced_321_draw_mode := ϟa.DrawMode                      // GLenum
@@ -2293,14 +2364,15 @@ func (ϟa *GlDrawArraysInstanced) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 			_ = vao3
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_320_major, minRequiredVersion_320_minor, DrawArraysInstanced_321_draw_mode, DrawArraysInstanced_321_first_index, DrawArraysInstanced_321_indices_count, DrawArraysInstanced_321_instance_count, checkPrimitiveType_322_draw_mode, glErrorInvalidValueIf_325_condition, glErrorInvalidValueIf_326_condition, glErrorInvalidValueIf_327_condition, context, GetContext_328_result, ctx, ReadVertexArrays_330_ctx, ReadVertexArrays_330_first_index, ReadVertexArrays_330_index_count, ReadVertexArrays_330_instance_count
 	return nil
 }
 func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_332_major := uint32(1)    // u32
 	minRequiredVersion_332_minor := uint32(0)    // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -2497,14 +2569,15 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_332_major, minRequiredVersion_332_minor, context, GetContext_333_result, ctx, DrawElements_335_ctx, DrawElements_335_draw_mode, DrawElements_335_indices_count, DrawElements_335_indices_type, DrawElements_335_indices, DrawElements_335_instance_count, DrawElements_335_base_vertex, checkPrimitiveType_336_draw_mode, glErrorInvalidValueIf_339_condition, checkIndicesType_340_indices_type, glErrorInvalidValueIf_343_condition
 	return nil
 }
 func (ϟa *GlDrawElementsBaseVertex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_349_major := uint32(3)                   // u32
 	minRequiredVersion_349_minor := uint32(2)                   // u32
 	DrawElementsBaseVertex_350_draw_mode := ϟa.DrawMode         // GLenum
@@ -2706,14 +2779,15 @@ func (ϟa *GlDrawElementsBaseVertex) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_349_major, minRequiredVersion_349_minor, DrawElementsBaseVertex_350_draw_mode, DrawElementsBaseVertex_350_indices_count, DrawElementsBaseVertex_350_indices_type, DrawElementsBaseVertex_350_indices, DrawElementsBaseVertex_350_base_vertex, context, GetContext_351_result, ctx, DrawElements_353_ctx, DrawElements_353_draw_mode, DrawElements_353_indices_count, DrawElements_353_indices_type, DrawElements_353_indices, DrawElements_353_instance_count, DrawElements_353_base_vertex, checkPrimitiveType_354_draw_mode, glErrorInvalidValueIf_357_condition, checkIndicesType_358_indices_type, glErrorInvalidValueIf_361_condition
 	return nil
 }
 func (ϟa *GlDrawElementsIndirect) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_367_major := uint32(3)       // u32
 	minRequiredVersion_367_minor := uint32(1)       // u32
 	checkPrimitiveType_368_draw_mode := ϟa.DrawMode // GLenum
@@ -2756,14 +2830,15 @@ func (ϟa *GlDrawElementsIndirect) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	if glErrorInvalidOperationIf_377_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_367_major, minRequiredVersion_367_minor, checkPrimitiveType_368_draw_mode, checkIndicesType_371_indices_type, context, GetContext_374_result, ctx, glErrorInvalidOperationIf_376_condition, glErrorInvalidOperationIf_377_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstanced) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_378_major := uint32(3)                    // u32
 	minRequiredVersion_378_minor := uint32(0)                    // u32
 	DrawElementsInstanced_379_draw_mode := ϟa.DrawMode           // GLenum
@@ -2965,14 +3040,15 @@ func (ϟa *GlDrawElementsInstanced) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_378_major, minRequiredVersion_378_minor, DrawElementsInstanced_379_draw_mode, DrawElementsInstanced_379_indices_count, DrawElementsInstanced_379_indices_type, DrawElementsInstanced_379_indices, DrawElementsInstanced_379_instance_count, context, GetContext_380_result, ctx, DrawElements_382_ctx, DrawElements_382_draw_mode, DrawElements_382_indices_count, DrawElements_382_indices_type, DrawElements_382_indices, DrawElements_382_instance_count, DrawElements_382_base_vertex, checkPrimitiveType_383_draw_mode, glErrorInvalidValueIf_386_condition, checkIndicesType_387_indices_type, glErrorInvalidValueIf_390_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedBaseVertex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_396_major := uint32(3)                              // u32
 	minRequiredVersion_396_minor := uint32(2)                              // u32
 	DrawElementsInstancedBaseVertex_397_draw_mode := ϟa.DrawMode           // GLenum
@@ -3175,14 +3251,15 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Mutate(ϟs *gfxapi.State, ϟd data
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_396_major, minRequiredVersion_396_minor, DrawElementsInstancedBaseVertex_397_draw_mode, DrawElementsInstancedBaseVertex_397_indices_count, DrawElementsInstancedBaseVertex_397_indices_type, DrawElementsInstancedBaseVertex_397_indices, DrawElementsInstancedBaseVertex_397_instance_count, DrawElementsInstancedBaseVertex_397_base_vertex, context, GetContext_398_result, ctx, DrawElements_400_ctx, DrawElements_400_draw_mode, DrawElements_400_indices_count, DrawElements_400_indices_type, DrawElements_400_indices, DrawElements_400_instance_count, DrawElements_400_base_vertex, checkPrimitiveType_401_draw_mode, glErrorInvalidValueIf_404_condition, checkIndicesType_405_indices_type, glErrorInvalidValueIf_408_condition
 	return nil
 }
 func (ϟa *GlDrawRangeElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_414_major := uint32(3)                    // u32
 	minRequiredVersion_414_minor := uint32(0)                    // u32
 	glErrorInvalidValueIf_415_condition := (ϟa.End) < (ϟa.Start) // bool
@@ -3383,14 +3460,15 @@ func (ϟa *GlDrawRangeElements) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_414_major, minRequiredVersion_414_minor, glErrorInvalidValueIf_415_condition, context, GetContext_416_result, ctx, DrawElements_418_ctx, DrawElements_418_draw_mode, DrawElements_418_indices_count, DrawElements_418_indices_type, DrawElements_418_indices, DrawElements_418_instance_count, DrawElements_418_base_vertex, checkPrimitiveType_419_draw_mode, glErrorInvalidValueIf_422_condition, checkIndicesType_423_indices_type, glErrorInvalidValueIf_426_condition
 	return nil
 }
 func (ϟa *GlDrawRangeElementsBaseVertex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_432_major := uint32(3)                                                                              // u32
 	minRequiredVersion_432_minor := uint32(2)                                                                              // u32
 	DrawRangeElementsBaseVertex_433_draw_mode := ϟa.DrawMode                                                               // GLenum
@@ -3598,14 +3676,15 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Mutate(ϟs *gfxapi.State, ϟd database
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_432_major, minRequiredVersion_432_minor, DrawRangeElementsBaseVertex_433_draw_mode, DrawRangeElementsBaseVertex_433_start, DrawRangeElementsBaseVertex_433_end, DrawRangeElementsBaseVertex_433_indices_count, DrawRangeElementsBaseVertex_433_indices_type, DrawRangeElementsBaseVertex_433_indices, DrawRangeElementsBaseVertex_433_base_vertex, glErrorInvalidValueIf_434_condition, context, GetContext_435_result, ctx, DrawElements_437_ctx, DrawElements_437_draw_mode, DrawElements_437_indices_count, DrawElements_437_indices_type, DrawElements_437_indices, DrawElements_437_instance_count, DrawElements_437_base_vertex, checkPrimitiveType_438_draw_mode, glErrorInvalidValueIf_441_condition, checkIndicesType_442_indices_type, glErrorInvalidValueIf_445_condition
 	return nil
 }
 func (ϟa *GlPatchParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_451_major := uint32(3)                                                       // u32
 	minRequiredVersion_451_minor := uint32(2)                                                       // u32
 	PatchParameteri_452_pname := ϟa.Pname                                                           // GLenum
@@ -3614,14 +3693,15 @@ func (ϟa *GlPatchParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	if glErrorInvalidEnumIf_453_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_451_major, minRequiredVersion_451_minor, PatchParameteri_452_pname, PatchParameteri_452_value, glErrorInvalidEnumIf_453_condition
 	return nil
 }
 func (ϟa *GlPrimitiveBoundingBox) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_454_major := uint32(3) // u32
 	minRequiredVersion_454_minor := uint32(2) // u32
 	PrimitiveBoundingBox_455_minX := ϟa.MinX  // GLfloat
@@ -3632,105 +3712,116 @@ func (ϟa *GlPrimitiveBoundingBox) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	PrimitiveBoundingBox_455_maxY := ϟa.MaxY  // GLfloat
 	PrimitiveBoundingBox_455_maxZ := ϟa.MaxZ  // GLfloat
 	PrimitiveBoundingBox_455_maxW := ϟa.MaxW  // GLfloat
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_454_major, minRequiredVersion_454_minor, PrimitiveBoundingBox_455_minX, PrimitiveBoundingBox_455_minY, PrimitiveBoundingBox_455_minZ, PrimitiveBoundingBox_455_minW, PrimitiveBoundingBox_455_maxX, PrimitiveBoundingBox_455_maxY, PrimitiveBoundingBox_455_maxZ, PrimitiveBoundingBox_455_maxW
 	return nil
 }
 func (ϟa *GlActiveShaderProgramEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_456_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_456_ext
 	return nil
 }
 func (ϟa *GlAlphaFuncQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_457_ext := ExtensionId_GL_QCOM_alpha_test // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_457_ext
 	return nil
 }
 func (ϟa *GlApplyFramebufferAttachmentCMAAINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_458_ext := ExtensionId_GL_INTEL_framebuffer_CMAA // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_458_ext
 	return nil
 }
 func (ϟa *GlBeginConditionalRenderNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_459_ext := ExtensionId_GL_NV_conditional_render // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_459_ext
 	return nil
 }
 func (ϟa *GlBeginPerfMonitorAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_460_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_460_ext
 	return nil
 }
 func (ϟa *GlBeginPerfQueryINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_461_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_461_ext
 	return nil
 }
 func (ϟa *GlBeginQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_462_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_462_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = requiresExtension2_462_ext, requiresExtension2_462_ext2
 	return nil
 }
 func (ϟa *GlBindFragDataLocationEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_463_ext := ExtensionId_GL_EXT_blend_func_extended // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_463_ext
 	return nil
 }
 func (ϟa *GlBindFragDataLocationIndexedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_464_ext := ExtensionId_GL_EXT_blend_func_extended // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_464_ext
 	return nil
 }
 func (ϟa *GlBindProgramPipelineEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_465_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_465_ext
 	return nil
 }
 func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_466_ext := ExtensionId_GL_OES_vertex_array_object // ExtensionId
 	BindVertexArray_467_array := ϟa.Array                               // VertexArrayId
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                        // Contextʳ
@@ -3755,23 +3846,25 @@ func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		_, _, _ = NewVertexArray_470_ctx, array, NewVertexArray_470_result
 	}
 	ctx.BoundVertexArray = BindVertexArray_467_array
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = requiresExtension_466_ext, BindVertexArray_467_array, context, GetContext_468_result, ctx
 	return nil
 }
 func (ϟa *GlBlendBarrierNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_471_ext := ExtensionId_GL_NV_blend_equation_advanced // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_471_ext
 	return nil
 }
 func (ϟa *GlBlendEquationSeparateiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_473_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	BlendEquationSeparatei_474_buf := ϟa.Buf                             // DrawBufferIndex
 	BlendEquationSeparatei_474_modeRGB := ϟa.ModeRGB                     // GLenum
@@ -3790,14 +3883,15 @@ func (ϟa *GlBlendEquationSeparateiOES) Mutate(ϟs *gfxapi.State, ϟd database.D
 		return
 		_ = glErrorInvalidEnum_476_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_473_ext, BlendEquationSeparatei_474_buf, BlendEquationSeparatei_474_modeRGB, BlendEquationSeparatei_474_modeAlpha
 	return nil
 }
 func (ϟa *GlBlendEquationiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_477_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	BlendEquationi_478_buf := ϟa.Buf                                     // DrawBufferIndex
 	BlendEquationi_478_mode := ϟa.Mode                                   // GLenum
@@ -3808,14 +3902,15 @@ func (ϟa *GlBlendEquationiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_479_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_477_ext, BlendEquationi_478_buf, BlendEquationi_478_mode
 	return nil
 }
 func (ϟa *GlBlendFuncSeparateiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_480_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	BlendFuncSeparatei_481_buf := ϟa.Buf                                 // DrawBufferIndex
 	BlendFuncSeparatei_481_srcRGB := ϟa.SrcRGB                           // GLenum
@@ -3850,14 +3945,15 @@ func (ϟa *GlBlendFuncSeparateiOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_485_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_480_ext, BlendFuncSeparatei_481_buf, BlendFuncSeparatei_481_srcRGB, BlendFuncSeparatei_481_dstRGB, BlendFuncSeparatei_481_srcAlpha, BlendFuncSeparatei_481_dstAlpha
 	return nil
 }
 func (ϟa *GlBlendFunciOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_486_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	BlendFunci_487_buf := ϟa.Buf                                         // DrawBufferIndex
 	BlendFunci_487_src := ϟa.Src                                         // GLenum
@@ -3876,32 +3972,35 @@ func (ϟa *GlBlendFunciOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_489_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_486_ext, BlendFunci_487_buf, BlendFunci_487_src, BlendFunci_487_dst
 	return nil
 }
 func (ϟa *GlBlendParameteriNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_490_ext := ExtensionId_GL_NV_blend_equation_advanced // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_490_ext
 	return nil
 }
 func (ϟa *GlBlitFramebufferANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_491_ext := ExtensionId_GL_ANGLE_framebuffer_blit // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_491_ext
 	return nil
 }
 func (ϟa *GlBlitFramebufferNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_492_ext := ExtensionId_GL_NV_framebuffer_blit                                                                          // ExtensionId
 	BlitFramebuffer_493_srcX0 := ϟa.SrcX0                                                                                                    // GLint
 	BlitFramebuffer_493_srcY0 := ϟa.SrcY0                                                                                                    // GLint
@@ -3928,23 +4027,25 @@ func (ϟa *GlBlitFramebufferNV) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_495_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_492_ext, BlitFramebuffer_493_srcX0, BlitFramebuffer_493_srcY0, BlitFramebuffer_493_srcX1, BlitFramebuffer_493_srcY1, BlitFramebuffer_493_dstX0, BlitFramebuffer_493_dstY0, BlitFramebuffer_493_dstX1, BlitFramebuffer_493_dstY1, BlitFramebuffer_493_mask, BlitFramebuffer_493_filter, supportsBits_494_seenBits, supportsBits_494_validBits
 	return nil
 }
 func (ϟa *GlBufferStorageEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_496_ext := ExtensionId_GL_EXT_buffer_storage // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_496_ext
 	return nil
 }
 func (ϟa *GlClientWaitSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_497_ext := ExtensionId_GL_APPLE_sync              // ExtensionId
 	ClientWaitSync_498_sync := ϟa.Sync                                  // GLsync
 	ClientWaitSync_498_syncFlags := ϟa.Flag                             // GLbitfield
@@ -3953,7 +4054,7 @@ func (ϟa *GlClientWaitSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	supportsBits_499_validBits := GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT // GLbitfield
 	if (GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT)&(ClientWaitSync_498_syncFlags) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ClientWaitSync_498_result := ϟa.Result // GLenum
 	ϟa.Result = ClientWaitSync_498_result
 	_, _, _, _, _, _, _ = requiresExtension_497_ext, ClientWaitSync_498_sync, ClientWaitSync_498_syncFlags, ClientWaitSync_498_timeout, supportsBits_499_seenBits, supportsBits_499_validBits, ClientWaitSync_498_result
@@ -3961,22 +4062,24 @@ func (ϟa *GlClientWaitSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlColorMaskiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_500_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	ColorMaski_501_index := ϟa.Index                                     // DrawBufferIndex
 	ColorMaski_501_r := ϟa.R                                             // GLboolean
 	ColorMaski_501_g := ϟa.G                                             // GLboolean
 	ColorMaski_501_b := ϟa.B                                             // GLboolean
 	ColorMaski_501_a := ϟa.A                                             // GLboolean
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_500_ext, ColorMaski_501_index, ColorMaski_501_r, ColorMaski_501_g, ColorMaski_501_b, ColorMaski_501_a
 	return nil
 }
 func (ϟa *GlCompressedTexImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_502_ext := ExtensionId_GL_OES_texture_3D   // ExtensionId
 	CompressedTexImage3D_503_target := ϟa.Target                 // GLenum
 	CompressedTexImage3D_503_level := ϟa.Level                   // GLint
@@ -4020,14 +4123,15 @@ func (ϟa *GlCompressedTexImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((CompressedTexImage3D_503_data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(CompressedTexImage3D_503_data).Slice(uint64(GLsizei(int32(0))), uint64(CompressedTexImage3D_503_image_size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_502_ext, CompressedTexImage3D_503_target, CompressedTexImage3D_503_level, CompressedTexImage3D_503_internalformat, CompressedTexImage3D_503_width, CompressedTexImage3D_503_height, CompressedTexImage3D_503_depth, CompressedTexImage3D_503_border, CompressedTexImage3D_503_image_size, CompressedTexImage3D_503_data, context, GetContext_508_result, ctx
 	return nil
 }
 func (ϟa *GlCompressedTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_510_ext := ExtensionId_GL_OES_texture_3D // ExtensionId
 	CompressedTexSubImage3D_511_target := ϟa.Target            // GLenum
 	CompressedTexSubImage3D_511_level := ϟa.Level              // GLint
@@ -4073,14 +4177,15 @@ func (ϟa *GlCompressedTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((CompressedTexSubImage3D_511_data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(CompressedTexSubImage3D_511_data).Slice(uint64(GLsizei(int32(0))), uint64(CompressedTexSubImage3D_511_image_size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_510_ext, CompressedTexSubImage3D_511_target, CompressedTexSubImage3D_511_level, CompressedTexSubImage3D_511_xoffset, CompressedTexSubImage3D_511_yoffset, CompressedTexSubImage3D_511_zoffset, CompressedTexSubImage3D_511_width, CompressedTexSubImage3D_511_height, CompressedTexSubImage3D_511_depth, CompressedTexSubImage3D_511_format, CompressedTexSubImage3D_511_image_size, CompressedTexSubImage3D_511_data, context, GetContext_516_result, ctx
 	return nil
 }
 func (ϟa *GlCopyBufferSubDataNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_518_ext := ExtensionId_GL_NV_copy_buffer // ExtensionId
 	CopyBufferSubData_519_readTarget := ϟa.ReadTarget          // GLenum
 	CopyBufferSubData_519_writeTarget := ϟa.WriteTarget        // GLenum
@@ -4109,14 +4214,15 @@ func (ϟa *GlCopyBufferSubDataNV) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_523_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_518_ext, CopyBufferSubData_519_readTarget, CopyBufferSubData_519_writeTarget, CopyBufferSubData_519_readOffset, CopyBufferSubData_519_writeOffset, CopyBufferSubData_519_size
 	return nil
 }
 func (ϟa *GlCopyImageSubDataOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_524_ext := ExtensionId_GL_OES_copy_image // ExtensionId
 	CopyImageSubData_525_srcName := ϟa.SrcName                 // GLuint
 	CopyImageSubData_525_srcTarget := ϟa.SrcTarget             // GLenum
@@ -4147,23 +4253,25 @@ func (ϟa *GlCopyImageSubDataOES) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_527_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_524_ext, CopyImageSubData_525_srcName, CopyImageSubData_525_srcTarget, CopyImageSubData_525_srcLevel, CopyImageSubData_525_srcX, CopyImageSubData_525_srcY, CopyImageSubData_525_srcZ, CopyImageSubData_525_dstName, CopyImageSubData_525_dstTarget, CopyImageSubData_525_dstLevel, CopyImageSubData_525_dstX, CopyImageSubData_525_dstY, CopyImageSubData_525_dstZ, CopyImageSubData_525_srcWidth, CopyImageSubData_525_srcHeight, CopyImageSubData_525_srcDepth
 	return nil
 }
 func (ϟa *GlCopyPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_528_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_528_ext
 	return nil
 }
 func (ϟa *GlCopyTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_529_ext := ExtensionId_GL_OES_texture_3D // ExtensionId
 	CopyTexSubImage3D_530_target := ϟa.Target                  // GLenum
 	CopyTexSubImage3D_530_level := ϟa.Level                    // GLint
@@ -4185,159 +4293,176 @@ func (ϟa *GlCopyTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = glErrorInvalidEnum_532_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = requiresExtension_529_ext, CopyTexSubImage3D_530_target, CopyTexSubImage3D_530_level, CopyTexSubImage3D_530_xoffset, CopyTexSubImage3D_530_yoffset, CopyTexSubImage3D_530_zoffset, CopyTexSubImage3D_530_x, CopyTexSubImage3D_530_y, CopyTexSubImage3D_530_width, CopyTexSubImage3D_530_height
 	return nil
 }
 func (ϟa *GlCopyTextureLevelsAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_533_ext := ExtensionId_GL_APPLE_copy_texture_levels // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_533_ext
 	return nil
 }
 func (ϟa *GlCoverFillPathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_534_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_534_ext
 	return nil
 }
 func (ϟa *GlCoverFillPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_535_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_535_ext
 	return nil
 }
 func (ϟa *GlCoverStrokePathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_536_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_536_ext
 	return nil
 }
 func (ϟa *GlCoverStrokePathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_537_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_537_ext
 	return nil
 }
 func (ϟa *GlCoverageMaskNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_538_ext := ExtensionId_GL_NV_coverage_sample // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_538_ext
 	return nil
 }
 func (ϟa *GlCoverageModulationNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_539_ext := ExtensionId_GL_NV_framebuffer_mixed_samples // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_539_ext
 	return nil
 }
 func (ϟa *GlCoverageModulationTableNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_540_ext := ExtensionId_GL_NV_framebuffer_mixed_samples // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_540_ext
 	return nil
 }
 func (ϟa *GlCoverageOperationNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_541_ext := ExtensionId_GL_NV_coverage_sample // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_541_ext
 	return nil
 }
 func (ϟa *GlCreatePerfQueryINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_542_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_542_ext
 	return nil
 }
 func (ϟa *GlCreateShaderProgramvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_543_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_543_ext
 	return nil
 }
 func (ϟa *GlDeleteFencesNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_544_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_544_ext
 	return nil
 }
 func (ϟa *GlDeletePathsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_545_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_545_ext
 	return nil
 }
 func (ϟa *GlDeletePerfMonitorsAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_546_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_546_ext
 	return nil
 }
 func (ϟa *GlDeletePerfQueryINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_547_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_547_ext
 	return nil
 }
 func (ϟa *GlDeleteProgramPipelinesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_548_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_548_ext
 	return nil
 }
 func (ϟa *GlDeleteQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_549_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_549_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
 	q := ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs)    // QueryIdˢ
@@ -4352,24 +4477,26 @@ func (ϟa *GlDeleteQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension2_549_ext, requiresExtension2_549_ext2, q, context, GetContext_550_result, ctx
 	return nil
 }
 func (ϟa *GlDeleteSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_552_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	DeleteSync_553_sync := ϟa.Sync                         // GLsync
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = requiresExtension_552_ext, DeleteSync_553_sync
 	return nil
 }
 func (ϟa *GlDeleteVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_554_ext := ExtensionId_GL_OES_vertex_array_object                         // ExtensionId
 	DeleteVertexArrays_555_count := ϟa.Count                                                    // GLsizei
 	DeleteVertexArrays_555_arrays := ϟa.Arrays                                                  // VertexArrayIdᶜᵖ
@@ -4398,41 +4525,45 @@ func (ϟa *GlDeleteVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		}
 		_ = id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = requiresExtension_554_ext, DeleteVertexArrays_555_count, DeleteVertexArrays_555_arrays, glErrorInvalidValueIf_556_condition, context, GetContext_557_result, ctx, a
 	return nil
 }
 func (ϟa *GlDepthRangeArrayfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_559_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_559_ext
 	return nil
 }
 func (ϟa *GlDepthRangeIndexedfNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_560_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_560_ext
 	return nil
 }
 func (ϟa *GlDisableDriverControlQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_561_ext := ExtensionId_GL_QCOM_driver_control // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_561_ext
 	return nil
 }
 func (ϟa *GlDisableiNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_562_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
 	Disablei_563_target := ϟa.Target                              // GLenum
 	Disablei_563_index := ϟa.Index                                // GLuint
@@ -4443,14 +4574,15 @@ func (ϟa *GlDisableiNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_564_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_562_ext, Disablei_563_target, Disablei_563_index
 	return nil
 }
 func (ϟa *GlDisableiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_565_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	Disablei_566_target := ϟa.Target                                     // GLenum
 	Disablei_566_index := ϟa.Index                                       // GLuint
@@ -4461,23 +4593,25 @@ func (ϟa *GlDisableiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		return
 		_ = glErrorInvalidEnum_567_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_565_ext, Disablei_566_target, Disablei_566_index
 	return nil
 }
 func (ϟa *GlDiscardFramebufferEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_568_ext := ExtensionId_GL_EXT_discard_framebuffer // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_568_ext
 	return nil
 }
 func (ϟa *GlDrawArraysInstancedANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_569_ext := ExtensionId_GL_ANGLE_instanced_arrays    // ExtensionId
 	DrawArraysInstanced_570_draw_mode := ϟa.Mode                          // GLenum
 	DrawArraysInstanced_570_first_index := ϟa.First                       // GLint
@@ -4572,23 +4706,25 @@ func (ϟa *GlDrawArraysInstancedANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Da
 			_ = vao3
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_569_ext, DrawArraysInstanced_570_draw_mode, DrawArraysInstanced_570_first_index, DrawArraysInstanced_570_indices_count, DrawArraysInstanced_570_instance_count, checkPrimitiveType_571_draw_mode, glErrorInvalidValueIf_574_condition, glErrorInvalidValueIf_575_condition, glErrorInvalidValueIf_576_condition, context, GetContext_577_result, ctx, ReadVertexArrays_579_ctx, ReadVertexArrays_579_first_index, ReadVertexArrays_579_index_count, ReadVertexArrays_579_instance_count
 	return nil
 }
 func (ϟa *GlDrawArraysInstancedBaseInstanceEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_581_ext := ExtensionId_GL_EXT_base_instance // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_581_ext
 	return nil
 }
 func (ϟa *GlDrawArraysInstancedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_582_ext := ExtensionId_GL_EXT_draw_instanced       // ExtensionId
 	requiresExtension2_582_ext2 := ExtensionId_GL_EXT_instanced_arrays    // ExtensionId
 	DrawArraysInstanced_583_draw_mode := ϟa.Mode                          // GLenum
@@ -4684,14 +4820,15 @@ func (ϟa *GlDrawArraysInstancedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 			_ = vao3
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension2_582_ext, requiresExtension2_582_ext2, DrawArraysInstanced_583_draw_mode, DrawArraysInstanced_583_first_index, DrawArraysInstanced_583_indices_count, DrawArraysInstanced_583_instance_count, checkPrimitiveType_584_draw_mode, glErrorInvalidValueIf_587_condition, glErrorInvalidValueIf_588_condition, glErrorInvalidValueIf_589_condition, context, GetContext_590_result, ctx, ReadVertexArrays_592_ctx, ReadVertexArrays_592_first_index, ReadVertexArrays_592_index_count, ReadVertexArrays_592_instance_count
 	return nil
 }
 func (ϟa *GlDrawArraysInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_594_ext := ExtensionId_GL_NV_draw_instanced         // ExtensionId
 	DrawArraysInstanced_595_draw_mode := ϟa.Mode                          // GLenum
 	DrawArraysInstanced_595_first_index := ϟa.First                       // GLint
@@ -4786,44 +4923,48 @@ func (ϟa *GlDrawArraysInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 			_ = vao3
 		}
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_594_ext, DrawArraysInstanced_595_draw_mode, DrawArraysInstanced_595_first_index, DrawArraysInstanced_595_indices_count, DrawArraysInstanced_595_instance_count, checkPrimitiveType_596_draw_mode, glErrorInvalidValueIf_599_condition, glErrorInvalidValueIf_600_condition, glErrorInvalidValueIf_601_condition, context, GetContext_602_result, ctx, ReadVertexArrays_604_ctx, ReadVertexArrays_604_first_index, ReadVertexArrays_604_index_count, ReadVertexArrays_604_instance_count
 	return nil
 }
 func (ϟa *GlDrawBuffersEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_606_ext := ExtensionId_GL_EXT_draw_buffers // ExtensionId
 	DrawBuffers_607_n := ϟa.N                                    // GLsizei
 	DrawBuffers_607_bufs := ϟa.Bufs                              // GLenumᶜᵖ
 	DrawBuffers_607_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_607_n), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_606_ext, DrawBuffers_607_n, DrawBuffers_607_bufs
 	return nil
 }
 func (ϟa *GlDrawBuffersIndexedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_608_ext := ExtensionId_GL_EXT_multiview_draw_buffers // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_608_ext
 	return nil
 }
 func (ϟa *GlDrawBuffersNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_609_ext := ExtensionId_GL_NV_draw_buffers // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_609_ext
 	return nil
 }
 func (ϟa *GlDrawElementsBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_610_ext := ExtensionId_GL_EXT_draw_elements_base_vertex // ExtensionId
 	DrawElementsBaseVertex_611_draw_mode := ϟa.Mode                           // GLenum
 	DrawElementsBaseVertex_611_indices_count := ϟa.Count                      // GLsizei
@@ -5024,14 +5165,15 @@ func (ϟa *GlDrawElementsBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd database.D
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_610_ext, DrawElementsBaseVertex_611_draw_mode, DrawElementsBaseVertex_611_indices_count, DrawElementsBaseVertex_611_indices_type, DrawElementsBaseVertex_611_indices, DrawElementsBaseVertex_611_base_vertex, context, GetContext_612_result, ctx, DrawElements_614_ctx, DrawElements_614_draw_mode, DrawElements_614_indices_count, DrawElements_614_indices_type, DrawElements_614_indices, DrawElements_614_instance_count, DrawElements_614_base_vertex, checkPrimitiveType_615_draw_mode, glErrorInvalidValueIf_618_condition, checkIndicesType_619_indices_type, glErrorInvalidValueIf_622_condition
 	return nil
 }
 func (ϟa *GlDrawElementsBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_628_ext := ExtensionId_GL_OES_draw_elements_base_vertex // ExtensionId
 	DrawElementsBaseVertex_629_draw_mode := ϟa.Mode                           // GLenum
 	DrawElementsBaseVertex_629_indices_count := ϟa.Count                      // GLsizei
@@ -5232,14 +5374,15 @@ func (ϟa *GlDrawElementsBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd database.D
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_628_ext, DrawElementsBaseVertex_629_draw_mode, DrawElementsBaseVertex_629_indices_count, DrawElementsBaseVertex_629_indices_type, DrawElementsBaseVertex_629_indices, DrawElementsBaseVertex_629_base_vertex, context, GetContext_630_result, ctx, DrawElements_632_ctx, DrawElements_632_draw_mode, DrawElements_632_indices_count, DrawElements_632_indices_type, DrawElements_632_indices, DrawElements_632_instance_count, DrawElements_632_base_vertex, checkPrimitiveType_633_draw_mode, glErrorInvalidValueIf_636_condition, checkIndicesType_637_indices_type, glErrorInvalidValueIf_640_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_646_ext := ExtensionId_GL_ANGLE_instanced_arrays // ExtensionId
 	DrawElementsInstanced_647_draw_mode := ϟa.Mode                     // GLenum
 	DrawElementsInstanced_647_indices_count := ϟa.Count                // GLsizei
@@ -5440,32 +5583,35 @@ func (ϟa *GlDrawElementsInstancedANGLE) Mutate(ϟs *gfxapi.State, ϟd database.
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_646_ext, DrawElementsInstanced_647_draw_mode, DrawElementsInstanced_647_indices_count, DrawElementsInstanced_647_indices_type, DrawElementsInstanced_647_indices, DrawElementsInstanced_647_instance_count, context, GetContext_648_result, ctx, DrawElements_650_ctx, DrawElements_650_draw_mode, DrawElements_650_indices_count, DrawElements_650_indices_type, DrawElements_650_indices, DrawElements_650_instance_count, DrawElements_650_base_vertex, checkPrimitiveType_651_draw_mode, glErrorInvalidValueIf_654_condition, checkIndicesType_655_indices_type, glErrorInvalidValueIf_658_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedBaseInstanceEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_664_ext := ExtensionId_GL_EXT_base_instance // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_664_ext
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedBaseVertexBaseInstanceEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_665_ext := ExtensionId_GL_EXT_base_instance // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_665_ext
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_666_ext := ExtensionId_GL_EXT_draw_elements_base_vertex // ExtensionId
 	DrawElementsInstancedBaseVertex_667_draw_mode := ϟa.Mode                  // GLenum
 	DrawElementsInstancedBaseVertex_667_indices_count := ϟa.Count             // GLsizei
@@ -5667,14 +5813,15 @@ func (ϟa *GlDrawElementsInstancedBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd d
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_666_ext, DrawElementsInstancedBaseVertex_667_draw_mode, DrawElementsInstancedBaseVertex_667_indices_count, DrawElementsInstancedBaseVertex_667_indices_type, DrawElementsInstancedBaseVertex_667_indices, DrawElementsInstancedBaseVertex_667_instance_count, DrawElementsInstancedBaseVertex_667_base_vertex, context, GetContext_668_result, ctx, DrawElements_670_ctx, DrawElements_670_draw_mode, DrawElements_670_indices_count, DrawElements_670_indices_type, DrawElements_670_indices, DrawElements_670_instance_count, DrawElements_670_base_vertex, checkPrimitiveType_671_draw_mode, glErrorInvalidValueIf_674_condition, checkIndicesType_675_indices_type, glErrorInvalidValueIf_678_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_684_ext := ExtensionId_GL_OES_draw_elements_base_vertex // ExtensionId
 	DrawElementsInstancedBaseVertex_685_draw_mode := ϟa.Mode                  // GLenum
 	DrawElementsInstancedBaseVertex_685_indices_count := ϟa.Count             // GLsizei
@@ -5876,14 +6023,15 @@ func (ϟa *GlDrawElementsInstancedBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd d
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_684_ext, DrawElementsInstancedBaseVertex_685_draw_mode, DrawElementsInstancedBaseVertex_685_indices_count, DrawElementsInstancedBaseVertex_685_indices_type, DrawElementsInstancedBaseVertex_685_indices, DrawElementsInstancedBaseVertex_685_instance_count, DrawElementsInstancedBaseVertex_685_base_vertex, context, GetContext_686_result, ctx, DrawElements_688_ctx, DrawElements_688_draw_mode, DrawElements_688_indices_count, DrawElements_688_indices_type, DrawElements_688_indices, DrawElements_688_instance_count, DrawElements_688_base_vertex, checkPrimitiveType_689_draw_mode, glErrorInvalidValueIf_692_condition, checkIndicesType_693_indices_type, glErrorInvalidValueIf_696_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_702_ext := ExtensionId_GL_EXT_draw_instanced    // ExtensionId
 	requiresExtension2_702_ext2 := ExtensionId_GL_EXT_instanced_arrays // ExtensionId
 	DrawElementsInstanced_703_draw_mode := ϟa.Mode                     // GLenum
@@ -6085,14 +6233,15 @@ func (ϟa *GlDrawElementsInstancedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Da
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension2_702_ext, requiresExtension2_702_ext2, DrawElementsInstanced_703_draw_mode, DrawElementsInstanced_703_indices_count, DrawElementsInstanced_703_indices_type, DrawElementsInstanced_703_indices, DrawElementsInstanced_703_instance_count, context, GetContext_704_result, ctx, DrawElements_706_ctx, DrawElements_706_draw_mode, DrawElements_706_indices_count, DrawElements_706_indices_type, DrawElements_706_indices, DrawElements_706_instance_count, DrawElements_706_base_vertex, checkPrimitiveType_707_draw_mode, glErrorInvalidValueIf_710_condition, checkIndicesType_711_indices_type, glErrorInvalidValueIf_714_condition
 	return nil
 }
 func (ϟa *GlDrawElementsInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_720_ext := ExtensionId_GL_NV_draw_instanced // ExtensionId
 	DrawElementsInstanced_721_draw_mode := ϟa.Mode                // GLenum
 	DrawElementsInstanced_721_indices_count := ϟa.Count           // GLsizei
@@ -6293,14 +6442,15 @@ func (ϟa *GlDrawElementsInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_720_ext, DrawElementsInstanced_721_draw_mode, DrawElementsInstanced_721_indices_count, DrawElementsInstanced_721_indices_type, DrawElementsInstanced_721_indices, DrawElementsInstanced_721_instance_count, context, GetContext_722_result, ctx, DrawElements_724_ctx, DrawElements_724_draw_mode, DrawElements_724_indices_count, DrawElements_724_indices_type, DrawElements_724_indices, DrawElements_724_instance_count, DrawElements_724_base_vertex, checkPrimitiveType_725_draw_mode, glErrorInvalidValueIf_728_condition, checkIndicesType_729_indices_type, glErrorInvalidValueIf_732_condition
 	return nil
 }
 func (ϟa *GlDrawRangeElementsBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_738_ext := ExtensionId_GL_EXT_draw_elements_base_vertex                                              // ExtensionId
 	DrawRangeElementsBaseVertex_739_draw_mode := ϟa.Mode                                                                   // GLenum
 	DrawRangeElementsBaseVertex_739_start := ϟa.Start                                                                      // GLuint
@@ -6507,14 +6657,15 @@ func (ϟa *GlDrawRangeElementsBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd datab
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_738_ext, DrawRangeElementsBaseVertex_739_draw_mode, DrawRangeElementsBaseVertex_739_start, DrawRangeElementsBaseVertex_739_end, DrawRangeElementsBaseVertex_739_indices_count, DrawRangeElementsBaseVertex_739_indices_type, DrawRangeElementsBaseVertex_739_indices, DrawRangeElementsBaseVertex_739_base_vertex, glErrorInvalidValueIf_740_condition, context, GetContext_741_result, ctx, DrawElements_743_ctx, DrawElements_743_draw_mode, DrawElements_743_indices_count, DrawElements_743_indices_type, DrawElements_743_indices, DrawElements_743_instance_count, DrawElements_743_base_vertex, checkPrimitiveType_744_draw_mode, glErrorInvalidValueIf_747_condition, checkIndicesType_748_indices_type, glErrorInvalidValueIf_751_condition
 	return nil
 }
 func (ϟa *GlDrawRangeElementsBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_757_ext := ExtensionId_GL_OES_draw_elements_base_vertex                                              // ExtensionId
 	DrawRangeElementsBaseVertex_758_draw_mode := ϟa.Mode                                                                   // GLenum
 	DrawRangeElementsBaseVertex_758_start := ϟa.Start                                                                      // GLuint
@@ -6721,41 +6872,45 @@ func (ϟa *GlDrawRangeElementsBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd datab
 		}
 		_, _ = count, id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_757_ext, DrawRangeElementsBaseVertex_758_draw_mode, DrawRangeElementsBaseVertex_758_start, DrawRangeElementsBaseVertex_758_end, DrawRangeElementsBaseVertex_758_indices_count, DrawRangeElementsBaseVertex_758_indices_type, DrawRangeElementsBaseVertex_758_indices, DrawRangeElementsBaseVertex_758_base_vertex, glErrorInvalidValueIf_759_condition, context, GetContext_760_result, ctx, DrawElements_762_ctx, DrawElements_762_draw_mode, DrawElements_762_indices_count, DrawElements_762_indices_type, DrawElements_762_indices, DrawElements_762_instance_count, DrawElements_762_base_vertex, checkPrimitiveType_763_draw_mode, glErrorInvalidValueIf_766_condition, checkIndicesType_767_indices_type, glErrorInvalidValueIf_770_condition
 	return nil
 }
 func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_776_ext := ExtensionId_GL_OES_EGL_image // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_776_ext
 	return nil
 }
 func (ϟa *GlEGLImageTargetTexture2DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_777_ext := ExtensionId_GL_OES_EGL_image // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_777_ext
 	return nil
 }
 func (ϟa *GlEnableDriverControlQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_778_ext := ExtensionId_GL_QCOM_driver_control // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_778_ext
 	return nil
 }
 func (ϟa *GlEnableiNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_779_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
 	Enablei_780_target := ϟa.Target                               // GLenum
 	Enablei_780_index := ϟa.Index                                 // GLuint
@@ -6766,14 +6921,15 @@ func (ϟa *GlEnableiNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		return
 		_ = glErrorInvalidEnum_781_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_779_ext, Enablei_780_target, Enablei_780_index
 	return nil
 }
 func (ϟa *GlEnableiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_782_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	Enablei_783_target := ϟa.Target                                      // GLenum
 	Enablei_783_index := ϟa.Index                                        // GLuint
@@ -6784,169 +6940,187 @@ func (ϟa *GlEnableiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_784_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension_782_ext, Enablei_783_target, Enablei_783_index
 	return nil
 }
 func (ϟa *GlEndConditionalRenderNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_785_ext := ExtensionId_GL_NV_conditional_render // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_785_ext
 	return nil
 }
 func (ϟa *GlEndPerfMonitorAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_786_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_786_ext
 	return nil
 }
 func (ϟa *GlEndPerfQueryINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_787_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_787_ext
 	return nil
 }
 func (ϟa *GlEndQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_788_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_788_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = requiresExtension2_788_ext, requiresExtension2_788_ext2
 	return nil
 }
 func (ϟa *GlEndTilingQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_789_ext := ExtensionId_GL_QCOM_tiled_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_789_ext
 	return nil
 }
 func (ϟa *GlExtGetBufferPointervQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_790_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_790_ext
 	return nil
 }
 func (ϟa *GlExtGetBuffersQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_791_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_791_ext
 	return nil
 }
 func (ϟa *GlExtGetFramebuffersQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_792_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_792_ext
 	return nil
 }
 func (ϟa *GlExtGetProgramBinarySourceQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_793_ext := ExtensionId_GL_QCOM_extended_get2 // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_793_ext
 	return nil
 }
 func (ϟa *GlExtGetProgramsQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_794_ext := ExtensionId_GL_QCOM_extended_get2 // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_794_ext
 	return nil
 }
 func (ϟa *GlExtGetRenderbuffersQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_795_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_795_ext
 	return nil
 }
 func (ϟa *GlExtGetShadersQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_796_ext := ExtensionId_GL_QCOM_extended_get2 // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_796_ext
 	return nil
 }
 func (ϟa *GlExtGetTexLevelParameterivQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_797_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_797_ext
 	return nil
 }
 func (ϟa *GlExtGetTexSubImageQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_798_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_798_ext
 	return nil
 }
 func (ϟa *GlExtGetTexturesQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_799_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_799_ext
 	return nil
 }
 func (ϟa *GlExtIsProgramBinaryQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_800_ext := ExtensionId_GL_QCOM_extended_get2 // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_800_ext
 	return nil
 }
 func (ϟa *GlExtTexObjectStateOverrideiQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_801_ext := ExtensionId_GL_QCOM_extended_get // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_801_ext
 	return nil
 }
 func (ϟa *GlFenceSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_802_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	FenceSync_803_condition := ϟa.Condition                // GLenum
 	FenceSync_803_syncFlags := ϟa.Flag                     // GLbitfield
@@ -6957,7 +7131,7 @@ func (ϟa *GlFenceSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_804_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	FenceSync_803_result := ϟa.Result // GLsync
 	ϟa.Result = FenceSync_803_result
 	_, _, _, _ = requiresExtension_802_ext, FenceSync_803_condition, FenceSync_803_syncFlags, FenceSync_803_result
@@ -6965,17 +7139,19 @@ func (ϟa *GlFenceSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlFinishFenceNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_805_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_805_ext
 	return nil
 }
 func (ϟa *GlFlushMappedBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_806_ext := ExtensionId_GL_EXT_map_buffer_range // ExtensionId
 	FlushMappedBufferRange_807_target := ϟa.Target                   // GLenum
 	FlushMappedBufferRange_807_offset := ϟa.Offset                   // GLintptr
@@ -6991,68 +7167,75 @@ func (ϟa *GlFlushMappedBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.D
 		return
 		_ = glErrorInvalidEnum_809_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_806_ext, FlushMappedBufferRange_807_target, FlushMappedBufferRange_807_offset, FlushMappedBufferRange_807_length
 	return nil
 }
 func (ϟa *GlFragmentCoverageColorNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_810_ext := ExtensionId_GL_NV_fragment_coverage_to_color // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_810_ext
 	return nil
 }
 func (ϟa *GlFramebufferSampleLocationsfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_811_ext := ExtensionId_GL_NV_sample_locations // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_811_ext
 	return nil
 }
 func (ϟa *GlFramebufferTexture2DMultisampleEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_812_ext := ExtensionId_GL_EXT_multisampled_render_to_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_812_ext
 	return nil
 }
 func (ϟa *GlFramebufferTexture2DMultisampleIMG) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_813_ext := ExtensionId_GL_IMG_multisampled_render_to_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_813_ext
 	return nil
 }
 func (ϟa *GlFramebufferTexture3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_814_ext := ExtensionId_GL_OES_texture_3D // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_814_ext
 	return nil
 }
 func (ϟa *GlFramebufferTextureMultiviewOVR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_815_ext := ExtensionId_GL_OVR_multiview // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_815_ext
 	return nil
 }
 func (ϟa *GlFramebufferTextureOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_816_ext := ExtensionId_GL_OES_geometry_shader // ExtensionId
 	FramebufferTexture_817_target := ϟa.Target                      // GLenum
 	FramebufferTexture_817_attachment := ϟa.Attachment              // GLenum
@@ -7072,51 +7255,56 @@ func (ϟa *GlFramebufferTextureOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_819_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = requiresExtension_816_ext, FramebufferTexture_817_target, FramebufferTexture_817_attachment, FramebufferTexture_817_texture, FramebufferTexture_817_level
 	return nil
 }
 func (ϟa *GlGenFencesNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_820_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_820_ext
 	return nil
 }
 func (ϟa *GlGenPathsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_821_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_821_ext
 	return nil
 }
 func (ϟa *GlGenPerfMonitorsAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_822_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_822_ext
 	return nil
 }
 func (ϟa *GlGenProgramPipelinesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_823_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_823_ext
 	return nil
 }
 func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_824_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_824_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
 	q := ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs)    // QueryIdˢ
@@ -7128,7 +7316,7 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	}
 	GetContext_825_result := context // Contextʳ
 	ctx := GetContext_825_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
 		ctx.Instances.Queries[id] = &Query{}
@@ -7140,8 +7328,9 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_827_ext := ExtensionId_GL_OES_vertex_array_object                      // ExtensionId
 	GenVertexArrays_828_count := ϟa.Count                                                    // GLsizei
 	GenVertexArrays_828_arrays := ϟa.Arrays                                                  // VertexArrayIdᵖ
@@ -7158,7 +7347,7 @@ func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	}
 	GetContext_830_result := context // Contextʳ
 	ctx := GetContext_830_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < GenVertexArrays_828_count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(GenVertexArrays_828_count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7169,8 +7358,9 @@ func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetBufferPointervOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_832_ext := ExtensionId_GL_OES_mapbuffer // ExtensionId
 	GetBufferPointerv_833_target := ϟa.Target                 // GLenum
 	GetBufferPointerv_833_pname := ϟa.Pname                   // GLenum
@@ -7193,91 +7383,100 @@ func (ϟa *GlGetBufferPointervOES) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = glErrorInvalidEnum_836_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetBufferPointerv_833_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _ = requiresExtension_832_ext, GetBufferPointerv_833_target, GetBufferPointerv_833_pname, GetBufferPointerv_833_params
 	return nil
 }
 func (ϟa *GlGetCoverageModulationTableNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_837_ext := ExtensionId_GL_NV_framebuffer_mixed_samples // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_837_ext
 	return nil
 }
 func (ϟa *GlGetDriverControlStringQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_838_ext := ExtensionId_GL_QCOM_driver_control // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_838_ext
 	return nil
 }
 func (ϟa *GlGetDriverControlsQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_839_ext := ExtensionId_GL_QCOM_driver_control // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_839_ext
 	return nil
 }
 func (ϟa *GlGetFenceivNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_840_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_840_ext
 	return nil
 }
 func (ϟa *GlGetFirstPerfQueryIdINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_841_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_841_ext
 	return nil
 }
 func (ϟa *GlGetFloati_vNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_842_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_842_ext
 	return nil
 }
 func (ϟa *GlGetFragDataIndexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_843_ext := ExtensionId_GL_EXT_blend_func_extended // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_843_ext
 	return nil
 }
 func (ϟa *GlGetGraphicsResetStatusEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_844_ext := ExtensionId_GL_EXT_robustness // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_844_ext
 	return nil
 }
 func (ϟa *GlGetGraphicsResetStatusKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_845_ext := ExtensionId_GL_KHR_robustness // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetGraphicsResetStatus_846_result := ϟa.Result // GLenum
 	ϟa.Result = GetGraphicsResetStatus_846_result
 	_, _ = requiresExtension_845_ext, GetGraphicsResetStatus_846_result
@@ -7285,18 +7484,20 @@ func (ϟa *GlGetGraphicsResetStatusKHR) Mutate(ϟs *gfxapi.State, ϟd database.D
 }
 func (ϟa *GlGetImageHandleNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_847_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_847_ext
 	return nil
 }
 func (ϟa *GlGetInteger64vAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_848_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	GetInteger64v_849_param := ϟa.Pname                    // GLenum
 	GetInteger64v_849_values := ϟa.Params                  // GLint64ᵖ
@@ -7311,7 +7512,7 @@ func (ϟa *GlGetInteger64vAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	observeGlGetWrites_852_ctx := ctx                      // Contextʳ
 	observeGlGetWrites_852_name := GetInteger64v_849_param // GLenum
 	observeGlGetWrites_852_v := GetInteger64v_849_values   // GLint64ᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch observeGlGetWrites_852_name {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		minRequiredVersion_853_major := uint32(2) // u32
@@ -8598,223 +8799,247 @@ func (ϟa *GlGetInteger64vAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetIntegeri_vEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1109_ext := ExtensionId_GL_EXT_multiview_draw_buffers // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1109_ext
 	return nil
 }
 func (ϟa *GlGetInternalformatSampleivNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1110_ext := ExtensionId_GL_NV_internalformat_sample_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1110_ext
 	return nil
 }
 func (ϟa *GlGetNextPerfQueryIdINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1111_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1111_ext
 	return nil
 }
 func (ϟa *GlGetObjectLabelEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1112_ext := ExtensionId_GL_EXT_debug_label // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1112_ext
 	return nil
 }
 func (ϟa *GlGetPathCommandsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1113_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1113_ext
 	return nil
 }
 func (ϟa *GlGetPathCoordsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1114_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1114_ext
 	return nil
 }
 func (ϟa *GlGetPathDashArrayNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1115_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1115_ext
 	return nil
 }
 func (ϟa *GlGetPathLengthNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1116_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1116_ext
 	return nil
 }
 func (ϟa *GlGetPathMetricRangeNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1117_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1117_ext
 	return nil
 }
 func (ϟa *GlGetPathMetricsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1118_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1118_ext
 	return nil
 }
 func (ϟa *GlGetPathParameterfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1119_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1119_ext
 	return nil
 }
 func (ϟa *GlGetPathParameterivNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1120_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1120_ext
 	return nil
 }
 func (ϟa *GlGetPathSpacingNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1121_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1121_ext
 	return nil
 }
 func (ϟa *GlGetPerfCounterInfoINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1122_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1122_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorCounterDataAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1123_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1123_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorCounterInfoAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1124_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1124_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorCounterStringAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1125_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1125_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorCountersAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1126_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1126_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorGroupStringAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1127_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1127_ext
 	return nil
 }
 func (ϟa *GlGetPerfMonitorGroupsAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1128_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1128_ext
 	return nil
 }
 func (ϟa *GlGetPerfQueryDataINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1129_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1129_ext
 	return nil
 }
 func (ϟa *GlGetPerfQueryIdByNameINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1130_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1130_ext
 	return nil
 }
 func (ϟa *GlGetPerfQueryInfoINTEL) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1131_ext := ExtensionId_GL_INTEL_performance_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1131_ext
 	return nil
 }
 func (ϟa *GlGetProgramBinaryOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1132_ext := ExtensionId_GL_OES_get_program_binary // ExtensionId
 	GetProgramBinary_1133_program := ϟa.Program                         // ProgramId
 	GetProgramBinary_1133_bufSize := ϟa.BufferSize                      // GLsizei
 	GetProgramBinary_1133_length := ϟa.BytesWritten                     // GLsizeiᵖ
 	GetProgramBinary_1133_binaryFormat := ϟa.BinaryFormat               // GLenumᵖ
 	GetProgramBinary_1133_binary := ϟa.Binary                           // Voidᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (GetProgramBinary_1133_length) != (GLsizeiᵖ{}) {
 		l := GLsizei(ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 		GetProgramBinary_1133_length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8829,97 +9054,107 @@ func (ϟa *GlGetProgramBinaryOES) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlGetProgramPipelineInfoLogEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1134_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1134_ext
 	return nil
 }
 func (ϟa *GlGetProgramPipelineivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1135_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1135_ext
 	return nil
 }
 func (ϟa *GlGetProgramResourceLocationIndexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1136_ext := ExtensionId_GL_EXT_blend_func_extended // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1136_ext
 	return nil
 }
 func (ϟa *GlGetProgramResourcefvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1137_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1137_ext
 	return nil
 }
 func (ϟa *GlGetQueryObjecti64vEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1138_ext := ExtensionId_GL_EXT_disjoint_timer_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_1138_ext
 	return nil
 }
 func (ϟa *GlGetQueryObjectivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1139_ext := ExtensionId_GL_EXT_disjoint_timer_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_1139_ext
 	return nil
 }
 func (ϟa *GlGetQueryObjectui64vEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1140_ext := ExtensionId_GL_EXT_disjoint_timer_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_1140_ext
 	return nil
 }
 func (ϟa *GlGetQueryObjectuivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_1141_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_1141_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = requiresExtension2_1141_ext, requiresExtension2_1141_ext2
 	return nil
 }
 func (ϟa *GlGetQueryivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_1142_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_1142_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = requiresExtension2_1142_ext, requiresExtension2_1142_ext2
 	return nil
 }
 func (ϟa *GlGetSamplerParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1143_ext := ExtensionId_GL_OES_texture_border_clamp   // ExtensionId
 	GetSamplerParameterIiv_1144_sampler := ϟa.Sampler                       // SamplerId
 	GetSamplerParameterIiv_1144_pname := ϟa.Pname                           // GLenum
@@ -8927,7 +9162,7 @@ func (ϟa *GlGetSamplerParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.D
 	GetSamplerParameter_1145_sampler := GetSamplerParameterIiv_1144_sampler // SamplerId
 	GetSamplerParameter_1145_pname := GetSamplerParameterIiv_1144_pname     // GLenum
 	GetSamplerParameter_1145_params := GetSamplerParameterIiv_1144_params   // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_1145_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_1145_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8943,8 +9178,9 @@ func (ϟa *GlGetSamplerParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.D
 }
 func (ϟa *GlGetSamplerParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1147_ext := ExtensionId_GL_OES_texture_border_clamp    // ExtensionId
 	GetSamplerParameterIuiv_1148_sampler := ϟa.Sampler                       // SamplerId
 	GetSamplerParameterIuiv_1148_pname := ϟa.Pname                           // GLenum
@@ -8952,7 +9188,7 @@ func (ϟa *GlGetSamplerParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.
 	GetSamplerParameter_1149_sampler := GetSamplerParameterIuiv_1148_sampler // SamplerId
 	GetSamplerParameter_1149_pname := GetSamplerParameterIuiv_1148_pname     // GLenum
 	GetSamplerParameter_1149_params := GetSamplerParameterIuiv_1148_params   // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_1149_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_1149_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8968,15 +9204,16 @@ func (ϟa *GlGetSamplerParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.
 }
 func (ϟa *GlGetSyncivAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1151_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	GetSynciv_1152_sync := ϟa.Sync                          // GLsync
 	GetSynciv_1152_pname := ϟa.Pname                        // GLenum
 	GetSynciv_1152_bufSize := ϟa.BufSize                    // GLsizei
 	GetSynciv_1152_length := ϟa.Length                      // GLsizeiᵖ
 	GetSynciv_1152_values := ϟa.Values                      // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSynciv_1152_pname {
 	case GLenum_GL_OBJECT_TYPE, GLenum_GL_SYNC_CONDITION, GLenum_GL_SYNC_FLAGS, GLenum_GL_SYNC_STATUS:
 		if ((GetSynciv_1152_values) != (GLintᵖ{})) && ((GetSynciv_1152_bufSize) > (GLsizei(int32(0)))) {
@@ -8995,8 +9232,9 @@ func (ϟa *GlGetSyncivAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlGetTexParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1154_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	GetTexParameterIiv_1155_target := ϟa.Target                           // GLenum
 	GetTexParameterIiv_1155_pname := ϟa.Pname                             // GLenum
@@ -9025,7 +9263,7 @@ func (ϟa *GlGetTexParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_1161_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_1156_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_1156_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9054,8 +9292,9 @@ func (ϟa *GlGetTexParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 }
 func (ϟa *GlGetTexParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1166_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	GetTexParameterIuiv_1167_target := ϟa.Target                          // GLenum
 	GetTexParameterIuiv_1167_pname := ϟa.Pname                            // GLenum
@@ -9084,7 +9323,7 @@ func (ϟa *GlGetTexParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_1173_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_1168_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_1168_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9113,69 +9352,76 @@ func (ϟa *GlGetTexParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Data
 }
 func (ϟa *GlGetTextureHandleNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1178_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1178_ext
 	return nil
 }
 func (ϟa *GlGetTextureSamplerHandleNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1179_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1179_ext
 	return nil
 }
 func (ϟa *GlGetTranslatedShaderSourceANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1180_ext := ExtensionId_GL_ANGLE_translated_shader_source // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1180_ext
 	return nil
 }
 func (ϟa *GlGetnUniformfvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1181_ext := ExtensionId_GL_EXT_robustness // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1181_ext
 	return nil
 }
 func (ϟa *GlGetnUniformfvKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1182_ext := ExtensionId_GL_KHR_robustness // ExtensionId
 	GetnUniformfv_1183_program := ϟa.Program                    // ProgramId
 	GetnUniformfv_1183_location := ϟa.Location                  // UniformLocation
 	GetnUniformfv_1183_bufSize := ϟa.BufSize                    // GLsizei
 	GetnUniformfv_1183_values := ϟa.Params                      // GLfloatᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_1183_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_1183_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _ = requiresExtension_1182_ext, GetnUniformfv_1183_program, GetnUniformfv_1183_location, GetnUniformfv_1183_bufSize, GetnUniformfv_1183_values
 	return nil
 }
 func (ϟa *GlGetnUniformivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1184_ext := ExtensionId_GL_EXT_robustness // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1184_ext
 	return nil
 }
 func (ϟa *GlGetnUniformivKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1185_ext := ExtensionId_GL_KHR_robustness // ExtensionId
 	GetnUniformiv_1186_program := ϟa.Program                    // ProgramId
 	GetnUniformiv_1186_location := ϟa.Location                  // UniformLocation
@@ -9185,15 +9431,16 @@ func (ϟa *GlGetnUniformivKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	GetnUniformfv_1187_location := GetnUniformiv_1186_location  // UniformLocation
 	GetnUniformfv_1187_bufSize := GetnUniformiv_1186_bufSize    // GLsizei
 	GetnUniformfv_1187_values := GetnUniformiv_1186_values      // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_1187_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_1187_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _, _ = requiresExtension_1185_ext, GetnUniformiv_1186_program, GetnUniformiv_1186_location, GetnUniformiv_1186_bufSize, GetnUniformiv_1186_values, GetnUniformfv_1187_program, GetnUniformfv_1187_location, GetnUniformfv_1187_bufSize, GetnUniformfv_1187_values
 	return nil
 }
 func (ϟa *GlGetnUniformuivKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1188_ext := ExtensionId_GL_KHR_robustness // ExtensionId
 	GetnUniformuiv_1189_program := ϟa.Program                   // ProgramId
 	GetnUniformuiv_1189_location := ϟa.Location                 // UniformLocation
@@ -9203,38 +9450,41 @@ func (ϟa *GlGetnUniformuivKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	GetnUniformfv_1190_location := GetnUniformuiv_1189_location // UniformLocation
 	GetnUniformfv_1190_bufSize := GetnUniformuiv_1189_bufSize   // GLsizei
 	GetnUniformfv_1190_values := GetnUniformuiv_1189_values     // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_1190_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_1190_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _, _ = requiresExtension_1188_ext, GetnUniformuiv_1189_program, GetnUniformuiv_1189_location, GetnUniformuiv_1189_bufSize, GetnUniformuiv_1189_values, GetnUniformfv_1190_program, GetnUniformfv_1190_location, GetnUniformfv_1190_bufSize, GetnUniformfv_1190_values
 	return nil
 }
 func (ϟa *GlInsertEventMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1191_ext := ExtensionId_GL_EXT_debug_marker // ExtensionId
 	if (ϟa.Length) > (GLsizei(int32(0))) {
 		ϟa.Marker.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	} else {
 		_ = strings.TrimRight(string(Charᵖ(ϟa.Marker).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1191_ext
 	return nil
 }
 func (ϟa *GlInterpolatePathsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1192_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1192_ext
 	return nil
 }
 func (ϟa *GlIsEnablediNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1193_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
 	IsEnabledi_1194_target := ϟa.Target                            // GLenum
 	IsEnabledi_1194_index := ϟa.Index                              // GLuint
@@ -9245,7 +9495,7 @@ func (ϟa *GlIsEnablediNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_1195_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsEnabledi_1194_result := ϟa.Result // GLboolean
 	ϟa.Result = IsEnabledi_1194_result
 	_, _, _, _ = requiresExtension_1193_ext, IsEnabledi_1194_target, IsEnabledi_1194_index, IsEnabledi_1194_result
@@ -9253,8 +9503,9 @@ func (ϟa *GlIsEnablediNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 }
 func (ϟa *GlIsEnablediOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1196_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
 	IsEnabledi_1197_target := ϟa.Target                                   // GLenum
 	IsEnabledi_1197_index := ϟa.Index                                     // GLuint
@@ -9265,7 +9516,7 @@ func (ϟa *GlIsEnablediOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_1198_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsEnabledi_1197_result := ϟa.Result // GLboolean
 	ϟa.Result = IsEnabledi_1197_result
 	_, _, _, _ = requiresExtension_1196_ext, IsEnabledi_1197_target, IsEnabledi_1197_index, IsEnabledi_1197_result
@@ -9273,68 +9524,75 @@ func (ϟa *GlIsEnablediOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlIsFenceNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1199_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1199_ext
 	return nil
 }
 func (ϟa *GlIsImageHandleResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1200_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1200_ext
 	return nil
 }
 func (ϟa *GlIsPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1201_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1201_ext
 	return nil
 }
 func (ϟa *GlIsPointInFillPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1202_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1202_ext
 	return nil
 }
 func (ϟa *GlIsPointInStrokePathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1203_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1203_ext
 	return nil
 }
 func (ϟa *GlIsProgramPipelineEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1204_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1204_ext
 	return nil
 }
 func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension2_1205_ext := ExtensionId_GL_EXT_disjoint_timer_query     // ExtensionId
 	requiresExtension2_1205_ext2 := ExtensionId_GL_EXT_occlusion_query_boolean // ExtensionId
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                               // Contextʳ
@@ -9345,7 +9603,7 @@ func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	}
 	GetContext_1206_result := context // Contextʳ
 	ctx := GetContext_1206_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Queries.Contains(ϟa.Query) {
 			return 1
@@ -9358,11 +9616,12 @@ func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlIsSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1208_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	IsSync_1209_sync := ϟa.Sync                             // GLsync
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsSync_1209_result := ϟa.Result // GLboolean
 	ϟa.Result = IsSync_1209_result
 	_, _, _ = requiresExtension_1208_ext, IsSync_1209_sync, IsSync_1209_result
@@ -9370,18 +9629,20 @@ func (ϟa *GlIsSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlIsTextureHandleResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1210_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1210_ext
 	return nil
 }
 func (ϟa *GlIsVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1211_ext := ExtensionId_GL_OES_vertex_array_object // ExtensionId
 	IsVertexArray_1212_array := ϟa.Array                                 // VertexArrayId
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
@@ -9399,70 +9660,77 @@ func (ϟa *GlIsVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 			return 0
 		}
 	}() // GLboolean
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = IsVertexArray_1212_result
 	_, _, _, _, _, _ = requiresExtension_1211_ext, IsVertexArray_1212_array, context, GetContext_1213_result, ctx, IsVertexArray_1212_result
 	return nil
 }
 func (ϟa *GlLabelObjectEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1215_ext := ExtensionId_GL_EXT_debug_label // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1215_ext
 	return nil
 }
 func (ϟa *GlMakeImageHandleNonResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1216_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1216_ext
 	return nil
 }
 func (ϟa *GlMakeImageHandleResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1217_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1217_ext
 	return nil
 }
 func (ϟa *GlMakeTextureHandleNonResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1218_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1218_ext
 	return nil
 }
 func (ϟa *GlMakeTextureHandleResidentNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1219_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1219_ext
 	return nil
 }
 func (ϟa *GlMapBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1220_ext := ExtensionId_GL_OES_mapbuffer // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1220_ext
 	return nil
 }
 func (ϟa *GlMapBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1221_ext := ExtensionId_GL_EXT_map_buffer_range // ExtensionId
 	MapBufferRange_1222_target := ϟa.Target                           // GLenum
 	MapBufferRange_1222_offset := ϟa.Offset                           // GLintptr
@@ -9506,7 +9774,7 @@ func (ϟa *GlMapBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	GetContext_1227_result := context                                                // Contextʳ
 	ctx := GetContext_1227_result                                                    // Contextʳ
 	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(MapBufferRange_1222_target)) // Bufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ptr := U8ᵖ(ϟa.Result) // U8ᵖ
 	b.MappingAccess = MapBufferRange_1222_access
 	b.MappingData = ptr.Slice(uint64(GLsizeiptr(int32(0))), uint64(MapBufferRange_1222_length), ϟs)
@@ -9524,125 +9792,139 @@ func (ϟa *GlMapBufferRangeEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlMatrixLoad3x2fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1229_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1229_ext
 	return nil
 }
 func (ϟa *GlMatrixLoad3x3fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1230_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1230_ext
 	return nil
 }
 func (ϟa *GlMatrixLoadTranspose3x3fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1231_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1231_ext
 	return nil
 }
 func (ϟa *GlMatrixMult3x2fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1232_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1232_ext
 	return nil
 }
 func (ϟa *GlMatrixMult3x3fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1233_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1233_ext
 	return nil
 }
 func (ϟa *GlMatrixMultTranspose3x3fNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1234_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1234_ext
 	return nil
 }
 func (ϟa *GlMultiDrawArraysEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1235_ext := ExtensionId_GL_EXT_multi_draw_arrays // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1235_ext
 	return nil
 }
 func (ϟa *GlMultiDrawArraysIndirectEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1236_ext := ExtensionId_GL_EXT_multi_draw_indirect // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1236_ext
 	return nil
 }
 func (ϟa *GlMultiDrawElementsBaseVertexEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1237_ext := ExtensionId_GL_EXT_draw_elements_base_vertex // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1237_ext
 	return nil
 }
 func (ϟa *GlMultiDrawElementsBaseVertexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1238_ext := ExtensionId_GL_OES_draw_elements_base_vertex // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1238_ext
 	return nil
 }
 func (ϟa *GlMultiDrawElementsEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1239_ext := ExtensionId_GL_EXT_multi_draw_arrays // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1239_ext
 	return nil
 }
 func (ϟa *GlMultiDrawElementsIndirectEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1240_ext := ExtensionId_GL_EXT_multi_draw_indirect // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1240_ext
 	return nil
 }
 func (ϟa *GlNamedFramebufferSampleLocationsfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1241_ext := ExtensionId_GL_NV_sample_locations // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1241_ext
 	return nil
 }
 func (ϟa *GlPatchParameteriOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1242_ext := ExtensionId_GL_OES_tessellation_shader                              // ExtensionId
 	PatchParameteri_1243_pname := ϟa.Pname                                                            // GLenum
 	PatchParameteri_1243_value := ϟa.Value                                                            // GLint
@@ -9650,207 +9932,229 @@ func (ϟa *GlPatchParameteriOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	if glErrorInvalidEnumIf_1244_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_1242_ext, PatchParameteri_1243_pname, PatchParameteri_1243_value, glErrorInvalidEnumIf_1244_condition
 	return nil
 }
 func (ϟa *GlPathCommandsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1245_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1245_ext
 	return nil
 }
 func (ϟa *GlPathCoordsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1246_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1246_ext
 	return nil
 }
 func (ϟa *GlPathCoverDepthFuncNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1247_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1247_ext
 	return nil
 }
 func (ϟa *GlPathDashArrayNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1248_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1248_ext
 	return nil
 }
 func (ϟa *GlPathGlyphIndexArrayNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1249_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1249_ext
 	return nil
 }
 func (ϟa *GlPathGlyphIndexRangeNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1250_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1250_ext
 	return nil
 }
 func (ϟa *GlPathGlyphRangeNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1251_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1251_ext
 	return nil
 }
 func (ϟa *GlPathGlyphsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1252_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1252_ext
 	return nil
 }
 func (ϟa *GlPathMemoryGlyphIndexArrayNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1253_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1253_ext
 	return nil
 }
 func (ϟa *GlPathParameterfNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1254_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1254_ext
 	return nil
 }
 func (ϟa *GlPathParameterfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1255_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1255_ext
 	return nil
 }
 func (ϟa *GlPathParameteriNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1256_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1256_ext
 	return nil
 }
 func (ϟa *GlPathParameterivNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1257_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1257_ext
 	return nil
 }
 func (ϟa *GlPathStencilDepthOffsetNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1258_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1258_ext
 	return nil
 }
 func (ϟa *GlPathStencilFuncNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1259_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1259_ext
 	return nil
 }
 func (ϟa *GlPathStringNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1260_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1260_ext
 	return nil
 }
 func (ϟa *GlPathSubCommandsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1261_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1261_ext
 	return nil
 }
 func (ϟa *GlPathSubCoordsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1262_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1262_ext
 	return nil
 }
 func (ϟa *GlPointAlongPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1263_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1263_ext
 	return nil
 }
 func (ϟa *GlPolygonModeNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1264_ext := ExtensionId_GL_NV_polygon_mode // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1264_ext
 	return nil
 }
 func (ϟa *GlPopGroupMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1265_ext := ExtensionId_GL_EXT_debug_marker // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1265_ext
 	return nil
 }
 func (ϟa *GlPrimitiveBoundingBoxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1266_ext := ExtensionId_GL_OES_primitive_bounding_box // ExtensionId
 	PrimitiveBoundingBox_1267_minX := ϟa.MinX                               // GLfloat
 	PrimitiveBoundingBox_1267_minY := ϟa.MinY                               // GLfloat
@@ -9860,14 +10164,15 @@ func (ϟa *GlPrimitiveBoundingBoxOES) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	PrimitiveBoundingBox_1267_maxY := ϟa.MaxY                               // GLfloat
 	PrimitiveBoundingBox_1267_maxZ := ϟa.MaxZ                               // GLfloat
 	PrimitiveBoundingBox_1267_maxW := ϟa.MaxW                               // GLfloat
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_1266_ext, PrimitiveBoundingBox_1267_minX, PrimitiveBoundingBox_1267_minY, PrimitiveBoundingBox_1267_minZ, PrimitiveBoundingBox_1267_minW, PrimitiveBoundingBox_1267_maxX, PrimitiveBoundingBox_1267_maxY, PrimitiveBoundingBox_1267_maxZ, PrimitiveBoundingBox_1267_maxW
 	return nil
 }
 func (ϟa *GlProgramBinaryOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1268_ext := ExtensionId_GL_OES_get_program_binary // ExtensionId
 	ProgramBinary_1269_program := ϟa.Program                            // ProgramId
 	ProgramBinary_1269_binaryFormat := ϟa.BinaryFormat                  // GLenum
@@ -9880,14 +10185,15 @@ func (ϟa *GlProgramBinaryOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		_ = glErrorInvalidEnum_1270_param
 	}
 	ProgramBinary_1269_binary.Slice(uint64(GLsizei(int32(0))), uint64(ProgramBinary_1269_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = requiresExtension_1268_ext, ProgramBinary_1269_program, ProgramBinary_1269_binaryFormat, ProgramBinary_1269_binary, ProgramBinary_1269_length
 	return nil
 }
 func (ϟa *GlProgramParameteriEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1271_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramParameteri_1272_program := ϟa.Program                             // ProgramId
 	ProgramParameteri_1272_pname := ϟa.Pname                                 // GLenum
@@ -9903,29 +10209,31 @@ func (ϟa *GlProgramParameteriEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = glErrorInvalidEnum_1274_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_1271_ext, ProgramParameteri_1272_program, ProgramParameteri_1272_pname, ProgramParameteri_1272_value
 	return nil
 }
 func (ϟa *GlProgramPathFragmentInputGenNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1275_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1275_ext
 	return nil
 }
 func (ϟa *GlProgramUniform1fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1276_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform1f_1277_program := ϟa.Program                              // ProgramId
 	ProgramUniform1f_1277_location := ϟa.Location                            // UniformLocation
 	ProgramUniform1f_1277_value0 := ϟa.V0                                    // GLfloat
 	v := MakeGLfloatˢ(uint64(1), ϟs)                                         // GLfloatˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1f_1277_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1278_program := ProgramUniform1f_1277_program   // ProgramId
 	ProgramUniformv_1278_location := ProgramUniform1f_1277_location // UniformLocation
@@ -9949,8 +10257,9 @@ func (ϟa *GlProgramUniform1fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform1fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1281_ext := ExtensionId_GL_EXT_separate_shader_objects                                      // ExtensionId
 	ProgramUniform1fv_1282_program := ϟa.Program                                                                  // ProgramId
 	ProgramUniform1fv_1282_location := ϟa.Location                                                                // UniformLocation
@@ -9974,20 +10283,21 @@ func (ϟa *GlProgramUniform1fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1283_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1283_type
 	p.Uniforms[ProgramUniformv_1283_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1281_ext, ProgramUniform1fv_1282_program, ProgramUniform1fv_1282_location, ProgramUniform1fv_1282_count, ProgramUniform1fv_1282_values, v, ProgramUniformv_1283_program, ProgramUniformv_1283_location, ProgramUniformv_1283_values, ProgramUniformv_1283_type, context, GetContext_1284_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform1iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1286_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform1i_1287_program := ϟa.Program                              // ProgramId
 	ProgramUniform1i_1287_location := ϟa.Location                            // UniformLocation
 	ProgramUniform1i_1287_value0 := ϟa.V0                                    // GLint
 	v := MakeGLintˢ(uint64(1), ϟs)                                           // GLintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1i_1287_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1288_program := ProgramUniform1i_1287_program   // ProgramId
 	ProgramUniformv_1288_location := ProgramUniform1i_1287_location // UniformLocation
@@ -10011,8 +10321,9 @@ func (ϟa *GlProgramUniform1iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform1ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1291_ext := ExtensionId_GL_EXT_separate_shader_objects                                      // ExtensionId
 	ProgramUniform1iv_1292_program := ϟa.Program                                                                  // ProgramId
 	ProgramUniform1iv_1292_location := ϟa.Location                                                                // UniformLocation
@@ -10036,20 +10347,21 @@ func (ϟa *GlProgramUniform1ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1293_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1293_type
 	p.Uniforms[ProgramUniformv_1293_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1291_ext, ProgramUniform1iv_1292_program, ProgramUniform1iv_1292_location, ProgramUniform1iv_1292_count, ProgramUniform1iv_1292_values, v, ProgramUniformv_1293_program, ProgramUniformv_1293_location, ProgramUniformv_1293_values, ProgramUniformv_1293_type, context, GetContext_1294_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform1uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1296_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform1ui_1297_program := ϟa.Program                             // ProgramId
 	ProgramUniform1ui_1297_location := ϟa.Location                           // UniformLocation
 	ProgramUniform1ui_1297_value0 := ϟa.V0                                   // GLuint
 	v := MakeGLuintˢ(uint64(1), ϟs)                                          // GLuintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1ui_1297_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1298_program := ProgramUniform1ui_1297_program   // ProgramId
 	ProgramUniformv_1298_location := ProgramUniform1ui_1297_location // UniformLocation
@@ -10073,8 +10385,9 @@ func (ϟa *GlProgramUniform1uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlProgramUniform1uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1301_ext := ExtensionId_GL_EXT_separate_shader_objects                                        // ExtensionId
 	ProgramUniform1uiv_1302_program := ϟa.Program                                                                   // ProgramId
 	ProgramUniform1uiv_1302_location := ϟa.Location                                                                 // UniformLocation
@@ -10098,21 +10411,22 @@ func (ϟa *GlProgramUniform1uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	uniform.Value = AsU8ˢ(ProgramUniformv_1303_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1303_type
 	p.Uniforms[ProgramUniformv_1303_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1301_ext, ProgramUniform1uiv_1302_program, ProgramUniform1uiv_1302_location, ProgramUniform1uiv_1302_count, ProgramUniform1uiv_1302_values, v, ProgramUniformv_1303_program, ProgramUniformv_1303_location, ProgramUniformv_1303_values, ProgramUniformv_1303_type, context, GetContext_1304_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1306_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform2f_1307_program := ϟa.Program                              // ProgramId
 	ProgramUniform2f_1307_location := ϟa.Location                            // UniformLocation
 	ProgramUniform2f_1307_value0 := ϟa.V0                                    // GLfloat
 	ProgramUniform2f_1307_value1 := ϟa.V1                                    // GLfloat
 	v := MakeVec2fˢ(uint64(1), ϟs)                                           // Vec2fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2f{Elements: [2]GLfloat{ProgramUniform2f_1307_value0, ProgramUniform2f_1307_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1308_program := ProgramUniform2f_1307_program   // ProgramId
 	ProgramUniformv_1308_location := ProgramUniform2f_1307_location // UniformLocation
@@ -10136,8 +10450,9 @@ func (ϟa *GlProgramUniform2fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1311_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform2fv_1312_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform2fv_1312_location := ϟa.Location                                                                        // UniformLocation
@@ -10161,21 +10476,22 @@ func (ϟa *GlProgramUniform2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1313_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1313_type
 	p.Uniforms[ProgramUniformv_1313_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1311_ext, ProgramUniform2fv_1312_program, ProgramUniform2fv_1312_location, ProgramUniform2fv_1312_count, ProgramUniform2fv_1312_values, v, ProgramUniformv_1313_program, ProgramUniformv_1313_location, ProgramUniformv_1313_values, ProgramUniformv_1313_type, context, GetContext_1314_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1316_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform2i_1317_program := ϟa.Program                              // ProgramId
 	ProgramUniform2i_1317_location := ϟa.Location                            // UniformLocation
 	ProgramUniform2i_1317_value0 := ϟa.V0                                    // GLint
 	ProgramUniform2i_1317_value1 := ϟa.V1                                    // GLint
 	v := MakeVec2iˢ(uint64(1), ϟs)                                           // Vec2iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2i{Elements: [2]GLint{ProgramUniform2i_1317_value0, ProgramUniform2i_1317_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1318_program := ProgramUniform2i_1317_program   // ProgramId
 	ProgramUniformv_1318_location := ProgramUniform2i_1317_location // UniformLocation
@@ -10199,8 +10515,9 @@ func (ϟa *GlProgramUniform2iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform2ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1321_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform2iv_1322_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform2iv_1322_location := ϟa.Location                                                                        // UniformLocation
@@ -10224,21 +10541,22 @@ func (ϟa *GlProgramUniform2ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1323_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1323_type
 	p.Uniforms[ProgramUniformv_1323_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1321_ext, ProgramUniform2iv_1322_program, ProgramUniform2iv_1322_location, ProgramUniform2iv_1322_count, ProgramUniform2iv_1322_values, v, ProgramUniformv_1323_program, ProgramUniformv_1323_location, ProgramUniformv_1323_values, ProgramUniformv_1323_type, context, GetContext_1324_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1326_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform2ui_1327_program := ϟa.Program                             // ProgramId
 	ProgramUniform2ui_1327_location := ϟa.Location                           // UniformLocation
 	ProgramUniform2ui_1327_value0 := ϟa.V0                                   // GLuint
 	ProgramUniform2ui_1327_value1 := ϟa.V1                                   // GLuint
 	v := MakeVec2uˢ(uint64(1), ϟs)                                           // Vec2uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2u{Elements: [2]GLuint{ProgramUniform2ui_1327_value0, ProgramUniform2ui_1327_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1328_program := ProgramUniform2ui_1327_program   // ProgramId
 	ProgramUniformv_1328_location := ProgramUniform2ui_1327_location // UniformLocation
@@ -10262,8 +10580,9 @@ func (ϟa *GlProgramUniform2uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlProgramUniform2uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1331_ext := ExtensionId_GL_EXT_separate_shader_objects                                                // ExtensionId
 	ProgramUniform2uiv_1332_program := ϟa.Program                                                                           // ProgramId
 	ProgramUniform2uiv_1332_location := ϟa.Location                                                                         // UniformLocation
@@ -10287,14 +10606,15 @@ func (ϟa *GlProgramUniform2uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	uniform.Value = AsU8ˢ(ProgramUniformv_1333_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1333_type
 	p.Uniforms[ProgramUniformv_1333_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1331_ext, ProgramUniform2uiv_1332_program, ProgramUniform2uiv_1332_location, ProgramUniform2uiv_1332_count, ProgramUniform2uiv_1332_values, v, ProgramUniformv_1333_program, ProgramUniformv_1333_location, ProgramUniformv_1333_values, ProgramUniformv_1333_type, context, GetContext_1334_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1336_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform3f_1337_program := ϟa.Program                              // ProgramId
 	ProgramUniform3f_1337_location := ϟa.Location                            // UniformLocation
@@ -10302,7 +10622,7 @@ func (ϟa *GlProgramUniform3fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	ProgramUniform3f_1337_value1 := ϟa.V1                                    // GLfloat
 	ProgramUniform3f_1337_value2 := ϟa.V2                                    // GLfloat
 	v := MakeVec3fˢ(uint64(1), ϟs)                                           // Vec3fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3f{Elements: [3]GLfloat{ProgramUniform3f_1337_value0, ProgramUniform3f_1337_value1, ProgramUniform3f_1337_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1338_program := ProgramUniform3f_1337_program   // ProgramId
 	ProgramUniformv_1338_location := ProgramUniform3f_1337_location // UniformLocation
@@ -10326,8 +10646,9 @@ func (ϟa *GlProgramUniform3fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1341_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform3fv_1342_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform3fv_1342_location := ϟa.Location                                                                        // UniformLocation
@@ -10351,14 +10672,15 @@ func (ϟa *GlProgramUniform3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1343_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1343_type
 	p.Uniforms[ProgramUniformv_1343_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1341_ext, ProgramUniform3fv_1342_program, ProgramUniform3fv_1342_location, ProgramUniform3fv_1342_count, ProgramUniform3fv_1342_values, v, ProgramUniformv_1343_program, ProgramUniformv_1343_location, ProgramUniformv_1343_values, ProgramUniformv_1343_type, context, GetContext_1344_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1346_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform3i_1347_program := ϟa.Program                              // ProgramId
 	ProgramUniform3i_1347_location := ϟa.Location                            // UniformLocation
@@ -10366,7 +10688,7 @@ func (ϟa *GlProgramUniform3iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	ProgramUniform3i_1347_value1 := ϟa.V1                                    // GLint
 	ProgramUniform3i_1347_value2 := ϟa.V2                                    // GLint
 	v := MakeVec3iˢ(uint64(1), ϟs)                                           // Vec3iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3i{Elements: [3]GLint{ProgramUniform3i_1347_value0, ProgramUniform3i_1347_value1, ProgramUniform3i_1347_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1348_program := ProgramUniform3i_1347_program   // ProgramId
 	ProgramUniformv_1348_location := ProgramUniform3i_1347_location // UniformLocation
@@ -10390,8 +10712,9 @@ func (ϟa *GlProgramUniform3iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform3ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1351_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform3iv_1352_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform3iv_1352_location := ϟa.Location                                                                        // UniformLocation
@@ -10415,14 +10738,15 @@ func (ϟa *GlProgramUniform3ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1353_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1353_type
 	p.Uniforms[ProgramUniformv_1353_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1351_ext, ProgramUniform3iv_1352_program, ProgramUniform3iv_1352_location, ProgramUniform3iv_1352_count, ProgramUniform3iv_1352_values, v, ProgramUniformv_1353_program, ProgramUniformv_1353_location, ProgramUniformv_1353_values, ProgramUniformv_1353_type, context, GetContext_1354_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1356_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform3ui_1357_program := ϟa.Program                             // ProgramId
 	ProgramUniform3ui_1357_location := ϟa.Location                           // UniformLocation
@@ -10430,7 +10754,7 @@ func (ϟa *GlProgramUniform3uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	ProgramUniform3ui_1357_value1 := ϟa.V1                                   // GLuint
 	ProgramUniform3ui_1357_value2 := ϟa.V2                                   // GLuint
 	v := MakeVec3uˢ(uint64(1), ϟs)                                           // Vec3uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3u{Elements: [3]GLuint{ProgramUniform3ui_1357_value0, ProgramUniform3ui_1357_value1, ProgramUniform3ui_1357_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1358_program := ProgramUniform3ui_1357_program   // ProgramId
 	ProgramUniformv_1358_location := ProgramUniform3ui_1357_location // UniformLocation
@@ -10454,8 +10778,9 @@ func (ϟa *GlProgramUniform3uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlProgramUniform3uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1361_ext := ExtensionId_GL_EXT_separate_shader_objects                                                // ExtensionId
 	ProgramUniform3uiv_1362_program := ϟa.Program                                                                           // ProgramId
 	ProgramUniform3uiv_1362_location := ϟa.Location                                                                         // UniformLocation
@@ -10479,14 +10804,15 @@ func (ϟa *GlProgramUniform3uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	uniform.Value = AsU8ˢ(ProgramUniformv_1363_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1363_type
 	p.Uniforms[ProgramUniformv_1363_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1361_ext, ProgramUniform3uiv_1362_program, ProgramUniform3uiv_1362_location, ProgramUniform3uiv_1362_count, ProgramUniform3uiv_1362_values, v, ProgramUniformv_1363_program, ProgramUniformv_1363_location, ProgramUniformv_1363_values, ProgramUniformv_1363_type, context, GetContext_1364_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1366_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform4f_1367_program := ϟa.Program                              // ProgramId
 	ProgramUniform4f_1367_location := ϟa.Location                            // UniformLocation
@@ -10495,7 +10821,7 @@ func (ϟa *GlProgramUniform4fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	ProgramUniform4f_1367_value2 := ϟa.V2                                    // GLfloat
 	ProgramUniform4f_1367_value3 := ϟa.V3                                    // GLfloat
 	v := MakeVec4fˢ(uint64(1), ϟs)                                           // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4f{Elements: [4]GLfloat{ProgramUniform4f_1367_value0, ProgramUniform4f_1367_value1, ProgramUniform4f_1367_value2, ProgramUniform4f_1367_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1368_program := ProgramUniform4f_1367_program   // ProgramId
 	ProgramUniformv_1368_location := ProgramUniform4f_1367_location // UniformLocation
@@ -10519,8 +10845,9 @@ func (ϟa *GlProgramUniform4fEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1371_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform4fv_1372_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform4fv_1372_location := ϟa.Location                                                                        // UniformLocation
@@ -10544,14 +10871,15 @@ func (ϟa *GlProgramUniform4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1373_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1373_type
 	p.Uniforms[ProgramUniformv_1373_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1371_ext, ProgramUniform4fv_1372_program, ProgramUniform4fv_1372_location, ProgramUniform4fv_1372_count, ProgramUniform4fv_1372_values, v, ProgramUniformv_1373_program, ProgramUniformv_1373_location, ProgramUniformv_1373_values, ProgramUniformv_1373_type, context, GetContext_1374_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1376_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform4i_1377_program := ϟa.Program                              // ProgramId
 	ProgramUniform4i_1377_location := ϟa.Location                            // UniformLocation
@@ -10560,7 +10888,7 @@ func (ϟa *GlProgramUniform4iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	ProgramUniform4i_1377_value2 := ϟa.V2                                    // GLint
 	ProgramUniform4i_1377_value3 := ϟa.V3                                    // GLint
 	v := MakeVec4iˢ(uint64(1), ϟs)                                           // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4i{Elements: [4]GLint{ProgramUniform4i_1377_value0, ProgramUniform4i_1377_value1, ProgramUniform4i_1377_value2, ProgramUniform4i_1377_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1378_program := ProgramUniform4i_1377_program   // ProgramId
 	ProgramUniformv_1378_location := ProgramUniform4i_1377_location // UniformLocation
@@ -10584,8 +10912,9 @@ func (ϟa *GlProgramUniform4iEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlProgramUniform4ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1381_ext := ExtensionId_GL_EXT_separate_shader_objects                                              // ExtensionId
 	ProgramUniform4iv_1382_program := ϟa.Program                                                                          // ProgramId
 	ProgramUniform4iv_1382_location := ϟa.Location                                                                        // UniformLocation
@@ -10609,14 +10938,15 @@ func (ϟa *GlProgramUniform4ivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(ProgramUniformv_1383_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1383_type
 	p.Uniforms[ProgramUniformv_1383_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1381_ext, ProgramUniform4iv_1382_program, ProgramUniform4iv_1382_location, ProgramUniform4iv_1382_count, ProgramUniform4iv_1382_values, v, ProgramUniformv_1383_program, ProgramUniformv_1383_location, ProgramUniformv_1383_values, ProgramUniformv_1383_type, context, GetContext_1384_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1386_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
 	ProgramUniform4ui_1387_program := ϟa.Program                             // ProgramId
 	ProgramUniform4ui_1387_location := ϟa.Location                           // UniformLocation
@@ -10625,7 +10955,7 @@ func (ϟa *GlProgramUniform4uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	ProgramUniform4ui_1387_value2 := ϟa.V2                                   // GLuint
 	ProgramUniform4ui_1387_value3 := ϟa.V3                                   // GLuint
 	v := MakeVec4uˢ(uint64(1), ϟs)                                           // Vec4uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4u{Elements: [4]GLuint{ProgramUniform4ui_1387_value0, ProgramUniform4ui_1387_value1, ProgramUniform4ui_1387_value2, ProgramUniform4ui_1387_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_1388_program := ProgramUniform4ui_1387_program   // ProgramId
 	ProgramUniformv_1388_location := ProgramUniform4ui_1387_location // UniformLocation
@@ -10649,8 +10979,9 @@ func (ϟa *GlProgramUniform4uiEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlProgramUniform4uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1391_ext := ExtensionId_GL_EXT_separate_shader_objects                                                // ExtensionId
 	ProgramUniform4uiv_1392_program := ϟa.Program                                                                           // ProgramId
 	ProgramUniform4uiv_1392_location := ϟa.Location                                                                         // UniformLocation
@@ -10674,32 +11005,35 @@ func (ϟa *GlProgramUniform4uivEXT) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	uniform.Value = AsU8ˢ(ProgramUniformv_1393_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_1393_type
 	p.Uniforms[ProgramUniformv_1393_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1391_ext, ProgramUniform4uiv_1392_program, ProgramUniform4uiv_1392_location, ProgramUniform4uiv_1392_count, ProgramUniform4uiv_1392_values, v, ProgramUniformv_1393_program, ProgramUniformv_1393_location, ProgramUniformv_1393_values, ProgramUniformv_1393_type, context, GetContext_1394_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformHandleui64NV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1396_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1396_ext
 	return nil
 }
 func (ϟa *GlProgramUniformHandleui64vNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1397_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1397_ext
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1398_ext := ExtensionId_GL_EXT_separate_shader_objects                                                          // ExtensionId
 	ProgramUniformMatrix2fv_1399_program := ϟa.Program                                                                                // ProgramId
 	ProgramUniformMatrix2fv_1399_location := ϟa.Location                                                                              // UniformLocation
@@ -10725,14 +11059,15 @@ func (ϟa *GlProgramUniformMatrix2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1400_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1400_type
 	p.Uniforms[ProgramUniformMatrixv_1400_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1398_ext, ProgramUniformMatrix2fv_1399_program, ProgramUniformMatrix2fv_1399_location, ProgramUniformMatrix2fv_1399_count, ProgramUniformMatrix2fv_1399_transpose, ProgramUniformMatrix2fv_1399_values, v, ProgramUniformMatrixv_1400_program, ProgramUniformMatrixv_1400_location, ProgramUniformMatrixv_1400_transpose, ProgramUniformMatrixv_1400_values, ProgramUniformMatrixv_1400_type, context, GetContext_1401_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2x3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1403_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix2x3fv_1404_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix2x3fv_1404_location := ϟa.Location                                                                                  // UniformLocation
@@ -10758,14 +11093,15 @@ func (ϟa *GlProgramUniformMatrix2x3fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1405_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1405_type
 	p.Uniforms[ProgramUniformMatrixv_1405_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1403_ext, ProgramUniformMatrix2x3fv_1404_program, ProgramUniformMatrix2x3fv_1404_location, ProgramUniformMatrix2x3fv_1404_count, ProgramUniformMatrix2x3fv_1404_transpose, ProgramUniformMatrix2x3fv_1404_values, v, ProgramUniformMatrixv_1405_program, ProgramUniformMatrixv_1405_location, ProgramUniformMatrixv_1405_transpose, ProgramUniformMatrixv_1405_values, ProgramUniformMatrixv_1405_type, context, GetContext_1406_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2x4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1408_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix2x4fv_1409_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix2x4fv_1409_location := ϟa.Location                                                                                  // UniformLocation
@@ -10791,14 +11127,15 @@ func (ϟa *GlProgramUniformMatrix2x4fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1410_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1410_type
 	p.Uniforms[ProgramUniformMatrixv_1410_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1408_ext, ProgramUniformMatrix2x4fv_1409_program, ProgramUniformMatrix2x4fv_1409_location, ProgramUniformMatrix2x4fv_1409_count, ProgramUniformMatrix2x4fv_1409_transpose, ProgramUniformMatrix2x4fv_1409_values, v, ProgramUniformMatrixv_1410_program, ProgramUniformMatrixv_1410_location, ProgramUniformMatrixv_1410_transpose, ProgramUniformMatrixv_1410_values, ProgramUniformMatrixv_1410_type, context, GetContext_1411_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1413_ext := ExtensionId_GL_EXT_separate_shader_objects                                                          // ExtensionId
 	ProgramUniformMatrix3fv_1414_program := ϟa.Program                                                                                // ProgramId
 	ProgramUniformMatrix3fv_1414_location := ϟa.Location                                                                              // UniformLocation
@@ -10824,14 +11161,15 @@ func (ϟa *GlProgramUniformMatrix3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1415_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1415_type
 	p.Uniforms[ProgramUniformMatrixv_1415_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1413_ext, ProgramUniformMatrix3fv_1414_program, ProgramUniformMatrix3fv_1414_location, ProgramUniformMatrix3fv_1414_count, ProgramUniformMatrix3fv_1414_transpose, ProgramUniformMatrix3fv_1414_values, v, ProgramUniformMatrixv_1415_program, ProgramUniformMatrixv_1415_location, ProgramUniformMatrixv_1415_transpose, ProgramUniformMatrixv_1415_values, ProgramUniformMatrixv_1415_type, context, GetContext_1416_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3x2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1418_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix3x2fv_1419_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix3x2fv_1419_location := ϟa.Location                                                                                  // UniformLocation
@@ -10857,14 +11195,15 @@ func (ϟa *GlProgramUniformMatrix3x2fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1420_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1420_type
 	p.Uniforms[ProgramUniformMatrixv_1420_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1418_ext, ProgramUniformMatrix3x2fv_1419_program, ProgramUniformMatrix3x2fv_1419_location, ProgramUniformMatrix3x2fv_1419_count, ProgramUniformMatrix3x2fv_1419_transpose, ProgramUniformMatrix3x2fv_1419_values, v, ProgramUniformMatrixv_1420_program, ProgramUniformMatrixv_1420_location, ProgramUniformMatrixv_1420_transpose, ProgramUniformMatrixv_1420_values, ProgramUniformMatrixv_1420_type, context, GetContext_1421_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3x4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1423_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix3x4fv_1424_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix3x4fv_1424_location := ϟa.Location                                                                                  // UniformLocation
@@ -10890,14 +11229,15 @@ func (ϟa *GlProgramUniformMatrix3x4fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1425_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1425_type
 	p.Uniforms[ProgramUniformMatrixv_1425_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1423_ext, ProgramUniformMatrix3x4fv_1424_program, ProgramUniformMatrix3x4fv_1424_location, ProgramUniformMatrix3x4fv_1424_count, ProgramUniformMatrix3x4fv_1424_transpose, ProgramUniformMatrix3x4fv_1424_values, v, ProgramUniformMatrixv_1425_program, ProgramUniformMatrixv_1425_location, ProgramUniformMatrixv_1425_transpose, ProgramUniformMatrixv_1425_values, ProgramUniformMatrixv_1425_type, context, GetContext_1426_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1428_ext := ExtensionId_GL_EXT_separate_shader_objects                                                          // ExtensionId
 	ProgramUniformMatrix4fv_1429_program := ϟa.Program                                                                                // ProgramId
 	ProgramUniformMatrix4fv_1429_location := ϟa.Location                                                                              // UniformLocation
@@ -10923,14 +11263,15 @@ func (ϟa *GlProgramUniformMatrix4fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1430_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1430_type
 	p.Uniforms[ProgramUniformMatrixv_1430_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1428_ext, ProgramUniformMatrix4fv_1429_program, ProgramUniformMatrix4fv_1429_location, ProgramUniformMatrix4fv_1429_count, ProgramUniformMatrix4fv_1429_transpose, ProgramUniformMatrix4fv_1429_values, v, ProgramUniformMatrixv_1430_program, ProgramUniformMatrixv_1430_location, ProgramUniformMatrixv_1430_transpose, ProgramUniformMatrixv_1430_values, ProgramUniformMatrixv_1430_type, context, GetContext_1431_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4x2fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1433_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix4x2fv_1434_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix4x2fv_1434_location := ϟa.Location                                                                                  // UniformLocation
@@ -10956,14 +11297,15 @@ func (ϟa *GlProgramUniformMatrix4x2fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1435_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1435_type
 	p.Uniforms[ProgramUniformMatrixv_1435_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1433_ext, ProgramUniformMatrix4x2fv_1434_program, ProgramUniformMatrix4x2fv_1434_location, ProgramUniformMatrix4x2fv_1434_count, ProgramUniformMatrix4x2fv_1434_transpose, ProgramUniformMatrix4x2fv_1434_values, v, ProgramUniformMatrixv_1435_program, ProgramUniformMatrixv_1435_location, ProgramUniformMatrixv_1435_transpose, ProgramUniformMatrixv_1435_values, ProgramUniformMatrixv_1435_type, context, GetContext_1436_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4x3fvEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1438_ext := ExtensionId_GL_EXT_separate_shader_objects                                                                // ExtensionId
 	ProgramUniformMatrix4x3fv_1439_program := ϟa.Program                                                                                    // ProgramId
 	ProgramUniformMatrix4x3fv_1439_location := ϟa.Location                                                                                  // UniformLocation
@@ -10989,66 +11331,72 @@ func (ϟa *GlProgramUniformMatrix4x3fvEXT) Mutate(ϟs *gfxapi.State, ϟd databas
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_1440_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_1440_type
 	p.Uniforms[ProgramUniformMatrixv_1440_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1438_ext, ProgramUniformMatrix4x3fv_1439_program, ProgramUniformMatrix4x3fv_1439_location, ProgramUniformMatrix4x3fv_1439_count, ProgramUniformMatrix4x3fv_1439_transpose, ProgramUniformMatrix4x3fv_1439_values, v, ProgramUniformMatrixv_1440_program, ProgramUniformMatrixv_1440_location, ProgramUniformMatrixv_1440_transpose, ProgramUniformMatrixv_1440_values, ProgramUniformMatrixv_1440_type, context, GetContext_1441_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlPushGroupMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1443_ext := ExtensionId_GL_EXT_debug_marker // ExtensionId
 	if (ϟa.Length) > (GLsizei(int32(0))) {
 		ϟa.Marker.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	} else {
 		_ = strings.TrimRight(string(Charᵖ(ϟa.Marker).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1443_ext
 	return nil
 }
 func (ϟa *GlQueryCounterEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1444_ext := ExtensionId_GL_EXT_disjoint_timer_query // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1444_ext
 	return nil
 }
 func (ϟa *GlRasterSamplesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension3_1445_ext := ExtensionId_GL_EXT_raster_multisample        // ExtensionId
 	requiresExtension3_1445_ext2 := ExtensionId_GL_EXT_texture_filter_minmax    // ExtensionId
 	requiresExtension3_1445_ext3 := ExtensionId_GL_NV_framebuffer_mixed_samples // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = requiresExtension3_1445_ext, requiresExtension3_1445_ext2, requiresExtension3_1445_ext3
 	return nil
 }
 func (ϟa *GlReadBufferIndexedEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1446_ext := ExtensionId_GL_EXT_multiview_draw_buffers // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1446_ext
 	return nil
 }
 func (ϟa *GlReadBufferNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1447_ext := ExtensionId_GL_NV_read_buffer // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1447_ext
 	return nil
 }
 func (ϟa *GlReadnPixelsEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1448_ext := ExtensionId_GL_EXT_robustness // ExtensionId
 	ReadnPixels_1449_x := ϟa.X                                  // GLint
 	ReadnPixels_1449_y := ϟa.Y                                  // GLint
@@ -11080,7 +11428,7 @@ func (ϟa *GlReadnPixelsEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	GetContext_1452_result := context // Contextʳ
 	ctx := GetContext_1452_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_PACK_BUFFER)) == (BufferId(uint32(0)))) && ((ReadnPixels_1449_data) != (Voidᵖ{})) {
 		imageSize_1454_width := uint32(ReadnPixels_1449_width)                                                                                                            // u32
 		imageSize_1454_height := uint32(ReadnPixels_1449_height)                                                                                                          // u32
@@ -11100,8 +11448,9 @@ func (ϟa *GlReadnPixelsEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlReadnPixelsKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1456_ext := ExtensionId_GL_KHR_robustness // ExtensionId
 	ReadnPixels_1457_x := ϟa.X                                  // GLint
 	ReadnPixels_1457_y := ϟa.Y                                  // GLint
@@ -11133,7 +11482,7 @@ func (ϟa *GlReadnPixelsKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	GetContext_1460_result := context // Contextʳ
 	ctx := GetContext_1460_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_PACK_BUFFER)) == (BufferId(uint32(0)))) && ((ReadnPixels_1457_data) != (Voidᵖ{})) {
 		imageSize_1462_width := uint32(ReadnPixels_1457_width)                                                                                                            // u32
 		imageSize_1462_height := uint32(ReadnPixels_1457_height)                                                                                                          // u32
@@ -11153,26 +11502,29 @@ func (ϟa *GlReadnPixelsKHR) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlRenderbufferStorageMultisampleANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1464_ext := ExtensionId_GL_ANGLE_framebuffer_multisample // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1464_ext
 	return nil
 }
 func (ϟa *GlRenderbufferStorageMultisampleAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1465_ext := ExtensionId_GL_APPLE_framebuffer_multisample // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1465_ext
 	return nil
 }
 func (ϟa *GlRenderbufferStorageMultisampleEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1466_ext := ExtensionId_GL_EXT_multisampled_render_to_texture // ExtensionId
 	RenderbufferStorageMultisample_1467_target := ϟa.Target                         // GLenum
 	RenderbufferStorageMultisample_1467_samples := ϟa.Samples                       // GLsizei
@@ -11193,23 +11545,25 @@ func (ϟa *GlRenderbufferStorageMultisampleEXT) Mutate(ϟs *gfxapi.State, ϟd da
 		return
 		_ = glErrorInvalidEnum_1469_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_1466_ext, RenderbufferStorageMultisample_1467_target, RenderbufferStorageMultisample_1467_samples, RenderbufferStorageMultisample_1467_format, RenderbufferStorageMultisample_1467_width, RenderbufferStorageMultisample_1467_height
 	return nil
 }
 func (ϟa *GlRenderbufferStorageMultisampleIMG) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1470_ext := ExtensionId_GL_IMG_multisampled_render_to_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1470_ext
 	return nil
 }
 func (ϟa *GlRenderbufferStorageMultisampleNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1471_ext := ExtensionId_GL_NV_framebuffer_multisample // ExtensionId
 	RenderbufferStorageMultisample_1472_target := ϟa.Target                 // GLenum
 	RenderbufferStorageMultisample_1472_samples := ϟa.Samples               // GLsizei
@@ -11230,32 +11584,35 @@ func (ϟa *GlRenderbufferStorageMultisampleNV) Mutate(ϟs *gfxapi.State, ϟd dat
 		return
 		_ = glErrorInvalidEnum_1474_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_1471_ext, RenderbufferStorageMultisample_1472_target, RenderbufferStorageMultisample_1472_samples, RenderbufferStorageMultisample_1472_format, RenderbufferStorageMultisample_1472_width, RenderbufferStorageMultisample_1472_height
 	return nil
 }
 func (ϟa *GlResolveDepthValuesNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1475_ext := ExtensionId_GL_NV_sample_locations // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1475_ext
 	return nil
 }
 func (ϟa *GlResolveMultisampleFramebufferAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1476_ext := ExtensionId_GL_APPLE_framebuffer_multisample // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1476_ext
 	return nil
 }
 func (ϟa *GlSamplerParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1477_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	SamplerParameterIiv_1478_sampler := ϟa.Sampler                        // SamplerId
 	SamplerParameterIiv_1478_pname := ϟa.Pname                            // GLenum
@@ -11278,14 +11635,15 @@ func (ϟa *GlSamplerParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_1482_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_1477_ext, SamplerParameterIiv_1478_sampler, SamplerParameterIiv_1478_pname, SamplerParameterIiv_1478_param, SamplerParameterv_1479_sampler, SamplerParameterv_1479_pname, SamplerParameterv_1479_params, minRequiredVersion_1480_major, minRequiredVersion_1480_minor
 	return nil
 }
 func (ϟa *GlSamplerParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1483_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	SamplerParameterIuiv_1484_sampler := ϟa.Sampler                       // SamplerId
 	SamplerParameterIuiv_1484_pname := ϟa.Pname                           // GLenum
@@ -11308,159 +11666,176 @@ func (ϟa *GlSamplerParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_1488_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = requiresExtension_1483_ext, SamplerParameterIuiv_1484_sampler, SamplerParameterIuiv_1484_pname, SamplerParameterIuiv_1484_param, SamplerParameterv_1485_sampler, SamplerParameterv_1485_pname, SamplerParameterv_1485_params, minRequiredVersion_1486_major, minRequiredVersion_1486_minor
 	return nil
 }
 func (ϟa *GlScissorArrayvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1489_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1489_ext
 	return nil
 }
 func (ϟa *GlScissorIndexedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1490_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1490_ext
 	return nil
 }
 func (ϟa *GlScissorIndexedvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1491_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1491_ext
 	return nil
 }
 func (ϟa *GlSelectPerfMonitorCountersAMD) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1492_ext := ExtensionId_GL_AMD_performance_monitor // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1492_ext
 	return nil
 }
 func (ϟa *GlSetFenceNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1493_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1493_ext
 	return nil
 }
 func (ϟa *GlStartTilingQCOM) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1494_ext := ExtensionId_GL_QCOM_tiled_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1494_ext
 	return nil
 }
 func (ϟa *GlStencilFillPathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1495_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1495_ext
 	return nil
 }
 func (ϟa *GlStencilFillPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1496_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1496_ext
 	return nil
 }
 func (ϟa *GlStencilStrokePathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1497_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1497_ext
 	return nil
 }
 func (ϟa *GlStencilStrokePathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1498_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1498_ext
 	return nil
 }
 func (ϟa *GlStencilThenCoverFillPathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1499_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1499_ext
 	return nil
 }
 func (ϟa *GlStencilThenCoverFillPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1500_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1500_ext
 	return nil
 }
 func (ϟa *GlStencilThenCoverStrokePathInstancedNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1501_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1501_ext
 	return nil
 }
 func (ϟa *GlStencilThenCoverStrokePathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1502_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1502_ext
 	return nil
 }
 func (ϟa *GlSubpixelPrecisionBiasNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1503_ext := ExtensionId_GL_NV_conservative_raster // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1503_ext
 	return nil
 }
 func (ϟa *GlTestFenceNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1504_ext := ExtensionId_GL_NV_fence // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_1504_ext
 	return nil
 }
 func (ϟa *GlTexBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1505_ext := ExtensionId_GL_OES_texture_buffer // ExtensionId
 	TexBuffer_1506_target := ϟa.Target                              // GLenum
 	TexBuffer_1506_internalformat := ϟa.Internalformat              // GLenum
@@ -11479,14 +11854,15 @@ func (ϟa *GlTexBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_1508_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_1505_ext, TexBuffer_1506_target, TexBuffer_1506_internalformat, TexBuffer_1506_buffer
 	return nil
 }
 func (ϟa *GlTexBufferRangeOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1509_ext := ExtensionId_GL_OES_texture_buffer // ExtensionId
 	TexBufferRange_1510_target := ϟa.Target                         // GLenum
 	TexBufferRange_1510_internalformat := ϟa.Internalformat         // GLenum
@@ -11507,14 +11883,15 @@ func (ϟa *GlTexBufferRangeOES) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_1512_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_1509_ext, TexBufferRange_1510_target, TexBufferRange_1510_internalformat, TexBufferRange_1510_buffer, TexBufferRange_1510_offset, TexBufferRange_1510_size
 	return nil
 }
 func (ϟa *GlTexImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1513_ext := ExtensionId_GL_OES_texture_3D // ExtensionId
 	TexImage3D_1514_target := ϟa.Target                         // GLenum
 	TexImage3D_1514_level := ϟa.Level                           // GLint
@@ -11576,23 +11953,25 @@ func (ϟa *GlTexImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		U8ᵖ(TexImage3D_1514_data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _, _, _, _, _ = imageSize_1523_width, imageSize_1523_height, imageSize_1523_format, imageSize_1523_type, imageSize_1523_result, size
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1513_ext, TexImage3D_1514_target, TexImage3D_1514_level, TexImage3D_1514_internalformat, TexImage3D_1514_width, TexImage3D_1514_height, TexImage3D_1514_depth, TexImage3D_1514_border, TexImage3D_1514_format, TexImage3D_1514_type, TexImage3D_1514_data, context, GetContext_1521_result, ctx
 	return nil
 }
 func (ϟa *GlTexPageCommitmentEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1524_ext := ExtensionId_GL_EXT_sparse_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1524_ext
 	return nil
 }
 func (ϟa *GlTexParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1525_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	TexParameterIiv_1526_target := ϟa.Target                              // GLenum
 	TexParameterIiv_1526_pname := ϟa.Pname                                // GLenum
@@ -11642,14 +12021,15 @@ func (ϟa *GlTexParameterIivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_1535_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_1525_ext, TexParameterIiv_1526_target, TexParameterIiv_1526_pname, TexParameterIiv_1526_params, TexParameterv_1527_target, TexParameterv_1527_pname, TexParameterv_1527_params
 	return nil
 }
 func (ϟa *GlTexParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1536_ext := ExtensionId_GL_OES_texture_border_clamp // ExtensionId
 	TexParameterIuiv_1537_target := ϟa.Target                             // GLenum
 	TexParameterIuiv_1537_pname := ϟa.Pname                               // GLenum
@@ -11699,23 +12079,25 @@ func (ϟa *GlTexParameterIuivOES) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_1546_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_1536_ext, TexParameterIuiv_1537_target, TexParameterIuiv_1537_pname, TexParameterIuiv_1537_params, TexParameterv_1538_target, TexParameterv_1538_pname, TexParameterv_1538_params
 	return nil
 }
 func (ϟa *GlTexStorage1DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1547_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1547_ext
 	return nil
 }
 func (ϟa *GlTexStorage2DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1548_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
 	TexStorage2D_1549_target := ϟa.Target                            // GLenum
 	TexStorage2D_1549_levels := ϟa.Levels                            // GLsizei
@@ -11740,14 +12122,15 @@ func (ϟa *GlTexStorage2DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 		_ = glErrorInvalidEnum_1552_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = requiresExtension_1548_ext, TexStorage2D_1549_target, TexStorage2D_1549_levels, TexStorage2D_1549_internalformat, TexStorage2D_1549_width, TexStorage2D_1549_height
 	return nil
 }
 func (ϟa *GlTexStorage3DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1553_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
 	TexStorage3D_1554_target := ϟa.Target                            // GLenum
 	TexStorage3D_1554_levels := ϟa.Levels                            // GLsizei
@@ -11777,14 +12160,15 @@ func (ϟa *GlTexStorage3DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 		_ = glErrorInvalidEnum_1558_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = requiresExtension_1553_ext, TexStorage3D_1554_target, TexStorage3D_1554_levels, TexStorage3D_1554_internalformat, TexStorage3D_1554_width, TexStorage3D_1554_height, TexStorage3D_1554_depth
 	return nil
 }
 func (ϟa *GlTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1559_ext := ExtensionId_GL_OES_texture_3D // ExtensionId
 	TexSubImage3D_1560_target := ϟa.Target                      // GLenum
 	TexSubImage3D_1560_level := ϟa.Level                        // GLint
@@ -11843,86 +12227,95 @@ func (ϟa *GlTexSubImage3DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		U8ᵖ(TexSubImage3D_1560_data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _, _, _, _, _ = imageSize_1568_width, imageSize_1568_height, imageSize_1568_format, imageSize_1568_type, imageSize_1568_result, size
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1559_ext, TexSubImage3D_1560_target, TexSubImage3D_1560_level, TexSubImage3D_1560_xoffset, TexSubImage3D_1560_yoffset, TexSubImage3D_1560_zoffset, TexSubImage3D_1560_width, TexSubImage3D_1560_height, TexSubImage3D_1560_depth, TexSubImage3D_1560_format, TexSubImage3D_1560_type, TexSubImage3D_1560_data, context, GetContext_1566_result, ctx
 	return nil
 }
 func (ϟa *GlTextureStorage1DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1569_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1569_ext
 	return nil
 }
 func (ϟa *GlTextureStorage2DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1570_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1570_ext
 	return nil
 }
 func (ϟa *GlTextureStorage3DEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1571_ext := ExtensionId_GL_EXT_texture_storage // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1571_ext
 	return nil
 }
 func (ϟa *GlTextureViewEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1572_ext := ExtensionId_GL_EXT_texture_view // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1572_ext
 	return nil
 }
 func (ϟa *GlTextureViewOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1573_ext := ExtensionId_GL_OES_texture_view // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1573_ext
 	return nil
 }
 func (ϟa *GlTransformPathNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1574_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1574_ext
 	return nil
 }
 func (ϟa *GlUniformHandleui64NV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1575_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1575_ext
 	return nil
 }
 func (ϟa *GlUniformHandleui64vNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1576_ext := ExtensionId_GL_NV_bindless_texture // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1576_ext
 	return nil
 }
 func (ϟa *GlUniformMatrix2x3fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1577_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix2x3fv_1578_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix2x3fv_1578_count := ϟa.Count                                                                                 // GLsizei
@@ -11948,14 +12341,15 @@ func (ϟa *GlUniformMatrix2x3fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1579_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1579_type
 	program.Uniforms[UniformMatrixv_1579_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1577_ext, UniformMatrix2x3fv_1578_location, UniformMatrix2x3fv_1578_count, UniformMatrix2x3fv_1578_transpose, UniformMatrix2x3fv_1578_values, v, UniformMatrixv_1579_location, UniformMatrixv_1579_transpose, UniformMatrixv_1579_values, UniformMatrixv_1579_type, minRequiredVersion_1580_major, minRequiredVersion_1580_minor, context, GetContext_1581_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix2x4fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1583_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix2x4fv_1584_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix2x4fv_1584_count := ϟa.Count                                                                                 // GLsizei
@@ -11981,14 +12375,15 @@ func (ϟa *GlUniformMatrix2x4fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1585_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1585_type
 	program.Uniforms[UniformMatrixv_1585_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1583_ext, UniformMatrix2x4fv_1584_location, UniformMatrix2x4fv_1584_count, UniformMatrix2x4fv_1584_transpose, UniformMatrix2x4fv_1584_values, v, UniformMatrixv_1585_location, UniformMatrixv_1585_transpose, UniformMatrixv_1585_values, UniformMatrixv_1585_type, minRequiredVersion_1586_major, minRequiredVersion_1586_minor, context, GetContext_1587_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix3x2fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1589_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix3x2fv_1590_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix3x2fv_1590_count := ϟa.Count                                                                                 // GLsizei
@@ -12014,14 +12409,15 @@ func (ϟa *GlUniformMatrix3x2fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1591_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1591_type
 	program.Uniforms[UniformMatrixv_1591_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1589_ext, UniformMatrix3x2fv_1590_location, UniformMatrix3x2fv_1590_count, UniformMatrix3x2fv_1590_transpose, UniformMatrix3x2fv_1590_values, v, UniformMatrixv_1591_location, UniformMatrixv_1591_transpose, UniformMatrixv_1591_values, UniformMatrixv_1591_type, minRequiredVersion_1592_major, minRequiredVersion_1592_minor, context, GetContext_1593_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix3x4fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1595_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix3x4fv_1596_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix3x4fv_1596_count := ϟa.Count                                                                                 // GLsizei
@@ -12047,14 +12443,15 @@ func (ϟa *GlUniformMatrix3x4fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1597_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1597_type
 	program.Uniforms[UniformMatrixv_1597_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1595_ext, UniformMatrix3x4fv_1596_location, UniformMatrix3x4fv_1596_count, UniformMatrix3x4fv_1596_transpose, UniformMatrix3x4fv_1596_values, v, UniformMatrixv_1597_location, UniformMatrixv_1597_transpose, UniformMatrixv_1597_values, UniformMatrixv_1597_type, minRequiredVersion_1598_major, minRequiredVersion_1598_minor, context, GetContext_1599_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix4x2fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1601_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix4x2fv_1602_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix4x2fv_1602_count := ϟa.Count                                                                                 // GLsizei
@@ -12080,14 +12477,15 @@ func (ϟa *GlUniformMatrix4x2fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1603_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1603_type
 	program.Uniforms[UniformMatrixv_1603_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1601_ext, UniformMatrix4x2fv_1602_location, UniformMatrix4x2fv_1602_count, UniformMatrix4x2fv_1602_transpose, UniformMatrix4x2fv_1602_values, v, UniformMatrixv_1603_location, UniformMatrixv_1603_transpose, UniformMatrixv_1603_values, UniformMatrixv_1603_type, minRequiredVersion_1604_major, minRequiredVersion_1604_minor, context, GetContext_1605_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix4x3fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1607_ext := ExtensionId_GL_NV_non_square_matrices                                                       // ExtensionId
 	UniformMatrix4x3fv_1608_location := ϟa.Location                                                                           // UniformLocation
 	UniformMatrix4x3fv_1608_count := ϟa.Count                                                                                 // GLsizei
@@ -12113,14 +12511,15 @@ func (ϟa *GlUniformMatrix4x3fvNV) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	uniform.Value = AsU8ˢ(UniformMatrixv_1609_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_1609_type
 	program.Uniforms[UniformMatrixv_1609_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1607_ext, UniformMatrix4x3fv_1608_location, UniformMatrix4x3fv_1608_count, UniformMatrix4x3fv_1608_transpose, UniformMatrix4x3fv_1608_values, v, UniformMatrixv_1609_location, UniformMatrixv_1609_transpose, UniformMatrixv_1609_values, UniformMatrixv_1609_type, minRequiredVersion_1610_major, minRequiredVersion_1610_minor, context, GetContext_1611_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUnmapBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1613_ext := ExtensionId_GL_OES_mapbuffer // ExtensionId
 	UnmapBuffer_1614_target := ϟa.Target                       // GLenum
 	switch UnmapBuffer_1614_target {
@@ -12147,7 +12546,7 @@ func (ϟa *GlUnmapBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	GetContext_1618_result := context                                             // Contextʳ
 	ctx := GetContext_1618_result                                                 // Contextʳ
 	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(UnmapBuffer_1614_target)) // Bufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	b.Data.Slice(uint64(b.MappingOffset), uint64((b.MappingOffset)+(int32(b.MappingData.Count))), ϟs).Copy(b.MappingData, ϟa, ϟs, ϟd, ϟl, ϟb)
 	externs{ϟa, ϟs, ϟd, ϟl, ϟb}.unmapMemory(b.MappingData)
 	b.MappingOffset = int32(0)
@@ -12159,26 +12558,29 @@ func (ϟa *GlUnmapBufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlUseProgramStagesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1620_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1620_ext
 	return nil
 }
 func (ϟa *GlValidateProgramPipelineEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1621_ext := ExtensionId_GL_EXT_separate_shader_objects // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1621_ext
 	return nil
 }
 func (ϟa *GlVertexAttribDivisorANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1622_ext := ExtensionId_GL_ANGLE_instanced_arrays // ExtensionId
 	VertexAttribDivisor_1623_index := ϟa.Index                          // AttributeLocation
 	VertexAttribDivisor_1623_divisor := ϟa.Divisor                      // GLuint
@@ -12206,14 +12608,15 @@ func (ϟa *GlVertexAttribDivisorANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	vao5.VertexAttributeArrays.Get(VertexAttribBinding_1626_index).Binding = VertexAttribBinding_1626_binding_index
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexBufferBindings.Get(binding_index).Divisor = VertexAttribDivisor_1623_divisor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1622_ext, VertexAttribDivisor_1623_index, VertexAttribDivisor_1623_divisor, context, GetContext_1624_result, ctx, binding_index, VertexAttribBinding_1626_ctx, VertexAttribBinding_1626_index, VertexAttribBinding_1626_binding_index, glErrorInvalidValueIf_1627_condition, glErrorInvalidValueIf_1628_condition, vao5, vao
 	return nil
 }
 func (ϟa *GlVertexAttribDivisorEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1629_ext := ExtensionId_GL_EXT_instanced_arrays // ExtensionId
 	VertexAttribDivisor_1630_index := ϟa.Index                        // AttributeLocation
 	VertexAttribDivisor_1630_divisor := ϟa.Divisor                    // GLuint
@@ -12241,14 +12644,15 @@ func (ϟa *GlVertexAttribDivisorEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 	vao5.VertexAttributeArrays.Get(VertexAttribBinding_1633_index).Binding = VertexAttribBinding_1633_binding_index
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexBufferBindings.Get(binding_index).Divisor = VertexAttribDivisor_1630_divisor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1629_ext, VertexAttribDivisor_1630_index, VertexAttribDivisor_1630_divisor, context, GetContext_1631_result, ctx, binding_index, VertexAttribBinding_1633_ctx, VertexAttribBinding_1633_index, VertexAttribBinding_1633_binding_index, glErrorInvalidValueIf_1634_condition, glErrorInvalidValueIf_1635_condition, vao5, vao
 	return nil
 }
 func (ϟa *GlVertexAttribDivisorNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1636_ext := ExtensionId_GL_NV_instanced_arrays // ExtensionId
 	VertexAttribDivisor_1637_index := ϟa.Index                       // AttributeLocation
 	VertexAttribDivisor_1637_divisor := ϟa.Divisor                   // GLuint
@@ -12276,72 +12680,79 @@ func (ϟa *GlVertexAttribDivisorNV) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	vao5.VertexAttributeArrays.Get(VertexAttribBinding_1640_index).Binding = VertexAttribBinding_1640_binding_index
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexBufferBindings.Get(binding_index).Divisor = VertexAttribDivisor_1637_divisor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_1636_ext, VertexAttribDivisor_1637_index, VertexAttribDivisor_1637_divisor, context, GetContext_1638_result, ctx, binding_index, VertexAttribBinding_1640_ctx, VertexAttribBinding_1640_index, VertexAttribBinding_1640_binding_index, glErrorInvalidValueIf_1641_condition, glErrorInvalidValueIf_1642_condition, vao5, vao
 	return nil
 }
 func (ϟa *GlViewportArrayvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1643_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1643_ext
 	return nil
 }
 func (ϟa *GlViewportIndexedfNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1644_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1644_ext
 	return nil
 }
 func (ϟa *GlViewportIndexedfvNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1645_ext := ExtensionId_GL_NV_viewport_array // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1645_ext
 	return nil
 }
 func (ϟa *GlWaitSyncAPPLE) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1646_ext := ExtensionId_GL_APPLE_sync // ExtensionId
 	WaitSync_1647_sync := ϟa.Sync                           // GLsync
 	WaitSync_1647_syncFlags := ϟa.Flag                      // GLbitfield
 	WaitSync_1647_timeout := ϟa.Timeout                     // GLuint64
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = requiresExtension_1646_ext, WaitSync_1647_sync, WaitSync_1647_syncFlags, WaitSync_1647_timeout
 	return nil
 }
 func (ϟa *GlWeightPathsNV) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_1648_ext := ExtensionId_GL_NV_path_rendering // ExtensionId
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_1648_ext
 	return nil
 }
 func (ϟa *GlBlendBarrier) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1649_major := uint32(3) // u32
 	minRequiredVersion_1649_minor := uint32(2) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1649_major, minRequiredVersion_1649_minor
 	return nil
 }
 func (ϟa *GlBlendColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1651_major := uint32(2)   // u32
 	minRequiredVersion_1651_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -12353,14 +12764,15 @@ func (ϟa *GlBlendColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_1652_result := context // Contextʳ
 	ctx := GetContext_1652_result     // Contextʳ
 	ctx.Blending.BlendColor = Color{Red: ϟa.Red, Green: ϟa.Green, Blue: ϟa.Blue, Alpha: ϟa.Alpha}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1651_major, minRequiredVersion_1651_minor, context, GetContext_1652_result, ctx
 	return nil
 }
 func (ϟa *GlBlendEquation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1654_major := uint32(2) // u32
 	minRequiredVersion_1654_minor := uint32(0) // u32
 	switch ϟa.Equation {
@@ -12384,14 +12796,15 @@ func (ϟa *GlBlendEquation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ctx := GetContext_1657_result     // Contextʳ
 	ctx.Blending.BlendEquationRgb = ϟa.Equation
 	ctx.Blending.BlendEquationAlpha = ϟa.Equation
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1654_major, minRequiredVersion_1654_minor, context, GetContext_1657_result, ctx
 	return nil
 }
 func (ϟa *GlBlendEquationSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1659_major := uint32(2) // u32
 	minRequiredVersion_1659_minor := uint32(0) // u32
 	switch ϟa.Rgb {
@@ -12426,14 +12839,15 @@ func (ϟa *GlBlendEquationSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	ctx := GetContext_1664_result     // Contextʳ
 	ctx.Blending.BlendEquationRgb = ϟa.Rgb
 	ctx.Blending.BlendEquationAlpha = ϟa.Alpha
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1659_major, minRequiredVersion_1659_minor, context, GetContext_1664_result, ctx
 	return nil
 }
 func (ϟa *GlBlendEquationSeparatei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1666_major := uint32(3)            // u32
 	minRequiredVersion_1666_minor := uint32(2)            // u32
 	BlendEquationSeparatei_1667_buf := ϟa.Buf             // DrawBufferIndex
@@ -12453,14 +12867,15 @@ func (ϟa *GlBlendEquationSeparatei) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_1669_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1666_major, minRequiredVersion_1666_minor, BlendEquationSeparatei_1667_buf, BlendEquationSeparatei_1667_modeRGB, BlendEquationSeparatei_1667_modeAlpha
 	return nil
 }
 func (ϟa *GlBlendEquationi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1670_major := uint32(3) // u32
 	minRequiredVersion_1670_minor := uint32(2) // u32
 	BlendEquationi_1671_buf := ϟa.Buf          // DrawBufferIndex
@@ -12472,14 +12887,15 @@ func (ϟa *GlBlendEquationi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_1672_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_1670_major, minRequiredVersion_1670_minor, BlendEquationi_1671_buf, BlendEquationi_1671_mode
 	return nil
 }
 func (ϟa *GlBlendFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1673_major := uint32(1) // u32
 	minRequiredVersion_1673_minor := uint32(0) // u32
 	switch ϟa.SrcFactor {
@@ -12508,14 +12924,15 @@ func (ϟa *GlBlendFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ctx.Blending.SrcAlphaBlendFactor = ϟa.SrcFactor
 	ctx.Blending.DstRgbBlendFactor = ϟa.DstFactor
 	ctx.Blending.DstAlphaBlendFactor = ϟa.DstFactor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1673_major, minRequiredVersion_1673_minor, context, GetContext_1676_result, ctx
 	return nil
 }
 func (ϟa *GlBlendFuncSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1678_major := uint32(2) // u32
 	minRequiredVersion_1678_minor := uint32(0) // u32
 	switch ϟa.SrcFactorRgb {
@@ -12558,14 +12975,15 @@ func (ϟa *GlBlendFuncSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ctx.Blending.DstRgbBlendFactor = ϟa.DstFactorRgb
 	ctx.Blending.SrcAlphaBlendFactor = ϟa.SrcFactorAlpha
 	ctx.Blending.DstAlphaBlendFactor = ϟa.DstFactorAlpha
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1678_major, minRequiredVersion_1678_minor, context, GetContext_1683_result, ctx
 	return nil
 }
 func (ϟa *GlBlendFuncSeparatei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1685_major := uint32(3)      // u32
 	minRequiredVersion_1685_minor := uint32(2)      // u32
 	BlendFuncSeparatei_1686_buf := ϟa.Buf           // DrawBufferIndex
@@ -12601,14 +13019,15 @@ func (ϟa *GlBlendFuncSeparatei) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_1690_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1685_major, minRequiredVersion_1685_minor, BlendFuncSeparatei_1686_buf, BlendFuncSeparatei_1686_srcRGB, BlendFuncSeparatei_1686_dstRGB, BlendFuncSeparatei_1686_srcAlpha, BlendFuncSeparatei_1686_dstAlpha
 	return nil
 }
 func (ϟa *GlBlendFunci) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1691_major := uint32(3) // u32
 	minRequiredVersion_1691_minor := uint32(2) // u32
 	BlendFunci_1692_buf := ϟa.Buf              // DrawBufferIndex
@@ -12628,14 +13047,15 @@ func (ϟa *GlBlendFunci) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_1694_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1691_major, minRequiredVersion_1691_minor, BlendFunci_1692_buf, BlendFunci_1692_src, BlendFunci_1692_dst
 	return nil
 }
 func (ϟa *GlDepthFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1695_major := uint32(1) // u32
 	minRequiredVersion_1695_minor := uint32(0) // u32
 	switch ϟa.Function {
@@ -12654,14 +13074,15 @@ func (ϟa *GlDepthFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_1697_result := context // Contextʳ
 	ctx := GetContext_1697_result     // Contextʳ
 	ctx.Rasterizing.DepthTestFunction = ϟa.Function
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1695_major, minRequiredVersion_1695_minor, context, GetContext_1697_result, ctx
 	return nil
 }
 func (ϟa *GlSampleCoverage) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1699_major := uint32(1)   // u32
 	minRequiredVersion_1699_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -12674,24 +13095,26 @@ func (ϟa *GlSampleCoverage) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx := GetContext_1700_result     // Contextʳ
 	ctx.Rasterizing.SampleCoverageValue = ϟa.Value
 	ctx.Rasterizing.SampleCoverageInvert = ϟa.Invert
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1699_major, minRequiredVersion_1699_minor, context, GetContext_1700_result, ctx
 	return nil
 }
 func (ϟa *GlSampleMaski) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1702_major := uint32(3) // u32
 	minRequiredVersion_1702_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1702_major, minRequiredVersion_1702_minor
 	return nil
 }
 func (ϟa *GlScissor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1703_major := uint32(1)   // u32
 	minRequiredVersion_1703_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -12703,14 +13126,15 @@ func (ϟa *GlScissor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	GetContext_1704_result := context // Contextʳ
 	ctx := GetContext_1704_result     // Contextʳ
 	ctx.Rasterizing.Scissor = Rect{X: ϟa.X, Y: ϟa.Y, Width: ϟa.Width, Height: ϟa.Height}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1703_major, minRequiredVersion_1703_minor, context, GetContext_1704_result, ctx
 	return nil
 }
 func (ϟa *GlStencilFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1706_major := uint32(1) // u32
 	minRequiredVersion_1706_minor := uint32(0) // u32
 	switch ϟa.Func {
@@ -12720,14 +13144,15 @@ func (ϟa *GlStencilFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		return
 		_ = glErrorInvalidEnum_1707_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1706_major, minRequiredVersion_1706_minor
 	return nil
 }
 func (ϟa *GlStencilFuncSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1708_major := uint32(2) // u32
 	minRequiredVersion_1708_minor := uint32(0) // u32
 	switch ϟa.Face {
@@ -12744,14 +13169,15 @@ func (ϟa *GlStencilFuncSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_1710_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1708_major, minRequiredVersion_1708_minor
 	return nil
 }
 func (ϟa *GlStencilOp) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1711_major := uint32(1) // u32
 	minRequiredVersion_1711_minor := uint32(0) // u32
 	switch ϟa.Fail {
@@ -12775,14 +13201,15 @@ func (ϟa *GlStencilOp) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		return
 		_ = glErrorInvalidEnum_1714_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1711_major, minRequiredVersion_1711_minor
 	return nil
 }
 func (ϟa *GlStencilOpSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1715_major := uint32(2) // u32
 	minRequiredVersion_1715_minor := uint32(0) // u32
 	switch ϟa.Face {
@@ -12813,14 +13240,15 @@ func (ϟa *GlStencilOpSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_1719_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1715_major, minRequiredVersion_1715_minor
 	return nil
 }
 func (ϟa *GlBindFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1720_major := uint32(2) // u32
 	minRequiredVersion_1720_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -12851,14 +13279,15 @@ func (ϟa *GlBindFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	} else {
 		ctx.BoundFramebuffers[ϟa.Target] = ϟa.Framebuffer
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1720_major, minRequiredVersion_1720_minor, context, GetContext_1723_result, ctx
 	return nil
 }
 func (ϟa *GlBindRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1725_major := uint32(2) // u32
 	minRequiredVersion_1725_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -12880,14 +13309,15 @@ func (ϟa *GlBindRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		ctx.Instances.Renderbuffers[ϟa.Renderbuffer] = &Renderbuffer{}
 	}
 	ctx.BoundRenderbuffers[ϟa.Target] = ϟa.Renderbuffer
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1725_major, minRequiredVersion_1725_minor, context, GetContext_1727_result, ctx
 	return nil
 }
 func (ϟa *GlBlitFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1729_major := uint32(3)                                                                                                // u32
 	minRequiredVersion_1729_minor := uint32(0)                                                                                                // u32
 	BlitFramebuffer_1730_srcX0 := ϟa.SrcX0                                                                                                    // GLint
@@ -12915,14 +13345,15 @@ func (ϟa *GlBlitFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 		_ = glErrorInvalidEnum_1732_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1729_major, minRequiredVersion_1729_minor, BlitFramebuffer_1730_srcX0, BlitFramebuffer_1730_srcY0, BlitFramebuffer_1730_srcX1, BlitFramebuffer_1730_srcY1, BlitFramebuffer_1730_dstX0, BlitFramebuffer_1730_dstY0, BlitFramebuffer_1730_dstX1, BlitFramebuffer_1730_dstY1, BlitFramebuffer_1730_mask, BlitFramebuffer_1730_filter, supportsBits_1731_seenBits, supportsBits_1731_validBits
 	return nil
 }
 func (ϟa *GlCheckFramebufferStatus) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1733_major := uint32(2) // u32
 	minRequiredVersion_1733_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -12936,15 +13367,16 @@ func (ϟa *GlCheckFramebufferStatus) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_1735_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1733_major, minRequiredVersion_1733_minor
 	return nil
 }
 func (ϟa *GlClear) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1736_major := uint32(1)                                                                                                // u32
 	minRequiredVersion_1736_minor := uint32(0)                                                                                                // u32
 	supportsBits_1737_seenBits := ϟa.Mask                                                                                                     // GLbitfield
@@ -12957,14 +13389,15 @@ func (ϟa *GlClear) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 	}
 	if (GLbitfield_GL_COLOR_BUFFER_BIT)&(ϟa.Mask) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_1736_major, minRequiredVersion_1736_minor, supportsBits_1737_seenBits, supportsBits_1737_validBits
 	return nil
 }
 func (ϟa *GlClearBufferfi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1738_major := uint32(3) // u32
 	minRequiredVersion_1738_minor := uint32(0) // u32
 	switch ϟa.Buffer {
@@ -12979,14 +13412,15 @@ func (ϟa *GlClearBufferfi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_1740_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1738_major, minRequiredVersion_1738_minor
 	return nil
 }
 func (ϟa *GlClearBufferfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1741_major := uint32(3) // u32
 	minRequiredVersion_1741_minor := uint32(0) // u32
 	switch ϟa.Buffer {
@@ -13017,14 +13451,15 @@ func (ϟa *GlClearBufferfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_1746_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1741_major, minRequiredVersion_1741_minor
 	return nil
 }
 func (ϟa *GlClearBufferiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1747_major := uint32(3) // u32
 	minRequiredVersion_1747_minor := uint32(0) // u32
 	switch ϟa.Buffer {
@@ -13055,14 +13490,15 @@ func (ϟa *GlClearBufferiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return
 		_ = glErrorInvalidEnum_1752_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1747_major, minRequiredVersion_1747_minor
 	return nil
 }
 func (ϟa *GlClearBufferuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1753_major := uint32(3) // u32
 	minRequiredVersion_1753_minor := uint32(0) // u32
 	switch ϟa.Buffer {
@@ -13086,14 +13522,15 @@ func (ϟa *GlClearBufferuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_1757_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1753_major, minRequiredVersion_1753_minor
 	return nil
 }
 func (ϟa *GlClearColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1758_major := uint32(1)   // u32
 	minRequiredVersion_1758_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13105,14 +13542,15 @@ func (ϟa *GlClearColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_1759_result := context // Contextʳ
 	ctx := GetContext_1759_result     // Contextʳ
 	ctx.Clearing.ClearColor = Color{Red: ϟa.R, Green: ϟa.G, Blue: ϟa.B, Alpha: ϟa.A}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1758_major, minRequiredVersion_1758_minor, context, GetContext_1759_result, ctx
 	return nil
 }
 func (ϟa *GlClearDepthf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1761_major := uint32(1)   // u32
 	minRequiredVersion_1761_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13124,14 +13562,15 @@ func (ϟa *GlClearDepthf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_1762_result := context // Contextʳ
 	ctx := GetContext_1762_result     // Contextʳ
 	ctx.Clearing.ClearDepth = ϟa.Depth
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1761_major, minRequiredVersion_1761_minor, context, GetContext_1762_result, ctx
 	return nil
 }
 func (ϟa *GlClearStencil) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1764_major := uint32(1)   // u32
 	minRequiredVersion_1764_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13143,14 +13582,15 @@ func (ϟa *GlClearStencil) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	GetContext_1765_result := context // Contextʳ
 	ctx := GetContext_1765_result     // Contextʳ
 	ctx.Clearing.ClearStencil = ϟa.Stencil
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1764_major, minRequiredVersion_1764_minor, context, GetContext_1765_result, ctx
 	return nil
 }
 func (ϟa *GlColorMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1767_major := uint32(1)   // u32
 	minRequiredVersion_1767_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13165,14 +13605,15 @@ func (ϟa *GlColorMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ctx.Rasterizing.ColorMaskGreen = ϟa.Green
 	ctx.Rasterizing.ColorMaskBlue = ϟa.Blue
 	ctx.Rasterizing.ColorMaskAlpha = ϟa.Alpha
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1767_major, minRequiredVersion_1767_minor, context, GetContext_1768_result, ctx
 	return nil
 }
 func (ϟa *GlColorMaski) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1770_major := uint32(3) // u32
 	minRequiredVersion_1770_minor := uint32(2) // u32
 	ColorMaski_1771_index := ϟa.Index          // DrawBufferIndex
@@ -13180,14 +13621,15 @@ func (ϟa *GlColorMaski) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ColorMaski_1771_g := ϟa.G                  // GLboolean
 	ColorMaski_1771_b := ϟa.B                  // GLboolean
 	ColorMaski_1771_a := ϟa.A                  // GLboolean
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1770_major, minRequiredVersion_1770_minor, ColorMaski_1771_index, ColorMaski_1771_r, ColorMaski_1771_g, ColorMaski_1771_b, ColorMaski_1771_a
 	return nil
 }
 func (ϟa *GlDeleteFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1772_major := uint32(2)                                  // u32
 	minRequiredVersion_1772_minor := uint32(0)                                  // u32
 	f := ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // FramebufferIdˢ
@@ -13202,14 +13644,15 @@ func (ϟa *GlDeleteFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Framebuffers, f.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_1772_major, minRequiredVersion_1772_minor, f, context, GetContext_1773_result, ctx
 	return nil
 }
 func (ϟa *GlDeleteRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1775_major := uint32(2)                                   // u32
 	minRequiredVersion_1775_minor := uint32(0)                                   // u32
 	r := ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // RenderbufferIdˢ
@@ -13224,14 +13667,15 @@ func (ϟa *GlDeleteRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Renderbuffers, r.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_1775_major, minRequiredVersion_1775_minor, r, context, GetContext_1776_result, ctx
 	return nil
 }
 func (ϟa *GlDepthMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1778_major := uint32(1)   // u32
 	minRequiredVersion_1778_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13243,27 +13687,29 @@ func (ϟa *GlDepthMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_1779_result := context // Contextʳ
 	ctx := GetContext_1779_result     // Contextʳ
 	ctx.Rasterizing.DepthMask = ϟa.Enabled
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1778_major, minRequiredVersion_1778_minor, context, GetContext_1779_result, ctx
 	return nil
 }
 func (ϟa *GlDrawBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1781_major := uint32(3) // u32
 	minRequiredVersion_1781_minor := uint32(0) // u32
 	DrawBuffers_1782_n := ϟa.N                 // GLsizei
 	DrawBuffers_1782_bufs := ϟa.Bufs           // GLenumᶜᵖ
 	DrawBuffers_1782_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_1782_n), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_1781_major, minRequiredVersion_1781_minor, DrawBuffers_1782_n, DrawBuffers_1782_bufs
 	return nil
 }
 func (ϟa *GlFramebufferParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1783_major := uint32(3) // u32
 	minRequiredVersion_1783_minor := uint32(1) // u32
 	switch ϟa.Target {
@@ -13284,14 +13730,15 @@ func (ϟa *GlFramebufferParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_1786_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1783_major, minRequiredVersion_1783_minor
 	return nil
 }
 func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1787_major := uint32(2) // u32
 	minRequiredVersion_1787_minor := uint32(0) // u32
 	switch ϟa.FramebufferTarget {
@@ -13357,14 +13804,15 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	attachment.TextureLevel = GLint(int32(0))
 	attachment.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	framebuffer.Attachments[ϟa.FramebufferAttachment] = attachment
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_1787_major, minRequiredVersion_1787_minor, context, GetContext_1793_result, ctx, target, framebufferId, framebuffer, attachment
 	return nil
 }
 func (ϟa *GlFramebufferTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1795_major := uint32(3)          // u32
 	minRequiredVersion_1795_minor := uint32(2)          // u32
 	FramebufferTexture_1796_target := ϟa.Target         // GLenum
@@ -13385,14 +13833,15 @@ func (ϟa *GlFramebufferTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_1798_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_1795_major, minRequiredVersion_1795_minor, FramebufferTexture_1796_target, FramebufferTexture_1796_attachment, FramebufferTexture_1796_texture, FramebufferTexture_1796_level
 	return nil
 }
 func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1799_major := uint32(2)                                   // u32
 	minRequiredVersion_1799_minor := uint32(0)                                   // u32
 	FramebufferTexture2D_1800_framebuffer_target := ϟa.FramebufferTarget         // GLenum
@@ -13491,14 +13940,15 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		}()
 	}
 	framebuffer.Attachments[FramebufferTexture2D_1800_framebuffer_attachment] = attachment
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1799_major, minRequiredVersion_1799_minor, FramebufferTexture2D_1800_framebuffer_target, FramebufferTexture2D_1800_framebuffer_attachment, FramebufferTexture2D_1800_texture_target, FramebufferTexture2D_1800_texture, FramebufferTexture2D_1800_level, context, GetContext_1807_result, ctx, target, framebufferId, framebuffer, attachment
 	return nil
 }
 func (ϟa *GlFramebufferTextureLayer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1809_major := uint32(3) // u32
 	minRequiredVersion_1809_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -13515,14 +13965,15 @@ func (ϟa *GlFramebufferTextureLayer) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_1811_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1809_major, minRequiredVersion_1809_minor
 	return nil
 }
 func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1812_major := uint32(2)                                  // u32
 	minRequiredVersion_1812_minor := uint32(0)                                  // u32
 	f := ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // FramebufferIdˢ
@@ -13534,7 +13985,7 @@ func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	}
 	GetContext_1813_result := context // Contextʳ
 	ctx := GetContext_1813_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := FramebufferId(ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // FramebufferId
 		ctx.Instances.Framebuffers[id] = &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}}
@@ -13546,8 +13997,9 @@ func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlGenRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1815_major := uint32(2)                                   // u32
 	minRequiredVersion_1815_minor := uint32(0)                                   // u32
 	r := ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // RenderbufferIdˢ
@@ -13559,7 +14011,7 @@ func (ϟa *GlGenRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	GetContext_1816_result := context // Contextʳ
 	ctx := GetContext_1816_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := RenderbufferId(ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // RenderbufferId
 		ctx.Instances.Renderbuffers[id] = &Renderbuffer{}
@@ -13571,8 +14023,9 @@ func (ϟa *GlGenRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1818_major := uint32(2) // u32
 	minRequiredVersion_1818_minor := uint32(0) // u32
 	switch ϟa.FramebufferTarget {
@@ -13637,7 +14090,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *gfxapi.State, ϟd 
 	framebufferId := ctx.BoundFramebuffers.Get(target)           // FramebufferId
 	framebuffer := ctx.Instances.Framebuffers.Get(framebufferId) // Framebufferʳ
 	a := framebuffer.Attachments.Get(ϟa.Attachment)              // FramebufferAttachmentInfo
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:
@@ -13659,8 +14112,9 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *gfxapi.State, ϟd 
 }
 func (ϟa *GlGetFramebufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1828_major := uint32(3) // u32
 	minRequiredVersion_1828_minor := uint32(1) // u32
 	switch ϟa.Target {
@@ -13681,15 +14135,16 @@ func (ϟa *GlGetFramebufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.D
 		return
 		_ = glErrorInvalidEnum_1831_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1828_major, minRequiredVersion_1828_minor
 	return nil
 }
 func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1832_major := uint32(2) // u32
 	minRequiredVersion_1832_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -13720,7 +14175,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.
 	ctx := GetContext_1836_result               // Contextʳ
 	id := ctx.BoundRenderbuffers.Get(ϟa.Target) // RenderbufferId
 	rb := ctx.Instances.Renderbuffers.Get(id)   // Renderbufferʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_RENDERBUFFER_WIDTH:
@@ -13740,8 +14195,9 @@ func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.
 }
 func (ϟa *GlInvalidateFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1838_major := uint32(3) // u32
 	minRequiredVersion_1838_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -13752,14 +14208,15 @@ func (ϟa *GlInvalidateFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		_ = glErrorInvalidEnum_1839_param
 	}
 	a := ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLenumˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_1838_major, minRequiredVersion_1838_minor, a
 	return nil
 }
 func (ϟa *GlInvalidateSubFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1840_major := uint32(3) // u32
 	minRequiredVersion_1840_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -13770,14 +14227,15 @@ func (ϟa *GlInvalidateSubFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Da
 		_ = glErrorInvalidEnum_1841_param
 	}
 	a := ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.NumAttachments), ϟs) // GLenumˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_1840_major, minRequiredVersion_1840_minor, a
 	return nil
 }
 func (ϟa *GlIsFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1842_major := uint32(2)   // u32
 	minRequiredVersion_1842_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13788,7 +14246,7 @@ func (ϟa *GlIsFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	}
 	GetContext_1843_result := context // Contextʳ
 	ctx := GetContext_1843_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Framebuffers.Contains(ϟa.Framebuffer) {
 			return 1
@@ -13801,8 +14259,9 @@ func (ϟa *GlIsFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlIsRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1845_major := uint32(2)   // u32
 	minRequiredVersion_1845_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -13813,7 +14272,7 @@ func (ϟa *GlIsRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	GetContext_1846_result := context // Contextʳ
 	ctx := GetContext_1846_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Renderbuffers.Contains(ϟa.Renderbuffer) {
 			return 1
@@ -13826,8 +14285,9 @@ func (ϟa *GlIsRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlReadBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1848_major := uint32(3) // u32
 	minRequiredVersion_1848_minor := uint32(0) // u32
 	switch ϟa.Src {
@@ -13837,14 +14297,15 @@ func (ϟa *GlReadBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_1849_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1848_major, minRequiredVersion_1848_minor
 	return nil
 }
 func (ϟa *GlReadPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1850_major := uint32(1) // u32
 	minRequiredVersion_1850_minor := uint32(0) // u32
 	switch ϟa.Format {
@@ -13873,7 +14334,7 @@ func (ϟa *GlReadPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	}
 	GetContext_1854_result := context // Contextʳ
 	ctx := GetContext_1854_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_PACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (Voidᵖ{})) {
 		imageSize_1856_width := uint32(ϟa.Width)                                                                                                                          // u32
 		imageSize_1856_height := uint32(ϟa.Height)                                                                                                                        // u32
@@ -13889,8 +14350,9 @@ func (ϟa *GlReadPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlReadnPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1857_major := uint32(3) // u32
 	minRequiredVersion_1857_minor := uint32(2) // u32
 	ReadnPixels_1858_x := ϟa.X                 // GLint
@@ -13923,7 +14385,7 @@ func (ϟa *GlReadnPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	}
 	GetContext_1861_result := context // Contextʳ
 	ctx := GetContext_1861_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_PACK_BUFFER)) == (BufferId(uint32(0)))) && ((ReadnPixels_1858_data) != (Voidᵖ{})) {
 		imageSize_1863_width := uint32(ReadnPixels_1858_width)                                                                                                            // u32
 		imageSize_1863_height := uint32(ReadnPixels_1858_height)                                                                                                          // u32
@@ -13943,8 +14405,9 @@ func (ϟa *GlReadnPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlRenderbufferStorage) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1865_major := uint32(2) // u32
 	minRequiredVersion_1865_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -13978,14 +14441,15 @@ func (ϟa *GlRenderbufferStorage) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	rb.TexelFormat = ϟa.Format
 	rb.Width = ϟa.Width
 	rb.Height = ϟa.Height
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1865_major, minRequiredVersion_1865_minor, context, GetContext_1869_result, ctx, id, rb
 	return nil
 }
 func (ϟa *GlRenderbufferStorageMultisample) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1871_major := uint32(3)                // u32
 	minRequiredVersion_1871_minor := uint32(0)                // u32
 	RenderbufferStorageMultisample_1872_target := ϟa.Target   // GLenum
@@ -14007,14 +14471,15 @@ func (ϟa *GlRenderbufferStorageMultisample) Mutate(ϟs *gfxapi.State, ϟd datab
 		return
 		_ = glErrorInvalidEnum_1874_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1871_major, minRequiredVersion_1871_minor, RenderbufferStorageMultisample_1872_target, RenderbufferStorageMultisample_1872_samples, RenderbufferStorageMultisample_1872_format, RenderbufferStorageMultisample_1872_width, RenderbufferStorageMultisample_1872_height
 	return nil
 }
 func (ϟa *GlStencilMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1875_major := uint32(1)   // u32
 	minRequiredVersion_1875_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14027,14 +14492,15 @@ func (ϟa *GlStencilMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ctx := GetContext_1876_result     // Contextʳ
 	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = ϟa.Mask
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = ϟa.Mask
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1875_major, minRequiredVersion_1875_minor, context, GetContext_1876_result, ctx
 	return nil
 }
 func (ϟa *GlStencilMaskSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1878_major := uint32(2) // u32
 	minRequiredVersion_1878_minor := uint32(0) // u32
 	switch ϟa.Face {
@@ -14064,14 +14530,15 @@ func (ϟa *GlStencilMaskSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		v := ϟa.Face
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1878_major, minRequiredVersion_1878_minor, context, GetContext_1880_result, ctx
 	return nil
 }
 func (ϟa *GlDisable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1882_major := uint32(1) // u32
 	minRequiredVersion_1882_minor := uint32(0) // u32
 	switch ϟa.Capability {
@@ -14102,14 +14569,15 @@ func (ϟa *GlDisable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	GetContext_1887_result := context // Contextʳ
 	ctx := GetContext_1887_result     // Contextʳ
 	ctx.Capabilities[ϟa.Capability] = false
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1882_major, minRequiredVersion_1882_minor, context, GetContext_1887_result, ctx
 	return nil
 }
 func (ϟa *GlDisablei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1889_major := uint32(3) // u32
 	minRequiredVersion_1889_minor := uint32(2) // u32
 	Disablei_1890_target := ϟa.Target          // GLenum
@@ -14121,14 +14589,15 @@ func (ϟa *GlDisablei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		return
 		_ = glErrorInvalidEnum_1891_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_1889_major, minRequiredVersion_1889_minor, Disablei_1890_target, Disablei_1890_index
 	return nil
 }
 func (ϟa *GlEnable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1892_major := uint32(1) // u32
 	minRequiredVersion_1892_minor := uint32(0) // u32
 	switch ϟa.Capability {
@@ -14159,14 +14628,15 @@ func (ϟa *GlEnable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Lo
 	GetContext_1897_result := context // Contextʳ
 	ctx := GetContext_1897_result     // Contextʳ
 	ctx.Capabilities[ϟa.Capability] = true
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1892_major, minRequiredVersion_1892_minor, context, GetContext_1897_result, ctx
 	return nil
 }
 func (ϟa *GlEnablei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1899_major := uint32(3) // u32
 	minRequiredVersion_1899_minor := uint32(2) // u32
 	Enablei_1900_target := ϟa.Target           // GLenum
@@ -14178,34 +14648,37 @@ func (ϟa *GlEnablei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 		return
 		_ = glErrorInvalidEnum_1901_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_1899_major, minRequiredVersion_1899_minor, Enablei_1900_target, Enablei_1900_index
 	return nil
 }
 func (ϟa *GlFinish) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1902_major := uint32(1) // u32
 	minRequiredVersion_1902_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1902_major, minRequiredVersion_1902_minor
 	return nil
 }
 func (ϟa *GlFlush) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1903_major := uint32(1) // u32
 	minRequiredVersion_1903_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1903_major, minRequiredVersion_1903_minor
 	return nil
 }
 func (ϟa *GlFlushMappedBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1904_major := uint32(3)      // u32
 	minRequiredVersion_1904_minor := uint32(0)      // u32
 	FlushMappedBufferRange_1905_target := ϟa.Target // GLenum
@@ -14222,28 +14695,30 @@ func (ϟa *GlFlushMappedBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_1907_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1904_major, minRequiredVersion_1904_minor, FlushMappedBufferRange_1905_target, FlushMappedBufferRange_1905_offset, FlushMappedBufferRange_1905_length
 	return nil
 }
 func (ϟa *GlGetError) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1908_major := uint32(1) // u32
 	minRequiredVersion_1908_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1908_major, minRequiredVersion_1908_minor
 	return nil
 }
 func (ϟa *GlGetGraphicsResetStatus) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1909_major := uint32(3) // u32
 	minRequiredVersion_1909_minor := uint32(2) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetGraphicsResetStatus_1910_result := ϟa.Result // GLenum
 	ϟa.Result = GetGraphicsResetStatus_1910_result
 	_, _, _ = minRequiredVersion_1909_major, minRequiredVersion_1909_minor, GetGraphicsResetStatus_1910_result
@@ -14251,8 +14726,9 @@ func (ϟa *GlGetGraphicsResetStatus) Mutate(ϟs *gfxapi.State, ϟd database.Data
 }
 func (ϟa *GlHint) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1911_major := uint32(1) // u32
 	minRequiredVersion_1911_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -14282,24 +14758,26 @@ func (ϟa *GlHint) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 	GetContext_1915_result := context // Contextʳ
 	ctx := GetContext_1915_result     // Contextʳ
 	ctx.GenerateMipmapHint = ϟa.Mode
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1911_major, minRequiredVersion_1911_minor, context, GetContext_1915_result, ctx
 	return nil
 }
 func (ϟa *GlActiveShaderProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1917_major := uint32(3) // u32
 	minRequiredVersion_1917_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1917_major, minRequiredVersion_1917_minor
 	return nil
 }
 func (ϟa *GlAttachShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1918_major := uint32(2)   // u32
 	minRequiredVersion_1918_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14313,14 +14791,15 @@ func (ϟa *GlAttachShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	p := ctx.Instances.Programs.Get(ϟa.Program) // Programʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)   // Shaderʳ
 	p.Shaders[s.Type] = ϟa.Shader
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1918_major, minRequiredVersion_1918_minor, context, GetContext_1919_result, ctx, p, s
 	return nil
 }
 func (ϟa *GlBindAttribLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1921_major := uint32(2)   // u32
 	minRequiredVersion_1921_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14333,34 +14812,37 @@ func (ϟa *GlBindAttribLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	ctx := GetContext_1922_result               // Contextʳ
 	p := ctx.Instances.Programs.Get(ϟa.Program) // Programʳ
 	p.AttributeBindings[ϟa.Name] = ϟa.Location
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_1921_major, minRequiredVersion_1921_minor, context, GetContext_1922_result, ctx, p
 	return nil
 }
 func (ϟa *GlBindProgramPipeline) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1924_major := uint32(3) // u32
 	minRequiredVersion_1924_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1924_major, minRequiredVersion_1924_minor
 	return nil
 }
 func (ϟa *GlCompileShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1925_major := uint32(2) // u32
 	minRequiredVersion_1925_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1925_major, minRequiredVersion_1925_minor
 	return nil
 }
 func (ϟa *GlCreateProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1926_major := uint32(2)   // u32
 	minRequiredVersion_1926_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14371,7 +14853,7 @@ func (ϟa *GlCreateProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	}
 	GetContext_1927_result := context // Contextʳ
 	ctx := GetContext_1927_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ProgramId(ϟa.Result) // ProgramId
 	ctx.Instances.Programs[id] = &Program{Shaders: GLenumːShaderIdᵐ{}, AttributeBindings: StringːAttributeLocationᵐ{}, Attributes: S32ːVertexAttributeᵐ{}, Uniforms: UniformLocationːUniformᵐ{}}
 	ϟa.Result = id
@@ -14380,8 +14862,9 @@ func (ϟa *GlCreateProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlCreateShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1929_major := uint32(2) // u32
 	minRequiredVersion_1929_minor := uint32(0) // u32
 	switch ϟa.Type {
@@ -14407,7 +14890,7 @@ func (ϟa *GlCreateShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	}
 	GetContext_1933_result := context // Contextʳ
 	ctx := GetContext_1933_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ShaderId(ϟa.Result) // ShaderId
 	ctx.Instances.Shaders[id] = &Shader{Compiled: false, Deletable: false}
 	s := ctx.Instances.Shaders.Get(id) // Shaderʳ
@@ -14418,8 +14901,9 @@ func (ϟa *GlCreateShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 }
 func (ϟa *GlCreateShaderProgramv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1935_major := uint32(3) // u32
 	minRequiredVersion_1935_minor := uint32(1) // u32
 	switch ϟa.Type {
@@ -14446,15 +14930,16 @@ func (ϟa *GlCreateShaderProgramv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		source := strings.TrimRight(string(Charᵖ(sources.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
 		_ = source
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _, _, _, _, _ = minRequiredVersion_1935_major, minRequiredVersion_1935_minor, context, GetContext_1938_result, ctx, sources
 	return nil
 }
 func (ϟa *GlDeleteProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1940_major := uint32(2)   // u32
 	minRequiredVersion_1940_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14466,25 +14951,27 @@ func (ϟa *GlDeleteProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_1941_result := context // Contextʳ
 	ctx := GetContext_1941_result     // Contextʳ
 	delete(ctx.Instances.Programs, ϟa.Program)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_1940_major, minRequiredVersion_1940_minor, context, GetContext_1941_result, ctx
 	return nil
 }
 func (ϟa *GlDeleteProgramPipelines) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1943_major := uint32(3)                           // u32
 	minRequiredVersion_1943_minor := uint32(1)                           // u32
 	p := ϟa.Pipelines.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs) // PipelineIdˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_1943_major, minRequiredVersion_1943_minor, p
 	return nil
 }
 func (ϟa *GlDeleteShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1944_major := uint32(2)   // u32
 	minRequiredVersion_1944_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14498,14 +14985,15 @@ func (ϟa *GlDeleteShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	s := ctx.Instances.Shaders.Get(ϟa.Shader) // Shaderʳ
 	s.Deletable = true
 	delete(ctx.Instances.Shaders, ϟa.Shader)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_1944_major, minRequiredVersion_1944_minor, context, GetContext_1945_result, ctx, s
 	return nil
 }
 func (ϟa *GlDetachShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1947_major := uint32(2)   // u32
 	minRequiredVersion_1947_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14519,51 +15007,55 @@ func (ϟa *GlDetachShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	p := ctx.Instances.Programs.Get(ϟa.Program) // Programʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)   // Shaderʳ
 	delete(p.Shaders, s.Type)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_1947_major, minRequiredVersion_1947_minor, context, GetContext_1948_result, ctx, p, s
 	return nil
 }
 func (ϟa *GlDispatchCompute) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1950_major := uint32(3) // u32
 	minRequiredVersion_1950_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1950_major, minRequiredVersion_1950_minor
 	return nil
 }
 func (ϟa *GlDispatchComputeIndirect) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1951_major := uint32(3) // u32
 	minRequiredVersion_1951_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_1951_major, minRequiredVersion_1951_minor
 	return nil
 }
 func (ϟa *GlGenProgramPipelines) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1952_major := uint32(3) // u32
 	minRequiredVersion_1952_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Pipelines.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1952_major, minRequiredVersion_1952_minor
 	return nil
 }
 func (ϟa *GlGetActiveAttrib) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1953_major := uint32(2)                     // u32
 	minRequiredVersion_1953_minor := uint32(0)                     // u32
 	writeString_1954_buffer_size := ϟa.BufferSize                  // GLsizei
 	writeString_1954_buffer_bytes_written := ϟa.BufferBytesWritten // GLsizeiᵖ
 	writeString_1954_buffer := ϟa.Name                             // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1954_buffer) != (GLcharᵖ{})) && ((writeString_1954_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1954_buffer_size // GLsizei
 		if (writeString_1954_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14583,14 +15075,15 @@ func (ϟa *GlGetActiveAttrib) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1955_major := uint32(2)                     // u32
 	minRequiredVersion_1955_minor := uint32(0)                     // u32
 	writeString_1956_buffer_size := ϟa.BufferSize                  // GLsizei
 	writeString_1956_buffer_bytes_written := ϟa.BufferBytesWritten // GLsizeiᵖ
 	writeString_1956_buffer := ϟa.Name                             // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1956_buffer) != (GLcharᵖ{})) && ((writeString_1956_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1956_buffer_size // GLsizei
 		if (writeString_1956_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14610,14 +15103,15 @@ func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlGetActiveUniformBlockName) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1957_major := uint32(3)                     // u32
 	minRequiredVersion_1957_minor := uint32(0)                     // u32
 	writeString_1958_buffer_size := ϟa.BufferSize                  // GLsizei
 	writeString_1958_buffer_bytes_written := ϟa.BufferBytesWritten // GLsizeiᵖ
 	writeString_1958_buffer := ϟa.Name                             // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1958_buffer) != (GLcharᵖ{})) && ((writeString_1958_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1958_buffer_size // GLsizei
 		if (writeString_1958_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14635,8 +15129,9 @@ func (ϟa *GlGetActiveUniformBlockName) Mutate(ϟs *gfxapi.State, ϟd database.D
 }
 func (ϟa *GlGetActiveUniformBlockiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1959_major := uint32(3) // u32
 	minRequiredVersion_1959_minor := uint32(0) // u32
 	switch ϟa.ParameterName {
@@ -14646,15 +15141,16 @@ func (ϟa *GlGetActiveUniformBlockiv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_1960_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1959_major, minRequiredVersion_1959_minor
 	return nil
 }
 func (ϟa *GlGetActiveUniformsiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1961_major := uint32(3) // u32
 	minRequiredVersion_1961_minor := uint32(0) // u32
 	switch ϟa.ParameterName {
@@ -14665,15 +15161,16 @@ func (ϟa *GlGetActiveUniformsiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		_ = glErrorInvalidEnum_1962_param
 	}
 	ϟa.UniformIndices.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.UniformCount), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Parameters.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.UniformCount), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1961_major, minRequiredVersion_1961_minor
 	return nil
 }
 func (ϟa *GlGetAttachedShaders) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1963_major := uint32(2)   // u32
 	minRequiredVersion_1963_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14700,7 +15197,7 @@ func (ϟa *GlGetAttachedShaders) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		}
 	}() // s32
 	l := min_1966_result // s32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Shaders.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if (ϟa.ShadersLengthWritten) != (GLsizeiᵖ{}) {
 		ϟa.ShadersLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLsizei(l), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -14710,30 +15207,33 @@ func (ϟa *GlGetAttachedShaders) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetAttribLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1967_major := uint32(2) // u32
 	minRequiredVersion_1967_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1967_major, minRequiredVersion_1967_minor
 	return nil
 }
 func (ϟa *GlGetFragDataLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1968_major := uint32(3) // u32
 	minRequiredVersion_1968_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1968_major, minRequiredVersion_1968_minor
 	return nil
 }
 func (ϟa *GlGetProgramBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1969_major := uint32(3)            // u32
 	minRequiredVersion_1969_minor := uint32(0)            // u32
 	GetProgramBinary_1970_program := ϟa.Program           // ProgramId
@@ -14741,7 +15241,7 @@ func (ϟa *GlGetProgramBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	GetProgramBinary_1970_length := ϟa.Length             // GLsizeiᵖ
 	GetProgramBinary_1970_binaryFormat := ϟa.BinaryFormat // GLenumᵖ
 	GetProgramBinary_1970_binary := ϟa.Binary             // Voidᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (GetProgramBinary_1970_length) != (GLsizeiᵖ{}) {
 		l := GLsizei(ϟa.Length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 		GetProgramBinary_1970_length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -14756,8 +15256,9 @@ func (ϟa *GlGetProgramBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1971_major := uint32(2)   // u32
 	minRequiredVersion_1971_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -14772,7 +15273,7 @@ func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	writeString_1974_buffer_size := ϟa.BufferLength                 // GLsizei
 	writeString_1974_buffer_bytes_written := ϟa.StringLengthWritten // GLsizeiᵖ
 	writeString_1974_buffer := ϟa.Info                              // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1974_buffer) != (GLcharᵖ{})) && ((writeString_1974_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1974_buffer_size // GLsizei
 		if (writeString_1974_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14790,8 +15291,9 @@ func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlGetProgramInterfaceiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1975_major := uint32(3) // u32
 	minRequiredVersion_1975_minor := uint32(1) // u32
 	switch ϟa.ProgramInterface {
@@ -14808,21 +15310,22 @@ func (ϟa *GlGetProgramInterfaceiv) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_1977_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1975_major, minRequiredVersion_1975_minor
 	return nil
 }
 func (ϟa *GlGetProgramPipelineInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1978_major := uint32(3)         // u32
 	minRequiredVersion_1978_minor := uint32(1)         // u32
 	writeString_1979_buffer_size := ϟa.BufSize         // GLsizei
 	writeString_1979_buffer_bytes_written := ϟa.Length // GLsizeiᵖ
 	writeString_1979_buffer := ϟa.InfoLog              // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1979_buffer) != (GLcharᵖ{})) && ((writeString_1979_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1979_buffer_size // GLsizei
 		if (writeString_1979_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14840,8 +15343,9 @@ func (ϟa *GlGetProgramPipelineInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.D
 }
 func (ϟa *GlGetProgramPipelineiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1980_major := uint32(3) // u32
 	minRequiredVersion_1980_minor := uint32(1) // u32
 	switch ϟa.Pname {
@@ -14855,15 +15359,16 @@ func (ϟa *GlGetProgramPipelineiv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = glErrorInvalidEnum_1982_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1980_major, minRequiredVersion_1980_minor
 	return nil
 }
 func (ϟa *GlGetProgramResourceIndex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1983_major := uint32(3) // u32
 	minRequiredVersion_1983_minor := uint32(1) // u32
 	switch ϟa.ProgramInterface {
@@ -14873,15 +15378,16 @@ func (ϟa *GlGetProgramResourceIndex) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_1984_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1983_major, minRequiredVersion_1983_minor
 	return nil
 }
 func (ϟa *GlGetProgramResourceLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1985_major := uint32(3) // u32
 	minRequiredVersion_1985_minor := uint32(1) // u32
 	switch ϟa.ProgramInterface {
@@ -14891,15 +15397,16 @@ func (ϟa *GlGetProgramResourceLocation) Mutate(ϟs *gfxapi.State, ϟd database.
 		return
 		_ = glErrorInvalidEnum_1986_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_1985_major, minRequiredVersion_1985_minor
 	return nil
 }
 func (ϟa *GlGetProgramResourceName) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1987_major := uint32(3) // u32
 	minRequiredVersion_1987_minor := uint32(1) // u32
 	switch ϟa.ProgramInterface {
@@ -14912,7 +15419,7 @@ func (ϟa *GlGetProgramResourceName) Mutate(ϟs *gfxapi.State, ϟd database.Data
 	writeString_1989_buffer_size := ϟa.BufSize         // GLsizei
 	writeString_1989_buffer_bytes_written := ϟa.Length // GLsizeiᵖ
 	writeString_1989_buffer := ϟa.Name                 // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_1989_buffer) != (GLcharᵖ{})) && ((writeString_1989_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_1989_buffer_size // GLsizei
 		if (writeString_1989_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -14930,8 +15437,9 @@ func (ϟa *GlGetProgramResourceName) Mutate(ϟs *gfxapi.State, ϟd database.Data
 }
 func (ϟa *GlGetProgramResourceiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1990_major := uint32(3) // u32
 	minRequiredVersion_1990_minor := uint32(1) // u32
 	switch ϟa.ProgramInterface {
@@ -14942,7 +15450,7 @@ func (ϟa *GlGetProgramResourceiv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		_ = glErrorInvalidEnum_1991_param
 	}
 	p := ϟa.Props.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.PropCount), ϟs) // GLenumˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) != (GLsizeiᵖ{}) {
 		l := GLsizei(ϟa.Length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 		ϟa.Length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -14956,8 +15464,9 @@ func (ϟa *GlGetProgramResourceiv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 }
 func (ϟa *GlGetProgramiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1992_major := uint32(2) // u32
 	minRequiredVersion_1992_minor := uint32(0) // u32
 	switch ϟa.Parameter {
@@ -14979,15 +15488,16 @@ func (ϟa *GlGetProgramiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_1996_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_1992_major, minRequiredVersion_1992_minor
 	return nil
 }
 func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1997_major := uint32(2)   // u32
 	minRequiredVersion_1997_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -15002,7 +15512,7 @@ func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	writeString_2000_buffer_size := ϟa.BufferLength                 // GLsizei
 	writeString_2000_buffer_bytes_written := ϟa.StringLengthWritten // GLsizeiᵖ
 	writeString_2000_buffer := ϟa.Info                              // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_2000_buffer) != (GLcharᵖ{})) && ((writeString_2000_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_2000_buffer_size // GLsizei
 		if (writeString_2000_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -15020,8 +15530,9 @@ func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlGetShaderPrecisionFormat) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2001_major := uint32(2) // u32
 	minRequiredVersion_2001_minor := uint32(0) // u32
 	switch ϟa.ShaderType {
@@ -15038,7 +15549,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Mutate(ϟs *gfxapi.State, ϟd database.Da
 		return
 		_ = glErrorInvalidEnum_2003_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Range.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_2001_major, minRequiredVersion_2001_minor
@@ -15046,8 +15557,9 @@ func (ϟa *GlGetShaderPrecisionFormat) Mutate(ϟs *gfxapi.State, ϟd database.Da
 }
 func (ϟa *GlGetShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2004_major := uint32(2)   // u32
 	minRequiredVersion_2004_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -15062,7 +15574,7 @@ func (ϟa *GlGetShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	writeString_2007_buffer_size := ϟa.BufferLength                 // GLsizei
 	writeString_2007_buffer_bytes_written := ϟa.StringLengthWritten // GLsizeiᵖ
 	writeString_2007_buffer := ϟa.Source                            // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_2007_buffer) != (GLcharᵖ{})) && ((writeString_2007_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_2007_buffer_size // GLsizei
 		if (writeString_2007_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -15080,8 +15592,9 @@ func (ϟa *GlGetShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2008_major := uint32(2) // u32
 	minRequiredVersion_2008_minor := uint32(0) // u32
 	switch ϟa.Parameter {
@@ -15100,7 +15613,7 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_2010_result := context         // Contextʳ
 	ctx := GetContext_2010_result             // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader) // Shaderʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_SHADER_TYPE:
@@ -15146,19 +15659,21 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlGetUniformBlockIndex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2012_major := uint32(3) // u32
 	minRequiredVersion_2012_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_2012_major, minRequiredVersion_2012_minor
 	return nil
 }
 func (ϟa *GlGetUniformIndices) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2013_major := uint32(3)                                             // u32
 	minRequiredVersion_2013_minor := uint32(0)                                             // u32
 	names := ϟa.UniformNames.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.UniformCount), ϟs) // GLcharᶜᵖˢ
@@ -15166,83 +15681,89 @@ func (ϟa *GlGetUniformIndices) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		name := strings.TrimRight(string(Charᵖ(names.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
 		_ = name
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.UniformIndices.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.UniformCount), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _ = minRequiredVersion_2013_major, minRequiredVersion_2013_minor, names
 	return nil
 }
 func (ϟa *GlGetUniformLocation) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2014_major := uint32(2) // u32
 	minRequiredVersion_2014_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_2014_major, minRequiredVersion_2014_minor
 	return nil
 }
 func (ϟa *GlGetUniformfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2015_major := uint32(2) // u32
 	minRequiredVersion_2015_minor := uint32(0) // u32
 	GetUniformv_2016_program := ϟa.Program     // ProgramId
 	GetUniformv_2016_location := ϟa.Location   // UniformLocation
 	GetUniformv_2016_values := ϟa.Values       // GLfloatᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetUniformv_2016_values.Slice(uint64(0), uint64(16), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _ = minRequiredVersion_2015_major, minRequiredVersion_2015_minor, GetUniformv_2016_program, GetUniformv_2016_location, GetUniformv_2016_values
 	return nil
 }
 func (ϟa *GlGetUniformiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2017_major := uint32(2) // u32
 	minRequiredVersion_2017_minor := uint32(0) // u32
 	GetUniformv_2018_program := ϟa.Program     // ProgramId
 	GetUniformv_2018_location := ϟa.Location   // UniformLocation
 	GetUniformv_2018_values := ϟa.Values       // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetUniformv_2018_values.Slice(uint64(0), uint64(16), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _ = minRequiredVersion_2017_major, minRequiredVersion_2017_minor, GetUniformv_2018_program, GetUniformv_2018_location, GetUniformv_2018_values
 	return nil
 }
 func (ϟa *GlGetUniformuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2019_major := uint32(3) // u32
 	minRequiredVersion_2019_minor := uint32(0) // u32
 	GetUniformv_2020_program := ϟa.Program     // ProgramId
 	GetUniformv_2020_location := ϟa.Location   // UniformLocation
 	GetUniformv_2020_values := ϟa.Values       // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	GetUniformv_2020_values.Slice(uint64(0), uint64(16), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _ = minRequiredVersion_2019_major, minRequiredVersion_2019_minor, GetUniformv_2020_program, GetUniformv_2020_location, GetUniformv_2020_values
 	return nil
 }
 func (ϟa *GlGetnUniformfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2021_major := uint32(3) // u32
 	minRequiredVersion_2021_minor := uint32(2) // u32
 	GetnUniformfv_2022_program := ϟa.Program   // ProgramId
 	GetnUniformfv_2022_location := ϟa.Location // UniformLocation
 	GetnUniformfv_2022_bufSize := ϟa.BufSize   // GLsizei
 	GetnUniformfv_2022_values := ϟa.Values     // GLfloatᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_2022_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_2022_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _ = minRequiredVersion_2021_major, minRequiredVersion_2021_minor, GetnUniformfv_2022_program, GetnUniformfv_2022_location, GetnUniformfv_2022_bufSize, GetnUniformfv_2022_values
 	return nil
 }
 func (ϟa *GlGetnUniformiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2023_major := uint32(3)                 // u32
 	minRequiredVersion_2023_minor := uint32(2)                 // u32
 	GetnUniformiv_2024_program := ϟa.Program                   // ProgramId
@@ -15253,15 +15774,16 @@ func (ϟa *GlGetnUniformiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetnUniformfv_2025_location := GetnUniformiv_2024_location // UniformLocation
 	GetnUniformfv_2025_bufSize := GetnUniformiv_2024_bufSize   // GLsizei
 	GetnUniformfv_2025_values := GetnUniformiv_2024_values     // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_2025_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_2025_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2023_major, minRequiredVersion_2023_minor, GetnUniformiv_2024_program, GetnUniformiv_2024_location, GetnUniformiv_2024_bufSize, GetnUniformiv_2024_values, GetnUniformfv_2025_program, GetnUniformfv_2025_location, GetnUniformfv_2025_bufSize, GetnUniformfv_2025_values
 	return nil
 }
 func (ϟa *GlGetnUniformuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2026_major := uint32(3)                  // u32
 	minRequiredVersion_2026_minor := uint32(2)                  // u32
 	GetnUniformuiv_2027_program := ϟa.Program                   // ProgramId
@@ -15272,15 +15794,16 @@ func (ϟa *GlGetnUniformuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	GetnUniformfv_2028_location := GetnUniformuiv_2027_location // UniformLocation
 	GetnUniformfv_2028_bufSize := GetnUniformuiv_2027_bufSize   // GLsizei
 	GetnUniformfv_2028_values := GetnUniformuiv_2027_values     // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	Charᵖ(GetnUniformfv_2028_values).Slice(uint64(GLsizei(int32(0))), uint64(GetnUniformfv_2028_bufSize), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2026_major, minRequiredVersion_2026_minor, GetnUniformuiv_2027_program, GetnUniformuiv_2027_location, GetnUniformuiv_2027_bufSize, GetnUniformuiv_2027_values, GetnUniformfv_2028_program, GetnUniformfv_2028_location, GetnUniformfv_2028_bufSize, GetnUniformfv_2028_values
 	return nil
 }
 func (ϟa *GlIsProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2029_major := uint32(2)   // u32
 	minRequiredVersion_2029_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -15291,7 +15814,7 @@ func (ϟa *GlIsProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	}
 	GetContext_2030_result := context // Contextʳ
 	ctx := GetContext_2030_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Programs.Contains(ϟa.Program) {
 			return 1
@@ -15304,19 +15827,21 @@ func (ϟa *GlIsProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlIsProgramPipeline) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2032_major := uint32(3) // u32
 	minRequiredVersion_2032_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_2032_major, minRequiredVersion_2032_minor
 	return nil
 }
 func (ϟa *GlIsShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2033_major := uint32(2)   // u32
 	minRequiredVersion_2033_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -15327,7 +15852,7 @@ func (ϟa *GlIsShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	}
 	GetContext_2034_result := context // Contextʳ
 	ctx := GetContext_2034_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Shaders.Contains(ϟa.Shader) {
 			return 1
@@ -15340,18 +15865,20 @@ func (ϟa *GlIsShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 }
 func (ϟa *GlLinkProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2036_major := uint32(2) // u32
 	minRequiredVersion_2036_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2036_major, minRequiredVersion_2036_minor
 	return nil
 }
 func (ϟa *GlMemoryBarrier) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2037_major := uint32(3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               // u32
 	minRequiredVersion_2037_minor := uint32(1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               // u32
 	supportsBits_2038_seenBits := ϟa.Barriers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // GLbitfield
@@ -15384,14 +15911,15 @@ func (ϟa *GlMemoryBarrier) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	}
 	if (GLbitfield_GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT)&(ϟa.Barriers) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_2037_major, minRequiredVersion_2037_minor, supportsBits_2038_seenBits, supportsBits_2038_validBits
 	return nil
 }
 func (ϟa *GlMemoryBarrierByRegion) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2039_major := uint32(3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               // u32
 	minRequiredVersion_2039_minor := uint32(1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               // u32
 	supportsBits_2040_seenBits := ϟa.Barriers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // GLbitfield
@@ -15424,14 +15952,15 @@ func (ϟa *GlMemoryBarrierByRegion) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	if (GLbitfield_GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT)&(ϟa.Barriers) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_2039_major, minRequiredVersion_2039_minor, supportsBits_2040_seenBits, supportsBits_2040_validBits
 	return nil
 }
 func (ϟa *GlProgramBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2041_major := uint32(3)         // u32
 	minRequiredVersion_2041_minor := uint32(0)         // u32
 	ProgramBinary_2042_program := ϟa.Program           // ProgramId
@@ -15445,14 +15974,15 @@ func (ϟa *GlProgramBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		_ = glErrorInvalidEnum_2043_param
 	}
 	ProgramBinary_2042_binary.Slice(uint64(GLsizei(int32(0))), uint64(ProgramBinary_2042_length), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_2041_major, minRequiredVersion_2041_minor, ProgramBinary_2042_program, ProgramBinary_2042_binaryFormat, ProgramBinary_2042_binary, ProgramBinary_2042_length
 	return nil
 }
 func (ϟa *GlProgramParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2044_major := uint32(3)   // u32
 	minRequiredVersion_2044_minor := uint32(0)   // u32
 	ProgramParameteri_2045_program := ϟa.Program // ProgramId
@@ -15469,21 +15999,22 @@ func (ϟa *GlProgramParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_2047_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2044_major, minRequiredVersion_2044_minor, ProgramParameteri_2045_program, ProgramParameteri_2045_pname, ProgramParameteri_2045_value
 	return nil
 }
 func (ϟa *GlProgramUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2048_major := uint32(3)    // u32
 	minRequiredVersion_2048_minor := uint32(1)    // u32
 	ProgramUniform1f_2049_program := ϟa.Program   // ProgramId
 	ProgramUniform1f_2049_location := ϟa.Location // UniformLocation
 	ProgramUniform1f_2049_value0 := ϟa.Value0     // GLfloat
 	v := MakeGLfloatˢ(uint64(1), ϟs)              // GLfloatˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1f_2049_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2050_program := ProgramUniform1f_2049_program   // ProgramId
 	ProgramUniformv_2050_location := ProgramUniform1f_2049_location // UniformLocation
@@ -15507,8 +16038,9 @@ func (ϟa *GlProgramUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2053_major := uint32(3)                                                                    // u32
 	minRequiredVersion_2053_minor := uint32(1)                                                                    // u32
 	ProgramUniform1fv_2054_program := ϟa.Program                                                                  // ProgramId
@@ -15533,21 +16065,22 @@ func (ϟa *GlProgramUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2055_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2055_type
 	p.Uniforms[ProgramUniformv_2055_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2053_major, minRequiredVersion_2053_minor, ProgramUniform1fv_2054_program, ProgramUniform1fv_2054_location, ProgramUniform1fv_2054_count, ProgramUniform1fv_2054_values, v, ProgramUniformv_2055_program, ProgramUniformv_2055_location, ProgramUniformv_2055_values, ProgramUniformv_2055_type, context, GetContext_2056_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2058_major := uint32(3)    // u32
 	minRequiredVersion_2058_minor := uint32(1)    // u32
 	ProgramUniform1i_2059_program := ϟa.Program   // ProgramId
 	ProgramUniform1i_2059_location := ϟa.Location // UniformLocation
 	ProgramUniform1i_2059_value0 := ϟa.Value0     // GLint
 	v := MakeGLintˢ(uint64(1), ϟs)                // GLintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1i_2059_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2060_program := ProgramUniform1i_2059_program   // ProgramId
 	ProgramUniformv_2060_location := ProgramUniform1i_2059_location // UniformLocation
@@ -15571,8 +16104,9 @@ func (ϟa *GlProgramUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2063_major := uint32(3)                                                                    // u32
 	minRequiredVersion_2063_minor := uint32(1)                                                                    // u32
 	ProgramUniform1iv_2064_program := ϟa.Program                                                                  // ProgramId
@@ -15597,21 +16131,22 @@ func (ϟa *GlProgramUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2065_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2065_type
 	p.Uniforms[ProgramUniformv_2065_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2063_major, minRequiredVersion_2063_minor, ProgramUniform1iv_2064_program, ProgramUniform1iv_2064_location, ProgramUniform1iv_2064_count, ProgramUniform1iv_2064_values, v, ProgramUniformv_2065_program, ProgramUniformv_2065_location, ProgramUniformv_2065_values, ProgramUniformv_2065_type, context, GetContext_2066_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform1ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2068_major := uint32(3)     // u32
 	minRequiredVersion_2068_minor := uint32(1)     // u32
 	ProgramUniform1ui_2069_program := ϟa.Program   // ProgramId
 	ProgramUniform1ui_2069_location := ϟa.Location // UniformLocation
 	ProgramUniform1ui_2069_value0 := ϟa.Value0     // GLuint
 	v := MakeGLuintˢ(uint64(1), ϟs)                // GLuintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ProgramUniform1ui_2069_value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2070_program := ProgramUniform1ui_2069_program   // ProgramId
 	ProgramUniformv_2070_location := ProgramUniform1ui_2069_location // UniformLocation
@@ -15635,8 +16170,9 @@ func (ϟa *GlProgramUniform1ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlProgramUniform1uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2073_major := uint32(3)                                                                      // u32
 	minRequiredVersion_2073_minor := uint32(1)                                                                      // u32
 	ProgramUniform1uiv_2074_program := ϟa.Program                                                                   // ProgramId
@@ -15661,14 +16197,15 @@ func (ϟa *GlProgramUniform1uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(ProgramUniformv_2075_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2075_type
 	p.Uniforms[ProgramUniformv_2075_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2073_major, minRequiredVersion_2073_minor, ProgramUniform1uiv_2074_program, ProgramUniform1uiv_2074_location, ProgramUniform1uiv_2074_count, ProgramUniform1uiv_2074_values, v, ProgramUniformv_2075_program, ProgramUniformv_2075_location, ProgramUniformv_2075_values, ProgramUniformv_2075_type, context, GetContext_2076_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2078_major := uint32(3)    // u32
 	minRequiredVersion_2078_minor := uint32(1)    // u32
 	ProgramUniform2f_2079_program := ϟa.Program   // ProgramId
@@ -15676,7 +16213,7 @@ func (ϟa *GlProgramUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform2f_2079_value0 := ϟa.Value0     // GLfloat
 	ProgramUniform2f_2079_value1 := ϟa.Value1     // GLfloat
 	v := MakeVec2fˢ(uint64(1), ϟs)                // Vec2fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2f{Elements: [2]GLfloat{ProgramUniform2f_2079_value0, ProgramUniform2f_2079_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2080_program := ProgramUniform2f_2079_program   // ProgramId
 	ProgramUniformv_2080_location := ProgramUniform2f_2079_location // UniformLocation
@@ -15700,8 +16237,9 @@ func (ϟa *GlProgramUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2083_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2083_minor := uint32(1)                                                                            // u32
 	ProgramUniform2fv_2084_program := ϟa.Program                                                                          // ProgramId
@@ -15726,14 +16264,15 @@ func (ϟa *GlProgramUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2085_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2085_type
 	p.Uniforms[ProgramUniformv_2085_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2083_major, minRequiredVersion_2083_minor, ProgramUniform2fv_2084_program, ProgramUniform2fv_2084_location, ProgramUniform2fv_2084_count, ProgramUniform2fv_2084_values, v, ProgramUniformv_2085_program, ProgramUniformv_2085_location, ProgramUniformv_2085_values, ProgramUniformv_2085_type, context, GetContext_2086_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2088_major := uint32(3)    // u32
 	minRequiredVersion_2088_minor := uint32(1)    // u32
 	ProgramUniform2i_2089_program := ϟa.Program   // ProgramId
@@ -15741,7 +16280,7 @@ func (ϟa *GlProgramUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform2i_2089_value0 := ϟa.Value0     // GLint
 	ProgramUniform2i_2089_value1 := ϟa.Value1     // GLint
 	v := MakeVec2iˢ(uint64(1), ϟs)                // Vec2iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2i{Elements: [2]GLint{ProgramUniform2i_2089_value0, ProgramUniform2i_2089_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2090_program := ProgramUniform2i_2089_program   // ProgramId
 	ProgramUniformv_2090_location := ProgramUniform2i_2089_location // UniformLocation
@@ -15765,8 +16304,9 @@ func (ϟa *GlProgramUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2093_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2093_minor := uint32(1)                                                                            // u32
 	ProgramUniform2iv_2094_program := ϟa.Program                                                                          // ProgramId
@@ -15791,14 +16331,15 @@ func (ϟa *GlProgramUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2095_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2095_type
 	p.Uniforms[ProgramUniformv_2095_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2093_major, minRequiredVersion_2093_minor, ProgramUniform2iv_2094_program, ProgramUniform2iv_2094_location, ProgramUniform2iv_2094_count, ProgramUniform2iv_2094_values, v, ProgramUniformv_2095_program, ProgramUniformv_2095_location, ProgramUniformv_2095_values, ProgramUniformv_2095_type, context, GetContext_2096_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform2ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2098_major := uint32(3)     // u32
 	minRequiredVersion_2098_minor := uint32(1)     // u32
 	ProgramUniform2ui_2099_program := ϟa.Program   // ProgramId
@@ -15806,7 +16347,7 @@ func (ϟa *GlProgramUniform2ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ProgramUniform2ui_2099_value0 := ϟa.Value0     // GLuint
 	ProgramUniform2ui_2099_value1 := ϟa.Value1     // GLuint
 	v := MakeVec2uˢ(uint64(1), ϟs)                 // Vec2uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2u{Elements: [2]GLuint{ProgramUniform2ui_2099_value0, ProgramUniform2ui_2099_value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2100_program := ProgramUniform2ui_2099_program   // ProgramId
 	ProgramUniformv_2100_location := ProgramUniform2ui_2099_location // UniformLocation
@@ -15830,8 +16371,9 @@ func (ϟa *GlProgramUniform2ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlProgramUniform2uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2103_major := uint32(3)                                                                              // u32
 	minRequiredVersion_2103_minor := uint32(1)                                                                              // u32
 	ProgramUniform2uiv_2104_program := ϟa.Program                                                                           // ProgramId
@@ -15856,14 +16398,15 @@ func (ϟa *GlProgramUniform2uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(ProgramUniformv_2105_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2105_type
 	p.Uniforms[ProgramUniformv_2105_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2103_major, minRequiredVersion_2103_minor, ProgramUniform2uiv_2104_program, ProgramUniform2uiv_2104_location, ProgramUniform2uiv_2104_count, ProgramUniform2uiv_2104_values, v, ProgramUniformv_2105_program, ProgramUniformv_2105_location, ProgramUniformv_2105_values, ProgramUniformv_2105_type, context, GetContext_2106_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2108_major := uint32(3)    // u32
 	minRequiredVersion_2108_minor := uint32(1)    // u32
 	ProgramUniform3f_2109_program := ϟa.Program   // ProgramId
@@ -15872,7 +16415,7 @@ func (ϟa *GlProgramUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform3f_2109_value1 := ϟa.Value1     // GLfloat
 	ProgramUniform3f_2109_value2 := ϟa.Value2     // GLfloat
 	v := MakeVec3fˢ(uint64(1), ϟs)                // Vec3fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3f{Elements: [3]GLfloat{ProgramUniform3f_2109_value0, ProgramUniform3f_2109_value1, ProgramUniform3f_2109_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2110_program := ProgramUniform3f_2109_program   // ProgramId
 	ProgramUniformv_2110_location := ProgramUniform3f_2109_location // UniformLocation
@@ -15896,8 +16439,9 @@ func (ϟa *GlProgramUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2113_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2113_minor := uint32(1)                                                                            // u32
 	ProgramUniform3fv_2114_program := ϟa.Program                                                                          // ProgramId
@@ -15922,14 +16466,15 @@ func (ϟa *GlProgramUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2115_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2115_type
 	p.Uniforms[ProgramUniformv_2115_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2113_major, minRequiredVersion_2113_minor, ProgramUniform3fv_2114_program, ProgramUniform3fv_2114_location, ProgramUniform3fv_2114_count, ProgramUniform3fv_2114_values, v, ProgramUniformv_2115_program, ProgramUniformv_2115_location, ProgramUniformv_2115_values, ProgramUniformv_2115_type, context, GetContext_2116_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2118_major := uint32(3)    // u32
 	minRequiredVersion_2118_minor := uint32(1)    // u32
 	ProgramUniform3i_2119_program := ϟa.Program   // ProgramId
@@ -15938,7 +16483,7 @@ func (ϟa *GlProgramUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform3i_2119_value1 := ϟa.Value1     // GLint
 	ProgramUniform3i_2119_value2 := ϟa.Value2     // GLint
 	v := MakeVec3iˢ(uint64(1), ϟs)                // Vec3iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3i{Elements: [3]GLint{ProgramUniform3i_2119_value0, ProgramUniform3i_2119_value1, ProgramUniform3i_2119_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2120_program := ProgramUniform3i_2119_program   // ProgramId
 	ProgramUniformv_2120_location := ProgramUniform3i_2119_location // UniformLocation
@@ -15962,8 +16507,9 @@ func (ϟa *GlProgramUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2123_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2123_minor := uint32(1)                                                                            // u32
 	ProgramUniform3iv_2124_program := ϟa.Program                                                                          // ProgramId
@@ -15988,14 +16534,15 @@ func (ϟa *GlProgramUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2125_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2125_type
 	p.Uniforms[ProgramUniformv_2125_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2123_major, minRequiredVersion_2123_minor, ProgramUniform3iv_2124_program, ProgramUniform3iv_2124_location, ProgramUniform3iv_2124_count, ProgramUniform3iv_2124_values, v, ProgramUniformv_2125_program, ProgramUniformv_2125_location, ProgramUniformv_2125_values, ProgramUniformv_2125_type, context, GetContext_2126_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform3ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2128_major := uint32(3)     // u32
 	minRequiredVersion_2128_minor := uint32(1)     // u32
 	ProgramUniform3ui_2129_program := ϟa.Program   // ProgramId
@@ -16004,7 +16551,7 @@ func (ϟa *GlProgramUniform3ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ProgramUniform3ui_2129_value1 := ϟa.Value1     // GLuint
 	ProgramUniform3ui_2129_value2 := ϟa.Value2     // GLuint
 	v := MakeVec3uˢ(uint64(1), ϟs)                 // Vec3uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3u{Elements: [3]GLuint{ProgramUniform3ui_2129_value0, ProgramUniform3ui_2129_value1, ProgramUniform3ui_2129_value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2130_program := ProgramUniform3ui_2129_program   // ProgramId
 	ProgramUniformv_2130_location := ProgramUniform3ui_2129_location // UniformLocation
@@ -16028,8 +16575,9 @@ func (ϟa *GlProgramUniform3ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlProgramUniform3uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2133_major := uint32(3)                                                                              // u32
 	minRequiredVersion_2133_minor := uint32(1)                                                                              // u32
 	ProgramUniform3uiv_2134_program := ϟa.Program                                                                           // ProgramId
@@ -16054,14 +16602,15 @@ func (ϟa *GlProgramUniform3uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(ProgramUniformv_2135_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2135_type
 	p.Uniforms[ProgramUniformv_2135_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2133_major, minRequiredVersion_2133_minor, ProgramUniform3uiv_2134_program, ProgramUniform3uiv_2134_location, ProgramUniform3uiv_2134_count, ProgramUniform3uiv_2134_values, v, ProgramUniformv_2135_program, ProgramUniformv_2135_location, ProgramUniformv_2135_values, ProgramUniformv_2135_type, context, GetContext_2136_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2138_major := uint32(3)    // u32
 	minRequiredVersion_2138_minor := uint32(1)    // u32
 	ProgramUniform4f_2139_program := ϟa.Program   // ProgramId
@@ -16071,7 +16620,7 @@ func (ϟa *GlProgramUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform4f_2139_value2 := ϟa.Value2     // GLfloat
 	ProgramUniform4f_2139_value3 := ϟa.Value3     // GLfloat
 	v := MakeVec4fˢ(uint64(1), ϟs)                // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4f{Elements: [4]GLfloat{ProgramUniform4f_2139_value0, ProgramUniform4f_2139_value1, ProgramUniform4f_2139_value2, ProgramUniform4f_2139_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2140_program := ProgramUniform4f_2139_program   // ProgramId
 	ProgramUniformv_2140_location := ProgramUniform4f_2139_location // UniformLocation
@@ -16095,8 +16644,9 @@ func (ϟa *GlProgramUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2143_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2143_minor := uint32(1)                                                                            // u32
 	ProgramUniform4fv_2144_program := ϟa.Program                                                                          // ProgramId
@@ -16121,14 +16671,15 @@ func (ϟa *GlProgramUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2145_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2145_type
 	p.Uniforms[ProgramUniformv_2145_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2143_major, minRequiredVersion_2143_minor, ProgramUniform4fv_2144_program, ProgramUniform4fv_2144_location, ProgramUniform4fv_2144_count, ProgramUniform4fv_2144_values, v, ProgramUniformv_2145_program, ProgramUniformv_2145_location, ProgramUniformv_2145_values, ProgramUniformv_2145_type, context, GetContext_2146_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2148_major := uint32(3)    // u32
 	minRequiredVersion_2148_minor := uint32(1)    // u32
 	ProgramUniform4i_2149_program := ϟa.Program   // ProgramId
@@ -16138,7 +16689,7 @@ func (ϟa *GlProgramUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ProgramUniform4i_2149_value2 := ϟa.Value2     // GLint
 	ProgramUniform4i_2149_value3 := ϟa.Value3     // GLint
 	v := MakeVec4iˢ(uint64(1), ϟs)                // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4i{Elements: [4]GLint{ProgramUniform4i_2149_value0, ProgramUniform4i_2149_value1, ProgramUniform4i_2149_value2, ProgramUniform4i_2149_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2150_program := ProgramUniform4i_2149_program   // ProgramId
 	ProgramUniformv_2150_location := ProgramUniform4i_2149_location // UniformLocation
@@ -16162,8 +16713,9 @@ func (ϟa *GlProgramUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlProgramUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2153_major := uint32(3)                                                                            // u32
 	minRequiredVersion_2153_minor := uint32(1)                                                                            // u32
 	ProgramUniform4iv_2154_program := ϟa.Program                                                                          // ProgramId
@@ -16188,14 +16740,15 @@ func (ϟa *GlProgramUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	uniform.Value = AsU8ˢ(ProgramUniformv_2155_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2155_type
 	p.Uniforms[ProgramUniformv_2155_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2153_major, minRequiredVersion_2153_minor, ProgramUniform4iv_2154_program, ProgramUniform4iv_2154_location, ProgramUniform4iv_2154_count, ProgramUniform4iv_2154_values, v, ProgramUniformv_2155_program, ProgramUniformv_2155_location, ProgramUniformv_2155_values, ProgramUniformv_2155_type, context, GetContext_2156_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniform4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2158_major := uint32(3)     // u32
 	minRequiredVersion_2158_minor := uint32(1)     // u32
 	ProgramUniform4ui_2159_program := ϟa.Program   // ProgramId
@@ -16205,7 +16758,7 @@ func (ϟa *GlProgramUniform4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ProgramUniform4ui_2159_value2 := ϟa.Value2     // GLuint
 	ProgramUniform4ui_2159_value3 := ϟa.Value3     // GLuint
 	v := MakeVec4uˢ(uint64(1), ϟs)                 // Vec4uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4u{Elements: [4]GLuint{ProgramUniform4ui_2159_value0, ProgramUniform4ui_2159_value1, ProgramUniform4ui_2159_value2, ProgramUniform4ui_2159_value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ProgramUniformv_2160_program := ProgramUniform4ui_2159_program   // ProgramId
 	ProgramUniformv_2160_location := ProgramUniform4ui_2159_location // UniformLocation
@@ -16229,8 +16782,9 @@ func (ϟa *GlProgramUniform4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlProgramUniform4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2163_major := uint32(3)                                                                              // u32
 	minRequiredVersion_2163_minor := uint32(1)                                                                              // u32
 	ProgramUniform4uiv_2164_program := ϟa.Program                                                                           // ProgramId
@@ -16255,14 +16809,15 @@ func (ϟa *GlProgramUniform4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(ProgramUniformv_2165_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformv_2165_type
 	p.Uniforms[ProgramUniformv_2165_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2163_major, minRequiredVersion_2163_minor, ProgramUniform4uiv_2164_program, ProgramUniform4uiv_2164_location, ProgramUniform4uiv_2164_count, ProgramUniform4uiv_2164_values, v, ProgramUniformv_2165_program, ProgramUniformv_2165_location, ProgramUniformv_2165_values, ProgramUniformv_2165_type, context, GetContext_2166_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2168_major := uint32(3)                                                                                        // u32
 	minRequiredVersion_2168_minor := uint32(1)                                                                                        // u32
 	ProgramUniformMatrix2fv_2169_program := ϟa.Program                                                                                // ProgramId
@@ -16289,14 +16844,15 @@ func (ϟa *GlProgramUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2170_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2170_type
 	p.Uniforms[ProgramUniformMatrixv_2170_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2168_major, minRequiredVersion_2168_minor, ProgramUniformMatrix2fv_2169_program, ProgramUniformMatrix2fv_2169_location, ProgramUniformMatrix2fv_2169_count, ProgramUniformMatrix2fv_2169_transpose, ProgramUniformMatrix2fv_2169_values, v, ProgramUniformMatrixv_2170_program, ProgramUniformMatrixv_2170_location, ProgramUniformMatrixv_2170_transpose, ProgramUniformMatrixv_2170_values, ProgramUniformMatrixv_2170_type, context, GetContext_2171_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2173_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2173_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix2x3fv_2174_program := ϟa.Program                                                                                    // ProgramId
@@ -16323,14 +16879,15 @@ func (ϟa *GlProgramUniformMatrix2x3fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2175_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2175_type
 	p.Uniforms[ProgramUniformMatrixv_2175_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2173_major, minRequiredVersion_2173_minor, ProgramUniformMatrix2x3fv_2174_program, ProgramUniformMatrix2x3fv_2174_location, ProgramUniformMatrix2x3fv_2174_count, ProgramUniformMatrix2x3fv_2174_transpose, ProgramUniformMatrix2x3fv_2174_values, v, ProgramUniformMatrixv_2175_program, ProgramUniformMatrixv_2175_location, ProgramUniformMatrixv_2175_transpose, ProgramUniformMatrixv_2175_values, ProgramUniformMatrixv_2175_type, context, GetContext_2176_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix2x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2178_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2178_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix2x4fv_2179_program := ϟa.Program                                                                                    // ProgramId
@@ -16357,14 +16914,15 @@ func (ϟa *GlProgramUniformMatrix2x4fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2180_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2180_type
 	p.Uniforms[ProgramUniformMatrixv_2180_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2178_major, minRequiredVersion_2178_minor, ProgramUniformMatrix2x4fv_2179_program, ProgramUniformMatrix2x4fv_2179_location, ProgramUniformMatrix2x4fv_2179_count, ProgramUniformMatrix2x4fv_2179_transpose, ProgramUniformMatrix2x4fv_2179_values, v, ProgramUniformMatrixv_2180_program, ProgramUniformMatrixv_2180_location, ProgramUniformMatrixv_2180_transpose, ProgramUniformMatrixv_2180_values, ProgramUniformMatrixv_2180_type, context, GetContext_2181_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2183_major := uint32(3)                                                                                        // u32
 	minRequiredVersion_2183_minor := uint32(1)                                                                                        // u32
 	ProgramUniformMatrix3fv_2184_program := ϟa.Program                                                                                // ProgramId
@@ -16391,14 +16949,15 @@ func (ϟa *GlProgramUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2185_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2185_type
 	p.Uniforms[ProgramUniformMatrixv_2185_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2183_major, minRequiredVersion_2183_minor, ProgramUniformMatrix3fv_2184_program, ProgramUniformMatrix3fv_2184_location, ProgramUniformMatrix3fv_2184_count, ProgramUniformMatrix3fv_2184_transpose, ProgramUniformMatrix3fv_2184_values, v, ProgramUniformMatrixv_2185_program, ProgramUniformMatrixv_2185_location, ProgramUniformMatrixv_2185_transpose, ProgramUniformMatrixv_2185_values, ProgramUniformMatrixv_2185_type, context, GetContext_2186_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2188_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2188_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix3x2fv_2189_program := ϟa.Program                                                                                    // ProgramId
@@ -16425,14 +16984,15 @@ func (ϟa *GlProgramUniformMatrix3x2fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2190_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2190_type
 	p.Uniforms[ProgramUniformMatrixv_2190_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2188_major, minRequiredVersion_2188_minor, ProgramUniformMatrix3x2fv_2189_program, ProgramUniformMatrix3x2fv_2189_location, ProgramUniformMatrix3x2fv_2189_count, ProgramUniformMatrix3x2fv_2189_transpose, ProgramUniformMatrix3x2fv_2189_values, v, ProgramUniformMatrixv_2190_program, ProgramUniformMatrixv_2190_location, ProgramUniformMatrixv_2190_transpose, ProgramUniformMatrixv_2190_values, ProgramUniformMatrixv_2190_type, context, GetContext_2191_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix3x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2193_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2193_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix3x4fv_2194_program := ϟa.Program                                                                                    // ProgramId
@@ -16459,14 +17019,15 @@ func (ϟa *GlProgramUniformMatrix3x4fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2195_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2195_type
 	p.Uniforms[ProgramUniformMatrixv_2195_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2193_major, minRequiredVersion_2193_minor, ProgramUniformMatrix3x4fv_2194_program, ProgramUniformMatrix3x4fv_2194_location, ProgramUniformMatrix3x4fv_2194_count, ProgramUniformMatrix3x4fv_2194_transpose, ProgramUniformMatrix3x4fv_2194_values, v, ProgramUniformMatrixv_2195_program, ProgramUniformMatrixv_2195_location, ProgramUniformMatrixv_2195_transpose, ProgramUniformMatrixv_2195_values, ProgramUniformMatrixv_2195_type, context, GetContext_2196_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2198_major := uint32(3)                                                                                        // u32
 	minRequiredVersion_2198_minor := uint32(1)                                                                                        // u32
 	ProgramUniformMatrix4fv_2199_program := ϟa.Program                                                                                // ProgramId
@@ -16493,14 +17054,15 @@ func (ϟa *GlProgramUniformMatrix4fv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2200_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2200_type
 	p.Uniforms[ProgramUniformMatrixv_2200_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2198_major, minRequiredVersion_2198_minor, ProgramUniformMatrix4fv_2199_program, ProgramUniformMatrix4fv_2199_location, ProgramUniformMatrix4fv_2199_count, ProgramUniformMatrix4fv_2199_transpose, ProgramUniformMatrix4fv_2199_values, v, ProgramUniformMatrixv_2200_program, ProgramUniformMatrixv_2200_location, ProgramUniformMatrixv_2200_transpose, ProgramUniformMatrixv_2200_values, ProgramUniformMatrixv_2200_type, context, GetContext_2201_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2203_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2203_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix4x2fv_2204_program := ϟa.Program                                                                                    // ProgramId
@@ -16527,14 +17089,15 @@ func (ϟa *GlProgramUniformMatrix4x2fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2205_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2205_type
 	p.Uniforms[ProgramUniformMatrixv_2205_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2203_major, minRequiredVersion_2203_minor, ProgramUniformMatrix4x2fv_2204_program, ProgramUniformMatrix4x2fv_2204_location, ProgramUniformMatrix4x2fv_2204_count, ProgramUniformMatrix4x2fv_2204_transpose, ProgramUniformMatrix4x2fv_2204_values, v, ProgramUniformMatrixv_2205_program, ProgramUniformMatrixv_2205_location, ProgramUniformMatrixv_2205_transpose, ProgramUniformMatrixv_2205_values, ProgramUniformMatrixv_2205_type, context, GetContext_2206_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlProgramUniformMatrix4x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2208_major := uint32(3)                                                                                              // u32
 	minRequiredVersion_2208_minor := uint32(1)                                                                                              // u32
 	ProgramUniformMatrix4x3fv_2209_program := ϟa.Program                                                                                    // ProgramId
@@ -16561,24 +17124,26 @@ func (ϟa *GlProgramUniformMatrix4x3fv) Mutate(ϟs *gfxapi.State, ϟd database.D
 	uniform.Value = AsU8ˢ(ProgramUniformMatrixv_2210_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = ProgramUniformMatrixv_2210_type
 	p.Uniforms[ProgramUniformMatrixv_2210_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2208_major, minRequiredVersion_2208_minor, ProgramUniformMatrix4x3fv_2209_program, ProgramUniformMatrix4x3fv_2209_location, ProgramUniformMatrix4x3fv_2209_count, ProgramUniformMatrix4x3fv_2209_transpose, ProgramUniformMatrix4x3fv_2209_values, v, ProgramUniformMatrixv_2210_program, ProgramUniformMatrixv_2210_location, ProgramUniformMatrixv_2210_transpose, ProgramUniformMatrixv_2210_values, ProgramUniformMatrixv_2210_type, context, GetContext_2211_result, ctx, p, uniform
 	return nil
 }
 func (ϟa *GlReleaseShaderCompiler) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2213_major := uint32(2) // u32
 	minRequiredVersion_2213_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2213_major, minRequiredVersion_2213_minor
 	return nil
 }
 func (ϟa *GlShaderBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2214_major := uint32(2) // u32
 	minRequiredVersion_2214_minor := uint32(0) // u32
 	switch ϟa.BinaryFormat {
@@ -16591,14 +17156,15 @@ func (ϟa *GlShaderBinary) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟa.Binary.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.BinarySize), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2214_major, minRequiredVersion_2214_minor
 	return nil
 }
 func (ϟa *GlShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2216_major := uint32(2)                                  // u32
 	minRequiredVersion_2216_minor := uint32(0)                                  // u32
 	sources := ϟa.Source.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLcharᶜᵖˢ
@@ -16629,18 +17195,19 @@ func (ϟa *GlShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		s.Source += str
 		_ = str
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_2216_major, minRequiredVersion_2216_minor, sources, lengths, context, GetContext_2217_result, ctx, s
 	return nil
 }
 func (ϟa *GlUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2219_major := uint32(2) // u32
 	minRequiredVersion_2219_minor := uint32(0) // u32
 	v := MakeGLfloatˢ(uint64(1), ϟs)           // GLfloatˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2220_location := ϟa.Location        // UniformLocation
 	Uniformv_2220_values := v                    // GLfloatˢ
@@ -16663,8 +17230,9 @@ func (ϟa *GlUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2223_major := uint32(2)                            // u32
 	minRequiredVersion_2223_minor := uint32(0)                            // u32
 	v := ϟa.Values.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLfloatˢ
@@ -16684,18 +17252,19 @@ func (ϟa *GlUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2224_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2224_type
 	program.Uniforms[Uniformv_2224_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2223_major, minRequiredVersion_2223_minor, v, Uniformv_2224_location, Uniformv_2224_values, Uniformv_2224_type, context, GetContext_2225_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2227_major := uint32(2) // u32
 	minRequiredVersion_2227_minor := uint32(0) // u32
 	v := MakeGLintˢ(uint64(1), ϟs)             // GLintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2228_location := ϟa.Location        // UniformLocation
 	Uniformv_2228_values := v                    // GLintˢ
@@ -16718,8 +17287,9 @@ func (ϟa *GlUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2231_major := uint32(2)                            // u32
 	minRequiredVersion_2231_minor := uint32(0)                            // u32
 	v := ϟa.Values.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLintˢ
@@ -16739,18 +17309,19 @@ func (ϟa *GlUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2232_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2232_type
 	program.Uniforms[Uniformv_2232_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2231_major, minRequiredVersion_2231_minor, v, Uniformv_2232_location, Uniformv_2232_values, Uniformv_2232_type, context, GetContext_2233_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform1ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2235_major := uint32(3) // u32
 	minRequiredVersion_2235_minor := uint32(0) // u32
 	v := MakeGLuintˢ(uint64(1), ϟs)            // GLuintˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(ϟa.Value0, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2236_location := ϟa.Location        // UniformLocation
 	Uniformv_2236_values := v                    // GLuintˢ
@@ -16773,8 +17344,9 @@ func (ϟa *GlUniform1ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlUniform1uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2239_major := uint32(3)                            // u32
 	minRequiredVersion_2239_minor := uint32(0)                            // u32
 	v := ϟa.Values.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLuintˢ
@@ -16794,18 +17366,19 @@ func (ϟa *GlUniform1uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	uniform.Value = AsU8ˢ(Uniformv_2240_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2240_type
 	program.Uniforms[Uniformv_2240_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2239_major, minRequiredVersion_2239_minor, v, Uniformv_2240_location, Uniformv_2240_values, Uniformv_2240_type, context, GetContext_2241_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2243_major := uint32(2) // u32
 	minRequiredVersion_2243_minor := uint32(0) // u32
 	v := MakeVec2fˢ(uint64(1), ϟs)             // Vec2fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2f{Elements: [2]GLfloat{ϟa.Value0, ϟa.Value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2244_location := ϟa.Location        // UniformLocation
 	Uniformv_2244_values := v                    // Vec2fˢ
@@ -16828,8 +17401,9 @@ func (ϟa *GlUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2247_major := uint32(2)                                    // u32
 	minRequiredVersion_2247_minor := uint32(0)                                    // u32
 	v := Vec2fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec2fˢ
@@ -16849,18 +17423,19 @@ func (ϟa *GlUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2248_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2248_type
 	program.Uniforms[Uniformv_2248_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2247_major, minRequiredVersion_2247_minor, v, Uniformv_2248_location, Uniformv_2248_values, Uniformv_2248_type, context, GetContext_2249_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2251_major := uint32(2) // u32
 	minRequiredVersion_2251_minor := uint32(0) // u32
 	v := MakeVec2iˢ(uint64(1), ϟs)             // Vec2iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2i{Elements: [2]GLint{ϟa.Value0, ϟa.Value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2252_location := ϟa.Location        // UniformLocation
 	Uniformv_2252_values := v                    // Vec2iˢ
@@ -16883,8 +17458,9 @@ func (ϟa *GlUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2255_major := uint32(2)                                    // u32
 	minRequiredVersion_2255_minor := uint32(0)                                    // u32
 	v := Vec2iᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec2iˢ
@@ -16904,18 +17480,19 @@ func (ϟa *GlUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2256_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2256_type
 	program.Uniforms[Uniformv_2256_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2255_major, minRequiredVersion_2255_minor, v, Uniformv_2256_location, Uniformv_2256_values, Uniformv_2256_type, context, GetContext_2257_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2259_major := uint32(3) // u32
 	minRequiredVersion_2259_minor := uint32(0) // u32
 	v := MakeVec2uˢ(uint64(1), ϟs)             // Vec2uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec2u{Elements: [2]GLuint{ϟa.Value0, ϟa.Value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2260_location := ϟa.Location             // UniformLocation
 	Uniformv_2260_values := v                         // Vec2uˢ
@@ -16938,8 +17515,9 @@ func (ϟa *GlUniform2ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlUniform2uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2263_major := uint32(3)                                    // u32
 	minRequiredVersion_2263_minor := uint32(0)                                    // u32
 	v := Vec2uᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec2uˢ
@@ -16959,18 +17537,19 @@ func (ϟa *GlUniform2uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	uniform.Value = AsU8ˢ(Uniformv_2264_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2264_type
 	program.Uniforms[Uniformv_2264_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2263_major, minRequiredVersion_2263_minor, v, Uniformv_2264_location, Uniformv_2264_values, Uniformv_2264_type, context, GetContext_2265_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2267_major := uint32(2) // u32
 	minRequiredVersion_2267_minor := uint32(0) // u32
 	v := MakeVec3fˢ(uint64(1), ϟs)             // Vec3fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3f{Elements: [3]GLfloat{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2268_location := ϟa.Location        // UniformLocation
 	Uniformv_2268_values := v                    // Vec3fˢ
@@ -16993,8 +17572,9 @@ func (ϟa *GlUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2271_major := uint32(2)                                    // u32
 	minRequiredVersion_2271_minor := uint32(0)                                    // u32
 	v := Vec3fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec3fˢ
@@ -17014,18 +17594,19 @@ func (ϟa *GlUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2272_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2272_type
 	program.Uniforms[Uniformv_2272_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2271_major, minRequiredVersion_2271_minor, v, Uniformv_2272_location, Uniformv_2272_values, Uniformv_2272_type, context, GetContext_2273_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2275_major := uint32(2) // u32
 	minRequiredVersion_2275_minor := uint32(0) // u32
 	v := MakeVec3iˢ(uint64(1), ϟs)             // Vec3iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3i{Elements: [3]GLint{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2276_location := ϟa.Location        // UniformLocation
 	Uniformv_2276_values := v                    // Vec3iˢ
@@ -17048,8 +17629,9 @@ func (ϟa *GlUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2279_major := uint32(2)                                    // u32
 	minRequiredVersion_2279_minor := uint32(0)                                    // u32
 	v := Vec3iᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec3iˢ
@@ -17069,18 +17651,19 @@ func (ϟa *GlUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2280_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2280_type
 	program.Uniforms[Uniformv_2280_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2279_major, minRequiredVersion_2279_minor, v, Uniformv_2280_location, Uniformv_2280_values, Uniformv_2280_type, context, GetContext_2281_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform3ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2283_major := uint32(3) // u32
 	minRequiredVersion_2283_minor := uint32(0) // u32
 	v := MakeVec3uˢ(uint64(1), ϟs)             // Vec3uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec3u{Elements: [3]GLuint{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2284_location := ϟa.Location             // UniformLocation
 	Uniformv_2284_values := v                         // Vec3uˢ
@@ -17103,8 +17686,9 @@ func (ϟa *GlUniform3ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlUniform3uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2287_major := uint32(3)                                    // u32
 	minRequiredVersion_2287_minor := uint32(0)                                    // u32
 	v := Vec3uᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec3uˢ
@@ -17124,18 +17708,19 @@ func (ϟa *GlUniform3uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	uniform.Value = AsU8ˢ(Uniformv_2288_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2288_type
 	program.Uniforms[Uniformv_2288_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2287_major, minRequiredVersion_2287_minor, v, Uniformv_2288_location, Uniformv_2288_values, Uniformv_2288_type, context, GetContext_2289_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2291_major := uint32(2) // u32
 	minRequiredVersion_2291_minor := uint32(0) // u32
 	v := MakeVec4fˢ(uint64(1), ϟs)             // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4f{Elements: [4]GLfloat{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2292_location := ϟa.Location        // UniformLocation
 	Uniformv_2292_values := v                    // Vec4fˢ
@@ -17158,8 +17743,9 @@ func (ϟa *GlUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2295_major := uint32(2)                                    // u32
 	minRequiredVersion_2295_minor := uint32(0)                                    // u32
 	v := Vec4fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec4fˢ
@@ -17179,18 +17765,19 @@ func (ϟa *GlUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2296_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2296_type
 	program.Uniforms[Uniformv_2296_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2295_major, minRequiredVersion_2295_minor, v, Uniformv_2296_location, Uniformv_2296_values, Uniformv_2296_type, context, GetContext_2297_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2299_major := uint32(2) // u32
 	minRequiredVersion_2299_minor := uint32(0) // u32
 	v := MakeVec4iˢ(uint64(1), ϟs)             // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4i{Elements: [4]GLint{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2300_location := ϟa.Location        // UniformLocation
 	Uniformv_2300_values := v                    // Vec4iˢ
@@ -17213,8 +17800,9 @@ func (ϟa *GlUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2303_major := uint32(2)                                    // u32
 	minRequiredVersion_2303_minor := uint32(0)                                    // u32
 	v := Vec4iᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec4iˢ
@@ -17234,18 +17822,19 @@ func (ϟa *GlUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	uniform.Value = AsU8ˢ(Uniformv_2304_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2304_type
 	program.Uniforms[Uniformv_2304_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2303_major, minRequiredVersion_2303_minor, v, Uniformv_2304_location, Uniformv_2304_values, Uniformv_2304_type, context, GetContext_2305_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniform4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2307_major := uint32(3) // u32
 	minRequiredVersion_2307_minor := uint32(0) // u32
 	v := MakeVec4uˢ(uint64(1), ϟs)             // Vec4uˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	v.Index(uint64(0), ϟs).Write(Vec4u{Elements: [4]GLuint{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 	Uniformv_2308_location := ϟa.Location             // UniformLocation
 	Uniformv_2308_values := v                         // Vec4uˢ
@@ -17268,8 +17857,9 @@ func (ϟa *GlUniform4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlUniform4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2311_major := uint32(3)                                    // u32
 	minRequiredVersion_2311_minor := uint32(0)                                    // u32
 	v := Vec4uᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Vec4uˢ
@@ -17289,24 +17879,26 @@ func (ϟa *GlUniform4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	uniform.Value = AsU8ˢ(Uniformv_2312_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = Uniformv_2312_type
 	program.Uniforms[Uniformv_2312_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2311_major, minRequiredVersion_2311_minor, v, Uniformv_2312_location, Uniformv_2312_values, Uniformv_2312_type, context, GetContext_2313_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformBlockBinding) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2315_major := uint32(3) // u32
 	minRequiredVersion_2315_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2315_major, minRequiredVersion_2315_minor
 	return nil
 }
 func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2316_major := uint32(2)                                    // u32
 	minRequiredVersion_2316_minor := uint32(0)                                    // u32
 	v := Mat2fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Mat2fˢ
@@ -17329,14 +17921,15 @@ func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	uniform.Value = AsU8ˢ(UniformMatrixv_2317_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2317_type
 	program.Uniforms[UniformMatrixv_2317_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2316_major, minRequiredVersion_2316_minor, v, UniformMatrixv_2317_location, UniformMatrixv_2317_transpose, UniformMatrixv_2317_values, UniformMatrixv_2317_type, minRequiredVersion_2318_major, minRequiredVersion_2318_minor, context, GetContext_2319_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix2x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2321_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2321_minor := uint32(0)                                                                                // u32
 	UniformMatrix2x3fv_2322_location := ϟa.Location                                                                           // UniformLocation
@@ -17363,14 +17956,15 @@ func (ϟa *GlUniformMatrix2x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2323_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2323_type
 	program.Uniforms[UniformMatrixv_2323_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2321_major, minRequiredVersion_2321_minor, UniformMatrix2x3fv_2322_location, UniformMatrix2x3fv_2322_count, UniformMatrix2x3fv_2322_transpose, UniformMatrix2x3fv_2322_values, v, UniformMatrixv_2323_location, UniformMatrixv_2323_transpose, UniformMatrixv_2323_values, UniformMatrixv_2323_type, minRequiredVersion_2324_major, minRequiredVersion_2324_minor, context, GetContext_2325_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix2x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2327_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2327_minor := uint32(0)                                                                                // u32
 	UniformMatrix2x4fv_2328_location := ϟa.Location                                                                           // UniformLocation
@@ -17397,14 +17991,15 @@ func (ϟa *GlUniformMatrix2x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2329_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2329_type
 	program.Uniforms[UniformMatrixv_2329_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2327_major, minRequiredVersion_2327_minor, UniformMatrix2x4fv_2328_location, UniformMatrix2x4fv_2328_count, UniformMatrix2x4fv_2328_transpose, UniformMatrix2x4fv_2328_values, v, UniformMatrixv_2329_location, UniformMatrixv_2329_transpose, UniformMatrixv_2329_values, UniformMatrixv_2329_type, minRequiredVersion_2330_major, minRequiredVersion_2330_minor, context, GetContext_2331_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2333_major := uint32(2)                                    // u32
 	minRequiredVersion_2333_minor := uint32(0)                                    // u32
 	v := Mat3fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Mat3fˢ
@@ -17427,14 +18022,15 @@ func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	uniform.Value = AsU8ˢ(UniformMatrixv_2334_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2334_type
 	program.Uniforms[UniformMatrixv_2334_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2333_major, minRequiredVersion_2333_minor, v, UniformMatrixv_2334_location, UniformMatrixv_2334_transpose, UniformMatrixv_2334_values, UniformMatrixv_2334_type, minRequiredVersion_2335_major, minRequiredVersion_2335_minor, context, GetContext_2336_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix3x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2338_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2338_minor := uint32(0)                                                                                // u32
 	UniformMatrix3x2fv_2339_location := ϟa.Location                                                                           // UniformLocation
@@ -17461,14 +18057,15 @@ func (ϟa *GlUniformMatrix3x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2340_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2340_type
 	program.Uniforms[UniformMatrixv_2340_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2338_major, minRequiredVersion_2338_minor, UniformMatrix3x2fv_2339_location, UniformMatrix3x2fv_2339_count, UniformMatrix3x2fv_2339_transpose, UniformMatrix3x2fv_2339_values, v, UniformMatrixv_2340_location, UniformMatrixv_2340_transpose, UniformMatrixv_2340_values, UniformMatrixv_2340_type, minRequiredVersion_2341_major, minRequiredVersion_2341_minor, context, GetContext_2342_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix3x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2344_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2344_minor := uint32(0)                                                                                // u32
 	UniformMatrix3x4fv_2345_location := ϟa.Location                                                                           // UniformLocation
@@ -17495,14 +18092,15 @@ func (ϟa *GlUniformMatrix3x4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2346_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2346_type
 	program.Uniforms[UniformMatrixv_2346_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2344_major, minRequiredVersion_2344_minor, UniformMatrix3x4fv_2345_location, UniformMatrix3x4fv_2345_count, UniformMatrix3x4fv_2345_transpose, UniformMatrix3x4fv_2345_values, v, UniformMatrixv_2346_location, UniformMatrixv_2346_transpose, UniformMatrixv_2346_values, UniformMatrixv_2346_type, minRequiredVersion_2347_major, minRequiredVersion_2347_minor, context, GetContext_2348_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2350_major := uint32(2)                                    // u32
 	minRequiredVersion_2350_minor := uint32(0)                                    // u32
 	v := Mat4fᵖ(ϟa.Values).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // Mat4fˢ
@@ -17525,14 +18123,15 @@ func (ϟa *GlUniformMatrix4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	uniform.Value = AsU8ˢ(UniformMatrixv_2351_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2351_type
 	program.Uniforms[UniformMatrixv_2351_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2350_major, minRequiredVersion_2350_minor, v, UniformMatrixv_2351_location, UniformMatrixv_2351_transpose, UniformMatrixv_2351_values, UniformMatrixv_2351_type, minRequiredVersion_2352_major, minRequiredVersion_2352_minor, context, GetContext_2353_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix4x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2355_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2355_minor := uint32(0)                                                                                // u32
 	UniformMatrix4x2fv_2356_location := ϟa.Location                                                                           // UniformLocation
@@ -17559,14 +18158,15 @@ func (ϟa *GlUniformMatrix4x2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2357_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2357_type
 	program.Uniforms[UniformMatrixv_2357_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2355_major, minRequiredVersion_2355_minor, UniformMatrix4x2fv_2356_location, UniformMatrix4x2fv_2356_count, UniformMatrix4x2fv_2356_transpose, UniformMatrix4x2fv_2356_values, v, UniformMatrixv_2357_location, UniformMatrixv_2357_transpose, UniformMatrixv_2357_values, UniformMatrixv_2357_type, minRequiredVersion_2358_major, minRequiredVersion_2358_minor, context, GetContext_2359_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUniformMatrix4x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2361_major := uint32(3)                                                                                // u32
 	minRequiredVersion_2361_minor := uint32(0)                                                                                // u32
 	UniformMatrix4x3fv_2362_location := ϟa.Location                                                                           // UniformLocation
@@ -17593,14 +18193,15 @@ func (ϟa *GlUniformMatrix4x3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	uniform.Value = AsU8ˢ(UniformMatrixv_2363_values, ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	uniform.Type = UniformMatrixv_2363_type
 	program.Uniforms[UniformMatrixv_2363_location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_2361_major, minRequiredVersion_2361_minor, UniformMatrix4x3fv_2362_location, UniformMatrix4x3fv_2362_count, UniformMatrix4x3fv_2362_transpose, UniformMatrix4x3fv_2362_values, v, UniformMatrixv_2363_location, UniformMatrixv_2363_transpose, UniformMatrixv_2363_values, UniformMatrixv_2363_type, minRequiredVersion_2364_major, minRequiredVersion_2364_minor, context, GetContext_2365_result, ctx, program, uniform
 	return nil
 }
 func (ϟa *GlUseProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2367_major := uint32(2)   // u32
 	minRequiredVersion_2367_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17612,14 +18213,15 @@ func (ϟa *GlUseProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_2368_result := context // Contextʳ
 	ctx := GetContext_2368_result     // Contextʳ
 	ctx.BoundProgram = ϟa.Program
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2367_major, minRequiredVersion_2367_minor, context, GetContext_2368_result, ctx
 	return nil
 }
 func (ϟa *GlUseProgramStages) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2370_major := uint32(3)                                                                                                                                        // u32
 	minRequiredVersion_2370_minor := uint32(1)                                                                                                                                        // u32
 	supportsBits_2371_seenBits := ϟa.Stages                                                                                                                                           // GLbitfield
@@ -17632,34 +18234,37 @@ func (ϟa *GlUseProgramStages) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	if (GLbitfield_GL_VERTEX_SHADER_BIT)&(ϟa.Stages) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = minRequiredVersion_2370_major, minRequiredVersion_2370_minor, supportsBits_2371_seenBits, supportsBits_2371_validBits
 	return nil
 }
 func (ϟa *GlValidateProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2372_major := uint32(2) // u32
 	minRequiredVersion_2372_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2372_major, minRequiredVersion_2372_minor
 	return nil
 }
 func (ϟa *GlValidateProgramPipeline) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2373_major := uint32(3) // u32
 	minRequiredVersion_2373_minor := uint32(1) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2373_major, minRequiredVersion_2373_minor
 	return nil
 }
 func (ϟa *GlCullFace) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2374_major := uint32(1) // u32
 	minRequiredVersion_2374_minor := uint32(0) // u32
 	switch ϟa.Mode {
@@ -17678,14 +18283,15 @@ func (ϟa *GlCullFace) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	GetContext_2376_result := context // Contextʳ
 	ctx := GetContext_2376_result     // Contextʳ
 	ctx.Rasterizing.CullFace = ϟa.Mode
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2374_major, minRequiredVersion_2374_minor, context, GetContext_2376_result, ctx
 	return nil
 }
 func (ϟa *GlDepthRangef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2378_major := uint32(1)   // u32
 	minRequiredVersion_2378_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17698,14 +18304,15 @@ func (ϟa *GlDepthRangef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ctx := GetContext_2379_result     // Contextʳ
 	ctx.Rasterizing.DepthNear = ϟa.Near
 	ctx.Rasterizing.DepthFar = ϟa.Far
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2378_major, minRequiredVersion_2378_minor, context, GetContext_2379_result, ctx
 	return nil
 }
 func (ϟa *GlFrontFace) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2381_major := uint32(1) // u32
 	minRequiredVersion_2381_minor := uint32(0) // u32
 	switch ϟa.Orientation {
@@ -17724,14 +18331,15 @@ func (ϟa *GlFrontFace) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_2383_result := context // Contextʳ
 	ctx := GetContext_2383_result     // Contextʳ
 	ctx.Rasterizing.FrontFace = ϟa.Orientation
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2381_major, minRequiredVersion_2381_minor, context, GetContext_2383_result, ctx
 	return nil
 }
 func (ϟa *GlGetMultisamplefv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2385_major := uint32(3) // u32
 	minRequiredVersion_2385_minor := uint32(1) // u32
 	switch ϟa.Pname {
@@ -17742,14 +18350,15 @@ func (ϟa *GlGetMultisamplefv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		_ = glErrorInvalidEnum_2386_param
 	}
 	ϟa.Val.Slice(uint64(0), uint64(2), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_2385_major, minRequiredVersion_2385_minor
 	return nil
 }
 func (ϟa *GlLineWidth) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2387_major := uint32(1)   // u32
 	minRequiredVersion_2387_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17761,25 +18370,27 @@ func (ϟa *GlLineWidth) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_2388_result := context // Contextʳ
 	ctx := GetContext_2388_result     // Contextʳ
 	ctx.Rasterizing.LineWidth = ϟa.Width
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2387_major, minRequiredVersion_2387_minor, context, GetContext_2388_result, ctx
 	return nil
 }
 func (ϟa *GlMinSampleShading) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2390_major := uint32(3) // u32
 	minRequiredVersion_2390_minor := uint32(2) // u32
 	MinSampleShading_2391_value := ϟa.Value    // GLfloat
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_2390_major, minRequiredVersion_2390_minor, MinSampleShading_2391_value
 	return nil
 }
 func (ϟa *GlPolygonOffset) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2392_major := uint32(1)   // u32
 	minRequiredVersion_2392_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17792,14 +18403,15 @@ func (ϟa *GlPolygonOffset) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ctx := GetContext_2393_result     // Contextʳ
 	ctx.Rasterizing.PolygonOffsetUnits = ϟa.Units
 	ctx.Rasterizing.PolygonOffsetFactor = ϟa.ScaleFactor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2392_major, minRequiredVersion_2392_minor, context, GetContext_2393_result, ctx
 	return nil
 }
 func (ϟa *GlViewport) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2395_major := uint32(1)   // u32
 	minRequiredVersion_2395_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17811,14 +18423,15 @@ func (ϟa *GlViewport) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	GetContext_2396_result := context // Contextʳ
 	ctx := GetContext_2396_result     // Contextʳ
 	ctx.Rasterizing.Viewport = Rect{X: ϟa.X, Y: ϟa.Y, Width: ϟa.Width, Height: ϟa.Height}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_2395_major, minRequiredVersion_2395_minor, context, GetContext_2396_result, ctx
 	return nil
 }
 func (ϟa *GlGetBooleani_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2398_major := uint32(3)   // u32
 	minRequiredVersion_2398_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -17832,7 +18445,7 @@ func (ϟa *GlGetBooleani_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	observeGlGetWrites_2401_ctx := ctx       // Contextʳ
 	observeGlGetWrites_2401_name := ϟa.Param // GLenum
 	observeGlGetWrites_2401_v := ϟa.Values   // GLbooleanᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch observeGlGetWrites_2401_name {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		minRequiredVersion_2402_major := uint32(2) // u32
@@ -19119,8 +19732,9 @@ func (ϟa *GlGetBooleani_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlGetBooleanv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2658_major := uint32(1)                                                                  // u32
 	minRequiredVersion_2658_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLbooleanˢ
@@ -19132,7 +19746,7 @@ func (ϟa *GlGetBooleanv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	}
 	GetContext_2659_result := context // Contextʳ
 	ctx := GetContext_2659_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
 	case GLenum_GL_BLEND:
 		v.Index(uint64(0), ϟs).Write(func() GLboolean {
@@ -20512,8 +21126,9 @@ func (ϟa *GlGetBooleanv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlGetFloatv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_2918_major := uint32(1)                                                                  // u32
 	minRequiredVersion_2918_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLfloatˢ
@@ -20525,7 +21140,7 @@ func (ϟa *GlGetFloatv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	}
 	GetContext_2919_result := context // Contextʳ
 	ctx := GetContext_2919_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
 	case GLenum_GL_DEPTH_RANGE:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.DepthNear, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -21846,8 +22461,9 @@ func (ϟa *GlGetFloatv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlGetInteger64i_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_3178_major := uint32(3)   // u32
 	minRequiredVersion_3178_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -21861,7 +22477,7 @@ func (ϟa *GlGetInteger64i_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	observeGlGetWrites_3181_ctx := ctx       // Contextʳ
 	observeGlGetWrites_3181_name := ϟa.Param // GLenum
 	observeGlGetWrites_3181_v := ϟa.Values   // GLint64ᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch observeGlGetWrites_3181_name {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		minRequiredVersion_3182_major := uint32(2) // u32
@@ -23148,8 +23764,9 @@ func (ϟa *GlGetInteger64i_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlGetInteger64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_3438_major := uint32(3)   // u32
 	minRequiredVersion_3438_minor := uint32(0)   // u32
 	GetInteger64v_3439_param := ϟa.Param         // GLenum
@@ -23165,7 +23782,7 @@ func (ϟa *GlGetInteger64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	observeGlGetWrites_3442_ctx := ctx                       // Contextʳ
 	observeGlGetWrites_3442_name := GetInteger64v_3439_param // GLenum
 	observeGlGetWrites_3442_v := GetInteger64v_3439_values   // GLint64ᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch observeGlGetWrites_3442_name {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		minRequiredVersion_3443_major := uint32(2) // u32
@@ -24452,8 +25069,9 @@ func (ϟa *GlGetInteger64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlGetIntegeri_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_3699_major := uint32(3)   // u32
 	minRequiredVersion_3699_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -24467,7 +25085,7 @@ func (ϟa *GlGetIntegeri_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	observeGlGetWrites_3702_ctx := ctx       // Contextʳ
 	observeGlGetWrites_3702_name := ϟa.Param // GLenum
 	observeGlGetWrites_3702_v := ϟa.Values   // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch observeGlGetWrites_3702_name {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		minRequiredVersion_3703_major := uint32(2) // u32
@@ -25754,8 +26372,9 @@ func (ϟa *GlGetIntegeri_v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 }
 func (ϟa *GlGetIntegerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_3959_major := uint32(1)                                                                  // u32
 	minRequiredVersion_3959_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLintˢ
@@ -25767,7 +26386,7 @@ func (ϟa *GlGetIntegerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	}
 	GetContext_3960_result := context // Contextʳ
 	ctx := GetContext_3960_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
 	case GLenum_GL_ACTIVE_TEXTURE:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.ActiveTextureUnit), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -27247,8 +27866,9 @@ func (ϟa *GlGetIntegerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlGetInternalformativ) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4219_major := uint32(3) // u32
 	minRequiredVersion_4219_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27284,14 +27904,15 @@ func (ϟa *GlGetInternalformativ) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_4225_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4219_major, minRequiredVersion_4219_minor
 	return nil
 }
 func (ϟa *GlGetString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4226_major := uint32(1) // u32
 	minRequiredVersion_4226_minor := uint32(0) // u32
 	switch ϟa.Param {
@@ -27301,15 +27922,16 @@ func (ϟa *GlGetString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		return
 		_ = glErrorInvalidEnum_4227_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = GLubyteᶜᵖ{}
 	_, _ = minRequiredVersion_4226_major, minRequiredVersion_4226_minor
 	return nil
 }
 func (ϟa *GlGetStringi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4228_major := uint32(3) // u32
 	minRequiredVersion_4228_minor := uint32(0) // u32
 	switch ϟa.Name {
@@ -27319,15 +27941,16 @@ func (ϟa *GlGetStringi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_4229_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_4228_major, minRequiredVersion_4228_minor
 	return nil
 }
 func (ϟa *GlIsEnabled) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4230_major := uint32(1) // u32
 	minRequiredVersion_4230_minor := uint32(0) // u32
 	switch ϟa.Capability {
@@ -27353,7 +27976,7 @@ func (ϟa *GlIsEnabled) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	}
 	GetContext_4234_result := context // Contextʳ
 	ctx := GetContext_4234_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Capabilities.Get(ϟa.Capability) {
 			return 1
@@ -27366,8 +27989,9 @@ func (ϟa *GlIsEnabled) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlIsEnabledi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4236_major := uint32(3) // u32
 	minRequiredVersion_4236_minor := uint32(2) // u32
 	IsEnabledi_4237_target := ϟa.Target        // GLenum
@@ -27379,7 +28003,7 @@ func (ϟa *GlIsEnabledi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return
 		_ = glErrorInvalidEnum_4238_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsEnabledi_4237_result := ϟa.Result // GLboolean
 	ϟa.Result = IsEnabledi_4237_result
 	_, _, _, _, _ = minRequiredVersion_4236_major, minRequiredVersion_4236_minor, IsEnabledi_4237_target, IsEnabledi_4237_index, IsEnabledi_4237_result
@@ -27387,8 +28011,9 @@ func (ϟa *GlIsEnabledi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 }
 func (ϟa *GlClientWaitSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4239_major := uint32(3)                           // u32
 	minRequiredVersion_4239_minor := uint32(0)                           // u32
 	ClientWaitSync_4240_sync := ϟa.Sync                                  // GLsync
@@ -27398,7 +28023,7 @@ func (ϟa *GlClientWaitSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	supportsBits_4241_validBits := GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT // GLbitfield
 	if (GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT)&(ClientWaitSync_4240_syncFlags) != 0 {
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ClientWaitSync_4240_result := ϟa.Result // GLenum
 	ϟa.Result = ClientWaitSync_4240_result
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4239_major, minRequiredVersion_4239_minor, ClientWaitSync_4240_sync, ClientWaitSync_4240_syncFlags, ClientWaitSync_4240_timeout, supportsBits_4241_seenBits, supportsBits_4241_validBits, ClientWaitSync_4240_result
@@ -27406,19 +28031,21 @@ func (ϟa *GlClientWaitSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlDeleteSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4242_major := uint32(3) // u32
 	minRequiredVersion_4242_minor := uint32(0) // u32
 	DeleteSync_4243_sync := ϟa.Sync            // GLsync
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_4242_major, minRequiredVersion_4242_minor, DeleteSync_4243_sync
 	return nil
 }
 func (ϟa *GlFenceSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4244_major := uint32(3) // u32
 	minRequiredVersion_4244_minor := uint32(0) // u32
 	FenceSync_4245_condition := ϟa.Condition   // GLenum
@@ -27430,7 +28057,7 @@ func (ϟa *GlFenceSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		return
 		_ = glErrorInvalidEnum_4246_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	FenceSync_4245_result := ϟa.Result // GLsync
 	ϟa.Result = FenceSync_4245_result
 	_, _, _, _, _ = minRequiredVersion_4244_major, minRequiredVersion_4244_minor, FenceSync_4245_condition, FenceSync_4245_syncFlags, FenceSync_4245_result
@@ -27438,8 +28065,9 @@ func (ϟa *GlFenceSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlGetSynciv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4247_major := uint32(3) // u32
 	minRequiredVersion_4247_minor := uint32(0) // u32
 	GetSynciv_4248_sync := ϟa.Sync             // GLsync
@@ -27447,7 +28075,7 @@ func (ϟa *GlGetSynciv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetSynciv_4248_bufSize := ϟa.BufSize       // GLsizei
 	GetSynciv_4248_length := ϟa.Length         // GLsizeiᵖ
 	GetSynciv_4248_values := ϟa.Values         // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSynciv_4248_pname {
 	case GLenum_GL_OBJECT_TYPE, GLenum_GL_SYNC_CONDITION, GLenum_GL_SYNC_FLAGS, GLenum_GL_SYNC_STATUS:
 		if ((GetSynciv_4248_values) != (GLintᵖ{})) && ((GetSynciv_4248_bufSize) > (GLsizei(int32(0)))) {
@@ -27466,12 +28094,13 @@ func (ϟa *GlGetSynciv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlIsSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4250_major := uint32(3) // u32
 	minRequiredVersion_4250_minor := uint32(0) // u32
 	IsSync_4251_sync := ϟa.Sync                // GLsync
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	IsSync_4251_result := ϟa.Result // GLboolean
 	ϟa.Result = IsSync_4251_result
 	_, _, _, _ = minRequiredVersion_4250_major, minRequiredVersion_4250_minor, IsSync_4251_sync, IsSync_4251_result
@@ -27479,21 +28108,23 @@ func (ϟa *GlIsSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Lo
 }
 func (ϟa *GlWaitSync) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4252_major := uint32(3) // u32
 	minRequiredVersion_4252_minor := uint32(0) // u32
 	WaitSync_4253_sync := ϟa.Sync              // GLsync
 	WaitSync_4253_syncFlags := ϟa.SyncFlags    // GLbitfield
 	WaitSync_4253_timeout := ϟa.Timeout        // GLuint64
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4252_major, minRequiredVersion_4252_minor, WaitSync_4253_sync, WaitSync_4253_syncFlags, WaitSync_4253_timeout
 	return nil
 }
 func (ϟa *GlActiveTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4254_major := uint32(1) // u32
 	minRequiredVersion_4254_minor := uint32(0) // u32
 	switch ϟa.Unit {
@@ -27512,14 +28143,15 @@ func (ϟa *GlActiveTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_4256_result := context // Contextʳ
 	ctx := GetContext_4256_result     // Contextʳ
 	ctx.ActiveTextureUnit = ϟa.Unit
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4254_major, minRequiredVersion_4254_minor, context, GetContext_4256_result, ctx
 	return nil
 }
 func (ϟa *GlBindImageTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4258_major := uint32(3) // u32
 	minRequiredVersion_4258_minor := uint32(1) // u32
 	switch ϟa.Access {
@@ -27536,24 +28168,26 @@ func (ϟa *GlBindImageTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		return
 		_ = glErrorInvalidEnum_4260_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4258_major, minRequiredVersion_4258_minor
 	return nil
 }
 func (ϟa *GlBindSampler) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4261_major := uint32(3) // u32
 	minRequiredVersion_4261_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4261_major, minRequiredVersion_4261_minor
 	return nil
 }
 func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4262_major := uint32(1) // u32
 	minRequiredVersion_4262_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27588,14 +28222,15 @@ func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	}
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	tu.Bindings[ϟa.Target] = ϟa.Texture
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_4262_major, minRequiredVersion_4262_minor, context, GetContext_4267_result, ctx, tu
 	return nil
 }
 func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4269_major := uint32(1) // u32
 	minRequiredVersion_4269_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27660,14 +28295,15 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		v := ϟa.Target
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_4269_major, minRequiredVersion_4269_minor, context, GetContext_4275_result, ctx, tu
 	return nil
 }
 func (ϟa *GlCompressedTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4277_major := uint32(3)                    // u32
 	minRequiredVersion_4277_minor := uint32(0)                    // u32
 	CompressedTexImage3D_4278_target := ϟa.Target                 // GLenum
@@ -27712,14 +28348,15 @@ func (ϟa *GlCompressedTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((CompressedTexImage3D_4278_data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(CompressedTexImage3D_4278_data).Slice(uint64(GLsizei(int32(0))), uint64(CompressedTexImage3D_4278_image_size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4277_major, minRequiredVersion_4277_minor, CompressedTexImage3D_4278_target, CompressedTexImage3D_4278_level, CompressedTexImage3D_4278_internalformat, CompressedTexImage3D_4278_width, CompressedTexImage3D_4278_height, CompressedTexImage3D_4278_depth, CompressedTexImage3D_4278_border, CompressedTexImage3D_4278_image_size, CompressedTexImage3D_4278_data, context, GetContext_4283_result, ctx
 	return nil
 }
 func (ϟa *GlCompressedTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4285_major := uint32(1) // u32
 	minRequiredVersion_4285_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27754,14 +28391,15 @@ func (ϟa *GlCompressedTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(ϟa.Data).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.ImageSize), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4285_major, minRequiredVersion_4285_minor, context, GetContext_4290_result, ctx
 	return nil
 }
 func (ϟa *GlCompressedTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4292_major := uint32(3)              // u32
 	minRequiredVersion_4292_minor := uint32(0)              // u32
 	CompressedTexSubImage3D_4293_target := ϟa.Target        // GLenum
@@ -27808,14 +28446,15 @@ func (ϟa *GlCompressedTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((CompressedTexSubImage3D_4293_data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(CompressedTexSubImage3D_4293_data).Slice(uint64(GLsizei(int32(0))), uint64(CompressedTexSubImage3D_4293_image_size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4292_major, minRequiredVersion_4292_minor, CompressedTexSubImage3D_4293_target, CompressedTexSubImage3D_4293_level, CompressedTexSubImage3D_4293_xoffset, CompressedTexSubImage3D_4293_yoffset, CompressedTexSubImage3D_4293_zoffset, CompressedTexSubImage3D_4293_width, CompressedTexSubImage3D_4293_height, CompressedTexSubImage3D_4293_depth, CompressedTexSubImage3D_4293_format, CompressedTexSubImage3D_4293_image_size, CompressedTexSubImage3D_4293_data, context, GetContext_4298_result, ctx
 	return nil
 }
 func (ϟa *GlCopyImageSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4300_major := uint32(3)      // u32
 	minRequiredVersion_4300_minor := uint32(2)      // u32
 	CopyImageSubData_4301_srcName := ϟa.SrcName     // GLuint
@@ -27847,14 +28486,15 @@ func (ϟa *GlCopyImageSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		return
 		_ = glErrorInvalidEnum_4303_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4300_major, minRequiredVersion_4300_minor, CopyImageSubData_4301_srcName, CopyImageSubData_4301_srcTarget, CopyImageSubData_4301_srcLevel, CopyImageSubData_4301_srcX, CopyImageSubData_4301_srcY, CopyImageSubData_4301_srcZ, CopyImageSubData_4301_dstName, CopyImageSubData_4301_dstTarget, CopyImageSubData_4301_dstLevel, CopyImageSubData_4301_dstX, CopyImageSubData_4301_dstY, CopyImageSubData_4301_dstZ, CopyImageSubData_4301_srcWidth, CopyImageSubData_4301_srcHeight, CopyImageSubData_4301_srcDepth
 	return nil
 }
 func (ϟa *GlCopyTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4304_major := uint32(1) // u32
 	minRequiredVersion_4304_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27875,14 +28515,15 @@ func (ϟa *GlCopyTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_4307_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4304_major, minRequiredVersion_4304_minor
 	return nil
 }
 func (ϟa *GlCopyTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4308_major := uint32(1) // u32
 	minRequiredVersion_4308_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -27892,14 +28533,15 @@ func (ϟa *GlCopyTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4309_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4308_major, minRequiredVersion_4308_minor
 	return nil
 }
 func (ϟa *GlCopyTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4310_major := uint32(3)   // u32
 	minRequiredVersion_4310_minor := uint32(0)   // u32
 	CopyTexSubImage3D_4311_target := ϟa.Target   // GLenum
@@ -27922,25 +28564,27 @@ func (ϟa *GlCopyTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4313_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4310_major, minRequiredVersion_4310_minor, CopyTexSubImage3D_4311_target, CopyTexSubImage3D_4311_level, CopyTexSubImage3D_4311_xoffset, CopyTexSubImage3D_4311_yoffset, CopyTexSubImage3D_4311_zoffset, CopyTexSubImage3D_4311_x, CopyTexSubImage3D_4311_y, CopyTexSubImage3D_4311_width, CopyTexSubImage3D_4311_height
 	return nil
 }
 func (ϟa *GlDeleteSamplers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4314_major := uint32(3) // u32
 	minRequiredVersion_4314_minor := uint32(0) // u32
 	ϟa.Samplers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4314_major, minRequiredVersion_4314_minor
 	return nil
 }
 func (ϟa *GlDeleteTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4315_major := uint32(1)                              // u32
 	minRequiredVersion_4315_minor := uint32(0)                              // u32
 	t := ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // TextureIdˢ
@@ -27955,25 +28599,27 @@ func (ϟa *GlDeleteTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Textures, t.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_4315_major, minRequiredVersion_4315_minor, t, context, GetContext_4316_result, ctx
 	return nil
 }
 func (ϟa *GlGenSamplers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4318_major := uint32(3) // u32
 	minRequiredVersion_4318_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Samplers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_4318_major, minRequiredVersion_4318_minor
 	return nil
 }
 func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4319_major := uint32(1)                              // u32
 	minRequiredVersion_4319_minor := uint32(0)                              // u32
 	t := ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // TextureIdˢ
@@ -27985,7 +28631,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	}
 	GetContext_4320_result := context // Contextʳ
 	ctx := GetContext_4320_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
 		ctx.Instances.Textures[id] = (&Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -27997,8 +28643,9 @@ func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *GlGenerateMipmap) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4322_major := uint32(2) // u32
 	minRequiredVersion_4322_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -28016,14 +28663,15 @@ func (ϟa *GlGenerateMipmap) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_4325_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4322_major, minRequiredVersion_4322_minor
 	return nil
 }
 func (ϟa *GlGetSamplerParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4326_major := uint32(3)                              // u32
 	minRequiredVersion_4326_minor := uint32(2)                              // u32
 	GetSamplerParameterIiv_4327_sampler := ϟa.Sampler                       // SamplerId
@@ -28032,7 +28680,7 @@ func (ϟa *GlGetSamplerParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Data
 	GetSamplerParameter_4328_sampler := GetSamplerParameterIiv_4327_sampler // SamplerId
 	GetSamplerParameter_4328_pname := GetSamplerParameterIiv_4327_pname     // GLenum
 	GetSamplerParameter_4328_params := GetSamplerParameterIiv_4327_params   // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_4328_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_4328_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28048,8 +28696,9 @@ func (ϟa *GlGetSamplerParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Data
 }
 func (ϟa *GlGetSamplerParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4330_major := uint32(3)                               // u32
 	minRequiredVersion_4330_minor := uint32(2)                               // u32
 	GetSamplerParameterIuiv_4331_sampler := ϟa.Sampler                       // SamplerId
@@ -28058,7 +28707,7 @@ func (ϟa *GlGetSamplerParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	GetSamplerParameter_4332_sampler := GetSamplerParameterIuiv_4331_sampler // SamplerId
 	GetSamplerParameter_4332_pname := GetSamplerParameterIuiv_4331_pname     // GLenum
 	GetSamplerParameter_4332_params := GetSamplerParameterIuiv_4331_params   // GLuintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_4332_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_4332_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28074,14 +28723,15 @@ func (ϟa *GlGetSamplerParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 }
 func (ϟa *GlGetSamplerParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4334_major := uint32(3)     // u32
 	minRequiredVersion_4334_minor := uint32(0)     // u32
 	GetSamplerParameter_4335_sampler := ϟa.Sampler // SamplerId
 	GetSamplerParameter_4335_pname := ϟa.Pname     // GLenum
 	GetSamplerParameter_4335_params := ϟa.Params   // GLfloatᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_4335_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_4335_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28097,14 +28747,15 @@ func (ϟa *GlGetSamplerParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 }
 func (ϟa *GlGetSamplerParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4337_major := uint32(3)     // u32
 	minRequiredVersion_4337_minor := uint32(0)     // u32
 	GetSamplerParameter_4338_sampler := ϟa.Sampler // SamplerId
 	GetSamplerParameter_4338_pname := ϟa.Pname     // GLenum
 	GetSamplerParameter_4338_params := ϟa.Params   // GLintᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetSamplerParameter_4338_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetSamplerParameter_4338_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28120,8 +28771,9 @@ func (ϟa *GlGetSamplerParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 }
 func (ϟa *GlGetTexLevelParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4340_major := uint32(3) // u32
 	minRequiredVersion_4340_minor := uint32(1) // u32
 	switch ϟa.Target {
@@ -28146,15 +28798,16 @@ func (ϟa *GlGetTexLevelParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_4344_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_4340_major, minRequiredVersion_4340_minor
 	return nil
 }
 func (ϟa *GlGetTexLevelParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4345_major := uint32(3) // u32
 	minRequiredVersion_4345_minor := uint32(1) // u32
 	switch ϟa.Target {
@@ -28179,15 +28832,16 @@ func (ϟa *GlGetTexLevelParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_4349_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_4345_major, minRequiredVersion_4345_minor
 	return nil
 }
 func (ϟa *GlGetTexParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4350_major := uint32(3)                      // u32
 	minRequiredVersion_4350_minor := uint32(2)                      // u32
 	GetTexParameterIiv_4351_target := ϟa.Target                     // GLenum
@@ -28217,7 +28871,7 @@ func (ϟa *GlGetTexParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_4357_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_4352_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_4352_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28246,8 +28900,9 @@ func (ϟa *GlGetTexParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetTexParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4362_major := uint32(3)                       // u32
 	minRequiredVersion_4362_minor := uint32(2)                       // u32
 	GetTexParameterIuiv_4363_target := ϟa.Target                     // GLenum
@@ -28277,7 +28932,7 @@ func (ϟa *GlGetTexParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_4369_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_4364_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_4364_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28306,8 +28961,9 @@ func (ϟa *GlGetTexParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4374_major := uint32(1)     // u32
 	minRequiredVersion_4374_minor := uint32(0)     // u32
 	GetTexParameter_4375_target := ϟa.Target       // GLenum
@@ -28334,7 +28990,7 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4380_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_4375_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_4375_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28400,8 +29056,9 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4387_major := uint32(1)     // u32
 	minRequiredVersion_4387_minor := uint32(0)     // u32
 	GetTexParameter_4388_target := ϟa.Target       // GLenum
@@ -28428,7 +29085,7 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4393_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch GetTexParameter_4388_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 		GetTexParameter_4388_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -28494,19 +29151,21 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlIsSampler) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4400_major := uint32(3) // u32
 	minRequiredVersion_4400_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_4400_major, minRequiredVersion_4400_minor
 	return nil
 }
 func (ϟa *GlIsTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4401_major := uint32(1)   // u32
 	minRequiredVersion_4401_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -28517,7 +29176,7 @@ func (ϟa *GlIsTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	}
 	GetContext_4402_result := context // Contextʳ
 	ctx := GetContext_4402_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = func() GLboolean {
 		if ctx.Instances.Textures.Contains(ϟa.Texture) {
 			return 1
@@ -28530,8 +29189,9 @@ func (ϟa *GlIsTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *GlPixelStorei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4404_major := uint32(1) // u32
 	minRequiredVersion_4404_minor := uint32(0) // u32
 	switch ϟa.Parameter {
@@ -28554,14 +29214,15 @@ func (ϟa *GlPixelStorei) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_4407_result := context // Contextʳ
 	ctx := GetContext_4407_result     // Contextʳ
 	ctx.PixelStorage[ϟa.Parameter] = ϟa.Value
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4404_major, minRequiredVersion_4404_minor, context, GetContext_4407_result, ctx
 	return nil
 }
 func (ϟa *GlSamplerParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4409_major := uint32(3)                         // u32
 	minRequiredVersion_4409_minor := uint32(2)                         // u32
 	SamplerParameterIiv_4410_sampler := ϟa.Sampler                     // SamplerId
@@ -28585,14 +29246,15 @@ func (ϟa *GlSamplerParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		return
 		_ = glErrorInvalidEnum_4414_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4409_major, minRequiredVersion_4409_minor, SamplerParameterIiv_4410_sampler, SamplerParameterIiv_4410_pname, SamplerParameterIiv_4410_param, SamplerParameterv_4411_sampler, SamplerParameterv_4411_pname, SamplerParameterv_4411_params, minRequiredVersion_4412_major, minRequiredVersion_4412_minor
 	return nil
 }
 func (ϟa *GlSamplerParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4415_major := uint32(3)                          // u32
 	minRequiredVersion_4415_minor := uint32(2)                          // u32
 	SamplerParameterIuiv_4416_sampler := ϟa.Sampler                     // SamplerId
@@ -28616,14 +29278,15 @@ func (ϟa *GlSamplerParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = glErrorInvalidEnum_4420_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4415_major, minRequiredVersion_4415_minor, SamplerParameterIuiv_4416_sampler, SamplerParameterIuiv_4416_pname, SamplerParameterIuiv_4416_param, SamplerParameterv_4417_sampler, SamplerParameterv_4417_pname, SamplerParameterv_4417_params, minRequiredVersion_4418_major, minRequiredVersion_4418_minor
 	return nil
 }
 func (ϟa *GlSamplerParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4421_major := uint32(3) // u32
 	minRequiredVersion_4421_minor := uint32(0) // u32
 	switch ϟa.Pname {
@@ -28633,14 +29296,15 @@ func (ϟa *GlSamplerParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4422_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4421_major, minRequiredVersion_4421_minor
 	return nil
 }
 func (ϟa *GlSamplerParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4423_major := uint32(3)   // u32
 	minRequiredVersion_4423_minor := uint32(0)   // u32
 	SamplerParameterv_4424_sampler := ϟa.Sampler // SamplerId
@@ -28661,14 +29325,15 @@ func (ϟa *GlSamplerParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_4427_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4423_major, minRequiredVersion_4423_minor, SamplerParameterv_4424_sampler, SamplerParameterv_4424_pname, SamplerParameterv_4424_params, minRequiredVersion_4425_major, minRequiredVersion_4425_minor
 	return nil
 }
 func (ϟa *GlSamplerParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4428_major := uint32(3) // u32
 	minRequiredVersion_4428_minor := uint32(0) // u32
 	switch ϟa.Pname {
@@ -28678,14 +29343,15 @@ func (ϟa *GlSamplerParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 		_ = glErrorInvalidEnum_4429_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4428_major, minRequiredVersion_4428_minor
 	return nil
 }
 func (ϟa *GlSamplerParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4430_major := uint32(3)   // u32
 	minRequiredVersion_4430_minor := uint32(0)   // u32
 	SamplerParameterv_4431_sampler := ϟa.Sampler // SamplerId
@@ -28706,14 +29372,15 @@ func (ϟa *GlSamplerParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		return
 		_ = glErrorInvalidEnum_4434_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4430_major, minRequiredVersion_4430_minor, SamplerParameterv_4431_sampler, SamplerParameterv_4431_pname, SamplerParameterv_4431_params, minRequiredVersion_4432_major, minRequiredVersion_4432_minor
 	return nil
 }
 func (ϟa *GlTexBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4435_major := uint32(3)         // u32
 	minRequiredVersion_4435_minor := uint32(2)         // u32
 	TexBuffer_4436_target := ϟa.Target                 // GLenum
@@ -28733,14 +29400,15 @@ func (ϟa *GlTexBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		return
 		_ = glErrorInvalidEnum_4438_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4435_major, minRequiredVersion_4435_minor, TexBuffer_4436_target, TexBuffer_4436_internalformat, TexBuffer_4436_buffer
 	return nil
 }
 func (ϟa *GlTexBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4439_major := uint32(3)              // u32
 	minRequiredVersion_4439_minor := uint32(2)              // u32
 	TexBufferRange_4440_target := ϟa.Target                 // GLenum
@@ -28762,14 +29430,15 @@ func (ϟa *GlTexBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_4442_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4439_major, minRequiredVersion_4439_minor, TexBufferRange_4440_target, TexBufferRange_4440_internalformat, TexBufferRange_4440_buffer, TexBufferRange_4440_offset, TexBufferRange_4440_size
 	return nil
 }
 func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4443_major := uint32(1) // u32
 	minRequiredVersion_4443_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -28866,14 +29535,15 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		v := ϟa.Target
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_4443_major, minRequiredVersion_4443_minor, context, GetContext_4451_result, ctx, tu
 	return nil
 }
 func (ϟa *GlTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4455_major := uint32(3)          // u32
 	minRequiredVersion_4455_minor := uint32(0)          // u32
 	TexImage3D_4456_target := ϟa.Target                 // GLenum
@@ -28936,14 +29606,15 @@ func (ϟa *GlTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		U8ᵖ(TexImage3D_4456_data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _, _, _, _, _ = imageSize_4465_width, imageSize_4465_height, imageSize_4465_format, imageSize_4465_type, imageSize_4465_result, size
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4455_major, minRequiredVersion_4455_minor, TexImage3D_4456_target, TexImage3D_4456_level, TexImage3D_4456_internalformat, TexImage3D_4456_width, TexImage3D_4456_height, TexImage3D_4456_depth, TexImage3D_4456_border, TexImage3D_4456_format, TexImage3D_4456_type, TexImage3D_4456_data, context, GetContext_4463_result, ctx
 	return nil
 }
 func (ϟa *GlTexParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4466_major := uint32(3)               // u32
 	minRequiredVersion_4466_minor := uint32(2)               // u32
 	TexParameterIiv_4467_target := ϟa.Target                 // GLenum
@@ -28994,14 +29665,15 @@ func (ϟa *GlTexParameterIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 		_ = glErrorInvalidEnum_4476_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4466_major, minRequiredVersion_4466_minor, TexParameterIiv_4467_target, TexParameterIiv_4467_pname, TexParameterIiv_4467_params, TexParameterv_4468_target, TexParameterv_4468_pname, TexParameterv_4468_params
 	return nil
 }
 func (ϟa *GlTexParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4477_major := uint32(3)                // u32
 	minRequiredVersion_4477_minor := uint32(2)                // u32
 	TexParameterIuiv_4478_target := ϟa.Target                 // GLenum
@@ -29052,14 +29724,15 @@ func (ϟa *GlTexParameterIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		return
 		_ = glErrorInvalidEnum_4487_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4477_major, minRequiredVersion_4477_minor, TexParameterIuiv_4478_target, TexParameterIuiv_4478_pname, TexParameterIuiv_4478_params, TexParameterv_4479_target, TexParameterv_4479_pname, TexParameterv_4479_params
 	return nil
 }
 func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4488_major := uint32(1) // u32
 	minRequiredVersion_4488_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -29130,14 +29803,15 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4488_major, minRequiredVersion_4488_minor, context, GetContext_4496_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4498_major := uint32(1) // u32
 	minRequiredVersion_4498_minor := uint32(0) // u32
 	TexParameterv_4499_target := ϟa.Target     // GLenum
@@ -29185,14 +29859,15 @@ func (ϟa *GlTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_4507_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4498_major, minRequiredVersion_4498_minor, TexParameterv_4499_target, TexParameterv_4499_pname, TexParameterv_4499_params
 	return nil
 }
 func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4508_major := uint32(1) // u32
 	minRequiredVersion_4508_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -29265,14 +29940,15 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4508_major, minRequiredVersion_4508_minor, context, GetContext_4516_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4518_major := uint32(1) // u32
 	minRequiredVersion_4518_minor := uint32(0) // u32
 	TexParameterv_4519_target := ϟa.Target     // GLenum
@@ -29320,14 +29996,15 @@ func (ϟa *GlTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 		_ = glErrorInvalidEnum_4527_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_4518_major, minRequiredVersion_4518_minor, TexParameterv_4519_target, TexParameterv_4519_pname, TexParameterv_4519_params
 	return nil
 }
 func (ϟa *GlTexStorage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4528_major := uint32(3)            // u32
 	minRequiredVersion_4528_minor := uint32(0)            // u32
 	TexStorage2D_4529_target := ϟa.Target                 // GLenum
@@ -29353,14 +30030,15 @@ func (ϟa *GlTexStorage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_4532_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4528_major, minRequiredVersion_4528_minor, TexStorage2D_4529_target, TexStorage2D_4529_levels, TexStorage2D_4529_internalformat, TexStorage2D_4529_width, TexStorage2D_4529_height
 	return nil
 }
 func (ϟa *GlTexStorage2DMultisample) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4533_major := uint32(3) // u32
 	minRequiredVersion_4533_minor := uint32(1) // u32
 	switch ϟa.Target {
@@ -29381,14 +30059,15 @@ func (ϟa *GlTexStorage2DMultisample) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_4536_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4533_major, minRequiredVersion_4533_minor
 	return nil
 }
 func (ϟa *GlTexStorage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4537_major := uint32(3)            // u32
 	minRequiredVersion_4537_minor := uint32(0)            // u32
 	TexStorage3D_4538_target := ϟa.Target                 // GLenum
@@ -29419,14 +30098,15 @@ func (ϟa *GlTexStorage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		return
 		_ = glErrorInvalidEnum_4542_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4537_major, minRequiredVersion_4537_minor, TexStorage3D_4538_target, TexStorage3D_4538_levels, TexStorage3D_4538_internalformat, TexStorage3D_4538_width, TexStorage3D_4538_height, TexStorage3D_4538_depth
 	return nil
 }
 func (ϟa *GlTexStorage3DMultisample) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4543_major := uint32(3)                                   // u32
 	minRequiredVersion_4543_minor := uint32(2)                                   // u32
 	TexStorage3DMultisample_4544_target := ϟa.Target                             // GLenum
@@ -29450,14 +30130,15 @@ func (ϟa *GlTexStorage3DMultisample) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 		_ = glErrorInvalidEnum_4546_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4543_major, minRequiredVersion_4543_minor, TexStorage3DMultisample_4544_target, TexStorage3DMultisample_4544_samples, TexStorage3DMultisample_4544_internalformat, TexStorage3DMultisample_4544_width, TexStorage3DMultisample_4544_height, TexStorage3DMultisample_4544_depth, TexStorage3DMultisample_4544_fixedsamplelocations
 	return nil
 }
 func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4547_major := uint32(1) // u32
 	minRequiredVersion_4547_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -29570,14 +30251,15 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		image.Data.Slice(uint64(dst), uint64((dst)+(line_bytes)), ϟs).Copy(src_data.Slice(uint64(src), uint64((src)+(line_bytes)), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _ = src, dst
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4547_major, minRequiredVersion_4547_minor, context, GetContext_4554_result, ctx, tu, image, pbo, url, src_width, imageSize_4556_width, imageSize_4556_height, imageSize_4556_format, imageSize_4556_type, imageSize_4556_result, src_stride, src_size, imageSize_4557_width, imageSize_4557_height, imageSize_4557_format, imageSize_4557_type, imageSize_4557_result, dst_stride, imageSize_4558_width, imageSize_4558_height, imageSize_4558_format, imageSize_4558_type, imageSize_4558_result, dst_offset, src_data, imageSize_4559_width, imageSize_4559_height, imageSize_4559_format, imageSize_4559_type, imageSize_4559_result, line_bytes
 	return nil
 }
 func (ϟa *GlTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4560_major := uint32(3) // u32
 	minRequiredVersion_4560_minor := uint32(0) // u32
 	TexSubImage3D_4561_target := ϟa.Target     // GLenum
@@ -29637,14 +30319,15 @@ func (ϟa *GlTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		U8ᵖ(TexSubImage3D_4561_data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _, _, _, _, _ = imageSize_4569_width, imageSize_4569_height, imageSize_4569_format, imageSize_4569_type, imageSize_4569_result, size
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4560_major, minRequiredVersion_4560_minor, TexSubImage3D_4561_target, TexSubImage3D_4561_level, TexSubImage3D_4561_xoffset, TexSubImage3D_4561_yoffset, TexSubImage3D_4561_zoffset, TexSubImage3D_4561_width, TexSubImage3D_4561_height, TexSubImage3D_4561_depth, TexSubImage3D_4561_format, TexSubImage3D_4561_type, TexSubImage3D_4561_data, context, GetContext_4567_result, ctx
 	return nil
 }
 func (ϟa *GlBeginTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4570_major := uint32(3) // u32
 	minRequiredVersion_4570_minor := uint32(0) // u32
 	switch ϟa.PrimitiveMode {
@@ -29654,14 +30337,15 @@ func (ϟa *GlBeginTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Data
 		return
 		_ = glErrorInvalidEnum_4571_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4570_major, minRequiredVersion_4570_minor
 	return nil
 }
 func (ϟa *GlBindTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4572_major := uint32(3) // u32
 	minRequiredVersion_4572_minor := uint32(0) // u32
 	switch ϟa.Target {
@@ -29671,52 +30355,56 @@ func (ϟa *GlBindTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 		return
 		_ = glErrorInvalidEnum_4573_param
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4572_major, minRequiredVersion_4572_minor
 	return nil
 }
 func (ϟa *GlDeleteTransformFeedbacks) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4574_major := uint32(3) // u32
 	minRequiredVersion_4574_minor := uint32(0) // u32
 	ϟa.Ids.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4574_major, minRequiredVersion_4574_minor
 	return nil
 }
 func (ϟa *GlEndTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4575_major := uint32(3) // u32
 	minRequiredVersion_4575_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4575_major, minRequiredVersion_4575_minor
 	return nil
 }
 func (ϟa *GlGenTransformFeedbacks) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4576_major := uint32(3) // u32
 	minRequiredVersion_4576_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Ids.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_4576_major, minRequiredVersion_4576_minor
 	return nil
 }
 func (ϟa *GlGetTransformFeedbackVarying) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4577_major := uint32(3)         // u32
 	minRequiredVersion_4577_minor := uint32(0)         // u32
 	writeString_4578_buffer_size := ϟa.BufSize         // GLsizei
 	writeString_4578_buffer_bytes_written := ϟa.Length // GLsizeiᵖ
 	writeString_4578_buffer := ϟa.Name                 // GLcharᵖ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if ((writeString_4578_buffer) != (GLcharᵖ{})) && ((writeString_4578_buffer_size) > (GLsizei(int32(0)))) {
 		buffer_size2 := writeString_4578_buffer_size // GLsizei
 		if (writeString_4578_buffer_bytes_written) != (GLsizeiᵖ{}) {
@@ -29736,39 +30424,43 @@ func (ϟa *GlGetTransformFeedbackVarying) Mutate(ϟs *gfxapi.State, ϟd database
 }
 func (ϟa *GlIsTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4579_major := uint32(3) // u32
 	minRequiredVersion_4579_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_, _ = minRequiredVersion_4579_major, minRequiredVersion_4579_minor
 	return nil
 }
 func (ϟa *GlPauseTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4580_major := uint32(3) // u32
 	minRequiredVersion_4580_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4580_major, minRequiredVersion_4580_minor
 	return nil
 }
 func (ϟa *GlResumeTransformFeedback) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4581_major := uint32(3) // u32
 	minRequiredVersion_4581_minor := uint32(0) // u32
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4581_major, minRequiredVersion_4581_minor
 	return nil
 }
 func (ϟa *GlTransformFeedbackVaryings) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4582_major := uint32(3) // u32
 	minRequiredVersion_4582_minor := uint32(0) // u32
 	switch ϟa.BufferMode {
@@ -29783,14 +30475,15 @@ func (ϟa *GlTransformFeedbackVaryings) Mutate(ϟs *gfxapi.State, ϟd database.D
 		name := strings.TrimRight(string(Charᵖ(names.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
 		_ = name
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = minRequiredVersion_4582_major, minRequiredVersion_4582_minor, names
 	return nil
 }
 func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4584_major := uint32(3)   // u32
 	minRequiredVersion_4584_minor := uint32(0)   // u32
 	BindVertexArray_4585_array := ϟa.Array       // VertexArrayId
@@ -29816,14 +30509,15 @@ func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		_, _, _ = NewVertexArray_4588_ctx, array, NewVertexArray_4588_result
 	}
 	ctx.BoundVertexArray = BindVertexArray_4585_array
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = minRequiredVersion_4584_major, minRequiredVersion_4584_minor, BindVertexArray_4585_array, context, GetContext_4586_result, ctx
 	return nil
 }
 func (ϟa *GlBindVertexBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4589_major := uint32(3)   // u32
 	minRequiredVersion_4589_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -29867,14 +30561,15 @@ func (ϟa *GlBindVertexBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	binding.Buffer = BindVertexBuffer_4593_buffer
 	binding.Offset = BindVertexBuffer_4593_offset
 	binding.Stride = BindVertexBuffer_4593_stride
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4589_major, minRequiredVersion_4589_minor, context, GetContext_4590_result, ctx, glErrorInvalidOperationIf_4592_condition, BindVertexBuffer_4593_ctx, BindVertexBuffer_4593_binding_index, BindVertexBuffer_4593_buffer, BindVertexBuffer_4593_offset, BindVertexBuffer_4593_stride, glErrorInvalidValueIf_4594_condition, glErrorInvalidValueIf_4595_condition, glErrorInvalidValueIf_4596_condition, glErrorInvalidValueIf_4597_condition, vao4, binding
 	return nil
 }
 func (ϟa *GlDeleteVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4598_major := uint32(3)                                                    // u32
 	minRequiredVersion_4598_minor := uint32(0)                                                    // u32
 	DeleteVertexArrays_4599_count := ϟa.Count                                                     // GLsizei
@@ -29904,14 +30599,15 @@ func (ϟa *GlDeleteVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database
 		}
 		_ = id
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4598_major, minRequiredVersion_4598_minor, DeleteVertexArrays_4599_count, DeleteVertexArrays_4599_arrays, glErrorInvalidValueIf_4600_condition, context, GetContext_4601_result, ctx, a
 	return nil
 }
 func (ϟa *GlDisableVertexAttribArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4603_major := uint32(2)   // u32
 	minRequiredVersion_4603_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -29928,14 +30624,15 @@ func (ϟa *GlDisableVertexAttribArray) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	}
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexAttributeArrays.Get(ϟa.Location).Enabled = false
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4603_major, minRequiredVersion_4603_minor, context, GetContext_4604_result, ctx, glErrorInvalidValueIf_4606_condition, vao
 	return nil
 }
 func (ϟa *GlEnableVertexAttribArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4607_major := uint32(2)   // u32
 	minRequiredVersion_4607_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -29952,14 +30649,15 @@ func (ϟa *GlEnableVertexAttribArray) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexAttributeArrays.Get(ϟa.Location).Enabled = true
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = minRequiredVersion_4607_major, minRequiredVersion_4607_minor, context, GetContext_4608_result, ctx, glErrorInvalidValueIf_4610_condition, vao
 	return nil
 }
 func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4611_major := uint32(3)                                                 // u32
 	minRequiredVersion_4611_minor := uint32(0)                                                 // u32
 	GenVertexArrays_4612_count := ϟa.Count                                                     // GLsizei
@@ -29977,7 +30675,7 @@ func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	}
 	GetContext_4614_result := context // Contextʳ
 	ctx := GetContext_4614_result     // Contextʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < GenVertexArrays_4612_count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(GenVertexArrays_4612_count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -29988,8 +30686,9 @@ func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlGetVertexAttribIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4616_major := uint32(3)   // u32
 	minRequiredVersion_4616_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30004,7 +30703,7 @@ func (ϟa *GlGetVertexAttribIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	if glErrorInvalidValueIf_4619_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
 		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
 		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -30063,8 +30762,9 @@ func (ϟa *GlGetVertexAttribIiv) Mutate(ϟs *gfxapi.State, ϟd database.Database
 }
 func (ϟa *GlGetVertexAttribIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4621_major := uint32(3)   // u32
 	minRequiredVersion_4621_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30079,7 +30779,7 @@ func (ϟa *GlGetVertexAttribIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	if glErrorInvalidValueIf_4624_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
 		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
 		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -30138,8 +30838,9 @@ func (ϟa *GlGetVertexAttribIuiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 }
 func (ϟa *GlGetVertexAttribPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4626_major := uint32(2)   // u32
 	minRequiredVersion_4626_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30159,15 +30860,16 @@ func (ϟa *GlGetVertexAttribPointerv) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		return
 	}
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Pointer.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(Voidᵖ(vao.VertexAttributeArrays.Get(ϟa.Index).Pointer), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4626_major, minRequiredVersion_4626_minor, context, GetContext_4627_result, ctx, glErrorInvalidValueIf_4629_condition, glErrorInvalidEnumIf_4630_condition, vao
 	return nil
 }
 func (ϟa *GlGetVertexAttribfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4631_major := uint32(2)   // u32
 	minRequiredVersion_4631_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30182,7 +30884,7 @@ func (ϟa *GlGetVertexAttribfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	if glErrorInvalidValueIf_4634_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
 		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
 		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -30241,8 +30943,9 @@ func (ϟa *GlGetVertexAttribfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlGetVertexAttribiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4636_major := uint32(2)   // u32
 	minRequiredVersion_4636_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30257,7 +30960,7 @@ func (ϟa *GlGetVertexAttribiv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	if glErrorInvalidValueIf_4639_condition {
 		return
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
 		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
 		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -30316,8 +31019,9 @@ func (ϟa *GlGetVertexAttribiv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlIsVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4641_major := uint32(3)   // u32
 	minRequiredVersion_4641_minor := uint32(0)   // u32
 	IsVertexArray_4642_array := ϟa.Array         // VertexArrayId
@@ -30336,15 +31040,16 @@ func (ϟa *GlIsVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 			return 0
 		}
 	}() // GLboolean
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = IsVertexArray_4642_result
 	_, _, _, _, _, _, _ = minRequiredVersion_4641_major, minRequiredVersion_4641_minor, IsVertexArray_4642_array, context, GetContext_4643_result, ctx, IsVertexArray_4642_result
 	return nil
 }
 func (ϟa *GlVertexAttrib1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4645_major := uint32(2)                                                                                        // u32
 	minRequiredVersion_4645_minor := uint32(0)                                                                                        // u32
 	VertexAttribF_4646_location := ϟa.Location                                                                                        // AttributeLocation
@@ -30362,7 +31067,7 @@ func (ϟa *GlVertexAttrib1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4646_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4646_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4645_major, minRequiredVersion_4645_minor, VertexAttribF_4646_location, VertexAttribF_4646_value, context, GetContext_4647_result, ctx, glErrorInvalidValueIf_4649_condition, vals
@@ -30370,8 +31075,9 @@ func (ϟa *GlVertexAttrib1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlVertexAttrib1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4650_major := uint32(2)                                                                                                                              // u32
 	minRequiredVersion_4650_minor := uint32(0)                                                                                                                              // u32
 	v := ϟa.Value.Slice(uint64(0), uint64(1), ϟs)                                                                                                                           // GLfloatˢ
@@ -30390,7 +31096,7 @@ func (ϟa *GlVertexAttrib1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4651_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4651_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4650_major, minRequiredVersion_4650_minor, v, VertexAttribF_4651_location, VertexAttribF_4651_value, context, GetContext_4652_result, ctx, glErrorInvalidValueIf_4654_condition, vals
@@ -30398,8 +31104,9 @@ func (ϟa *GlVertexAttrib1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlVertexAttrib2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4655_major := uint32(2)                                                                              // u32
 	minRequiredVersion_4655_minor := uint32(0)                                                                              // u32
 	VertexAttribF_4656_location := ϟa.Location                                                                              // AttributeLocation
@@ -30417,7 +31124,7 @@ func (ϟa *GlVertexAttrib2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4656_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4656_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4655_major, minRequiredVersion_4655_minor, VertexAttribF_4656_location, VertexAttribF_4656_value, context, GetContext_4657_result, ctx, glErrorInvalidValueIf_4659_condition, vals
@@ -30425,8 +31132,9 @@ func (ϟa *GlVertexAttrib2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlVertexAttrib2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4660_major := uint32(2)                                                                                                                                                          // u32
 	minRequiredVersion_4660_minor := uint32(0)                                                                                                                                                          // u32
 	v := ϟa.Value.Slice(uint64(0), uint64(2), ϟs)                                                                                                                                                       // GLfloatˢ
@@ -30445,7 +31153,7 @@ func (ϟa *GlVertexAttrib2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4661_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4661_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4660_major, minRequiredVersion_4660_minor, v, VertexAttribF_4661_location, VertexAttribF_4661_value, context, GetContext_4662_result, ctx, glErrorInvalidValueIf_4664_condition, vals
@@ -30453,8 +31161,9 @@ func (ϟa *GlVertexAttrib2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlVertexAttrib3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4665_major := uint32(2)                                                                    // u32
 	minRequiredVersion_4665_minor := uint32(0)                                                                    // u32
 	VertexAttribF_4666_location := ϟa.Location                                                                    // AttributeLocation
@@ -30472,7 +31181,7 @@ func (ϟa *GlVertexAttrib3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4666_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4666_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4665_major, minRequiredVersion_4665_minor, VertexAttribF_4666_location, VertexAttribF_4666_value, context, GetContext_4667_result, ctx, glErrorInvalidValueIf_4669_condition, vals
@@ -30480,8 +31189,9 @@ func (ϟa *GlVertexAttrib3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlVertexAttrib3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4670_major := uint32(2)                                                                                                                                                                                      // u32
 	minRequiredVersion_4670_minor := uint32(0)                                                                                                                                                                                      // u32
 	v := ϟa.Value.Slice(uint64(0), uint64(3), ϟs)                                                                                                                                                                                   // GLfloatˢ
@@ -30500,7 +31210,7 @@ func (ϟa *GlVertexAttrib3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4671_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4671_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4670_major, minRequiredVersion_4670_minor, v, VertexAttribF_4671_location, VertexAttribF_4671_value, context, GetContext_4672_result, ctx, glErrorInvalidValueIf_4674_condition, vals
@@ -30508,8 +31218,9 @@ func (ϟa *GlVertexAttrib3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlVertexAttrib4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4675_major := uint32(2)                                                          // u32
 	minRequiredVersion_4675_minor := uint32(0)                                                          // u32
 	VertexAttribF_4676_location := ϟa.Location                                                          // AttributeLocation
@@ -30527,7 +31238,7 @@ func (ϟa *GlVertexAttrib4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4676_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4676_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4675_major, minRequiredVersion_4675_minor, VertexAttribF_4676_location, VertexAttribF_4676_value, context, GetContext_4677_result, ctx, glErrorInvalidValueIf_4679_condition, vals
@@ -30535,8 +31246,9 @@ func (ϟa *GlVertexAttrib4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlVertexAttrib4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4680_major := uint32(2)                                                                                                                                                                                                                  // u32
 	minRequiredVersion_4680_minor := uint32(0)                                                                                                                                                                                                                  // u32
 	v := ϟa.Value.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                               // GLfloatˢ
@@ -30555,7 +31267,7 @@ func (ϟa *GlVertexAttrib4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 	}
 	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribF_4681_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribF_4681_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4680_major, minRequiredVersion_4680_minor, v, VertexAttribF_4681_location, VertexAttribF_4681_value, context, GetContext_4682_result, ctx, glErrorInvalidValueIf_4684_condition, vals
@@ -30563,8 +31275,9 @@ func (ϟa *GlVertexAttrib4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlVertexAttribBinding) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4685_major := uint32(3)   // u32
 	minRequiredVersion_4685_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30592,14 +31305,15 @@ func (ϟa *GlVertexAttribBinding) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	vao5 := VertexAttribBinding_4689_ctx.Instances.VertexArrays.Get(VertexAttribBinding_4689_ctx.BoundVertexArray) // VertexArrayʳ
 	vao5.VertexAttributeArrays.Get(VertexAttribBinding_4689_index).Binding = VertexAttribBinding_4689_binding_index
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4685_major, minRequiredVersion_4685_minor, context, GetContext_4686_result, ctx, glErrorInvalidOperationIf_4688_condition, VertexAttribBinding_4689_ctx, VertexAttribBinding_4689_index, VertexAttribBinding_4689_binding_index, glErrorInvalidValueIf_4690_condition, glErrorInvalidValueIf_4691_condition, vao5
 	return nil
 }
 func (ϟa *GlVertexAttribDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4692_major := uint32(3)     // u32
 	minRequiredVersion_4692_minor := uint32(0)     // u32
 	VertexAttribDivisor_4693_index := ϟa.Index     // AttributeLocation
@@ -30628,14 +31342,15 @@ func (ϟa *GlVertexAttribDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	vao5.VertexAttributeArrays.Get(VertexAttribBinding_4696_index).Binding = VertexAttribBinding_4696_binding_index
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexBufferBindings.Get(binding_index).Divisor = VertexAttribDivisor_4693_divisor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4692_major, minRequiredVersion_4692_minor, VertexAttribDivisor_4693_index, VertexAttribDivisor_4693_divisor, context, GetContext_4694_result, ctx, binding_index, VertexAttribBinding_4696_ctx, VertexAttribBinding_4696_index, VertexAttribBinding_4696_binding_index, glErrorInvalidValueIf_4697_condition, glErrorInvalidValueIf_4698_condition, vao5, vao
 	return nil
 }
 func (ϟa *GlVertexAttribFormat) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4699_major := uint32(3)   // u32
 	minRequiredVersion_4699_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30716,14 +31431,15 @@ func (ϟa *GlVertexAttribFormat) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	}
 	format.RelativeOffset = VertexAttribFormat_4703_relativeOffset
 	format.Integer = VertexAttribFormat_4703_integer
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4699_major, minRequiredVersion_4699_minor, context, GetContext_4700_result, ctx, glErrorInvalidOperationIf_4702_condition, VertexAttribFormat_4703_ctx, VertexAttribFormat_4703_index, VertexAttribFormat_4703_size, VertexAttribFormat_4703_type, VertexAttribFormat_4703_normalized, VertexAttribFormat_4703_relativeOffset, VertexAttribFormat_4703_integer, glErrorInvalidValueIf_4704_condition, glErrorInvalidValueIf_4705_condition, glErrorInvalidValueIf_4714_condition, vao, format
 	return nil
 }
 func (ϟa *GlVertexAttribI4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4715_major := uint32(3)                                    // u32
 	minRequiredVersion_4715_minor := uint32(0)                                    // u32
 	VertexAttribI_4716_location := ϟa.Index                                       // AttributeLocation
@@ -30741,7 +31457,7 @@ func (ϟa *GlVertexAttribI4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		return
 	}
 	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribI_4716_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribI_4716_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4715_major, minRequiredVersion_4715_minor, VertexAttribI_4716_location, VertexAttribI_4716_value, context, GetContext_4717_result, ctx, glErrorInvalidValueIf_4719_condition, vals
@@ -30749,8 +31465,9 @@ func (ϟa *GlVertexAttribI4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 }
 func (ϟa *GlVertexAttribI4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4720_major := uint32(3)                                                                                                                                                                                                                // u32
 	minRequiredVersion_4720_minor := uint32(0)                                                                                                                                                                                                                // u32
 	v := ϟa.Values.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                            // GLintˢ
@@ -30769,7 +31486,7 @@ func (ϟa *GlVertexAttribI4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		return
 	}
 	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribI_4721_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribI_4721_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4720_major, minRequiredVersion_4720_minor, v, VertexAttribI_4721_location, VertexAttribI_4721_value, context, GetContext_4722_result, ctx, glErrorInvalidValueIf_4724_condition, vals
@@ -30777,8 +31494,9 @@ func (ϟa *GlVertexAttribI4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlVertexAttribI4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4725_major := uint32(3)                                                                // u32
 	minRequiredVersion_4725_minor := uint32(0)                                                                // u32
 	VertexAttribI_4726_location := ϟa.Index                                                                   // AttributeLocation
@@ -30796,7 +31514,7 @@ func (ϟa *GlVertexAttribI4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		return
 	}
 	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribI_4726_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribI_4726_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _ = minRequiredVersion_4725_major, minRequiredVersion_4725_minor, VertexAttribI_4726_location, VertexAttribI_4726_value, context, GetContext_4727_result, ctx, glErrorInvalidValueIf_4729_condition, vals
@@ -30804,8 +31522,9 @@ func (ϟa *GlVertexAttribI4ui) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 }
 func (ϟa *GlVertexAttribI4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4730_major := uint32(3)                                                                                                                                                                                                                                            // u32
 	minRequiredVersion_4730_minor := uint32(0)                                                                                                                                                                                                                                            // u32
 	v := ϟa.Values.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                                                        // GLuintˢ
@@ -30824,7 +31543,7 @@ func (ϟa *GlVertexAttribI4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		return
 	}
 	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	vals.Index(uint64(0), ϟs).Write(VertexAttribI_4731_value, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ctx.VertexAttributes[VertexAttribI_4731_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
 	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4730_major, minRequiredVersion_4730_minor, v, VertexAttribI_4731_location, VertexAttribI_4731_value, context, GetContext_4732_result, ctx, glErrorInvalidValueIf_4734_condition, vals
@@ -30832,8 +31551,9 @@ func (ϟa *GlVertexAttribI4uiv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlVertexAttribIFormat) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4735_major := uint32(3)   // u32
 	minRequiredVersion_4735_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -30914,14 +31634,15 @@ func (ϟa *GlVertexAttribIFormat) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	format.RelativeOffset = VertexAttribFormat_4739_relativeOffset
 	format.Integer = VertexAttribFormat_4739_integer
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4735_major, minRequiredVersion_4735_minor, context, GetContext_4736_result, ctx, glErrorInvalidOperationIf_4738_condition, VertexAttribFormat_4739_ctx, VertexAttribFormat_4739_index, VertexAttribFormat_4739_size, VertexAttribFormat_4739_type, VertexAttribFormat_4739_normalized, VertexAttribFormat_4739_relativeOffset, VertexAttribFormat_4739_integer, glErrorInvalidValueIf_4740_condition, glErrorInvalidValueIf_4741_condition, glErrorInvalidValueIf_4750_condition, vao, format
 	return nil
 }
 func (ϟa *GlVertexAttribIPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4751_major := uint32(3)   // u32
 	minRequiredVersion_4751_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -31129,14 +31850,15 @@ func (ϟa *GlVertexAttribIPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		binding.Stride = BindVertexBuffer_4779_stride
 		_, _, _, _, _, _, _, _, _, _, _, _ = offset, BindVertexBuffer_4779_ctx, BindVertexBuffer_4779_binding_index, BindVertexBuffer_4779_buffer, BindVertexBuffer_4779_offset, BindVertexBuffer_4779_stride, glErrorInvalidValueIf_4780_condition, glErrorInvalidValueIf_4781_condition, glErrorInvalidValueIf_4782_condition, glErrorInvalidValueIf_4783_condition, vao4, binding
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4751_major, minRequiredVersion_4751_minor, context, GetContext_4752_result, ctx, VertexAttribPointer_4754_ctx, VertexAttribPointer_4754_index, VertexAttribPointer_4754_size, VertexAttribPointer_4754_type, VertexAttribPointer_4754_normalized, VertexAttribPointer_4754_stride, VertexAttribPointer_4754_pointer, VertexAttribPointer_4754_integer, boundArrayBuffer, glErrorInvalidValueIf_4755_condition, glErrorInvalidValueIf_4756_condition, glErrorInvalidOperationIf_4757_condition, VertexAttribFormat_4758_ctx, VertexAttribFormat_4758_index, VertexAttribFormat_4758_size, VertexAttribFormat_4758_type, VertexAttribFormat_4758_normalized, VertexAttribFormat_4758_relativeOffset, VertexAttribFormat_4758_integer, glErrorInvalidValueIf_4759_condition, glErrorInvalidValueIf_4760_condition, glErrorInvalidValueIf_4769_condition, vao, format, binding_index, VertexAttribBinding_4770_ctx, VertexAttribBinding_4770_index, VertexAttribBinding_4770_binding_index, glErrorInvalidValueIf_4771_condition, glErrorInvalidValueIf_4772_condition, vao5, VertexAttribTypeSize_4773_type, VertexAttribTypeSize_4773_result, effectiveStride, vao6
 	return nil
 }
 func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4784_major := uint32(2)   // u32
 	minRequiredVersion_4784_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -31344,14 +32066,15 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		binding.Stride = BindVertexBuffer_4812_stride
 		_, _, _, _, _, _, _, _, _, _, _, _ = offset, BindVertexBuffer_4812_ctx, BindVertexBuffer_4812_binding_index, BindVertexBuffer_4812_buffer, BindVertexBuffer_4812_offset, BindVertexBuffer_4812_stride, glErrorInvalidValueIf_4813_condition, glErrorInvalidValueIf_4814_condition, glErrorInvalidValueIf_4815_condition, glErrorInvalidValueIf_4816_condition, vao4, binding
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_4784_major, minRequiredVersion_4784_minor, context, GetContext_4785_result, ctx, VertexAttribPointer_4787_ctx, VertexAttribPointer_4787_index, VertexAttribPointer_4787_size, VertexAttribPointer_4787_type, VertexAttribPointer_4787_normalized, VertexAttribPointer_4787_stride, VertexAttribPointer_4787_pointer, VertexAttribPointer_4787_integer, boundArrayBuffer, glErrorInvalidValueIf_4788_condition, glErrorInvalidValueIf_4789_condition, glErrorInvalidOperationIf_4790_condition, VertexAttribFormat_4791_ctx, VertexAttribFormat_4791_index, VertexAttribFormat_4791_size, VertexAttribFormat_4791_type, VertexAttribFormat_4791_normalized, VertexAttribFormat_4791_relativeOffset, VertexAttribFormat_4791_integer, glErrorInvalidValueIf_4792_condition, glErrorInvalidValueIf_4793_condition, glErrorInvalidValueIf_4802_condition, vao, format, binding_index, VertexAttribBinding_4803_ctx, VertexAttribBinding_4803_index, VertexAttribBinding_4803_binding_index, glErrorInvalidValueIf_4804_condition, glErrorInvalidValueIf_4805_condition, vao5, VertexAttribTypeSize_4806_type, VertexAttribTypeSize_4806_result, effectiveStride, vao6
 	return nil
 }
 func (ϟa *GlVertexBindingDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4817_major := uint32(3)   // u32
 	minRequiredVersion_4817_minor := uint32(1)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
@@ -31372,15 +32095,16 @@ func (ϟa *GlVertexBindingDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	}
 	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	vao.VertexBufferBindings.Get(ϟa.BindingIndex).Divisor = ϟa.Divisor
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _ = minRequiredVersion_4817_major, minRequiredVersion_4817_minor, context, GetContext_4818_result, ctx, glErrorInvalidValueIf_4820_condition, glErrorInvalidOperationIf_4821_condition, vao
 	return nil
 }
 func (ϟa *EglInitialize) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Major) != (EGLintᵖ{}) {
 		ϟa.Major.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Major.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
@@ -31392,9 +32116,10 @@ func (ϟa *EglInitialize) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := EGLContext(ϟa.Result) // EGLContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31428,37 +32153,41 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *EglMakeCurrent) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	SetContext_4823_context := ϟc.EGLContexts.Get(ϟa.Context) // Contextʳ
 	ϟc.Contexts[ϟc.CurrentThread] = SetContext_4823_context
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = SetContext_4823_context
 	return nil
 }
 func (ϟa *EglSwapBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *EglQuerySurface) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31492,9 +32221,10 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31528,47 +32258,52 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 }
 func (ϟa *GlXMakeContextCurrent) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	SetContext_4826_context := ϟc.GLXContexts.Get(ϟa.Ctx) // Contextʳ
 	ϟc.Contexts[ϟc.CurrentThread] = SetContext_4826_context
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = SetContext_4826_context
 	return nil
 }
 func (ϟa *GlXMakeCurrent) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	SetContext_4827_context := ϟc.GLXContexts.Get(ϟa.Ctx) // Contextʳ
 	ϟc.Contexts[ϟc.CurrentThread] = SetContext_4827_context
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = SetContext_4827_context
 	return nil
 }
 func (ϟa *GlXSwapBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *GlXQueryDrawable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31602,9 +32337,10 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31638,27 +32374,30 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 }
 func (ϟa *WglMakeCurrent) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	SetContext_4830_context := ϟc.WGLContexts.Get(ϟa.Hglrc) // Contextʳ
 	ϟc.Contexts[ϟc.CurrentThread] = SetContext_4830_context
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = SetContext_4830_context
 	return nil
 }
 func (ϟa *WglSwapBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	context := CGLContextObj(ϟa.Ctx.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // CGLContextObj
 	identifier := ϟc.NextContextID                                                                                  // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
@@ -31693,20 +32432,22 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 }
 func (ϟa *CGLSetCurrentContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	SetContext_4832_context := ϟc.CGLContexts.Get(ϟa.Ctx) // Contextʳ
 	ϟc.Contexts[ϟc.CurrentThread] = SetContext_4832_context
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = SetContext_4832_context
 	return nil
 }
 func (ϟa *CGLGetSurface) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Cid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Cid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Wid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Wid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Sid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Sid.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -31715,550 +32456,604 @@ func (ϟa *CGLGetSurface) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 }
 func (ϟa *CGSGetSurfaceBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Bounds.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *CGLFlushDrawable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *GlGetQueryObjecti64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 func (ϟa *GlGetQueryObjectui64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 func (ϟa *GlAlphaFunc) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4833_major := uint32(1) // u32
 	minRequiredVersion_4833_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4833_major, minRequiredVersion_4833_minor
 	return nil
 }
 func (ϟa *GlAlphaFuncx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4835_major := uint32(1) // u32
 	minRequiredVersion_4835_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4835_major, minRequiredVersion_4835_minor
 	return nil
 }
 func (ϟa *GlAlphaFuncxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4837_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4837_ext
 	return nil
 }
 func (ϟa *GlBindFramebufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4839_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4839_ext
 	return nil
 }
 func (ϟa *GlBindRenderbufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4841_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4841_ext
 	return nil
 }
 func (ϟa *GlBlendEquationOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4843_ext := ExtensionId_GL_OES_blend_subtract // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4843_ext
 	return nil
 }
 func (ϟa *GlBlendEquationSeparateOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4845_ext := ExtensionId_GL_OES_blend_equation_separate // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4845_ext
 	return nil
 }
 func (ϟa *GlBlendFuncSeparateOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4847_ext := ExtensionId_GL_OES_blend_func_separate // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4847_ext
 	return nil
 }
 func (ϟa *GlCheckFramebufferStatusOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4849_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_4849_ext
 	return nil
 }
 func (ϟa *GlClearColorx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4851_major := uint32(1) // u32
 	minRequiredVersion_4851_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4851_major, minRequiredVersion_4851_minor
 	return nil
 }
 func (ϟa *GlClearColorxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4853_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4853_ext
 	return nil
 }
 func (ϟa *GlClearDepthfOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4855_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4855_ext
 	return nil
 }
 func (ϟa *GlClearDepthx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4857_major := uint32(1) // u32
 	minRequiredVersion_4857_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4857_major, minRequiredVersion_4857_minor
 	return nil
 }
 func (ϟa *GlClearDepthxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4859_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4859_ext
 	return nil
 }
 func (ϟa *GlClientActiveTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4861_major := uint32(1) // u32
 	minRequiredVersion_4861_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4861_major, minRequiredVersion_4861_minor
 	return nil
 }
 func (ϟa *GlClipPlanef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4863_major := uint32(1) // u32
 	minRequiredVersion_4863_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4863_major, minRequiredVersion_4863_minor
 	return nil
 }
 func (ϟa *GlClipPlanefIMG) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4865_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4865_ext
 	return nil
 }
 func (ϟa *GlClipPlanefOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4867_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4867_ext
 	return nil
 }
 func (ϟa *GlClipPlanex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4869_major := uint32(1) // u32
 	minRequiredVersion_4869_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4869_major, minRequiredVersion_4869_minor
 	return nil
 }
 func (ϟa *GlClipPlanexIMG) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4871_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4871_ext
 	return nil
 }
 func (ϟa *GlClipPlanexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4873_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4873_ext
 	return nil
 }
 func (ϟa *GlColor4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4875_major := uint32(1) // u32
 	minRequiredVersion_4875_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4875_major, minRequiredVersion_4875_minor
 	return nil
 }
 func (ϟa *GlColor4ub) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4877_major := uint32(1) // u32
 	minRequiredVersion_4877_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4877_major, minRequiredVersion_4877_minor
 	return nil
 }
 func (ϟa *GlColor4x) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4879_major := uint32(1) // u32
 	minRequiredVersion_4879_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4879_major, minRequiredVersion_4879_minor
 	return nil
 }
 func (ϟa *GlColor4xOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4881_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4881_ext
 	return nil
 }
 func (ϟa *GlColorPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4883_major := uint32(1) // u32
 	minRequiredVersion_4883_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4883_major, minRequiredVersion_4883_minor
 	return nil
 }
 func (ϟa *GlCurrentPaletteMatrixOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4885_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4885_ext
 	return nil
 }
 func (ϟa *GlDeleteFramebuffersOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4887_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4887_ext
 	return nil
 }
 func (ϟa *GlDeleteRenderbuffersOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4889_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4889_ext
 	return nil
 }
 func (ϟa *GlDepthRangefOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4891_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4891_ext
 	return nil
 }
 func (ϟa *GlDepthRangex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4893_major := uint32(1) // u32
 	minRequiredVersion_4893_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4893_major, minRequiredVersion_4893_minor
 	return nil
 }
 func (ϟa *GlDepthRangexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4895_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4895_ext
 	return nil
 }
 func (ϟa *GlDisableClientState) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4897_major := uint32(1) // u32
 	minRequiredVersion_4897_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4897_major, minRequiredVersion_4897_minor
 	return nil
 }
 func (ϟa *GlDrawTexfOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4899_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4899_ext
 	return nil
 }
 func (ϟa *GlDrawTexfvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4901_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4901_ext
 	return nil
 }
 func (ϟa *GlDrawTexiOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4903_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4903_ext
 	return nil
 }
 func (ϟa *GlDrawTexivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4905_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4905_ext
 	return nil
 }
 func (ϟa *GlDrawTexsOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4907_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4907_ext
 	return nil
 }
 func (ϟa *GlDrawTexsvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4909_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4909_ext
 	return nil
 }
 func (ϟa *GlDrawTexxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4911_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4911_ext
 	return nil
 }
 func (ϟa *GlDrawTexxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4913_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4913_ext
 	return nil
 }
 func (ϟa *GlEnableClientState) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4915_major := uint32(1) // u32
 	minRequiredVersion_4915_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4915_major, minRequiredVersion_4915_minor
 	return nil
 }
 func (ϟa *GlFogf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4917_major := uint32(1) // u32
 	minRequiredVersion_4917_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4917_major, minRequiredVersion_4917_minor
 	return nil
 }
 func (ϟa *GlFogfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4919_major := uint32(1) // u32
 	minRequiredVersion_4919_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4919_major, minRequiredVersion_4919_minor
 	return nil
 }
 func (ϟa *GlFogx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4921_major := uint32(1) // u32
 	minRequiredVersion_4921_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4921_major, minRequiredVersion_4921_minor
 	return nil
 }
 func (ϟa *GlFogxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4923_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4923_ext
 	return nil
 }
 func (ϟa *GlFogxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4925_major := uint32(1) // u32
 	minRequiredVersion_4925_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4925_major, minRequiredVersion_4925_minor
 	return nil
 }
 func (ϟa *GlFogxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4927_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4927_ext
 	return nil
 }
 func (ϟa *GlFramebufferRenderbufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4929_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4929_ext
 	return nil
 }
 func (ϟa *GlFramebufferTexture2DOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4931_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	FramebufferTexture2D_4932_framebuffer_target := ϟa.Target           // GLenum
 	FramebufferTexture2D_4932_framebuffer_attachment := ϟa.Attachment   // GLenum
@@ -32356,1410 +33151,1544 @@ func (ϟa *GlFramebufferTexture2DOES) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 		}()
 	}
 	framebuffer.Attachments[FramebufferTexture2D_4932_framebuffer_attachment] = attachment
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_4931_ext, FramebufferTexture2D_4932_framebuffer_target, FramebufferTexture2D_4932_framebuffer_attachment, FramebufferTexture2D_4932_texture_target, FramebufferTexture2D_4932_texture, FramebufferTexture2D_4932_level, context, GetContext_4939_result, ctx, target, framebufferId, framebuffer, attachment
 	return nil
 }
 func (ϟa *GlFrustumf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4941_major := uint32(1) // u32
 	minRequiredVersion_4941_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4941_major, minRequiredVersion_4941_minor
 	return nil
 }
 func (ϟa *GlFrustumfOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4943_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4943_ext
 	return nil
 }
 func (ϟa *GlFrustumx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4945_major := uint32(1) // u32
 	minRequiredVersion_4945_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4945_major, minRequiredVersion_4945_minor
 	return nil
 }
 func (ϟa *GlFrustumxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4947_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4947_ext
 	return nil
 }
 func (ϟa *GlGenFramebuffersOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4949_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4949_ext
 	return nil
 }
 func (ϟa *GlGenRenderbuffersOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4951_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4951_ext
 	return nil
 }
 func (ϟa *GlGenerateMipmapOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4953_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4953_ext
 	return nil
 }
 func (ϟa *GlGetClipPlanef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4955_major := uint32(1) // u32
 	minRequiredVersion_4955_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4955_major, minRequiredVersion_4955_minor
 	return nil
 }
 func (ϟa *GlGetClipPlanefOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4957_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4957_ext
 	return nil
 }
 func (ϟa *GlGetClipPlanex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4959_major := uint32(1) // u32
 	minRequiredVersion_4959_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4959_major, minRequiredVersion_4959_minor
 	return nil
 }
 func (ϟa *GlGetClipPlanexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4961_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4961_ext
 	return nil
 }
 func (ϟa *GlGetFixedv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4963_major := uint32(1) // u32
 	minRequiredVersion_4963_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4963_major, minRequiredVersion_4963_minor
 	return nil
 }
 func (ϟa *GlGetFixedvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4965_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4965_ext
 	return nil
 }
 func (ϟa *GlGetFramebufferAttachmentParameterivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4967_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4967_ext
 	return nil
 }
 func (ϟa *GlGetLightfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4969_major := uint32(1) // u32
 	minRequiredVersion_4969_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4969_major, minRequiredVersion_4969_minor
 	return nil
 }
 func (ϟa *GlGetLightxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4971_major := uint32(1) // u32
 	minRequiredVersion_4971_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4971_major, minRequiredVersion_4971_minor
 	return nil
 }
 func (ϟa *GlGetLightxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4973_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4973_ext
 	return nil
 }
 func (ϟa *GlGetMaterialfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4975_major := uint32(1) // u32
 	minRequiredVersion_4975_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4975_major, minRequiredVersion_4975_minor
 	return nil
 }
 func (ϟa *GlGetMaterialxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4977_major := uint32(1) // u32
 	minRequiredVersion_4977_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4977_major, minRequiredVersion_4977_minor
 	return nil
 }
 func (ϟa *GlGetMaterialxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4979_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4979_ext
 	return nil
 }
 func (ϟa *GlGetRenderbufferParameterivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4981_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4981_ext
 	return nil
 }
 func (ϟa *GlGetTexEnvfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4983_major := uint32(1) // u32
 	minRequiredVersion_4983_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4983_major, minRequiredVersion_4983_minor
 	return nil
 }
 func (ϟa *GlGetTexEnviv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4985_major := uint32(1) // u32
 	minRequiredVersion_4985_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4985_major, minRequiredVersion_4985_minor
 	return nil
 }
 func (ϟa *GlGetTexEnvxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4987_major := uint32(1) // u32
 	minRequiredVersion_4987_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4987_major, minRequiredVersion_4987_minor
 	return nil
 }
 func (ϟa *GlGetTexEnvxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4989_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4989_ext
 	return nil
 }
 func (ϟa *GlGetTexGenfvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4991_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4991_ext
 	return nil
 }
 func (ϟa *GlGetTexGenivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4993_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4993_ext
 	return nil
 }
 func (ϟa *GlGetTexGenxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4995_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4995_ext
 	return nil
 }
 func (ϟa *GlGetTexParameterxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_4997_major := uint32(1) // u32
 	minRequiredVersion_4997_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_4997_major, minRequiredVersion_4997_minor
 	return nil
 }
 func (ϟa *GlGetTexParameterxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_4999_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_4999_ext
 	return nil
 }
 func (ϟa *GlIsFramebufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5001_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_5001_ext
 	return nil
 }
 func (ϟa *GlIsRenderbufferOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5003_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_5003_ext
 	return nil
 }
 func (ϟa *GlLightModelf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5005_major := uint32(1) // u32
 	minRequiredVersion_5005_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5005_major, minRequiredVersion_5005_minor
 	return nil
 }
 func (ϟa *GlLightModelfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5007_major := uint32(1) // u32
 	minRequiredVersion_5007_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5007_major, minRequiredVersion_5007_minor
 	return nil
 }
 func (ϟa *GlLightModelx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5009_major := uint32(1) // u32
 	minRequiredVersion_5009_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5009_major, minRequiredVersion_5009_minor
 	return nil
 }
 func (ϟa *GlLightModelxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5011_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5011_ext
 	return nil
 }
 func (ϟa *GlLightModelxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5013_major := uint32(1) // u32
 	minRequiredVersion_5013_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5013_major, minRequiredVersion_5013_minor
 	return nil
 }
 func (ϟa *GlLightModelxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5015_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5015_ext
 	return nil
 }
 func (ϟa *GlLightf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5017_major := uint32(1) // u32
 	minRequiredVersion_5017_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5017_major, minRequiredVersion_5017_minor
 	return nil
 }
 func (ϟa *GlLightfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5019_major := uint32(1) // u32
 	minRequiredVersion_5019_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5019_major, minRequiredVersion_5019_minor
 	return nil
 }
 func (ϟa *GlLightx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5021_major := uint32(1) // u32
 	minRequiredVersion_5021_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5021_major, minRequiredVersion_5021_minor
 	return nil
 }
 func (ϟa *GlLightxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5023_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5023_ext
 	return nil
 }
 func (ϟa *GlLightxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5025_major := uint32(1) // u32
 	minRequiredVersion_5025_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5025_major, minRequiredVersion_5025_minor
 	return nil
 }
 func (ϟa *GlLightxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5027_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5027_ext
 	return nil
 }
 func (ϟa *GlLineWidthx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5029_major := uint32(1) // u32
 	minRequiredVersion_5029_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5029_major, minRequiredVersion_5029_minor
 	return nil
 }
 func (ϟa *GlLineWidthxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5031_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5031_ext
 	return nil
 }
 func (ϟa *GlLoadIdentity) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5033_major := uint32(1) // u32
 	minRequiredVersion_5033_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5033_major, minRequiredVersion_5033_minor
 	return nil
 }
 func (ϟa *GlLoadMatrixf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5035_major := uint32(1) // u32
 	minRequiredVersion_5035_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5035_major, minRequiredVersion_5035_minor
 	return nil
 }
 func (ϟa *GlLoadMatrixx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5037_major := uint32(1) // u32
 	minRequiredVersion_5037_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5037_major, minRequiredVersion_5037_minor
 	return nil
 }
 func (ϟa *GlLoadMatrixxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5039_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5039_ext
 	return nil
 }
 func (ϟa *GlLoadPaletteFromModelViewMatrixOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5041_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5041_ext
 	return nil
 }
 func (ϟa *GlLogicOp) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5043_major := uint32(1) // u32
 	minRequiredVersion_5043_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5043_major, minRequiredVersion_5043_minor
 	return nil
 }
 func (ϟa *GlMaterialf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5045_major := uint32(1) // u32
 	minRequiredVersion_5045_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5045_major, minRequiredVersion_5045_minor
 	return nil
 }
 func (ϟa *GlMaterialfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5047_major := uint32(1) // u32
 	minRequiredVersion_5047_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5047_major, minRequiredVersion_5047_minor
 	return nil
 }
 func (ϟa *GlMaterialx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5049_major := uint32(1) // u32
 	minRequiredVersion_5049_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5049_major, minRequiredVersion_5049_minor
 	return nil
 }
 func (ϟa *GlMaterialxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5051_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5051_ext
 	return nil
 }
 func (ϟa *GlMaterialxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5053_major := uint32(1) // u32
 	minRequiredVersion_5053_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5053_major, minRequiredVersion_5053_minor
 	return nil
 }
 func (ϟa *GlMaterialxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5055_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5055_ext
 	return nil
 }
 func (ϟa *GlMatrixIndexPointerOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5057_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5057_ext
 	return nil
 }
 func (ϟa *GlMatrixMode) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5059_major := uint32(1) // u32
 	minRequiredVersion_5059_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5059_major, minRequiredVersion_5059_minor
 	return nil
 }
 func (ϟa *GlMultMatrixf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5061_major := uint32(1) // u32
 	minRequiredVersion_5061_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5061_major, minRequiredVersion_5061_minor
 	return nil
 }
 func (ϟa *GlMultMatrixx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5063_major := uint32(1) // u32
 	minRequiredVersion_5063_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5063_major, minRequiredVersion_5063_minor
 	return nil
 }
 func (ϟa *GlMultMatrixxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5065_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5065_ext
 	return nil
 }
 func (ϟa *GlMultiTexCoord4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5067_major := uint32(1) // u32
 	minRequiredVersion_5067_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5067_major, minRequiredVersion_5067_minor
 	return nil
 }
 func (ϟa *GlMultiTexCoord4x) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5069_major := uint32(1) // u32
 	minRequiredVersion_5069_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5069_major, minRequiredVersion_5069_minor
 	return nil
 }
 func (ϟa *GlMultiTexCoord4xOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5071_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5071_ext
 	return nil
 }
 func (ϟa *GlNormal3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5073_major := uint32(1) // u32
 	minRequiredVersion_5073_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5073_major, minRequiredVersion_5073_minor
 	return nil
 }
 func (ϟa *GlNormal3x) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5075_major := uint32(1) // u32
 	minRequiredVersion_5075_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5075_major, minRequiredVersion_5075_minor
 	return nil
 }
 func (ϟa *GlNormal3xOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5077_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5077_ext
 	return nil
 }
 func (ϟa *GlNormalPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5079_major := uint32(1) // u32
 	minRequiredVersion_5079_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5079_major, minRequiredVersion_5079_minor
 	return nil
 }
 func (ϟa *GlOrthof) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5081_major := uint32(1) // u32
 	minRequiredVersion_5081_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5081_major, minRequiredVersion_5081_minor
 	return nil
 }
 func (ϟa *GlOrthofOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5083_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5083_ext
 	return nil
 }
 func (ϟa *GlOrthox) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5085_major := uint32(1) // u32
 	minRequiredVersion_5085_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5085_major, minRequiredVersion_5085_minor
 	return nil
 }
 func (ϟa *GlOrthoxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5087_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5087_ext
 	return nil
 }
 func (ϟa *GlPointParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5089_major := uint32(1) // u32
 	minRequiredVersion_5089_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5089_major, minRequiredVersion_5089_minor
 	return nil
 }
 func (ϟa *GlPointParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5091_major := uint32(1) // u32
 	minRequiredVersion_5091_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5091_major, minRequiredVersion_5091_minor
 	return nil
 }
 func (ϟa *GlPointParameterx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5093_major := uint32(1) // u32
 	minRequiredVersion_5093_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5093_major, minRequiredVersion_5093_minor
 	return nil
 }
 func (ϟa *GlPointParameterxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5095_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5095_ext
 	return nil
 }
 func (ϟa *GlPointParameterxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5097_major := uint32(1) // u32
 	minRequiredVersion_5097_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5097_major, minRequiredVersion_5097_minor
 	return nil
 }
 func (ϟa *GlPointParameterxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5099_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5099_ext
 	return nil
 }
 func (ϟa *GlPointSize) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5101_major := uint32(1) // u32
 	minRequiredVersion_5101_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5101_major, minRequiredVersion_5101_minor
 	return nil
 }
 func (ϟa *GlPointSizePointerOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5103_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5103_ext
 	return nil
 }
 func (ϟa *GlPointSizex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5105_major := uint32(1) // u32
 	minRequiredVersion_5105_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5105_major, minRequiredVersion_5105_minor
 	return nil
 }
 func (ϟa *GlPointSizexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5107_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5107_ext
 	return nil
 }
 func (ϟa *GlPolygonOffsetx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5109_major := uint32(1) // u32
 	minRequiredVersion_5109_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5109_major, minRequiredVersion_5109_minor
 	return nil
 }
 func (ϟa *GlPolygonOffsetxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5111_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5111_ext
 	return nil
 }
 func (ϟa *GlPopMatrix) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5113_major := uint32(1) // u32
 	minRequiredVersion_5113_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5113_major, minRequiredVersion_5113_minor
 	return nil
 }
 func (ϟa *GlPushMatrix) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5115_major := uint32(1) // u32
 	minRequiredVersion_5115_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5115_major, minRequiredVersion_5115_minor
 	return nil
 }
 func (ϟa *GlQueryMatrixxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5117_ext := ExtensionId_GL_OES_query_matrix // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	_ = requiresExtension_5117_ext
 	return nil
 }
 func (ϟa *GlRenderbufferStorageOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5119_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5119_ext
 	return nil
 }
 func (ϟa *GlRotatef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5121_major := uint32(1) // u32
 	minRequiredVersion_5121_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5121_major, minRequiredVersion_5121_minor
 	return nil
 }
 func (ϟa *GlRotatex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5123_major := uint32(1) // u32
 	minRequiredVersion_5123_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5123_major, minRequiredVersion_5123_minor
 	return nil
 }
 func (ϟa *GlRotatexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5125_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5125_ext
 	return nil
 }
 func (ϟa *GlSampleCoveragex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5127_major := uint32(1) // u32
 	minRequiredVersion_5127_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5127_major, minRequiredVersion_5127_minor
 	return nil
 }
 func (ϟa *GlSampleCoveragexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5129_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5129_ext
 	return nil
 }
 func (ϟa *GlScalef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5131_major := uint32(1) // u32
 	minRequiredVersion_5131_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5131_major, minRequiredVersion_5131_minor
 	return nil
 }
 func (ϟa *GlScalex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5133_major := uint32(1) // u32
 	minRequiredVersion_5133_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5133_major, minRequiredVersion_5133_minor
 	return nil
 }
 func (ϟa *GlScalexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5135_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5135_ext
 	return nil
 }
 func (ϟa *GlShadeModel) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5137_major := uint32(1) // u32
 	minRequiredVersion_5137_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5137_major, minRequiredVersion_5137_minor
 	return nil
 }
 func (ϟa *GlTexCoordPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5139_major := uint32(1) // u32
 	minRequiredVersion_5139_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5139_major, minRequiredVersion_5139_minor
 	return nil
 }
 func (ϟa *GlTexEnvf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5141_major := uint32(1) // u32
 	minRequiredVersion_5141_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5141_major, minRequiredVersion_5141_minor
 	return nil
 }
 func (ϟa *GlTexEnvfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5143_major := uint32(1) // u32
 	minRequiredVersion_5143_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5143_major, minRequiredVersion_5143_minor
 	return nil
 }
 func (ϟa *GlTexEnvi) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5145_major := uint32(1) // u32
 	minRequiredVersion_5145_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5145_major, minRequiredVersion_5145_minor
 	return nil
 }
 func (ϟa *GlTexEnviv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5147_major := uint32(1) // u32
 	minRequiredVersion_5147_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5147_major, minRequiredVersion_5147_minor
 	return nil
 }
 func (ϟa *GlTexEnvx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5149_major := uint32(1) // u32
 	minRequiredVersion_5149_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5149_major, minRequiredVersion_5149_minor
 	return nil
 }
 func (ϟa *GlTexEnvxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5151_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5151_ext
 	return nil
 }
 func (ϟa *GlTexEnvxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5153_major := uint32(1) // u32
 	minRequiredVersion_5153_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5153_major, minRequiredVersion_5153_minor
 	return nil
 }
 func (ϟa *GlTexEnvxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5155_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5155_ext
 	return nil
 }
 func (ϟa *GlTexGenfOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5157_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5157_ext
 	return nil
 }
 func (ϟa *GlTexGenfvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5159_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5159_ext
 	return nil
 }
 func (ϟa *GlTexGeniOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5161_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5161_ext
 	return nil
 }
 func (ϟa *GlTexGenivOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5163_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5163_ext
 	return nil
 }
 func (ϟa *GlTexGenxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5165_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5165_ext
 	return nil
 }
 func (ϟa *GlTexGenxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5167_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5167_ext
 	return nil
 }
 func (ϟa *GlTexParameterx) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5169_major := uint32(1) // u32
 	minRequiredVersion_5169_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5169_major, minRequiredVersion_5169_minor
 	return nil
 }
 func (ϟa *GlTexParameterxOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5171_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5171_ext
 	return nil
 }
 func (ϟa *GlTexParameterxv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5173_major := uint32(1) // u32
 	minRequiredVersion_5173_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5173_major, minRequiredVersion_5173_minor
 	return nil
 }
 func (ϟa *GlTexParameterxvOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5175_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5175_ext
 	return nil
 }
 func (ϟa *GlTranslatef) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5177_major := uint32(1) // u32
 	minRequiredVersion_5177_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5177_major, minRequiredVersion_5177_minor
 	return nil
 }
 func (ϟa *GlTranslatex) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5179_major := uint32(1) // u32
 	minRequiredVersion_5179_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5179_major, minRequiredVersion_5179_minor
 	return nil
 }
 func (ϟa *GlTranslatexOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5181_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5181_ext
 	return nil
 }
 func (ϟa *GlVertexPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5183_major := uint32(1) // u32
 	minRequiredVersion_5183_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5183_major, minRequiredVersion_5183_minor
 	return nil
 }
 func (ϟa *GlWeightPointerOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5185_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5185_ext
 	return nil
 }
 func (ϟa *GlColorPointerBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5187_major := uint32(1) // u32
 	minRequiredVersion_5187_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5187_major, minRequiredVersion_5187_minor
 	return nil
 }
 func (ϟa *GlNormalPointerBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5189_major := uint32(1) // u32
 	minRequiredVersion_5189_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5189_major, minRequiredVersion_5189_minor
 	return nil
 }
 func (ϟa *GlTexCoordPointerBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5191_major := uint32(1) // u32
 	minRequiredVersion_5191_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5191_major, minRequiredVersion_5191_minor
 	return nil
 }
 func (ϟa *GlVertexPointerBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_5193_major := uint32(1) // u32
 	minRequiredVersion_5193_minor := uint32(0) // u32
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _ = minRequiredVersion_5193_major, minRequiredVersion_5193_minor
 	return nil
 }
 func (ϟa *GlPointSizePointerOESBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5195_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5195_ext
 	return nil
 }
 func (ϟa *GlMatrixIndexPointerOESBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5197_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5197_ext
 	return nil
 }
 func (ϟa *GlWeightPointerOESBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_5199_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_ = requiresExtension_5199_ext
 	return nil
 }
 func (ϟa *ReplayCreateRenderer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *ReplayBindRenderer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *SwitchThread) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.CurrentThread = ϟa.ThreadID
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *ContextInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
 		error_5202_msg := "No context bound" // string
@@ -34110,7 +35039,7 @@ func (ϟa *ContextInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_5204_result
 		_, _, _ = NewVertexArray_5204_ctx, array, NewVertexArray_5204_result
 	}
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < ctx.Constants.MaxVertexAttribs; i++ {
 		if !(ctx.VertexAttributes.Contains(i)) {
 			v := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
@@ -34131,23 +35060,26 @@ func (ϟa *ContextInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 }
 func (ϟa *StartTimer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *StopTimer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *FlushPostBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+	ϟobservations := ϟa.Extras().Observations()
 	_, _ = ϟc, ϟb
-	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }

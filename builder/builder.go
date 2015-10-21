@@ -75,15 +75,16 @@ func extractResources(a *atom.List, d database.Database, l log.Logger) (*atom.Li
 		default:
 			// Replace resource IDs from identifiers generated at capture time to
 			// direct database identifiers. This avoids a database link indirection.
-			observations := a.Observations()
-			for i, r := range observations.Reads {
-				if id, found := idmap[r.ID]; found {
-					observations.Reads[i].ID = id
+			if observations := a.Extras().Observations(); observations != nil {
+				for i, r := range observations.Reads {
+					if id, found := idmap[r.ID]; found {
+						observations.Reads[i].ID = id
+					}
 				}
-			}
-			for i, w := range observations.Writes {
-				if id, found := idmap[w.ID]; found {
-					observations.Writes[i].ID = id
+				for i, w := range observations.Writes {
+					if id, found := idmap[w.ID]; found {
+						observations.Writes[i].ID = id
+					}
 				}
 			}
 			out.Atoms = append(out.Atoms, a)

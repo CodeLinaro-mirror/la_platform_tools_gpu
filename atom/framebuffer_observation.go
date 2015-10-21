@@ -37,9 +37,9 @@ func (a *FramebufferObservation) String() string {
 }
 
 // Atom compliance
-func (a *FramebufferObservation) API() gfxapi.ID              { return gfxapi.ID{} }
-func (a *FramebufferObservation) Flags() Flags                { return 0 }
-func (a *FramebufferObservation) Observations() *Observations { return &Observations{} }
+func (a *FramebufferObservation) API() gfxapi.ID { return gfxapi.ID{} }
+func (a *FramebufferObservation) Flags() Flags   { return 0 }
+func (a *FramebufferObservation) Extras() Extras { return nil }
 func (a *FramebufferObservation) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error {
 	return nil
 }
