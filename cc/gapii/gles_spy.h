@@ -27583,7 +27583,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
                 break;
             }
         }
-        Slice<uint32_t> l_a = slice(attachments, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
+        read(slice(attachments, (uint64_t)((GLsizei)(0)), (uint64_t)(count)));
         observe(observations.mReads);
         mImports.glInvalidateFramebuffer(target, count, attachments);
     } while (false);
@@ -27623,8 +27623,7 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
                 break;
             }
         }
-        Slice<uint32_t> l_a =
-                slice(attachments, (uint64_t)((GLsizei)(0)), (uint64_t)(numAttachments));
+        read(slice(attachments, (uint64_t)((GLsizei)(0)), (uint64_t)(numAttachments)));
         observe(observations.mReads);
         mImports.glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width,
                                             height);
@@ -28972,7 +28971,7 @@ inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
     do {
         uint32_t l_minRequiredVersion_1943_major = 3;
         uint32_t l_minRequiredVersion_1943_minor = 1;
-        Slice<PipelineId> l_p = slice(pipelines, (uint64_t)((GLsizei)(0)), (uint64_t)(n));
+        read(slice(pipelines, (uint64_t)((GLsizei)(0)), (uint64_t)(n)));
         observe(observations.mReads);
         mImports.glDeleteProgramPipelines(n, pipelines);
     } while (false);

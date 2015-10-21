@@ -22567,10 +22567,10 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		return
 		_ = glErrorInvalidEnum_1839_param
 	}
-	a := ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLenumˢ
+	ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = minRequiredVersion_1838_major, minRequiredVersion_1838_minor, a
+	_, _ = minRequiredVersion_1838_major, minRequiredVersion_1838_minor
 	return nil
 }
 
@@ -22600,10 +22600,10 @@ func (ϟa *GlInvalidateSubFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 		return
 		_ = glErrorInvalidEnum_1841_param
 	}
-	a := ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.NumAttachments), ϟs) // GLenumˢ
+	ϟa.Attachments.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.NumAttachments), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = minRequiredVersion_1840_major, minRequiredVersion_1840_minor, a
+	_, _ = minRequiredVersion_1840_major, minRequiredVersion_1840_minor
 	return nil
 }
 
@@ -23769,12 +23769,12 @@ func (ϟa *GlDeleteProgramPipelines) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟobservations := ϟa.Extras().Observations()
 	_ = ϟc
 	ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1943_major := uint32(3)                           // u32
-	minRequiredVersion_1943_minor := uint32(1)                           // u32
-	p := ϟa.Pipelines.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs) // PipelineIdˢ
+	minRequiredVersion_1943_major := uint32(3) // u32
+	minRequiredVersion_1943_minor := uint32(1) // u32
+	ϟa.Pipelines.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = minRequiredVersion_1943_major, minRequiredVersion_1943_minor, p
+	_, _ = minRequiredVersion_1943_major, minRequiredVersion_1943_minor
 	return nil
 }
 

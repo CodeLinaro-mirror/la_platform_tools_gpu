@@ -172,7 +172,7 @@ cmd void glDeleteProgram(ProgramId program) {
 cmd void glDeleteProgramPipelines(GLsizei n, const PipelineId* pipelines) {
   minRequiredVersion(3, 1)
   // TODO
-  p := pipelines[0:n]
+  read(pipelines[0:n])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml","OpenGL ES 2.0")

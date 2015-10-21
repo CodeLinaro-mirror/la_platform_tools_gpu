@@ -760,7 +760,7 @@ cmd void glInvalidateFramebuffer(GLenum target, GLsizei count, const GLenum* att
     }
   }
 
-  a := attachments[0:count]
+  read(attachments[0:count])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateSubFramebuffer.xhtml","OpenGL ES 3.0")
@@ -784,7 +784,7 @@ cmd void glInvalidateSubFramebuffer(GLenum        target,
   }
 
   // TODO
-  a := attachments[0:numAttachments]
+  read(attachments[0:numAttachments])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml","OpenGL ES 2.0")
