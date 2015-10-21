@@ -38,11 +38,15 @@ func (p *InstalledPackage) WrapProperties() ([]string, error) {
 	return strings.Fields(list), err
 }
 
-// WrapProperties sets the list of wrap-properties for the given installed
+// SetWrapProperties sets the list of wrap-properties for the given installed
 // package.
 func (p *InstalledPackage) SetWrapProperties(props ...string) error {
 	arg := strings.Join(props, " ")
-	return p.Device.Command("setprop", p.wrapPropName(), arg).Run()
+	res, err := p.Device.Command("setprop", p.wrapPropName(), arg).Call()
+	if res != "" {
+		return fmt.Errorf("setprop returned error:\n%s", res)
+	}
+	return err
 }
 
 // Action represents an Android action that can be sent as an intent.

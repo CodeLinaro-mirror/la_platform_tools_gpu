@@ -127,7 +127,7 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, flavor BuildFlavor)
 	}
 	defer func() {
 		log.Infof(l, "Clearing LD_PRELOAD on %s", p.Name)
-		err := p.SetWrapProperties("")
+		err := p.SetWrapProperties(`""`)
 		if err != nil {
 			log.Errorf(l, "Failed clearing LD_PRELOAD: %s", err)
 			return
