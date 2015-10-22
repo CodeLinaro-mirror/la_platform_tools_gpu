@@ -10,12 +10,13 @@ PROGDIR=`cd $PROGDIR && pwd`
 # Use osx-X86_64 instead of darwin-x64 for Mac.
 # TODO: Switch the build to use darwin-x64 to be consistent with
 # other Android repositories.
-HOST_OS=$(uname | tr A-Z a-z | sed -e "s/darwin/osx/g")"-X86_64"
+HOST_OS=$(uname | tr A-Z a-z | sed -e "s/darwin/osx/g")
+HOST_ARCH="x86_64"
 
 source $PROGDIR/setup_env_common.txt
-source $PROGDIR/setup_toolchain_$HOST_OS.txt
+source $PROGDIR/setup_toolchain_$HOST_OS-$HOST_ARCH.txt
 
-if [[ $HOST_OS == "linux-X86_64" ]]; then
+if [[ $HOST_OS == "linux" ]]; then
   crosscompile_windows=1
 else
   crosscompile_windows=0
@@ -83,7 +84,8 @@ fi
 export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_TEST_FLAGS="-v -x"
 
-go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
+go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS-$HOST_ARCH/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
+go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS-$HOST_ARCH/$BUILD_FLAVOR/gapit $GPU_RELATIVE_SOURCE_PATH/tools/gapit
 
 # Kill any existing replay daemon before running tests.
 killall gapir || true
@@ -114,31 +116,51 @@ fi
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -targetos=windows --disable=code cc:gapir
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
-  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-X86_64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC -s" $GPU_RELATIVE_SOURCE_PATH/server/gapis
+  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-$HOST_ARCH/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC -s" $GPU_RELATIVE_SOURCE_PATH/server/gapis
+  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-$HOST_ARCH/$BUILD_FLAVOR/gapit.exe -ldflags="-extld=$CC -s" $GPU_RELATIVE_SOURCE_PATH/tools/gapit
 fi
 
 # Create zip files for the build artifacts.
 if [[ -n "$DIST_DIR" ]]; then
   mkdir -p $DIST_DIR
+  DIST_DIR=$(cd $DIST_DIR && pwd)
+
   cd $GPU_BUILD_ROOT
-  for TARGET_OS in linux-X86_64 windows-X86_64 osx-X86_64; do
-      if [[ $TARGET_OS == $HOST_OS || ( $HOST_OS == linux-X86_64 && $TARGET_OS == windows-X86_64 && $crosscompile_windows == 1 ) ]]; then
-          if [[ $TARGET_OS == windows-X86_64 ]]; then
-            EXE_EXTENSION=".exe"
-          else
-            EXE_EXTENSION=""
-          fi
-
-          ZIP="$DIST_DIR/gpu-tools-$TARGET_OS-$BUILD_FLAVOR-$BUILD_NUMBER.zip"
-          rm -f $ZIP
-
-          for ARTIFACT in gapis gapir; do
-            # strip does not work on OS-X!
-            if [ "$HOST_OS" != "osx-X86_64" ]; then
-              strip bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
-            fi
-            zip -9rq $ZIP bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
-          done
+  for TARGET_OS in linux windows osx; do
+    if [[ $TARGET_OS == $HOST_OS || ( $HOST_OS == linux && $TARGET_OS == windows && $crosscompile_windows == 1 ) ]]; then
+      if [[ $TARGET_OS == windows ]]; then
+        EXE_EXTENSION=".exe"
+      else
+        EXE_EXTENSION=""
       fi
+
+      OUT=$DIST_DIR/$TARGET_OS/gapid
+      rm -rf $OUT
+      mkdir -p $OUT/android/armeabi-v7a
+      mkdir -p $OUT/android/arm64-v8a
+      mkdir -p $OUT/$TARGET_OS/$HOST_ARCH
+
+      cp bin/pkginfo.apk $OUT/android
+      for ARTIFACT in libgapii.so gapir.apk; do
+        cp bin/android-arm/$BUILD_FLAVOR/$ARTIFACT $OUT/android/armeabi-v7a
+        cp bin/android-arm64/$BUILD_FLAVOR/$ARTIFACT $OUT/android/arm64-v8a
+      done
+
+      for ARTIFACT in gapir gapis gapit; do
+        BINARY=bin/$TARGET_OS-$HOST_ARCH/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
+        # strip does not work on OS-X!
+        if [ "$HOST_OS" != "osx" ]; then
+          strip $BINARY
+        fi
+
+        cp $BINARY $OUT/$TARGET_OS/$HOST_ARCH
+      done
+
+      ZIP="$DIST_DIR/gapid_r01_$TARGET_OS.zip"
+      rm -f $ZIP
+      pushd $OUT/..
+      zip -9r $ZIP gapid
+      popd
+    fi
   done
 fi

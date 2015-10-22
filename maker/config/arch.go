@@ -31,7 +31,7 @@ var (
 		Name: "x86",
 	}
 	X86_64 = &Architecture{
-		Name: "X86_64",
+		Name: "x86_64",
 	}
 )
 
