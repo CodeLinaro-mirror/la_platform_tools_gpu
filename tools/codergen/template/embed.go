@@ -348,7 +348,7 @@ const go_binary_tmpl = `{{/*
     doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
   «}¶
   func (*binaryClass{{.Name}}) New() binary.Object {»¶
-    return &{{.Name}}{}¶
+    return &{{BraceIfNeeded .Name}}{}¶
   «}¶
   func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶
     doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
@@ -397,14 +397,14 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
   type {{$className}} struct{ binary.FrozenClassBase }¶
   ¶
   func (*{{.Name}}) Class() binary.Class {»¶
-    return &{{$className}}{}¶
+    return &{{BraceIfNeeded $className}}{}¶
   «}¶
   {{$base := 18}}
   {{$wrap := gt (len .Name) (add $base 7)}}
   {{template "Go.doDecode" .}}
   {{$doUpgradeDecode := (print "doUpgradeDecodeǀ" .Name "ǁ" $name)}}
   func {{$doUpgradeDecode}}(d binary.Decoder, o *{{$name}}) {»¶
-    old := &{{.Name}}{}¶
+    old := &{{BraceIfNeeded .Name}}{}¶
     doDecode{{.Name}}(d, old)¶
     if d.Error() != nil {»¶
       return¶
@@ -412,7 +412,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
     old.upgrade(o) // This upgrade() method is not code generated.¶
   «}¶
   func (*{{$className}}) New() binary.Object {»¶
-    return &{{$name}}{}¶
+    return &{{BraceIfNeeded $name}}{}¶
   «}¶
   func (*{{$className}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶
     {{$doUpgradeDecode}}(d, obj.(*{{$name}}))¶
@@ -451,7 +451,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{end}}
 
 {{define "Go.Encode.Struct"}}
-  e.Struct(&{{.Name}})¶
+  e.Struct(&{{BraceIfNeeded .Name}})¶
 {{end}}
 
 {{define "Go.Encode.Pointer"}}
@@ -486,19 +486,19 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Encode.Slice"}}
   {{template "Go.Encode_Length" $}}
   for i := range {{.Name}} {»¶
-    curr := &{{.Name}}[i]¶
-    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
+    curr := &{{BraceIfNeeded .Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "*curr")}}
   «}¶
 {{end}}
 
 {{define "Go.Encode.Array#uint8"}}
-  e.Data({{.Name}}[:{{.Type.Size}}])¶
+  e.Data({{BraceIfNeeded .Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Encode.Array"}}
   for i := range {{.Name}} {»¶
-    curr := &{{.Name}}[i]¶
-    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
+    curr := &{{BraceIfNeeded .Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "*curr")}}
   «}¶
 {{end}}
 
@@ -517,9 +517,9 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Struct"}}
   {{if (File.Directive "Schema" false)}}
   // Schema is off¶
-  d.Value(&{{.Name}})¶
+  d.Value(&{{BraceIfNeeded .Name}})¶
   {{else}}
-  d.Struct(&{{.Name}})¶
+  d.Struct(&{{BraceIfNeeded .Name}})¶
   {{end}}
 {{end}}
 
@@ -565,20 +565,20 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Slice"}}
   {{template "Go.Decode_Length" $}}
     for i := range {{.Name}} {»¶
-      curr := &{{.Name}}[i]¶
-      {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
+      curr := &{{BraceIfNeeded .Name}}[i]¶
+      {{Call "Go.Decode" (Var .Type.ValueType "*curr")}}
     «}¶
   «}¶
 {{end}}
 
 {{define "Go.Decode.Array#uint8"}}
-  d.Data({{.Name}}[:{{.Type.Size}}])¶
+  d.Data({{BraceIfNeeded .Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Decode.Array"}}
   for i := range {{.Name}} {»¶
-    curr := &{{.Name}}[i]¶
-    {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
+    curr := &{{BraceIfNeeded .Name}}[i]¶
+    {{Call "Go.Decode" (Var .Type.ValueType "*curr")}}
   «}¶
 {{end}}
 

@@ -410,7 +410,7 @@ func doEncodeCmdBool(e binary.Encoder, o *CmdBool) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Bool(o.Result)
 }
@@ -420,9 +420,9 @@ func doDecodeCmdBool(d binary.Decoder, o *CmdBool) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -457,7 +457,7 @@ func doEncodeCmdCharptrToString(e binary.Encoder, o *CmdCharptrToString) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.S)
 }
@@ -467,9 +467,9 @@ func doDecodeCmdCharptrToString(d binary.Decoder, o *CmdCharptrToString) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -504,7 +504,7 @@ func doEncodeCmdCharsliceToString(e binary.Encoder, o *CmdCharsliceToString) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.S)
 	e.Uint32(o.Len)
@@ -515,9 +515,9 @@ func doDecodeCmdCharsliceToString(d binary.Decoder, o *CmdCharsliceToString) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -584,7 +584,7 @@ func doEncodeCmdClone(e binary.Encoder, o *CmdClone) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Src)
 	e.Uint32(o.Cnt)
@@ -595,9 +595,9 @@ func doDecodeCmdClone(d binary.Decoder, o *CmdClone) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -634,7 +634,7 @@ func doEncodeCmdCopy(e binary.Encoder, o *CmdCopy) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Src)
 	e.Uint32(o.Cnt)
@@ -645,9 +645,9 @@ func doDecodeCmdCopy(d binary.Decoder, o *CmdCopy) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -684,7 +684,7 @@ func doEncodeCmdF32(e binary.Encoder, o *CmdF32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(o.Result)
 }
@@ -694,9 +694,9 @@ func doDecodeCmdF32(d binary.Decoder, o *CmdF32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -731,7 +731,7 @@ func doEncodeCmdF64(e binary.Encoder, o *CmdF64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float64(o.Result)
 }
@@ -741,9 +741,9 @@ func doDecodeCmdF64(d binary.Decoder, o *CmdF64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -778,7 +778,7 @@ func doEncodeCmdMake(e binary.Encoder, o *CmdMake) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.Cnt)
 }
@@ -788,9 +788,9 @@ func doDecodeCmdMake(d binary.Decoder, o *CmdMake) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -855,7 +855,7 @@ func doEncodeCmdPointer(e binary.Encoder, o *CmdPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Result)
 }
@@ -865,9 +865,9 @@ func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -902,7 +902,7 @@ func doEncodeCmdRemapped(e binary.Encoder, o *CmdRemapped) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -912,9 +912,9 @@ func doDecodeCmdRemapped(d binary.Decoder, o *CmdRemapped) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -949,7 +949,7 @@ func doEncodeCmdS16(e binary.Encoder, o *CmdS16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int16(o.Result)
 }
@@ -959,9 +959,9 @@ func doDecodeCmdS16(d binary.Decoder, o *CmdS16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -996,7 +996,7 @@ func doEncodeCmdS32(e binary.Encoder, o *CmdS32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(o.Result)
 }
@@ -1006,9 +1006,9 @@ func doDecodeCmdS32(d binary.Decoder, o *CmdS32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1043,7 +1043,7 @@ func doEncodeCmdS64(e binary.Encoder, o *CmdS64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int64(o.Result)
 }
@@ -1053,9 +1053,9 @@ func doDecodeCmdS64(d binary.Decoder, o *CmdS64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1090,7 +1090,7 @@ func doEncodeCmdS8(e binary.Encoder, o *CmdS8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int8(o.Result)
 }
@@ -1100,9 +1100,9 @@ func doDecodeCmdS8(d binary.Decoder, o *CmdS8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1167,7 +1167,7 @@ func doEncodeCmdSliceCasts(e binary.Encoder, o *CmdSliceCasts) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.S)
 	e.Uint32(o.L)
@@ -1178,9 +1178,9 @@ func doDecodeCmdSliceCasts(d binary.Decoder, o *CmdSliceCasts) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1217,7 +1217,7 @@ func doEncodeCmdString(e binary.Encoder, o *CmdString) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.String(o.Result)
 }
@@ -1227,9 +1227,9 @@ func doDecodeCmdString(d binary.Decoder, o *CmdString) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1264,7 +1264,7 @@ func doEncodeCmdU16(e binary.Encoder, o *CmdU16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint16(o.Result)
 }
@@ -1274,9 +1274,9 @@ func doDecodeCmdU16(d binary.Decoder, o *CmdU16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1311,7 +1311,7 @@ func doEncodeCmdU32(e binary.Encoder, o *CmdU32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.Result)
 }
@@ -1321,9 +1321,9 @@ func doDecodeCmdU32(d binary.Decoder, o *CmdU32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1358,7 +1358,7 @@ func doEncodeCmdU64(e binary.Encoder, o *CmdU64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(o.Result)
 }
@@ -1368,9 +1368,9 @@ func doDecodeCmdU64(d binary.Decoder, o *CmdU64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1405,7 +1405,7 @@ func doEncodeCmdU8(e binary.Encoder, o *CmdU8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(o.Result)
 }
@@ -1415,9 +1415,9 @@ func doDecodeCmdU8(d binary.Decoder, o *CmdU8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1452,7 +1452,7 @@ func doEncodeCmdUnknownRet(e binary.Encoder, o *CmdUnknownRet) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int64(o.Result)
 }
@@ -1462,9 +1462,9 @@ func doDecodeCmdUnknownRet(d binary.Decoder, o *CmdUnknownRet) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1529,7 +1529,7 @@ func doEncodeCmdUnknownWritePtr(e binary.Encoder, o *CmdUnknownWritePtr) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.P)
 }
@@ -1539,9 +1539,9 @@ func doDecodeCmdUnknownWritePtr(d binary.Decoder, o *CmdUnknownWritePtr) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1576,7 +1576,7 @@ func doEncodeCmdUnknownWriteSlice(e binary.Encoder, o *CmdUnknownWriteSlice) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -1586,9 +1586,9 @@ func doDecodeCmdUnknownWriteSlice(d binary.Decoder, o *CmdUnknownWriteSlice) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1623,7 +1623,7 @@ func doEncodeCmdVoid(e binary.Encoder, o *CmdVoid) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) {
@@ -1632,9 +1632,9 @@ func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1697,7 +1697,7 @@ func doEncodeCmdVoid3InArrays(e binary.Encoder, o *CmdVoid3InArrays) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
@@ -1709,9 +1709,9 @@ func doDecodeCmdVoid3InArrays(d binary.Decoder, o *CmdVoid3InArrays) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1750,7 +1750,7 @@ func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.A))
 	e.Uint32(uint32(o.B))
@@ -1762,9 +1762,9 @@ func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1803,7 +1803,7 @@ func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.String(o.A)
 	e.String(o.B)
@@ -1815,9 +1815,9 @@ func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1856,7 +1856,7 @@ func doEncodeCmdVoidBool(e binary.Encoder, o *CmdVoidBool) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Bool(o.A)
 }
@@ -1866,9 +1866,9 @@ func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1903,7 +1903,7 @@ func doEncodeCmdVoidF32(e binary.Encoder, o *CmdVoidF32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(o.A)
 }
@@ -1913,9 +1913,9 @@ func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1950,7 +1950,7 @@ func doEncodeCmdVoidF64(e binary.Encoder, o *CmdVoidF64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float64(o.A)
 }
@@ -1960,9 +1960,9 @@ func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2027,7 +2027,7 @@ func doEncodeCmdVoidInArrayOfRemapped(e binary.Encoder, o *CmdVoidInArrayOfRemap
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2037,9 +2037,9 @@ func doDecodeCmdVoidInArrayOfRemapped(d binary.Decoder, o *CmdVoidInArrayOfRemap
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2076,7 +2076,7 @@ func doEncodeCmdVoidInArrayOfStrings(e binary.Encoder, o *CmdVoidInArrayOfString
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Strings)
 	e.Int32(o.Count)
@@ -2087,9 +2087,9 @@ func doDecodeCmdVoidInArrayOfStrings(d binary.Decoder, o *CmdVoidInArrayOfString
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2128,7 +2128,7 @@ func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRem
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2138,9 +2138,9 @@ func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRem
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2177,7 +2177,7 @@ func doEncodeCmdVoidOutArrayOfUnknownRemapped(e binary.Encoder, o *CmdVoidOutArr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2187,9 +2187,9 @@ func doDecodeCmdVoidOutArrayOfUnknownRemapped(d binary.Decoder, o *CmdVoidOutArr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2226,7 +2226,7 @@ func doEncodeCmdVoidReadBool(e binary.Encoder, o *CmdVoidReadBool) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2236,9 +2236,9 @@ func doDecodeCmdVoidReadBool(d binary.Decoder, o *CmdVoidReadBool) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2303,7 +2303,7 @@ func doEncodeCmdVoidReadF32(e binary.Encoder, o *CmdVoidReadF32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2313,9 +2313,9 @@ func doDecodeCmdVoidReadF32(d binary.Decoder, o *CmdVoidReadF32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2380,7 +2380,7 @@ func doEncodeCmdVoidReadF64(e binary.Encoder, o *CmdVoidReadF64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2390,9 +2390,9 @@ func doDecodeCmdVoidReadF64(d binary.Decoder, o *CmdVoidReadF64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2427,7 +2427,7 @@ func doEncodeCmdVoidReadPtrs(e binary.Encoder, o *CmdVoidReadPtrs) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
@@ -2439,9 +2439,9 @@ func doDecodeCmdVoidReadPtrs(d binary.Decoder, o *CmdVoidReadPtrs) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2510,7 +2510,7 @@ func doEncodeCmdVoidReadS16(e binary.Encoder, o *CmdVoidReadS16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2520,9 +2520,9 @@ func doDecodeCmdVoidReadS16(d binary.Decoder, o *CmdVoidReadS16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2587,7 +2587,7 @@ func doEncodeCmdVoidReadS32(e binary.Encoder, o *CmdVoidReadS32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2597,9 +2597,9 @@ func doDecodeCmdVoidReadS32(d binary.Decoder, o *CmdVoidReadS32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2664,7 +2664,7 @@ func doEncodeCmdVoidReadS64(e binary.Encoder, o *CmdVoidReadS64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2674,9 +2674,9 @@ func doDecodeCmdVoidReadS64(d binary.Decoder, o *CmdVoidReadS64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2741,7 +2741,7 @@ func doEncodeCmdVoidReadS8(e binary.Encoder, o *CmdVoidReadS8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2751,9 +2751,9 @@ func doDecodeCmdVoidReadS8(d binary.Decoder, o *CmdVoidReadS8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2788,7 +2788,7 @@ func doEncodeCmdVoidReadU16(e binary.Encoder, o *CmdVoidReadU16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2798,9 +2798,9 @@ func doDecodeCmdVoidReadU16(d binary.Decoder, o *CmdVoidReadU16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2835,7 +2835,7 @@ func doEncodeCmdVoidReadU32(e binary.Encoder, o *CmdVoidReadU32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2845,9 +2845,9 @@ func doDecodeCmdVoidReadU32(d binary.Decoder, o *CmdVoidReadU32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2912,7 +2912,7 @@ func doEncodeCmdVoidReadU64(e binary.Encoder, o *CmdVoidReadU64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2922,9 +2922,9 @@ func doDecodeCmdVoidReadU64(d binary.Decoder, o *CmdVoidReadU64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2959,7 +2959,7 @@ func doEncodeCmdVoidReadU8(e binary.Encoder, o *CmdVoidReadU8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -2969,9 +2969,9 @@ func doDecodeCmdVoidReadU8(d binary.Decoder, o *CmdVoidReadU8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3006,7 +3006,7 @@ func doEncodeCmdVoidS16(e binary.Encoder, o *CmdVoidS16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int16(o.A)
 }
@@ -3016,9 +3016,9 @@ func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3053,7 +3053,7 @@ func doEncodeCmdVoidS32(e binary.Encoder, o *CmdVoidS32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(o.A)
 }
@@ -3063,9 +3063,9 @@ func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3100,7 +3100,7 @@ func doEncodeCmdVoidS64(e binary.Encoder, o *CmdVoidS64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int64(o.A)
 }
@@ -3110,9 +3110,9 @@ func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3147,7 +3147,7 @@ func doEncodeCmdVoidS8(e binary.Encoder, o *CmdVoidS8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int8(o.A)
 }
@@ -3157,9 +3157,9 @@ func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3194,7 +3194,7 @@ func doEncodeCmdVoidString(e binary.Encoder, o *CmdVoidString) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.String(o.A)
 }
@@ -3204,9 +3204,9 @@ func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3241,7 +3241,7 @@ func doEncodeCmdVoidU16(e binary.Encoder, o *CmdVoidU16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint16(o.A)
 }
@@ -3251,9 +3251,9 @@ func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3288,7 +3288,7 @@ func doEncodeCmdVoidU32(e binary.Encoder, o *CmdVoidU32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.A)
 }
@@ -3298,9 +3298,9 @@ func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3335,7 +3335,7 @@ func doEncodeCmdVoidU64(e binary.Encoder, o *CmdVoidU64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(o.A)
 }
@@ -3345,9 +3345,9 @@ func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3382,7 +3382,7 @@ func doEncodeCmdVoidU8(e binary.Encoder, o *CmdVoidU8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(o.A)
 }
@@ -3392,9 +3392,9 @@ func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3429,7 +3429,7 @@ func doEncodeCmdVoidWriteBool(e binary.Encoder, o *CmdVoidWriteBool) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3439,9 +3439,9 @@ func doDecodeCmdVoidWriteBool(d binary.Decoder, o *CmdVoidWriteBool) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3476,7 +3476,7 @@ func doEncodeCmdVoidWriteF32(e binary.Encoder, o *CmdVoidWriteF32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3486,9 +3486,9 @@ func doDecodeCmdVoidWriteF32(d binary.Decoder, o *CmdVoidWriteF32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3523,7 +3523,7 @@ func doEncodeCmdVoidWriteF64(e binary.Encoder, o *CmdVoidWriteF64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3533,9 +3533,9 @@ func doDecodeCmdVoidWriteF64(d binary.Decoder, o *CmdVoidWriteF64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3570,7 +3570,7 @@ func doEncodeCmdVoidWritePtrs(e binary.Encoder, o *CmdVoidWritePtrs) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
@@ -3582,9 +3582,9 @@ func doDecodeCmdVoidWritePtrs(d binary.Decoder, o *CmdVoidWritePtrs) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3623,7 +3623,7 @@ func doEncodeCmdVoidWriteS16(e binary.Encoder, o *CmdVoidWriteS16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3633,9 +3633,9 @@ func doDecodeCmdVoidWriteS16(d binary.Decoder, o *CmdVoidWriteS16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3670,7 +3670,7 @@ func doEncodeCmdVoidWriteS32(e binary.Encoder, o *CmdVoidWriteS32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3680,9 +3680,9 @@ func doDecodeCmdVoidWriteS32(d binary.Decoder, o *CmdVoidWriteS32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3717,7 +3717,7 @@ func doEncodeCmdVoidWriteS64(e binary.Encoder, o *CmdVoidWriteS64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3727,9 +3727,9 @@ func doDecodeCmdVoidWriteS64(d binary.Decoder, o *CmdVoidWriteS64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3764,7 +3764,7 @@ func doEncodeCmdVoidWriteS8(e binary.Encoder, o *CmdVoidWriteS8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3774,9 +3774,9 @@ func doDecodeCmdVoidWriteS8(d binary.Decoder, o *CmdVoidWriteS8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3811,7 +3811,7 @@ func doEncodeCmdVoidWriteU16(e binary.Encoder, o *CmdVoidWriteU16) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3821,9 +3821,9 @@ func doDecodeCmdVoidWriteU16(d binary.Decoder, o *CmdVoidWriteU16) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3858,7 +3858,7 @@ func doEncodeCmdVoidWriteU32(e binary.Encoder, o *CmdVoidWriteU32) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3868,9 +3868,9 @@ func doDecodeCmdVoidWriteU32(d binary.Decoder, o *CmdVoidWriteU32) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3905,7 +3905,7 @@ func doEncodeCmdVoidWriteU64(e binary.Encoder, o *CmdVoidWriteU64) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3915,9 +3915,9 @@ func doDecodeCmdVoidWriteU64(d binary.Decoder, o *CmdVoidWriteU64) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -3952,7 +3952,7 @@ func doEncodeCmdVoidWriteU8(e binary.Encoder, o *CmdVoidWriteU8) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.A)
 }
@@ -3962,9 +3962,9 @@ func doDecodeCmdVoidWriteU8(d binary.Decoder, o *CmdVoidWriteU8) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}

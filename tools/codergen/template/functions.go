@@ -18,6 +18,9 @@ import (
 	"fmt"
 	"strings"
 
+	"unicode"
+	"unicode/utf8"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
@@ -66,6 +69,14 @@ func (*Templates) TrimPackage(n string) string {
 		return n
 	}
 	return n[i+1:]
+}
+
+func (*Templates) BraceIfNeeded(s string) string {
+	r, _ := utf8.DecodeRuneInString(s)
+	if unicode.IsLetter(r) || unicode.IsNumber(r) || r == '_' || r == '(' {
+		return s
+	}
+	return fmt.Sprintf("(%s)", s)
 }
 
 func (*Templates) Error(format string, args ...interface{}) (string, error) {

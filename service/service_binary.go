@@ -423,7 +423,7 @@ func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) {
 	e.Uint32(uint32(len(o.Accesses)))
 	for i := range o.Accesses {
 		curr := &o.Accesses[i]
-		e.Uint64((*curr))
+		e.Uint64(*curr)
 	}
 }
 func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
@@ -433,7 +433,7 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 		o.Accesses = make([]uint64, count)
 		for i := range o.Accesses {
 			curr := &o.Accesses[i]
-			(*curr) = uint64(d.Uint64())
+			*curr = uint64(d.Uint64())
 		}
 	}
 }
@@ -1083,8 +1083,8 @@ func doEncoderesultGetCaptures(e binary.Encoder, o *resultGetCaptures) {
 	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
 		curr := &o.value[i]
-		if (*curr) != nil {
-			e.Object((*curr))
+		if *curr != nil {
+			e.Object(*curr)
 		} else {
 			e.Object(nil)
 		}
@@ -1096,9 +1096,9 @@ func doDecoderesultGetCaptures(d binary.Decoder, o *resultGetCaptures) {
 		for i := range o.value {
 			curr := &o.value[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = obj.(*path.Capture)
+				*curr = obj.(*path.Capture)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1131,8 +1131,8 @@ func doEncoderesultGetDevices(e binary.Encoder, o *resultGetDevices) {
 	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
 		curr := &o.value[i]
-		if (*curr) != nil {
-			e.Object((*curr))
+		if *curr != nil {
+			e.Object(*curr)
 		} else {
 			e.Object(nil)
 		}
@@ -1144,9 +1144,9 @@ func doDecoderesultGetDevices(d binary.Decoder, o *resultGetDevices) {
 		for i := range o.value {
 			curr := &o.value[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = obj.(*path.Device)
+				*curr = obj.(*path.Device)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}

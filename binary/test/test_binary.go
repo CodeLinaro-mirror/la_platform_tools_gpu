@@ -192,7 +192,7 @@ func (*ArrayOfArrays) Class() binary.Class {
 func doEncodeArrayOfArrays(e binary.Encoder, o *ArrayOfArrays) {
 	for i := range o.Array {
 		curr := &o.Array[i]
-		for i := range (*curr) {
+		for i := range *curr {
 			curr := &(*curr)[i]
 			e.Struct(&(*curr))
 		}
@@ -201,7 +201,7 @@ func doEncodeArrayOfArrays(e binary.Encoder, o *ArrayOfArrays) {
 func doDecodeArrayOfArrays(d binary.Decoder, o *ArrayOfArrays) {
 	for i := range o.Array {
 		curr := &o.Array[i]
-		for i := range (*curr) {
+		for i := range *curr {
 			curr := &(*curr)[i]
 			d.Struct(&(*curr))
 		}
@@ -265,8 +265,8 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 	e.Uint32(uint32(len(o.SliceMapArray)))
 	for i := range o.SliceMapArray {
 		curr := &o.SliceMapArray[i]
-		e.Uint32(uint32(len((*curr))))
-		for k, v := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for k, v := range *curr {
 			e.Struct(&k)
 			for i := range v {
 				curr := &v[i]
@@ -277,10 +277,10 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 	e.Uint32(uint32(len(o.SliceArrayMap)))
 	for i := range o.SliceArrayMap {
 		curr := &o.SliceArrayMap[i]
-		for i := range (*curr) {
+		for i := range *curr {
 			curr := &(*curr)[i]
-			e.Uint32(uint32(len((*curr))))
-			for k, v := range (*curr) {
+			e.Uint32(uint32(len(*curr)))
+			for k, v := range *curr {
 				e.Struct(&k)
 				e.Struct(&v)
 			}
@@ -288,11 +288,11 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 	}
 	for i := range o.ArraySliceMap {
 		curr := &o.ArraySliceMap[i]
-		e.Uint32(uint32(len((*curr))))
-		for i := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for i := range *curr {
 			curr := &(*curr)[i]
-			e.Uint32(uint32(len((*curr))))
-			for k, v := range (*curr) {
+			e.Uint32(uint32(len(*curr)))
+			for k, v := range *curr {
 				e.Struct(&k)
 				e.Struct(&v)
 			}
@@ -300,8 +300,8 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 	}
 	for i := range o.ArrayMapSlice {
 		curr := &o.ArrayMapSlice[i]
-		e.Uint32(uint32(len((*curr))))
-		for k, v := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for k, v := range *curr {
 			e.Struct(&k)
 			e.Uint32(uint32(len(v)))
 			for i := range v {
@@ -315,8 +315,8 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 		e.Struct(&k)
 		for i := range v {
 			curr := &v[i]
-			e.Uint32(uint32(len((*curr))))
-			for i := range (*curr) {
+			e.Uint32(uint32(len(*curr)))
+			for i := range *curr {
 				curr := &(*curr)[i]
 				e.Struct(&(*curr))
 			}
@@ -328,7 +328,7 @@ func doEncodeComplex(e binary.Encoder, o *Complex) {
 		e.Uint32(uint32(len(v)))
 		for i := range v {
 			curr := &v[i]
-			for i := range (*curr) {
+			for i := range *curr {
 				curr := &(*curr)[i]
 				e.Struct(&(*curr))
 			}
@@ -341,8 +341,8 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 		for i := range o.SliceMapArray {
 			curr := &o.SliceMapArray[i]
 			if count := d.Count(); count > 0 {
-				(*curr) = make(map[Contains][3]Contains, count)
-				m := (*curr)
+				*curr = make(map[Contains][3]Contains, count)
+				m := *curr
 				for i := uint32(0); i < count; i++ {
 					var k Contains
 					var v [3]Contains
@@ -360,11 +360,11 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 		o.SliceArrayMap = make([][3]map[Contains]Contains, count)
 		for i := range o.SliceArrayMap {
 			curr := &o.SliceArrayMap[i]
-			for i := range (*curr) {
+			for i := range *curr {
 				curr := &(*curr)[i]
 				if count := d.Count(); count > 0 {
-					(*curr) = make(map[Contains]Contains, count)
-					m := (*curr)
+					*curr = make(map[Contains]Contains, count)
+					m := *curr
 					for i := uint32(0); i < count; i++ {
 						var k Contains
 						var v Contains
@@ -379,12 +379,12 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 	for i := range o.ArraySliceMap {
 		curr := &o.ArraySliceMap[i]
 		if count := d.Count(); count > 0 {
-			(*curr) = make([]map[Contains]Contains, count)
-			for i := range (*curr) {
+			*curr = make([]map[Contains]Contains, count)
+			for i := range *curr {
 				curr := &(*curr)[i]
 				if count := d.Count(); count > 0 {
-					(*curr) = make(map[Contains]Contains, count)
-					m := (*curr)
+					*curr = make(map[Contains]Contains, count)
+					m := *curr
 					for i := uint32(0); i < count; i++ {
 						var k Contains
 						var v Contains
@@ -399,8 +399,8 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 	for i := range o.ArrayMapSlice {
 		curr := &o.ArrayMapSlice[i]
 		if count := d.Count(); count > 0 {
-			(*curr) = make(map[Contains][]Contains, count)
-			m := (*curr)
+			*curr = make(map[Contains][]Contains, count)
+			m := *curr
 			for i := uint32(0); i < count; i++ {
 				var k Contains
 				var v []Contains
@@ -426,8 +426,8 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 			for i := range v {
 				curr := &v[i]
 				if count := d.Count(); count > 0 {
-					(*curr) = make([]Contains, count)
-					for i := range (*curr) {
+					*curr = make([]Contains, count)
+					for i := range *curr {
 						curr := &(*curr)[i]
 						d.Struct(&(*curr))
 					}
@@ -447,7 +447,7 @@ func doDecodeComplex(d binary.Decoder, o *Complex) {
 				v = make([][3]Contains, count)
 				for i := range v {
 					curr := &v[i]
-					for i := range (*curr) {
+					for i := range *curr {
 						curr := &(*curr)[i]
 						d.Struct(&(*curr))
 					}
@@ -489,8 +489,8 @@ func (*MapInArray) Class() binary.Class {
 func doEncodeMapInArray(e binary.Encoder, o *MapInArray) {
 	for i := range o.Array {
 		curr := &o.Array[i]
-		e.Uint32(uint32(len((*curr))))
-		for k, v := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for k, v := range *curr {
 			e.Uint32(k)
 			e.Uint32(v)
 		}
@@ -500,8 +500,8 @@ func doDecodeMapInArray(d binary.Decoder, o *MapInArray) {
 	for i := range o.Array {
 		curr := &o.Array[i]
 		if count := d.Count(); count > 0 {
-			(*curr) = make(map[uint32]uint32, count)
-			m := (*curr)
+			*curr = make(map[uint32]uint32, count)
+			m := *curr
 			for i := uint32(0); i < count; i++ {
 				var k uint32
 				var v uint32
@@ -540,8 +540,8 @@ func doEncodeMapInSlice(e binary.Encoder, o *MapInSlice) {
 	e.Uint32(uint32(len(o.Slice)))
 	for i := range o.Slice {
 		curr := &o.Slice[i]
-		e.Uint32(uint32(len((*curr))))
-		for k, v := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for k, v := range *curr {
 			e.Uint32(k)
 			e.Uint32(v)
 		}
@@ -553,8 +553,8 @@ func doDecodeMapInSlice(d binary.Decoder, o *MapInSlice) {
 		for i := range o.Slice {
 			curr := &o.Slice[i]
 			if count := d.Count(); count > 0 {
-				(*curr) = make(map[uint32]uint32, count)
-				m := (*curr)
+				*curr = make(map[uint32]uint32, count)
+				m := *curr
 				for i := uint32(0); i < count; i++ {
 					var k uint32
 					var v uint32
@@ -878,8 +878,8 @@ func doEncodeSliceOfSlices(e binary.Encoder, o *SliceOfSlices) {
 	e.Uint32(uint32(len(o.Slice)))
 	for i := range o.Slice {
 		curr := &o.Slice[i]
-		e.Uint32(uint32(len((*curr))))
-		for i := range (*curr) {
+		e.Uint32(uint32(len(*curr)))
+		for i := range *curr {
 			curr := &(*curr)[i]
 			e.Struct(&(*curr))
 		}
@@ -891,8 +891,8 @@ func doDecodeSliceOfSlices(d binary.Decoder, o *SliceOfSlices) {
 		for i := range o.Slice {
 			curr := &o.Slice[i]
 			if count := d.Count(); count > 0 {
-				(*curr) = make([]Leaf, count)
-				for i := range (*curr) {
+				*curr = make([]Leaf, count)
+				for i := range *curr {
 					curr := &(*curr)[i]
 					d.Struct(&(*curr))
 				}

@@ -156,7 +156,7 @@ func doEncodeList(e binary.Encoder, o *List) {
 	e.Uint32(uint32(len(o.Atoms)))
 	for i := range o.Atoms {
 		curr := &o.Atoms[i]
-		e.Variant((*curr))
+		e.Variant(*curr)
 	}
 }
 func doDecodeList(d binary.Decoder, o *List) {
@@ -165,9 +165,9 @@ func doDecodeList(d binary.Decoder, o *List) {
 		for i := range o.Atoms {
 			curr := &o.Atoms[i]
 			if obj := d.Variant(); obj != nil {
-				(*curr) = AtomCast(obj)
+				*curr = AtomCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}

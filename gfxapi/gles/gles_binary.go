@@ -1193,7 +1193,7 @@ func doEncodeArchitecture(e binary.Encoder, o *Architecture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.PointerAlignment)
 	e.Uint32(o.PointerSize)
@@ -1206,9 +1206,9 @@ func doDecodeArchitecture(d binary.Decoder, o *Architecture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1747,7 +1747,7 @@ func doEncodeCGLCreateContext(e binary.Encoder, o *CGLCreateContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Pix)
 	e.Struct(&o.Share)
@@ -1760,9 +1760,9 @@ func doDecodeCGLCreateContext(d binary.Decoder, o *CGLCreateContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1803,7 +1803,7 @@ func doEncodeCGLFlushDrawable(e binary.Encoder, o *CGLFlushDrawable) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ctx)
 	e.Int64(int64(o.Result))
@@ -1814,9 +1814,9 @@ func doDecodeCGLFlushDrawable(d binary.Decoder, o *CGLFlushDrawable) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -1943,7 +1943,7 @@ func doEncodeCGLGetSurface(e binary.Encoder, o *CGLGetSurface) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ctx)
 	e.Struct(&o.Cid)
@@ -1957,9 +1957,9 @@ func doDecodeCGLGetSurface(d binary.Decoder, o *CGLGetSurface) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2002,7 +2002,7 @@ func doEncodeCGLSetCurrentContext(e binary.Encoder, o *CGLSetCurrentContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ctx)
 	e.Int64(int64(o.Result))
@@ -2013,9 +2013,9 @@ func doDecodeCGLSetCurrentContext(d binary.Decoder, o *CGLSetCurrentContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -2142,7 +2142,7 @@ func doEncodeCGSGetSurfaceBounds(e binary.Encoder, o *CGSGetSurfaceBounds) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Cid)
 	e.Int32(int32(o.Wid))
@@ -2156,9 +2156,9 @@ func doDecodeCGSGetSurfaceBounds(d binary.Decoder, o *CGSGetSurfaceBounds) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4411,7 +4411,7 @@ func doEncodeContextInfo(e binary.Encoder, o *ContextInfo) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.ConstantCount)
 	e.Struct(&o.ConstantNames)
@@ -4432,9 +4432,9 @@ func doDecodeContextInfo(d binary.Decoder, o *ContextInfo) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4671,7 +4671,7 @@ func doEncodeEglCreateContext(e binary.Encoder, o *EglCreateContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Config)
@@ -4685,9 +4685,9 @@ func doDecodeEglCreateContext(d binary.Decoder, o *EglCreateContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4730,7 +4730,7 @@ func doEncodeEglInitialize(e binary.Encoder, o *EglInitialize) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Dpy)
 	e.Struct(&o.Major)
@@ -4743,9 +4743,9 @@ func doDecodeEglInitialize(d binary.Decoder, o *EglInitialize) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4786,7 +4786,7 @@ func doEncodeEglMakeCurrent(e binary.Encoder, o *EglMakeCurrent) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Draw)
@@ -4800,9 +4800,9 @@ func doDecodeEglMakeCurrent(d binary.Decoder, o *EglMakeCurrent) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4845,7 +4845,7 @@ func doEncodeEglQuerySurface(e binary.Encoder, o *EglQuerySurface) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Surface)
@@ -4859,9 +4859,9 @@ func doDecodeEglQuerySurface(d binary.Decoder, o *EglQuerySurface) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -4934,7 +4934,7 @@ func doEncodeEglSwapBuffers(e binary.Encoder, o *EglSwapBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Surface)
@@ -4946,9 +4946,9 @@ func doDecodeEglSwapBuffers(d binary.Decoder, o *EglSwapBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -5017,7 +5017,7 @@ func doEncodeFlushPostBuffer(e binary.Encoder, o *FlushPostBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeFlushPostBuffer(d binary.Decoder, o *FlushPostBuffer) {
@@ -5026,9 +5026,9 @@ func doDecodeFlushPostBuffer(d binary.Decoder, o *FlushPostBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -5630,13 +5630,13 @@ func (*GLfloatː2ᵃ) Class() binary.Class {
 func doEncodeGLfloatː2ᵃ(e binary.Encoder, o *GLfloatː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeGLfloatː2ᵃ(d binary.Decoder, o *GLfloatː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5666,13 +5666,13 @@ func (*GLfloatː3ᵃ) Class() binary.Class {
 func doEncodeGLfloatː3ᵃ(e binary.Encoder, o *GLfloatː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeGLfloatː3ᵃ(d binary.Decoder, o *GLfloatː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5702,13 +5702,13 @@ func (*GLfloatː4ᵃ) Class() binary.Class {
 func doEncodeGLfloatː4ᵃ(e binary.Encoder, o *GLfloatː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeGLfloatː4ᵃ(d binary.Decoder, o *GLfloatː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5858,13 +5858,13 @@ func (*GLintː2ᵃ) Class() binary.Class {
 func doEncodeGLintː2ᵃ(e binary.Encoder, o *GLintː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeGLintː2ᵃ(d binary.Decoder, o *GLintː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5894,13 +5894,13 @@ func (*GLintː3ᵃ) Class() binary.Class {
 func doEncodeGLintː3ᵃ(e binary.Encoder, o *GLintː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeGLintː3ᵃ(d binary.Decoder, o *GLintː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5930,13 +5930,13 @@ func (*GLintː4ᵃ) Class() binary.Class {
 func doEncodeGLintː4ᵃ(e binary.Encoder, o *GLintː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeGLintː4ᵃ(d binary.Decoder, o *GLintː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6386,13 +6386,13 @@ func (*GLuintː2ᵃ) Class() binary.Class {
 func doEncodeGLuintː2ᵃ(e binary.Encoder, o *GLuintː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeGLuintː2ᵃ(d binary.Decoder, o *GLuintː2ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6422,13 +6422,13 @@ func (*GLuintː3ᵃ) Class() binary.Class {
 func doEncodeGLuintː3ᵃ(e binary.Encoder, o *GLuintː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeGLuintː3ᵃ(d binary.Decoder, o *GLuintː3ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6458,13 +6458,13 @@ func (*GLuintː4ᵃ) Class() binary.Class {
 func doEncodeGLuintː4ᵃ(e binary.Encoder, o *GLuintː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeGLuintː4ᵃ(d binary.Decoder, o *GLuintː4ᵃ) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6645,7 +6645,7 @@ func doEncodeGlActiveShaderProgram(e binary.Encoder, o *GlActiveShaderProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Program))
@@ -6656,9 +6656,9 @@ func doDecodeGlActiveShaderProgram(d binary.Decoder, o *GlActiveShaderProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6695,7 +6695,7 @@ func doEncodeGlActiveShaderProgramEXT(e binary.Encoder, o *GlActiveShaderProgram
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Program))
@@ -6706,9 +6706,9 @@ func doDecodeGlActiveShaderProgramEXT(d binary.Decoder, o *GlActiveShaderProgram
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6747,7 +6747,7 @@ func doEncodeGlActiveTexture(e binary.Encoder, o *GlActiveTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Unit))
 }
@@ -6757,9 +6757,9 @@ func doDecodeGlActiveTexture(d binary.Decoder, o *GlActiveTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6794,7 +6794,7 @@ func doEncodeGlAlphaFunc(e binary.Encoder, o *GlAlphaFunc) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Float32(float32(o.Ref))
@@ -6805,9 +6805,9 @@ func doDecodeGlAlphaFunc(d binary.Decoder, o *GlAlphaFunc) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6844,7 +6844,7 @@ func doEncodeGlAlphaFuncQCOM(e binary.Encoder, o *GlAlphaFuncQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Float32(float32(o.Ref))
@@ -6855,9 +6855,9 @@ func doDecodeGlAlphaFuncQCOM(d binary.Decoder, o *GlAlphaFuncQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6894,7 +6894,7 @@ func doEncodeGlAlphaFuncx(e binary.Encoder, o *GlAlphaFuncx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Int32(int32(o.Ref))
@@ -6905,9 +6905,9 @@ func doDecodeGlAlphaFuncx(d binary.Decoder, o *GlAlphaFuncx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6944,7 +6944,7 @@ func doEncodeGlAlphaFuncxOES(e binary.Encoder, o *GlAlphaFuncxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Int32(int32(o.Ref))
@@ -6955,9 +6955,9 @@ func doDecodeGlAlphaFuncxOES(d binary.Decoder, o *GlAlphaFuncxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -6994,7 +6994,7 @@ func doEncodeGlApplyFramebufferAttachmentCMAAINTEL(e binary.Encoder, o *GlApplyF
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder, o *GlApplyFramebufferAttachmentCMAAINTEL) {
@@ -7003,9 +7003,9 @@ func doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder, o *GlApplyF
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7040,7 +7040,7 @@ func doEncodeGlAttachShader(e binary.Encoder, o *GlAttachShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Shader))
@@ -7051,9 +7051,9 @@ func doDecodeGlAttachShader(d binary.Decoder, o *GlAttachShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7090,7 +7090,7 @@ func doEncodeGlBeginConditionalRenderNV(e binary.Encoder, o *GlBeginConditionalR
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Id))
 	e.Uint32(uint32(o.Mode))
@@ -7101,9 +7101,9 @@ func doDecodeGlBeginConditionalRenderNV(d binary.Decoder, o *GlBeginConditionalR
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7142,7 +7142,7 @@ func doEncodeGlBeginPerfMonitorAMD(e binary.Encoder, o *GlBeginPerfMonitorAMD) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Monitor))
 }
@@ -7152,9 +7152,9 @@ func doDecodeGlBeginPerfMonitorAMD(d binary.Decoder, o *GlBeginPerfMonitorAMD) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7189,7 +7189,7 @@ func doEncodeGlBeginPerfQueryINTEL(e binary.Encoder, o *GlBeginPerfQueryINTEL) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryHandle))
 }
@@ -7199,9 +7199,9 @@ func doDecodeGlBeginPerfQueryINTEL(d binary.Decoder, o *GlBeginPerfQueryINTEL) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7236,7 +7236,7 @@ func doEncodeGlBeginQuery(e binary.Encoder, o *GlBeginQuery) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Query))
@@ -7247,9 +7247,9 @@ func doDecodeGlBeginQuery(d binary.Decoder, o *GlBeginQuery) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7286,7 +7286,7 @@ func doEncodeGlBeginQueryEXT(e binary.Encoder, o *GlBeginQueryEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Query))
@@ -7297,9 +7297,9 @@ func doDecodeGlBeginQueryEXT(d binary.Decoder, o *GlBeginQueryEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7336,7 +7336,7 @@ func doEncodeGlBeginTransformFeedback(e binary.Encoder, o *GlBeginTransformFeedb
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.PrimitiveMode))
 }
@@ -7346,9 +7346,9 @@ func doDecodeGlBeginTransformFeedback(d binary.Decoder, o *GlBeginTransformFeedb
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7385,7 +7385,7 @@ func doEncodeGlBindAttribLocation(e binary.Encoder, o *GlBindAttribLocation) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Location))
@@ -7397,9 +7397,9 @@ func doDecodeGlBindAttribLocation(d binary.Decoder, o *GlBindAttribLocation) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7438,7 +7438,7 @@ func doEncodeGlBindBuffer(e binary.Encoder, o *GlBindBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Buffer))
@@ -7449,9 +7449,9 @@ func doDecodeGlBindBuffer(d binary.Decoder, o *GlBindBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7488,7 +7488,7 @@ func doEncodeGlBindBufferBase(e binary.Encoder, o *GlBindBufferBase) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -7500,9 +7500,9 @@ func doDecodeGlBindBufferBase(d binary.Decoder, o *GlBindBufferBase) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7541,7 +7541,7 @@ func doEncodeGlBindBufferRange(e binary.Encoder, o *GlBindBufferRange) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -7555,9 +7555,9 @@ func doDecodeGlBindBufferRange(d binary.Decoder, o *GlBindBufferRange) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7600,7 +7600,7 @@ func doEncodeGlBindFragDataLocationEXT(e binary.Encoder, o *GlBindFragDataLocati
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Color))
@@ -7612,9 +7612,9 @@ func doDecodeGlBindFragDataLocationEXT(d binary.Decoder, o *GlBindFragDataLocati
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7655,7 +7655,7 @@ func doEncodeGlBindFragDataLocationIndexedEXT(e binary.Encoder, o *GlBindFragDat
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ColorNumber))
@@ -7668,9 +7668,9 @@ func doDecodeGlBindFragDataLocationIndexedEXT(d binary.Decoder, o *GlBindFragDat
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7713,7 +7713,7 @@ func doEncodeGlBindFramebuffer(e binary.Encoder, o *GlBindFramebuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Framebuffer))
@@ -7724,9 +7724,9 @@ func doDecodeGlBindFramebuffer(d binary.Decoder, o *GlBindFramebuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7763,7 +7763,7 @@ func doEncodeGlBindFramebufferOES(e binary.Encoder, o *GlBindFramebufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Framebuffer))
@@ -7774,9 +7774,9 @@ func doDecodeGlBindFramebufferOES(d binary.Decoder, o *GlBindFramebufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7813,7 +7813,7 @@ func doEncodeGlBindImageTexture(e binary.Encoder, o *GlBindImageTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Unit))
 	e.Uint32(uint32(o.Texture))
@@ -7829,9 +7829,9 @@ func doDecodeGlBindImageTexture(d binary.Decoder, o *GlBindImageTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7878,7 +7878,7 @@ func doEncodeGlBindProgramPipeline(e binary.Encoder, o *GlBindProgramPipeline) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 }
@@ -7888,9 +7888,9 @@ func doDecodeGlBindProgramPipeline(d binary.Decoder, o *GlBindProgramPipeline) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7925,7 +7925,7 @@ func doEncodeGlBindProgramPipelineEXT(e binary.Encoder, o *GlBindProgramPipeline
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 }
@@ -7935,9 +7935,9 @@ func doDecodeGlBindProgramPipelineEXT(d binary.Decoder, o *GlBindProgramPipeline
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -7974,7 +7974,7 @@ func doEncodeGlBindRenderbuffer(e binary.Encoder, o *GlBindRenderbuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Renderbuffer))
@@ -7985,9 +7985,9 @@ func doDecodeGlBindRenderbuffer(d binary.Decoder, o *GlBindRenderbuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8024,7 +8024,7 @@ func doEncodeGlBindRenderbufferOES(e binary.Encoder, o *GlBindRenderbufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Renderbuffer))
@@ -8035,9 +8035,9 @@ func doDecodeGlBindRenderbufferOES(d binary.Decoder, o *GlBindRenderbufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8074,7 +8074,7 @@ func doEncodeGlBindSampler(e binary.Encoder, o *GlBindSampler) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Unit))
 	e.Uint32(uint32(o.Sampler))
@@ -8085,9 +8085,9 @@ func doDecodeGlBindSampler(d binary.Decoder, o *GlBindSampler) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8124,7 +8124,7 @@ func doEncodeGlBindTexture(e binary.Encoder, o *GlBindTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Texture))
@@ -8135,9 +8135,9 @@ func doDecodeGlBindTexture(d binary.Decoder, o *GlBindTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8174,7 +8174,7 @@ func doEncodeGlBindTransformFeedback(e binary.Encoder, o *GlBindTransformFeedbac
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Id))
@@ -8185,9 +8185,9 @@ func doDecodeGlBindTransformFeedback(d binary.Decoder, o *GlBindTransformFeedbac
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8226,7 +8226,7 @@ func doEncodeGlBindVertexArray(e binary.Encoder, o *GlBindVertexArray) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 }
@@ -8236,9 +8236,9 @@ func doDecodeGlBindVertexArray(d binary.Decoder, o *GlBindVertexArray) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8273,7 +8273,7 @@ func doEncodeGlBindVertexArrayOES(e binary.Encoder, o *GlBindVertexArrayOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 }
@@ -8283,9 +8283,9 @@ func doDecodeGlBindVertexArrayOES(d binary.Decoder, o *GlBindVertexArrayOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8320,7 +8320,7 @@ func doEncodeGlBindVertexBuffer(e binary.Encoder, o *GlBindVertexBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.BindingIndex))
 	e.Uint32(uint32(o.Buffer))
@@ -8333,9 +8333,9 @@ func doDecodeGlBindVertexBuffer(d binary.Decoder, o *GlBindVertexBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8376,7 +8376,7 @@ func doEncodeGlBlendBarrier(e binary.Encoder, o *GlBlendBarrier) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlBlendBarrier(d binary.Decoder, o *GlBlendBarrier) {
@@ -8385,9 +8385,9 @@ func doDecodeGlBlendBarrier(d binary.Decoder, o *GlBlendBarrier) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8420,7 +8420,7 @@ func doEncodeGlBlendBarrierKHR(e binary.Encoder, o *GlBlendBarrierKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlBlendBarrierKHR(d binary.Decoder, o *GlBlendBarrierKHR) {
@@ -8429,9 +8429,9 @@ func doDecodeGlBlendBarrierKHR(d binary.Decoder, o *GlBlendBarrierKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8464,7 +8464,7 @@ func doEncodeGlBlendBarrierNV(e binary.Encoder, o *GlBlendBarrierNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlBlendBarrierNV(d binary.Decoder, o *GlBlendBarrierNV) {
@@ -8473,9 +8473,9 @@ func doDecodeGlBlendBarrierNV(d binary.Decoder, o *GlBlendBarrierNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8508,7 +8508,7 @@ func doEncodeGlBlendColor(e binary.Encoder, o *GlBlendColor) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Red))
 	e.Float32(float32(o.Green))
@@ -8521,9 +8521,9 @@ func doDecodeGlBlendColor(d binary.Decoder, o *GlBlendColor) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8564,7 +8564,7 @@ func doEncodeGlBlendEquation(e binary.Encoder, o *GlBlendEquation) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Equation))
 }
@@ -8574,9 +8574,9 @@ func doDecodeGlBlendEquation(d binary.Decoder, o *GlBlendEquation) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8611,7 +8611,7 @@ func doEncodeGlBlendEquationOES(e binary.Encoder, o *GlBlendEquationOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 }
@@ -8621,9 +8621,9 @@ func doDecodeGlBlendEquationOES(d binary.Decoder, o *GlBlendEquationOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8658,7 +8658,7 @@ func doEncodeGlBlendEquationSeparate(e binary.Encoder, o *GlBlendEquationSeparat
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Rgb))
 	e.Uint32(uint32(o.Alpha))
@@ -8669,9 +8669,9 @@ func doDecodeGlBlendEquationSeparate(d binary.Decoder, o *GlBlendEquationSeparat
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8710,7 +8710,7 @@ func doEncodeGlBlendEquationSeparateOES(e binary.Encoder, o *GlBlendEquationSepa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ModeRGB))
 	e.Uint32(uint32(o.ModeAlpha))
@@ -8721,9 +8721,9 @@ func doDecodeGlBlendEquationSeparateOES(d binary.Decoder, o *GlBlendEquationSepa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8762,7 +8762,7 @@ func doEncodeGlBlendEquationSeparatei(e binary.Encoder, o *GlBlendEquationSepara
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.ModeRGB))
@@ -8774,9 +8774,9 @@ func doDecodeGlBlendEquationSeparatei(d binary.Decoder, o *GlBlendEquationSepara
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8817,7 +8817,7 @@ func doEncodeGlBlendEquationSeparateiEXT(e binary.Encoder, o *GlBlendEquationSep
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.ModeRGB))
@@ -8829,9 +8829,9 @@ func doDecodeGlBlendEquationSeparateiEXT(d binary.Decoder, o *GlBlendEquationSep
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8872,7 +8872,7 @@ func doEncodeGlBlendEquationSeparateiOES(e binary.Encoder, o *GlBlendEquationSep
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.ModeRGB))
@@ -8884,9 +8884,9 @@ func doDecodeGlBlendEquationSeparateiOES(d binary.Decoder, o *GlBlendEquationSep
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8927,7 +8927,7 @@ func doEncodeGlBlendEquationi(e binary.Encoder, o *GlBlendEquationi) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Mode))
@@ -8938,9 +8938,9 @@ func doDecodeGlBlendEquationi(d binary.Decoder, o *GlBlendEquationi) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -8977,7 +8977,7 @@ func doEncodeGlBlendEquationiEXT(e binary.Encoder, o *GlBlendEquationiEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Mode))
@@ -8988,9 +8988,9 @@ func doDecodeGlBlendEquationiEXT(d binary.Decoder, o *GlBlendEquationiEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9027,7 +9027,7 @@ func doEncodeGlBlendEquationiOES(e binary.Encoder, o *GlBlendEquationiOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Mode))
@@ -9038,9 +9038,9 @@ func doDecodeGlBlendEquationiOES(d binary.Decoder, o *GlBlendEquationiOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9077,7 +9077,7 @@ func doEncodeGlBlendFunc(e binary.Encoder, o *GlBlendFunc) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcFactor))
 	e.Uint32(uint32(o.DstFactor))
@@ -9088,9 +9088,9 @@ func doDecodeGlBlendFunc(d binary.Decoder, o *GlBlendFunc) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9127,7 +9127,7 @@ func doEncodeGlBlendFuncSeparate(e binary.Encoder, o *GlBlendFuncSeparate) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcFactorRgb))
 	e.Uint32(uint32(o.DstFactorRgb))
@@ -9140,9 +9140,9 @@ func doDecodeGlBlendFuncSeparate(d binary.Decoder, o *GlBlendFuncSeparate) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9183,7 +9183,7 @@ func doEncodeGlBlendFuncSeparateOES(e binary.Encoder, o *GlBlendFuncSeparateOES)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcRGB))
 	e.Uint32(uint32(o.DstRGB))
@@ -9196,9 +9196,9 @@ func doDecodeGlBlendFuncSeparateOES(d binary.Decoder, o *GlBlendFuncSeparateOES)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9239,7 +9239,7 @@ func doEncodeGlBlendFuncSeparatei(e binary.Encoder, o *GlBlendFuncSeparatei) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.SrcRGB))
@@ -9253,9 +9253,9 @@ func doDecodeGlBlendFuncSeparatei(d binary.Decoder, o *GlBlendFuncSeparatei) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9298,7 +9298,7 @@ func doEncodeGlBlendFuncSeparateiEXT(e binary.Encoder, o *GlBlendFuncSeparateiEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.SrcRGB))
@@ -9312,9 +9312,9 @@ func doDecodeGlBlendFuncSeparateiEXT(d binary.Decoder, o *GlBlendFuncSeparateiEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9359,7 +9359,7 @@ func doEncodeGlBlendFuncSeparateiOES(e binary.Encoder, o *GlBlendFuncSeparateiOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.SrcRGB))
@@ -9373,9 +9373,9 @@ func doDecodeGlBlendFuncSeparateiOES(d binary.Decoder, o *GlBlendFuncSeparateiOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9420,7 +9420,7 @@ func doEncodeGlBlendFunci(e binary.Encoder, o *GlBlendFunci) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Src))
@@ -9432,9 +9432,9 @@ func doDecodeGlBlendFunci(d binary.Decoder, o *GlBlendFunci) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9473,7 +9473,7 @@ func doEncodeGlBlendFunciEXT(e binary.Encoder, o *GlBlendFunciEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Src))
@@ -9485,9 +9485,9 @@ func doDecodeGlBlendFunciEXT(d binary.Decoder, o *GlBlendFunciEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9526,7 +9526,7 @@ func doEncodeGlBlendFunciOES(e binary.Encoder, o *GlBlendFunciOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buf))
 	e.Uint32(uint32(o.Src))
@@ -9538,9 +9538,9 @@ func doDecodeGlBlendFunciOES(d binary.Decoder, o *GlBlendFunciOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9579,7 +9579,7 @@ func doEncodeGlBlendParameteriNV(e binary.Encoder, o *GlBlendParameteriNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Value))
@@ -9590,9 +9590,9 @@ func doDecodeGlBlendParameteriNV(d binary.Decoder, o *GlBlendParameteriNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9629,7 +9629,7 @@ func doEncodeGlBlitFramebuffer(e binary.Encoder, o *GlBlitFramebuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.SrcX0))
 	e.Int32(int32(o.SrcY0))
@@ -9648,9 +9648,9 @@ func doDecodeGlBlitFramebuffer(d binary.Decoder, o *GlBlitFramebuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9703,7 +9703,7 @@ func doEncodeGlBlitFramebufferANGLE(e binary.Encoder, o *GlBlitFramebufferANGLE)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.SrcX0))
 	e.Int32(int32(o.SrcY0))
@@ -9722,9 +9722,9 @@ func doDecodeGlBlitFramebufferANGLE(d binary.Decoder, o *GlBlitFramebufferANGLE)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9777,7 +9777,7 @@ func doEncodeGlBlitFramebufferNV(e binary.Encoder, o *GlBlitFramebufferNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.SrcX0))
 	e.Int32(int32(o.SrcY0))
@@ -9796,9 +9796,9 @@ func doDecodeGlBlitFramebufferNV(d binary.Decoder, o *GlBlitFramebufferNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9851,7 +9851,7 @@ func doEncodeGlBufferData(e binary.Encoder, o *GlBufferData) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Size))
@@ -9864,9 +9864,9 @@ func doDecodeGlBufferData(d binary.Decoder, o *GlBufferData) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9937,7 +9937,7 @@ func doEncodeGlBufferStorageEXT(e binary.Encoder, o *GlBufferStorageEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Size))
@@ -9950,9 +9950,9 @@ func doDecodeGlBufferStorageEXT(d binary.Decoder, o *GlBufferStorageEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -9993,7 +9993,7 @@ func doEncodeGlBufferSubData(e binary.Encoder, o *GlBufferSubData) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Offset))
@@ -10006,9 +10006,9 @@ func doDecodeGlBufferSubData(d binary.Decoder, o *GlBufferSubData) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10049,7 +10049,7 @@ func doEncodeGlCheckFramebufferStatus(e binary.Encoder, o *GlCheckFramebufferSta
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Result))
@@ -10060,9 +10060,9 @@ func doDecodeGlCheckFramebufferStatus(d binary.Decoder, o *GlCheckFramebufferSta
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10101,7 +10101,7 @@ func doEncodeGlCheckFramebufferStatusOES(e binary.Encoder, o *GlCheckFramebuffer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Result))
@@ -10112,9 +10112,9 @@ func doDecodeGlCheckFramebufferStatusOES(d binary.Decoder, o *GlCheckFramebuffer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10153,7 +10153,7 @@ func doEncodeGlClear(e binary.Encoder, o *GlClear) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mask))
 }
@@ -10163,9 +10163,9 @@ func doDecodeGlClear(d binary.Decoder, o *GlClear) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10200,7 +10200,7 @@ func doEncodeGlClearBufferfi(e binary.Encoder, o *GlClearBufferfi) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buffer))
 	e.Int32(int32(o.Drawbuffer))
@@ -10213,9 +10213,9 @@ func doDecodeGlClearBufferfi(d binary.Decoder, o *GlClearBufferfi) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10256,7 +10256,7 @@ func doEncodeGlClearBufferfv(e binary.Encoder, o *GlClearBufferfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buffer))
 	e.Int32(int32(o.Drawbuffer))
@@ -10268,9 +10268,9 @@ func doDecodeGlClearBufferfv(d binary.Decoder, o *GlClearBufferfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10309,7 +10309,7 @@ func doEncodeGlClearBufferiv(e binary.Encoder, o *GlClearBufferiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buffer))
 	e.Int32(int32(o.Drawbuffer))
@@ -10321,9 +10321,9 @@ func doDecodeGlClearBufferiv(d binary.Decoder, o *GlClearBufferiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10362,7 +10362,7 @@ func doEncodeGlClearBufferuiv(e binary.Encoder, o *GlClearBufferuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buffer))
 	e.Int32(int32(o.Drawbuffer))
@@ -10374,9 +10374,9 @@ func doDecodeGlClearBufferuiv(d binary.Decoder, o *GlClearBufferuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10415,7 +10415,7 @@ func doEncodeGlClearColor(e binary.Encoder, o *GlClearColor) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.R))
 	e.Float32(float32(o.G))
@@ -10428,9 +10428,9 @@ func doDecodeGlClearColor(d binary.Decoder, o *GlClearColor) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10471,7 +10471,7 @@ func doEncodeGlClearColorx(e binary.Encoder, o *GlClearColorx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Red))
 	e.Int32(int32(o.Green))
@@ -10484,9 +10484,9 @@ func doDecodeGlClearColorx(d binary.Decoder, o *GlClearColorx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10527,7 +10527,7 @@ func doEncodeGlClearColorxOES(e binary.Encoder, o *GlClearColorxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Red))
 	e.Int32(int32(o.Green))
@@ -10540,9 +10540,9 @@ func doDecodeGlClearColorxOES(d binary.Decoder, o *GlClearColorxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10583,7 +10583,7 @@ func doEncodeGlClearDepthf(e binary.Encoder, o *GlClearDepthf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Depth))
 }
@@ -10593,9 +10593,9 @@ func doDecodeGlClearDepthf(d binary.Decoder, o *GlClearDepthf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10630,7 +10630,7 @@ func doEncodeGlClearDepthfOES(e binary.Encoder, o *GlClearDepthfOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Depth))
 }
@@ -10640,9 +10640,9 @@ func doDecodeGlClearDepthfOES(d binary.Decoder, o *GlClearDepthfOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10677,7 +10677,7 @@ func doEncodeGlClearDepthx(e binary.Encoder, o *GlClearDepthx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Depth))
 }
@@ -10687,9 +10687,9 @@ func doDecodeGlClearDepthx(d binary.Decoder, o *GlClearDepthx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10724,7 +10724,7 @@ func doEncodeGlClearDepthxOES(e binary.Encoder, o *GlClearDepthxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Depth))
 }
@@ -10734,9 +10734,9 @@ func doDecodeGlClearDepthxOES(d binary.Decoder, o *GlClearDepthxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10771,7 +10771,7 @@ func doEncodeGlClearStencil(e binary.Encoder, o *GlClearStencil) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Stencil))
 }
@@ -10781,9 +10781,9 @@ func doDecodeGlClearStencil(d binary.Decoder, o *GlClearStencil) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10818,7 +10818,7 @@ func doEncodeGlClientActiveTexture(e binary.Encoder, o *GlClientActiveTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 }
@@ -10828,9 +10828,9 @@ func doDecodeGlClientActiveTexture(d binary.Decoder, o *GlClientActiveTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10865,7 +10865,7 @@ func doEncodeGlClientWaitSync(e binary.Encoder, o *GlClientWaitSync) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.SyncFlags))
@@ -10878,9 +10878,9 @@ func doDecodeGlClientWaitSync(d binary.Decoder, o *GlClientWaitSync) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10921,7 +10921,7 @@ func doEncodeGlClientWaitSyncAPPLE(e binary.Encoder, o *GlClientWaitSyncAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.Flag))
@@ -10934,9 +10934,9 @@ func doDecodeGlClientWaitSyncAPPLE(d binary.Decoder, o *GlClientWaitSyncAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -10977,7 +10977,7 @@ func doEncodeGlClipPlanef(e binary.Encoder, o *GlClipPlanef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.P))
 	e.Struct(&o.Eqn)
@@ -10988,9 +10988,9 @@ func doDecodeGlClipPlanef(d binary.Decoder, o *GlClipPlanef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11027,7 +11027,7 @@ func doEncodeGlClipPlanefIMG(e binary.Encoder, o *GlClipPlanefIMG) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.P))
 	e.Struct(&o.Eqn)
@@ -11038,9 +11038,9 @@ func doDecodeGlClipPlanefIMG(d binary.Decoder, o *GlClipPlanefIMG) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11077,7 +11077,7 @@ func doEncodeGlClipPlanefOES(e binary.Encoder, o *GlClipPlanefOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -11088,9 +11088,9 @@ func doDecodeGlClipPlanefOES(d binary.Decoder, o *GlClipPlanefOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11127,7 +11127,7 @@ func doEncodeGlClipPlanex(e binary.Encoder, o *GlClipPlanex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -11138,9 +11138,9 @@ func doDecodeGlClipPlanex(d binary.Decoder, o *GlClipPlanex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11177,7 +11177,7 @@ func doEncodeGlClipPlanexIMG(e binary.Encoder, o *GlClipPlanexIMG) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.P))
 	e.Struct(&o.Eqn)
@@ -11188,9 +11188,9 @@ func doDecodeGlClipPlanexIMG(d binary.Decoder, o *GlClipPlanexIMG) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11227,7 +11227,7 @@ func doEncodeGlClipPlanexOES(e binary.Encoder, o *GlClipPlanexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -11238,9 +11238,9 @@ func doDecodeGlClipPlanexOES(d binary.Decoder, o *GlClipPlanexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11277,7 +11277,7 @@ func doEncodeGlColor4f(e binary.Encoder, o *GlColor4f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Red))
 	e.Float32(float32(o.Green))
@@ -11290,9 +11290,9 @@ func doDecodeGlColor4f(d binary.Decoder, o *GlColor4f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11333,7 +11333,7 @@ func doEncodeGlColor4ub(e binary.Encoder, o *GlColor4ub) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(uint8(o.Red))
 	e.Uint8(uint8(o.Green))
@@ -11346,9 +11346,9 @@ func doDecodeGlColor4ub(d binary.Decoder, o *GlColor4ub) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11389,7 +11389,7 @@ func doEncodeGlColor4x(e binary.Encoder, o *GlColor4x) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Red))
 	e.Int32(int32(o.Green))
@@ -11402,9 +11402,9 @@ func doDecodeGlColor4x(d binary.Decoder, o *GlColor4x) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11445,7 +11445,7 @@ func doEncodeGlColor4xOES(e binary.Encoder, o *GlColor4xOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Red))
 	e.Int32(int32(o.Green))
@@ -11458,9 +11458,9 @@ func doDecodeGlColor4xOES(d binary.Decoder, o *GlColor4xOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11501,7 +11501,7 @@ func doEncodeGlColorMask(e binary.Encoder, o *GlColorMask) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(uint8(o.Red))
 	e.Uint8(uint8(o.Green))
@@ -11514,9 +11514,9 @@ func doDecodeGlColorMask(d binary.Decoder, o *GlColorMask) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11557,7 +11557,7 @@ func doEncodeGlColorMaski(e binary.Encoder, o *GlColorMaski) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint8(uint8(o.R))
@@ -11571,9 +11571,9 @@ func doDecodeGlColorMaski(d binary.Decoder, o *GlColorMaski) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11616,7 +11616,7 @@ func doEncodeGlColorMaskiEXT(e binary.Encoder, o *GlColorMaskiEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint8(uint8(o.R))
@@ -11630,9 +11630,9 @@ func doDecodeGlColorMaskiEXT(d binary.Decoder, o *GlColorMaskiEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11675,7 +11675,7 @@ func doEncodeGlColorMaskiOES(e binary.Encoder, o *GlColorMaskiOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint8(uint8(o.R))
@@ -11689,9 +11689,9 @@ func doDecodeGlColorMaskiOES(d binary.Decoder, o *GlColorMaskiOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11734,7 +11734,7 @@ func doEncodeGlColorPointer(e binary.Encoder, o *GlColorPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -11747,9 +11747,9 @@ func doDecodeGlColorPointer(d binary.Decoder, o *GlColorPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11790,7 +11790,7 @@ func doEncodeGlColorPointerBounds(e binary.Encoder, o *GlColorPointerBounds) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -11804,9 +11804,9 @@ func doDecodeGlColorPointerBounds(d binary.Decoder, o *GlColorPointerBounds) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11849,7 +11849,7 @@ func doEncodeGlCompileShader(e binary.Encoder, o *GlCompileShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 }
@@ -11859,9 +11859,9 @@ func doDecodeGlCompileShader(d binary.Decoder, o *GlCompileShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11926,7 +11926,7 @@ func doEncodeGlCompressedTexImage2D(e binary.Encoder, o *GlCompressedTexImage2D)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -11943,9 +11943,9 @@ func doDecodeGlCompressedTexImage2D(d binary.Decoder, o *GlCompressedTexImage2D)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -11994,7 +11994,7 @@ func doEncodeGlCompressedTexImage3D(e binary.Encoder, o *GlCompressedTexImage3D)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12012,9 +12012,9 @@ func doDecodeGlCompressedTexImage3D(d binary.Decoder, o *GlCompressedTexImage3D)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12065,7 +12065,7 @@ func doEncodeGlCompressedTexImage3DOES(e binary.Encoder, o *GlCompressedTexImage
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12083,9 +12083,9 @@ func doDecodeGlCompressedTexImage3DOES(d binary.Decoder, o *GlCompressedTexImage
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12138,7 +12138,7 @@ func doEncodeGlCompressedTexSubImage2D(e binary.Encoder, o *GlCompressedTexSubIm
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12156,9 +12156,9 @@ func doDecodeGlCompressedTexSubImage2D(d binary.Decoder, o *GlCompressedTexSubIm
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12211,7 +12211,7 @@ func doEncodeGlCompressedTexSubImage3D(e binary.Encoder, o *GlCompressedTexSubIm
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12231,9 +12231,9 @@ func doDecodeGlCompressedTexSubImage3D(d binary.Decoder, o *GlCompressedTexSubIm
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12290,7 +12290,7 @@ func doEncodeGlCompressedTexSubImage3DOES(e binary.Encoder, o *GlCompressedTexSu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12310,9 +12310,9 @@ func doDecodeGlCompressedTexSubImage3DOES(d binary.Decoder, o *GlCompressedTexSu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12369,7 +12369,7 @@ func doEncodeGlCopyBufferSubData(e binary.Encoder, o *GlCopyBufferSubData) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ReadTarget))
 	e.Uint32(uint32(o.WriteTarget))
@@ -12383,9 +12383,9 @@ func doDecodeGlCopyBufferSubData(d binary.Decoder, o *GlCopyBufferSubData) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12428,7 +12428,7 @@ func doEncodeGlCopyBufferSubDataNV(e binary.Encoder, o *GlCopyBufferSubDataNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ReadTarget))
 	e.Uint32(uint32(o.WriteTarget))
@@ -12442,9 +12442,9 @@ func doDecodeGlCopyBufferSubDataNV(d binary.Decoder, o *GlCopyBufferSubDataNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12487,7 +12487,7 @@ func doEncodeGlCopyImageSubData(e binary.Encoder, o *GlCopyImageSubData) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcName))
 	e.Uint32(uint32(o.SrcTarget))
@@ -12511,9 +12511,9 @@ func doDecodeGlCopyImageSubData(d binary.Decoder, o *GlCopyImageSubData) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12576,7 +12576,7 @@ func doEncodeGlCopyImageSubDataEXT(e binary.Encoder, o *GlCopyImageSubDataEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcName))
 	e.Uint32(uint32(o.SrcTarget))
@@ -12600,9 +12600,9 @@ func doDecodeGlCopyImageSubDataEXT(d binary.Decoder, o *GlCopyImageSubDataEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12665,7 +12665,7 @@ func doEncodeGlCopyImageSubDataOES(e binary.Encoder, o *GlCopyImageSubDataOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.SrcName))
 	e.Uint32(uint32(o.SrcTarget))
@@ -12689,9 +12689,9 @@ func doDecodeGlCopyImageSubDataOES(d binary.Decoder, o *GlCopyImageSubDataOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12754,7 +12754,7 @@ func doEncodeGlCopyPathNV(e binary.Encoder, o *GlCopyPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ResultPath))
 	e.Uint32(uint32(o.SrcPath))
@@ -12765,9 +12765,9 @@ func doDecodeGlCopyPathNV(d binary.Decoder, o *GlCopyPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12804,7 +12804,7 @@ func doEncodeGlCopyTexImage2D(e binary.Encoder, o *GlCopyTexImage2D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12821,9 +12821,9 @@ func doDecodeGlCopyTexImage2D(d binary.Decoder, o *GlCopyTexImage2D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12872,7 +12872,7 @@ func doEncodeGlCopyTexSubImage2D(e binary.Encoder, o *GlCopyTexSubImage2D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12889,9 +12889,9 @@ func doDecodeGlCopyTexSubImage2D(d binary.Decoder, o *GlCopyTexSubImage2D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -12940,7 +12940,7 @@ func doEncodeGlCopyTexSubImage3D(e binary.Encoder, o *GlCopyTexSubImage3D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -12958,9 +12958,9 @@ func doDecodeGlCopyTexSubImage3D(d binary.Decoder, o *GlCopyTexSubImage3D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13011,7 +13011,7 @@ func doEncodeGlCopyTexSubImage3DOES(e binary.Encoder, o *GlCopyTexSubImage3DOES)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -13029,9 +13029,9 @@ func doDecodeGlCopyTexSubImage3DOES(d binary.Decoder, o *GlCopyTexSubImage3DOES)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13082,7 +13082,7 @@ func doEncodeGlCopyTextureLevelsAPPLE(e binary.Encoder, o *GlCopyTextureLevelsAP
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DestinationTexture))
 	e.Uint32(uint32(o.SourceTexture))
@@ -13095,9 +13095,9 @@ func doDecodeGlCopyTextureLevelsAPPLE(d binary.Decoder, o *GlCopyTextureLevelsAP
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13140,7 +13140,7 @@ func doEncodeGlCoverFillPathInstancedNV(e binary.Encoder, o *GlCoverFillPathInst
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -13156,9 +13156,9 @@ func doDecodeGlCoverFillPathInstancedNV(d binary.Decoder, o *GlCoverFillPathInst
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13207,7 +13207,7 @@ func doEncodeGlCoverFillPathNV(e binary.Encoder, o *GlCoverFillPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.CoverMode))
@@ -13218,9 +13218,9 @@ func doDecodeGlCoverFillPathNV(d binary.Decoder, o *GlCoverFillPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13257,7 +13257,7 @@ func doEncodeGlCoverStrokePathInstancedNV(e binary.Encoder, o *GlCoverStrokePath
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -13273,9 +13273,9 @@ func doDecodeGlCoverStrokePathInstancedNV(d binary.Decoder, o *GlCoverStrokePath
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13324,7 +13324,7 @@ func doEncodeGlCoverStrokePathNV(e binary.Encoder, o *GlCoverStrokePathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.CoverMode))
@@ -13335,9 +13335,9 @@ func doDecodeGlCoverStrokePathNV(d binary.Decoder, o *GlCoverStrokePathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13374,7 +13374,7 @@ func doEncodeGlCoverageMaskNV(e binary.Encoder, o *GlCoverageMaskNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(uint8(o.Mask))
 }
@@ -13384,9 +13384,9 @@ func doDecodeGlCoverageMaskNV(d binary.Decoder, o *GlCoverageMaskNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13421,7 +13421,7 @@ func doEncodeGlCoverageModulationNV(e binary.Encoder, o *GlCoverageModulationNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Components))
 }
@@ -13431,9 +13431,9 @@ func doDecodeGlCoverageModulationNV(d binary.Decoder, o *GlCoverageModulationNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13468,7 +13468,7 @@ func doEncodeGlCoverageModulationTableNV(e binary.Encoder, o *GlCoverageModulati
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.V)
@@ -13479,9 +13479,9 @@ func doDecodeGlCoverageModulationTableNV(d binary.Decoder, o *GlCoverageModulati
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13520,7 +13520,7 @@ func doEncodeGlCoverageOperationNV(e binary.Encoder, o *GlCoverageOperationNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Operation))
 }
@@ -13530,9 +13530,9 @@ func doDecodeGlCoverageOperationNV(d binary.Decoder, o *GlCoverageOperationNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13567,7 +13567,7 @@ func doEncodeGlCreatePerfQueryINTEL(e binary.Encoder, o *GlCreatePerfQueryINTEL)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryId))
 	e.Struct(&o.QueryHandle)
@@ -13578,9 +13578,9 @@ func doDecodeGlCreatePerfQueryINTEL(d binary.Decoder, o *GlCreatePerfQueryINTEL)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13617,7 +13617,7 @@ func doEncodeGlCreateProgram(e binary.Encoder, o *GlCreateProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -13627,9 +13627,9 @@ func doDecodeGlCreateProgram(d binary.Decoder, o *GlCreateProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13664,7 +13664,7 @@ func doEncodeGlCreateShader(e binary.Encoder, o *GlCreateShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Uint32(uint32(o.Result))
@@ -13675,9 +13675,9 @@ func doDecodeGlCreateShader(d binary.Decoder, o *GlCreateShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13714,7 +13714,7 @@ func doEncodeGlCreateShaderProgramv(e binary.Encoder, o *GlCreateShaderProgramv)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Count))
@@ -13727,9 +13727,9 @@ func doDecodeGlCreateShaderProgramv(d binary.Decoder, o *GlCreateShaderProgramv)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13770,7 +13770,7 @@ func doEncodeGlCreateShaderProgramvEXT(e binary.Encoder, o *GlCreateShaderProgra
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Count))
@@ -13783,9 +13783,9 @@ func doDecodeGlCreateShaderProgramvEXT(d binary.Decoder, o *GlCreateShaderProgra
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13828,7 +13828,7 @@ func doEncodeGlCullFace(e binary.Encoder, o *GlCullFace) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 }
@@ -13838,9 +13838,9 @@ func doDecodeGlCullFace(d binary.Decoder, o *GlCullFace) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13875,7 +13875,7 @@ func doEncodeGlCurrentPaletteMatrixOES(e binary.Encoder, o *GlCurrentPaletteMatr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Matrixpaletteindex))
 }
@@ -13885,9 +13885,9 @@ func doDecodeGlCurrentPaletteMatrixOES(d binary.Decoder, o *GlCurrentPaletteMatr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13924,7 +13924,7 @@ func doEncodeGlDebugMessageCallback(e binary.Encoder, o *GlDebugMessageCallback)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Callback)
 	e.Struct(&o.UserParam)
@@ -13935,9 +13935,9 @@ func doDecodeGlDebugMessageCallback(d binary.Decoder, o *GlDebugMessageCallback)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -13974,7 +13974,7 @@ func doEncodeGlDebugMessageCallbackKHR(e binary.Encoder, o *GlDebugMessageCallba
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Callback)
 	e.Struct(&o.UserParam)
@@ -13985,9 +13985,9 @@ func doDecodeGlDebugMessageCallbackKHR(d binary.Decoder, o *GlDebugMessageCallba
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14026,7 +14026,7 @@ func doEncodeGlDebugMessageControl(e binary.Encoder, o *GlDebugMessageControl) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Type))
@@ -14041,9 +14041,9 @@ func doDecodeGlDebugMessageControl(d binary.Decoder, o *GlDebugMessageControl) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14088,7 +14088,7 @@ func doEncodeGlDebugMessageControlKHR(e binary.Encoder, o *GlDebugMessageControl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Type))
@@ -14103,9 +14103,9 @@ func doDecodeGlDebugMessageControlKHR(d binary.Decoder, o *GlDebugMessageControl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14152,7 +14152,7 @@ func doEncodeGlDebugMessageInsert(e binary.Encoder, o *GlDebugMessageInsert) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Type))
@@ -14167,9 +14167,9 @@ func doDecodeGlDebugMessageInsert(d binary.Decoder, o *GlDebugMessageInsert) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14214,7 +14214,7 @@ func doEncodeGlDebugMessageInsertKHR(e binary.Encoder, o *GlDebugMessageInsertKH
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Type))
@@ -14229,9 +14229,9 @@ func doDecodeGlDebugMessageInsertKHR(d binary.Decoder, o *GlDebugMessageInsertKH
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14278,7 +14278,7 @@ func doEncodeGlDeleteBuffers(e binary.Encoder, o *GlDeleteBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Buffers)
@@ -14289,9 +14289,9 @@ func doDecodeGlDeleteBuffers(d binary.Decoder, o *GlDeleteBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14328,7 +14328,7 @@ func doEncodeGlDeleteFencesNV(e binary.Encoder, o *GlDeleteFencesNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Fences)
@@ -14339,9 +14339,9 @@ func doDecodeGlDeleteFencesNV(d binary.Decoder, o *GlDeleteFencesNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14378,7 +14378,7 @@ func doEncodeGlDeleteFramebuffers(e binary.Encoder, o *GlDeleteFramebuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Framebuffers)
@@ -14389,9 +14389,9 @@ func doDecodeGlDeleteFramebuffers(d binary.Decoder, o *GlDeleteFramebuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14428,7 +14428,7 @@ func doEncodeGlDeleteFramebuffersOES(e binary.Encoder, o *GlDeleteFramebuffersOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Framebuffers)
@@ -14439,9 +14439,9 @@ func doDecodeGlDeleteFramebuffersOES(d binary.Decoder, o *GlDeleteFramebuffersOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14480,7 +14480,7 @@ func doEncodeGlDeletePathsNV(e binary.Encoder, o *GlDeletePathsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.Range))
@@ -14491,9 +14491,9 @@ func doDecodeGlDeletePathsNV(d binary.Decoder, o *GlDeletePathsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14530,7 +14530,7 @@ func doEncodeGlDeletePerfMonitorsAMD(e binary.Encoder, o *GlDeletePerfMonitorsAM
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Monitors)
@@ -14541,9 +14541,9 @@ func doDecodeGlDeletePerfMonitorsAMD(d binary.Decoder, o *GlDeletePerfMonitorsAM
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14582,7 +14582,7 @@ func doEncodeGlDeletePerfQueryINTEL(e binary.Encoder, o *GlDeletePerfQueryINTEL)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryHandle))
 }
@@ -14592,9 +14592,9 @@ func doDecodeGlDeletePerfQueryINTEL(d binary.Decoder, o *GlDeletePerfQueryINTEL)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14629,7 +14629,7 @@ func doEncodeGlDeleteProgram(e binary.Encoder, o *GlDeleteProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 }
@@ -14639,9 +14639,9 @@ func doDecodeGlDeleteProgram(d binary.Decoder, o *GlDeleteProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14706,7 +14706,7 @@ func doEncodeGlDeleteProgramPipelines(e binary.Encoder, o *GlDeleteProgramPipeli
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Pipelines)
@@ -14717,9 +14717,9 @@ func doDecodeGlDeleteProgramPipelines(d binary.Decoder, o *GlDeleteProgramPipeli
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14758,7 +14758,7 @@ func doEncodeGlDeleteProgramPipelinesEXT(e binary.Encoder, o *GlDeleteProgramPip
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Pipelines)
@@ -14769,9 +14769,9 @@ func doDecodeGlDeleteProgramPipelinesEXT(d binary.Decoder, o *GlDeleteProgramPip
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14840,7 +14840,7 @@ func doEncodeGlDeleteQueries(e binary.Encoder, o *GlDeleteQueries) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Queries)
@@ -14851,9 +14851,9 @@ func doDecodeGlDeleteQueries(d binary.Decoder, o *GlDeleteQueries) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14890,7 +14890,7 @@ func doEncodeGlDeleteQueriesEXT(e binary.Encoder, o *GlDeleteQueriesEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Queries)
@@ -14901,9 +14901,9 @@ func doDecodeGlDeleteQueriesEXT(d binary.Decoder, o *GlDeleteQueriesEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -14970,7 +14970,7 @@ func doEncodeGlDeleteRenderbuffers(e binary.Encoder, o *GlDeleteRenderbuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Renderbuffers)
@@ -14981,9 +14981,9 @@ func doDecodeGlDeleteRenderbuffers(d binary.Decoder, o *GlDeleteRenderbuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15020,7 +15020,7 @@ func doEncodeGlDeleteRenderbuffersOES(e binary.Encoder, o *GlDeleteRenderbuffers
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Renderbuffers)
@@ -15031,9 +15031,9 @@ func doDecodeGlDeleteRenderbuffersOES(d binary.Decoder, o *GlDeleteRenderbuffers
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15102,7 +15102,7 @@ func doEncodeGlDeleteSamplers(e binary.Encoder, o *GlDeleteSamplers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Samplers)
@@ -15113,9 +15113,9 @@ func doDecodeGlDeleteSamplers(d binary.Decoder, o *GlDeleteSamplers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15152,7 +15152,7 @@ func doEncodeGlDeleteShader(e binary.Encoder, o *GlDeleteShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 }
@@ -15162,9 +15162,9 @@ func doDecodeGlDeleteShader(d binary.Decoder, o *GlDeleteShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15199,7 +15199,7 @@ func doEncodeGlDeleteSync(e binary.Encoder, o *GlDeleteSync) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 }
@@ -15209,9 +15209,9 @@ func doDecodeGlDeleteSync(d binary.Decoder, o *GlDeleteSync) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15246,7 +15246,7 @@ func doEncodeGlDeleteSyncAPPLE(e binary.Encoder, o *GlDeleteSyncAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 }
@@ -15256,9 +15256,9 @@ func doDecodeGlDeleteSyncAPPLE(d binary.Decoder, o *GlDeleteSyncAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15323,7 +15323,7 @@ func doEncodeGlDeleteTextures(e binary.Encoder, o *GlDeleteTextures) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Textures)
@@ -15334,9 +15334,9 @@ func doDecodeGlDeleteTextures(d binary.Decoder, o *GlDeleteTextures) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15405,7 +15405,7 @@ func doEncodeGlDeleteTransformFeedbacks(e binary.Encoder, o *GlDeleteTransformFe
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Ids)
@@ -15416,9 +15416,9 @@ func doDecodeGlDeleteTransformFeedbacks(d binary.Decoder, o *GlDeleteTransformFe
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15487,7 +15487,7 @@ func doEncodeGlDeleteVertexArrays(e binary.Encoder, o *GlDeleteVertexArrays) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Arrays)
@@ -15498,9 +15498,9 @@ func doDecodeGlDeleteVertexArrays(d binary.Decoder, o *GlDeleteVertexArrays) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15537,7 +15537,7 @@ func doEncodeGlDeleteVertexArraysOES(e binary.Encoder, o *GlDeleteVertexArraysOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Arrays)
@@ -15548,9 +15548,9 @@ func doDecodeGlDeleteVertexArraysOES(d binary.Decoder, o *GlDeleteVertexArraysOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15589,7 +15589,7 @@ func doEncodeGlDepthFunc(e binary.Encoder, o *GlDepthFunc) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Function))
 }
@@ -15599,9 +15599,9 @@ func doDecodeGlDepthFunc(d binary.Decoder, o *GlDepthFunc) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15636,7 +15636,7 @@ func doEncodeGlDepthMask(e binary.Encoder, o *GlDepthMask) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(uint8(o.Enabled))
 }
@@ -15646,9 +15646,9 @@ func doDecodeGlDepthMask(d binary.Decoder, o *GlDepthMask) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15683,7 +15683,7 @@ func doEncodeGlDepthRangeArrayfvNV(e binary.Encoder, o *GlDepthRangeArrayfvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.First))
 	e.Int32(int32(o.Count))
@@ -15695,9 +15695,9 @@ func doDecodeGlDepthRangeArrayfvNV(d binary.Decoder, o *GlDepthRangeArrayfvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15736,7 +15736,7 @@ func doEncodeGlDepthRangeIndexedfNV(e binary.Encoder, o *GlDepthRangeIndexedfNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Float32(float32(o.N))
@@ -15748,9 +15748,9 @@ func doDecodeGlDepthRangeIndexedfNV(d binary.Decoder, o *GlDepthRangeIndexedfNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15789,7 +15789,7 @@ func doEncodeGlDepthRangef(e binary.Encoder, o *GlDepthRangef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Near))
 	e.Float32(float32(o.Far))
@@ -15800,9 +15800,9 @@ func doDecodeGlDepthRangef(d binary.Decoder, o *GlDepthRangef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15839,7 +15839,7 @@ func doEncodeGlDepthRangefOES(e binary.Encoder, o *GlDepthRangefOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.N))
 	e.Float32(float32(o.F))
@@ -15850,9 +15850,9 @@ func doDecodeGlDepthRangefOES(d binary.Decoder, o *GlDepthRangefOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15889,7 +15889,7 @@ func doEncodeGlDepthRangex(e binary.Encoder, o *GlDepthRangex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Int32(int32(o.F))
@@ -15900,9 +15900,9 @@ func doDecodeGlDepthRangex(d binary.Decoder, o *GlDepthRangex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15939,7 +15939,7 @@ func doEncodeGlDepthRangexOES(e binary.Encoder, o *GlDepthRangexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Int32(int32(o.F))
@@ -15950,9 +15950,9 @@ func doDecodeGlDepthRangexOES(d binary.Decoder, o *GlDepthRangexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -15989,7 +15989,7 @@ func doEncodeGlDetachShader(e binary.Encoder, o *GlDetachShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Shader))
@@ -16000,9 +16000,9 @@ func doDecodeGlDetachShader(d binary.Decoder, o *GlDetachShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16039,7 +16039,7 @@ func doEncodeGlDisable(e binary.Encoder, o *GlDisable) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Capability))
 }
@@ -16049,9 +16049,9 @@ func doDecodeGlDisable(d binary.Decoder, o *GlDisable) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16086,7 +16086,7 @@ func doEncodeGlDisableClientState(e binary.Encoder, o *GlDisableClientState) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 }
@@ -16096,9 +16096,9 @@ func doDecodeGlDisableClientState(d binary.Decoder, o *GlDisableClientState) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16133,7 +16133,7 @@ func doEncodeGlDisableDriverControlQCOM(e binary.Encoder, o *GlDisableDriverCont
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DriverControl))
 }
@@ -16143,9 +16143,9 @@ func doDecodeGlDisableDriverControlQCOM(d binary.Decoder, o *GlDisableDriverCont
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16182,7 +16182,7 @@ func doEncodeGlDisableVertexAttribArray(e binary.Encoder, o *GlDisableVertexAttr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 }
@@ -16192,9 +16192,9 @@ func doDecodeGlDisableVertexAttribArray(d binary.Decoder, o *GlDisableVertexAttr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16231,7 +16231,7 @@ func doEncodeGlDisablei(e binary.Encoder, o *GlDisablei) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -16242,9 +16242,9 @@ func doDecodeGlDisablei(d binary.Decoder, o *GlDisablei) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16281,7 +16281,7 @@ func doEncodeGlDisableiEXT(e binary.Encoder, o *GlDisableiEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -16292,9 +16292,9 @@ func doDecodeGlDisableiEXT(d binary.Decoder, o *GlDisableiEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16331,7 +16331,7 @@ func doEncodeGlDisableiNV(e binary.Encoder, o *GlDisableiNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -16342,9 +16342,9 @@ func doDecodeGlDisableiNV(d binary.Decoder, o *GlDisableiNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16381,7 +16381,7 @@ func doEncodeGlDisableiOES(e binary.Encoder, o *GlDisableiOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -16392,9 +16392,9 @@ func doDecodeGlDisableiOES(d binary.Decoder, o *GlDisableiOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16431,7 +16431,7 @@ func doEncodeGlDiscardFramebufferEXT(e binary.Encoder, o *GlDiscardFramebufferEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.NumAttachments))
@@ -16443,9 +16443,9 @@ func doDecodeGlDiscardFramebufferEXT(d binary.Decoder, o *GlDiscardFramebufferEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16486,7 +16486,7 @@ func doEncodeGlDispatchCompute(e binary.Encoder, o *GlDispatchCompute) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.NumGroupsX))
 	e.Uint32(uint32(o.NumGroupsY))
@@ -16498,9 +16498,9 @@ func doDecodeGlDispatchCompute(d binary.Decoder, o *GlDispatchCompute) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16539,7 +16539,7 @@ func doEncodeGlDispatchComputeIndirect(e binary.Encoder, o *GlDispatchComputeInd
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Indirect))
 }
@@ -16549,9 +16549,9 @@ func doDecodeGlDispatchComputeIndirect(d binary.Decoder, o *GlDispatchComputeInd
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16588,7 +16588,7 @@ func doEncodeGlDrawArrays(e binary.Encoder, o *GlDrawArrays) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.FirstIndex))
@@ -16600,9 +16600,9 @@ func doDecodeGlDrawArrays(d binary.Decoder, o *GlDrawArrays) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16641,7 +16641,7 @@ func doEncodeGlDrawArraysIndirect(e binary.Encoder, o *GlDrawArraysIndirect) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Struct(&o.Indirect)
@@ -16652,9 +16652,9 @@ func doDecodeGlDrawArraysIndirect(d binary.Decoder, o *GlDrawArraysIndirect) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16691,7 +16691,7 @@ func doEncodeGlDrawArraysInstanced(e binary.Encoder, o *GlDrawArraysInstanced) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.FirstIndex))
@@ -16704,9 +16704,9 @@ func doDecodeGlDrawArraysInstanced(d binary.Decoder, o *GlDrawArraysInstanced) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16747,7 +16747,7 @@ func doEncodeGlDrawArraysInstancedANGLE(e binary.Encoder, o *GlDrawArraysInstanc
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.First))
@@ -16760,9 +16760,9 @@ func doDecodeGlDrawArraysInstancedANGLE(d binary.Decoder, o *GlDrawArraysInstanc
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16805,7 +16805,7 @@ func doEncodeGlDrawArraysInstancedBaseInstanceEXT(e binary.Encoder, o *GlDrawArr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.First))
@@ -16819,9 +16819,9 @@ func doDecodeGlDrawArraysInstancedBaseInstanceEXT(d binary.Decoder, o *GlDrawArr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16866,7 +16866,7 @@ func doEncodeGlDrawArraysInstancedEXT(e binary.Encoder, o *GlDrawArraysInstanced
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Start))
@@ -16879,9 +16879,9 @@ func doDecodeGlDrawArraysInstancedEXT(d binary.Decoder, o *GlDrawArraysInstanced
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16924,7 +16924,7 @@ func doEncodeGlDrawArraysInstancedNV(e binary.Encoder, o *GlDrawArraysInstancedN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.First))
@@ -16937,9 +16937,9 @@ func doDecodeGlDrawArraysInstancedNV(d binary.Decoder, o *GlDrawArraysInstancedN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -16982,7 +16982,7 @@ func doEncodeGlDrawBuffers(e binary.Encoder, o *GlDrawBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Bufs)
@@ -16993,9 +16993,9 @@ func doDecodeGlDrawBuffers(d binary.Decoder, o *GlDrawBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17032,7 +17032,7 @@ func doEncodeGlDrawBuffersEXT(e binary.Encoder, o *GlDrawBuffersEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Bufs)
@@ -17043,9 +17043,9 @@ func doDecodeGlDrawBuffersEXT(d binary.Decoder, o *GlDrawBuffersEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17082,7 +17082,7 @@ func doEncodeGlDrawBuffersIndexedEXT(e binary.Encoder, o *GlDrawBuffersIndexedEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Location)
@@ -17094,9 +17094,9 @@ func doDecodeGlDrawBuffersIndexedEXT(d binary.Decoder, o *GlDrawBuffersIndexedEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17137,7 +17137,7 @@ func doEncodeGlDrawBuffersNV(e binary.Encoder, o *GlDrawBuffersNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Bufs)
@@ -17148,9 +17148,9 @@ func doDecodeGlDrawBuffersNV(d binary.Decoder, o *GlDrawBuffersNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17217,7 +17217,7 @@ func doEncodeGlDrawElements(e binary.Encoder, o *GlDrawElements) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.IndicesCount))
@@ -17230,9 +17230,9 @@ func doDecodeGlDrawElements(d binary.Decoder, o *GlDrawElements) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17273,7 +17273,7 @@ func doEncodeGlDrawElementsBaseVertex(e binary.Encoder, o *GlDrawElementsBaseVer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.IndicesCount))
@@ -17287,9 +17287,9 @@ func doDecodeGlDrawElementsBaseVertex(d binary.Decoder, o *GlDrawElementsBaseVer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17334,7 +17334,7 @@ func doEncodeGlDrawElementsBaseVertexEXT(e binary.Encoder, o *GlDrawElementsBase
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17348,9 +17348,9 @@ func doDecodeGlDrawElementsBaseVertexEXT(d binary.Decoder, o *GlDrawElementsBase
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17395,7 +17395,7 @@ func doEncodeGlDrawElementsBaseVertexOES(e binary.Encoder, o *GlDrawElementsBase
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17409,9 +17409,9 @@ func doDecodeGlDrawElementsBaseVertexOES(d binary.Decoder, o *GlDrawElementsBase
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17456,7 +17456,7 @@ func doEncodeGlDrawElementsIndirect(e binary.Encoder, o *GlDrawElementsIndirect)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Uint32(uint32(o.IndicesType))
@@ -17468,9 +17468,9 @@ func doDecodeGlDrawElementsIndirect(d binary.Decoder, o *GlDrawElementsIndirect)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17509,7 +17509,7 @@ func doEncodeGlDrawElementsInstanced(e binary.Encoder, o *GlDrawElementsInstance
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.IndicesCount))
@@ -17523,9 +17523,9 @@ func doDecodeGlDrawElementsInstanced(d binary.Decoder, o *GlDrawElementsInstance
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17570,7 +17570,7 @@ func doEncodeGlDrawElementsInstancedANGLE(e binary.Encoder, o *GlDrawElementsIns
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17584,9 +17584,9 @@ func doDecodeGlDrawElementsInstancedANGLE(d binary.Decoder, o *GlDrawElementsIns
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17631,7 +17631,7 @@ func doEncodeGlDrawElementsInstancedBaseInstanceEXT(e binary.Encoder, o *GlDrawE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17646,9 +17646,9 @@ func doDecodeGlDrawElementsInstancedBaseInstanceEXT(d binary.Decoder, o *GlDrawE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17695,7 +17695,7 @@ func doEncodeGlDrawElementsInstancedBaseVertex(e binary.Encoder, o *GlDrawElemen
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.IndicesCount))
@@ -17710,9 +17710,9 @@ func doDecodeGlDrawElementsInstancedBaseVertex(d binary.Decoder, o *GlDrawElemen
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17759,7 +17759,7 @@ func doEncodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(e binary.Encoder, 
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17775,9 +17775,9 @@ func doDecodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(d binary.Decoder, 
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17826,7 +17826,7 @@ func doEncodeGlDrawElementsInstancedBaseVertexEXT(e binary.Encoder, o *GlDrawEle
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17841,9 +17841,9 @@ func doDecodeGlDrawElementsInstancedBaseVertexEXT(d binary.Decoder, o *GlDrawEle
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17890,7 +17890,7 @@ func doEncodeGlDrawElementsInstancedBaseVertexOES(e binary.Encoder, o *GlDrawEle
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17905,9 +17905,9 @@ func doDecodeGlDrawElementsInstancedBaseVertexOES(d binary.Decoder, o *GlDrawEle
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -17954,7 +17954,7 @@ func doEncodeGlDrawElementsInstancedEXT(e binary.Encoder, o *GlDrawElementsInsta
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -17968,9 +17968,9 @@ func doDecodeGlDrawElementsInstancedEXT(d binary.Decoder, o *GlDrawElementsInsta
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18015,7 +18015,7 @@ func doEncodeGlDrawElementsInstancedNV(e binary.Encoder, o *GlDrawElementsInstan
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Int32(int32(o.Count))
@@ -18029,9 +18029,9 @@ func doDecodeGlDrawElementsInstancedNV(d binary.Decoder, o *GlDrawElementsInstan
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18076,7 +18076,7 @@ func doEncodeGlDrawRangeElements(e binary.Encoder, o *GlDrawRangeElements) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Uint32(uint32(o.Start))
@@ -18091,9 +18091,9 @@ func doDecodeGlDrawRangeElements(d binary.Decoder, o *GlDrawRangeElements) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18138,7 +18138,7 @@ func doEncodeGlDrawRangeElementsBaseVertex(e binary.Encoder, o *GlDrawRangeEleme
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DrawMode))
 	e.Uint32(uint32(o.Start))
@@ -18154,9 +18154,9 @@ func doDecodeGlDrawRangeElementsBaseVertex(d binary.Decoder, o *GlDrawRangeEleme
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18205,7 +18205,7 @@ func doEncodeGlDrawRangeElementsBaseVertexEXT(e binary.Encoder, o *GlDrawRangeEl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Uint32(uint32(o.Start))
@@ -18221,9 +18221,9 @@ func doDecodeGlDrawRangeElementsBaseVertexEXT(d binary.Decoder, o *GlDrawRangeEl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18272,7 +18272,7 @@ func doEncodeGlDrawRangeElementsBaseVertexOES(e binary.Encoder, o *GlDrawRangeEl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Uint32(uint32(o.Start))
@@ -18288,9 +18288,9 @@ func doDecodeGlDrawRangeElementsBaseVertexOES(d binary.Decoder, o *GlDrawRangeEl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18339,7 +18339,7 @@ func doEncodeGlDrawTexfOES(e binary.Encoder, o *GlDrawTexfOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.X))
 	e.Float32(float32(o.Y))
@@ -18353,9 +18353,9 @@ func doDecodeGlDrawTexfOES(d binary.Decoder, o *GlDrawTexfOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18398,7 +18398,7 @@ func doEncodeGlDrawTexfvOES(e binary.Encoder, o *GlDrawTexfvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Coords)
 }
@@ -18408,9 +18408,9 @@ func doDecodeGlDrawTexfvOES(d binary.Decoder, o *GlDrawTexfvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18445,7 +18445,7 @@ func doEncodeGlDrawTexiOES(e binary.Encoder, o *GlDrawTexiOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -18459,9 +18459,9 @@ func doDecodeGlDrawTexiOES(d binary.Decoder, o *GlDrawTexiOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18504,7 +18504,7 @@ func doEncodeGlDrawTexivOES(e binary.Encoder, o *GlDrawTexivOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Coords)
 }
@@ -18514,9 +18514,9 @@ func doDecodeGlDrawTexivOES(d binary.Decoder, o *GlDrawTexivOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18551,7 +18551,7 @@ func doEncodeGlDrawTexsOES(e binary.Encoder, o *GlDrawTexsOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int16(int16(o.X))
 	e.Int16(int16(o.Y))
@@ -18565,9 +18565,9 @@ func doDecodeGlDrawTexsOES(d binary.Decoder, o *GlDrawTexsOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18610,7 +18610,7 @@ func doEncodeGlDrawTexsvOES(e binary.Encoder, o *GlDrawTexsvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Coords)
 }
@@ -18620,9 +18620,9 @@ func doDecodeGlDrawTexsvOES(d binary.Decoder, o *GlDrawTexsvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18657,7 +18657,7 @@ func doEncodeGlDrawTexxOES(e binary.Encoder, o *GlDrawTexxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -18671,9 +18671,9 @@ func doDecodeGlDrawTexxOES(d binary.Decoder, o *GlDrawTexxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18716,7 +18716,7 @@ func doEncodeGlDrawTexxvOES(e binary.Encoder, o *GlDrawTexxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Coords)
 }
@@ -18726,9 +18726,9 @@ func doDecodeGlDrawTexxvOES(d binary.Decoder, o *GlDrawTexxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18763,7 +18763,7 @@ func doEncodeGlEGLImageTargetRenderbufferStorageOES(e binary.Encoder, o *GlEGLIm
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Struct(&o.Image)
@@ -18774,9 +18774,9 @@ func doDecodeGlEGLImageTargetRenderbufferStorageOES(d binary.Decoder, o *GlEGLIm
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18815,7 +18815,7 @@ func doEncodeGlEGLImageTargetTexture2DOES(e binary.Encoder, o *GlEGLImageTargetT
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Struct(&o.Image)
@@ -18826,9 +18826,9 @@ func doDecodeGlEGLImageTargetTexture2DOES(d binary.Decoder, o *GlEGLImageTargetT
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18867,7 +18867,7 @@ func doEncodeGlEnable(e binary.Encoder, o *GlEnable) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Capability))
 }
@@ -18877,9 +18877,9 @@ func doDecodeGlEnable(d binary.Decoder, o *GlEnable) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18914,7 +18914,7 @@ func doEncodeGlEnableClientState(e binary.Encoder, o *GlEnableClientState) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 }
@@ -18924,9 +18924,9 @@ func doDecodeGlEnableClientState(d binary.Decoder, o *GlEnableClientState) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -18961,7 +18961,7 @@ func doEncodeGlEnableDriverControlQCOM(e binary.Encoder, o *GlEnableDriverContro
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DriverControl))
 }
@@ -18971,9 +18971,9 @@ func doDecodeGlEnableDriverControlQCOM(d binary.Decoder, o *GlEnableDriverContro
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19010,7 +19010,7 @@ func doEncodeGlEnableVertexAttribArray(e binary.Encoder, o *GlEnableVertexAttrib
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 }
@@ -19020,9 +19020,9 @@ func doDecodeGlEnableVertexAttribArray(d binary.Decoder, o *GlEnableVertexAttrib
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19059,7 +19059,7 @@ func doEncodeGlEnablei(e binary.Encoder, o *GlEnablei) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -19070,9 +19070,9 @@ func doDecodeGlEnablei(d binary.Decoder, o *GlEnablei) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19109,7 +19109,7 @@ func doEncodeGlEnableiEXT(e binary.Encoder, o *GlEnableiEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -19120,9 +19120,9 @@ func doDecodeGlEnableiEXT(d binary.Decoder, o *GlEnableiEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19159,7 +19159,7 @@ func doEncodeGlEnableiNV(e binary.Encoder, o *GlEnableiNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -19170,9 +19170,9 @@ func doDecodeGlEnableiNV(d binary.Decoder, o *GlEnableiNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19209,7 +19209,7 @@ func doEncodeGlEnableiOES(e binary.Encoder, o *GlEnableiOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -19220,9 +19220,9 @@ func doDecodeGlEnableiOES(d binary.Decoder, o *GlEnableiOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19259,7 +19259,7 @@ func doEncodeGlEndConditionalRenderNV(e binary.Encoder, o *GlEndConditionalRende
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlEndConditionalRenderNV(d binary.Decoder, o *GlEndConditionalRenderNV) {
@@ -19268,9 +19268,9 @@ func doDecodeGlEndConditionalRenderNV(d binary.Decoder, o *GlEndConditionalRende
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19305,7 +19305,7 @@ func doEncodeGlEndPerfMonitorAMD(e binary.Encoder, o *GlEndPerfMonitorAMD) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Monitor))
 }
@@ -19315,9 +19315,9 @@ func doDecodeGlEndPerfMonitorAMD(d binary.Decoder, o *GlEndPerfMonitorAMD) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19352,7 +19352,7 @@ func doEncodeGlEndPerfQueryINTEL(e binary.Encoder, o *GlEndPerfQueryINTEL) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryHandle))
 }
@@ -19362,9 +19362,9 @@ func doDecodeGlEndPerfQueryINTEL(d binary.Decoder, o *GlEndPerfQueryINTEL) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19399,7 +19399,7 @@ func doEncodeGlEndQuery(e binary.Encoder, o *GlEndQuery) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 }
@@ -19409,9 +19409,9 @@ func doDecodeGlEndQuery(d binary.Decoder, o *GlEndQuery) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19446,7 +19446,7 @@ func doEncodeGlEndQueryEXT(e binary.Encoder, o *GlEndQueryEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 }
@@ -19456,9 +19456,9 @@ func doDecodeGlEndQueryEXT(d binary.Decoder, o *GlEndQueryEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19493,7 +19493,7 @@ func doEncodeGlEndTilingQCOM(e binary.Encoder, o *GlEndTilingQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.PreserveMask))
 }
@@ -19503,9 +19503,9 @@ func doDecodeGlEndTilingQCOM(d binary.Decoder, o *GlEndTilingQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19540,7 +19540,7 @@ func doEncodeGlEndTransformFeedback(e binary.Encoder, o *GlEndTransformFeedback)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlEndTransformFeedback(d binary.Decoder, o *GlEndTransformFeedback) {
@@ -19549,9 +19549,9 @@ func doDecodeGlEndTransformFeedback(d binary.Decoder, o *GlEndTransformFeedback)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19614,7 +19614,7 @@ func doEncodeGlExtGetBufferPointervQCOM(e binary.Encoder, o *GlExtGetBufferPoint
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Struct(&o.Params)
@@ -19625,9 +19625,9 @@ func doDecodeGlExtGetBufferPointervQCOM(d binary.Decoder, o *GlExtGetBufferPoint
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19666,7 +19666,7 @@ func doEncodeGlExtGetBuffersQCOM(e binary.Encoder, o *GlExtGetBuffersQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Buffers)
 	e.Int32(int32(o.MaxBuffers))
@@ -19678,9 +19678,9 @@ func doDecodeGlExtGetBuffersQCOM(d binary.Decoder, o *GlExtGetBuffersQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19719,7 +19719,7 @@ func doEncodeGlExtGetFramebuffersQCOM(e binary.Encoder, o *GlExtGetFramebuffersQ
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Framebuffers)
 	e.Int32(int32(o.MaxFramebuffers))
@@ -19731,9 +19731,9 @@ func doDecodeGlExtGetFramebuffersQCOM(d binary.Decoder, o *GlExtGetFramebuffersQ
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19774,7 +19774,7 @@ func doEncodeGlExtGetProgramBinarySourceQCOM(e binary.Encoder, o *GlExtGetProgra
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Shadertype))
@@ -19787,9 +19787,9 @@ func doDecodeGlExtGetProgramBinarySourceQCOM(d binary.Decoder, o *GlExtGetProgra
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19862,7 +19862,7 @@ func doEncodeGlExtGetProgramsQCOM(e binary.Encoder, o *GlExtGetProgramsQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Programs)
 	e.Int32(int32(o.MaxPrograms))
@@ -19874,9 +19874,9 @@ func doDecodeGlExtGetProgramsQCOM(d binary.Decoder, o *GlExtGetProgramsQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -19945,7 +19945,7 @@ func doEncodeGlExtGetRenderbuffersQCOM(e binary.Encoder, o *GlExtGetRenderbuffer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Renderbuffers)
 	e.Int32(int32(o.MaxRenderbuffers))
@@ -19957,9 +19957,9 @@ func doDecodeGlExtGetRenderbuffersQCOM(d binary.Decoder, o *GlExtGetRenderbuffer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20030,7 +20030,7 @@ func doEncodeGlExtGetShadersQCOM(e binary.Encoder, o *GlExtGetShadersQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Shaders)
 	e.Int32(int32(o.MaxShaders))
@@ -20042,9 +20042,9 @@ func doDecodeGlExtGetShadersQCOM(d binary.Decoder, o *GlExtGetShadersQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20083,7 +20083,7 @@ func doEncodeGlExtGetTexLevelParameterivQCOM(e binary.Encoder, o *GlExtGetTexLev
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Face))
@@ -20097,9 +20097,9 @@ func doDecodeGlExtGetTexLevelParameterivQCOM(d binary.Decoder, o *GlExtGetTexLev
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20144,7 +20144,7 @@ func doEncodeGlExtGetTexSubImageQCOM(e binary.Encoder, o *GlExtGetTexSubImageQCO
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -20164,9 +20164,9 @@ func doDecodeGlExtGetTexSubImageQCOM(d binary.Decoder, o *GlExtGetTexSubImageQCO
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20253,7 +20253,7 @@ func doEncodeGlExtGetTexturesQCOM(e binary.Encoder, o *GlExtGetTexturesQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Textures)
 	e.Int32(int32(o.MaxTextures))
@@ -20265,9 +20265,9 @@ func doDecodeGlExtGetTexturesQCOM(d binary.Decoder, o *GlExtGetTexturesQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20306,7 +20306,7 @@ func doEncodeGlExtIsProgramBinaryQCOM(e binary.Encoder, o *GlExtIsProgramBinaryQ
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint8(uint8(o.Result))
@@ -20317,9 +20317,9 @@ func doDecodeGlExtIsProgramBinaryQCOM(d binary.Decoder, o *GlExtIsProgramBinaryQ
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20358,7 +20358,7 @@ func doEncodeGlExtTexObjectStateOverrideiQCOM(e binary.Encoder, o *GlExtTexObjec
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -20370,9 +20370,9 @@ func doDecodeGlExtTexObjectStateOverrideiQCOM(d binary.Decoder, o *GlExtTexObjec
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20413,7 +20413,7 @@ func doEncodeGlFenceSync(e binary.Encoder, o *GlFenceSync) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Condition))
 	e.Uint32(uint32(o.SyncFlags))
@@ -20425,9 +20425,9 @@ func doDecodeGlFenceSync(d binary.Decoder, o *GlFenceSync) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20466,7 +20466,7 @@ func doEncodeGlFenceSyncAPPLE(e binary.Encoder, o *GlFenceSyncAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Condition))
 	e.Uint32(uint32(o.Flag))
@@ -20478,9 +20478,9 @@ func doDecodeGlFenceSyncAPPLE(d binary.Decoder, o *GlFenceSyncAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20519,7 +20519,7 @@ func doEncodeGlFinish(e binary.Encoder, o *GlFinish) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlFinish(d binary.Decoder, o *GlFinish) {
@@ -20528,9 +20528,9 @@ func doDecodeGlFinish(d binary.Decoder, o *GlFinish) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20563,7 +20563,7 @@ func doEncodeGlFinishFenceNV(e binary.Encoder, o *GlFinishFenceNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fence))
 }
@@ -20573,9 +20573,9 @@ func doDecodeGlFinishFenceNV(d binary.Decoder, o *GlFinishFenceNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20610,7 +20610,7 @@ func doEncodeGlFlush(e binary.Encoder, o *GlFlush) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlFlush(d binary.Decoder, o *GlFlush) {
@@ -20619,9 +20619,9 @@ func doDecodeGlFlush(d binary.Decoder, o *GlFlush) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20654,7 +20654,7 @@ func doEncodeGlFlushMappedBufferRange(e binary.Encoder, o *GlFlushMappedBufferRa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Offset))
@@ -20666,9 +20666,9 @@ func doDecodeGlFlushMappedBufferRange(d binary.Decoder, o *GlFlushMappedBufferRa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20709,7 +20709,7 @@ func doEncodeGlFlushMappedBufferRangeEXT(e binary.Encoder, o *GlFlushMappedBuffe
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Offset))
@@ -20721,9 +20721,9 @@ func doDecodeGlFlushMappedBufferRangeEXT(d binary.Decoder, o *GlFlushMappedBuffe
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20764,7 +20764,7 @@ func doEncodeGlFogf(e binary.Encoder, o *GlFogf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Float32(float32(o.Param))
@@ -20775,9 +20775,9 @@ func doDecodeGlFogf(d binary.Decoder, o *GlFogf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20814,7 +20814,7 @@ func doEncodeGlFogfv(e binary.Encoder, o *GlFogfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -20825,9 +20825,9 @@ func doDecodeGlFogfv(d binary.Decoder, o *GlFogfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20864,7 +20864,7 @@ func doEncodeGlFogx(e binary.Encoder, o *GlFogx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -20875,9 +20875,9 @@ func doDecodeGlFogx(d binary.Decoder, o *GlFogx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20914,7 +20914,7 @@ func doEncodeGlFogxOES(e binary.Encoder, o *GlFogxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -20925,9 +20925,9 @@ func doDecodeGlFogxOES(d binary.Decoder, o *GlFogxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -20964,7 +20964,7 @@ func doEncodeGlFogxv(e binary.Encoder, o *GlFogxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Param)
@@ -20975,9 +20975,9 @@ func doDecodeGlFogxv(d binary.Decoder, o *GlFogxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21014,7 +21014,7 @@ func doEncodeGlFogxvOES(e binary.Encoder, o *GlFogxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Param)
@@ -21025,9 +21025,9 @@ func doDecodeGlFogxvOES(d binary.Decoder, o *GlFogxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21064,7 +21064,7 @@ func doEncodeGlFragmentCoverageColorNV(e binary.Encoder, o *GlFragmentCoverageCo
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Color))
 }
@@ -21074,9 +21074,9 @@ func doDecodeGlFragmentCoverageColorNV(d binary.Decoder, o *GlFragmentCoverageCo
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21113,7 +21113,7 @@ func doEncodeGlFramebufferParameteri(e binary.Encoder, o *GlFramebufferParameter
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -21125,9 +21125,9 @@ func doDecodeGlFramebufferParameteri(d binary.Decoder, o *GlFramebufferParameter
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21168,7 +21168,7 @@ func doEncodeGlFramebufferRenderbuffer(e binary.Encoder, o *GlFramebufferRenderb
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FramebufferTarget))
 	e.Uint32(uint32(o.FramebufferAttachment))
@@ -21181,9 +21181,9 @@ func doDecodeGlFramebufferRenderbuffer(d binary.Decoder, o *GlFramebufferRenderb
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21226,7 +21226,7 @@ func doEncodeGlFramebufferRenderbufferOES(e binary.Encoder, o *GlFramebufferRend
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21239,9 +21239,9 @@ func doDecodeGlFramebufferRenderbufferOES(d binary.Decoder, o *GlFramebufferRend
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21284,7 +21284,7 @@ func doEncodeGlFramebufferSampleLocationsfvNV(e binary.Encoder, o *GlFramebuffer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Start))
@@ -21297,9 +21297,9 @@ func doDecodeGlFramebufferSampleLocationsfvNV(d binary.Decoder, o *GlFramebuffer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21342,7 +21342,7 @@ func doEncodeGlFramebufferTexture(e binary.Encoder, o *GlFramebufferTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21355,9 +21355,9 @@ func doDecodeGlFramebufferTexture(d binary.Decoder, o *GlFramebufferTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21398,7 +21398,7 @@ func doEncodeGlFramebufferTexture2D(e binary.Encoder, o *GlFramebufferTexture2D)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FramebufferTarget))
 	e.Uint32(uint32(o.FramebufferAttachment))
@@ -21412,9 +21412,9 @@ func doDecodeGlFramebufferTexture2D(d binary.Decoder, o *GlFramebufferTexture2D)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21457,7 +21457,7 @@ func doEncodeGlFramebufferTexture2DMultisampleEXT(e binary.Encoder, o *GlFramebu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21472,9 +21472,9 @@ func doDecodeGlFramebufferTexture2DMultisampleEXT(d binary.Decoder, o *GlFramebu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21521,7 +21521,7 @@ func doEncodeGlFramebufferTexture2DMultisampleIMG(e binary.Encoder, o *GlFramebu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21536,9 +21536,9 @@ func doDecodeGlFramebufferTexture2DMultisampleIMG(d binary.Decoder, o *GlFramebu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21585,7 +21585,7 @@ func doEncodeGlFramebufferTexture2DOES(e binary.Encoder, o *GlFramebufferTexture
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21599,9 +21599,9 @@ func doDecodeGlFramebufferTexture2DOES(d binary.Decoder, o *GlFramebufferTexture
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21646,7 +21646,7 @@ func doEncodeGlFramebufferTexture3DOES(e binary.Encoder, o *GlFramebufferTexture
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21661,9 +21661,9 @@ func doDecodeGlFramebufferTexture3DOES(d binary.Decoder, o *GlFramebufferTexture
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21710,7 +21710,7 @@ func doEncodeGlFramebufferTextureEXT(e binary.Encoder, o *GlFramebufferTextureEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21723,9 +21723,9 @@ func doDecodeGlFramebufferTextureEXT(d binary.Decoder, o *GlFramebufferTextureEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21768,7 +21768,7 @@ func doEncodeGlFramebufferTextureLayer(e binary.Encoder, o *GlFramebufferTexture
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21782,9 +21782,9 @@ func doDecodeGlFramebufferTextureLayer(d binary.Decoder, o *GlFramebufferTexture
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21829,7 +21829,7 @@ func doEncodeGlFramebufferTextureMultiviewOVR(e binary.Encoder, o *GlFramebuffer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21844,9 +21844,9 @@ func doDecodeGlFramebufferTextureMultiviewOVR(d binary.Decoder, o *GlFramebuffer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21893,7 +21893,7 @@ func doEncodeGlFramebufferTextureOES(e binary.Encoder, o *GlFramebufferTextureOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -21906,9 +21906,9 @@ func doDecodeGlFramebufferTextureOES(d binary.Decoder, o *GlFramebufferTextureOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21951,7 +21951,7 @@ func doEncodeGlFrontFace(e binary.Encoder, o *GlFrontFace) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Orientation))
 }
@@ -21961,9 +21961,9 @@ func doDecodeGlFrontFace(d binary.Decoder, o *GlFrontFace) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -21998,7 +21998,7 @@ func doEncodeGlFrustumf(e binary.Encoder, o *GlFrustumf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.L))
 	e.Float32(float32(o.R))
@@ -22013,9 +22013,9 @@ func doDecodeGlFrustumf(d binary.Decoder, o *GlFrustumf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22060,7 +22060,7 @@ func doEncodeGlFrustumfOES(e binary.Encoder, o *GlFrustumfOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.L))
 	e.Float32(float32(o.R))
@@ -22075,9 +22075,9 @@ func doDecodeGlFrustumfOES(d binary.Decoder, o *GlFrustumfOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22122,7 +22122,7 @@ func doEncodeGlFrustumx(e binary.Encoder, o *GlFrustumx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.L))
 	e.Int32(int32(o.R))
@@ -22137,9 +22137,9 @@ func doDecodeGlFrustumx(d binary.Decoder, o *GlFrustumx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22184,7 +22184,7 @@ func doEncodeGlFrustumxOES(e binary.Encoder, o *GlFrustumxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.L))
 	e.Int32(int32(o.R))
@@ -22199,9 +22199,9 @@ func doDecodeGlFrustumxOES(d binary.Decoder, o *GlFrustumxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22246,7 +22246,7 @@ func doEncodeGlGenBuffers(e binary.Encoder, o *GlGenBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Buffers)
@@ -22257,9 +22257,9 @@ func doDecodeGlGenBuffers(d binary.Decoder, o *GlGenBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22296,7 +22296,7 @@ func doEncodeGlGenFencesNV(e binary.Encoder, o *GlGenFencesNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Fences)
@@ -22307,9 +22307,9 @@ func doDecodeGlGenFencesNV(d binary.Decoder, o *GlGenFencesNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22346,7 +22346,7 @@ func doEncodeGlGenFramebuffers(e binary.Encoder, o *GlGenFramebuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Framebuffers)
@@ -22357,9 +22357,9 @@ func doDecodeGlGenFramebuffers(d binary.Decoder, o *GlGenFramebuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22396,7 +22396,7 @@ func doEncodeGlGenFramebuffersOES(e binary.Encoder, o *GlGenFramebuffersOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Framebuffers)
@@ -22407,9 +22407,9 @@ func doDecodeGlGenFramebuffersOES(d binary.Decoder, o *GlGenFramebuffersOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22446,7 +22446,7 @@ func doEncodeGlGenPathsNV(e binary.Encoder, o *GlGenPathsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Range))
 	e.Uint32(uint32(o.Result))
@@ -22457,9 +22457,9 @@ func doDecodeGlGenPathsNV(d binary.Decoder, o *GlGenPathsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22496,7 +22496,7 @@ func doEncodeGlGenPerfMonitorsAMD(e binary.Encoder, o *GlGenPerfMonitorsAMD) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Monitors)
@@ -22507,9 +22507,9 @@ func doDecodeGlGenPerfMonitorsAMD(d binary.Decoder, o *GlGenPerfMonitorsAMD) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22576,7 +22576,7 @@ func doEncodeGlGenProgramPipelines(e binary.Encoder, o *GlGenProgramPipelines) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Pipelines)
@@ -22587,9 +22587,9 @@ func doDecodeGlGenProgramPipelines(d binary.Decoder, o *GlGenProgramPipelines) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22626,7 +22626,7 @@ func doEncodeGlGenProgramPipelinesEXT(e binary.Encoder, o *GlGenProgramPipelines
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Pipelines)
@@ -22637,9 +22637,9 @@ func doDecodeGlGenProgramPipelinesEXT(d binary.Decoder, o *GlGenProgramPipelines
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22708,7 +22708,7 @@ func doEncodeGlGenQueries(e binary.Encoder, o *GlGenQueries) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Queries)
@@ -22719,9 +22719,9 @@ func doDecodeGlGenQueries(d binary.Decoder, o *GlGenQueries) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22758,7 +22758,7 @@ func doEncodeGlGenQueriesEXT(e binary.Encoder, o *GlGenQueriesEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Queries)
@@ -22769,9 +22769,9 @@ func doDecodeGlGenQueriesEXT(d binary.Decoder, o *GlGenQueriesEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22808,7 +22808,7 @@ func doEncodeGlGenRenderbuffers(e binary.Encoder, o *GlGenRenderbuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Renderbuffers)
@@ -22819,9 +22819,9 @@ func doDecodeGlGenRenderbuffers(d binary.Decoder, o *GlGenRenderbuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22858,7 +22858,7 @@ func doEncodeGlGenRenderbuffersOES(e binary.Encoder, o *GlGenRenderbuffersOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Renderbuffers)
@@ -22869,9 +22869,9 @@ func doDecodeGlGenRenderbuffersOES(d binary.Decoder, o *GlGenRenderbuffersOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22938,7 +22938,7 @@ func doEncodeGlGenSamplers(e binary.Encoder, o *GlGenSamplers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Samplers)
@@ -22949,9 +22949,9 @@ func doDecodeGlGenSamplers(d binary.Decoder, o *GlGenSamplers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -22988,7 +22988,7 @@ func doEncodeGlGenTextures(e binary.Encoder, o *GlGenTextures) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Textures)
@@ -22999,9 +22999,9 @@ func doDecodeGlGenTextures(d binary.Decoder, o *GlGenTextures) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23068,7 +23068,7 @@ func doEncodeGlGenTransformFeedbacks(e binary.Encoder, o *GlGenTransformFeedback
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.N))
 	e.Struct(&o.Ids)
@@ -23079,9 +23079,9 @@ func doDecodeGlGenTransformFeedbacks(d binary.Decoder, o *GlGenTransformFeedback
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23150,7 +23150,7 @@ func doEncodeGlGenVertexArrays(e binary.Encoder, o *GlGenVertexArrays) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Arrays)
@@ -23161,9 +23161,9 @@ func doDecodeGlGenVertexArrays(d binary.Decoder, o *GlGenVertexArrays) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23200,7 +23200,7 @@ func doEncodeGlGenVertexArraysOES(e binary.Encoder, o *GlGenVertexArraysOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Arrays)
@@ -23211,9 +23211,9 @@ func doDecodeGlGenVertexArraysOES(d binary.Decoder, o *GlGenVertexArraysOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23250,7 +23250,7 @@ func doEncodeGlGenerateMipmap(e binary.Encoder, o *GlGenerateMipmap) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 }
@@ -23260,9 +23260,9 @@ func doDecodeGlGenerateMipmap(d binary.Decoder, o *GlGenerateMipmap) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23297,7 +23297,7 @@ func doEncodeGlGenerateMipmapOES(e binary.Encoder, o *GlGenerateMipmapOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 }
@@ -23307,9 +23307,9 @@ func doDecodeGlGenerateMipmapOES(d binary.Decoder, o *GlGenerateMipmapOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23344,7 +23344,7 @@ func doEncodeGlGetActiveAttrib(e binary.Encoder, o *GlGetActiveAttrib) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Location))
@@ -23360,9 +23360,9 @@ func doDecodeGlGetActiveAttrib(d binary.Decoder, o *GlGetActiveAttrib) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23409,7 +23409,7 @@ func doEncodeGlGetActiveUniform(e binary.Encoder, o *GlGetActiveUniform) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Index))
@@ -23425,9 +23425,9 @@ func doDecodeGlGetActiveUniform(d binary.Decoder, o *GlGetActiveUniform) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23474,7 +23474,7 @@ func doEncodeGlGetActiveUniformBlockName(e binary.Encoder, o *GlGetActiveUniform
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.UniformBlockIndex))
@@ -23488,9 +23488,9 @@ func doDecodeGlGetActiveUniformBlockName(d binary.Decoder, o *GlGetActiveUniform
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23535,7 +23535,7 @@ func doEncodeGlGetActiveUniformBlockiv(e binary.Encoder, o *GlGetActiveUniformBl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.UniformBlockIndex))
@@ -23548,9 +23548,9 @@ func doDecodeGlGetActiveUniformBlockiv(d binary.Decoder, o *GlGetActiveUniformBl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23623,7 +23623,7 @@ func doEncodeGlGetActiveUniformsiv(e binary.Encoder, o *GlGetActiveUniformsiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.UniformCount))
@@ -23637,9 +23637,9 @@ func doDecodeGlGetActiveUniformsiv(d binary.Decoder, o *GlGetActiveUniformsiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23682,7 +23682,7 @@ func doEncodeGlGetAttachedShaders(e binary.Encoder, o *GlGetAttachedShaders) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.BufferLength))
@@ -23695,9 +23695,9 @@ func doDecodeGlGetAttachedShaders(d binary.Decoder, o *GlGetAttachedShaders) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23738,7 +23738,7 @@ func doEncodeGlGetAttribLocation(e binary.Encoder, o *GlGetAttribLocation) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.String(o.Name)
@@ -23750,9 +23750,9 @@ func doDecodeGlGetAttribLocation(d binary.Decoder, o *GlGetAttribLocation) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23791,7 +23791,7 @@ func doEncodeGlGetBooleani_v(e binary.Encoder, o *GlGetBooleani_v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Uint32(uint32(o.Index))
@@ -23803,9 +23803,9 @@ func doDecodeGlGetBooleani_v(d binary.Decoder, o *GlGetBooleani_v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23844,7 +23844,7 @@ func doEncodeGlGetBooleanv(e binary.Encoder, o *GlGetBooleanv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Struct(&o.Values)
@@ -23855,9 +23855,9 @@ func doDecodeGlGetBooleanv(d binary.Decoder, o *GlGetBooleanv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23894,7 +23894,7 @@ func doEncodeGlGetBufferParameteri64v(e binary.Encoder, o *GlGetBufferParameteri
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -23906,9 +23906,9 @@ func doDecodeGlGetBufferParameteri64v(d binary.Decoder, o *GlGetBufferParameteri
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -23949,7 +23949,7 @@ func doEncodeGlGetBufferParameteriv(e binary.Encoder, o *GlGetBufferParameteriv)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -23961,9 +23961,9 @@ func doDecodeGlGetBufferParameteriv(d binary.Decoder, o *GlGetBufferParameteriv)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24002,7 +24002,7 @@ func doEncodeGlGetBufferPointerv(e binary.Encoder, o *GlGetBufferPointerv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -24014,9 +24014,9 @@ func doDecodeGlGetBufferPointerv(d binary.Decoder, o *GlGetBufferPointerv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24055,7 +24055,7 @@ func doEncodeGlGetBufferPointervOES(e binary.Encoder, o *GlGetBufferPointervOES)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -24067,9 +24067,9 @@ func doDecodeGlGetBufferPointervOES(d binary.Decoder, o *GlGetBufferPointervOES)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24108,7 +24108,7 @@ func doEncodeGlGetClipPlanef(e binary.Encoder, o *GlGetClipPlanef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -24119,9 +24119,9 @@ func doDecodeGlGetClipPlanef(d binary.Decoder, o *GlGetClipPlanef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24158,7 +24158,7 @@ func doEncodeGlGetClipPlanefOES(e binary.Encoder, o *GlGetClipPlanefOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -24169,9 +24169,9 @@ func doDecodeGlGetClipPlanefOES(d binary.Decoder, o *GlGetClipPlanefOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24208,7 +24208,7 @@ func doEncodeGlGetClipPlanex(e binary.Encoder, o *GlGetClipPlanex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -24219,9 +24219,9 @@ func doDecodeGlGetClipPlanex(d binary.Decoder, o *GlGetClipPlanex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24258,7 +24258,7 @@ func doEncodeGlGetClipPlanexOES(e binary.Encoder, o *GlGetClipPlanexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Plane))
 	e.Struct(&o.Equation)
@@ -24269,9 +24269,9 @@ func doDecodeGlGetClipPlanexOES(d binary.Decoder, o *GlGetClipPlanexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24308,7 +24308,7 @@ func doEncodeGlGetCoverageModulationTableNV(e binary.Encoder, o *GlGetCoverageMo
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Bufsize))
 	e.Struct(&o.V)
@@ -24319,9 +24319,9 @@ func doDecodeGlGetCoverageModulationTableNV(d binary.Decoder, o *GlGetCoverageMo
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24360,7 +24360,7 @@ func doEncodeGlGetDebugMessageLog(e binary.Encoder, o *GlGetDebugMessageLog) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Count))
 	e.Int32(int32(o.BufSize))
@@ -24378,9 +24378,9 @@ func doDecodeGlGetDebugMessageLog(d binary.Decoder, o *GlGetDebugMessageLog) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24431,7 +24431,7 @@ func doEncodeGlGetDebugMessageLogKHR(e binary.Encoder, o *GlGetDebugMessageLogKH
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Count))
 	e.Int32(int32(o.BufSize))
@@ -24449,9 +24449,9 @@ func doDecodeGlGetDebugMessageLogKHR(d binary.Decoder, o *GlGetDebugMessageLogKH
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24504,7 +24504,7 @@ func doEncodeGlGetDriverControlStringQCOM(e binary.Encoder, o *GlGetDriverContro
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.DriverControl))
 	e.Int32(int32(o.BufSize))
@@ -24517,9 +24517,9 @@ func doDecodeGlGetDriverControlStringQCOM(d binary.Decoder, o *GlGetDriverContro
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24562,7 +24562,7 @@ func doEncodeGlGetDriverControlsQCOM(e binary.Encoder, o *GlGetDriverControlsQCO
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Num)
 	e.Int32(int32(o.Size))
@@ -24574,9 +24574,9 @@ func doDecodeGlGetDriverControlsQCOM(d binary.Decoder, o *GlGetDriverControlsQCO
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24617,7 +24617,7 @@ func doEncodeGlGetError(e binary.Encoder, o *GlGetError) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -24627,9 +24627,9 @@ func doDecodeGlGetError(d binary.Decoder, o *GlGetError) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24664,7 +24664,7 @@ func doEncodeGlGetFenceivNV(e binary.Encoder, o *GlGetFenceivNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fence))
 	e.Uint32(uint32(o.Pname))
@@ -24676,9 +24676,9 @@ func doDecodeGlGetFenceivNV(d binary.Decoder, o *GlGetFenceivNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24717,7 +24717,7 @@ func doEncodeGlGetFirstPerfQueryIdINTEL(e binary.Encoder, o *GlGetFirstPerfQuery
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.QueryId)
 }
@@ -24727,9 +24727,9 @@ func doDecodeGlGetFirstPerfQueryIdINTEL(d binary.Decoder, o *GlGetFirstPerfQuery
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24766,7 +24766,7 @@ func doEncodeGlGetFixedv(e binary.Encoder, o *GlGetFixedv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -24777,9 +24777,9 @@ func doDecodeGlGetFixedv(d binary.Decoder, o *GlGetFixedv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24816,7 +24816,7 @@ func doEncodeGlGetFixedvOES(e binary.Encoder, o *GlGetFixedvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -24827,9 +24827,9 @@ func doDecodeGlGetFixedvOES(d binary.Decoder, o *GlGetFixedvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24866,7 +24866,7 @@ func doEncodeGlGetFloati_vNV(e binary.Encoder, o *GlGetFloati_vNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -24878,9 +24878,9 @@ func doDecodeGlGetFloati_vNV(d binary.Decoder, o *GlGetFloati_vNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24919,7 +24919,7 @@ func doEncodeGlGetFloatv(e binary.Encoder, o *GlGetFloatv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Struct(&o.Values)
@@ -24930,9 +24930,9 @@ func doDecodeGlGetFloatv(d binary.Decoder, o *GlGetFloatv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -24969,7 +24969,7 @@ func doEncodeGlGetFragDataIndexEXT(e binary.Encoder, o *GlGetFragDataIndexEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.String(o.Name)
@@ -24981,9 +24981,9 @@ func doDecodeGlGetFragDataIndexEXT(d binary.Decoder, o *GlGetFragDataIndexEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25022,7 +25022,7 @@ func doEncodeGlGetFragDataLocation(e binary.Encoder, o *GlGetFragDataLocation) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.String(o.Name)
@@ -25034,9 +25034,9 @@ func doDecodeGlGetFragDataLocation(d binary.Decoder, o *GlGetFragDataLocation) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25075,7 +25075,7 @@ func doEncodeGlGetFramebufferAttachmentParameteriv(e binary.Encoder, o *GlGetFra
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FramebufferTarget))
 	e.Uint32(uint32(o.Attachment))
@@ -25088,9 +25088,9 @@ func doDecodeGlGetFramebufferAttachmentParameteriv(d binary.Decoder, o *GlGetFra
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25133,7 +25133,7 @@ func doEncodeGlGetFramebufferAttachmentParameterivOES(e binary.Encoder, o *GlGet
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Attachment))
@@ -25146,9 +25146,9 @@ func doDecodeGlGetFramebufferAttachmentParameterivOES(d binary.Decoder, o *GlGet
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25191,7 +25191,7 @@ func doEncodeGlGetFramebufferParameteriv(e binary.Encoder, o *GlGetFramebufferPa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -25203,9 +25203,9 @@ func doDecodeGlGetFramebufferParameteriv(d binary.Decoder, o *GlGetFramebufferPa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25246,7 +25246,7 @@ func doEncodeGlGetGraphicsResetStatus(e binary.Encoder, o *GlGetGraphicsResetSta
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -25256,9 +25256,9 @@ func doDecodeGlGetGraphicsResetStatus(d binary.Decoder, o *GlGetGraphicsResetSta
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25295,7 +25295,7 @@ func doEncodeGlGetGraphicsResetStatusEXT(e binary.Encoder, o *GlGetGraphicsReset
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -25305,9 +25305,9 @@ func doDecodeGlGetGraphicsResetStatusEXT(d binary.Decoder, o *GlGetGraphicsReset
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25344,7 +25344,7 @@ func doEncodeGlGetGraphicsResetStatusKHR(e binary.Encoder, o *GlGetGraphicsReset
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Result))
 }
@@ -25354,9 +25354,9 @@ func doDecodeGlGetGraphicsResetStatusKHR(d binary.Decoder, o *GlGetGraphicsReset
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25393,7 +25393,7 @@ func doEncodeGlGetImageHandleNV(e binary.Encoder, o *GlGetImageHandleNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Int32(int32(o.Level))
@@ -25408,9 +25408,9 @@ func doDecodeGlGetImageHandleNV(d binary.Decoder, o *GlGetImageHandleNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25455,7 +25455,7 @@ func doEncodeGlGetInteger64i_v(e binary.Encoder, o *GlGetInteger64i_v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Uint32(uint32(o.Index))
@@ -25467,9 +25467,9 @@ func doDecodeGlGetInteger64i_v(d binary.Decoder, o *GlGetInteger64i_v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25508,7 +25508,7 @@ func doEncodeGlGetInteger64v(e binary.Encoder, o *GlGetInteger64v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Struct(&o.Values)
@@ -25519,9 +25519,9 @@ func doDecodeGlGetInteger64v(d binary.Decoder, o *GlGetInteger64v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25558,7 +25558,7 @@ func doEncodeGlGetInteger64vAPPLE(e binary.Encoder, o *GlGetInteger64vAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -25569,9 +25569,9 @@ func doDecodeGlGetInteger64vAPPLE(d binary.Decoder, o *GlGetInteger64vAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25608,7 +25608,7 @@ func doEncodeGlGetIntegeri_v(e binary.Encoder, o *GlGetIntegeri_v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Uint32(uint32(o.Index))
@@ -25620,9 +25620,9 @@ func doDecodeGlGetIntegeri_v(d binary.Decoder, o *GlGetIntegeri_v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25661,7 +25661,7 @@ func doEncodeGlGetIntegeri_vEXT(e binary.Encoder, o *GlGetIntegeri_vEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -25673,9 +25673,9 @@ func doDecodeGlGetIntegeri_vEXT(d binary.Decoder, o *GlGetIntegeri_vEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25714,7 +25714,7 @@ func doEncodeGlGetIntegerv(e binary.Encoder, o *GlGetIntegerv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Struct(&o.Values)
@@ -25725,9 +25725,9 @@ func doDecodeGlGetIntegerv(d binary.Decoder, o *GlGetIntegerv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25764,7 +25764,7 @@ func doEncodeGlGetInternalformatSampleivNV(e binary.Encoder, o *GlGetInternalfor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -25779,9 +25779,9 @@ func doDecodeGlGetInternalformatSampleivNV(d binary.Decoder, o *GlGetInternalfor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25828,7 +25828,7 @@ func doEncodeGlGetInternalformativ(e binary.Encoder, o *GlGetInternalformativ) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -25842,9 +25842,9 @@ func doDecodeGlGetInternalformativ(d binary.Decoder, o *GlGetInternalformativ) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25887,7 +25887,7 @@ func doEncodeGlGetLightfv(e binary.Encoder, o *GlGetLightfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -25899,9 +25899,9 @@ func doDecodeGlGetLightfv(d binary.Decoder, o *GlGetLightfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25940,7 +25940,7 @@ func doEncodeGlGetLightxv(e binary.Encoder, o *GlGetLightxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -25952,9 +25952,9 @@ func doDecodeGlGetLightxv(d binary.Decoder, o *GlGetLightxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -25993,7 +25993,7 @@ func doEncodeGlGetLightxvOES(e binary.Encoder, o *GlGetLightxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -26005,9 +26005,9 @@ func doDecodeGlGetLightxvOES(d binary.Decoder, o *GlGetLightxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26046,7 +26046,7 @@ func doEncodeGlGetMaterialfv(e binary.Encoder, o *GlGetMaterialfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -26058,9 +26058,9 @@ func doDecodeGlGetMaterialfv(d binary.Decoder, o *GlGetMaterialfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26099,7 +26099,7 @@ func doEncodeGlGetMaterialxv(e binary.Encoder, o *GlGetMaterialxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -26111,9 +26111,9 @@ func doDecodeGlGetMaterialxv(d binary.Decoder, o *GlGetMaterialxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26152,7 +26152,7 @@ func doEncodeGlGetMaterialxvOES(e binary.Encoder, o *GlGetMaterialxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -26164,9 +26164,9 @@ func doDecodeGlGetMaterialxvOES(d binary.Decoder, o *GlGetMaterialxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26205,7 +26205,7 @@ func doEncodeGlGetMultisamplefv(e binary.Encoder, o *GlGetMultisamplefv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Uint32(uint32(o.Index))
@@ -26217,9 +26217,9 @@ func doDecodeGlGetMultisamplefv(d binary.Decoder, o *GlGetMultisamplefv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26258,7 +26258,7 @@ func doEncodeGlGetNextPerfQueryIdINTEL(e binary.Encoder, o *GlGetNextPerfQueryId
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryId))
 	e.Struct(&o.NextQueryId)
@@ -26269,9 +26269,9 @@ func doDecodeGlGetNextPerfQueryIdINTEL(d binary.Decoder, o *GlGetNextPerfQueryId
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26310,7 +26310,7 @@ func doEncodeGlGetObjectLabel(e binary.Encoder, o *GlGetObjectLabel) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Identifier))
 	e.Uint32(uint32(o.Name))
@@ -26324,9 +26324,9 @@ func doDecodeGlGetObjectLabel(d binary.Decoder, o *GlGetObjectLabel) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26369,7 +26369,7 @@ func doEncodeGlGetObjectLabelEXT(e binary.Encoder, o *GlGetObjectLabelEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Uint32(uint32(o.Object))
@@ -26383,9 +26383,9 @@ func doDecodeGlGetObjectLabelEXT(d binary.Decoder, o *GlGetObjectLabelEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26428,7 +26428,7 @@ func doEncodeGlGetObjectLabelKHR(e binary.Encoder, o *GlGetObjectLabelKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Identifier))
 	e.Uint32(uint32(o.Name))
@@ -26442,9 +26442,9 @@ func doDecodeGlGetObjectLabelKHR(d binary.Decoder, o *GlGetObjectLabelKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26487,7 +26487,7 @@ func doEncodeGlGetObjectPtrLabel(e binary.Encoder, o *GlGetObjectPtrLabel) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ptr)
 	e.Int32(int32(o.BufSize))
@@ -26500,9 +26500,9 @@ func doDecodeGlGetObjectPtrLabel(d binary.Decoder, o *GlGetObjectPtrLabel) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26543,7 +26543,7 @@ func doEncodeGlGetObjectPtrLabelKHR(e binary.Encoder, o *GlGetObjectPtrLabelKHR)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ptr)
 	e.Int32(int32(o.BufSize))
@@ -26556,9 +26556,9 @@ func doDecodeGlGetObjectPtrLabelKHR(d binary.Decoder, o *GlGetObjectPtrLabelKHR)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26599,7 +26599,7 @@ func doEncodeGlGetPathCommandsNV(e binary.Encoder, o *GlGetPathCommandsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Struct(&o.Commands)
@@ -26610,9 +26610,9 @@ func doDecodeGlGetPathCommandsNV(d binary.Decoder, o *GlGetPathCommandsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26649,7 +26649,7 @@ func doEncodeGlGetPathCoordsNV(e binary.Encoder, o *GlGetPathCoordsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Struct(&o.Coords)
@@ -26660,9 +26660,9 @@ func doDecodeGlGetPathCoordsNV(d binary.Decoder, o *GlGetPathCoordsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26699,7 +26699,7 @@ func doEncodeGlGetPathDashArrayNV(e binary.Encoder, o *GlGetPathDashArrayNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Struct(&o.DashArray)
@@ -26710,9 +26710,9 @@ func doDecodeGlGetPathDashArrayNV(d binary.Decoder, o *GlGetPathDashArrayNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26749,7 +26749,7 @@ func doEncodeGlGetPathLengthNV(e binary.Encoder, o *GlGetPathLengthNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.StartSegment))
@@ -26762,9 +26762,9 @@ func doDecodeGlGetPathLengthNV(d binary.Decoder, o *GlGetPathLengthNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26805,7 +26805,7 @@ func doEncodeGlGetPathMetricRangeNV(e binary.Encoder, o *GlGetPathMetricRangeNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MetricQueryMask))
 	e.Uint32(uint32(o.FirstPathName))
@@ -26819,9 +26819,9 @@ func doDecodeGlGetPathMetricRangeNV(d binary.Decoder, o *GlGetPathMetricRangeNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26864,7 +26864,7 @@ func doEncodeGlGetPathMetricsNV(e binary.Encoder, o *GlGetPathMetricsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MetricQueryMask))
 	e.Int32(int32(o.NumPaths))
@@ -26880,9 +26880,9 @@ func doDecodeGlGetPathMetricsNV(d binary.Decoder, o *GlGetPathMetricsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26929,7 +26929,7 @@ func doEncodeGlGetPathParameterfvNV(e binary.Encoder, o *GlGetPathParameterfvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -26941,9 +26941,9 @@ func doDecodeGlGetPathParameterfvNV(d binary.Decoder, o *GlGetPathParameterfvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -26982,7 +26982,7 @@ func doEncodeGlGetPathParameterivNV(e binary.Encoder, o *GlGetPathParameterivNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -26994,9 +26994,9 @@ func doDecodeGlGetPathParameterivNV(d binary.Decoder, o *GlGetPathParameterivNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27035,7 +27035,7 @@ func doEncodeGlGetPathSpacingNV(e binary.Encoder, o *GlGetPathSpacingNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.PathListMode))
 	e.Int32(int32(o.NumPaths))
@@ -27053,9 +27053,9 @@ func doDecodeGlGetPathSpacingNV(d binary.Decoder, o *GlGetPathSpacingNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27106,7 +27106,7 @@ func doEncodeGlGetPerfCounterInfoINTEL(e binary.Encoder, o *GlGetPerfCounterInfo
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryId))
 	e.Uint32(uint32(o.CounterId))
@@ -27126,9 +27126,9 @@ func doDecodeGlGetPerfCounterInfoINTEL(d binary.Decoder, o *GlGetPerfCounterInfo
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27185,7 +27185,7 @@ func doEncodeGlGetPerfMonitorCounterDataAMD(e binary.Encoder, o *GlGetPerfMonito
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Monitor))
 	e.Uint32(uint32(o.Pname))
@@ -27199,9 +27199,9 @@ func doDecodeGlGetPerfMonitorCounterDataAMD(d binary.Decoder, o *GlGetPerfMonito
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27246,7 +27246,7 @@ func doEncodeGlGetPerfMonitorCounterInfoAMD(e binary.Encoder, o *GlGetPerfMonito
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Group))
 	e.Uint32(uint32(o.Counter))
@@ -27259,9 +27259,9 @@ func doDecodeGlGetPerfMonitorCounterInfoAMD(d binary.Decoder, o *GlGetPerfMonito
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27304,7 +27304,7 @@ func doEncodeGlGetPerfMonitorCounterStringAMD(e binary.Encoder, o *GlGetPerfMoni
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Group))
 	e.Uint32(uint32(o.Counter))
@@ -27318,9 +27318,9 @@ func doDecodeGlGetPerfMonitorCounterStringAMD(d binary.Decoder, o *GlGetPerfMoni
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27365,7 +27365,7 @@ func doEncodeGlGetPerfMonitorCountersAMD(e binary.Encoder, o *GlGetPerfMonitorCo
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Group))
 	e.Struct(&o.NumCounters)
@@ -27379,9 +27379,9 @@ func doDecodeGlGetPerfMonitorCountersAMD(d binary.Decoder, o *GlGetPerfMonitorCo
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27426,7 +27426,7 @@ func doEncodeGlGetPerfMonitorGroupStringAMD(e binary.Encoder, o *GlGetPerfMonito
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Group))
 	e.Int32(int32(o.BufSize))
@@ -27439,9 +27439,9 @@ func doDecodeGlGetPerfMonitorGroupStringAMD(d binary.Decoder, o *GlGetPerfMonito
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27484,7 +27484,7 @@ func doEncodeGlGetPerfMonitorGroupsAMD(e binary.Encoder, o *GlGetPerfMonitorGrou
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.NumGroups)
 	e.Int32(int32(o.GroupsSize))
@@ -27496,9 +27496,9 @@ func doDecodeGlGetPerfMonitorGroupsAMD(d binary.Decoder, o *GlGetPerfMonitorGrou
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27539,7 +27539,7 @@ func doEncodeGlGetPerfQueryDataINTEL(e binary.Encoder, o *GlGetPerfQueryDataINTE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryHandle))
 	e.Uint32(uint32(o.Flag))
@@ -27553,9 +27553,9 @@ func doDecodeGlGetPerfQueryDataINTEL(d binary.Decoder, o *GlGetPerfQueryDataINTE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27600,7 +27600,7 @@ func doEncodeGlGetPerfQueryIdByNameINTEL(e binary.Encoder, o *GlGetPerfQueryIdBy
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.QueryName)
 	e.Struct(&o.QueryId)
@@ -27611,9 +27611,9 @@ func doDecodeGlGetPerfQueryIdByNameINTEL(d binary.Decoder, o *GlGetPerfQueryIdBy
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27652,7 +27652,7 @@ func doEncodeGlGetPerfQueryInfoINTEL(e binary.Encoder, o *GlGetPerfQueryInfoINTE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.QueryId))
 	e.Uint32(uint32(o.QueryNameLength))
@@ -27668,9 +27668,9 @@ func doDecodeGlGetPerfQueryInfoINTEL(d binary.Decoder, o *GlGetPerfQueryInfoINTE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27719,7 +27719,7 @@ func doEncodeGlGetPointerv(e binary.Encoder, o *GlGetPointerv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -27730,9 +27730,9 @@ func doDecodeGlGetPointerv(d binary.Decoder, o *GlGetPointerv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27769,7 +27769,7 @@ func doEncodeGlGetPointervKHR(e binary.Encoder, o *GlGetPointervKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -27780,9 +27780,9 @@ func doDecodeGlGetPointervKHR(d binary.Decoder, o *GlGetPointervKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27819,7 +27819,7 @@ func doEncodeGlGetProgramBinary(e binary.Encoder, o *GlGetProgramBinary) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.BufSize))
@@ -27833,9 +27833,9 @@ func doDecodeGlGetProgramBinary(d binary.Decoder, o *GlGetProgramBinary) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27878,7 +27878,7 @@ func doEncodeGlGetProgramBinaryOES(e binary.Encoder, o *GlGetProgramBinaryOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.BufferSize))
@@ -27892,9 +27892,9 @@ func doDecodeGlGetProgramBinaryOES(d binary.Decoder, o *GlGetProgramBinaryOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27937,7 +27937,7 @@ func doEncodeGlGetProgramInfoLog(e binary.Encoder, o *GlGetProgramInfoLog) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.BufferLength))
@@ -27950,9 +27950,9 @@ func doDecodeGlGetProgramInfoLog(d binary.Decoder, o *GlGetProgramInfoLog) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -27993,7 +27993,7 @@ func doEncodeGlGetProgramInterfaceiv(e binary.Encoder, o *GlGetProgramInterfacei
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28006,9 +28006,9 @@ func doDecodeGlGetProgramInterfaceiv(d binary.Decoder, o *GlGetProgramInterfacei
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28051,7 +28051,7 @@ func doEncodeGlGetProgramPipelineInfoLog(e binary.Encoder, o *GlGetProgramPipeli
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Int32(int32(o.BufSize))
@@ -28064,9 +28064,9 @@ func doDecodeGlGetProgramPipelineInfoLog(d binary.Decoder, o *GlGetProgramPipeli
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28109,7 +28109,7 @@ func doEncodeGlGetProgramPipelineInfoLogEXT(e binary.Encoder, o *GlGetProgramPip
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Int32(int32(o.BufSize))
@@ -28122,9 +28122,9 @@ func doDecodeGlGetProgramPipelineInfoLogEXT(d binary.Decoder, o *GlGetProgramPip
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28167,7 +28167,7 @@ func doEncodeGlGetProgramPipelineiv(e binary.Encoder, o *GlGetProgramPipelineiv)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Pname))
@@ -28179,9 +28179,9 @@ func doDecodeGlGetProgramPipelineiv(d binary.Decoder, o *GlGetProgramPipelineiv)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28220,7 +28220,7 @@ func doEncodeGlGetProgramPipelineivEXT(e binary.Encoder, o *GlGetProgramPipeline
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Pname))
@@ -28232,9 +28232,9 @@ func doDecodeGlGetProgramPipelineivEXT(d binary.Decoder, o *GlGetProgramPipeline
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28275,7 +28275,7 @@ func doEncodeGlGetProgramResourceIndex(e binary.Encoder, o *GlGetProgramResource
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28288,9 +28288,9 @@ func doDecodeGlGetProgramResourceIndex(d binary.Decoder, o *GlGetProgramResource
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28333,7 +28333,7 @@ func doEncodeGlGetProgramResourceLocation(e binary.Encoder, o *GlGetProgramResou
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28346,9 +28346,9 @@ func doDecodeGlGetProgramResourceLocation(d binary.Decoder, o *GlGetProgramResou
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28391,7 +28391,7 @@ func doEncodeGlGetProgramResourceLocationIndexEXT(e binary.Encoder, o *GlGetProg
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28404,9 +28404,9 @@ func doDecodeGlGetProgramResourceLocationIndexEXT(d binary.Decoder, o *GlGetProg
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28449,7 +28449,7 @@ func doEncodeGlGetProgramResourceName(e binary.Encoder, o *GlGetProgramResourceN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28464,9 +28464,9 @@ func doDecodeGlGetProgramResourceName(d binary.Decoder, o *GlGetProgramResourceN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28513,7 +28513,7 @@ func doEncodeGlGetProgramResourcefvNV(e binary.Encoder, o *GlGetProgramResourcef
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28530,9 +28530,9 @@ func doDecodeGlGetProgramResourcefvNV(d binary.Decoder, o *GlGetProgramResourcef
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28583,7 +28583,7 @@ func doEncodeGlGetProgramResourceiv(e binary.Encoder, o *GlGetProgramResourceiv)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.ProgramInterface))
@@ -28600,9 +28600,9 @@ func doDecodeGlGetProgramResourceiv(d binary.Decoder, o *GlGetProgramResourceiv)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28651,7 +28651,7 @@ func doEncodeGlGetProgramiv(e binary.Encoder, o *GlGetProgramiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Parameter))
@@ -28663,9 +28663,9 @@ func doDecodeGlGetProgramiv(d binary.Decoder, o *GlGetProgramiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28734,7 +28734,7 @@ func doEncodeGlGetQueryObjecti64v(e binary.Encoder, o *GlGetQueryObjecti64v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -28746,9 +28746,9 @@ func doDecodeGlGetQueryObjecti64v(d binary.Decoder, o *GlGetQueryObjecti64v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28787,7 +28787,7 @@ func doEncodeGlGetQueryObjecti64vEXT(e binary.Encoder, o *GlGetQueryObjecti64vEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -28799,9 +28799,9 @@ func doDecodeGlGetQueryObjecti64vEXT(d binary.Decoder, o *GlGetQueryObjecti64vEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28842,7 +28842,7 @@ func doEncodeGlGetQueryObjectivEXT(e binary.Encoder, o *GlGetQueryObjectivEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -28854,9 +28854,9 @@ func doDecodeGlGetQueryObjectivEXT(d binary.Decoder, o *GlGetQueryObjectivEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28925,7 +28925,7 @@ func doEncodeGlGetQueryObjectui64v(e binary.Encoder, o *GlGetQueryObjectui64v) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -28937,9 +28937,9 @@ func doDecodeGlGetQueryObjectui64v(d binary.Decoder, o *GlGetQueryObjectui64v) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -28978,7 +28978,7 @@ func doEncodeGlGetQueryObjectui64vEXT(e binary.Encoder, o *GlGetQueryObjectui64v
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -28990,9 +28990,9 @@ func doDecodeGlGetQueryObjectui64vEXT(d binary.Decoder, o *GlGetQueryObjectui64v
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29033,7 +29033,7 @@ func doEncodeGlGetQueryObjectuiv(e binary.Encoder, o *GlGetQueryObjectuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -29045,9 +29045,9 @@ func doDecodeGlGetQueryObjectuiv(d binary.Decoder, o *GlGetQueryObjectuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29086,7 +29086,7 @@ func doEncodeGlGetQueryObjectuivEXT(e binary.Encoder, o *GlGetQueryObjectuivEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Parameter))
@@ -29098,9 +29098,9 @@ func doDecodeGlGetQueryObjectuivEXT(d binary.Decoder, o *GlGetQueryObjectuivEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29139,7 +29139,7 @@ func doEncodeGlGetQueryiv(e binary.Encoder, o *GlGetQueryiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -29151,9 +29151,9 @@ func doDecodeGlGetQueryiv(d binary.Decoder, o *GlGetQueryiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29192,7 +29192,7 @@ func doEncodeGlGetQueryivEXT(e binary.Encoder, o *GlGetQueryivEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -29204,9 +29204,9 @@ func doDecodeGlGetQueryivEXT(d binary.Decoder, o *GlGetQueryivEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29245,7 +29245,7 @@ func doEncodeGlGetRenderbufferParameteriv(e binary.Encoder, o *GlGetRenderbuffer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -29257,9 +29257,9 @@ func doDecodeGlGetRenderbufferParameteriv(d binary.Decoder, o *GlGetRenderbuffer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29300,7 +29300,7 @@ func doEncodeGlGetRenderbufferParameterivOES(e binary.Encoder, o *GlGetRenderbuf
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -29312,9 +29312,9 @@ func doDecodeGlGetRenderbufferParameterivOES(d binary.Decoder, o *GlGetRenderbuf
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29355,7 +29355,7 @@ func doEncodeGlGetSamplerParameterIiv(e binary.Encoder, o *GlGetSamplerParameter
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29367,9 +29367,9 @@ func doDecodeGlGetSamplerParameterIiv(d binary.Decoder, o *GlGetSamplerParameter
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29410,7 +29410,7 @@ func doEncodeGlGetSamplerParameterIivEXT(e binary.Encoder, o *GlGetSamplerParame
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29422,9 +29422,9 @@ func doDecodeGlGetSamplerParameterIivEXT(d binary.Decoder, o *GlGetSamplerParame
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29465,7 +29465,7 @@ func doEncodeGlGetSamplerParameterIivOES(e binary.Encoder, o *GlGetSamplerParame
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29477,9 +29477,9 @@ func doDecodeGlGetSamplerParameterIivOES(d binary.Decoder, o *GlGetSamplerParame
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29520,7 +29520,7 @@ func doEncodeGlGetSamplerParameterIuiv(e binary.Encoder, o *GlGetSamplerParamete
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29532,9 +29532,9 @@ func doDecodeGlGetSamplerParameterIuiv(d binary.Decoder, o *GlGetSamplerParamete
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29575,7 +29575,7 @@ func doEncodeGlGetSamplerParameterIuivEXT(e binary.Encoder, o *GlGetSamplerParam
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29587,9 +29587,9 @@ func doDecodeGlGetSamplerParameterIuivEXT(d binary.Decoder, o *GlGetSamplerParam
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29630,7 +29630,7 @@ func doEncodeGlGetSamplerParameterIuivOES(e binary.Encoder, o *GlGetSamplerParam
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29642,9 +29642,9 @@ func doDecodeGlGetSamplerParameterIuivOES(d binary.Decoder, o *GlGetSamplerParam
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29685,7 +29685,7 @@ func doEncodeGlGetSamplerParameterfv(e binary.Encoder, o *GlGetSamplerParameterf
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29697,9 +29697,9 @@ func doDecodeGlGetSamplerParameterfv(d binary.Decoder, o *GlGetSamplerParameterf
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29740,7 +29740,7 @@ func doEncodeGlGetSamplerParameteriv(e binary.Encoder, o *GlGetSamplerParameteri
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -29752,9 +29752,9 @@ func doDecodeGlGetSamplerParameteriv(d binary.Decoder, o *GlGetSamplerParameteri
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29795,7 +29795,7 @@ func doEncodeGlGetShaderInfoLog(e binary.Encoder, o *GlGetShaderInfoLog) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Int32(int32(o.BufferLength))
@@ -29808,9 +29808,9 @@ func doDecodeGlGetShaderInfoLog(d binary.Decoder, o *GlGetShaderInfoLog) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29851,7 +29851,7 @@ func doEncodeGlGetShaderPrecisionFormat(e binary.Encoder, o *GlGetShaderPrecisio
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ShaderType))
 	e.Uint32(uint32(o.PrecisionType))
@@ -29864,9 +29864,9 @@ func doDecodeGlGetShaderPrecisionFormat(d binary.Decoder, o *GlGetShaderPrecisio
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29909,7 +29909,7 @@ func doEncodeGlGetShaderSource(e binary.Encoder, o *GlGetShaderSource) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Int32(int32(o.BufferLength))
@@ -29922,9 +29922,9 @@ func doDecodeGlGetShaderSource(d binary.Decoder, o *GlGetShaderSource) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -29965,7 +29965,7 @@ func doEncodeGlGetShaderiv(e binary.Encoder, o *GlGetShaderiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Uint32(uint32(o.Parameter))
@@ -29977,9 +29977,9 @@ func doDecodeGlGetShaderiv(d binary.Decoder, o *GlGetShaderiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30018,7 +30018,7 @@ func doEncodeGlGetString(e binary.Encoder, o *GlGetString) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Param))
 	e.Struct(&o.Result)
@@ -30029,9 +30029,9 @@ func doDecodeGlGetString(d binary.Decoder, o *GlGetString) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30068,7 +30068,7 @@ func doEncodeGlGetStringi(e binary.Encoder, o *GlGetStringi) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Name))
 	e.Uint32(uint32(o.Index))
@@ -30080,9 +30080,9 @@ func doDecodeGlGetStringi(d binary.Decoder, o *GlGetStringi) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30121,7 +30121,7 @@ func doEncodeGlGetSynciv(e binary.Encoder, o *GlGetSynciv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.Pname))
@@ -30135,9 +30135,9 @@ func doDecodeGlGetSynciv(d binary.Decoder, o *GlGetSynciv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30180,7 +30180,7 @@ func doEncodeGlGetSyncivAPPLE(e binary.Encoder, o *GlGetSyncivAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.Pname))
@@ -30194,9 +30194,9 @@ func doDecodeGlGetSyncivAPPLE(d binary.Decoder, o *GlGetSyncivAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30239,7 +30239,7 @@ func doEncodeGlGetTexEnvfv(e binary.Encoder, o *GlGetTexEnvfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30251,9 +30251,9 @@ func doDecodeGlGetTexEnvfv(d binary.Decoder, o *GlGetTexEnvfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30292,7 +30292,7 @@ func doEncodeGlGetTexEnviv(e binary.Encoder, o *GlGetTexEnviv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30304,9 +30304,9 @@ func doDecodeGlGetTexEnviv(d binary.Decoder, o *GlGetTexEnviv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30345,7 +30345,7 @@ func doEncodeGlGetTexEnvxv(e binary.Encoder, o *GlGetTexEnvxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30357,9 +30357,9 @@ func doDecodeGlGetTexEnvxv(d binary.Decoder, o *GlGetTexEnvxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30398,7 +30398,7 @@ func doEncodeGlGetTexEnvxvOES(e binary.Encoder, o *GlGetTexEnvxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30410,9 +30410,9 @@ func doDecodeGlGetTexEnvxvOES(d binary.Decoder, o *GlGetTexEnvxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30451,7 +30451,7 @@ func doEncodeGlGetTexGenfvOES(e binary.Encoder, o *GlGetTexGenfvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -30463,9 +30463,9 @@ func doDecodeGlGetTexGenfvOES(d binary.Decoder, o *GlGetTexGenfvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30504,7 +30504,7 @@ func doEncodeGlGetTexGenivOES(e binary.Encoder, o *GlGetTexGenivOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -30516,9 +30516,9 @@ func doDecodeGlGetTexGenivOES(d binary.Decoder, o *GlGetTexGenivOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30557,7 +30557,7 @@ func doEncodeGlGetTexGenxvOES(e binary.Encoder, o *GlGetTexGenxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -30569,9 +30569,9 @@ func doDecodeGlGetTexGenxvOES(d binary.Decoder, o *GlGetTexGenxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30610,7 +30610,7 @@ func doEncodeGlGetTexLevelParameterfv(e binary.Encoder, o *GlGetTexLevelParamete
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -30623,9 +30623,9 @@ func doDecodeGlGetTexLevelParameterfv(d binary.Decoder, o *GlGetTexLevelParamete
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30668,7 +30668,7 @@ func doEncodeGlGetTexLevelParameteriv(e binary.Encoder, o *GlGetTexLevelParamete
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -30681,9 +30681,9 @@ func doDecodeGlGetTexLevelParameteriv(d binary.Decoder, o *GlGetTexLevelParamete
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30726,7 +30726,7 @@ func doEncodeGlGetTexParameterIiv(e binary.Encoder, o *GlGetTexParameterIiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30738,9 +30738,9 @@ func doDecodeGlGetTexParameterIiv(d binary.Decoder, o *GlGetTexParameterIiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30779,7 +30779,7 @@ func doEncodeGlGetTexParameterIivEXT(e binary.Encoder, o *GlGetTexParameterIivEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30791,9 +30791,9 @@ func doDecodeGlGetTexParameterIivEXT(d binary.Decoder, o *GlGetTexParameterIivEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30834,7 +30834,7 @@ func doEncodeGlGetTexParameterIivOES(e binary.Encoder, o *GlGetTexParameterIivOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30846,9 +30846,9 @@ func doDecodeGlGetTexParameterIivOES(d binary.Decoder, o *GlGetTexParameterIivOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30889,7 +30889,7 @@ func doEncodeGlGetTexParameterIuiv(e binary.Encoder, o *GlGetTexParameterIuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30901,9 +30901,9 @@ func doDecodeGlGetTexParameterIuiv(d binary.Decoder, o *GlGetTexParameterIuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30942,7 +30942,7 @@ func doEncodeGlGetTexParameterIuivEXT(e binary.Encoder, o *GlGetTexParameterIuiv
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -30954,9 +30954,9 @@ func doDecodeGlGetTexParameterIuivEXT(d binary.Decoder, o *GlGetTexParameterIuiv
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -30997,7 +30997,7 @@ func doEncodeGlGetTexParameterIuivOES(e binary.Encoder, o *GlGetTexParameterIuiv
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -31009,9 +31009,9 @@ func doDecodeGlGetTexParameterIuivOES(d binary.Decoder, o *GlGetTexParameterIuiv
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31052,7 +31052,7 @@ func doEncodeGlGetTexParameterfv(e binary.Encoder, o *GlGetTexParameterfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -31064,9 +31064,9 @@ func doDecodeGlGetTexParameterfv(d binary.Decoder, o *GlGetTexParameterfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31105,7 +31105,7 @@ func doEncodeGlGetTexParameteriv(e binary.Encoder, o *GlGetTexParameteriv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -31117,9 +31117,9 @@ func doDecodeGlGetTexParameteriv(d binary.Decoder, o *GlGetTexParameteriv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31158,7 +31158,7 @@ func doEncodeGlGetTexParameterxv(e binary.Encoder, o *GlGetTexParameterxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -31170,9 +31170,9 @@ func doDecodeGlGetTexParameterxv(d binary.Decoder, o *GlGetTexParameterxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31211,7 +31211,7 @@ func doEncodeGlGetTexParameterxvOES(e binary.Encoder, o *GlGetTexParameterxvOES)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -31223,9 +31223,9 @@ func doDecodeGlGetTexParameterxvOES(d binary.Decoder, o *GlGetTexParameterxvOES)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31264,7 +31264,7 @@ func doEncodeGlGetTextureHandleNV(e binary.Encoder, o *GlGetTextureHandleNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint64(uint64(o.Result))
@@ -31275,9 +31275,9 @@ func doDecodeGlGetTextureHandleNV(d binary.Decoder, o *GlGetTextureHandleNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31314,7 +31314,7 @@ func doEncodeGlGetTextureSamplerHandleNV(e binary.Encoder, o *GlGetTextureSample
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Sampler))
@@ -31326,9 +31326,9 @@ func doDecodeGlGetTextureSamplerHandleNV(d binary.Decoder, o *GlGetTextureSample
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31369,7 +31369,7 @@ func doEncodeGlGetTransformFeedbackVarying(e binary.Encoder, o *GlGetTransformFe
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Index))
@@ -31385,9 +31385,9 @@ func doDecodeGlGetTransformFeedbackVarying(d binary.Decoder, o *GlGetTransformFe
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31436,7 +31436,7 @@ func doEncodeGlGetTranslatedShaderSourceANGLE(e binary.Encoder, o *GlGetTranslat
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Int32(int32(o.Bufsize))
@@ -31449,9 +31449,9 @@ func doDecodeGlGetTranslatedShaderSourceANGLE(d binary.Decoder, o *GlGetTranslat
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31494,7 +31494,7 @@ func doEncodeGlGetUniformBlockIndex(e binary.Encoder, o *GlGetUniformBlockIndex)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.String(o.UniformBlockName)
@@ -31506,9 +31506,9 @@ func doDecodeGlGetUniformBlockIndex(d binary.Decoder, o *GlGetUniformBlockIndex)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31577,7 +31577,7 @@ func doEncodeGlGetUniformIndices(e binary.Encoder, o *GlGetUniformIndices) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.UniformCount))
@@ -31590,9 +31590,9 @@ func doDecodeGlGetUniformIndices(d binary.Decoder, o *GlGetUniformIndices) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31633,7 +31633,7 @@ func doEncodeGlGetUniformLocation(e binary.Encoder, o *GlGetUniformLocation) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.String(o.Name)
@@ -31645,9 +31645,9 @@ func doDecodeGlGetUniformLocation(d binary.Decoder, o *GlGetUniformLocation) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31686,7 +31686,7 @@ func doEncodeGlGetUniformfv(e binary.Encoder, o *GlGetUniformfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -31698,9 +31698,9 @@ func doDecodeGlGetUniformfv(d binary.Decoder, o *GlGetUniformfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31739,7 +31739,7 @@ func doEncodeGlGetUniformiv(e binary.Encoder, o *GlGetUniformiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -31751,9 +31751,9 @@ func doDecodeGlGetUniformiv(d binary.Decoder, o *GlGetUniformiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31792,7 +31792,7 @@ func doEncodeGlGetUniformuiv(e binary.Encoder, o *GlGetUniformuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -31804,9 +31804,9 @@ func doDecodeGlGetUniformuiv(d binary.Decoder, o *GlGetUniformuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31845,7 +31845,7 @@ func doEncodeGlGetVertexAttribIiv(e binary.Encoder, o *GlGetVertexAttribIiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Pname))
@@ -31857,9 +31857,9 @@ func doDecodeGlGetVertexAttribIiv(d binary.Decoder, o *GlGetVertexAttribIiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31898,7 +31898,7 @@ func doEncodeGlGetVertexAttribIuiv(e binary.Encoder, o *GlGetVertexAttribIuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Pname))
@@ -31910,9 +31910,9 @@ func doDecodeGlGetVertexAttribIuiv(d binary.Decoder, o *GlGetVertexAttribIuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -31951,7 +31951,7 @@ func doEncodeGlGetVertexAttribPointerv(e binary.Encoder, o *GlGetVertexAttribPoi
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Pname))
@@ -31963,9 +31963,9 @@ func doDecodeGlGetVertexAttribPointerv(d binary.Decoder, o *GlGetVertexAttribPoi
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32006,7 +32006,7 @@ func doEncodeGlGetVertexAttribfv(e binary.Encoder, o *GlGetVertexAttribfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Pname))
@@ -32018,9 +32018,9 @@ func doDecodeGlGetVertexAttribfv(d binary.Decoder, o *GlGetVertexAttribfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32059,7 +32059,7 @@ func doEncodeGlGetVertexAttribiv(e binary.Encoder, o *GlGetVertexAttribiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Pname))
@@ -32071,9 +32071,9 @@ func doDecodeGlGetVertexAttribiv(d binary.Decoder, o *GlGetVertexAttribiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32112,7 +32112,7 @@ func doEncodeGlGetnUniformfv(e binary.Encoder, o *GlGetnUniformfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32125,9 +32125,9 @@ func doDecodeGlGetnUniformfv(d binary.Decoder, o *GlGetnUniformfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32168,7 +32168,7 @@ func doEncodeGlGetnUniformfvEXT(e binary.Encoder, o *GlGetnUniformfvEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32181,9 +32181,9 @@ func doDecodeGlGetnUniformfvEXT(d binary.Decoder, o *GlGetnUniformfvEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32224,7 +32224,7 @@ func doEncodeGlGetnUniformfvKHR(e binary.Encoder, o *GlGetnUniformfvKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32237,9 +32237,9 @@ func doDecodeGlGetnUniformfvKHR(d binary.Decoder, o *GlGetnUniformfvKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32280,7 +32280,7 @@ func doEncodeGlGetnUniformiv(e binary.Encoder, o *GlGetnUniformiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32293,9 +32293,9 @@ func doDecodeGlGetnUniformiv(d binary.Decoder, o *GlGetnUniformiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32336,7 +32336,7 @@ func doEncodeGlGetnUniformivEXT(e binary.Encoder, o *GlGetnUniformivEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32349,9 +32349,9 @@ func doDecodeGlGetnUniformivEXT(d binary.Decoder, o *GlGetnUniformivEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32392,7 +32392,7 @@ func doEncodeGlGetnUniformivKHR(e binary.Encoder, o *GlGetnUniformivKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32405,9 +32405,9 @@ func doDecodeGlGetnUniformivKHR(d binary.Decoder, o *GlGetnUniformivKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32448,7 +32448,7 @@ func doEncodeGlGetnUniformuiv(e binary.Encoder, o *GlGetnUniformuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32461,9 +32461,9 @@ func doDecodeGlGetnUniformuiv(d binary.Decoder, o *GlGetnUniformuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32504,7 +32504,7 @@ func doEncodeGlGetnUniformuivKHR(e binary.Encoder, o *GlGetnUniformuivKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -32517,9 +32517,9 @@ func doDecodeGlGetnUniformuivKHR(d binary.Decoder, o *GlGetnUniformuivKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32560,7 +32560,7 @@ func doEncodeGlHint(e binary.Encoder, o *GlHint) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Mode))
@@ -32571,9 +32571,9 @@ func doDecodeGlHint(d binary.Decoder, o *GlHint) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32610,7 +32610,7 @@ func doEncodeGlInsertEventMarkerEXT(e binary.Encoder, o *GlInsertEventMarkerEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Length))
 	e.Struct(&o.Marker)
@@ -32621,9 +32621,9 @@ func doDecodeGlInsertEventMarkerEXT(d binary.Decoder, o *GlInsertEventMarkerEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32660,7 +32660,7 @@ func doEncodeGlInterpolatePathsNV(e binary.Encoder, o *GlInterpolatePathsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ResultPath))
 	e.Uint32(uint32(o.PathA))
@@ -32673,9 +32673,9 @@ func doDecodeGlInterpolatePathsNV(d binary.Decoder, o *GlInterpolatePathsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32716,7 +32716,7 @@ func doEncodeGlInvalidateFramebuffer(e binary.Encoder, o *GlInvalidateFramebuffe
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Count))
@@ -32728,9 +32728,9 @@ func doDecodeGlInvalidateFramebuffer(d binary.Decoder, o *GlInvalidateFramebuffe
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32771,7 +32771,7 @@ func doEncodeGlInvalidateSubFramebuffer(e binary.Encoder, o *GlInvalidateSubFram
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.NumAttachments))
@@ -32787,9 +32787,9 @@ func doDecodeGlInvalidateSubFramebuffer(d binary.Decoder, o *GlInvalidateSubFram
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32838,7 +32838,7 @@ func doEncodeGlIsBuffer(e binary.Encoder, o *GlIsBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Buffer))
 	e.Uint8(uint8(o.Result))
@@ -32849,9 +32849,9 @@ func doDecodeGlIsBuffer(d binary.Decoder, o *GlIsBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32888,7 +32888,7 @@ func doEncodeGlIsEnabled(e binary.Encoder, o *GlIsEnabled) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Capability))
 	e.Uint8(uint8(o.Result))
@@ -32899,9 +32899,9 @@ func doDecodeGlIsEnabled(d binary.Decoder, o *GlIsEnabled) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32938,7 +32938,7 @@ func doEncodeGlIsEnabledi(e binary.Encoder, o *GlIsEnabledi) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -32950,9 +32950,9 @@ func doDecodeGlIsEnabledi(d binary.Decoder, o *GlIsEnabledi) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -32991,7 +32991,7 @@ func doEncodeGlIsEnablediEXT(e binary.Encoder, o *GlIsEnablediEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -33003,9 +33003,9 @@ func doDecodeGlIsEnablediEXT(d binary.Decoder, o *GlIsEnablediEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33044,7 +33044,7 @@ func doEncodeGlIsEnablediNV(e binary.Encoder, o *GlIsEnablediNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -33056,9 +33056,9 @@ func doDecodeGlIsEnablediNV(d binary.Decoder, o *GlIsEnablediNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33097,7 +33097,7 @@ func doEncodeGlIsEnablediOES(e binary.Encoder, o *GlIsEnablediOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Index))
@@ -33109,9 +33109,9 @@ func doDecodeGlIsEnablediOES(d binary.Decoder, o *GlIsEnablediOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33150,7 +33150,7 @@ func doEncodeGlIsFenceNV(e binary.Encoder, o *GlIsFenceNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fence))
 	e.Uint8(uint8(o.Result))
@@ -33161,9 +33161,9 @@ func doDecodeGlIsFenceNV(d binary.Decoder, o *GlIsFenceNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33200,7 +33200,7 @@ func doEncodeGlIsFramebuffer(e binary.Encoder, o *GlIsFramebuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Framebuffer))
 	e.Uint8(uint8(o.Result))
@@ -33211,9 +33211,9 @@ func doDecodeGlIsFramebuffer(d binary.Decoder, o *GlIsFramebuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33250,7 +33250,7 @@ func doEncodeGlIsFramebufferOES(e binary.Encoder, o *GlIsFramebufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Framebuffer))
 	e.Uint8(uint8(o.Result))
@@ -33261,9 +33261,9 @@ func doDecodeGlIsFramebufferOES(d binary.Decoder, o *GlIsFramebufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33300,7 +33300,7 @@ func doEncodeGlIsImageHandleResidentNV(e binary.Encoder, o *GlIsImageHandleResid
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 	e.Uint8(uint8(o.Result))
@@ -33311,9 +33311,9 @@ func doDecodeGlIsImageHandleResidentNV(d binary.Decoder, o *GlIsImageHandleResid
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33352,7 +33352,7 @@ func doEncodeGlIsPathNV(e binary.Encoder, o *GlIsPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint8(uint8(o.Result))
@@ -33363,9 +33363,9 @@ func doDecodeGlIsPathNV(d binary.Decoder, o *GlIsPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33402,7 +33402,7 @@ func doEncodeGlIsPointInFillPathNV(e binary.Encoder, o *GlIsPointInFillPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Mask))
@@ -33416,9 +33416,9 @@ func doDecodeGlIsPointInFillPathNV(d binary.Decoder, o *GlIsPointInFillPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33461,7 +33461,7 @@ func doEncodeGlIsPointInStrokePathNV(e binary.Encoder, o *GlIsPointInStrokePathN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Float32(float32(o.X))
@@ -33474,9 +33474,9 @@ func doDecodeGlIsPointInStrokePathNV(d binary.Decoder, o *GlIsPointInStrokePathN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33519,7 +33519,7 @@ func doEncodeGlIsProgram(e binary.Encoder, o *GlIsProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint8(uint8(o.Result))
@@ -33530,9 +33530,9 @@ func doDecodeGlIsProgram(d binary.Decoder, o *GlIsProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33569,7 +33569,7 @@ func doEncodeGlIsProgramPipeline(e binary.Encoder, o *GlIsProgramPipeline) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint8(uint8(o.Result))
@@ -33580,9 +33580,9 @@ func doDecodeGlIsProgramPipeline(d binary.Decoder, o *GlIsProgramPipeline) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33619,7 +33619,7 @@ func doEncodeGlIsProgramPipelineEXT(e binary.Encoder, o *GlIsProgramPipelineEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint8(uint8(o.Result))
@@ -33630,9 +33630,9 @@ func doDecodeGlIsProgramPipelineEXT(d binary.Decoder, o *GlIsProgramPipelineEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33669,7 +33669,7 @@ func doEncodeGlIsQuery(e binary.Encoder, o *GlIsQuery) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint8(uint8(o.Result))
@@ -33680,9 +33680,9 @@ func doDecodeGlIsQuery(d binary.Decoder, o *GlIsQuery) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33719,7 +33719,7 @@ func doEncodeGlIsQueryEXT(e binary.Encoder, o *GlIsQueryEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint8(uint8(o.Result))
@@ -33730,9 +33730,9 @@ func doDecodeGlIsQueryEXT(d binary.Decoder, o *GlIsQueryEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33769,7 +33769,7 @@ func doEncodeGlIsRenderbuffer(e binary.Encoder, o *GlIsRenderbuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Renderbuffer))
 	e.Uint8(uint8(o.Result))
@@ -33780,9 +33780,9 @@ func doDecodeGlIsRenderbuffer(d binary.Decoder, o *GlIsRenderbuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33819,7 +33819,7 @@ func doEncodeGlIsRenderbufferOES(e binary.Encoder, o *GlIsRenderbufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Renderbuffer))
 	e.Uint8(uint8(o.Result))
@@ -33830,9 +33830,9 @@ func doDecodeGlIsRenderbufferOES(d binary.Decoder, o *GlIsRenderbufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33869,7 +33869,7 @@ func doEncodeGlIsSampler(e binary.Encoder, o *GlIsSampler) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint8(uint8(o.Result))
@@ -33880,9 +33880,9 @@ func doDecodeGlIsSampler(d binary.Decoder, o *GlIsSampler) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33919,7 +33919,7 @@ func doEncodeGlIsShader(e binary.Encoder, o *GlIsShader) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Uint8(uint8(o.Result))
@@ -33930,9 +33930,9 @@ func doDecodeGlIsShader(d binary.Decoder, o *GlIsShader) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -33969,7 +33969,7 @@ func doEncodeGlIsSync(e binary.Encoder, o *GlIsSync) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint8(uint8(o.Result))
@@ -33980,9 +33980,9 @@ func doDecodeGlIsSync(d binary.Decoder, o *GlIsSync) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34019,7 +34019,7 @@ func doEncodeGlIsSyncAPPLE(e binary.Encoder, o *GlIsSyncAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint8(uint8(o.Result))
@@ -34030,9 +34030,9 @@ func doDecodeGlIsSyncAPPLE(d binary.Decoder, o *GlIsSyncAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34069,7 +34069,7 @@ func doEncodeGlIsTexture(e binary.Encoder, o *GlIsTexture) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint8(uint8(o.Result))
@@ -34080,9 +34080,9 @@ func doDecodeGlIsTexture(d binary.Decoder, o *GlIsTexture) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34119,7 +34119,7 @@ func doEncodeGlIsTextureHandleResidentNV(e binary.Encoder, o *GlIsTextureHandleR
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 	e.Uint8(uint8(o.Result))
@@ -34130,9 +34130,9 @@ func doDecodeGlIsTextureHandleResidentNV(d binary.Decoder, o *GlIsTextureHandleR
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34171,7 +34171,7 @@ func doEncodeGlIsTransformFeedback(e binary.Encoder, o *GlIsTransformFeedback) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Id))
 	e.Uint8(uint8(o.Result))
@@ -34182,9 +34182,9 @@ func doDecodeGlIsTransformFeedback(d binary.Decoder, o *GlIsTransformFeedback) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34221,7 +34221,7 @@ func doEncodeGlIsVertexArray(e binary.Encoder, o *GlIsVertexArray) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 	e.Uint8(uint8(o.Result))
@@ -34232,9 +34232,9 @@ func doDecodeGlIsVertexArray(d binary.Decoder, o *GlIsVertexArray) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34271,7 +34271,7 @@ func doEncodeGlIsVertexArrayOES(e binary.Encoder, o *GlIsVertexArrayOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Array))
 	e.Uint8(uint8(o.Result))
@@ -34282,9 +34282,9 @@ func doDecodeGlIsVertexArrayOES(d binary.Decoder, o *GlIsVertexArrayOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34321,7 +34321,7 @@ func doEncodeGlLabelObjectEXT(e binary.Encoder, o *GlLabelObjectEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Uint32(uint32(o.Object))
@@ -34334,9 +34334,9 @@ func doDecodeGlLabelObjectEXT(d binary.Decoder, o *GlLabelObjectEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34377,7 +34377,7 @@ func doEncodeGlLightModelf(e binary.Encoder, o *GlLightModelf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Float32(float32(o.Param))
@@ -34388,9 +34388,9 @@ func doDecodeGlLightModelf(d binary.Decoder, o *GlLightModelf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34427,7 +34427,7 @@ func doEncodeGlLightModelfv(e binary.Encoder, o *GlLightModelfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -34438,9 +34438,9 @@ func doDecodeGlLightModelfv(d binary.Decoder, o *GlLightModelfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34477,7 +34477,7 @@ func doEncodeGlLightModelx(e binary.Encoder, o *GlLightModelx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -34488,9 +34488,9 @@ func doDecodeGlLightModelx(d binary.Decoder, o *GlLightModelx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34527,7 +34527,7 @@ func doEncodeGlLightModelxOES(e binary.Encoder, o *GlLightModelxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -34538,9 +34538,9 @@ func doDecodeGlLightModelxOES(d binary.Decoder, o *GlLightModelxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34577,7 +34577,7 @@ func doEncodeGlLightModelxv(e binary.Encoder, o *GlLightModelxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Param)
@@ -34588,9 +34588,9 @@ func doDecodeGlLightModelxv(d binary.Decoder, o *GlLightModelxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34627,7 +34627,7 @@ func doEncodeGlLightModelxvOES(e binary.Encoder, o *GlLightModelxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Param)
@@ -34638,9 +34638,9 @@ func doDecodeGlLightModelxvOES(d binary.Decoder, o *GlLightModelxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34677,7 +34677,7 @@ func doEncodeGlLightf(e binary.Encoder, o *GlLightf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34689,9 +34689,9 @@ func doDecodeGlLightf(d binary.Decoder, o *GlLightf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34730,7 +34730,7 @@ func doEncodeGlLightfv(e binary.Encoder, o *GlLightfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34742,9 +34742,9 @@ func doDecodeGlLightfv(d binary.Decoder, o *GlLightfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34783,7 +34783,7 @@ func doEncodeGlLightx(e binary.Encoder, o *GlLightx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34795,9 +34795,9 @@ func doDecodeGlLightx(d binary.Decoder, o *GlLightx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34836,7 +34836,7 @@ func doEncodeGlLightxOES(e binary.Encoder, o *GlLightxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34848,9 +34848,9 @@ func doDecodeGlLightxOES(d binary.Decoder, o *GlLightxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34889,7 +34889,7 @@ func doEncodeGlLightxv(e binary.Encoder, o *GlLightxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34901,9 +34901,9 @@ func doDecodeGlLightxv(d binary.Decoder, o *GlLightxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34942,7 +34942,7 @@ func doEncodeGlLightxvOES(e binary.Encoder, o *GlLightxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Light))
 	e.Uint32(uint32(o.Pname))
@@ -34954,9 +34954,9 @@ func doDecodeGlLightxvOES(d binary.Decoder, o *GlLightxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -34995,7 +34995,7 @@ func doEncodeGlLineWidth(e binary.Encoder, o *GlLineWidth) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Width))
 }
@@ -35005,9 +35005,9 @@ func doDecodeGlLineWidth(d binary.Decoder, o *GlLineWidth) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35042,7 +35042,7 @@ func doEncodeGlLineWidthx(e binary.Encoder, o *GlLineWidthx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Width))
 }
@@ -35052,9 +35052,9 @@ func doDecodeGlLineWidthx(d binary.Decoder, o *GlLineWidthx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35089,7 +35089,7 @@ func doEncodeGlLineWidthxOES(e binary.Encoder, o *GlLineWidthxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Width))
 }
@@ -35099,9 +35099,9 @@ func doDecodeGlLineWidthxOES(d binary.Decoder, o *GlLineWidthxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35136,7 +35136,7 @@ func doEncodeGlLinkProgram(e binary.Encoder, o *GlLinkProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 }
@@ -35146,9 +35146,9 @@ func doDecodeGlLinkProgram(d binary.Decoder, o *GlLinkProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35183,7 +35183,7 @@ func doEncodeGlLoadIdentity(e binary.Encoder, o *GlLoadIdentity) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlLoadIdentity(d binary.Decoder, o *GlLoadIdentity) {
@@ -35192,9 +35192,9 @@ func doDecodeGlLoadIdentity(d binary.Decoder, o *GlLoadIdentity) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35227,7 +35227,7 @@ func doEncodeGlLoadMatrixf(e binary.Encoder, o *GlLoadMatrixf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -35237,9 +35237,9 @@ func doDecodeGlLoadMatrixf(d binary.Decoder, o *GlLoadMatrixf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35274,7 +35274,7 @@ func doEncodeGlLoadMatrixx(e binary.Encoder, o *GlLoadMatrixx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -35284,9 +35284,9 @@ func doDecodeGlLoadMatrixx(d binary.Decoder, o *GlLoadMatrixx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35321,7 +35321,7 @@ func doEncodeGlLoadMatrixxOES(e binary.Encoder, o *GlLoadMatrixxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -35331,9 +35331,9 @@ func doDecodeGlLoadMatrixxOES(d binary.Decoder, o *GlLoadMatrixxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35368,7 +35368,7 @@ func doEncodeGlLoadPaletteFromModelViewMatrixOES(e binary.Encoder, o *GlLoadPale
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlLoadPaletteFromModelViewMatrixOES(d binary.Decoder, o *GlLoadPaletteFromModelViewMatrixOES) {
@@ -35377,9 +35377,9 @@ func doDecodeGlLoadPaletteFromModelViewMatrixOES(d binary.Decoder, o *GlLoadPale
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35414,7 +35414,7 @@ func doEncodeGlLogicOp(e binary.Encoder, o *GlLogicOp) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Opcode))
 }
@@ -35424,9 +35424,9 @@ func doDecodeGlLogicOp(d binary.Decoder, o *GlLogicOp) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35461,7 +35461,7 @@ func doEncodeGlMakeImageHandleNonResidentNV(e binary.Encoder, o *GlMakeImageHand
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 }
@@ -35471,9 +35471,9 @@ func doDecodeGlMakeImageHandleNonResidentNV(d binary.Decoder, o *GlMakeImageHand
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35510,7 +35510,7 @@ func doEncodeGlMakeImageHandleResidentNV(e binary.Encoder, o *GlMakeImageHandleR
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 	e.Uint32(uint32(o.Access))
@@ -35521,9 +35521,9 @@ func doDecodeGlMakeImageHandleResidentNV(d binary.Decoder, o *GlMakeImageHandleR
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35562,7 +35562,7 @@ func doEncodeGlMakeTextureHandleNonResidentNV(e binary.Encoder, o *GlMakeTexture
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 }
@@ -35572,9 +35572,9 @@ func doDecodeGlMakeTextureHandleNonResidentNV(d binary.Decoder, o *GlMakeTexture
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35611,7 +35611,7 @@ func doEncodeGlMakeTextureHandleResidentNV(e binary.Encoder, o *GlMakeTextureHan
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Handle))
 }
@@ -35621,9 +35621,9 @@ func doDecodeGlMakeTextureHandleResidentNV(d binary.Decoder, o *GlMakeTextureHan
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35660,7 +35660,7 @@ func doEncodeGlMapBufferOES(e binary.Encoder, o *GlMapBufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Access))
@@ -35672,9 +35672,9 @@ func doDecodeGlMapBufferOES(d binary.Decoder, o *GlMapBufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35713,7 +35713,7 @@ func doEncodeGlMapBufferRange(e binary.Encoder, o *GlMapBufferRange) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Offset))
@@ -35727,9 +35727,9 @@ func doDecodeGlMapBufferRange(d binary.Decoder, o *GlMapBufferRange) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35772,7 +35772,7 @@ func doEncodeGlMapBufferRangeEXT(e binary.Encoder, o *GlMapBufferRangeEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Offset))
@@ -35786,9 +35786,9 @@ func doDecodeGlMapBufferRangeEXT(d binary.Decoder, o *GlMapBufferRangeEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35831,7 +35831,7 @@ func doEncodeGlMaterialf(e binary.Encoder, o *GlMaterialf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -35843,9 +35843,9 @@ func doDecodeGlMaterialf(d binary.Decoder, o *GlMaterialf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35884,7 +35884,7 @@ func doEncodeGlMaterialfv(e binary.Encoder, o *GlMaterialfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -35896,9 +35896,9 @@ func doDecodeGlMaterialfv(d binary.Decoder, o *GlMaterialfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35937,7 +35937,7 @@ func doEncodeGlMaterialx(e binary.Encoder, o *GlMaterialx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -35949,9 +35949,9 @@ func doDecodeGlMaterialx(d binary.Decoder, o *GlMaterialx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -35990,7 +35990,7 @@ func doEncodeGlMaterialxOES(e binary.Encoder, o *GlMaterialxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -36002,9 +36002,9 @@ func doDecodeGlMaterialxOES(d binary.Decoder, o *GlMaterialxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36043,7 +36043,7 @@ func doEncodeGlMaterialxv(e binary.Encoder, o *GlMaterialxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -36055,9 +36055,9 @@ func doDecodeGlMaterialxv(d binary.Decoder, o *GlMaterialxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36096,7 +36096,7 @@ func doEncodeGlMaterialxvOES(e binary.Encoder, o *GlMaterialxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Pname))
@@ -36108,9 +36108,9 @@ func doDecodeGlMaterialxvOES(d binary.Decoder, o *GlMaterialxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36149,7 +36149,7 @@ func doEncodeGlMatrixIndexPointerOES(e binary.Encoder, o *GlMatrixIndexPointerOE
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -36162,9 +36162,9 @@ func doDecodeGlMatrixIndexPointerOES(d binary.Decoder, o *GlMatrixIndexPointerOE
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36207,7 +36207,7 @@ func doEncodeGlMatrixIndexPointerOESBounds(e binary.Encoder, o *GlMatrixIndexPoi
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -36221,9 +36221,9 @@ func doDecodeGlMatrixIndexPointerOESBounds(d binary.Decoder, o *GlMatrixIndexPoi
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36268,7 +36268,7 @@ func doEncodeGlMatrixLoad3x2fNV(e binary.Encoder, o *GlMatrixLoad3x2fNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36279,9 +36279,9 @@ func doDecodeGlMatrixLoad3x2fNV(d binary.Decoder, o *GlMatrixLoad3x2fNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36318,7 +36318,7 @@ func doEncodeGlMatrixLoad3x3fNV(e binary.Encoder, o *GlMatrixLoad3x3fNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36329,9 +36329,9 @@ func doDecodeGlMatrixLoad3x3fNV(d binary.Decoder, o *GlMatrixLoad3x3fNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36368,7 +36368,7 @@ func doEncodeGlMatrixLoadTranspose3x3fNV(e binary.Encoder, o *GlMatrixLoadTransp
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36379,9 +36379,9 @@ func doDecodeGlMatrixLoadTranspose3x3fNV(d binary.Decoder, o *GlMatrixLoadTransp
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36420,7 +36420,7 @@ func doEncodeGlMatrixMode(e binary.Encoder, o *GlMatrixMode) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 }
@@ -36430,9 +36430,9 @@ func doDecodeGlMatrixMode(d binary.Decoder, o *GlMatrixMode) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36467,7 +36467,7 @@ func doEncodeGlMatrixMult3x2fNV(e binary.Encoder, o *GlMatrixMult3x2fNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36478,9 +36478,9 @@ func doDecodeGlMatrixMult3x2fNV(d binary.Decoder, o *GlMatrixMult3x2fNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36517,7 +36517,7 @@ func doEncodeGlMatrixMult3x3fNV(e binary.Encoder, o *GlMatrixMult3x3fNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36528,9 +36528,9 @@ func doDecodeGlMatrixMult3x3fNV(d binary.Decoder, o *GlMatrixMult3x3fNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36567,7 +36567,7 @@ func doEncodeGlMatrixMultTranspose3x3fNV(e binary.Encoder, o *GlMatrixMultTransp
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MatrixMode))
 	e.Struct(&o.M)
@@ -36578,9 +36578,9 @@ func doDecodeGlMatrixMultTranspose3x3fNV(d binary.Decoder, o *GlMatrixMultTransp
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36619,7 +36619,7 @@ func doEncodeGlMemoryBarrier(e binary.Encoder, o *GlMemoryBarrier) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Barriers))
 }
@@ -36629,9 +36629,9 @@ func doDecodeGlMemoryBarrier(d binary.Decoder, o *GlMemoryBarrier) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36666,7 +36666,7 @@ func doEncodeGlMemoryBarrierByRegion(e binary.Encoder, o *GlMemoryBarrierByRegio
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Barriers))
 }
@@ -36676,9 +36676,9 @@ func doDecodeGlMemoryBarrierByRegion(d binary.Decoder, o *GlMemoryBarrierByRegio
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36715,7 +36715,7 @@ func doEncodeGlMinSampleShading(e binary.Encoder, o *GlMinSampleShading) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Value))
 }
@@ -36725,9 +36725,9 @@ func doDecodeGlMinSampleShading(d binary.Decoder, o *GlMinSampleShading) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36762,7 +36762,7 @@ func doEncodeGlMinSampleShadingOES(e binary.Encoder, o *GlMinSampleShadingOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Value))
 }
@@ -36772,9 +36772,9 @@ func doDecodeGlMinSampleShadingOES(d binary.Decoder, o *GlMinSampleShadingOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36809,7 +36809,7 @@ func doEncodeGlMultMatrixf(e binary.Encoder, o *GlMultMatrixf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -36819,9 +36819,9 @@ func doDecodeGlMultMatrixf(d binary.Decoder, o *GlMultMatrixf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36856,7 +36856,7 @@ func doEncodeGlMultMatrixx(e binary.Encoder, o *GlMultMatrixx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -36866,9 +36866,9 @@ func doDecodeGlMultMatrixx(d binary.Decoder, o *GlMultMatrixx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36903,7 +36903,7 @@ func doEncodeGlMultMatrixxOES(e binary.Encoder, o *GlMultMatrixxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.M)
 }
@@ -36913,9 +36913,9 @@ func doDecodeGlMultMatrixxOES(d binary.Decoder, o *GlMultMatrixxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -36950,7 +36950,7 @@ func doEncodeGlMultiDrawArraysEXT(e binary.Encoder, o *GlMultiDrawArraysEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Struct(&o.First)
@@ -36963,9 +36963,9 @@ func doDecodeGlMultiDrawArraysEXT(d binary.Decoder, o *GlMultiDrawArraysEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37006,7 +37006,7 @@ func doEncodeGlMultiDrawArraysIndirectEXT(e binary.Encoder, o *GlMultiDrawArrays
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Struct(&o.Indirect)
@@ -37019,9 +37019,9 @@ func doDecodeGlMultiDrawArraysIndirectEXT(d binary.Decoder, o *GlMultiDrawArrays
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37094,7 +37094,7 @@ func doEncodeGlMultiDrawElementsBaseVertexEXT(e binary.Encoder, o *GlMultiDrawEl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Struct(&o.Count)
@@ -37109,9 +37109,9 @@ func doDecodeGlMultiDrawElementsBaseVertexEXT(d binary.Decoder, o *GlMultiDrawEl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37158,7 +37158,7 @@ func doEncodeGlMultiDrawElementsBaseVertexOES(e binary.Encoder, o *GlMultiDrawEl
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Struct(&o.Count)
@@ -37173,9 +37173,9 @@ func doDecodeGlMultiDrawElementsBaseVertexOES(d binary.Decoder, o *GlMultiDrawEl
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37222,7 +37222,7 @@ func doEncodeGlMultiDrawElementsEXT(e binary.Encoder, o *GlMultiDrawElementsEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Struct(&o.Count)
@@ -37236,9 +37236,9 @@ func doDecodeGlMultiDrawElementsEXT(d binary.Decoder, o *GlMultiDrawElementsEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37281,7 +37281,7 @@ func doEncodeGlMultiDrawElementsIndirectEXT(e binary.Encoder, o *GlMultiDrawElem
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 	e.Uint32(uint32(o.Type))
@@ -37295,9 +37295,9 @@ func doDecodeGlMultiDrawElementsIndirectEXT(d binary.Decoder, o *GlMultiDrawElem
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37342,7 +37342,7 @@ func doEncodeGlMultiTexCoord4f(e binary.Encoder, o *GlMultiTexCoord4f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Float32(float32(o.V0))
@@ -37356,9 +37356,9 @@ func doDecodeGlMultiTexCoord4f(d binary.Decoder, o *GlMultiTexCoord4f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37401,7 +37401,7 @@ func doEncodeGlMultiTexCoord4x(e binary.Encoder, o *GlMultiTexCoord4x) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Int32(int32(o.V0))
@@ -37415,9 +37415,9 @@ func doDecodeGlMultiTexCoord4x(d binary.Decoder, o *GlMultiTexCoord4x) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37460,7 +37460,7 @@ func doEncodeGlMultiTexCoord4xOES(e binary.Encoder, o *GlMultiTexCoord4xOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Int32(int32(o.V0))
@@ -37474,9 +37474,9 @@ func doDecodeGlMultiTexCoord4xOES(d binary.Decoder, o *GlMultiTexCoord4xOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37519,7 +37519,7 @@ func doEncodeGlNamedFramebufferSampleLocationsfvNV(e binary.Encoder, o *GlNamedF
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Framebuffer))
 	e.Uint32(uint32(o.Start))
@@ -37532,9 +37532,9 @@ func doDecodeGlNamedFramebufferSampleLocationsfvNV(d binary.Decoder, o *GlNamedF
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37577,7 +37577,7 @@ func doEncodeGlNormal3f(e binary.Encoder, o *GlNormal3f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Nx))
 	e.Float32(float32(o.Ny))
@@ -37589,9 +37589,9 @@ func doDecodeGlNormal3f(d binary.Decoder, o *GlNormal3f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37630,7 +37630,7 @@ func doEncodeGlNormal3x(e binary.Encoder, o *GlNormal3x) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Nx))
 	e.Int32(int32(o.Ny))
@@ -37642,9 +37642,9 @@ func doDecodeGlNormal3x(d binary.Decoder, o *GlNormal3x) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37683,7 +37683,7 @@ func doEncodeGlNormal3xOES(e binary.Encoder, o *GlNormal3xOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Nx))
 	e.Int32(int32(o.Ny))
@@ -37695,9 +37695,9 @@ func doDecodeGlNormal3xOES(d binary.Decoder, o *GlNormal3xOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37736,7 +37736,7 @@ func doEncodeGlNormalPointer(e binary.Encoder, o *GlNormalPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Stride))
@@ -37748,9 +37748,9 @@ func doDecodeGlNormalPointer(d binary.Decoder, o *GlNormalPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37789,7 +37789,7 @@ func doEncodeGlNormalPointerBounds(e binary.Encoder, o *GlNormalPointerBounds) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Stride))
@@ -37802,9 +37802,9 @@ func doDecodeGlNormalPointerBounds(d binary.Decoder, o *GlNormalPointerBounds) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37845,7 +37845,7 @@ func doEncodeGlObjectLabel(e binary.Encoder, o *GlObjectLabel) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Identifier))
 	e.Uint32(uint32(o.Name))
@@ -37858,9 +37858,9 @@ func doDecodeGlObjectLabel(d binary.Decoder, o *GlObjectLabel) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37901,7 +37901,7 @@ func doEncodeGlObjectLabelKHR(e binary.Encoder, o *GlObjectLabelKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Identifier))
 	e.Uint32(uint32(o.Name))
@@ -37914,9 +37914,9 @@ func doDecodeGlObjectLabelKHR(d binary.Decoder, o *GlObjectLabelKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -37957,7 +37957,7 @@ func doEncodeGlObjectPtrLabel(e binary.Encoder, o *GlObjectPtrLabel) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ptr)
 	e.Int32(int32(o.Length))
@@ -37969,9 +37969,9 @@ func doDecodeGlObjectPtrLabel(d binary.Decoder, o *GlObjectPtrLabel) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38010,7 +38010,7 @@ func doEncodeGlObjectPtrLabelKHR(e binary.Encoder, o *GlObjectPtrLabelKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Ptr)
 	e.Int32(int32(o.Length))
@@ -38022,9 +38022,9 @@ func doDecodeGlObjectPtrLabelKHR(d binary.Decoder, o *GlObjectPtrLabelKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38063,7 +38063,7 @@ func doEncodeGlOrthof(e binary.Encoder, o *GlOrthof) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.L))
 	e.Float32(float32(o.R))
@@ -38078,9 +38078,9 @@ func doDecodeGlOrthof(d binary.Decoder, o *GlOrthof) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38125,7 +38125,7 @@ func doEncodeGlOrthofOES(e binary.Encoder, o *GlOrthofOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.L))
 	e.Float32(float32(o.R))
@@ -38140,9 +38140,9 @@ func doDecodeGlOrthofOES(d binary.Decoder, o *GlOrthofOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38187,7 +38187,7 @@ func doEncodeGlOrthox(e binary.Encoder, o *GlOrthox) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.L))
 	e.Int32(int32(o.R))
@@ -38202,9 +38202,9 @@ func doDecodeGlOrthox(d binary.Decoder, o *GlOrthox) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38249,7 +38249,7 @@ func doEncodeGlOrthoxOES(e binary.Encoder, o *GlOrthoxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.L))
 	e.Int32(int32(o.R))
@@ -38264,9 +38264,9 @@ func doDecodeGlOrthoxOES(d binary.Decoder, o *GlOrthoxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38311,7 +38311,7 @@ func doEncodeGlPatchParameteri(e binary.Encoder, o *GlPatchParameteri) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Value))
@@ -38322,9 +38322,9 @@ func doDecodeGlPatchParameteri(d binary.Decoder, o *GlPatchParameteri) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38361,7 +38361,7 @@ func doEncodeGlPatchParameteriEXT(e binary.Encoder, o *GlPatchParameteriEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Value))
@@ -38372,9 +38372,9 @@ func doDecodeGlPatchParameteriEXT(d binary.Decoder, o *GlPatchParameteriEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38411,7 +38411,7 @@ func doEncodeGlPatchParameteriOES(e binary.Encoder, o *GlPatchParameteriOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Value))
@@ -38422,9 +38422,9 @@ func doDecodeGlPatchParameteriOES(d binary.Decoder, o *GlPatchParameteriOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38461,7 +38461,7 @@ func doEncodeGlPathCommandsNV(e binary.Encoder, o *GlPathCommandsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.NumCommands))
@@ -38476,9 +38476,9 @@ func doDecodeGlPathCommandsNV(d binary.Decoder, o *GlPathCommandsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38523,7 +38523,7 @@ func doEncodeGlPathCoordsNV(e binary.Encoder, o *GlPathCoordsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.NumCoords))
@@ -38536,9 +38536,9 @@ func doDecodeGlPathCoordsNV(d binary.Decoder, o *GlPathCoordsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38579,7 +38579,7 @@ func doEncodeGlPathCoverDepthFuncNV(e binary.Encoder, o *GlPathCoverDepthFuncNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 }
@@ -38589,9 +38589,9 @@ func doDecodeGlPathCoverDepthFuncNV(d binary.Decoder, o *GlPathCoverDepthFuncNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38626,7 +38626,7 @@ func doEncodeGlPathDashArrayNV(e binary.Encoder, o *GlPathDashArrayNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.DashCount))
@@ -38638,9 +38638,9 @@ func doDecodeGlPathDashArrayNV(d binary.Decoder, o *GlPathDashArrayNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38679,7 +38679,7 @@ func doEncodeGlPathGlyphIndexArrayNV(e binary.Encoder, o *GlPathGlyphIndexArrayN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FirstPathName))
 	e.Uint32(uint32(o.FontTarget))
@@ -38697,9 +38697,9 @@ func doDecodeGlPathGlyphIndexArrayNV(d binary.Decoder, o *GlPathGlyphIndexArrayN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38752,7 +38752,7 @@ func doEncodeGlPathGlyphIndexRangeNV(e binary.Encoder, o *GlPathGlyphIndexRangeN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FontTarget))
 	e.Struct(&o.FontName)
@@ -38768,9 +38768,9 @@ func doDecodeGlPathGlyphIndexRangeNV(d binary.Decoder, o *GlPathGlyphIndexRangeN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38819,7 +38819,7 @@ func doEncodeGlPathGlyphRangeNV(e binary.Encoder, o *GlPathGlyphRangeNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FirstPathName))
 	e.Uint32(uint32(o.FontTarget))
@@ -38837,9 +38837,9 @@ func doDecodeGlPathGlyphRangeNV(d binary.Decoder, o *GlPathGlyphRangeNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38890,7 +38890,7 @@ func doEncodeGlPathGlyphsNV(e binary.Encoder, o *GlPathGlyphsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FirstPathName))
 	e.Uint32(uint32(o.FontTarget))
@@ -38909,9 +38909,9 @@ func doDecodeGlPathGlyphsNV(d binary.Decoder, o *GlPathGlyphsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -38964,7 +38964,7 @@ func doEncodeGlPathMemoryGlyphIndexArrayNV(e binary.Encoder, o *GlPathMemoryGlyp
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.FirstPathName))
 	e.Uint32(uint32(o.FontTarget))
@@ -38983,9 +38983,9 @@ func doDecodeGlPathMemoryGlyphIndexArrayNV(d binary.Decoder, o *GlPathMemoryGlyp
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39040,7 +39040,7 @@ func doEncodeGlPathParameterfNV(e binary.Encoder, o *GlPathParameterfNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -39052,9 +39052,9 @@ func doDecodeGlPathParameterfNV(d binary.Decoder, o *GlPathParameterfNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39093,7 +39093,7 @@ func doEncodeGlPathParameterfvNV(e binary.Encoder, o *GlPathParameterfvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -39105,9 +39105,9 @@ func doDecodeGlPathParameterfvNV(d binary.Decoder, o *GlPathParameterfvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39146,7 +39146,7 @@ func doEncodeGlPathParameteriNV(e binary.Encoder, o *GlPathParameteriNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -39158,9 +39158,9 @@ func doDecodeGlPathParameteriNV(d binary.Decoder, o *GlPathParameteriNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39199,7 +39199,7 @@ func doEncodeGlPathParameterivNV(e binary.Encoder, o *GlPathParameterivNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Pname))
@@ -39211,9 +39211,9 @@ func doDecodeGlPathParameterivNV(d binary.Decoder, o *GlPathParameterivNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39252,7 +39252,7 @@ func doEncodeGlPathStencilDepthOffsetNV(e binary.Encoder, o *GlPathStencilDepthO
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Factor))
 	e.Float32(float32(o.Units))
@@ -39263,9 +39263,9 @@ func doDecodeGlPathStencilDepthOffsetNV(d binary.Decoder, o *GlPathStencilDepthO
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39304,7 +39304,7 @@ func doEncodeGlPathStencilFuncNV(e binary.Encoder, o *GlPathStencilFuncNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Int32(int32(o.Ref))
@@ -39316,9 +39316,9 @@ func doDecodeGlPathStencilFuncNV(d binary.Decoder, o *GlPathStencilFuncNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39357,7 +39357,7 @@ func doEncodeGlPathStringNV(e binary.Encoder, o *GlPathStringNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.Format))
@@ -39370,9 +39370,9 @@ func doDecodeGlPathStringNV(d binary.Decoder, o *GlPathStringNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39413,7 +39413,7 @@ func doEncodeGlPathSubCommandsNV(e binary.Encoder, o *GlPathSubCommandsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.CommandStart))
@@ -39430,9 +39430,9 @@ func doDecodeGlPathSubCommandsNV(d binary.Decoder, o *GlPathSubCommandsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39481,7 +39481,7 @@ func doEncodeGlPathSubCoordsNV(e binary.Encoder, o *GlPathSubCoordsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.CoordStart))
@@ -39495,9 +39495,9 @@ func doDecodeGlPathSubCoordsNV(d binary.Decoder, o *GlPathSubCoordsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39540,7 +39540,7 @@ func doEncodeGlPauseTransformFeedback(e binary.Encoder, o *GlPauseTransformFeedb
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPauseTransformFeedback(d binary.Decoder, o *GlPauseTransformFeedback) {
@@ -39549,9 +39549,9 @@ func doDecodeGlPauseTransformFeedback(d binary.Decoder, o *GlPauseTransformFeedb
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39586,7 +39586,7 @@ func doEncodeGlPixelStorei(e binary.Encoder, o *GlPixelStorei) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Parameter))
 	e.Int32(int32(o.Value))
@@ -39597,9 +39597,9 @@ func doDecodeGlPixelStorei(d binary.Decoder, o *GlPixelStorei) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39636,7 +39636,7 @@ func doEncodeGlPointAlongPathNV(e binary.Encoder, o *GlPointAlongPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.StartSegment))
@@ -39654,9 +39654,9 @@ func doDecodeGlPointAlongPathNV(d binary.Decoder, o *GlPointAlongPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39707,7 +39707,7 @@ func doEncodeGlPointParameterf(e binary.Encoder, o *GlPointParameterf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Float32(float32(o.Param))
@@ -39718,9 +39718,9 @@ func doDecodeGlPointParameterf(d binary.Decoder, o *GlPointParameterf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39757,7 +39757,7 @@ func doEncodeGlPointParameterfv(e binary.Encoder, o *GlPointParameterfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -39768,9 +39768,9 @@ func doDecodeGlPointParameterfv(d binary.Decoder, o *GlPointParameterfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39807,7 +39807,7 @@ func doEncodeGlPointParameterx(e binary.Encoder, o *GlPointParameterx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -39818,9 +39818,9 @@ func doDecodeGlPointParameterx(d binary.Decoder, o *GlPointParameterx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39857,7 +39857,7 @@ func doEncodeGlPointParameterxOES(e binary.Encoder, o *GlPointParameterxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Int32(int32(o.Param))
@@ -39868,9 +39868,9 @@ func doDecodeGlPointParameterxOES(d binary.Decoder, o *GlPointParameterxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39907,7 +39907,7 @@ func doEncodeGlPointParameterxv(e binary.Encoder, o *GlPointParameterxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -39918,9 +39918,9 @@ func doDecodeGlPointParameterxv(d binary.Decoder, o *GlPointParameterxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -39957,7 +39957,7 @@ func doEncodeGlPointParameterxvOES(e binary.Encoder, o *GlPointParameterxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pname))
 	e.Struct(&o.Params)
@@ -39968,9 +39968,9 @@ func doDecodeGlPointParameterxvOES(d binary.Decoder, o *GlPointParameterxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40007,7 +40007,7 @@ func doEncodeGlPointSize(e binary.Encoder, o *GlPointSize) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Size))
 }
@@ -40017,9 +40017,9 @@ func doDecodeGlPointSize(d binary.Decoder, o *GlPointSize) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40054,7 +40054,7 @@ func doEncodeGlPointSizePointerOES(e binary.Encoder, o *GlPointSizePointerOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Stride))
@@ -40066,9 +40066,9 @@ func doDecodeGlPointSizePointerOES(d binary.Decoder, o *GlPointSizePointerOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40107,7 +40107,7 @@ func doEncodeGlPointSizePointerOESBounds(e binary.Encoder, o *GlPointSizePointer
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Stride))
@@ -40120,9 +40120,9 @@ func doDecodeGlPointSizePointerOESBounds(d binary.Decoder, o *GlPointSizePointer
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40165,7 +40165,7 @@ func doEncodeGlPointSizex(e binary.Encoder, o *GlPointSizex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 }
@@ -40175,9 +40175,9 @@ func doDecodeGlPointSizex(d binary.Decoder, o *GlPointSizex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40212,7 +40212,7 @@ func doEncodeGlPointSizexOES(e binary.Encoder, o *GlPointSizexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 }
@@ -40222,9 +40222,9 @@ func doDecodeGlPointSizexOES(d binary.Decoder, o *GlPointSizexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40259,7 +40259,7 @@ func doEncodeGlPolygonModeNV(e binary.Encoder, o *GlPolygonModeNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Mode))
@@ -40270,9 +40270,9 @@ func doDecodeGlPolygonModeNV(d binary.Decoder, o *GlPolygonModeNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40309,7 +40309,7 @@ func doEncodeGlPolygonOffset(e binary.Encoder, o *GlPolygonOffset) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.ScaleFactor))
 	e.Float32(float32(o.Units))
@@ -40320,9 +40320,9 @@ func doDecodeGlPolygonOffset(d binary.Decoder, o *GlPolygonOffset) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40359,7 +40359,7 @@ func doEncodeGlPolygonOffsetx(e binary.Encoder, o *GlPolygonOffsetx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Factor))
 	e.Int32(int32(o.Units))
@@ -40370,9 +40370,9 @@ func doDecodeGlPolygonOffsetx(d binary.Decoder, o *GlPolygonOffsetx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40409,7 +40409,7 @@ func doEncodeGlPolygonOffsetxOES(e binary.Encoder, o *GlPolygonOffsetxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Factor))
 	e.Int32(int32(o.Units))
@@ -40420,9 +40420,9 @@ func doDecodeGlPolygonOffsetxOES(d binary.Decoder, o *GlPolygonOffsetxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40459,7 +40459,7 @@ func doEncodeGlPopDebugGroup(e binary.Encoder, o *GlPopDebugGroup) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPopDebugGroup(d binary.Decoder, o *GlPopDebugGroup) {
@@ -40468,9 +40468,9 @@ func doDecodeGlPopDebugGroup(d binary.Decoder, o *GlPopDebugGroup) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40503,7 +40503,7 @@ func doEncodeGlPopDebugGroupKHR(e binary.Encoder, o *GlPopDebugGroupKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPopDebugGroupKHR(d binary.Decoder, o *GlPopDebugGroupKHR) {
@@ -40512,9 +40512,9 @@ func doDecodeGlPopDebugGroupKHR(d binary.Decoder, o *GlPopDebugGroupKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40547,7 +40547,7 @@ func doEncodeGlPopGroupMarkerEXT(e binary.Encoder, o *GlPopGroupMarkerEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPopGroupMarkerEXT(d binary.Decoder, o *GlPopGroupMarkerEXT) {
@@ -40556,9 +40556,9 @@ func doDecodeGlPopGroupMarkerEXT(d binary.Decoder, o *GlPopGroupMarkerEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40591,7 +40591,7 @@ func doEncodeGlPopMatrix(e binary.Encoder, o *GlPopMatrix) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPopMatrix(d binary.Decoder, o *GlPopMatrix) {
@@ -40600,9 +40600,9 @@ func doDecodeGlPopMatrix(d binary.Decoder, o *GlPopMatrix) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40635,7 +40635,7 @@ func doEncodeGlPrimitiveBoundingBox(e binary.Encoder, o *GlPrimitiveBoundingBox)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.MinX))
 	e.Float32(float32(o.MinY))
@@ -40652,9 +40652,9 @@ func doDecodeGlPrimitiveBoundingBox(d binary.Decoder, o *GlPrimitiveBoundingBox)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40703,7 +40703,7 @@ func doEncodeGlPrimitiveBoundingBoxEXT(e binary.Encoder, o *GlPrimitiveBoundingB
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.MinX))
 	e.Float32(float32(o.MinY))
@@ -40720,9 +40720,9 @@ func doDecodeGlPrimitiveBoundingBoxEXT(d binary.Decoder, o *GlPrimitiveBoundingB
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40773,7 +40773,7 @@ func doEncodeGlPrimitiveBoundingBoxOES(e binary.Encoder, o *GlPrimitiveBoundingB
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.MinX))
 	e.Float32(float32(o.MinY))
@@ -40790,9 +40790,9 @@ func doDecodeGlPrimitiveBoundingBoxOES(d binary.Decoder, o *GlPrimitiveBoundingB
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40843,7 +40843,7 @@ func doEncodeGlProgramBinary(e binary.Encoder, o *GlProgramBinary) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.BinaryFormat))
@@ -40856,9 +40856,9 @@ func doDecodeGlProgramBinary(d binary.Decoder, o *GlProgramBinary) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40899,7 +40899,7 @@ func doEncodeGlProgramBinaryOES(e binary.Encoder, o *GlProgramBinaryOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.BinaryFormat))
@@ -40912,9 +40912,9 @@ func doDecodeGlProgramBinaryOES(d binary.Decoder, o *GlProgramBinaryOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -40955,7 +40955,7 @@ func doEncodeGlProgramParameteri(e binary.Encoder, o *GlProgramParameteri) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Pname))
@@ -40967,9 +40967,9 @@ func doDecodeGlProgramParameteri(d binary.Decoder, o *GlProgramParameteri) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41008,7 +41008,7 @@ func doEncodeGlProgramParameteriEXT(e binary.Encoder, o *GlProgramParameteriEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.Pname))
@@ -41020,9 +41020,9 @@ func doDecodeGlProgramParameteriEXT(d binary.Decoder, o *GlProgramParameteriEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41061,7 +41061,7 @@ func doEncodeGlProgramPathFragmentInputGenNV(e binary.Encoder, o *GlProgramPathF
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41075,9 +41075,9 @@ func doDecodeGlProgramPathFragmentInputGenNV(d binary.Decoder, o *GlProgramPathF
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41122,7 +41122,7 @@ func doEncodeGlProgramUniform1f(e binary.Encoder, o *GlProgramUniform1f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41134,9 +41134,9 @@ func doDecodeGlProgramUniform1f(d binary.Decoder, o *GlProgramUniform1f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41175,7 +41175,7 @@ func doEncodeGlProgramUniform1fEXT(e binary.Encoder, o *GlProgramUniform1fEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41187,9 +41187,9 @@ func doDecodeGlProgramUniform1fEXT(d binary.Decoder, o *GlProgramUniform1fEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41228,7 +41228,7 @@ func doEncodeGlProgramUniform1fv(e binary.Encoder, o *GlProgramUniform1fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41241,9 +41241,9 @@ func doDecodeGlProgramUniform1fv(d binary.Decoder, o *GlProgramUniform1fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41284,7 +41284,7 @@ func doEncodeGlProgramUniform1fvEXT(e binary.Encoder, o *GlProgramUniform1fvEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41297,9 +41297,9 @@ func doDecodeGlProgramUniform1fvEXT(d binary.Decoder, o *GlProgramUniform1fvEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41340,7 +41340,7 @@ func doEncodeGlProgramUniform1i(e binary.Encoder, o *GlProgramUniform1i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41352,9 +41352,9 @@ func doDecodeGlProgramUniform1i(d binary.Decoder, o *GlProgramUniform1i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41393,7 +41393,7 @@ func doEncodeGlProgramUniform1iEXT(e binary.Encoder, o *GlProgramUniform1iEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41405,9 +41405,9 @@ func doDecodeGlProgramUniform1iEXT(d binary.Decoder, o *GlProgramUniform1iEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41446,7 +41446,7 @@ func doEncodeGlProgramUniform1iv(e binary.Encoder, o *GlProgramUniform1iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41459,9 +41459,9 @@ func doDecodeGlProgramUniform1iv(d binary.Decoder, o *GlProgramUniform1iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41502,7 +41502,7 @@ func doEncodeGlProgramUniform1ivEXT(e binary.Encoder, o *GlProgramUniform1ivEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41515,9 +41515,9 @@ func doDecodeGlProgramUniform1ivEXT(d binary.Decoder, o *GlProgramUniform1ivEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41558,7 +41558,7 @@ func doEncodeGlProgramUniform1ui(e binary.Encoder, o *GlProgramUniform1ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41570,9 +41570,9 @@ func doDecodeGlProgramUniform1ui(d binary.Decoder, o *GlProgramUniform1ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41611,7 +41611,7 @@ func doEncodeGlProgramUniform1uiEXT(e binary.Encoder, o *GlProgramUniform1uiEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41623,9 +41623,9 @@ func doDecodeGlProgramUniform1uiEXT(d binary.Decoder, o *GlProgramUniform1uiEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41664,7 +41664,7 @@ func doEncodeGlProgramUniform1uiv(e binary.Encoder, o *GlProgramUniform1uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41677,9 +41677,9 @@ func doDecodeGlProgramUniform1uiv(d binary.Decoder, o *GlProgramUniform1uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41720,7 +41720,7 @@ func doEncodeGlProgramUniform1uivEXT(e binary.Encoder, o *GlProgramUniform1uivEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41733,9 +41733,9 @@ func doDecodeGlProgramUniform1uivEXT(d binary.Decoder, o *GlProgramUniform1uivEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41778,7 +41778,7 @@ func doEncodeGlProgramUniform2f(e binary.Encoder, o *GlProgramUniform2f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41791,9 +41791,9 @@ func doDecodeGlProgramUniform2f(d binary.Decoder, o *GlProgramUniform2f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41834,7 +41834,7 @@ func doEncodeGlProgramUniform2fEXT(e binary.Encoder, o *GlProgramUniform2fEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41847,9 +41847,9 @@ func doDecodeGlProgramUniform2fEXT(d binary.Decoder, o *GlProgramUniform2fEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41890,7 +41890,7 @@ func doEncodeGlProgramUniform2fv(e binary.Encoder, o *GlProgramUniform2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41903,9 +41903,9 @@ func doDecodeGlProgramUniform2fv(d binary.Decoder, o *GlProgramUniform2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -41946,7 +41946,7 @@ func doEncodeGlProgramUniform2fvEXT(e binary.Encoder, o *GlProgramUniform2fvEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -41959,9 +41959,9 @@ func doDecodeGlProgramUniform2fvEXT(d binary.Decoder, o *GlProgramUniform2fvEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42002,7 +42002,7 @@ func doEncodeGlProgramUniform2i(e binary.Encoder, o *GlProgramUniform2i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42015,9 +42015,9 @@ func doDecodeGlProgramUniform2i(d binary.Decoder, o *GlProgramUniform2i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42058,7 +42058,7 @@ func doEncodeGlProgramUniform2iEXT(e binary.Encoder, o *GlProgramUniform2iEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42071,9 +42071,9 @@ func doDecodeGlProgramUniform2iEXT(d binary.Decoder, o *GlProgramUniform2iEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42114,7 +42114,7 @@ func doEncodeGlProgramUniform2iv(e binary.Encoder, o *GlProgramUniform2iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42127,9 +42127,9 @@ func doDecodeGlProgramUniform2iv(d binary.Decoder, o *GlProgramUniform2iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42170,7 +42170,7 @@ func doEncodeGlProgramUniform2ivEXT(e binary.Encoder, o *GlProgramUniform2ivEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42183,9 +42183,9 @@ func doDecodeGlProgramUniform2ivEXT(d binary.Decoder, o *GlProgramUniform2ivEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42226,7 +42226,7 @@ func doEncodeGlProgramUniform2ui(e binary.Encoder, o *GlProgramUniform2ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42239,9 +42239,9 @@ func doDecodeGlProgramUniform2ui(d binary.Decoder, o *GlProgramUniform2ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42282,7 +42282,7 @@ func doEncodeGlProgramUniform2uiEXT(e binary.Encoder, o *GlProgramUniform2uiEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42295,9 +42295,9 @@ func doDecodeGlProgramUniform2uiEXT(d binary.Decoder, o *GlProgramUniform2uiEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42338,7 +42338,7 @@ func doEncodeGlProgramUniform2uiv(e binary.Encoder, o *GlProgramUniform2uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42351,9 +42351,9 @@ func doDecodeGlProgramUniform2uiv(d binary.Decoder, o *GlProgramUniform2uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42394,7 +42394,7 @@ func doEncodeGlProgramUniform2uivEXT(e binary.Encoder, o *GlProgramUniform2uivEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42407,9 +42407,9 @@ func doDecodeGlProgramUniform2uivEXT(d binary.Decoder, o *GlProgramUniform2uivEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42452,7 +42452,7 @@ func doEncodeGlProgramUniform3f(e binary.Encoder, o *GlProgramUniform3f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42466,9 +42466,9 @@ func doDecodeGlProgramUniform3f(d binary.Decoder, o *GlProgramUniform3f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42511,7 +42511,7 @@ func doEncodeGlProgramUniform3fEXT(e binary.Encoder, o *GlProgramUniform3fEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42525,9 +42525,9 @@ func doDecodeGlProgramUniform3fEXT(d binary.Decoder, o *GlProgramUniform3fEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42570,7 +42570,7 @@ func doEncodeGlProgramUniform3fv(e binary.Encoder, o *GlProgramUniform3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42583,9 +42583,9 @@ func doDecodeGlProgramUniform3fv(d binary.Decoder, o *GlProgramUniform3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42626,7 +42626,7 @@ func doEncodeGlProgramUniform3fvEXT(e binary.Encoder, o *GlProgramUniform3fvEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42639,9 +42639,9 @@ func doDecodeGlProgramUniform3fvEXT(d binary.Decoder, o *GlProgramUniform3fvEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42682,7 +42682,7 @@ func doEncodeGlProgramUniform3i(e binary.Encoder, o *GlProgramUniform3i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42696,9 +42696,9 @@ func doDecodeGlProgramUniform3i(d binary.Decoder, o *GlProgramUniform3i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42741,7 +42741,7 @@ func doEncodeGlProgramUniform3iEXT(e binary.Encoder, o *GlProgramUniform3iEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42755,9 +42755,9 @@ func doDecodeGlProgramUniform3iEXT(d binary.Decoder, o *GlProgramUniform3iEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42800,7 +42800,7 @@ func doEncodeGlProgramUniform3iv(e binary.Encoder, o *GlProgramUniform3iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42813,9 +42813,9 @@ func doDecodeGlProgramUniform3iv(d binary.Decoder, o *GlProgramUniform3iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42856,7 +42856,7 @@ func doEncodeGlProgramUniform3ivEXT(e binary.Encoder, o *GlProgramUniform3ivEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42869,9 +42869,9 @@ func doDecodeGlProgramUniform3ivEXT(d binary.Decoder, o *GlProgramUniform3ivEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42912,7 +42912,7 @@ func doEncodeGlProgramUniform3ui(e binary.Encoder, o *GlProgramUniform3ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42926,9 +42926,9 @@ func doDecodeGlProgramUniform3ui(d binary.Decoder, o *GlProgramUniform3ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -42971,7 +42971,7 @@ func doEncodeGlProgramUniform3uiEXT(e binary.Encoder, o *GlProgramUniform3uiEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -42985,9 +42985,9 @@ func doDecodeGlProgramUniform3uiEXT(d binary.Decoder, o *GlProgramUniform3uiEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43030,7 +43030,7 @@ func doEncodeGlProgramUniform3uiv(e binary.Encoder, o *GlProgramUniform3uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43043,9 +43043,9 @@ func doDecodeGlProgramUniform3uiv(d binary.Decoder, o *GlProgramUniform3uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43086,7 +43086,7 @@ func doEncodeGlProgramUniform3uivEXT(e binary.Encoder, o *GlProgramUniform3uivEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43099,9 +43099,9 @@ func doDecodeGlProgramUniform3uivEXT(d binary.Decoder, o *GlProgramUniform3uivEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43144,7 +43144,7 @@ func doEncodeGlProgramUniform4f(e binary.Encoder, o *GlProgramUniform4f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43159,9 +43159,9 @@ func doDecodeGlProgramUniform4f(d binary.Decoder, o *GlProgramUniform4f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43206,7 +43206,7 @@ func doEncodeGlProgramUniform4fEXT(e binary.Encoder, o *GlProgramUniform4fEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43221,9 +43221,9 @@ func doDecodeGlProgramUniform4fEXT(d binary.Decoder, o *GlProgramUniform4fEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43268,7 +43268,7 @@ func doEncodeGlProgramUniform4fv(e binary.Encoder, o *GlProgramUniform4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43281,9 +43281,9 @@ func doDecodeGlProgramUniform4fv(d binary.Decoder, o *GlProgramUniform4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43324,7 +43324,7 @@ func doEncodeGlProgramUniform4fvEXT(e binary.Encoder, o *GlProgramUniform4fvEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43337,9 +43337,9 @@ func doDecodeGlProgramUniform4fvEXT(d binary.Decoder, o *GlProgramUniform4fvEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43380,7 +43380,7 @@ func doEncodeGlProgramUniform4i(e binary.Encoder, o *GlProgramUniform4i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43395,9 +43395,9 @@ func doDecodeGlProgramUniform4i(d binary.Decoder, o *GlProgramUniform4i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43442,7 +43442,7 @@ func doEncodeGlProgramUniform4iEXT(e binary.Encoder, o *GlProgramUniform4iEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43457,9 +43457,9 @@ func doDecodeGlProgramUniform4iEXT(d binary.Decoder, o *GlProgramUniform4iEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43504,7 +43504,7 @@ func doEncodeGlProgramUniform4iv(e binary.Encoder, o *GlProgramUniform4iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43517,9 +43517,9 @@ func doDecodeGlProgramUniform4iv(d binary.Decoder, o *GlProgramUniform4iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43560,7 +43560,7 @@ func doEncodeGlProgramUniform4ivEXT(e binary.Encoder, o *GlProgramUniform4ivEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43573,9 +43573,9 @@ func doDecodeGlProgramUniform4ivEXT(d binary.Decoder, o *GlProgramUniform4ivEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43616,7 +43616,7 @@ func doEncodeGlProgramUniform4ui(e binary.Encoder, o *GlProgramUniform4ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43631,9 +43631,9 @@ func doDecodeGlProgramUniform4ui(d binary.Decoder, o *GlProgramUniform4ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43678,7 +43678,7 @@ func doEncodeGlProgramUniform4uiEXT(e binary.Encoder, o *GlProgramUniform4uiEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43693,9 +43693,9 @@ func doDecodeGlProgramUniform4uiEXT(d binary.Decoder, o *GlProgramUniform4uiEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43740,7 +43740,7 @@ func doEncodeGlProgramUniform4uiv(e binary.Encoder, o *GlProgramUniform4uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43753,9 +43753,9 @@ func doDecodeGlProgramUniform4uiv(d binary.Decoder, o *GlProgramUniform4uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43796,7 +43796,7 @@ func doEncodeGlProgramUniform4uivEXT(e binary.Encoder, o *GlProgramUniform4uivEX
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43809,9 +43809,9 @@ func doDecodeGlProgramUniform4uivEXT(d binary.Decoder, o *GlProgramUniform4uivEX
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43854,7 +43854,7 @@ func doEncodeGlProgramUniformHandleui64NV(e binary.Encoder, o *GlProgramUniformH
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43866,9 +43866,9 @@ func doDecodeGlProgramUniformHandleui64NV(d binary.Decoder, o *GlProgramUniformH
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43909,7 +43909,7 @@ func doEncodeGlProgramUniformHandleui64vNV(e binary.Encoder, o *GlProgramUniform
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43922,9 +43922,9 @@ func doDecodeGlProgramUniformHandleui64vNV(d binary.Decoder, o *GlProgramUniform
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -43967,7 +43967,7 @@ func doEncodeGlProgramUniformMatrix2fv(e binary.Encoder, o *GlProgramUniformMatr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -43981,9 +43981,9 @@ func doDecodeGlProgramUniformMatrix2fv(d binary.Decoder, o *GlProgramUniformMatr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44028,7 +44028,7 @@ func doEncodeGlProgramUniformMatrix2fvEXT(e binary.Encoder, o *GlProgramUniformM
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44042,9 +44042,9 @@ func doDecodeGlProgramUniformMatrix2fvEXT(d binary.Decoder, o *GlProgramUniformM
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44089,7 +44089,7 @@ func doEncodeGlProgramUniformMatrix2x3fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44103,9 +44103,9 @@ func doDecodeGlProgramUniformMatrix2x3fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44150,7 +44150,7 @@ func doEncodeGlProgramUniformMatrix2x3fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44164,9 +44164,9 @@ func doDecodeGlProgramUniformMatrix2x3fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44211,7 +44211,7 @@ func doEncodeGlProgramUniformMatrix2x4fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44225,9 +44225,9 @@ func doDecodeGlProgramUniformMatrix2x4fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44272,7 +44272,7 @@ func doEncodeGlProgramUniformMatrix2x4fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44286,9 +44286,9 @@ func doDecodeGlProgramUniformMatrix2x4fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44333,7 +44333,7 @@ func doEncodeGlProgramUniformMatrix3fv(e binary.Encoder, o *GlProgramUniformMatr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44347,9 +44347,9 @@ func doDecodeGlProgramUniformMatrix3fv(d binary.Decoder, o *GlProgramUniformMatr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44394,7 +44394,7 @@ func doEncodeGlProgramUniformMatrix3fvEXT(e binary.Encoder, o *GlProgramUniformM
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44408,9 +44408,9 @@ func doDecodeGlProgramUniformMatrix3fvEXT(d binary.Decoder, o *GlProgramUniformM
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44455,7 +44455,7 @@ func doEncodeGlProgramUniformMatrix3x2fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44469,9 +44469,9 @@ func doDecodeGlProgramUniformMatrix3x2fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44516,7 +44516,7 @@ func doEncodeGlProgramUniformMatrix3x2fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44530,9 +44530,9 @@ func doDecodeGlProgramUniformMatrix3x2fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44577,7 +44577,7 @@ func doEncodeGlProgramUniformMatrix3x4fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44591,9 +44591,9 @@ func doDecodeGlProgramUniformMatrix3x4fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44638,7 +44638,7 @@ func doEncodeGlProgramUniformMatrix3x4fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44652,9 +44652,9 @@ func doDecodeGlProgramUniformMatrix3x4fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44699,7 +44699,7 @@ func doEncodeGlProgramUniformMatrix4fv(e binary.Encoder, o *GlProgramUniformMatr
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44713,9 +44713,9 @@ func doDecodeGlProgramUniformMatrix4fv(d binary.Decoder, o *GlProgramUniformMatr
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44760,7 +44760,7 @@ func doEncodeGlProgramUniformMatrix4fvEXT(e binary.Encoder, o *GlProgramUniformM
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44774,9 +44774,9 @@ func doDecodeGlProgramUniformMatrix4fvEXT(d binary.Decoder, o *GlProgramUniformM
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44821,7 +44821,7 @@ func doEncodeGlProgramUniformMatrix4x2fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44835,9 +44835,9 @@ func doDecodeGlProgramUniformMatrix4x2fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44882,7 +44882,7 @@ func doEncodeGlProgramUniformMatrix4x2fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44896,9 +44896,9 @@ func doDecodeGlProgramUniformMatrix4x2fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -44943,7 +44943,7 @@ func doEncodeGlProgramUniformMatrix4x3fv(e binary.Encoder, o *GlProgramUniformMa
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -44957,9 +44957,9 @@ func doDecodeGlProgramUniformMatrix4x3fv(d binary.Decoder, o *GlProgramUniformMa
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45004,7 +45004,7 @@ func doEncodeGlProgramUniformMatrix4x3fvEXT(e binary.Encoder, o *GlProgramUnifor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Location))
@@ -45018,9 +45018,9 @@ func doDecodeGlProgramUniformMatrix4x3fvEXT(d binary.Decoder, o *GlProgramUnifor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45065,7 +45065,7 @@ func doEncodeGlPushDebugGroup(e binary.Encoder, o *GlPushDebugGroup) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Id))
@@ -45078,9 +45078,9 @@ func doDecodeGlPushDebugGroup(d binary.Decoder, o *GlPushDebugGroup) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45121,7 +45121,7 @@ func doEncodeGlPushDebugGroupKHR(e binary.Encoder, o *GlPushDebugGroupKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Source))
 	e.Uint32(uint32(o.Id))
@@ -45134,9 +45134,9 @@ func doDecodeGlPushDebugGroupKHR(d binary.Decoder, o *GlPushDebugGroupKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45177,7 +45177,7 @@ func doEncodeGlPushGroupMarkerEXT(e binary.Encoder, o *GlPushGroupMarkerEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Length))
 	e.Struct(&o.Marker)
@@ -45188,9 +45188,9 @@ func doDecodeGlPushGroupMarkerEXT(d binary.Decoder, o *GlPushGroupMarkerEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45227,7 +45227,7 @@ func doEncodeGlPushMatrix(e binary.Encoder, o *GlPushMatrix) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlPushMatrix(d binary.Decoder, o *GlPushMatrix) {
@@ -45236,9 +45236,9 @@ func doDecodeGlPushMatrix(d binary.Decoder, o *GlPushMatrix) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45271,7 +45271,7 @@ func doEncodeGlQueryCounterEXT(e binary.Encoder, o *GlQueryCounterEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Query))
 	e.Uint32(uint32(o.Target))
@@ -45282,9 +45282,9 @@ func doDecodeGlQueryCounterEXT(d binary.Decoder, o *GlQueryCounterEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45321,7 +45321,7 @@ func doEncodeGlQueryMatrixxOES(e binary.Encoder, o *GlQueryMatrixxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Mantissa)
 	e.Struct(&o.Exponent)
@@ -45333,9 +45333,9 @@ func doDecodeGlQueryMatrixxOES(d binary.Decoder, o *GlQueryMatrixxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45374,7 +45374,7 @@ func doEncodeGlRasterSamplesEXT(e binary.Encoder, o *GlRasterSamplesEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Samples))
 	e.Uint8(uint8(o.Fixedsamplelocations))
@@ -45385,9 +45385,9 @@ func doDecodeGlRasterSamplesEXT(d binary.Decoder, o *GlRasterSamplesEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45424,7 +45424,7 @@ func doEncodeGlReadBuffer(e binary.Encoder, o *GlReadBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Src))
 }
@@ -45434,9 +45434,9 @@ func doDecodeGlReadBuffer(d binary.Decoder, o *GlReadBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45471,7 +45471,7 @@ func doEncodeGlReadBufferIndexedEXT(e binary.Encoder, o *GlReadBufferIndexedEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Src))
 	e.Int32(int32(o.Index))
@@ -45482,9 +45482,9 @@ func doDecodeGlReadBufferIndexedEXT(d binary.Decoder, o *GlReadBufferIndexedEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45521,7 +45521,7 @@ func doEncodeGlReadBufferNV(e binary.Encoder, o *GlReadBufferNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 }
@@ -45531,9 +45531,9 @@ func doDecodeGlReadBufferNV(d binary.Decoder, o *GlReadBufferNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45568,7 +45568,7 @@ func doEncodeGlReadPixels(e binary.Encoder, o *GlReadPixels) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -45584,9 +45584,9 @@ func doDecodeGlReadPixels(d binary.Decoder, o *GlReadPixels) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45633,7 +45633,7 @@ func doEncodeGlReadnPixels(e binary.Encoder, o *GlReadnPixels) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -45650,9 +45650,9 @@ func doDecodeGlReadnPixels(d binary.Decoder, o *GlReadnPixels) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45701,7 +45701,7 @@ func doEncodeGlReadnPixelsEXT(e binary.Encoder, o *GlReadnPixelsEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -45718,9 +45718,9 @@ func doDecodeGlReadnPixelsEXT(d binary.Decoder, o *GlReadnPixelsEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45769,7 +45769,7 @@ func doEncodeGlReadnPixelsKHR(e binary.Encoder, o *GlReadnPixelsKHR) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -45786,9 +45786,9 @@ func doDecodeGlReadnPixelsKHR(d binary.Decoder, o *GlReadnPixelsKHR) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45837,7 +45837,7 @@ func doEncodeGlReleaseShaderCompiler(e binary.Encoder, o *GlReleaseShaderCompile
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlReleaseShaderCompiler(d binary.Decoder, o *GlReleaseShaderCompiler) {
@@ -45846,9 +45846,9 @@ func doDecodeGlReleaseShaderCompiler(d binary.Decoder, o *GlReleaseShaderCompile
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45883,7 +45883,7 @@ func doEncodeGlRenderbufferStorage(e binary.Encoder, o *GlRenderbufferStorage) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Format))
@@ -45896,9 +45896,9 @@ func doDecodeGlRenderbufferStorage(d binary.Decoder, o *GlRenderbufferStorage) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -45939,7 +45939,7 @@ func doEncodeGlRenderbufferStorageMultisample(e binary.Encoder, o *GlRenderbuffe
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -45953,9 +45953,9 @@ func doDecodeGlRenderbufferStorageMultisample(d binary.Decoder, o *GlRenderbuffe
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46000,7 +46000,7 @@ func doEncodeGlRenderbufferStorageMultisampleANGLE(e binary.Encoder, o *GlRender
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -46014,9 +46014,9 @@ func doDecodeGlRenderbufferStorageMultisampleANGLE(d binary.Decoder, o *GlRender
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46061,7 +46061,7 @@ func doEncodeGlRenderbufferStorageMultisampleAPPLE(e binary.Encoder, o *GlRender
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -46075,9 +46075,9 @@ func doDecodeGlRenderbufferStorageMultisampleAPPLE(d binary.Decoder, o *GlRender
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46122,7 +46122,7 @@ func doEncodeGlRenderbufferStorageMultisampleEXT(e binary.Encoder, o *GlRenderbu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -46136,9 +46136,9 @@ func doDecodeGlRenderbufferStorageMultisampleEXT(d binary.Decoder, o *GlRenderbu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46183,7 +46183,7 @@ func doEncodeGlRenderbufferStorageMultisampleIMG(e binary.Encoder, o *GlRenderbu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -46197,9 +46197,9 @@ func doDecodeGlRenderbufferStorageMultisampleIMG(d binary.Decoder, o *GlRenderbu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46244,7 +46244,7 @@ func doEncodeGlRenderbufferStorageMultisampleNV(e binary.Encoder, o *GlRenderbuf
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -46258,9 +46258,9 @@ func doDecodeGlRenderbufferStorageMultisampleNV(d binary.Decoder, o *GlRenderbuf
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46305,7 +46305,7 @@ func doEncodeGlRenderbufferStorageOES(e binary.Encoder, o *GlRenderbufferStorage
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -46318,9 +46318,9 @@ func doDecodeGlRenderbufferStorageOES(d binary.Decoder, o *GlRenderbufferStorage
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46363,7 +46363,7 @@ func doEncodeGlResolveDepthValuesNV(e binary.Encoder, o *GlResolveDepthValuesNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlResolveDepthValuesNV(d binary.Decoder, o *GlResolveDepthValuesNV) {
@@ -46372,9 +46372,9 @@ func doDecodeGlResolveDepthValuesNV(d binary.Decoder, o *GlResolveDepthValuesNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46407,7 +46407,7 @@ func doEncodeGlResolveMultisampleFramebufferAPPLE(e binary.Encoder, o *GlResolve
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlResolveMultisampleFramebufferAPPLE(d binary.Decoder, o *GlResolveMultisampleFramebufferAPPLE) {
@@ -46416,9 +46416,9 @@ func doDecodeGlResolveMultisampleFramebufferAPPLE(d binary.Decoder, o *GlResolve
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46453,7 +46453,7 @@ func doEncodeGlResumeTransformFeedback(e binary.Encoder, o *GlResumeTransformFee
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 }
 func doDecodeGlResumeTransformFeedback(d binary.Decoder, o *GlResumeTransformFeedback) {
@@ -46462,9 +46462,9 @@ func doDecodeGlResumeTransformFeedback(d binary.Decoder, o *GlResumeTransformFee
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46499,7 +46499,7 @@ func doEncodeGlRotatef(e binary.Encoder, o *GlRotatef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Angle))
 	e.Float32(float32(o.X))
@@ -46512,9 +46512,9 @@ func doDecodeGlRotatef(d binary.Decoder, o *GlRotatef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46555,7 +46555,7 @@ func doEncodeGlRotatex(e binary.Encoder, o *GlRotatex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Angle))
 	e.Int32(int32(o.X))
@@ -46568,9 +46568,9 @@ func doDecodeGlRotatex(d binary.Decoder, o *GlRotatex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46611,7 +46611,7 @@ func doEncodeGlRotatexOES(e binary.Encoder, o *GlRotatexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Angle))
 	e.Int32(int32(o.X))
@@ -46624,9 +46624,9 @@ func doDecodeGlRotatexOES(d binary.Decoder, o *GlRotatexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46667,7 +46667,7 @@ func doEncodeGlSampleCoverage(e binary.Encoder, o *GlSampleCoverage) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.Value))
 	e.Uint8(uint8(o.Invert))
@@ -46678,9 +46678,9 @@ func doDecodeGlSampleCoverage(d binary.Decoder, o *GlSampleCoverage) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46717,7 +46717,7 @@ func doEncodeGlSampleCoveragex(e binary.Encoder, o *GlSampleCoveragex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Value))
 	e.Uint8(uint8(o.Invert))
@@ -46728,9 +46728,9 @@ func doDecodeGlSampleCoveragex(d binary.Decoder, o *GlSampleCoveragex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46767,7 +46767,7 @@ func doEncodeGlSampleCoveragexOES(e binary.Encoder, o *GlSampleCoveragexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Value))
 	e.Uint8(uint8(o.Invert))
@@ -46778,9 +46778,9 @@ func doDecodeGlSampleCoveragexOES(d binary.Decoder, o *GlSampleCoveragexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46817,7 +46817,7 @@ func doEncodeGlSampleMaski(e binary.Encoder, o *GlSampleMaski) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.MaskNumber))
 	e.Uint32(uint32(o.Mask))
@@ -46828,9 +46828,9 @@ func doDecodeGlSampleMaski(d binary.Decoder, o *GlSampleMaski) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46867,7 +46867,7 @@ func doEncodeGlSamplerParameterIiv(e binary.Encoder, o *GlSamplerParameterIiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -46879,9 +46879,9 @@ func doDecodeGlSamplerParameterIiv(d binary.Decoder, o *GlSamplerParameterIiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46920,7 +46920,7 @@ func doEncodeGlSamplerParameterIivEXT(e binary.Encoder, o *GlSamplerParameterIiv
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -46932,9 +46932,9 @@ func doDecodeGlSamplerParameterIivEXT(d binary.Decoder, o *GlSamplerParameterIiv
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -46975,7 +46975,7 @@ func doEncodeGlSamplerParameterIivOES(e binary.Encoder, o *GlSamplerParameterIiv
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -46987,9 +46987,9 @@ func doDecodeGlSamplerParameterIivOES(d binary.Decoder, o *GlSamplerParameterIiv
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47030,7 +47030,7 @@ func doEncodeGlSamplerParameterIuiv(e binary.Encoder, o *GlSamplerParameterIuiv)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47042,9 +47042,9 @@ func doDecodeGlSamplerParameterIuiv(d binary.Decoder, o *GlSamplerParameterIuiv)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47083,7 +47083,7 @@ func doEncodeGlSamplerParameterIuivEXT(e binary.Encoder, o *GlSamplerParameterIu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47095,9 +47095,9 @@ func doDecodeGlSamplerParameterIuivEXT(d binary.Decoder, o *GlSamplerParameterIu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47138,7 +47138,7 @@ func doEncodeGlSamplerParameterIuivOES(e binary.Encoder, o *GlSamplerParameterIu
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47150,9 +47150,9 @@ func doDecodeGlSamplerParameterIuivOES(d binary.Decoder, o *GlSamplerParameterIu
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47193,7 +47193,7 @@ func doEncodeGlSamplerParameterf(e binary.Encoder, o *GlSamplerParameterf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47205,9 +47205,9 @@ func doDecodeGlSamplerParameterf(d binary.Decoder, o *GlSamplerParameterf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47246,7 +47246,7 @@ func doEncodeGlSamplerParameterfv(e binary.Encoder, o *GlSamplerParameterfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47258,9 +47258,9 @@ func doDecodeGlSamplerParameterfv(d binary.Decoder, o *GlSamplerParameterfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47299,7 +47299,7 @@ func doEncodeGlSamplerParameteri(e binary.Encoder, o *GlSamplerParameteri) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47311,9 +47311,9 @@ func doDecodeGlSamplerParameteri(d binary.Decoder, o *GlSamplerParameteri) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47352,7 +47352,7 @@ func doEncodeGlSamplerParameteriv(e binary.Encoder, o *GlSamplerParameteriv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Sampler))
 	e.Uint32(uint32(o.Pname))
@@ -47364,9 +47364,9 @@ func doDecodeGlSamplerParameteriv(d binary.Decoder, o *GlSamplerParameteriv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47405,7 +47405,7 @@ func doEncodeGlScalef(e binary.Encoder, o *GlScalef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.X))
 	e.Float32(float32(o.Y))
@@ -47417,9 +47417,9 @@ func doDecodeGlScalef(d binary.Decoder, o *GlScalef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47458,7 +47458,7 @@ func doEncodeGlScalex(e binary.Encoder, o *GlScalex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -47470,9 +47470,9 @@ func doDecodeGlScalex(d binary.Decoder, o *GlScalex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47511,7 +47511,7 @@ func doEncodeGlScalexOES(e binary.Encoder, o *GlScalexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -47523,9 +47523,9 @@ func doDecodeGlScalexOES(d binary.Decoder, o *GlScalexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47564,7 +47564,7 @@ func doEncodeGlScissor(e binary.Encoder, o *GlScissor) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -47577,9 +47577,9 @@ func doDecodeGlScissor(d binary.Decoder, o *GlScissor) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47620,7 +47620,7 @@ func doEncodeGlScissorArrayvNV(e binary.Encoder, o *GlScissorArrayvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.First))
 	e.Int32(int32(o.Count))
@@ -47632,9 +47632,9 @@ func doDecodeGlScissorArrayvNV(d binary.Decoder, o *GlScissorArrayvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47673,7 +47673,7 @@ func doEncodeGlScissorIndexedNV(e binary.Encoder, o *GlScissorIndexedNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.Left))
@@ -47687,9 +47687,9 @@ func doDecodeGlScissorIndexedNV(d binary.Decoder, o *GlScissorIndexedNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47732,7 +47732,7 @@ func doEncodeGlScissorIndexedvNV(e binary.Encoder, o *GlScissorIndexedvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Struct(&o.V)
@@ -47743,9 +47743,9 @@ func doDecodeGlScissorIndexedvNV(d binary.Decoder, o *GlScissorIndexedvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47782,7 +47782,7 @@ func doEncodeGlSelectPerfMonitorCountersAMD(e binary.Encoder, o *GlSelectPerfMon
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Monitor))
 	e.Uint8(uint8(o.Enable))
@@ -47796,9 +47796,9 @@ func doDecodeGlSelectPerfMonitorCountersAMD(d binary.Decoder, o *GlSelectPerfMon
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47843,7 +47843,7 @@ func doEncodeGlSetFenceNV(e binary.Encoder, o *GlSetFenceNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fence))
 	e.Uint32(uint32(o.Condition))
@@ -47854,9 +47854,9 @@ func doDecodeGlSetFenceNV(d binary.Decoder, o *GlSetFenceNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47893,7 +47893,7 @@ func doEncodeGlShadeModel(e binary.Encoder, o *GlShadeModel) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mode))
 }
@@ -47903,9 +47903,9 @@ func doDecodeGlShadeModel(d binary.Decoder, o *GlShadeModel) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -47970,7 +47970,7 @@ func doEncodeGlShaderBinary(e binary.Encoder, o *GlShaderBinary) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Count))
 	e.Struct(&o.Shaders)
@@ -47984,9 +47984,9 @@ func doDecodeGlShaderBinary(d binary.Decoder, o *GlShaderBinary) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48029,7 +48029,7 @@ func doEncodeGlShaderSource(e binary.Encoder, o *GlShaderSource) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Shader))
 	e.Int32(int32(o.Count))
@@ -48042,9 +48042,9 @@ func doDecodeGlShaderSource(d binary.Decoder, o *GlShaderSource) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48085,7 +48085,7 @@ func doEncodeGlStartTilingQCOM(e binary.Encoder, o *GlStartTilingQCOM) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.X))
 	e.Uint32(uint32(o.Y))
@@ -48099,9 +48099,9 @@ func doDecodeGlStartTilingQCOM(d binary.Decoder, o *GlStartTilingQCOM) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48144,7 +48144,7 @@ func doEncodeGlStencilFillPathInstancedNV(e binary.Encoder, o *GlStencilFillPath
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -48161,9 +48161,9 @@ func doDecodeGlStencilFillPathInstancedNV(d binary.Decoder, o *GlStencilFillPath
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48214,7 +48214,7 @@ func doEncodeGlStencilFillPathNV(e binary.Encoder, o *GlStencilFillPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.FillMode))
@@ -48226,9 +48226,9 @@ func doDecodeGlStencilFillPathNV(d binary.Decoder, o *GlStencilFillPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48267,7 +48267,7 @@ func doEncodeGlStencilFunc(e binary.Encoder, o *GlStencilFunc) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Func))
 	e.Int32(int32(o.Ref))
@@ -48279,9 +48279,9 @@ func doDecodeGlStencilFunc(d binary.Decoder, o *GlStencilFunc) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48320,7 +48320,7 @@ func doEncodeGlStencilFuncSeparate(e binary.Encoder, o *GlStencilFuncSeparate) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Function))
@@ -48333,9 +48333,9 @@ func doDecodeGlStencilFuncSeparate(d binary.Decoder, o *GlStencilFuncSeparate) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48376,7 +48376,7 @@ func doEncodeGlStencilMask(e binary.Encoder, o *GlStencilMask) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Mask))
 }
@@ -48386,9 +48386,9 @@ func doDecodeGlStencilMask(d binary.Decoder, o *GlStencilMask) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48423,7 +48423,7 @@ func doEncodeGlStencilMaskSeparate(e binary.Encoder, o *GlStencilMaskSeparate) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.Mask))
@@ -48434,9 +48434,9 @@ func doDecodeGlStencilMaskSeparate(d binary.Decoder, o *GlStencilMaskSeparate) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48473,7 +48473,7 @@ func doEncodeGlStencilOp(e binary.Encoder, o *GlStencilOp) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fail))
 	e.Uint32(uint32(o.Zfail))
@@ -48485,9 +48485,9 @@ func doDecodeGlStencilOp(d binary.Decoder, o *GlStencilOp) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48526,7 +48526,7 @@ func doEncodeGlStencilOpSeparate(e binary.Encoder, o *GlStencilOpSeparate) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Face))
 	e.Uint32(uint32(o.StencilFail))
@@ -48539,9 +48539,9 @@ func doDecodeGlStencilOpSeparate(d binary.Decoder, o *GlStencilOpSeparate) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48582,7 +48582,7 @@ func doEncodeGlStencilStrokePathInstancedNV(e binary.Encoder, o *GlStencilStroke
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -48599,9 +48599,9 @@ func doDecodeGlStencilStrokePathInstancedNV(d binary.Decoder, o *GlStencilStroke
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48652,7 +48652,7 @@ func doEncodeGlStencilStrokePathNV(e binary.Encoder, o *GlStencilStrokePathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.Reference))
@@ -48664,9 +48664,9 @@ func doDecodeGlStencilStrokePathNV(d binary.Decoder, o *GlStencilStrokePathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48705,7 +48705,7 @@ func doEncodeGlStencilThenCoverFillPathInstancedNV(e binary.Encoder, o *GlStenci
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -48723,9 +48723,9 @@ func doDecodeGlStencilThenCoverFillPathInstancedNV(d binary.Decoder, o *GlStenci
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48778,7 +48778,7 @@ func doEncodeGlStencilThenCoverFillPathNV(e binary.Encoder, o *GlStencilThenCove
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Uint32(uint32(o.FillMode))
@@ -48791,9 +48791,9 @@ func doDecodeGlStencilThenCoverFillPathNV(d binary.Decoder, o *GlStencilThenCove
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48836,7 +48836,7 @@ func doEncodeGlStencilThenCoverStrokePathInstancedNV(e binary.Encoder, o *GlSten
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.NumPaths))
 	e.Uint32(uint32(o.PathNameType))
@@ -48854,9 +48854,9 @@ func doDecodeGlStencilThenCoverStrokePathInstancedNV(d binary.Decoder, o *GlSten
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48909,7 +48909,7 @@ func doEncodeGlStencilThenCoverStrokePathNV(e binary.Encoder, o *GlStencilThenCo
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Path))
 	e.Int32(int32(o.Reference))
@@ -48922,9 +48922,9 @@ func doDecodeGlStencilThenCoverStrokePathNV(d binary.Decoder, o *GlStencilThenCo
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -48967,7 +48967,7 @@ func doEncodeGlSubpixelPrecisionBiasNV(e binary.Encoder, o *GlSubpixelPrecisionB
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Xbits))
 	e.Uint32(uint32(o.Ybits))
@@ -48978,9 +48978,9 @@ func doDecodeGlSubpixelPrecisionBiasNV(d binary.Decoder, o *GlSubpixelPrecisionB
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49019,7 +49019,7 @@ func doEncodeGlTestFenceNV(e binary.Encoder, o *GlTestFenceNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Fence))
 	e.Uint8(uint8(o.Result))
@@ -49030,9 +49030,9 @@ func doDecodeGlTestFenceNV(d binary.Decoder, o *GlTestFenceNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49069,7 +49069,7 @@ func doEncodeGlTexBuffer(e binary.Encoder, o *GlTexBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49081,9 +49081,9 @@ func doDecodeGlTexBuffer(d binary.Decoder, o *GlTexBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49122,7 +49122,7 @@ func doEncodeGlTexBufferEXT(e binary.Encoder, o *GlTexBufferEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49134,9 +49134,9 @@ func doDecodeGlTexBufferEXT(d binary.Decoder, o *GlTexBufferEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49175,7 +49175,7 @@ func doEncodeGlTexBufferOES(e binary.Encoder, o *GlTexBufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49187,9 +49187,9 @@ func doDecodeGlTexBufferOES(d binary.Decoder, o *GlTexBufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49228,7 +49228,7 @@ func doEncodeGlTexBufferRange(e binary.Encoder, o *GlTexBufferRange) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49242,9 +49242,9 @@ func doDecodeGlTexBufferRange(d binary.Decoder, o *GlTexBufferRange) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49287,7 +49287,7 @@ func doEncodeGlTexBufferRangeEXT(e binary.Encoder, o *GlTexBufferRangeEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49301,9 +49301,9 @@ func doDecodeGlTexBufferRangeEXT(d binary.Decoder, o *GlTexBufferRangeEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49346,7 +49346,7 @@ func doEncodeGlTexBufferRangeOES(e binary.Encoder, o *GlTexBufferRangeOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Internalformat))
@@ -49360,9 +49360,9 @@ func doDecodeGlTexBufferRangeOES(d binary.Decoder, o *GlTexBufferRangeOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49405,7 +49405,7 @@ func doEncodeGlTexCoordPointer(e binary.Encoder, o *GlTexCoordPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -49418,9 +49418,9 @@ func doDecodeGlTexCoordPointer(d binary.Decoder, o *GlTexCoordPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49461,7 +49461,7 @@ func doEncodeGlTexCoordPointerBounds(e binary.Encoder, o *GlTexCoordPointerBound
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -49475,9 +49475,9 @@ func doDecodeGlTexCoordPointerBounds(d binary.Decoder, o *GlTexCoordPointerBound
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49522,7 +49522,7 @@ func doEncodeGlTexEnvf(e binary.Encoder, o *GlTexEnvf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49534,9 +49534,9 @@ func doDecodeGlTexEnvf(d binary.Decoder, o *GlTexEnvf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49575,7 +49575,7 @@ func doEncodeGlTexEnvfv(e binary.Encoder, o *GlTexEnvfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49587,9 +49587,9 @@ func doDecodeGlTexEnvfv(d binary.Decoder, o *GlTexEnvfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49628,7 +49628,7 @@ func doEncodeGlTexEnvi(e binary.Encoder, o *GlTexEnvi) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49640,9 +49640,9 @@ func doDecodeGlTexEnvi(d binary.Decoder, o *GlTexEnvi) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49681,7 +49681,7 @@ func doEncodeGlTexEnviv(e binary.Encoder, o *GlTexEnviv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49693,9 +49693,9 @@ func doDecodeGlTexEnviv(d binary.Decoder, o *GlTexEnviv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49734,7 +49734,7 @@ func doEncodeGlTexEnvx(e binary.Encoder, o *GlTexEnvx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49746,9 +49746,9 @@ func doDecodeGlTexEnvx(d binary.Decoder, o *GlTexEnvx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49787,7 +49787,7 @@ func doEncodeGlTexEnvxOES(e binary.Encoder, o *GlTexEnvxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49799,9 +49799,9 @@ func doDecodeGlTexEnvxOES(d binary.Decoder, o *GlTexEnvxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49840,7 +49840,7 @@ func doEncodeGlTexEnvxv(e binary.Encoder, o *GlTexEnvxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49852,9 +49852,9 @@ func doDecodeGlTexEnvxv(d binary.Decoder, o *GlTexEnvxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49893,7 +49893,7 @@ func doEncodeGlTexEnvxvOES(e binary.Encoder, o *GlTexEnvxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -49905,9 +49905,9 @@ func doDecodeGlTexEnvxvOES(d binary.Decoder, o *GlTexEnvxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49946,7 +49946,7 @@ func doEncodeGlTexGenfOES(e binary.Encoder, o *GlTexGenfOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -49958,9 +49958,9 @@ func doDecodeGlTexGenfOES(d binary.Decoder, o *GlTexGenfOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -49999,7 +49999,7 @@ func doEncodeGlTexGenfvOES(e binary.Encoder, o *GlTexGenfvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -50011,9 +50011,9 @@ func doDecodeGlTexGenfvOES(d binary.Decoder, o *GlTexGenfvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50052,7 +50052,7 @@ func doEncodeGlTexGeniOES(e binary.Encoder, o *GlTexGeniOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -50064,9 +50064,9 @@ func doDecodeGlTexGeniOES(d binary.Decoder, o *GlTexGeniOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50105,7 +50105,7 @@ func doEncodeGlTexGenivOES(e binary.Encoder, o *GlTexGenivOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -50117,9 +50117,9 @@ func doDecodeGlTexGenivOES(d binary.Decoder, o *GlTexGenivOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50158,7 +50158,7 @@ func doEncodeGlTexGenxOES(e binary.Encoder, o *GlTexGenxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -50170,9 +50170,9 @@ func doDecodeGlTexGenxOES(d binary.Decoder, o *GlTexGenxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50211,7 +50211,7 @@ func doEncodeGlTexGenxvOES(e binary.Encoder, o *GlTexGenxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Coord))
 	e.Uint32(uint32(o.Pname))
@@ -50223,9 +50223,9 @@ func doDecodeGlTexGenxvOES(d binary.Decoder, o *GlTexGenxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50264,7 +50264,7 @@ func doEncodeGlTexImage2D(e binary.Encoder, o *GlTexImage2D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -50282,9 +50282,9 @@ func doDecodeGlTexImage2D(d binary.Decoder, o *GlTexImage2D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50335,7 +50335,7 @@ func doEncodeGlTexImage3D(e binary.Encoder, o *GlTexImage3D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -50354,9 +50354,9 @@ func doDecodeGlTexImage3D(d binary.Decoder, o *GlTexImage3D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50409,7 +50409,7 @@ func doEncodeGlTexImage3DOES(e binary.Encoder, o *GlTexImage3DOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -50428,9 +50428,9 @@ func doDecodeGlTexImage3DOES(d binary.Decoder, o *GlTexImage3DOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50483,7 +50483,7 @@ func doEncodeGlTexPageCommitmentEXT(e binary.Encoder, o *GlTexPageCommitmentEXT)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -50501,9 +50501,9 @@ func doDecodeGlTexPageCommitmentEXT(d binary.Decoder, o *GlTexPageCommitmentEXT)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50554,7 +50554,7 @@ func doEncodeGlTexParameterIiv(e binary.Encoder, o *GlTexParameterIiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50566,9 +50566,9 @@ func doDecodeGlTexParameterIiv(d binary.Decoder, o *GlTexParameterIiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50607,7 +50607,7 @@ func doEncodeGlTexParameterIivEXT(e binary.Encoder, o *GlTexParameterIivEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50619,9 +50619,9 @@ func doDecodeGlTexParameterIivEXT(d binary.Decoder, o *GlTexParameterIivEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50660,7 +50660,7 @@ func doEncodeGlTexParameterIivOES(e binary.Encoder, o *GlTexParameterIivOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50672,9 +50672,9 @@ func doDecodeGlTexParameterIivOES(d binary.Decoder, o *GlTexParameterIivOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50713,7 +50713,7 @@ func doEncodeGlTexParameterIuiv(e binary.Encoder, o *GlTexParameterIuiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50725,9 +50725,9 @@ func doDecodeGlTexParameterIuiv(d binary.Decoder, o *GlTexParameterIuiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50766,7 +50766,7 @@ func doEncodeGlTexParameterIuivEXT(e binary.Encoder, o *GlTexParameterIuivEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50778,9 +50778,9 @@ func doDecodeGlTexParameterIuivEXT(d binary.Decoder, o *GlTexParameterIuivEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50819,7 +50819,7 @@ func doEncodeGlTexParameterIuivOES(e binary.Encoder, o *GlTexParameterIuivOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50831,9 +50831,9 @@ func doDecodeGlTexParameterIuivOES(d binary.Decoder, o *GlTexParameterIuivOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50872,7 +50872,7 @@ func doEncodeGlTexParameterf(e binary.Encoder, o *GlTexParameterf) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -50884,9 +50884,9 @@ func doDecodeGlTexParameterf(d binary.Decoder, o *GlTexParameterf) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50925,7 +50925,7 @@ func doEncodeGlTexParameterfv(e binary.Encoder, o *GlTexParameterfv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -50937,9 +50937,9 @@ func doDecodeGlTexParameterfv(d binary.Decoder, o *GlTexParameterfv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -50978,7 +50978,7 @@ func doEncodeGlTexParameteri(e binary.Encoder, o *GlTexParameteri) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Parameter))
@@ -50990,9 +50990,9 @@ func doDecodeGlTexParameteri(d binary.Decoder, o *GlTexParameteri) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51031,7 +51031,7 @@ func doEncodeGlTexParameteriv(e binary.Encoder, o *GlTexParameteriv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -51043,9 +51043,9 @@ func doDecodeGlTexParameteriv(d binary.Decoder, o *GlTexParameteriv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51084,7 +51084,7 @@ func doEncodeGlTexParameterx(e binary.Encoder, o *GlTexParameterx) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -51096,9 +51096,9 @@ func doDecodeGlTexParameterx(d binary.Decoder, o *GlTexParameterx) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51137,7 +51137,7 @@ func doEncodeGlTexParameterxOES(e binary.Encoder, o *GlTexParameterxOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -51149,9 +51149,9 @@ func doDecodeGlTexParameterxOES(d binary.Decoder, o *GlTexParameterxOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51190,7 +51190,7 @@ func doEncodeGlTexParameterxv(e binary.Encoder, o *GlTexParameterxv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -51202,9 +51202,9 @@ func doDecodeGlTexParameterxv(d binary.Decoder, o *GlTexParameterxv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51243,7 +51243,7 @@ func doEncodeGlTexParameterxvOES(e binary.Encoder, o *GlTexParameterxvOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint32(uint32(o.Pname))
@@ -51255,9 +51255,9 @@ func doDecodeGlTexParameterxvOES(d binary.Decoder, o *GlTexParameterxvOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51296,7 +51296,7 @@ func doEncodeGlTexStorage1DEXT(e binary.Encoder, o *GlTexStorage1DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Levels))
@@ -51309,9 +51309,9 @@ func doDecodeGlTexStorage1DEXT(d binary.Decoder, o *GlTexStorage1DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51352,7 +51352,7 @@ func doEncodeGlTexStorage2D(e binary.Encoder, o *GlTexStorage2D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Levels))
@@ -51366,9 +51366,9 @@ func doDecodeGlTexStorage2D(d binary.Decoder, o *GlTexStorage2D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51411,7 +51411,7 @@ func doEncodeGlTexStorage2DEXT(e binary.Encoder, o *GlTexStorage2DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Levels))
@@ -51425,9 +51425,9 @@ func doDecodeGlTexStorage2DEXT(d binary.Decoder, o *GlTexStorage2DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51470,7 +51470,7 @@ func doEncodeGlTexStorage2DMultisample(e binary.Encoder, o *GlTexStorage2DMultis
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -51485,9 +51485,9 @@ func doDecodeGlTexStorage2DMultisample(d binary.Decoder, o *GlTexStorage2DMultis
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51534,7 +51534,7 @@ func doEncodeGlTexStorage3D(e binary.Encoder, o *GlTexStorage3D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Levels))
@@ -51549,9 +51549,9 @@ func doDecodeGlTexStorage3D(d binary.Decoder, o *GlTexStorage3D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51596,7 +51596,7 @@ func doEncodeGlTexStorage3DEXT(e binary.Encoder, o *GlTexStorage3DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Levels))
@@ -51611,9 +51611,9 @@ func doDecodeGlTexStorage3DEXT(d binary.Decoder, o *GlTexStorage3DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51658,7 +51658,7 @@ func doEncodeGlTexStorage3DMultisample(e binary.Encoder, o *GlTexStorage3DMultis
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -51674,9 +51674,9 @@ func doDecodeGlTexStorage3DMultisample(d binary.Decoder, o *GlTexStorage3DMultis
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51725,7 +51725,7 @@ func doEncodeGlTexStorage3DMultisampleOES(e binary.Encoder, o *GlTexStorage3DMul
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Samples))
@@ -51741,9 +51741,9 @@ func doDecodeGlTexStorage3DMultisampleOES(d binary.Decoder, o *GlTexStorage3DMul
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51792,7 +51792,7 @@ func doEncodeGlTexSubImage2D(e binary.Encoder, o *GlTexSubImage2D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -51810,9 +51810,9 @@ func doDecodeGlTexSubImage2D(d binary.Decoder, o *GlTexSubImage2D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51863,7 +51863,7 @@ func doEncodeGlTexSubImage3D(e binary.Encoder, o *GlTexSubImage3D) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -51883,9 +51883,9 @@ func doDecodeGlTexSubImage3D(d binary.Decoder, o *GlTexSubImage3D) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -51940,7 +51940,7 @@ func doEncodeGlTexSubImage3DOES(e binary.Encoder, o *GlTexSubImage3DOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Int32(int32(o.Level))
@@ -51960,9 +51960,9 @@ func doDecodeGlTexSubImage3DOES(d binary.Decoder, o *GlTexSubImage3DOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52017,7 +52017,7 @@ func doEncodeGlTextureStorage1DEXT(e binary.Encoder, o *GlTextureStorage1DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Target))
@@ -52031,9 +52031,9 @@ func doDecodeGlTextureStorage1DEXT(d binary.Decoder, o *GlTextureStorage1DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52076,7 +52076,7 @@ func doEncodeGlTextureStorage2DEXT(e binary.Encoder, o *GlTextureStorage2DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Target))
@@ -52091,9 +52091,9 @@ func doDecodeGlTextureStorage2DEXT(d binary.Decoder, o *GlTextureStorage2DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52138,7 +52138,7 @@ func doEncodeGlTextureStorage3DEXT(e binary.Encoder, o *GlTextureStorage3DEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Target))
@@ -52154,9 +52154,9 @@ func doDecodeGlTextureStorage3DEXT(d binary.Decoder, o *GlTextureStorage3DEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52203,7 +52203,7 @@ func doEncodeGlTextureViewEXT(e binary.Encoder, o *GlTextureViewEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Target))
@@ -52220,9 +52220,9 @@ func doDecodeGlTextureViewEXT(d binary.Decoder, o *GlTextureViewEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52271,7 +52271,7 @@ func doEncodeGlTextureViewOES(e binary.Encoder, o *GlTextureViewOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Texture))
 	e.Uint32(uint32(o.Target))
@@ -52288,9 +52288,9 @@ func doDecodeGlTextureViewOES(d binary.Decoder, o *GlTextureViewOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52339,7 +52339,7 @@ func doEncodeGlTransformFeedbackVaryings(e binary.Encoder, o *GlTransformFeedbac
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Int32(int32(o.Count))
@@ -52352,9 +52352,9 @@ func doDecodeGlTransformFeedbackVaryings(d binary.Decoder, o *GlTransformFeedbac
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52397,7 +52397,7 @@ func doEncodeGlTransformPathNV(e binary.Encoder, o *GlTransformPathNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ResultPath))
 	e.Uint32(uint32(o.SrcPath))
@@ -52410,9 +52410,9 @@ func doDecodeGlTransformPathNV(d binary.Decoder, o *GlTransformPathNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52453,7 +52453,7 @@ func doEncodeGlTranslatef(e binary.Encoder, o *GlTranslatef) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Float32(float32(o.X))
 	e.Float32(float32(o.Y))
@@ -52465,9 +52465,9 @@ func doDecodeGlTranslatef(d binary.Decoder, o *GlTranslatef) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52506,7 +52506,7 @@ func doEncodeGlTranslatex(e binary.Encoder, o *GlTranslatex) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -52518,9 +52518,9 @@ func doDecodeGlTranslatex(d binary.Decoder, o *GlTranslatex) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52559,7 +52559,7 @@ func doEncodeGlTranslatexOES(e binary.Encoder, o *GlTranslatexOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -52571,9 +52571,9 @@ func doDecodeGlTranslatexOES(d binary.Decoder, o *GlTranslatexOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52612,7 +52612,7 @@ func doEncodeGlUniform1f(e binary.Encoder, o *GlUniform1f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Float32(float32(o.Value))
@@ -52623,9 +52623,9 @@ func doDecodeGlUniform1f(d binary.Decoder, o *GlUniform1f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52662,7 +52662,7 @@ func doEncodeGlUniform1fv(e binary.Encoder, o *GlUniform1fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -52674,9 +52674,9 @@ func doDecodeGlUniform1fv(d binary.Decoder, o *GlUniform1fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52715,7 +52715,7 @@ func doEncodeGlUniform1i(e binary.Encoder, o *GlUniform1i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Value))
@@ -52726,9 +52726,9 @@ func doDecodeGlUniform1i(d binary.Decoder, o *GlUniform1i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52765,7 +52765,7 @@ func doEncodeGlUniform1iv(e binary.Encoder, o *GlUniform1iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -52777,9 +52777,9 @@ func doDecodeGlUniform1iv(d binary.Decoder, o *GlUniform1iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52818,7 +52818,7 @@ func doEncodeGlUniform1ui(e binary.Encoder, o *GlUniform1ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Uint32(uint32(o.Value0))
@@ -52829,9 +52829,9 @@ func doDecodeGlUniform1ui(d binary.Decoder, o *GlUniform1ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52868,7 +52868,7 @@ func doEncodeGlUniform1uiv(e binary.Encoder, o *GlUniform1uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -52880,9 +52880,9 @@ func doDecodeGlUniform1uiv(d binary.Decoder, o *GlUniform1uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52921,7 +52921,7 @@ func doEncodeGlUniform2f(e binary.Encoder, o *GlUniform2f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -52933,9 +52933,9 @@ func doDecodeGlUniform2f(d binary.Decoder, o *GlUniform2f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -52974,7 +52974,7 @@ func doEncodeGlUniform2fv(e binary.Encoder, o *GlUniform2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -52986,9 +52986,9 @@ func doDecodeGlUniform2fv(d binary.Decoder, o *GlUniform2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53027,7 +53027,7 @@ func doEncodeGlUniform2i(e binary.Encoder, o *GlUniform2i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Value0))
@@ -53039,9 +53039,9 @@ func doDecodeGlUniform2i(d binary.Decoder, o *GlUniform2i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53080,7 +53080,7 @@ func doEncodeGlUniform2iv(e binary.Encoder, o *GlUniform2iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53092,9 +53092,9 @@ func doDecodeGlUniform2iv(d binary.Decoder, o *GlUniform2iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53133,7 +53133,7 @@ func doEncodeGlUniform2ui(e binary.Encoder, o *GlUniform2ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Uint32(uint32(o.Value0))
@@ -53145,9 +53145,9 @@ func doDecodeGlUniform2ui(d binary.Decoder, o *GlUniform2ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53186,7 +53186,7 @@ func doEncodeGlUniform2uiv(e binary.Encoder, o *GlUniform2uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53198,9 +53198,9 @@ func doDecodeGlUniform2uiv(d binary.Decoder, o *GlUniform2uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53239,7 +53239,7 @@ func doEncodeGlUniform3f(e binary.Encoder, o *GlUniform3f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -53252,9 +53252,9 @@ func doDecodeGlUniform3f(d binary.Decoder, o *GlUniform3f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53295,7 +53295,7 @@ func doEncodeGlUniform3fv(e binary.Encoder, o *GlUniform3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53307,9 +53307,9 @@ func doDecodeGlUniform3fv(d binary.Decoder, o *GlUniform3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53348,7 +53348,7 @@ func doEncodeGlUniform3i(e binary.Encoder, o *GlUniform3i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Value0))
@@ -53361,9 +53361,9 @@ func doDecodeGlUniform3i(d binary.Decoder, o *GlUniform3i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53404,7 +53404,7 @@ func doEncodeGlUniform3iv(e binary.Encoder, o *GlUniform3iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53416,9 +53416,9 @@ func doDecodeGlUniform3iv(d binary.Decoder, o *GlUniform3iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53457,7 +53457,7 @@ func doEncodeGlUniform3ui(e binary.Encoder, o *GlUniform3ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Uint32(uint32(o.Value0))
@@ -53470,9 +53470,9 @@ func doDecodeGlUniform3ui(d binary.Decoder, o *GlUniform3ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53513,7 +53513,7 @@ func doEncodeGlUniform3uiv(e binary.Encoder, o *GlUniform3uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53525,9 +53525,9 @@ func doDecodeGlUniform3uiv(d binary.Decoder, o *GlUniform3uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53566,7 +53566,7 @@ func doEncodeGlUniform4f(e binary.Encoder, o *GlUniform4f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -53580,9 +53580,9 @@ func doDecodeGlUniform4f(d binary.Decoder, o *GlUniform4f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53625,7 +53625,7 @@ func doEncodeGlUniform4fv(e binary.Encoder, o *GlUniform4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53637,9 +53637,9 @@ func doDecodeGlUniform4fv(d binary.Decoder, o *GlUniform4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53678,7 +53678,7 @@ func doEncodeGlUniform4i(e binary.Encoder, o *GlUniform4i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Value0))
@@ -53692,9 +53692,9 @@ func doDecodeGlUniform4i(d binary.Decoder, o *GlUniform4i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53737,7 +53737,7 @@ func doEncodeGlUniform4iv(e binary.Encoder, o *GlUniform4iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53749,9 +53749,9 @@ func doDecodeGlUniform4iv(d binary.Decoder, o *GlUniform4iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53790,7 +53790,7 @@ func doEncodeGlUniform4ui(e binary.Encoder, o *GlUniform4ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Uint32(uint32(o.Value0))
@@ -53804,9 +53804,9 @@ func doDecodeGlUniform4ui(d binary.Decoder, o *GlUniform4ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53849,7 +53849,7 @@ func doEncodeGlUniform4uiv(e binary.Encoder, o *GlUniform4uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -53861,9 +53861,9 @@ func doDecodeGlUniform4uiv(d binary.Decoder, o *GlUniform4uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53902,7 +53902,7 @@ func doEncodeGlUniformBlockBinding(e binary.Encoder, o *GlUniformBlockBinding) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 	e.Uint32(uint32(o.UniformBlockIndex))
@@ -53914,9 +53914,9 @@ func doDecodeGlUniformBlockBinding(d binary.Decoder, o *GlUniformBlockBinding) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -53955,7 +53955,7 @@ func doEncodeGlUniformHandleui64NV(e binary.Encoder, o *GlUniformHandleui64NV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Uint64(uint64(o.Value))
@@ -53966,9 +53966,9 @@ func doDecodeGlUniformHandleui64NV(d binary.Decoder, o *GlUniformHandleui64NV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54005,7 +54005,7 @@ func doEncodeGlUniformHandleui64vNV(e binary.Encoder, o *GlUniformHandleui64vNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54017,9 +54017,9 @@ func doDecodeGlUniformHandleui64vNV(d binary.Decoder, o *GlUniformHandleui64vNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54058,7 +54058,7 @@ func doEncodeGlUniformMatrix2fv(e binary.Encoder, o *GlUniformMatrix2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54071,9 +54071,9 @@ func doDecodeGlUniformMatrix2fv(d binary.Decoder, o *GlUniformMatrix2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54114,7 +54114,7 @@ func doEncodeGlUniformMatrix2x3fv(e binary.Encoder, o *GlUniformMatrix2x3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54127,9 +54127,9 @@ func doDecodeGlUniformMatrix2x3fv(d binary.Decoder, o *GlUniformMatrix2x3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54170,7 +54170,7 @@ func doEncodeGlUniformMatrix2x3fvNV(e binary.Encoder, o *GlUniformMatrix2x3fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54183,9 +54183,9 @@ func doDecodeGlUniformMatrix2x3fvNV(d binary.Decoder, o *GlUniformMatrix2x3fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54226,7 +54226,7 @@ func doEncodeGlUniformMatrix2x4fv(e binary.Encoder, o *GlUniformMatrix2x4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54239,9 +54239,9 @@ func doDecodeGlUniformMatrix2x4fv(d binary.Decoder, o *GlUniformMatrix2x4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54282,7 +54282,7 @@ func doEncodeGlUniformMatrix2x4fvNV(e binary.Encoder, o *GlUniformMatrix2x4fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54295,9 +54295,9 @@ func doDecodeGlUniformMatrix2x4fvNV(d binary.Decoder, o *GlUniformMatrix2x4fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54338,7 +54338,7 @@ func doEncodeGlUniformMatrix3fv(e binary.Encoder, o *GlUniformMatrix3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54351,9 +54351,9 @@ func doDecodeGlUniformMatrix3fv(d binary.Decoder, o *GlUniformMatrix3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54394,7 +54394,7 @@ func doEncodeGlUniformMatrix3x2fv(e binary.Encoder, o *GlUniformMatrix3x2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54407,9 +54407,9 @@ func doDecodeGlUniformMatrix3x2fv(d binary.Decoder, o *GlUniformMatrix3x2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54450,7 +54450,7 @@ func doEncodeGlUniformMatrix3x2fvNV(e binary.Encoder, o *GlUniformMatrix3x2fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54463,9 +54463,9 @@ func doDecodeGlUniformMatrix3x2fvNV(d binary.Decoder, o *GlUniformMatrix3x2fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54506,7 +54506,7 @@ func doEncodeGlUniformMatrix3x4fv(e binary.Encoder, o *GlUniformMatrix3x4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54519,9 +54519,9 @@ func doDecodeGlUniformMatrix3x4fv(d binary.Decoder, o *GlUniformMatrix3x4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54562,7 +54562,7 @@ func doEncodeGlUniformMatrix3x4fvNV(e binary.Encoder, o *GlUniformMatrix3x4fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54575,9 +54575,9 @@ func doDecodeGlUniformMatrix3x4fvNV(d binary.Decoder, o *GlUniformMatrix3x4fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54618,7 +54618,7 @@ func doEncodeGlUniformMatrix4fv(e binary.Encoder, o *GlUniformMatrix4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54631,9 +54631,9 @@ func doDecodeGlUniformMatrix4fv(d binary.Decoder, o *GlUniformMatrix4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54674,7 +54674,7 @@ func doEncodeGlUniformMatrix4x2fv(e binary.Encoder, o *GlUniformMatrix4x2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54687,9 +54687,9 @@ func doDecodeGlUniformMatrix4x2fv(d binary.Decoder, o *GlUniformMatrix4x2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54730,7 +54730,7 @@ func doEncodeGlUniformMatrix4x2fvNV(e binary.Encoder, o *GlUniformMatrix4x2fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54743,9 +54743,9 @@ func doDecodeGlUniformMatrix4x2fvNV(d binary.Decoder, o *GlUniformMatrix4x2fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54786,7 +54786,7 @@ func doEncodeGlUniformMatrix4x3fv(e binary.Encoder, o *GlUniformMatrix4x3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54799,9 +54799,9 @@ func doDecodeGlUniformMatrix4x3fv(d binary.Decoder, o *GlUniformMatrix4x3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54842,7 +54842,7 @@ func doEncodeGlUniformMatrix4x3fvNV(e binary.Encoder, o *GlUniformMatrix4x3fvNV)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Location))
 	e.Int32(int32(o.Count))
@@ -54855,9 +54855,9 @@ func doDecodeGlUniformMatrix4x3fvNV(d binary.Decoder, o *GlUniformMatrix4x3fvNV)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54898,7 +54898,7 @@ func doEncodeGlUnmapBuffer(e binary.Encoder, o *GlUnmapBuffer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint8(uint8(o.Result))
@@ -54909,9 +54909,9 @@ func doDecodeGlUnmapBuffer(d binary.Decoder, o *GlUnmapBuffer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54948,7 +54948,7 @@ func doEncodeGlUnmapBufferOES(e binary.Encoder, o *GlUnmapBufferOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Target))
 	e.Uint8(uint8(o.Result))
@@ -54959,9 +54959,9 @@ func doDecodeGlUnmapBufferOES(d binary.Decoder, o *GlUnmapBufferOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -54998,7 +54998,7 @@ func doEncodeGlUseProgram(e binary.Encoder, o *GlUseProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 }
@@ -55008,9 +55008,9 @@ func doDecodeGlUseProgram(d binary.Decoder, o *GlUseProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55045,7 +55045,7 @@ func doEncodeGlUseProgramStages(e binary.Encoder, o *GlUseProgramStages) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Stages))
@@ -55057,9 +55057,9 @@ func doDecodeGlUseProgramStages(d binary.Decoder, o *GlUseProgramStages) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55098,7 +55098,7 @@ func doEncodeGlUseProgramStagesEXT(e binary.Encoder, o *GlUseProgramStagesEXT) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 	e.Uint32(uint32(o.Stages))
@@ -55110,9 +55110,9 @@ func doDecodeGlUseProgramStagesEXT(d binary.Decoder, o *GlUseProgramStagesEXT) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55151,7 +55151,7 @@ func doEncodeGlValidateProgram(e binary.Encoder, o *GlValidateProgram) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Program))
 }
@@ -55161,9 +55161,9 @@ func doDecodeGlValidateProgram(d binary.Decoder, o *GlValidateProgram) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55198,7 +55198,7 @@ func doEncodeGlValidateProgramPipeline(e binary.Encoder, o *GlValidateProgramPip
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 }
@@ -55208,9 +55208,9 @@ func doDecodeGlValidateProgramPipeline(d binary.Decoder, o *GlValidateProgramPip
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55247,7 +55247,7 @@ func doEncodeGlValidateProgramPipelineEXT(e binary.Encoder, o *GlValidateProgram
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Pipeline))
 }
@@ -55257,9 +55257,9 @@ func doDecodeGlValidateProgramPipelineEXT(d binary.Decoder, o *GlValidateProgram
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55296,7 +55296,7 @@ func doEncodeGlVertexAttrib1f(e binary.Encoder, o *GlVertexAttrib1f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -55307,9 +55307,9 @@ func doDecodeGlVertexAttrib1f(d binary.Decoder, o *GlVertexAttrib1f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55346,7 +55346,7 @@ func doEncodeGlVertexAttrib1fv(e binary.Encoder, o *GlVertexAttrib1fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Struct(&o.Value)
@@ -55357,9 +55357,9 @@ func doDecodeGlVertexAttrib1fv(d binary.Decoder, o *GlVertexAttrib1fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55396,7 +55396,7 @@ func doEncodeGlVertexAttrib2f(e binary.Encoder, o *GlVertexAttrib2f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -55408,9 +55408,9 @@ func doDecodeGlVertexAttrib2f(d binary.Decoder, o *GlVertexAttrib2f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55449,7 +55449,7 @@ func doEncodeGlVertexAttrib2fv(e binary.Encoder, o *GlVertexAttrib2fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Struct(&o.Value)
@@ -55460,9 +55460,9 @@ func doDecodeGlVertexAttrib2fv(d binary.Decoder, o *GlVertexAttrib2fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55499,7 +55499,7 @@ func doEncodeGlVertexAttrib3f(e binary.Encoder, o *GlVertexAttrib3f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -55512,9 +55512,9 @@ func doDecodeGlVertexAttrib3f(d binary.Decoder, o *GlVertexAttrib3f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55555,7 +55555,7 @@ func doEncodeGlVertexAttrib3fv(e binary.Encoder, o *GlVertexAttrib3fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Struct(&o.Value)
@@ -55566,9 +55566,9 @@ func doDecodeGlVertexAttrib3fv(d binary.Decoder, o *GlVertexAttrib3fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55605,7 +55605,7 @@ func doEncodeGlVertexAttrib4f(e binary.Encoder, o *GlVertexAttrib4f) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Float32(float32(o.Value0))
@@ -55619,9 +55619,9 @@ func doDecodeGlVertexAttrib4f(d binary.Decoder, o *GlVertexAttrib4f) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55664,7 +55664,7 @@ func doEncodeGlVertexAttrib4fv(e binary.Encoder, o *GlVertexAttrib4fv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Struct(&o.Value)
@@ -55675,9 +55675,9 @@ func doDecodeGlVertexAttrib4fv(d binary.Decoder, o *GlVertexAttrib4fv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55714,7 +55714,7 @@ func doEncodeGlVertexAttribBinding(e binary.Encoder, o *GlVertexAttribBinding) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.BindingIndex))
@@ -55725,9 +55725,9 @@ func doDecodeGlVertexAttribBinding(d binary.Decoder, o *GlVertexAttribBinding) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55764,7 +55764,7 @@ func doEncodeGlVertexAttribDivisor(e binary.Encoder, o *GlVertexAttribDivisor) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Divisor))
@@ -55775,9 +55775,9 @@ func doDecodeGlVertexAttribDivisor(d binary.Decoder, o *GlVertexAttribDivisor) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55814,7 +55814,7 @@ func doEncodeGlVertexAttribDivisorANGLE(e binary.Encoder, o *GlVertexAttribDivis
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Divisor))
@@ -55825,9 +55825,9 @@ func doDecodeGlVertexAttribDivisorANGLE(d binary.Decoder, o *GlVertexAttribDivis
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55866,7 +55866,7 @@ func doEncodeGlVertexAttribDivisorEXT(e binary.Encoder, o *GlVertexAttribDivisor
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Divisor))
@@ -55877,9 +55877,9 @@ func doDecodeGlVertexAttribDivisorEXT(d binary.Decoder, o *GlVertexAttribDivisor
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55918,7 +55918,7 @@ func doEncodeGlVertexAttribDivisorNV(e binary.Encoder, o *GlVertexAttribDivisorN
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.Divisor))
@@ -55929,9 +55929,9 @@ func doDecodeGlVertexAttribDivisorNV(d binary.Decoder, o *GlVertexAttribDivisorN
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -55970,7 +55970,7 @@ func doEncodeGlVertexAttribFormat(e binary.Encoder, o *GlVertexAttribFormat) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.Size))
@@ -55984,9 +55984,9 @@ func doDecodeGlVertexAttribFormat(d binary.Decoder, o *GlVertexAttribFormat) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56029,7 +56029,7 @@ func doEncodeGlVertexAttribI4i(e binary.Encoder, o *GlVertexAttribI4i) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.X))
@@ -56043,9 +56043,9 @@ func doDecodeGlVertexAttribI4i(d binary.Decoder, o *GlVertexAttribI4i) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56088,7 +56088,7 @@ func doEncodeGlVertexAttribI4iv(e binary.Encoder, o *GlVertexAttribI4iv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Struct(&o.Values)
@@ -56099,9 +56099,9 @@ func doDecodeGlVertexAttribI4iv(d binary.Decoder, o *GlVertexAttribI4iv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56138,7 +56138,7 @@ func doEncodeGlVertexAttribI4ui(e binary.Encoder, o *GlVertexAttribI4ui) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Uint32(uint32(o.X))
@@ -56152,9 +56152,9 @@ func doDecodeGlVertexAttribI4ui(d binary.Decoder, o *GlVertexAttribI4ui) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56197,7 +56197,7 @@ func doEncodeGlVertexAttribI4uiv(e binary.Encoder, o *GlVertexAttribI4uiv) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Struct(&o.Values)
@@ -56208,9 +56208,9 @@ func doDecodeGlVertexAttribI4uiv(d binary.Decoder, o *GlVertexAttribI4uiv) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56247,7 +56247,7 @@ func doEncodeGlVertexAttribIFormat(e binary.Encoder, o *GlVertexAttribIFormat) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.Size))
@@ -56260,9 +56260,9 @@ func doDecodeGlVertexAttribIFormat(d binary.Decoder, o *GlVertexAttribIFormat) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56303,7 +56303,7 @@ func doEncodeGlVertexAttribIPointer(e binary.Encoder, o *GlVertexAttribIPointer)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Int32(int32(o.Size))
@@ -56317,9 +56317,9 @@ func doDecodeGlVertexAttribIPointer(d binary.Decoder, o *GlVertexAttribIPointer)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56362,7 +56362,7 @@ func doEncodeGlVertexAttribPointer(e binary.Encoder, o *GlVertexAttribPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Location))
 	e.Int32(int32(o.Size))
@@ -56377,9 +56377,9 @@ func doDecodeGlVertexAttribPointer(d binary.Decoder, o *GlVertexAttribPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56424,7 +56424,7 @@ func doEncodeGlVertexBindingDivisor(e binary.Encoder, o *GlVertexBindingDivisor)
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.BindingIndex))
 	e.Uint32(uint32(o.Divisor))
@@ -56435,9 +56435,9 @@ func doDecodeGlVertexBindingDivisor(d binary.Decoder, o *GlVertexBindingDivisor)
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56474,7 +56474,7 @@ func doEncodeGlVertexPointer(e binary.Encoder, o *GlVertexPointer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -56487,9 +56487,9 @@ func doDecodeGlVertexPointer(d binary.Decoder, o *GlVertexPointer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56530,7 +56530,7 @@ func doEncodeGlVertexPointerBounds(e binary.Encoder, o *GlVertexPointerBounds) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -56544,9 +56544,9 @@ func doDecodeGlVertexPointerBounds(d binary.Decoder, o *GlVertexPointerBounds) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56589,7 +56589,7 @@ func doEncodeGlViewport(e binary.Encoder, o *GlViewport) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.X))
 	e.Int32(int32(o.Y))
@@ -56602,9 +56602,9 @@ func doDecodeGlViewport(d binary.Decoder, o *GlViewport) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56645,7 +56645,7 @@ func doEncodeGlViewportArrayvNV(e binary.Encoder, o *GlViewportArrayvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.First))
 	e.Int32(int32(o.Count))
@@ -56657,9 +56657,9 @@ func doDecodeGlViewportArrayvNV(d binary.Decoder, o *GlViewportArrayvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56698,7 +56698,7 @@ func doEncodeGlViewportIndexedfNV(e binary.Encoder, o *GlViewportIndexedfNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Float32(float32(o.X))
@@ -56712,9 +56712,9 @@ func doDecodeGlViewportIndexedfNV(d binary.Decoder, o *GlViewportIndexedfNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56757,7 +56757,7 @@ func doEncodeGlViewportIndexedfvNV(e binary.Encoder, o *GlViewportIndexedfvNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.Index))
 	e.Struct(&o.V)
@@ -56768,9 +56768,9 @@ func doDecodeGlViewportIndexedfvNV(d binary.Decoder, o *GlViewportIndexedfvNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56807,7 +56807,7 @@ func doEncodeGlWaitSync(e binary.Encoder, o *GlWaitSync) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.SyncFlags))
@@ -56819,9 +56819,9 @@ func doDecodeGlWaitSync(d binary.Decoder, o *GlWaitSync) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56860,7 +56860,7 @@ func doEncodeGlWaitSyncAPPLE(e binary.Encoder, o *GlWaitSyncAPPLE) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.Sync))
 	e.Uint32(uint32(o.Flag))
@@ -56872,9 +56872,9 @@ func doDecodeGlWaitSyncAPPLE(d binary.Decoder, o *GlWaitSyncAPPLE) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56913,7 +56913,7 @@ func doEncodeGlWeightPathsNV(e binary.Encoder, o *GlWeightPathsNV) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(uint32(o.ResultPath))
 	e.Int32(int32(o.NumPaths))
@@ -56926,9 +56926,9 @@ func doDecodeGlWeightPathsNV(d binary.Decoder, o *GlWeightPathsNV) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -56969,7 +56969,7 @@ func doEncodeGlWeightPointerOES(e binary.Encoder, o *GlWeightPointerOES) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -56982,9 +56982,9 @@ func doDecodeGlWeightPointerOES(d binary.Decoder, o *GlWeightPointerOES) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57025,7 +57025,7 @@ func doEncodeGlWeightPointerOESBounds(e binary.Encoder, o *GlWeightPointerOESBou
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
@@ -57039,9 +57039,9 @@ func doDecodeGlWeightPointerOESBounds(d binary.Decoder, o *GlWeightPointerOESBou
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57086,7 +57086,7 @@ func doEncodeGlXCreateContext(e binary.Encoder, o *GlXCreateContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Dpy)
 	e.Struct(&o.Vis)
@@ -57100,9 +57100,9 @@ func doDecodeGlXCreateContext(d binary.Decoder, o *GlXCreateContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57145,7 +57145,7 @@ func doEncodeGlXCreateNewContext(e binary.Encoder, o *GlXCreateNewContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Fbconfig)
@@ -57160,9 +57160,9 @@ func doDecodeGlXCreateNewContext(d binary.Decoder, o *GlXCreateNewContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57207,7 +57207,7 @@ func doEncodeGlXMakeContextCurrent(e binary.Encoder, o *GlXMakeContextCurrent) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Draw)
@@ -57221,9 +57221,9 @@ func doDecodeGlXMakeContextCurrent(d binary.Decoder, o *GlXMakeContextCurrent) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57266,7 +57266,7 @@ func doEncodeGlXMakeCurrent(e binary.Encoder, o *GlXMakeCurrent) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Drawable)
@@ -57279,9 +57279,9 @@ func doDecodeGlXMakeCurrent(d binary.Decoder, o *GlXMakeCurrent) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57352,7 +57352,7 @@ func doEncodeGlXQueryDrawable(e binary.Encoder, o *GlXQueryDrawable) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Draw)
@@ -57366,9 +57366,9 @@ func doDecodeGlXQueryDrawable(d binary.Decoder, o *GlXQueryDrawable) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57411,7 +57411,7 @@ func doEncodeGlXSwapBuffers(e binary.Encoder, o *GlXSwapBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Display)
 	e.Struct(&o.Drawable)
@@ -57422,9 +57422,9 @@ func doDecodeGlXSwapBuffers(d binary.Decoder, o *GlXSwapBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -57550,13 +57550,13 @@ func (*Vec2f) Class() binary.Class {
 func doEncodeVec2f(e binary.Encoder, o *Vec2f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeVec2f(d binary.Decoder, o *Vec2f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) {
@@ -57682,13 +57682,13 @@ func (*Vec3f) Class() binary.Class {
 func doEncodeVec3f(e binary.Encoder, o *Vec3f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeVec3f(d binary.Decoder, o *Vec3f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) {
@@ -57814,13 +57814,13 @@ func (*Vec4f) Class() binary.Class {
 func doEncodeVec4f(e binary.Encoder, o *Vec4f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Float32(float32((*curr)))
+		e.Float32(float32(*curr))
 	}
 }
 func doDecodeVec4f(d binary.Decoder, o *Vec4f) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLfloat(d.Float32())
+		*curr = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) {
@@ -58643,7 +58643,7 @@ func doEncodeReplayBindRenderer(e binary.Encoder, o *ReplayBindRenderer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.Id)
 }
@@ -58653,9 +58653,9 @@ func doDecodeReplayBindRenderer(d binary.Decoder, o *ReplayBindRenderer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -58690,7 +58690,7 @@ func doEncodeReplayCreateRenderer(e binary.Encoder, o *ReplayCreateRenderer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint32(o.Id)
 }
@@ -58700,9 +58700,9 @@ func doDecodeReplayCreateRenderer(d binary.Decoder, o *ReplayCreateRenderer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -58827,7 +58827,7 @@ func doEncodeStartTimer(e binary.Encoder, o *StartTimer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(o.Index)
 }
@@ -58837,9 +58837,9 @@ func doDecodeStartTimer(d binary.Decoder, o *StartTimer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -59032,7 +59032,7 @@ func doEncodeStopTimer(e binary.Encoder, o *StopTimer) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint8(o.Index)
 	e.Uint64(o.Result)
@@ -59043,9 +59043,9 @@ func doDecodeStopTimer(d binary.Decoder, o *StopTimer) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -59082,7 +59082,7 @@ func doEncodeSwitchThread(e binary.Encoder, o *SwitchThread) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Uint64(uint64(o.ThreadID))
 }
@@ -59092,9 +59092,9 @@ func doDecodeSwitchThread(d binary.Decoder, o *SwitchThread) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -59506,13 +59506,13 @@ func (*Vec2i) Class() binary.Class {
 func doEncodeVec2i(e binary.Encoder, o *Vec2i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeVec2i(d binary.Decoder, o *Vec2i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) {
@@ -59602,13 +59602,13 @@ func (*Vec2u) Class() binary.Class {
 func doEncodeVec2u(e binary.Encoder, o *Vec2u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeVec2u(d binary.Decoder, o *Vec2u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec2u) Encode(e binary.Encoder, obj binary.Object) {
@@ -59866,13 +59866,13 @@ func (*Vec3i) Class() binary.Class {
 func doEncodeVec3i(e binary.Encoder, o *Vec3i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeVec3i(d binary.Decoder, o *Vec3i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) {
@@ -59962,13 +59962,13 @@ func (*Vec3u) Class() binary.Class {
 func doEncodeVec3u(e binary.Encoder, o *Vec3u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeVec3u(d binary.Decoder, o *Vec3u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec3u) Encode(e binary.Encoder, obj binary.Object) {
@@ -60226,13 +60226,13 @@ func (*Vec4i) Class() binary.Class {
 func doEncodeVec4i(e binary.Encoder, o *Vec4i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Int32(int32((*curr)))
+		e.Int32(int32(*curr))
 	}
 }
 func doDecodeVec4i(d binary.Decoder, o *Vec4i) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLint(d.Int32())
+		*curr = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) {
@@ -60322,13 +60322,13 @@ func (*Vec4u) Class() binary.Class {
 func doEncodeVec4u(e binary.Encoder, o *Vec4u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		e.Uint32(uint32((*curr)))
+		e.Uint32(uint32(*curr))
 	}
 }
 func doDecodeVec4u(d binary.Decoder, o *Vec4u) {
 	for i := range o.Elements {
 		curr := &o.Elements[i]
-		(*curr) = GLuint(d.Uint32())
+		*curr = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec4u) Encode(e binary.Encoder, obj binary.Object) {
@@ -60633,7 +60633,7 @@ func doEncodeWglCreateContext(e binary.Encoder, o *WglCreateContext) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Hdc)
 	e.Struct(&o.Result)
@@ -60644,9 +60644,9 @@ func doDecodeWglCreateContext(d binary.Decoder, o *WglCreateContext) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -60683,7 +60683,7 @@ func doEncodeWglCreateContextAttribsARB(e binary.Encoder, o *WglCreateContextAtt
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Hdc)
 	e.Struct(&o.HShareContext)
@@ -60696,9 +60696,9 @@ func doDecodeWglCreateContextAttribsARB(d binary.Decoder, o *WglCreateContextAtt
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -60741,7 +60741,7 @@ func doEncodeWglMakeCurrent(e binary.Encoder, o *WglMakeCurrent) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Hdc)
 	e.Struct(&o.Hglrc)
@@ -60753,9 +60753,9 @@ func doDecodeWglMakeCurrent(d binary.Decoder, o *WglMakeCurrent) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
@@ -60794,7 +60794,7 @@ func doEncodeWglSwapBuffers(e binary.Encoder, o *WglSwapBuffers) {
 	e.Uint32(uint32(len(o.extras)))
 	for i := range o.extras {
 		curr := &o.extras[i]
-		e.Object((*curr))
+		e.Object(*curr)
 	}
 	e.Struct(&o.Hdc)
 }
@@ -60804,9 +60804,9 @@ func doDecodeWglSwapBuffers(d binary.Decoder, o *WglSwapBuffers) {
 		for i := range o.extras {
 			curr := &o.extras[i]
 			if obj := d.Object(); obj != nil {
-				(*curr) = atom.ExtraCast(obj)
+				*curr = atom.ExtraCast(obj)
 			} else {
-				(*curr) = nil
+				*curr = nil
 			}
 		}
 	}
