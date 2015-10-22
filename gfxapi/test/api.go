@@ -21,14 +21,11 @@ import (
 type remapped uint32
 
 // U8ᵖ is a pointer to a uint8 element.
-type U8ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U8ᵖ memory.Pointer
 
 // NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
 func NewU8ᵖ(addr uint64) U8ᵖ {
-	return U8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U8ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U8ᵖ points to.
@@ -67,7 +64,7 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U8ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -78,14 +75,11 @@ func (p U8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) val
 }
 
 // U16ᵖ is a pointer to a uint16 element.
-type U16ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U16ᵖ memory.Pointer
 
 // NewU16ᵖ returns a U16ᵖ that points to addr in the application pool.
 func NewU16ᵖ(addr uint64) U16ᵖ {
-	return U16ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U16ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U16ᵖ points to.
@@ -124,7 +118,7 @@ func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U16ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -135,14 +129,11 @@ func (p U16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // U32ᵖ is a pointer to a uint32 element.
-type U32ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U32ᵖ memory.Pointer
 
 // NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
 func NewU32ᵖ(addr uint64) U32ᵖ {
-	return U32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U32ᵖ points to.
@@ -181,7 +172,7 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U32ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -192,14 +183,11 @@ func (p U32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // Intᵖ is a pointer to a int64 element.
-type Intᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Intᵖ memory.Pointer
 
 // NewIntᵖ returns a Intᵖ that points to addr in the application pool.
 func NewIntᵖ(addr uint64) Intᵖ {
-	return Intᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Intᵖ points to.
@@ -238,7 +226,7 @@ func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Intˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Intˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Intᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -249,14 +237,11 @@ func (p Intᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // Charᵖ is a pointer to a byte element.
-type Charᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Charᵖ memory.Pointer
 
 // NewCharᵖ returns a Charᵖ that points to addr in the application pool.
 func NewCharᵖ(addr uint64) Charᵖ {
-	return Charᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Charᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Charᵖ points to.
@@ -292,7 +277,7 @@ func (p Charᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
 		if b := d.Uint8(); b == 0 {
@@ -306,7 +291,7 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Charᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -317,14 +302,11 @@ func (p Charᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) v
 }
 
 // Charᶜᵖ is a pointer to a byte element.
-type Charᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Charᶜᵖ memory.Pointer
 
 // NewCharᶜᵖ returns a Charᶜᵖ that points to addr in the application pool.
 func NewCharᶜᵖ(addr uint64) Charᶜᵖ {
-	return Charᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Charᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Charᶜᵖ points to.
@@ -360,7 +342,7 @@ func (p Charᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 func (p Charᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
 		if b := d.Uint8(); b == 0 {
@@ -374,7 +356,7 @@ func (p Charᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Charᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -389,19 +371,16 @@ func (p Charᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type Charᶜᵖᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Charᶜᵖᶜᵖ memory.Pointer
 
 // NewCharᶜᵖᶜᵖ returns a Charᶜᵖᶜᵖ that points to addr in the application pool.
 func NewCharᶜᵖᶜᵖ(addr uint64) Charᶜᵖᶜᵖ {
-	return Charᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Charᶜᵖᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Charᶜᵖᶜᵖ points to.
 func (p Charᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -439,7 +418,7 @@ func (p Charᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖ
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Charᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -454,19 +433,16 @@ func (p Charᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type Charᶜᵖᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Charᶜᵖᵖ memory.Pointer
 
 // NewCharᶜᵖᵖ returns a Charᶜᵖᵖ that points to addr in the application pool.
 func NewCharᶜᵖᵖ(addr uint64) Charᶜᵖᵖ {
-	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Charᶜᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Charᶜᵖᵖ points to.
 func (p Charᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -504,7 +480,7 @@ func (p Charᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ 
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Charᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -515,14 +491,11 @@ func (p Charᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // S8ᵖ is a pointer to a int8 element.
-type S8ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type S8ᵖ memory.Pointer
 
 // NewS8ᵖ returns a S8ᵖ that points to addr in the application pool.
 func NewS8ᵖ(addr uint64) S8ᵖ {
-	return S8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return S8ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that S8ᵖ points to.
@@ -561,7 +534,7 @@ func (p S8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return S8ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p S8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -572,14 +545,11 @@ func (p S8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) val
 }
 
 // S16ᵖ is a pointer to a int16 element.
-type S16ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type S16ᵖ memory.Pointer
 
 // NewS16ᵖ returns a S16ᵖ that points to addr in the application pool.
 func NewS16ᵖ(addr uint64) S16ᵖ {
-	return S16ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return S16ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that S16ᵖ points to.
@@ -618,7 +588,7 @@ func (p S16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return S16ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p S16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -629,14 +599,11 @@ func (p S16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // F32ᵖ is a pointer to a float32 element.
-type F32ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type F32ᵖ memory.Pointer
 
 // NewF32ᵖ returns a F32ᵖ that points to addr in the application pool.
 func NewF32ᵖ(addr uint64) F32ᵖ {
-	return F32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return F32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that F32ᵖ points to.
@@ -675,7 +642,7 @@ func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return F32ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p F32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -686,14 +653,11 @@ func (p F32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // S32ᵖ is a pointer to a int32 element.
-type S32ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type S32ᵖ memory.Pointer
 
 // NewS32ᵖ returns a S32ᵖ that points to addr in the application pool.
 func NewS32ᵖ(addr uint64) S32ᵖ {
-	return S32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return S32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that S32ᵖ points to.
@@ -732,7 +696,7 @@ func (p S32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return S32ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p S32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -743,14 +707,11 @@ func (p S32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // F64ᵖ is a pointer to a float64 element.
-type F64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type F64ᵖ memory.Pointer
 
 // NewF64ᵖ returns a F64ᵖ that points to addr in the application pool.
 func NewF64ᵖ(addr uint64) F64ᵖ {
-	return F64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return F64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that F64ᵖ points to.
@@ -789,7 +750,7 @@ func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return F64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p F64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -800,14 +761,11 @@ func (p F64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // U64ᵖ is a pointer to a uint64 element.
-type U64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U64ᵖ memory.Pointer
 
 // NewU64ᵖ returns a U64ᵖ that points to addr in the application pool.
 func NewU64ᵖ(addr uint64) U64ᵖ {
-	return U64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U64ᵖ points to.
@@ -846,7 +804,7 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -857,14 +815,11 @@ func (p U64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // S64ᵖ is a pointer to a int64 element.
-type S64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type S64ᵖ memory.Pointer
 
 // NewS64ᵖ returns a S64ᵖ that points to addr in the application pool.
 func NewS64ᵖ(addr uint64) S64ᵖ {
-	return S64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return S64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that S64ᵖ points to.
@@ -903,7 +858,7 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return S64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p S64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -914,14 +869,11 @@ func (p S64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // Boolᵖ is a pointer to a bool element.
-type Boolᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Boolᵖ memory.Pointer
 
 // NewBoolᵖ returns a Boolᵖ that points to addr in the application pool.
 func NewBoolᵖ(addr uint64) Boolᵖ {
-	return Boolᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Boolᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Boolᵖ points to.
@@ -960,7 +912,7 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Boolˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Boolˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Boolᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -971,14 +923,11 @@ func (p Boolᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) v
 }
 
 // Voidᵖ is a pointer to a void element.
-type Voidᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᵖ memory.Pointer
 
 // NewVoidᵖ returns a Voidᵖ that points to addr in the application pool.
 func NewVoidᵖ(addr uint64) Voidᵖ {
-	return Voidᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᵖ points to.
@@ -1007,7 +956,7 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1018,14 +967,11 @@ func (p Voidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) v
 }
 
 // Remappedᵖ is a pointer to a remapped element.
-type Remappedᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Remappedᵖ memory.Pointer
 
 // NewRemappedᵖ returns a Remappedᵖ that points to addr in the application pool.
 func NewRemappedᵖ(addr uint64) Remappedᵖ {
-	return Remappedᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Remappedᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Remappedᵖ points to.
@@ -1064,7 +1010,7 @@ func (p Remappedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Remappedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Remappedˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Remappedᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1212,7 +1158,7 @@ func (s Boolˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 
 // Index returns a Boolᵖ to the i'th element in this Boolˢ.
 func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ {
-	return Boolᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Boolᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Boolˢ using start and end indices.
@@ -1380,7 +1326,7 @@ func (s Charˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 
 // Index returns a Charᵖ to the i'th element in this Charˢ.
 func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ {
-	return Charᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Charᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Charˢ using start and end indices.
@@ -1565,7 +1511,7 @@ func (s Charᶜᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 
 // Index returns a Charᶜᵖᵖ to the i'th element in this Charᶜᵖˢ.
 func (s Charᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᶜᵖᵖ {
-	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Charᶜᵖᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Charᶜᵖˢ using start and end indices.
@@ -1722,7 +1668,7 @@ func (s F32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a F32ᵖ to the i'th element in this F32ˢ.
 func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ {
-	return F32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return F32ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the F32ˢ using start and end indices.
@@ -1879,7 +1825,7 @@ func (s F64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a F64ᵖ to the i'th element in this F64ˢ.
 func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ {
-	return F64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return F64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the F64ˢ using start and end indices.
@@ -2036,7 +1982,7 @@ func (s Intˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a Intᵖ to the i'th element in this Intˢ.
 func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ {
-	return Intᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Intᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Intˢ using start and end indices.
@@ -2228,7 +2174,7 @@ func (s Remappedˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 
 // Index returns a Remappedᵖ to the i'th element in this Remappedˢ.
 func (s Remappedˢ) Index(i uint64, ϟs *gfxapi.State) Remappedᵖ {
-	return Remappedᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Remappedᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Remappedˢ using start and end indices.
@@ -2385,7 +2331,7 @@ func (s S16ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a S16ᵖ to the i'th element in this S16ˢ.
 func (s S16ˢ) Index(i uint64, ϟs *gfxapi.State) S16ᵖ {
-	return S16ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return S16ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the S16ˢ using start and end indices.
@@ -2542,7 +2488,7 @@ func (s S32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a S32ᵖ to the i'th element in this S32ˢ.
 func (s S32ˢ) Index(i uint64, ϟs *gfxapi.State) S32ᵖ {
-	return S32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return S32ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the S32ˢ using start and end indices.
@@ -2699,7 +2645,7 @@ func (s S64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a S64ᵖ to the i'th element in this S64ˢ.
 func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ {
-	return S64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return S64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the S64ˢ using start and end indices.
@@ -2856,7 +2802,7 @@ func (s S8ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 
 // Index returns a S8ᵖ to the i'th element in this S8ˢ.
 func (s S8ˢ) Index(i uint64, ϟs *gfxapi.State) S8ᵖ {
-	return S8ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return S8ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the S8ˢ using start and end indices.
@@ -3013,7 +2959,7 @@ func (s U16ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U16ᵖ to the i'th element in this U16ˢ.
 func (s U16ˢ) Index(i uint64, ϟs *gfxapi.State) U16ᵖ {
-	return U16ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U16ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U16ˢ using start and end indices.
@@ -3170,7 +3116,7 @@ func (s U32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U32ᵖ to the i'th element in this U32ˢ.
 func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ {
-	return U32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U32ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U32ˢ using start and end indices.
@@ -3327,7 +3273,7 @@ func (s U64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U64ᵖ to the i'th element in this U64ˢ.
 func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ {
-	return U64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U64ˢ using start and end indices.
@@ -3484,7 +3430,7 @@ func (s U8ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 
 // Index returns a U8ᵖ to the i'th element in this U8ˢ.
 func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ {
-	return U8ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U8ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U8ˢ using start and end indices.
@@ -3591,7 +3537,7 @@ func (s Voidˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 
 // Index returns a Voidᵖ to the i'th element in this Voidˢ.
 func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ {
-	return Voidᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Voidᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Voidˢ using start and end indices.
@@ -5800,22 +5746,22 @@ type State struct {
 func (g *State) Init() {
 }
 func NewCmdClone(Src memory.Pointer, Cnt uint32) *CmdClone {
-	return &CmdClone{Src: U8ᵖ{Pointer: Src}, Cnt: Cnt}
+	return &CmdClone{Src: U8ᵖ(Src), Cnt: Cnt}
 }
 func NewCmdMake(Cnt uint32) *CmdMake {
 	return &CmdMake{Cnt: Cnt}
 }
 func NewCmdCopy(Src memory.Pointer, Cnt uint32) *CmdCopy {
-	return &CmdCopy{Src: U8ᵖ{Pointer: Src}, Cnt: Cnt}
+	return &CmdCopy{Src: U8ᵖ(Src), Cnt: Cnt}
 }
 func NewCmdCharsliceToString(S memory.Pointer, Len uint32) *CmdCharsliceToString {
-	return &CmdCharsliceToString{S: Charᵖ{Pointer: S}, Len: Len}
+	return &CmdCharsliceToString{S: Charᵖ(S), Len: Len}
 }
 func NewCmdCharptrToString(S memory.Pointer) *CmdCharptrToString {
-	return &CmdCharptrToString{S: Charᵖ{Pointer: S}}
+	return &CmdCharptrToString{S: Charᵖ(S)}
 }
 func NewCmdSliceCasts(S memory.Pointer, L uint32) *CmdSliceCasts {
-	return &CmdSliceCasts{S: U16ᵖ{Pointer: S}, L: L}
+	return &CmdSliceCasts{S: U16ᵖ(S), L: L}
 }
 func NewCmdVoid() *CmdVoid {
 	return &CmdVoid{}
@@ -5824,10 +5770,10 @@ func NewCmdUnknownRet(Result int64) *CmdUnknownRet {
 	return &CmdUnknownRet{Result: Result}
 }
 func NewCmdUnknownWritePtr(P memory.Pointer) *CmdUnknownWritePtr {
-	return &CmdUnknownWritePtr{P: Intᵖ{Pointer: P}}
+	return &CmdUnknownWritePtr{P: Intᵖ(P)}
 }
 func NewCmdUnknownWriteSlice(A memory.Pointer) *CmdUnknownWriteSlice {
-	return &CmdUnknownWriteSlice{A: Intᵖ{Pointer: A}}
+	return &CmdUnknownWriteSlice{A: Intᵖ(A)}
 }
 func NewCmdVoidU8(A uint8) *CmdVoidU8 {
 	return &CmdVoidU8{A: A}
@@ -5869,82 +5815,82 @@ func NewCmdVoid3Strings(A string, B string, C string) *CmdVoid3Strings {
 	return &CmdVoid3Strings{A: A, B: B, C: C}
 }
 func NewCmdVoid3InArrays(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoid3InArrays {
-	return &CmdVoid3InArrays{A: U8ᵖ{Pointer: A}, B: U32ᵖ{Pointer: B}, C: Intᵖ{Pointer: C}}
+	return &CmdVoid3InArrays{A: U8ᵖ(A), B: U32ᵖ(B), C: Intᵖ(C)}
 }
 func NewCmdVoidInArrayOfStrings(Strings memory.Pointer, Count int32) *CmdVoidInArrayOfStrings {
-	return &CmdVoidInArrayOfStrings{Strings: Charᶜᵖᶜᵖ{Pointer: Strings}, Count: Count}
+	return &CmdVoidInArrayOfStrings{Strings: Charᶜᵖᶜᵖ(Strings), Count: Count}
 }
 func NewCmdVoidReadU8(A memory.Pointer) *CmdVoidReadU8 {
-	return &CmdVoidReadU8{A: U8ᵖ{Pointer: A}}
+	return &CmdVoidReadU8{A: U8ᵖ(A)}
 }
 func NewCmdVoidReadS8(A memory.Pointer) *CmdVoidReadS8 {
-	return &CmdVoidReadS8{A: S8ᵖ{Pointer: A}}
+	return &CmdVoidReadS8{A: S8ᵖ(A)}
 }
 func NewCmdVoidReadU16(A memory.Pointer) *CmdVoidReadU16 {
-	return &CmdVoidReadU16{A: U16ᵖ{Pointer: A}}
+	return &CmdVoidReadU16{A: U16ᵖ(A)}
 }
 func NewCmdVoidReadS16(A memory.Pointer) *CmdVoidReadS16 {
-	return &CmdVoidReadS16{A: S16ᵖ{Pointer: A}}
+	return &CmdVoidReadS16{A: S16ᵖ(A)}
 }
 func NewCmdVoidReadF32(A memory.Pointer) *CmdVoidReadF32 {
-	return &CmdVoidReadF32{A: F32ᵖ{Pointer: A}}
+	return &CmdVoidReadF32{A: F32ᵖ(A)}
 }
 func NewCmdVoidReadU32(A memory.Pointer) *CmdVoidReadU32 {
-	return &CmdVoidReadU32{A: U32ᵖ{Pointer: A}}
+	return &CmdVoidReadU32{A: U32ᵖ(A)}
 }
 func NewCmdVoidReadS32(A memory.Pointer) *CmdVoidReadS32 {
-	return &CmdVoidReadS32{A: S32ᵖ{Pointer: A}}
+	return &CmdVoidReadS32{A: S32ᵖ(A)}
 }
 func NewCmdVoidReadF64(A memory.Pointer) *CmdVoidReadF64 {
-	return &CmdVoidReadF64{A: F64ᵖ{Pointer: A}}
+	return &CmdVoidReadF64{A: F64ᵖ(A)}
 }
 func NewCmdVoidReadU64(A memory.Pointer) *CmdVoidReadU64 {
-	return &CmdVoidReadU64{A: U64ᵖ{Pointer: A}}
+	return &CmdVoidReadU64{A: U64ᵖ(A)}
 }
 func NewCmdVoidReadS64(A memory.Pointer) *CmdVoidReadS64 {
-	return &CmdVoidReadS64{A: S64ᵖ{Pointer: A}}
+	return &CmdVoidReadS64{A: S64ᵖ(A)}
 }
 func NewCmdVoidReadBool(A memory.Pointer) *CmdVoidReadBool {
-	return &CmdVoidReadBool{A: Boolᵖ{Pointer: A}}
+	return &CmdVoidReadBool{A: Boolᵖ(A)}
 }
 func NewCmdVoidReadPtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoidReadPtrs {
-	return &CmdVoidReadPtrs{A: F32ᵖ{Pointer: A}, B: U16ᵖ{Pointer: B}, C: Boolᵖ{Pointer: C}}
+	return &CmdVoidReadPtrs{A: F32ᵖ(A), B: U16ᵖ(B), C: Boolᵖ(C)}
 }
 func NewCmdVoidWriteU8(A memory.Pointer) *CmdVoidWriteU8 {
-	return &CmdVoidWriteU8{A: U8ᵖ{Pointer: A}}
+	return &CmdVoidWriteU8{A: U8ᵖ(A)}
 }
 func NewCmdVoidWriteS8(A memory.Pointer) *CmdVoidWriteS8 {
-	return &CmdVoidWriteS8{A: S8ᵖ{Pointer: A}}
+	return &CmdVoidWriteS8{A: S8ᵖ(A)}
 }
 func NewCmdVoidWriteU16(A memory.Pointer) *CmdVoidWriteU16 {
-	return &CmdVoidWriteU16{A: U16ᵖ{Pointer: A}}
+	return &CmdVoidWriteU16{A: U16ᵖ(A)}
 }
 func NewCmdVoidWriteS16(A memory.Pointer) *CmdVoidWriteS16 {
-	return &CmdVoidWriteS16{A: S16ᵖ{Pointer: A}}
+	return &CmdVoidWriteS16{A: S16ᵖ(A)}
 }
 func NewCmdVoidWriteF32(A memory.Pointer) *CmdVoidWriteF32 {
-	return &CmdVoidWriteF32{A: F32ᵖ{Pointer: A}}
+	return &CmdVoidWriteF32{A: F32ᵖ(A)}
 }
 func NewCmdVoidWriteU32(A memory.Pointer) *CmdVoidWriteU32 {
-	return &CmdVoidWriteU32{A: U32ᵖ{Pointer: A}}
+	return &CmdVoidWriteU32{A: U32ᵖ(A)}
 }
 func NewCmdVoidWriteS32(A memory.Pointer) *CmdVoidWriteS32 {
-	return &CmdVoidWriteS32{A: S32ᵖ{Pointer: A}}
+	return &CmdVoidWriteS32{A: S32ᵖ(A)}
 }
 func NewCmdVoidWriteF64(A memory.Pointer) *CmdVoidWriteF64 {
-	return &CmdVoidWriteF64{A: F64ᵖ{Pointer: A}}
+	return &CmdVoidWriteF64{A: F64ᵖ(A)}
 }
 func NewCmdVoidWriteU64(A memory.Pointer) *CmdVoidWriteU64 {
-	return &CmdVoidWriteU64{A: U64ᵖ{Pointer: A}}
+	return &CmdVoidWriteU64{A: U64ᵖ(A)}
 }
 func NewCmdVoidWriteS64(A memory.Pointer) *CmdVoidWriteS64 {
-	return &CmdVoidWriteS64{A: S64ᵖ{Pointer: A}}
+	return &CmdVoidWriteS64{A: S64ᵖ(A)}
 }
 func NewCmdVoidWriteBool(A memory.Pointer) *CmdVoidWriteBool {
-	return &CmdVoidWriteBool{A: Boolᵖ{Pointer: A}}
+	return &CmdVoidWriteBool{A: Boolᵖ(A)}
 }
 func NewCmdVoidWritePtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoidWritePtrs {
-	return &CmdVoidWritePtrs{A: F32ᵖ{Pointer: A}, B: U16ᵖ{Pointer: B}, C: Boolᵖ{Pointer: C}}
+	return &CmdVoidWritePtrs{A: F32ᵖ(A), B: U16ᵖ(B), C: Boolᵖ(C)}
 }
 func NewCmdU8(Result uint8) *CmdU8 {
 	return &CmdU8{Result: Result}
@@ -5983,19 +5929,19 @@ func NewCmdString(Result string) *CmdString {
 	return &CmdString{Result: Result}
 }
 func NewCmdPointer(Result memory.Pointer) *CmdPointer {
-	return &CmdPointer{Result: Voidᵖ{Pointer: Result}}
+	return &CmdPointer{Result: Voidᵖ(Result)}
 }
 func NewCmdVoid3Remapped(A remapped, B remapped, C remapped) *CmdVoid3Remapped {
 	return &CmdVoid3Remapped{A: A, B: B, C: C}
 }
 func NewCmdVoidInArrayOfRemapped(A memory.Pointer) *CmdVoidInArrayOfRemapped {
-	return &CmdVoidInArrayOfRemapped{A: Remappedᵖ{Pointer: A}}
+	return &CmdVoidInArrayOfRemapped{A: Remappedᵖ(A)}
 }
 func NewCmdVoidOutArrayOfRemapped(A memory.Pointer) *CmdVoidOutArrayOfRemapped {
-	return &CmdVoidOutArrayOfRemapped{A: Remappedᵖ{Pointer: A}}
+	return &CmdVoidOutArrayOfRemapped{A: Remappedᵖ(A)}
 }
 func NewCmdVoidOutArrayOfUnknownRemapped(A memory.Pointer) *CmdVoidOutArrayOfUnknownRemapped {
-	return &CmdVoidOutArrayOfUnknownRemapped{A: Remappedᵖ{Pointer: A}}
+	return &CmdVoidOutArrayOfUnknownRemapped{A: Remappedᵖ(A)}
 }
 func NewCmdRemapped(Result remapped) *CmdRemapped {
 	return &CmdRemapped{Result: Result}

@@ -56,14 +56,11 @@ type UniformBlockId GLuint
 type TransformFeedbackId GLuint
 
 // IndicesPointer is a pointer to a void element.
-type IndicesPointer struct {
-	binary.Generate
-	memory.Pointer
-}
+type IndicesPointer memory.Pointer
 
 // NewIndicesPointer returns a IndicesPointer that points to addr in the application pool.
 func NewIndicesPointer(addr uint64) IndicesPointer {
-	return IndicesPointer{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return IndicesPointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that IndicesPointer points to.
@@ -92,18 +89,15 @@ func (p IndicesPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // VertexPointer is a pointer to a void element.
-type VertexPointer struct {
-	binary.Generate
-	memory.Pointer
-}
+type VertexPointer memory.Pointer
 
 // NewVertexPointer returns a VertexPointer that points to addr in the application pool.
 func NewVertexPointer(addr uint64) VertexPointer {
-	return VertexPointer{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return VertexPointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that VertexPointer points to.
@@ -132,18 +126,15 @@ func (p VertexPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // TexturePointer is a pointer to a void element.
-type TexturePointer struct {
-	binary.Generate
-	memory.Pointer
-}
+type TexturePointer memory.Pointer
 
 // NewTexturePointer returns a TexturePointer that points to addr in the application pool.
 func NewTexturePointer(addr uint64) TexturePointer {
-	return TexturePointer{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return TexturePointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that TexturePointer points to.
@@ -172,18 +163,15 @@ func (p TexturePointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // BufferDataPointer is a pointer to a void element.
-type BufferDataPointer struct {
-	binary.Generate
-	memory.Pointer
-}
+type BufferDataPointer memory.Pointer
 
 // NewBufferDataPointer returns a BufferDataPointer that points to addr in the application pool.
 func NewBufferDataPointer(addr uint64) BufferDataPointer {
-	return BufferDataPointer{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return BufferDataPointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that BufferDataPointer points to.
@@ -212,7 +200,7 @@ func (p BufferDataPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 type ContextID uint32
@@ -221,14 +209,11 @@ type EGLBoolean int64
 type EGLint int64
 
 // EGLConfig is a pointer to a void element.
-type EGLConfig struct {
-	binary.Generate
-	memory.Pointer
-}
+type EGLConfig memory.Pointer
 
 // NewEGLConfig returns a EGLConfig that points to addr in the application pool.
 func NewEGLConfig(addr uint64) EGLConfig {
-	return EGLConfig{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return EGLConfig{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that EGLConfig points to.
@@ -257,7 +242,7 @@ func (p EGLConfig) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -268,14 +253,11 @@ func (p EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // EGLContext is a pointer to a void element.
-type EGLContext struct {
-	binary.Generate
-	memory.Pointer
-}
+type EGLContext memory.Pointer
 
 // NewEGLContext returns a EGLContext that points to addr in the application pool.
 func NewEGLContext(addr uint64) EGLContext {
-	return EGLContext{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return EGLContext{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that EGLContext points to.
@@ -304,7 +286,7 @@ func (p EGLContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p EGLContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -315,14 +297,11 @@ func (p EGLContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // EGLDisplay is a pointer to a void element.
-type EGLDisplay struct {
-	binary.Generate
-	memory.Pointer
-}
+type EGLDisplay memory.Pointer
 
 // NewEGLDisplay returns a EGLDisplay that points to addr in the application pool.
 func NewEGLDisplay(addr uint64) EGLDisplay {
-	return EGLDisplay{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return EGLDisplay{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that EGLDisplay points to.
@@ -351,7 +330,7 @@ func (p EGLDisplay) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -362,14 +341,11 @@ func (p EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // EGLSurface is a pointer to a void element.
-type EGLSurface struct {
-	binary.Generate
-	memory.Pointer
-}
+type EGLSurface memory.Pointer
 
 // NewEGLSurface returns a EGLSurface that points to addr in the application pool.
 func NewEGLSurface(addr uint64) EGLSurface {
-	return EGLSurface{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return EGLSurface{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that EGLSurface points to.
@@ -398,7 +374,7 @@ func (p EGLSurface) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -409,14 +385,11 @@ func (p EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLXContext is a pointer to a void element.
-type GLXContext struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLXContext memory.Pointer
 
 // NewGLXContext returns a GLXContext that points to addr in the application pool.
 func NewGLXContext(addr uint64) GLXContext {
-	return GLXContext{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLXContext{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLXContext points to.
@@ -445,7 +418,7 @@ func (p GLXContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLXContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -456,14 +429,11 @@ func (p GLXContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLXDrawable is a pointer to a void element.
-type GLXDrawable struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLXDrawable memory.Pointer
 
 // NewGLXDrawable returns a GLXDrawable that points to addr in the application pool.
 func NewGLXDrawable(addr uint64) GLXDrawable {
-	return GLXDrawable{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLXDrawable{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLXDrawable points to.
@@ -492,7 +462,7 @@ func (p GLXDrawable) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLXDrawable) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -505,14 +475,11 @@ func (p GLXDrawable) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Stat
 type Bool int64
 
 // HGLRC is a pointer to a void element.
-type HGLRC struct {
-	binary.Generate
-	memory.Pointer
-}
+type HGLRC memory.Pointer
 
 // NewHGLRC returns a HGLRC that points to addr in the application pool.
 func NewHGLRC(addr uint64) HGLRC {
-	return HGLRC{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return HGLRC{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that HGLRC points to.
@@ -541,7 +508,7 @@ func (p HGLRC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -552,14 +519,11 @@ func (p HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) val
 }
 
 // HDC is a pointer to a void element.
-type HDC struct {
-	binary.Generate
-	memory.Pointer
-}
+type HDC memory.Pointer
 
 // NewHDC returns a HDC that points to addr in the application pool.
 func NewHDC(addr uint64) HDC {
-	return HDC{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return HDC{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that HDC points to.
@@ -588,7 +552,7 @@ func (p HDC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p HDC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -602,14 +566,11 @@ type BOOL int64
 type CGLError int64
 
 // CGLTexelFormatObj is a pointer to a void element.
-type CGLTexelFormatObj struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGLTexelFormatObj memory.Pointer
 
 // NewCGLTexelFormatObj returns a CGLTexelFormatObj that points to addr in the application pool.
 func NewCGLTexelFormatObj(addr uint64) CGLTexelFormatObj {
-	return CGLTexelFormatObj{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGLTexelFormatObj{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGLTexelFormatObj points to.
@@ -638,7 +599,7 @@ func (p CGLTexelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGLTexelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -649,14 +610,11 @@ func (p CGLTexelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxap
 }
 
 // CGLContextObj is a pointer to a void element.
-type CGLContextObj struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGLContextObj memory.Pointer
 
 // NewCGLContextObj returns a CGLContextObj that points to addr in the application pool.
 func NewCGLContextObj(addr uint64) CGLContextObj {
-	return CGLContextObj{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGLContextObj{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGLContextObj points to.
@@ -685,7 +643,7 @@ func (p CGLContextObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -696,14 +654,11 @@ func (p CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // CGSConnectionID is a pointer to a void element.
-type CGSConnectionID struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGSConnectionID memory.Pointer
 
 // NewCGSConnectionID returns a CGSConnectionID that points to addr in the application pool.
 func NewCGSConnectionID(addr uint64) CGSConnectionID {
-	return CGSConnectionID{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGSConnectionID{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGSConnectionID points to.
@@ -732,7 +687,7 @@ func (p CGSConnectionID) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGSConnectionID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -760,14 +715,11 @@ type GLintptr int32
 type GLsizeiptr int32
 
 // GLDEBUGPROC is a pointer to a void element.
-type GLDEBUGPROC struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLDEBUGPROC memory.Pointer
 
 // NewGLDEBUGPROC returns a GLDEBUGPROC that points to addr in the application pool.
 func NewGLDEBUGPROC(addr uint64) GLDEBUGPROC {
-	return GLDEBUGPROC{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLDEBUGPROC{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLDEBUGPROC points to.
@@ -796,7 +748,7 @@ func (p GLDEBUGPROC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLDEBUGPROC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -813,14 +765,11 @@ type GLclampx int32
 type GLsync uint64
 
 // GLeglImageOES is a pointer to a void element.
-type GLeglImageOES struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLeglImageOES memory.Pointer
 
 // NewGLeglImageOES returns a GLeglImageOES that points to addr in the application pool.
 func NewGLeglImageOES(addr uint64) GLeglImageOES {
-	return GLeglImageOES{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLeglImageOES{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLeglImageOES points to.
@@ -849,18 +798,15 @@ func (p GLeglImageOES) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Voidᶜᵖ is a pointer to a void element.
-type Voidᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᶜᵖ memory.Pointer
 
 // NewVoidᶜᵖ returns a Voidᶜᵖ that points to addr in the application pool.
 func NewVoidᶜᵖ(addr uint64) Voidᶜᵖ {
-	return Voidᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᶜᵖ points to.
@@ -889,7 +835,7 @@ func (p Voidᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -900,14 +846,11 @@ func (p Voidᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Voidᵖ is a pointer to a void element.
-type Voidᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᵖ memory.Pointer
 
 // NewVoidᵖ returns a Voidᵖ that points to addr in the application pool.
 func NewVoidᵖ(addr uint64) Voidᵖ {
-	return Voidᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᵖ points to.
@@ -936,7 +879,7 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -951,19 +894,16 @@ func (p Voidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) v
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type Voidᵖᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᵖᵖ memory.Pointer
 
 // NewVoidᵖᵖ returns a Voidᵖᵖ that points to addr in the application pool.
 func NewVoidᵖᵖ(addr uint64) Voidᵖᵖ {
-	return Voidᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᵖᵖ points to.
 func (p Voidᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -1001,7 +941,7 @@ func (p Voidᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1012,14 +952,11 @@ func (p Voidᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLuintᶜᵖ is a pointer to a GLuint element.
-type GLuintᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLuintᶜᵖ memory.Pointer
 
 // NewGLuintᶜᵖ returns a GLuintᶜᵖ that points to addr in the application pool.
 func NewGLuintᶜᵖ(addr uint64) GLuintᶜᵖ {
-	return GLuintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLuintᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLuintᶜᵖ points to.
@@ -1058,7 +995,7 @@ func (p GLuintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLuintˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLuintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1069,14 +1006,11 @@ func (p GLuintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // GLuintᵖ is a pointer to a GLuint element.
-type GLuintᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLuintᵖ memory.Pointer
 
 // NewGLuintᵖ returns a GLuintᵖ that points to addr in the application pool.
 func NewGLuintᵖ(addr uint64) GLuintᵖ {
-	return GLuintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLuintᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLuintᵖ points to.
@@ -1115,7 +1049,7 @@ func (p GLuintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLuintˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLuintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1126,14 +1060,11 @@ func (p GLuintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // GLcharᶜᵖ is a pointer to a GLchar element.
-type GLcharᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLcharᶜᵖ memory.Pointer
 
 // NewGLcharᶜᵖ returns a GLcharᶜᵖ that points to addr in the application pool.
 func NewGLcharᶜᵖ(addr uint64) GLcharᶜᵖ {
-	return GLcharᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLcharᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLcharᶜᵖ points to.
@@ -1169,7 +1100,7 @@ func (p GLcharᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
 		if b := d.Uint8(); b == 0 {
@@ -1183,7 +1114,7 @@ func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLcharˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLcharᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1194,14 +1125,11 @@ func (p GLcharᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // GLcharᵖ is a pointer to a GLchar element.
-type GLcharᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLcharᵖ memory.Pointer
 
 // NewGLcharᵖ returns a GLcharᵖ that points to addr in the application pool.
 func NewGLcharᵖ(addr uint64) GLcharᵖ {
-	return GLcharᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLcharᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLcharᵖ points to.
@@ -1237,7 +1165,7 @@ func (p GLcharᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 func (p GLcharᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
 		if b := d.Uint8(); b == 0 {
@@ -1251,7 +1179,7 @@ func (p GLcharᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLcharˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLcharᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1262,14 +1190,11 @@ func (p GLcharᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // GLenumᵖ is a pointer to a GLenum element.
-type GLenumᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLenumᵖ memory.Pointer
 
 // NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
 func NewGLenumᵖ(addr uint64) GLenumᵖ {
-	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLenumᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLenumᵖ points to.
@@ -1308,7 +1233,7 @@ func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLenumᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1319,14 +1244,11 @@ func (p GLenumᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // GLsizeiᵖ is a pointer to a GLsizei element.
-type GLsizeiᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLsizeiᵖ memory.Pointer
 
 // NewGLsizeiᵖ returns a GLsizeiᵖ that points to addr in the application pool.
 func NewGLsizeiᵖ(addr uint64) GLsizeiᵖ {
-	return GLsizeiᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLsizeiᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLsizeiᵖ points to.
@@ -1365,7 +1287,7 @@ func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLsizeiˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLsizeiᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1376,14 +1298,11 @@ func (p GLsizeiᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLenumᶜᵖ is a pointer to a GLenum element.
-type GLenumᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLenumᶜᵖ memory.Pointer
 
 // NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
 func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
-	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLenumᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
@@ -1422,7 +1341,7 @@ func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLenumᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1433,14 +1352,11 @@ func (p GLenumᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // GLintᵖ is a pointer to a GLint element.
-type GLintᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLintᵖ memory.Pointer
 
 // NewGLintᵖ returns a GLintᵖ that points to addr in the application pool.
 func NewGLintᵖ(addr uint64) GLintᵖ {
-	return GLintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLintᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLintᵖ points to.
@@ -1479,7 +1395,7 @@ func (p GLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLintˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1490,14 +1406,11 @@ func (p GLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // GLfloatᶜᵖ is a pointer to a GLfloat element.
-type GLfloatᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLfloatᶜᵖ memory.Pointer
 
 // NewGLfloatᶜᵖ returns a GLfloatᶜᵖ that points to addr in the application pool.
 func NewGLfloatᶜᵖ(addr uint64) GLfloatᶜᵖ {
-	return GLfloatᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLfloatᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLfloatᶜᵖ points to.
@@ -1536,7 +1449,7 @@ func (p GLfloatᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLfloatˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLfloatᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1547,14 +1460,11 @@ func (p GLfloatᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // GLfloatᵖ is a pointer to a GLfloat element.
-type GLfloatᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLfloatᵖ memory.Pointer
 
 // NewGLfloatᵖ returns a GLfloatᵖ that points to addr in the application pool.
 func NewGLfloatᵖ(addr uint64) GLfloatᵖ {
-	return GLfloatᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLfloatᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLfloatᵖ points to.
@@ -1593,7 +1503,7 @@ func (p GLfloatᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLfloatˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLfloatᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1604,14 +1514,11 @@ func (p GLfloatᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLintᶜᵖ is a pointer to a GLint element.
-type GLintᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLintᶜᵖ memory.Pointer
 
 // NewGLintᶜᵖ returns a GLintᶜᵖ that points to addr in the application pool.
 func NewGLintᶜᵖ(addr uint64) GLintᶜᵖ {
-	return GLintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLintᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLintᶜᵖ points to.
@@ -1650,7 +1557,7 @@ func (p GLintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLintˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1661,14 +1568,11 @@ func (p GLintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 
 // GLint64ᵖ is a pointer to a GLint64 element.
-type GLint64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLint64ᵖ memory.Pointer
 
 // NewGLint64ᵖ returns a GLint64ᵖ that points to addr in the application pool.
 func NewGLint64ᵖ(addr uint64) GLint64ᵖ {
-	return GLint64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLint64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLint64ᵖ points to.
@@ -1707,7 +1611,7 @@ func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLint64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1718,14 +1622,11 @@ func (p GLint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // U8ᵖ is a pointer to a uint8 element.
-type U8ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U8ᵖ memory.Pointer
 
 // NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
 func NewU8ᵖ(addr uint64) U8ᵖ {
-	return U8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U8ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U8ᵖ points to.
@@ -1764,7 +1665,7 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U8ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1775,14 +1676,11 @@ func (p U8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) val
 }
 
 // VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
-type VertexArrayIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type VertexArrayIdᶜᵖ memory.Pointer
 
 // NewVertexArrayIdᶜᵖ returns a VertexArrayIdᶜᵖ that points to addr in the application pool.
 func NewVertexArrayIdᶜᵖ(addr uint64) VertexArrayIdᶜᵖ {
-	return VertexArrayIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return VertexArrayIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that VertexArrayIdᶜᵖ points to.
@@ -1821,7 +1719,7 @@ func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexA
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p VertexArrayIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1832,14 +1730,11 @@ func (p VertexArrayIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfx
 }
 
 // VertexArrayIdᵖ is a pointer to a VertexArrayId element.
-type VertexArrayIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type VertexArrayIdᵖ memory.Pointer
 
 // NewVertexArrayIdᵖ returns a VertexArrayIdᵖ that points to addr in the application pool.
 func NewVertexArrayIdᵖ(addr uint64) VertexArrayIdᵖ {
-	return VertexArrayIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return VertexArrayIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that VertexArrayIdᵖ points to.
@@ -1878,7 +1773,7 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p VertexArrayIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1889,14 +1784,11 @@ func (p VertexArrayIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 }
 
 // U16ᵖ is a pointer to a uint16 element.
-type U16ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U16ᵖ memory.Pointer
 
 // NewU16ᵖ returns a U16ᵖ that points to addr in the application pool.
 func NewU16ᵖ(addr uint64) U16ᵖ {
-	return U16ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U16ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U16ᵖ points to.
@@ -1935,7 +1827,7 @@ func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U16ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -1946,14 +1838,11 @@ func (p U16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // U32ᵖ is a pointer to a uint32 element.
-type U32ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U32ᵖ memory.Pointer
 
 // NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
 func NewU32ᵖ(addr uint64) U32ᵖ {
-	return U32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U32ᵖ points to.
@@ -1992,7 +1881,7 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U32ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2003,14 +1892,11 @@ func (p U32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // Charᵖ is a pointer to a byte element.
-type Charᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Charᵖ memory.Pointer
 
 // NewCharᵖ returns a Charᵖ that points to addr in the application pool.
 func NewCharᵖ(addr uint64) Charᵖ {
-	return Charᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Charᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Charᵖ points to.
@@ -2046,7 +1932,7 @@ func (p Charᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
 		if b := d.Uint8(); b == 0 {
@@ -2060,7 +1946,7 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Charᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2071,14 +1957,11 @@ func (p Charᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) v
 }
 
 // QueryIdᶜᵖ is a pointer to a QueryId element.
-type QueryIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type QueryIdᶜᵖ memory.Pointer
 
 // NewQueryIdᶜᵖ returns a QueryIdᶜᵖ that points to addr in the application pool.
 func NewQueryIdᶜᵖ(addr uint64) QueryIdᶜᵖ {
-	return QueryIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return QueryIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that QueryIdᶜᵖ points to.
@@ -2117,7 +2000,7 @@ func (p QueryIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return QueryIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p QueryIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2128,14 +2011,11 @@ func (p QueryIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // QueryIdᵖ is a pointer to a QueryId element.
-type QueryIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type QueryIdᵖ memory.Pointer
 
 // NewQueryIdᵖ returns a QueryIdᵖ that points to addr in the application pool.
 func NewQueryIdᵖ(addr uint64) QueryIdᵖ {
-	return QueryIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return QueryIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that QueryIdᵖ points to.
@@ -2174,7 +2054,7 @@ func (p QueryIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return QueryIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p QueryIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2185,14 +2065,11 @@ func (p QueryIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // BufferIdᶜᵖ is a pointer to a BufferId element.
-type BufferIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type BufferIdᶜᵖ memory.Pointer
 
 // NewBufferIdᶜᵖ returns a BufferIdᶜᵖ that points to addr in the application pool.
 func NewBufferIdᶜᵖ(addr uint64) BufferIdᶜᵖ {
-	return BufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return BufferIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that BufferIdᶜᵖ points to.
@@ -2231,7 +2108,7 @@ func (p BufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return BufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p BufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2242,14 +2119,11 @@ func (p BufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.S
 }
 
 // BufferIdᵖ is a pointer to a BufferId element.
-type BufferIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type BufferIdᵖ memory.Pointer
 
 // NewBufferIdᵖ returns a BufferIdᵖ that points to addr in the application pool.
 func NewBufferIdᵖ(addr uint64) BufferIdᵖ {
-	return BufferIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return BufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that BufferIdᵖ points to.
@@ -2288,7 +2162,7 @@ func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return BufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p BufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2303,19 +2177,16 @@ func (p BufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Stat
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type GLcharᶜᵖᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLcharᶜᵖᵖ memory.Pointer
 
 // NewGLcharᶜᵖᵖ returns a GLcharᶜᵖᵖ that points to addr in the application pool.
 func NewGLcharᶜᵖᵖ(addr uint64) GLcharᶜᵖᵖ {
-	return GLcharᶜᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLcharᶜᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLcharᶜᵖᵖ points to.
 func (p GLcharᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -2353,7 +2224,7 @@ func (p GLcharᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharᶜ�
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLcharᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2364,14 +2235,11 @@ func (p GLcharᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 }
 
 // PipelineIdᶜᵖ is a pointer to a PipelineId element.
-type PipelineIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type PipelineIdᶜᵖ memory.Pointer
 
 // NewPipelineIdᶜᵖ returns a PipelineIdᶜᵖ that points to addr in the application pool.
 func NewPipelineIdᶜᵖ(addr uint64) PipelineIdᶜᵖ {
-	return PipelineIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return PipelineIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that PipelineIdᶜᵖ points to.
@@ -2410,7 +2278,7 @@ func (p PipelineIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) PipelineId
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return PipelineIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return PipelineIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p PipelineIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2421,14 +2289,11 @@ func (p PipelineIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 }
 
 // PipelineIdᵖ is a pointer to a PipelineId element.
-type PipelineIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type PipelineIdᵖ memory.Pointer
 
 // NewPipelineIdᵖ returns a PipelineIdᵖ that points to addr in the application pool.
 func NewPipelineIdᵖ(addr uint64) PipelineIdᵖ {
-	return PipelineIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return PipelineIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that PipelineIdᵖ points to.
@@ -2467,7 +2332,7 @@ func (p PipelineIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) PipelineIdˢ 
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return PipelineIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return PipelineIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p PipelineIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2478,14 +2343,11 @@ func (p PipelineIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // FramebufferIdᵖ is a pointer to a FramebufferId element.
-type FramebufferIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type FramebufferIdᵖ memory.Pointer
 
 // NewFramebufferIdᵖ returns a FramebufferIdᵖ that points to addr in the application pool.
 func NewFramebufferIdᵖ(addr uint64) FramebufferIdᵖ {
-	return FramebufferIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return FramebufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that FramebufferIdᵖ points to.
@@ -2524,7 +2386,7 @@ func (p FramebufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffe
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p FramebufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2535,14 +2397,11 @@ func (p FramebufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 }
 
 // ProgramIdᵖ is a pointer to a ProgramId element.
-type ProgramIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type ProgramIdᵖ memory.Pointer
 
 // NewProgramIdᵖ returns a ProgramIdᵖ that points to addr in the application pool.
 func NewProgramIdᵖ(addr uint64) ProgramIdᵖ {
-	return ProgramIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return ProgramIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that ProgramIdᵖ points to.
@@ -2581,7 +2440,7 @@ func (p ProgramIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ProgramIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ProgramIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return ProgramIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p ProgramIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2592,14 +2451,11 @@ func (p ProgramIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // RenderbufferIdᵖ is a pointer to a RenderbufferId element.
-type RenderbufferIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type RenderbufferIdᵖ memory.Pointer
 
 // NewRenderbufferIdᵖ returns a RenderbufferIdᵖ that points to addr in the application pool.
 func NewRenderbufferIdᵖ(addr uint64) RenderbufferIdᵖ {
-	return RenderbufferIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return RenderbufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that RenderbufferIdᵖ points to.
@@ -2638,7 +2494,7 @@ func (p RenderbufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Renderbuf
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p RenderbufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2649,14 +2505,11 @@ func (p RenderbufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxap
 }
 
 // ShaderIdᵖ is a pointer to a ShaderId element.
-type ShaderIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type ShaderIdᵖ memory.Pointer
 
 // NewShaderIdᵖ returns a ShaderIdᵖ that points to addr in the application pool.
 func NewShaderIdᵖ(addr uint64) ShaderIdᵖ {
-	return ShaderIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return ShaderIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that ShaderIdᵖ points to.
@@ -2695,7 +2548,7 @@ func (p ShaderIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p ShaderIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2706,14 +2559,11 @@ func (p ShaderIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 
 // TextureIdᵖ is a pointer to a TextureId element.
-type TextureIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type TextureIdᵖ memory.Pointer
 
 // NewTextureIdᵖ returns a TextureIdᵖ that points to addr in the application pool.
 func NewTextureIdᵖ(addr uint64) TextureIdᵖ {
-	return TextureIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return TextureIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that TextureIdᵖ points to.
@@ -2752,7 +2602,7 @@ func (p TextureIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return TextureIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p TextureIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2763,14 +2613,11 @@ func (p TextureIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // GLubyteᵖ is a pointer to a GLubyte element.
-type GLubyteᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLubyteᵖ memory.Pointer
 
 // NewGLubyteᵖ returns a GLubyteᵖ that points to addr in the application pool.
 func NewGLubyteᵖ(addr uint64) GLubyteᵖ {
-	return GLubyteᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLubyteᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLubyteᵖ points to.
@@ -2809,7 +2656,7 @@ func (p GLubyteᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLubyteˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLubyteˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLubyteˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLubyteᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2820,14 +2667,11 @@ func (p GLubyteᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLuint64ᵖ is a pointer to a GLuint64 element.
-type GLuint64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLuint64ᵖ memory.Pointer
 
 // NewGLuint64ᵖ returns a GLuint64ᵖ that points to addr in the application pool.
 func NewGLuint64ᵖ(addr uint64) GLuint64ᵖ {
-	return GLuint64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLuint64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLuint64ᵖ points to.
@@ -2866,7 +2710,7 @@ func (p GLuint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLuint64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLuint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2877,14 +2721,11 @@ func (p GLuint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 
 // GLvoidᵖ is a pointer to a GLvoid element.
-type GLvoidᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLvoidᵖ memory.Pointer
 
 // NewGLvoidᵖ returns a GLvoidᵖ that points to addr in the application pool.
 func NewGLvoidᵖ(addr uint64) GLvoidᵖ {
-	return GLvoidᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLvoidᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLvoidᵖ points to.
@@ -2913,7 +2754,7 @@ func (p GLvoidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLvoidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLvoidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLvoidˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLvoidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2924,14 +2765,11 @@ func (p GLvoidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // GLsizeiᶜᵖ is a pointer to a GLsizei element.
-type GLsizeiᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLsizeiᶜᵖ memory.Pointer
 
 // NewGLsizeiᶜᵖ returns a GLsizeiᶜᵖ that points to addr in the application pool.
 func NewGLsizeiᶜᵖ(addr uint64) GLsizeiᶜᵖ {
-	return GLsizeiᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLsizeiᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLsizeiᶜᵖ points to.
@@ -2970,7 +2808,7 @@ func (p GLsizeiᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLsizeiˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLsizeiᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -2985,19 +2823,16 @@ func (p GLsizeiᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type Voidᶜᵖᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᶜᵖᶜᵖ memory.Pointer
 
 // NewVoidᶜᵖᶜᵖ returns a Voidᶜᵖᶜᵖ that points to addr in the application pool.
 func NewVoidᶜᵖᶜᵖ(addr uint64) Voidᶜᵖᶜᵖ {
-	return Voidᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᶜᵖᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᶜᵖᶜᵖ points to.
 func (p Voidᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -3035,7 +2870,7 @@ func (p Voidᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᶜᵖ
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3050,19 +2885,16 @@ func (p Voidᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type Voidᶜᵖᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Voidᶜᵖᵖ memory.Pointer
 
 // NewVoidᶜᵖᵖ returns a Voidᶜᵖᵖ that points to addr in the application pool.
 func NewVoidᶜᵖᵖ(addr uint64) Voidᶜᵖᵖ {
-	return Voidᶜᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Voidᶜᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᶜᵖᵖ points to.
 func (p Voidᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -3100,7 +2932,7 @@ func (p Voidᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᶜᵖˢ 
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Voidᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3111,14 +2943,11 @@ func (p Voidᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // GLubyteᶜᵖ is a pointer to a GLubyte element.
-type GLubyteᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLubyteᶜᵖ memory.Pointer
 
 // NewGLubyteᶜᵖ returns a GLubyteᶜᵖ that points to addr in the application pool.
 func NewGLubyteᶜᵖ(addr uint64) GLubyteᶜᵖ {
-	return GLubyteᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLubyteᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLubyteᶜᵖ points to.
@@ -3157,7 +2986,7 @@ func (p GLubyteᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLubyteˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLubyteˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLubyteˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLubyteᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3168,14 +2997,11 @@ func (p GLubyteᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // Vec2fᵖ is a pointer to a Vec2f element.
-type Vec2fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec2fᵖ memory.Pointer
 
 // NewVec2fᵖ returns a Vec2fᵖ that points to addr in the application pool.
 func NewVec2fᵖ(addr uint64) Vec2fᵖ {
-	return Vec2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec2fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec2fᵖ points to.
@@ -3214,7 +3040,7 @@ func (p Vec2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec2fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3225,14 +3051,11 @@ func (p Vec2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec2iᵖ is a pointer to a Vec2i element.
-type Vec2iᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec2iᵖ memory.Pointer
 
 // NewVec2iᵖ returns a Vec2iᵖ that points to addr in the application pool.
 func NewVec2iᵖ(addr uint64) Vec2iᵖ {
-	return Vec2iᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec2iᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec2iᵖ points to.
@@ -3271,7 +3094,7 @@ func (p Vec2iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec2iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec2iˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec2iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3282,14 +3105,11 @@ func (p Vec2iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec2uᵖ is a pointer to a Vec2u element.
-type Vec2uᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec2uᵖ memory.Pointer
 
 // NewVec2uᵖ returns a Vec2uᵖ that points to addr in the application pool.
 func NewVec2uᵖ(addr uint64) Vec2uᵖ {
-	return Vec2uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec2uᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec2uᵖ points to.
@@ -3328,7 +3148,7 @@ func (p Vec2uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2uˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec2uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec2uˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec2uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3339,14 +3159,11 @@ func (p Vec2uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec3fᵖ is a pointer to a Vec3f element.
-type Vec3fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec3fᵖ memory.Pointer
 
 // NewVec3fᵖ returns a Vec3fᵖ that points to addr in the application pool.
 func NewVec3fᵖ(addr uint64) Vec3fᵖ {
-	return Vec3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec3fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec3fᵖ points to.
@@ -3385,7 +3202,7 @@ func (p Vec3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec3fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3396,14 +3213,11 @@ func (p Vec3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec3iᵖ is a pointer to a Vec3i element.
-type Vec3iᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec3iᵖ memory.Pointer
 
 // NewVec3iᵖ returns a Vec3iᵖ that points to addr in the application pool.
 func NewVec3iᵖ(addr uint64) Vec3iᵖ {
-	return Vec3iᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec3iᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec3iᵖ points to.
@@ -3442,7 +3256,7 @@ func (p Vec3iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec3iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec3iˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec3iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3453,14 +3267,11 @@ func (p Vec3iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec3uᵖ is a pointer to a Vec3u element.
-type Vec3uᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec3uᵖ memory.Pointer
 
 // NewVec3uᵖ returns a Vec3uᵖ that points to addr in the application pool.
 func NewVec3uᵖ(addr uint64) Vec3uᵖ {
-	return Vec3uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec3uᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec3uᵖ points to.
@@ -3499,7 +3310,7 @@ func (p Vec3uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3uˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec3uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec3uˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec3uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3510,14 +3321,11 @@ func (p Vec3uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec4fᵖ is a pointer to a Vec4f element.
-type Vec4fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec4fᵖ memory.Pointer
 
 // NewVec4fᵖ returns a Vec4fᵖ that points to addr in the application pool.
 func NewVec4fᵖ(addr uint64) Vec4fᵖ {
-	return Vec4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec4fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec4fᵖ points to.
@@ -3556,7 +3364,7 @@ func (p Vec4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec4fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3567,14 +3375,11 @@ func (p Vec4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec4iᵖ is a pointer to a Vec4i element.
-type Vec4iᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec4iᵖ memory.Pointer
 
 // NewVec4iᵖ returns a Vec4iᵖ that points to addr in the application pool.
 func NewVec4iᵖ(addr uint64) Vec4iᵖ {
-	return Vec4iᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec4iᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec4iᵖ points to.
@@ -3613,7 +3418,7 @@ func (p Vec4iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec4iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec4iˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec4iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3624,14 +3429,11 @@ func (p Vec4iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Vec4uᵖ is a pointer to a Vec4u element.
-type Vec4uᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Vec4uᵖ memory.Pointer
 
 // NewVec4uᵖ returns a Vec4uᵖ that points to addr in the application pool.
 func NewVec4uᵖ(addr uint64) Vec4uᵖ {
-	return Vec4uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Vec4uᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Vec4uᵖ points to.
@@ -3670,7 +3472,7 @@ func (p Vec4uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4uˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Vec4uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Vec4uˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Vec4uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3681,14 +3483,11 @@ func (p Vec4uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // GLuint64ᶜᵖ is a pointer to a GLuint64 element.
-type GLuint64ᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLuint64ᶜᵖ memory.Pointer
 
 // NewGLuint64ᶜᵖ returns a GLuint64ᶜᵖ that points to addr in the application pool.
 func NewGLuint64ᶜᵖ(addr uint64) GLuint64ᶜᵖ {
-	return GLuint64ᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLuint64ᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLuint64ᶜᵖ points to.
@@ -3727,7 +3526,7 @@ func (p GLuint64ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLuint64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLuint64ᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3738,14 +3537,11 @@ func (p GLuint64ᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.S
 }
 
 // Mat2fᵖ is a pointer to a Mat2f element.
-type Mat2fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat2fᵖ memory.Pointer
 
 // NewMat2fᵖ returns a Mat2fᵖ that points to addr in the application pool.
 func NewMat2fᵖ(addr uint64) Mat2fᵖ {
-	return Mat2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat2fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat2fᵖ points to.
@@ -3784,7 +3580,7 @@ func (p Mat2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat2fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3795,14 +3591,11 @@ func (p Mat2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Mat2x3fᵖ is a pointer to a Mat2x3f element.
-type Mat2x3fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat2x3fᵖ memory.Pointer
 
 // NewMat2x3fᵖ returns a Mat2x3fᵖ that points to addr in the application pool.
 func NewMat2x3fᵖ(addr uint64) Mat2x3fᵖ {
-	return Mat2x3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat2x3fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat2x3fᵖ points to.
@@ -3841,7 +3634,7 @@ func (p Mat2x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x3fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat2x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat2x3fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat2x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3852,14 +3645,11 @@ func (p Mat2x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Mat2x4fᵖ is a pointer to a Mat2x4f element.
-type Mat2x4fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat2x4fᵖ memory.Pointer
 
 // NewMat2x4fᵖ returns a Mat2x4fᵖ that points to addr in the application pool.
 func NewMat2x4fᵖ(addr uint64) Mat2x4fᵖ {
-	return Mat2x4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat2x4fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat2x4fᵖ points to.
@@ -3898,7 +3688,7 @@ func (p Mat2x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x4fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat2x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat2x4fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat2x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3909,14 +3699,11 @@ func (p Mat2x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Mat3fᵖ is a pointer to a Mat3f element.
-type Mat3fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat3fᵖ memory.Pointer
 
 // NewMat3fᵖ returns a Mat3fᵖ that points to addr in the application pool.
 func NewMat3fᵖ(addr uint64) Mat3fᵖ {
-	return Mat3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat3fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat3fᵖ points to.
@@ -3955,7 +3742,7 @@ func (p Mat3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat3fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -3966,14 +3753,11 @@ func (p Mat3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Mat3x2fᵖ is a pointer to a Mat3x2f element.
-type Mat3x2fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat3x2fᵖ memory.Pointer
 
 // NewMat3x2fᵖ returns a Mat3x2fᵖ that points to addr in the application pool.
 func NewMat3x2fᵖ(addr uint64) Mat3x2fᵖ {
-	return Mat3x2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat3x2fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat3x2fᵖ points to.
@@ -4012,7 +3796,7 @@ func (p Mat3x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x2fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat3x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat3x2fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat3x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4023,14 +3807,11 @@ func (p Mat3x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Mat3x4fᵖ is a pointer to a Mat3x4f element.
-type Mat3x4fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat3x4fᵖ memory.Pointer
 
 // NewMat3x4fᵖ returns a Mat3x4fᵖ that points to addr in the application pool.
 func NewMat3x4fᵖ(addr uint64) Mat3x4fᵖ {
-	return Mat3x4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat3x4fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat3x4fᵖ points to.
@@ -4069,7 +3850,7 @@ func (p Mat3x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x4fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat3x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat3x4fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat3x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4080,14 +3861,11 @@ func (p Mat3x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Mat4fᵖ is a pointer to a Mat4f element.
-type Mat4fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat4fᵖ memory.Pointer
 
 // NewMat4fᵖ returns a Mat4fᵖ that points to addr in the application pool.
 func NewMat4fᵖ(addr uint64) Mat4fᵖ {
-	return Mat4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat4fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat4fᵖ points to.
@@ -4126,7 +3904,7 @@ func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat4fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4137,14 +3915,11 @@ func (p Mat4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 
 // Mat4x2fᵖ is a pointer to a Mat4x2f element.
-type Mat4x2fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat4x2fᵖ memory.Pointer
 
 // NewMat4x2fᵖ returns a Mat4x2fᵖ that points to addr in the application pool.
 func NewMat4x2fᵖ(addr uint64) Mat4x2fᵖ {
-	return Mat4x2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat4x2fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat4x2fᵖ points to.
@@ -4183,7 +3958,7 @@ func (p Mat4x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x2fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat4x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat4x2fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat4x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4194,14 +3969,11 @@ func (p Mat4x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // Mat4x3fᵖ is a pointer to a Mat4x3f element.
-type Mat4x3fᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Mat4x3fᵖ memory.Pointer
 
 // NewMat4x3fᵖ returns a Mat4x3fᵖ that points to addr in the application pool.
 func NewMat4x3fᵖ(addr uint64) Mat4x3fᵖ {
-	return Mat4x3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Mat4x3fᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Mat4x3fᵖ points to.
@@ -4240,7 +4012,7 @@ func (p Mat4x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x3fˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Mat4x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4251,14 +4023,11 @@ func (p Mat4x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
-type FramebufferIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type FramebufferIdᶜᵖ memory.Pointer
 
 // NewFramebufferIdᶜᵖ returns a FramebufferIdᶜᵖ that points to addr in the application pool.
 func NewFramebufferIdᶜᵖ(addr uint64) FramebufferIdᶜᵖ {
-	return FramebufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return FramebufferIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that FramebufferIdᶜᵖ points to.
@@ -4297,7 +4066,7 @@ func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebu
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p FramebufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4308,14 +4077,11 @@ func (p FramebufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfx
 }
 
 // RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
-type RenderbufferIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type RenderbufferIdᶜᵖ memory.Pointer
 
 // NewRenderbufferIdᶜᵖ returns a RenderbufferIdᶜᵖ that points to addr in the application pool.
 func NewRenderbufferIdᶜᵖ(addr uint64) RenderbufferIdᶜᵖ {
-	return RenderbufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return RenderbufferIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that RenderbufferIdᶜᵖ points to.
@@ -4354,7 +4120,7 @@ func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Render
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p RenderbufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4369,19 +4135,16 @@ func (p RenderbufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gf
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type GLcharᶜᵖᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLcharᶜᵖᶜᵖ memory.Pointer
 
 // NewGLcharᶜᵖᶜᵖ returns a GLcharᶜᵖᶜᵖ that points to addr in the application pool.
 func NewGLcharᶜᵖᶜᵖ(addr uint64) GLcharᶜᵖᶜᵖ {
-	return GLcharᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLcharᶜᵖᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLcharᶜᵖᶜᵖ points to.
 func (p GLcharᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -4419,7 +4182,7 @@ func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLchar�
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLcharᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4430,14 +4193,11 @@ func (p GLcharᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxa
 }
 
 // UniformIndexᶜᵖ is a pointer to a UniformIndex element.
-type UniformIndexᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type UniformIndexᶜᵖ memory.Pointer
 
 // NewUniformIndexᶜᵖ returns a UniformIndexᶜᵖ that points to addr in the application pool.
 func NewUniformIndexᶜᵖ(addr uint64) UniformIndexᶜᵖ {
-	return UniformIndexᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return UniformIndexᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that UniformIndexᶜᵖ points to.
@@ -4476,7 +4236,7 @@ func (p UniformIndexᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformI
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return UniformIndexˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p UniformIndexᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4487,14 +4247,11 @@ func (p UniformIndexᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxa
 }
 
 // UniformIndexᵖ is a pointer to a UniformIndex element.
-type UniformIndexᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type UniformIndexᵖ memory.Pointer
 
 // NewUniformIndexᵖ returns a UniformIndexᵖ that points to addr in the application pool.
 func NewUniformIndexᵖ(addr uint64) UniformIndexᵖ {
-	return UniformIndexᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return UniformIndexᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that UniformIndexᵖ points to.
@@ -4533,7 +4290,7 @@ func (p UniformIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformInde
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return UniformIndexˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p UniformIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4544,14 +4301,11 @@ func (p UniformIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 }
 
 // ShaderIdᶜᵖ is a pointer to a ShaderId element.
-type ShaderIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type ShaderIdᶜᵖ memory.Pointer
 
 // NewShaderIdᶜᵖ returns a ShaderIdᶜᵖ that points to addr in the application pool.
 func NewShaderIdᶜᵖ(addr uint64) ShaderIdᶜᵖ {
-	return ShaderIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return ShaderIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that ShaderIdᶜᵖ points to.
@@ -4590,7 +4344,7 @@ func (p ShaderIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p ShaderIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4601,14 +4355,11 @@ func (p ShaderIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.S
 }
 
 // GLbooleanᵖ is a pointer to a GLboolean element.
-type GLbooleanᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLbooleanᵖ memory.Pointer
 
 // NewGLbooleanᵖ returns a GLbooleanᵖ that points to addr in the application pool.
 func NewGLbooleanᵖ(addr uint64) GLbooleanᵖ {
-	return GLbooleanᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLbooleanᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLbooleanᵖ points to.
@@ -4647,7 +4398,7 @@ func (p GLbooleanᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLbooleanˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLbooleanˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLbooleanˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLbooleanᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4658,14 +4409,11 @@ func (p GLbooleanᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // SamplerIdᶜᵖ is a pointer to a SamplerId element.
-type SamplerIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type SamplerIdᶜᵖ memory.Pointer
 
 // NewSamplerIdᶜᵖ returns a SamplerIdᶜᵖ that points to addr in the application pool.
 func NewSamplerIdᶜᵖ(addr uint64) SamplerIdᶜᵖ {
-	return SamplerIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return SamplerIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that SamplerIdᶜᵖ points to.
@@ -4704,7 +4452,7 @@ func (p SamplerIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) SamplerIdˢ
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return SamplerIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return SamplerIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p SamplerIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4715,14 +4463,11 @@ func (p SamplerIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 }
 
 // SamplerIdᵖ is a pointer to a SamplerId element.
-type SamplerIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type SamplerIdᵖ memory.Pointer
 
 // NewSamplerIdᵖ returns a SamplerIdᵖ that points to addr in the application pool.
 func NewSamplerIdᵖ(addr uint64) SamplerIdᵖ {
-	return SamplerIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return SamplerIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that SamplerIdᵖ points to.
@@ -4761,7 +4506,7 @@ func (p SamplerIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) SamplerIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return SamplerIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return SamplerIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p SamplerIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4772,14 +4517,11 @@ func (p SamplerIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 }
 
 // TextureIdᶜᵖ is a pointer to a TextureId element.
-type TextureIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type TextureIdᶜᵖ memory.Pointer
 
 // NewTextureIdᶜᵖ returns a TextureIdᶜᵖ that points to addr in the application pool.
 func NewTextureIdᶜᵖ(addr uint64) TextureIdᶜᵖ {
-	return TextureIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return TextureIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that TextureIdᶜᵖ points to.
@@ -4818,7 +4560,7 @@ func (p TextureIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return TextureIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p TextureIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4829,14 +4571,11 @@ func (p TextureIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 }
 
 // TransformFeedbackIdᶜᵖ is a pointer to a TransformFeedbackId element.
-type TransformFeedbackIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type TransformFeedbackIdᶜᵖ memory.Pointer
 
 // NewTransformFeedbackIdᶜᵖ returns a TransformFeedbackIdᶜᵖ that points to addr in the application pool.
 func NewTransformFeedbackIdᶜᵖ(addr uint64) TransformFeedbackIdᶜᵖ {
-	return TransformFeedbackIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return TransformFeedbackIdᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that TransformFeedbackIdᶜᵖ points to.
@@ -4875,7 +4614,7 @@ func (p TransformFeedbackIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) T
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p TransformFeedbackIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4886,14 +4625,11 @@ func (p TransformFeedbackIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟ
 }
 
 // TransformFeedbackIdᵖ is a pointer to a TransformFeedbackId element.
-type TransformFeedbackIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type TransformFeedbackIdᵖ memory.Pointer
 
 // NewTransformFeedbackIdᵖ returns a TransformFeedbackIdᵖ that points to addr in the application pool.
 func NewTransformFeedbackIdᵖ(addr uint64) TransformFeedbackIdᵖ {
-	return TransformFeedbackIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return TransformFeedbackIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that TransformFeedbackIdᵖ points to.
@@ -4932,7 +4668,7 @@ func (p TransformFeedbackIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Tran
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p TransformFeedbackIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -4943,14 +4679,11 @@ func (p TransformFeedbackIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *
 }
 
 // EGLintᵖ is a pointer to a EGLint element.
-type EGLintᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type EGLintᵖ memory.Pointer
 
 // NewEGLintᵖ returns a EGLintᵖ that points to addr in the application pool.
 func NewEGLintᵖ(addr uint64) EGLintᵖ {
-	return EGLintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return EGLintᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that EGLintᵖ points to.
@@ -4989,7 +4722,7 @@ func (p EGLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) EGLintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return EGLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return EGLintˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p EGLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5000,14 +4733,11 @@ func (p EGLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 }
 
 // Intᵖ is a pointer to a int64 element.
-type Intᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type Intᵖ memory.Pointer
 
 // NewIntᵖ returns a Intᵖ that points to addr in the application pool.
 func NewIntᵖ(addr uint64) Intᵖ {
-	return Intᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that Intᵖ points to.
@@ -5046,7 +4776,7 @@ func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Intˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Intˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p Intᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5061,19 +4791,16 @@ func (p Intᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type CGLContextObjᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGLContextObjᵖ memory.Pointer
 
 // NewCGLContextObjᵖ returns a CGLContextObjᵖ that points to addr in the application pool.
 func NewCGLContextObjᵖ(addr uint64) CGLContextObjᵖ {
-	return CGLContextObjᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGLContextObjᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGLContextObjᵖ points to.
 func (p CGLContextObjᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -5111,7 +4838,7 @@ func (p CGLContextObjᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGLContext
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return CGLContextObjˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return CGLContextObjˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGLContextObjᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5126,19 +4853,16 @@ func (p CGLContextObjᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi
 //  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
-type CGSConnectionIDᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGSConnectionIDᵖ memory.Pointer
 
 // NewCGSConnectionIDᵖ returns a CGSConnectionIDᵖ that points to addr in the application pool.
 func NewCGSConnectionIDᵖ(addr uint64) CGSConnectionIDᵖ {
-	return CGSConnectionIDᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGSConnectionIDᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGSConnectionIDᵖ points to.
 func (p CGSConnectionIDᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
+	if p.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -5176,7 +4900,7 @@ func (p CGSConnectionIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSConne
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return CGSConnectionIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return CGSConnectionIDˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGSConnectionIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5187,14 +4911,11 @@ func (p CGSConnectionIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxa
 }
 
 // CGSWindowIDᵖ is a pointer to a CGSWindowID element.
-type CGSWindowIDᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGSWindowIDᵖ memory.Pointer
 
 // NewCGSWindowIDᵖ returns a CGSWindowIDᵖ that points to addr in the application pool.
 func NewCGSWindowIDᵖ(addr uint64) CGSWindowIDᵖ {
-	return CGSWindowIDᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGSWindowIDᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGSWindowIDᵖ points to.
@@ -5233,7 +4954,7 @@ func (p CGSWindowIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSWindowID�
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return CGSWindowIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return CGSWindowIDˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGSWindowIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5244,14 +4965,11 @@ func (p CGSWindowIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.S
 }
 
 // CGSSurfaceIDᵖ is a pointer to a CGSSurfaceID element.
-type CGSSurfaceIDᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type CGSSurfaceIDᵖ memory.Pointer
 
 // NewCGSSurfaceIDᵖ returns a CGSSurfaceIDᵖ that points to addr in the application pool.
 func NewCGSSurfaceIDᵖ(addr uint64) CGSSurfaceIDᵖ {
-	return CGSSurfaceIDᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return CGSSurfaceIDᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that CGSSurfaceIDᵖ points to.
@@ -5290,7 +5008,7 @@ func (p CGSSurfaceIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSSurfaceI
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return CGSSurfaceIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return CGSSurfaceIDˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p CGSSurfaceIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5301,14 +5019,11 @@ func (p CGSSurfaceIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 }
 
 // F64ᵖ is a pointer to a float64 element.
-type F64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type F64ᵖ memory.Pointer
 
 // NewF64ᵖ returns a F64ᵖ that points to addr in the application pool.
 func NewF64ᵖ(addr uint64) F64ᵖ {
-	return F64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return F64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that F64ᵖ points to.
@@ -5347,7 +5062,7 @@ func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return F64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p F64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5358,14 +5073,11 @@ func (p F64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // S64ᵖ is a pointer to a int64 element.
-type S64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type S64ᵖ memory.Pointer
 
 // NewS64ᵖ returns a S64ᵖ that points to addr in the application pool.
 func NewS64ᵖ(addr uint64) S64ᵖ {
-	return S64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return S64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that S64ᵖ points to.
@@ -5404,7 +5116,7 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return S64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p S64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5415,14 +5127,11 @@ func (p S64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // U64ᵖ is a pointer to a uint64 element.
-type U64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type U64ᵖ memory.Pointer
 
 // NewU64ᵖ returns a U64ᵖ that points to addr in the application pool.
 func NewU64ᵖ(addr uint64) U64ᵖ {
-	return U64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return U64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that U64ᵖ points to.
@@ -5461,7 +5170,7 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return U64ˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p U64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5472,14 +5181,11 @@ func (p U64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) va
 }
 
 // GLfixedᶜᵖ is a pointer to a GLfixed element.
-type GLfixedᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLfixedᶜᵖ memory.Pointer
 
 // NewGLfixedᶜᵖ returns a GLfixedᶜᵖ that points to addr in the application pool.
 func NewGLfixedᶜᵖ(addr uint64) GLfixedᶜᵖ {
-	return GLfixedᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLfixedᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLfixedᶜᵖ points to.
@@ -5518,7 +5224,7 @@ func (p GLfixedᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLfixedˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLfixedᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5529,14 +5235,11 @@ func (p GLfixedᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // GLfixedᵖ is a pointer to a GLfixed element.
-type GLfixedᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLfixedᵖ memory.Pointer
 
 // NewGLfixedᵖ returns a GLfixedᵖ that points to addr in the application pool.
 func NewGLfixedᵖ(addr uint64) GLfixedᵖ {
-	return GLfixedᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLfixedᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLfixedᵖ points to.
@@ -5575,7 +5278,7 @@ func (p GLfixedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLfixedˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLfixedᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5586,14 +5289,11 @@ func (p GLfixedᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // GLshortᶜᵖ is a pointer to a GLshort element.
-type GLshortᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLshortᶜᵖ memory.Pointer
 
 // NewGLshortᶜᵖ returns a GLshortᶜᵖ that points to addr in the application pool.
 func NewGLshortᶜᵖ(addr uint64) GLshortᶜᵖ {
-	return GLshortᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLshortᶜᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLshortᶜᵖ points to.
@@ -5632,7 +5332,7 @@ func (p GLshortᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLshortˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLshortᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5643,14 +5343,11 @@ func (p GLshortᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 // GLshortᵖ is a pointer to a GLshort element.
-type GLshortᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type GLshortᵖ memory.Pointer
 
 // NewGLshortᵖ returns a GLshortᵖ that points to addr in the application pool.
 func NewGLshortᵖ(addr uint64) GLshortᵖ {
-	return GLshortᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return GLshortᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that GLshortᵖ points to.
@@ -5689,7 +5386,7 @@ func (p GLshortᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLshortˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p GLshortᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5700,14 +5397,11 @@ func (p GLshortᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State
 }
 
 // VertexBufferBindingIndexᵖ is a pointer to a VertexBufferBindingIndex element.
-type VertexBufferBindingIndexᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type VertexBufferBindingIndexᵖ memory.Pointer
 
 // NewVertexBufferBindingIndexᵖ returns a VertexBufferBindingIndexᵖ that points to addr in the application pool.
 func NewVertexBufferBindingIndexᵖ(addr uint64) VertexBufferBindingIndexᵖ {
-	return VertexBufferBindingIndexᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return VertexBufferBindingIndexᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that VertexBufferBindingIndexᵖ points to.
@@ -5746,7 +5440,7 @@ func (p VertexBufferBindingIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State)
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p VertexBufferBindingIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -5757,14 +5451,11 @@ func (p VertexBufferBindingIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, 
 }
 
 // AttributeLocationᵖ is a pointer to a AttributeLocation element.
-type AttributeLocationᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
+type AttributeLocationᵖ memory.Pointer
 
 // NewAttributeLocationᵖ returns a AttributeLocationᵖ that points to addr in the application pool.
 func NewAttributeLocationᵖ(addr uint64) AttributeLocationᵖ {
-	return AttributeLocationᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+	return AttributeLocationᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
 // ElementSize returns the size in bytes of an element that AttributeLocationᵖ points to.
@@ -5803,7 +5494,7 @@ func (p AttributeLocationᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Attrib
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return AttributeLocationˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return AttributeLocationˢ{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 func (p AttributeLocationᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if p.Address != 0 {
@@ -6024,7 +5715,7 @@ func (s AttributeLocationˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd
 
 // Index returns a AttributeLocationᵖ to the i'th element in this AttributeLocationˢ.
 func (s AttributeLocationˢ) Index(i uint64, ϟs *gfxapi.State) AttributeLocationᵖ {
-	return AttributeLocationᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return AttributeLocationᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the AttributeLocationˢ using start and end indices.
@@ -6216,7 +5907,7 @@ func (s BufferIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 
 // Index returns a BufferIdᵖ to the i'th element in this BufferIdˢ.
 func (s BufferIdˢ) Index(i uint64, ϟs *gfxapi.State) BufferIdᵖ {
-	return BufferIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return BufferIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the BufferIdˢ using start and end indices.
@@ -6401,7 +6092,7 @@ func (s CGLContextObjˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 
 // Index returns a CGLContextObjᵖ to the i'th element in this CGLContextObjˢ.
 func (s CGLContextObjˢ) Index(i uint64, ϟs *gfxapi.State) CGLContextObjᵖ {
-	return CGLContextObjᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return CGLContextObjᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the CGLContextObjˢ using start and end indices.
@@ -6586,7 +6277,7 @@ func (s CGSConnectionIDˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 
 // Index returns a CGSConnectionIDᵖ to the i'th element in this CGSConnectionIDˢ.
 func (s CGSConnectionIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSConnectionIDᵖ {
-	return CGSConnectionIDᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return CGSConnectionIDᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the CGSConnectionIDˢ using start and end indices.
@@ -6743,7 +6434,7 @@ func (s CGSSurfaceIDˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 
 // Index returns a CGSSurfaceIDᵖ to the i'th element in this CGSSurfaceIDˢ.
 func (s CGSSurfaceIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSSurfaceIDᵖ {
-	return CGSSurfaceIDᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return CGSSurfaceIDᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the CGSSurfaceIDˢ using start and end indices.
@@ -6900,7 +6591,7 @@ func (s CGSWindowIDˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd datab
 
 // Index returns a CGSWindowIDᵖ to the i'th element in this CGSWindowIDˢ.
 func (s CGSWindowIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSWindowIDᵖ {
-	return CGSWindowIDᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return CGSWindowIDᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the CGSWindowIDˢ using start and end indices.
@@ -7068,7 +6759,7 @@ func (s Charˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 
 // Index returns a Charᵖ to the i'th element in this Charˢ.
 func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ {
-	return Charᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Charᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Charˢ using start and end indices.
@@ -7225,7 +6916,7 @@ func (s EGLintˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 
 // Index returns a EGLintᵖ to the i'th element in this EGLintˢ.
 func (s EGLintˢ) Index(i uint64, ϟs *gfxapi.State) EGLintᵖ {
-	return EGLintᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return EGLintᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the EGLintˢ using start and end indices.
@@ -7382,7 +7073,7 @@ func (s F64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a F64ᵖ to the i'th element in this F64ˢ.
 func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ {
-	return F64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return F64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the F64ˢ using start and end indices.
@@ -7574,7 +7265,7 @@ func (s FramebufferIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 
 // Index returns a FramebufferIdᵖ to the i'th element in this FramebufferIdˢ.
 func (s FramebufferIdˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferIdᵖ {
-	return FramebufferIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return FramebufferIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the FramebufferIdˢ using start and end indices.
@@ -7731,7 +7422,7 @@ func (s GLbooleanˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 
 // Index returns a GLbooleanᵖ to the i'th element in this GLbooleanˢ.
 func (s GLbooleanˢ) Index(i uint64, ϟs *gfxapi.State) GLbooleanᵖ {
-	return GLbooleanᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLbooleanᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLbooleanˢ using start and end indices.
@@ -7899,7 +7590,7 @@ func (s GLcharˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 
 // Index returns a GLcharᵖ to the i'th element in this GLcharˢ.
 func (s GLcharˢ) Index(i uint64, ϟs *gfxapi.State) GLcharᵖ {
-	return GLcharᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLcharᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLcharˢ using start and end indices.
@@ -8084,7 +7775,7 @@ func (s GLcharᶜᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 
 // Index returns a GLcharᶜᵖᵖ to the i'th element in this GLcharᶜᵖˢ.
 func (s GLcharᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) GLcharᶜᵖᵖ {
-	return GLcharᶜᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLcharᶜᵖᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLcharᶜᵖˢ using start and end indices.
@@ -8241,7 +7932,7 @@ func (s GLenumˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 
 // Index returns a GLenumᵖ to the i'th element in this GLenumˢ.
 func (s GLenumˢ) Index(i uint64, ϟs *gfxapi.State) GLenumᵖ {
-	return GLenumᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLenumᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLenumˢ using start and end indices.
@@ -8398,7 +8089,7 @@ func (s GLfixedˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLfixedᵖ to the i'th element in this GLfixedˢ.
 func (s GLfixedˢ) Index(i uint64, ϟs *gfxapi.State) GLfixedᵖ {
-	return GLfixedᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLfixedᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLfixedˢ using start and end indices.
@@ -8555,7 +8246,7 @@ func (s GLfloatˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLfloatᵖ to the i'th element in this GLfloatˢ.
 func (s GLfloatˢ) Index(i uint64, ϟs *gfxapi.State) GLfloatᵖ {
-	return GLfloatᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLfloatᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLfloatˢ using start and end indices.
@@ -8712,7 +8403,7 @@ func (s GLint64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLint64ᵖ to the i'th element in this GLint64ˢ.
 func (s GLint64ˢ) Index(i uint64, ϟs *gfxapi.State) GLint64ᵖ {
-	return GLint64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLint64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLint64ˢ using start and end indices.
@@ -8869,7 +8560,7 @@ func (s GLintˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a GLintᵖ to the i'th element in this GLintˢ.
 func (s GLintˢ) Index(i uint64, ϟs *gfxapi.State) GLintᵖ {
-	return GLintᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLintᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLintˢ using start and end indices.
@@ -9026,7 +8717,7 @@ func (s GLshortˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLshortᵖ to the i'th element in this GLshortˢ.
 func (s GLshortˢ) Index(i uint64, ϟs *gfxapi.State) GLshortᵖ {
-	return GLshortᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLshortᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLshortˢ using start and end indices.
@@ -9183,7 +8874,7 @@ func (s GLsizeiˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLsizeiᵖ to the i'th element in this GLsizeiˢ.
 func (s GLsizeiˢ) Index(i uint64, ϟs *gfxapi.State) GLsizeiᵖ {
-	return GLsizeiᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLsizeiᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLsizeiˢ using start and end indices.
@@ -9340,7 +9031,7 @@ func (s GLubyteˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a GLubyteᵖ to the i'th element in this GLubyteˢ.
 func (s GLubyteˢ) Index(i uint64, ϟs *gfxapi.State) GLubyteᵖ {
-	return GLubyteᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLubyteᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLubyteˢ using start and end indices.
@@ -9497,7 +9188,7 @@ func (s GLuint64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 
 // Index returns a GLuint64ᵖ to the i'th element in this GLuint64ˢ.
 func (s GLuint64ˢ) Index(i uint64, ϟs *gfxapi.State) GLuint64ᵖ {
-	return GLuint64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLuint64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLuint64ˢ using start and end indices.
@@ -9654,7 +9345,7 @@ func (s GLuintˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 
 // Index returns a GLuintᵖ to the i'th element in this GLuintˢ.
 func (s GLuintˢ) Index(i uint64, ϟs *gfxapi.State) GLuintᵖ {
-	return GLuintᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLuintᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLuintˢ using start and end indices.
@@ -9761,7 +9452,7 @@ func (s GLvoidˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 
 // Index returns a GLvoidᵖ to the i'th element in this GLvoidˢ.
 func (s GLvoidˢ) Index(i uint64, ϟs *gfxapi.State) GLvoidᵖ {
-	return GLvoidᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return GLvoidᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the GLvoidˢ using start and end indices.
@@ -9918,7 +9609,7 @@ func (s Intˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a Intᵖ to the i'th element in this Intˢ.
 func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ {
-	return Intᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Intᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Intˢ using start and end indices.
@@ -10073,7 +9764,7 @@ func (s Mat2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Mat2fᵖ to the i'th element in this Mat2fˢ.
 func (s Mat2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2fᵖ {
-	return Mat2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat2fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat2fˢ using start and end indices.
@@ -10228,7 +9919,7 @@ func (s Mat2x3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat2x3fᵖ to the i'th element in this Mat2x3fˢ.
 func (s Mat2x3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2x3fᵖ {
-	return Mat2x3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat2x3fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat2x3fˢ using start and end indices.
@@ -10383,7 +10074,7 @@ func (s Mat2x4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat2x4fᵖ to the i'th element in this Mat2x4fˢ.
 func (s Mat2x4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2x4fᵖ {
-	return Mat2x4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat2x4fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat2x4fˢ using start and end indices.
@@ -10538,7 +10229,7 @@ func (s Mat3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Mat3fᵖ to the i'th element in this Mat3fˢ.
 func (s Mat3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3fᵖ {
-	return Mat3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat3fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat3fˢ using start and end indices.
@@ -10693,7 +10384,7 @@ func (s Mat3x2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat3x2fᵖ to the i'th element in this Mat3x2fˢ.
 func (s Mat3x2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3x2fᵖ {
-	return Mat3x2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat3x2fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat3x2fˢ using start and end indices.
@@ -10848,7 +10539,7 @@ func (s Mat3x4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat3x4fᵖ to the i'th element in this Mat3x4fˢ.
 func (s Mat3x4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3x4fᵖ {
-	return Mat3x4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat3x4fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat3x4fˢ using start and end indices.
@@ -11003,7 +10694,7 @@ func (s Mat4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Mat4fᵖ to the i'th element in this Mat4fˢ.
 func (s Mat4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4fᵖ {
-	return Mat4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat4fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat4fˢ using start and end indices.
@@ -11158,7 +10849,7 @@ func (s Mat4x2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat4x2fᵖ to the i'th element in this Mat4x2fˢ.
 func (s Mat4x2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4x2fᵖ {
-	return Mat4x2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat4x2fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat4x2fˢ using start and end indices.
@@ -11313,7 +11004,7 @@ func (s Mat4x3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Mat4x3fᵖ to the i'th element in this Mat4x3fˢ.
 func (s Mat4x3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4x3fᵖ {
-	return Mat4x3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Mat4x3fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Mat4x3fˢ using start and end indices.
@@ -11470,7 +11161,7 @@ func (s PipelineIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 
 // Index returns a PipelineIdᵖ to the i'th element in this PipelineIdˢ.
 func (s PipelineIdˢ) Index(i uint64, ϟs *gfxapi.State) PipelineIdᵖ {
-	return PipelineIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return PipelineIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the PipelineIdˢ using start and end indices.
@@ -11662,7 +11353,7 @@ func (s ProgramIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 
 // Index returns a ProgramIdᵖ to the i'th element in this ProgramIdˢ.
 func (s ProgramIdˢ) Index(i uint64, ϟs *gfxapi.State) ProgramIdᵖ {
-	return ProgramIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return ProgramIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the ProgramIdˢ using start and end indices.
@@ -11854,7 +11545,7 @@ func (s QueryIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a QueryIdᵖ to the i'th element in this QueryIdˢ.
 func (s QueryIdˢ) Index(i uint64, ϟs *gfxapi.State) QueryIdᵖ {
-	return QueryIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return QueryIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the QueryIdˢ using start and end indices.
@@ -12046,7 +11737,7 @@ func (s RenderbufferIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 
 // Index returns a RenderbufferIdᵖ to the i'th element in this RenderbufferIdˢ.
 func (s RenderbufferIdˢ) Index(i uint64, ϟs *gfxapi.State) RenderbufferIdᵖ {
-	return RenderbufferIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return RenderbufferIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the RenderbufferIdˢ using start and end indices.
@@ -12203,7 +11894,7 @@ func (s S64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a S64ᵖ to the i'th element in this S64ˢ.
 func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ {
-	return S64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return S64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the S64ˢ using start and end indices.
@@ -12360,7 +12051,7 @@ func (s SamplerIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 
 // Index returns a SamplerIdᵖ to the i'th element in this SamplerIdˢ.
 func (s SamplerIdˢ) Index(i uint64, ϟs *gfxapi.State) SamplerIdᵖ {
-	return SamplerIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return SamplerIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the SamplerIdˢ using start and end indices.
@@ -12552,7 +12243,7 @@ func (s ShaderIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 
 // Index returns a ShaderIdᵖ to the i'th element in this ShaderIdˢ.
 func (s ShaderIdˢ) Index(i uint64, ϟs *gfxapi.State) ShaderIdᵖ {
-	return ShaderIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return ShaderIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the ShaderIdˢ using start and end indices.
@@ -12744,7 +12435,7 @@ func (s TextureIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 
 // Index returns a TextureIdᵖ to the i'th element in this TextureIdˢ.
 func (s TextureIdˢ) Index(i uint64, ϟs *gfxapi.State) TextureIdᵖ {
-	return TextureIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return TextureIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the TextureIdˢ using start and end indices.
@@ -12901,7 +12592,7 @@ func (s TransformFeedbackIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, �
 
 // Index returns a TransformFeedbackIdᵖ to the i'th element in this TransformFeedbackIdˢ.
 func (s TransformFeedbackIdˢ) Index(i uint64, ϟs *gfxapi.State) TransformFeedbackIdᵖ {
-	return TransformFeedbackIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return TransformFeedbackIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the TransformFeedbackIdˢ using start and end indices.
@@ -13058,7 +12749,7 @@ func (s U16ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U16ᵖ to the i'th element in this U16ˢ.
 func (s U16ˢ) Index(i uint64, ϟs *gfxapi.State) U16ᵖ {
-	return U16ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U16ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U16ˢ using start and end indices.
@@ -13215,7 +12906,7 @@ func (s U32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U32ᵖ to the i'th element in this U32ˢ.
 func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ {
-	return U32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U32ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U32ˢ using start and end indices.
@@ -13372,7 +13063,7 @@ func (s U64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 
 // Index returns a U64ᵖ to the i'th element in this U64ˢ.
 func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ {
-	return U64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U64ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U64ˢ using start and end indices.
@@ -13529,7 +13220,7 @@ func (s U8ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 
 // Index returns a U8ᵖ to the i'th element in this U8ˢ.
 func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ {
-	return U8ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return U8ᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the U8ˢ using start and end indices.
@@ -13686,7 +13377,7 @@ func (s UniformIndexˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 
 // Index returns a UniformIndexᵖ to the i'th element in this UniformIndexˢ.
 func (s UniformIndexˢ) Index(i uint64, ϟs *gfxapi.State) UniformIndexᵖ {
-	return UniformIndexᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return UniformIndexᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the UniformIndexˢ using start and end indices.
@@ -13841,7 +13532,7 @@ func (s Vec2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec2fᵖ to the i'th element in this Vec2fˢ.
 func (s Vec2fˢ) Index(i uint64, ϟs *gfxapi.State) Vec2fᵖ {
-	return Vec2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec2fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec2fˢ using start and end indices.
@@ -13996,7 +13687,7 @@ func (s Vec2iˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec2iᵖ to the i'th element in this Vec2iˢ.
 func (s Vec2iˢ) Index(i uint64, ϟs *gfxapi.State) Vec2iᵖ {
-	return Vec2iᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec2iᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec2iˢ using start and end indices.
@@ -14151,7 +13842,7 @@ func (s Vec2uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec2uᵖ to the i'th element in this Vec2uˢ.
 func (s Vec2uˢ) Index(i uint64, ϟs *gfxapi.State) Vec2uᵖ {
-	return Vec2uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec2uᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec2uˢ using start and end indices.
@@ -14306,7 +13997,7 @@ func (s Vec3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec3fᵖ to the i'th element in this Vec3fˢ.
 func (s Vec3fˢ) Index(i uint64, ϟs *gfxapi.State) Vec3fᵖ {
-	return Vec3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec3fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec3fˢ using start and end indices.
@@ -14461,7 +14152,7 @@ func (s Vec3iˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec3iᵖ to the i'th element in this Vec3iˢ.
 func (s Vec3iˢ) Index(i uint64, ϟs *gfxapi.State) Vec3iᵖ {
-	return Vec3iᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec3iᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec3iˢ using start and end indices.
@@ -14616,7 +14307,7 @@ func (s Vec3uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec3uᵖ to the i'th element in this Vec3uˢ.
 func (s Vec3uˢ) Index(i uint64, ϟs *gfxapi.State) Vec3uᵖ {
-	return Vec3uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec3uᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec3uˢ using start and end indices.
@@ -14771,7 +14462,7 @@ func (s Vec4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec4fᵖ to the i'th element in this Vec4fˢ.
 func (s Vec4fˢ) Index(i uint64, ϟs *gfxapi.State) Vec4fᵖ {
-	return Vec4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec4fᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec4fˢ using start and end indices.
@@ -14926,7 +14617,7 @@ func (s Vec4iˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec4iᵖ to the i'th element in this Vec4iˢ.
 func (s Vec4iˢ) Index(i uint64, ϟs *gfxapi.State) Vec4iᵖ {
-	return Vec4iᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec4iᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec4iˢ using start and end indices.
@@ -15081,7 +14772,7 @@ func (s Vec4uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 
 // Index returns a Vec4uᵖ to the i'th element in this Vec4uˢ.
 func (s Vec4uˢ) Index(i uint64, ϟs *gfxapi.State) Vec4uᵖ {
-	return Vec4uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Vec4uᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Vec4uˢ using start and end indices.
@@ -15273,7 +14964,7 @@ func (s VertexArrayIdˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 
 // Index returns a VertexArrayIdᵖ to the i'th element in this VertexArrayIdˢ.
 func (s VertexArrayIdˢ) Index(i uint64, ϟs *gfxapi.State) VertexArrayIdᵖ {
-	return VertexArrayIdᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return VertexArrayIdᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the VertexArrayIdˢ using start and end indices.
@@ -15430,7 +15121,7 @@ func (s VertexBufferBindingIndexˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.Sta
 
 // Index returns a VertexBufferBindingIndexᵖ to the i'th element in this VertexBufferBindingIndexˢ.
 func (s VertexBufferBindingIndexˢ) Index(i uint64, ϟs *gfxapi.State) VertexBufferBindingIndexᵖ {
-	return VertexBufferBindingIndexᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return VertexBufferBindingIndexᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the VertexBufferBindingIndexˢ using start and end indices.
@@ -15537,7 +15228,7 @@ func (s Voidˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 
 // Index returns a Voidᵖ to the i'th element in this Voidˢ.
 func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ {
-	return Voidᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Voidᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Voidˢ using start and end indices.
@@ -15722,7 +15413,7 @@ func (s Voidᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 
 // Index returns a Voidᵖᵖ to the i'th element in this Voidᵖˢ.
 func (s Voidᵖˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖᵖ {
-	return Voidᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Voidᵖᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Voidᵖˢ using start and end indices.
@@ -15907,7 +15598,7 @@ func (s Voidᶜᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 
 // Index returns a Voidᶜᵖᵖ to the i'th element in this Voidᶜᵖˢ.
 func (s Voidᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) Voidᶜᵖᵖ {
-	return Voidᶜᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+	return Voidᶜᵖᵖ{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}
 }
 
 // Slice returns a sub-slice from the Voidᶜᵖˢ using start and end indices.
@@ -54984,13 +54675,13 @@ func NewGlCopyImageSubDataEXT(SrcName GLuint, SrcTarget GLenum, SrcLevel GLint, 
 	return &GlCopyImageSubDataEXT{SrcName: SrcName, SrcTarget: SrcTarget, SrcLevel: SrcLevel, SrcX: SrcX, SrcY: SrcY, SrcZ: SrcZ, DstName: DstName, DstTarget: DstTarget, DstLevel: DstLevel, DstX: DstX, DstY: DstY, DstZ: DstZ, SrcWidth: SrcWidth, SrcHeight: SrcHeight, SrcDepth: SrcDepth}
 }
 func NewGlDebugMessageCallbackKHR(Callback memory.Pointer, UserParam memory.Pointer) *GlDebugMessageCallbackKHR {
-	return &GlDebugMessageCallbackKHR{Callback: GLDEBUGPROC{Pointer: Callback}, UserParam: Voidᶜᵖ{Pointer: UserParam}}
+	return &GlDebugMessageCallbackKHR{Callback: GLDEBUGPROC(Callback), UserParam: Voidᶜᵖ(UserParam)}
 }
 func NewGlDebugMessageControlKHR(Source GLenum, Type GLenum, Severity GLenum, Count GLsizei, Ids memory.Pointer, Enabled GLboolean) *GlDebugMessageControlKHR {
-	return &GlDebugMessageControlKHR{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ{Pointer: Ids}, Enabled: Enabled}
+	return &GlDebugMessageControlKHR{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ(Ids), Enabled: Enabled}
 }
 func NewGlDebugMessageInsertKHR(Source GLenum, Type GLenum, Id GLuint, Severity GLenum, Length GLsizei, Message memory.Pointer) *GlDebugMessageInsertKHR {
-	return &GlDebugMessageInsertKHR{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
+	return &GlDebugMessageInsertKHR{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ(Message)}
 }
 func NewGlDisableiEXT(Target GLenum, Index GLuint) *GlDisableiEXT {
 	return &GlDisableiEXT{Target: Target, Index: Index}
@@ -55002,28 +54693,28 @@ func NewGlFramebufferTextureEXT(Target GLenum, Attachment GLenum, Texture Textur
 	return &GlFramebufferTextureEXT{Target: Target, Attachment: Attachment, Texture: Texture, Level: Level}
 }
 func NewGlGetDebugMessageLogKHR(Count GLuint, BufSize GLsizei, Sources memory.Pointer, Types memory.Pointer, Ids memory.Pointer, Severities memory.Pointer, Lengths memory.Pointer, MessageLog memory.Pointer, Result GLuint) *GlGetDebugMessageLogKHR {
-	return &GlGetDebugMessageLogKHR{Count: Count, BufSize: BufSize, Sources: GLenumᵖ{Pointer: Sources}, Types: GLenumᵖ{Pointer: Types}, Ids: GLuintᵖ{Pointer: Ids}, Severities: GLenumᵖ{Pointer: Severities}, Lengths: GLsizeiᵖ{Pointer: Lengths}, MessageLog: GLcharᵖ{Pointer: MessageLog}, Result: Result}
+	return &GlGetDebugMessageLogKHR{Count: Count, BufSize: BufSize, Sources: GLenumᵖ(Sources), Types: GLenumᵖ(Types), Ids: GLuintᵖ(Ids), Severities: GLenumᵖ(Severities), Lengths: GLsizeiᵖ(Lengths), MessageLog: GLcharᵖ(MessageLog), Result: Result}
 }
 func NewGlGetObjectLabelKHR(Identifier GLenum, Name GLuint, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectLabelKHR {
-	return &GlGetObjectLabelKHR{Identifier: Identifier, Name: Name, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+	return &GlGetObjectLabelKHR{Identifier: Identifier, Name: Name, BufSize: BufSize, Length: GLsizeiᵖ(Length), Label: GLcharᵖ(Label)}
 }
 func NewGlGetObjectPtrLabelKHR(Ptr memory.Pointer, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectPtrLabelKHR {
-	return &GlGetObjectPtrLabelKHR{Ptr: Voidᶜᵖ{Pointer: Ptr}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+	return &GlGetObjectPtrLabelKHR{Ptr: Voidᶜᵖ(Ptr), BufSize: BufSize, Length: GLsizeiᵖ(Length), Label: GLcharᵖ(Label)}
 }
 func NewGlGetPointervKHR(Pname GLenum, Params memory.Pointer) *GlGetPointervKHR {
-	return &GlGetPointervKHR{Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
+	return &GlGetPointervKHR{Pname: Pname, Params: Voidᵖᵖ(Params)}
 }
 func NewGlGetSamplerParameterIivEXT(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIivEXT {
-	return &GlGetSamplerParameterIivEXT{Sampler: Sampler, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIivEXT{Sampler: Sampler, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetSamplerParameterIuivEXT(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIuivEXT {
-	return &GlGetSamplerParameterIuivEXT{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIuivEXT{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetTexParameterIivEXT(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIivEXT {
-	return &GlGetTexParameterIivEXT{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIivEXT{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexParameterIuivEXT(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIuivEXT {
-	return &GlGetTexParameterIuivEXT{Target: Target, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIuivEXT{Target: Target, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlIsEnablediEXT(Target GLenum, Index GLuint, Result GLboolean) *GlIsEnablediEXT {
 	return &GlIsEnablediEXT{Target: Target, Index: Index, Result: Result}
@@ -55032,10 +54723,10 @@ func NewGlMinSampleShadingOES(Value GLfloat) *GlMinSampleShadingOES {
 	return &GlMinSampleShadingOES{Value: Value}
 }
 func NewGlObjectLabelKHR(Identifier GLenum, Name GLuint, Length GLsizei, Label memory.Pointer) *GlObjectLabelKHR {
-	return &GlObjectLabelKHR{Identifier: Identifier, Name: Name, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+	return &GlObjectLabelKHR{Identifier: Identifier, Name: Name, Length: Length, Label: GLcharᶜᵖ(Label)}
 }
 func NewGlObjectPtrLabelKHR(Ptr memory.Pointer, Length GLsizei, Label memory.Pointer) *GlObjectPtrLabelKHR {
-	return &GlObjectPtrLabelKHR{Ptr: Voidᶜᵖ{Pointer: Ptr}, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+	return &GlObjectPtrLabelKHR{Ptr: Voidᶜᵖ(Ptr), Length: Length, Label: GLcharᶜᵖ(Label)}
 }
 func NewGlPatchParameteriEXT(Pname GLenum, Value GLint) *GlPatchParameteriEXT {
 	return &GlPatchParameteriEXT{Pname: Pname, Value: Value}
@@ -55047,13 +54738,13 @@ func NewGlPrimitiveBoundingBoxEXT(MinX GLfloat, MinY GLfloat, MinZ GLfloat, MinW
 	return &GlPrimitiveBoundingBoxEXT{MinX: MinX, MinY: MinY, MinZ: MinZ, MinW: MinW, MaxX: MaxX, MaxY: MaxY, MaxZ: MaxZ, MaxW: MaxW}
 }
 func NewGlPushDebugGroupKHR(Source GLenum, Id GLuint, Length GLsizei, Message memory.Pointer) *GlPushDebugGroupKHR {
-	return &GlPushDebugGroupKHR{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
+	return &GlPushDebugGroupKHR{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ(Message)}
 }
 func NewGlSamplerParameterIivEXT(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIivEXT {
-	return &GlSamplerParameterIivEXT{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIivEXT{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ(Param)}
 }
 func NewGlSamplerParameterIuivEXT(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIuivEXT {
-	return &GlSamplerParameterIuivEXT{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIuivEXT{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ(Param)}
 }
 func NewGlTexBufferEXT(Target GLenum, Internalformat GLenum, Buffer BufferId) *GlTexBufferEXT {
 	return &GlTexBufferEXT{Target: Target, Internalformat: Internalformat, Buffer: Buffer}
@@ -55062,10 +54753,10 @@ func NewGlTexBufferRangeEXT(Target GLenum, Internalformat GLenum, Buffer BufferI
 	return &GlTexBufferRangeEXT{Target: Target, Internalformat: Internalformat, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlTexParameterIivEXT(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIivEXT {
-	return &GlTexParameterIivEXT{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIivEXT{Target: Target, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexParameterIuivEXT(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIuivEXT {
-	return &GlTexParameterIuivEXT{Target: Target, Pname: Pname, Params: GLuintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIuivEXT{Target: Target, Pname: Pname, Params: GLuintᶜᵖ(Params)}
 }
 func NewGlTexStorage3DMultisampleOES(Target GLenum, Samples GLsizei, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Fixedsamplelocations GLboolean) *GlTexStorage3DMultisampleOES {
 	return &GlTexStorage3DMultisampleOES{Target: Target, Samples: Samples, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Fixedsamplelocations: Fixedsamplelocations}
@@ -55074,19 +54765,19 @@ func NewGlBeginQuery(Target GLenum, Query QueryId) *GlBeginQuery {
 	return &GlBeginQuery{Target: Target, Query: Query}
 }
 func NewGlDeleteQueries(Count GLsizei, Queries memory.Pointer) *GlDeleteQueries {
-	return &GlDeleteQueries{Count: Count, Queries: QueryIdᶜᵖ{Pointer: Queries}}
+	return &GlDeleteQueries{Count: Count, Queries: QueryIdᶜᵖ(Queries)}
 }
 func NewGlEndQuery(Target GLenum) *GlEndQuery {
 	return &GlEndQuery{Target: Target}
 }
 func NewGlGenQueries(Count GLsizei, Queries memory.Pointer) *GlGenQueries {
-	return &GlGenQueries{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
+	return &GlGenQueries{Count: Count, Queries: QueryIdᵖ(Queries)}
 }
 func NewGlGetQueryObjectuiv(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectuiv {
-	return &GlGetQueryObjectuiv{Query: Query, Parameter: Parameter, Value: GLuintᵖ{Pointer: Value}}
+	return &GlGetQueryObjectuiv{Query: Query, Parameter: Parameter, Value: GLuintᵖ(Value)}
 }
 func NewGlGetQueryiv(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetQueryiv {
-	return &GlGetQueryiv{Target: Target, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetQueryiv{Target: Target, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlIsQuery(Query QueryId, Result GLboolean) *GlIsQuery {
 	return &GlIsQuery{Query: Query, Result: Result}
@@ -55101,100 +54792,100 @@ func NewGlBindBufferRange(Target GLenum, Index BufferBindingIndex, Buffer Buffer
 	return &GlBindBufferRange{Target: Target, Index: Index, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlBufferData(Target GLenum, Size GLsizeiptr, Data memory.Pointer, Usage GLenum) *GlBufferData {
-	return &GlBufferData{Target: Target, Size: Size, Data: BufferDataPointer{Pointer: Data}, Usage: Usage}
+	return &GlBufferData{Target: Target, Size: Size, Data: BufferDataPointer(Data), Usage: Usage}
 }
 func NewGlBufferSubData(Target GLenum, Offset GLintptr, Size GLsizeiptr, Data memory.Pointer) *GlBufferSubData {
-	return &GlBufferSubData{Target: Target, Offset: Offset, Size: Size, Data: BufferDataPointer{Pointer: Data}}
+	return &GlBufferSubData{Target: Target, Offset: Offset, Size: Size, Data: BufferDataPointer(Data)}
 }
 func NewGlCopyBufferSubData(ReadTarget GLenum, WriteTarget GLenum, ReadOffset GLintptr, WriteOffset GLintptr, Size GLsizeiptr) *GlCopyBufferSubData {
 	return &GlCopyBufferSubData{ReadTarget: ReadTarget, WriteTarget: WriteTarget, ReadOffset: ReadOffset, WriteOffset: WriteOffset, Size: Size}
 }
 func NewGlDeleteBuffers(Count GLsizei, Buffers memory.Pointer) *GlDeleteBuffers {
-	return &GlDeleteBuffers{Count: Count, Buffers: BufferIdᶜᵖ{Pointer: Buffers}}
+	return &GlDeleteBuffers{Count: Count, Buffers: BufferIdᶜᵖ(Buffers)}
 }
 func NewGlGenBuffers(Count GLsizei, Buffers memory.Pointer) *GlGenBuffers {
-	return &GlGenBuffers{Count: Count, Buffers: BufferIdᵖ{Pointer: Buffers}}
+	return &GlGenBuffers{Count: Count, Buffers: BufferIdᵖ(Buffers)}
 }
 func NewGlGetBufferParameteri64v(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetBufferParameteri64v {
-	return &GlGetBufferParameteri64v{Target: Target, Pname: Pname, Params: GLint64ᵖ{Pointer: Params}}
+	return &GlGetBufferParameteri64v{Target: Target, Pname: Pname, Params: GLint64ᵖ(Params)}
 }
 func NewGlGetBufferParameteriv(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetBufferParameteriv {
-	return &GlGetBufferParameteriv{Target: Target, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetBufferParameteriv{Target: Target, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetBufferPointerv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetBufferPointerv {
-	return &GlGetBufferPointerv{Target: Target, Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
+	return &GlGetBufferPointerv{Target: Target, Pname: Pname, Params: Voidᵖᵖ(Params)}
 }
 func NewGlIsBuffer(Buffer BufferId, Result GLboolean) *GlIsBuffer {
 	return &GlIsBuffer{Buffer: Buffer, Result: Result}
 }
 func NewGlMapBufferRange(Target GLenum, Offset GLintptr, Length GLsizeiptr, Access GLbitfield, Result memory.Pointer) *GlMapBufferRange {
-	return &GlMapBufferRange{Target: Target, Offset: Offset, Length: Length, Access: Access, Result: Voidᵖ{Pointer: Result}}
+	return &GlMapBufferRange{Target: Target, Offset: Offset, Length: Length, Access: Access, Result: Voidᵖ(Result)}
 }
 func NewGlUnmapBuffer(Target GLenum, Result GLboolean) *GlUnmapBuffer {
 	return &GlUnmapBuffer{Target: Target, Result: Result}
 }
 func NewGlDebugMessageCallback(Callback memory.Pointer, UserParam memory.Pointer) *GlDebugMessageCallback {
-	return &GlDebugMessageCallback{Callback: GLDEBUGPROC{Pointer: Callback}, UserParam: Voidᶜᵖ{Pointer: UserParam}}
+	return &GlDebugMessageCallback{Callback: GLDEBUGPROC(Callback), UserParam: Voidᶜᵖ(UserParam)}
 }
 func NewGlDebugMessageControl(Source GLenum, Type GLenum, Severity GLenum, Count GLsizei, Ids memory.Pointer, Enabled GLboolean) *GlDebugMessageControl {
-	return &GlDebugMessageControl{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ{Pointer: Ids}, Enabled: Enabled}
+	return &GlDebugMessageControl{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ(Ids), Enabled: Enabled}
 }
 func NewGlDebugMessageInsert(Source GLenum, Type GLenum, Id GLuint, Severity GLenum, Length GLsizei, Message memory.Pointer) *GlDebugMessageInsert {
-	return &GlDebugMessageInsert{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
+	return &GlDebugMessageInsert{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ(Message)}
 }
 func NewGlGetDebugMessageLog(Count GLuint, BufSize GLsizei, Sources memory.Pointer, Types memory.Pointer, Ids memory.Pointer, Severities memory.Pointer, Lengths memory.Pointer, MessageLog memory.Pointer, Result GLuint) *GlGetDebugMessageLog {
-	return &GlGetDebugMessageLog{Count: Count, BufSize: BufSize, Sources: GLenumᵖ{Pointer: Sources}, Types: GLenumᵖ{Pointer: Types}, Ids: GLuintᵖ{Pointer: Ids}, Severities: GLenumᵖ{Pointer: Severities}, Lengths: GLsizeiᵖ{Pointer: Lengths}, MessageLog: GLcharᵖ{Pointer: MessageLog}, Result: Result}
+	return &GlGetDebugMessageLog{Count: Count, BufSize: BufSize, Sources: GLenumᵖ(Sources), Types: GLenumᵖ(Types), Ids: GLuintᵖ(Ids), Severities: GLenumᵖ(Severities), Lengths: GLsizeiᵖ(Lengths), MessageLog: GLcharᵖ(MessageLog), Result: Result}
 }
 func NewGlGetObjectLabel(Identifier GLenum, Name GLuint, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectLabel {
-	return &GlGetObjectLabel{Identifier: Identifier, Name: Name, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+	return &GlGetObjectLabel{Identifier: Identifier, Name: Name, BufSize: BufSize, Length: GLsizeiᵖ(Length), Label: GLcharᵖ(Label)}
 }
 func NewGlGetObjectPtrLabel(Ptr memory.Pointer, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectPtrLabel {
-	return &GlGetObjectPtrLabel{Ptr: Voidᶜᵖ{Pointer: Ptr}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+	return &GlGetObjectPtrLabel{Ptr: Voidᶜᵖ(Ptr), BufSize: BufSize, Length: GLsizeiᵖ(Length), Label: GLcharᵖ(Label)}
 }
 func NewGlGetPointerv(Pname GLenum, Params memory.Pointer) *GlGetPointerv {
-	return &GlGetPointerv{Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
+	return &GlGetPointerv{Pname: Pname, Params: Voidᵖᵖ(Params)}
 }
 func NewGlObjectLabel(Identifier GLenum, Name GLuint, Length GLsizei, Label memory.Pointer) *GlObjectLabel {
-	return &GlObjectLabel{Identifier: Identifier, Name: Name, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+	return &GlObjectLabel{Identifier: Identifier, Name: Name, Length: Length, Label: GLcharᶜᵖ(Label)}
 }
 func NewGlObjectPtrLabel(Ptr memory.Pointer, Length GLsizei, Label memory.Pointer) *GlObjectPtrLabel {
-	return &GlObjectPtrLabel{Ptr: Voidᶜᵖ{Pointer: Ptr}, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+	return &GlObjectPtrLabel{Ptr: Voidᶜᵖ(Ptr), Length: Length, Label: GLcharᶜᵖ(Label)}
 }
 func NewGlPopDebugGroup() *GlPopDebugGroup {
 	return &GlPopDebugGroup{}
 }
 func NewGlPushDebugGroup(Source GLenum, Id GLuint, Length GLsizei, Message memory.Pointer) *GlPushDebugGroup {
-	return &GlPushDebugGroup{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
+	return &GlPushDebugGroup{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ(Message)}
 }
 func NewGlDrawArrays(Draw_mode GLenum, First_index GLint, Indices_count GLsizei) *GlDrawArrays {
 	return &GlDrawArrays{DrawMode: Draw_mode, FirstIndex: First_index, IndicesCount: Indices_count}
 }
 func NewGlDrawArraysIndirect(Draw_mode GLenum, Indirect memory.Pointer) *GlDrawArraysIndirect {
-	return &GlDrawArraysIndirect{DrawMode: Draw_mode, Indirect: Voidᶜᵖ{Pointer: Indirect}}
+	return &GlDrawArraysIndirect{DrawMode: Draw_mode, Indirect: Voidᶜᵖ(Indirect)}
 }
 func NewGlDrawArraysInstanced(Draw_mode GLenum, First_index GLint, Indices_count GLsizei, Instance_count GLsizei) *GlDrawArraysInstanced {
 	return &GlDrawArraysInstanced{DrawMode: Draw_mode, FirstIndex: First_index, IndicesCount: Indices_count, InstanceCount: Instance_count}
 }
 func NewGlDrawElements(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer) *GlDrawElements {
-	return &GlDrawElements{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
+	return &GlDrawElements{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices)}
 }
 func NewGlDrawElementsBaseVertex(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Base_vertex GLint) *GlDrawElementsBaseVertex {
-	return &GlDrawElementsBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, BaseVertex: Base_vertex}
+	return &GlDrawElementsBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices), BaseVertex: Base_vertex}
 }
 func NewGlDrawElementsIndirect(Draw_mode GLenum, Indices_type GLenum, Indirect memory.Pointer) *GlDrawElementsIndirect {
-	return &GlDrawElementsIndirect{DrawMode: Draw_mode, IndicesType: Indices_type, Indirect: Voidᶜᵖ{Pointer: Indirect}}
+	return &GlDrawElementsIndirect{DrawMode: Draw_mode, IndicesType: Indices_type, Indirect: Voidᶜᵖ(Indirect)}
 }
 func NewGlDrawElementsInstanced(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Instance_count GLsizei) *GlDrawElementsInstanced {
-	return &GlDrawElementsInstanced{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, InstanceCount: Instance_count}
+	return &GlDrawElementsInstanced{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices), InstanceCount: Instance_count}
 }
 func NewGlDrawElementsInstancedBaseVertex(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Instance_count GLsizei, Base_vertex GLint) *GlDrawElementsInstancedBaseVertex {
-	return &GlDrawElementsInstancedBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, InstanceCount: Instance_count, BaseVertex: Base_vertex}
+	return &GlDrawElementsInstancedBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices), InstanceCount: Instance_count, BaseVertex: Base_vertex}
 }
 func NewGlDrawRangeElements(Draw_mode GLenum, Start GLuint, End GLuint, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer) *GlDrawRangeElements {
-	return &GlDrawRangeElements{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
+	return &GlDrawRangeElements{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices)}
 }
 func NewGlDrawRangeElementsBaseVertex(Draw_mode GLenum, Start GLuint, End GLuint, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Base_vertex GLint) *GlDrawRangeElementsBaseVertex {
-	return &GlDrawRangeElementsBaseVertex{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, BaseVertex: Base_vertex}
+	return &GlDrawRangeElementsBaseVertex{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer(Indices), BaseVertex: Base_vertex}
 }
 func NewGlPatchParameteri(Pname GLenum, Value GLint) *GlPatchParameteri {
 	return &GlPatchParameteri{Pname: Pname, Value: Value}
@@ -55260,7 +54951,7 @@ func NewGlBlitFramebufferNV(SrcX0 GLint, SrcY0 GLint, SrcX1 GLint, SrcY1 GLint, 
 	return &GlBlitFramebufferNV{SrcX0: SrcX0, SrcY0: SrcY0, SrcX1: SrcX1, SrcY1: SrcY1, DstX0: DstX0, DstY0: DstY0, DstX1: DstX1, DstY1: DstY1, Mask: Mask, Filter: Filter}
 }
 func NewGlBufferStorageEXT(Target GLenum, Size GLsizeiptr, Data memory.Pointer, Flag GLbitfield) *GlBufferStorageEXT {
-	return &GlBufferStorageEXT{Target: Target, Size: Size, Data: Voidᶜᵖ{Pointer: Data}, Flag: Flag}
+	return &GlBufferStorageEXT{Target: Target, Size: Size, Data: Voidᶜᵖ(Data), Flag: Flag}
 }
 func NewGlClientWaitSyncAPPLE(Sync GLsync, Flag GLbitfield, Timeout GLuint64, Result GLenum) *GlClientWaitSyncAPPLE {
 	return &GlClientWaitSyncAPPLE{Sync: Sync, Flag: Flag, Timeout: Timeout, Result: Result}
@@ -55269,10 +54960,10 @@ func NewGlColorMaskiOES(Index DrawBufferIndex, R GLboolean, G GLboolean, B GLboo
 	return &GlColorMaskiOES{Index: Index, R: R, G: G, B: B, A: A}
 }
 func NewGlCompressedTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage3DOES {
-	return &GlCompressedTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCompressedTexSubImage3DOES(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3DOES {
-	return &GlCompressedTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCopyBufferSubDataNV(ReadTarget GLenum, WriteTarget GLenum, ReadOffset GLintptr, WriteOffset GLintptr, Size GLsizeiptr) *GlCopyBufferSubDataNV {
 	return &GlCopyBufferSubDataNV{ReadTarget: ReadTarget, WriteTarget: WriteTarget, ReadOffset: ReadOffset, WriteOffset: WriteOffset, Size: Size}
@@ -55290,13 +54981,13 @@ func NewGlCopyTextureLevelsAPPLE(DestinationTexture GLuint, SourceTexture GLuint
 	return &GlCopyTextureLevelsAPPLE{DestinationTexture: DestinationTexture, SourceTexture: SourceTexture, SourceBaseLevel: SourceBaseLevel, SourceLevelCount: SourceLevelCount}
 }
 func NewGlCoverFillPathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, CoverMode GLenum, TransformType GLenum, TransformValues memory.Pointer) *GlCoverFillPathInstancedNV {
-	return &GlCoverFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlCoverFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlCoverFillPathNV(Path GLuint, CoverMode GLenum) *GlCoverFillPathNV {
 	return &GlCoverFillPathNV{Path: Path, CoverMode: CoverMode}
 }
 func NewGlCoverStrokePathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, CoverMode GLenum, TransformType GLenum, TransformValues memory.Pointer) *GlCoverStrokePathInstancedNV {
-	return &GlCoverStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlCoverStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlCoverStrokePathNV(Path GLuint, CoverMode GLenum) *GlCoverStrokePathNV {
 	return &GlCoverStrokePathNV{Path: Path, CoverMode: CoverMode}
@@ -55308,43 +54999,43 @@ func NewGlCoverageModulationNV(Components GLenum) *GlCoverageModulationNV {
 	return &GlCoverageModulationNV{Components: Components}
 }
 func NewGlCoverageModulationTableNV(N GLsizei, V memory.Pointer) *GlCoverageModulationTableNV {
-	return &GlCoverageModulationTableNV{N: N, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlCoverageModulationTableNV{N: N, V: GLfloatᶜᵖ(V)}
 }
 func NewGlCoverageOperationNV(Operation GLenum) *GlCoverageOperationNV {
 	return &GlCoverageOperationNV{Operation: Operation}
 }
 func NewGlCreatePerfQueryINTEL(QueryId GLuint, QueryHandle memory.Pointer) *GlCreatePerfQueryINTEL {
-	return &GlCreatePerfQueryINTEL{QueryId: QueryId, QueryHandle: GLuintᵖ{Pointer: QueryHandle}}
+	return &GlCreatePerfQueryINTEL{QueryId: QueryId, QueryHandle: GLuintᵖ(QueryHandle)}
 }
 func NewGlCreateShaderProgramvEXT(Type GLenum, Count GLsizei, Strings memory.Pointer, Result GLuint) *GlCreateShaderProgramvEXT {
-	return &GlCreateShaderProgramvEXT{Type: Type, Count: Count, Strings: GLcharᶜᵖᵖ{Pointer: Strings}, Result: Result}
+	return &GlCreateShaderProgramvEXT{Type: Type, Count: Count, Strings: GLcharᶜᵖᵖ(Strings), Result: Result}
 }
 func NewGlDeleteFencesNV(N GLsizei, Fences memory.Pointer) *GlDeleteFencesNV {
-	return &GlDeleteFencesNV{N: N, Fences: GLuintᶜᵖ{Pointer: Fences}}
+	return &GlDeleteFencesNV{N: N, Fences: GLuintᶜᵖ(Fences)}
 }
 func NewGlDeletePathsNV(Path GLuint, Range GLsizei) *GlDeletePathsNV {
 	return &GlDeletePathsNV{Path: Path, Range: Range}
 }
 func NewGlDeletePerfMonitorsAMD(N GLsizei, Monitors memory.Pointer) *GlDeletePerfMonitorsAMD {
-	return &GlDeletePerfMonitorsAMD{N: N, Monitors: GLuintᵖ{Pointer: Monitors}}
+	return &GlDeletePerfMonitorsAMD{N: N, Monitors: GLuintᵖ(Monitors)}
 }
 func NewGlDeletePerfQueryINTEL(QueryHandle GLuint) *GlDeletePerfQueryINTEL {
 	return &GlDeletePerfQueryINTEL{QueryHandle: QueryHandle}
 }
 func NewGlDeleteProgramPipelinesEXT(N GLsizei, Pipelines memory.Pointer) *GlDeleteProgramPipelinesEXT {
-	return &GlDeleteProgramPipelinesEXT{N: N, Pipelines: PipelineIdᶜᵖ{Pointer: Pipelines}}
+	return &GlDeleteProgramPipelinesEXT{N: N, Pipelines: PipelineIdᶜᵖ(Pipelines)}
 }
 func NewGlDeleteQueriesEXT(Count GLsizei, Queries memory.Pointer) *GlDeleteQueriesEXT {
-	return &GlDeleteQueriesEXT{Count: Count, Queries: QueryIdᶜᵖ{Pointer: Queries}}
+	return &GlDeleteQueriesEXT{Count: Count, Queries: QueryIdᶜᵖ(Queries)}
 }
 func NewGlDeleteSyncAPPLE(Sync GLsync) *GlDeleteSyncAPPLE {
 	return &GlDeleteSyncAPPLE{Sync: Sync}
 }
 func NewGlDeleteVertexArraysOES(Count GLsizei, Arrays memory.Pointer) *GlDeleteVertexArraysOES {
-	return &GlDeleteVertexArraysOES{Count: Count, Arrays: VertexArrayIdᶜᵖ{Pointer: Arrays}}
+	return &GlDeleteVertexArraysOES{Count: Count, Arrays: VertexArrayIdᶜᵖ(Arrays)}
 }
 func NewGlDepthRangeArrayfvNV(First GLuint, Count GLsizei, V memory.Pointer) *GlDepthRangeArrayfvNV {
-	return &GlDepthRangeArrayfvNV{First: First, Count: Count, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlDepthRangeArrayfvNV{First: First, Count: Count, V: GLfloatᶜᵖ(V)}
 }
 func NewGlDepthRangeIndexedfNV(Index GLuint, N GLfloat, F GLfloat) *GlDepthRangeIndexedfNV {
 	return &GlDepthRangeIndexedfNV{Index: Index, N: N, F: F}
@@ -55359,7 +55050,7 @@ func NewGlDisableiOES(Target GLenum, Index GLuint) *GlDisableiOES {
 	return &GlDisableiOES{Target: Target, Index: Index}
 }
 func NewGlDiscardFramebufferEXT(Target GLenum, NumAttachments GLsizei, Attachments memory.Pointer) *GlDiscardFramebufferEXT {
-	return &GlDiscardFramebufferEXT{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᶜᵖ{Pointer: Attachments}}
+	return &GlDiscardFramebufferEXT{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᶜᵖ(Attachments)}
 }
 func NewGlDrawArraysInstancedANGLE(Mode GLenum, First GLint, Count GLsizei, Primcount GLsizei) *GlDrawArraysInstancedANGLE {
 	return &GlDrawArraysInstancedANGLE{Mode: Mode, First: First, Count: Count, Primcount: Primcount}
@@ -55374,52 +55065,52 @@ func NewGlDrawArraysInstancedNV(Mode GLenum, First GLint, Count GLsizei, Primcou
 	return &GlDrawArraysInstancedNV{Mode: Mode, First: First, Count: Count, Primcount: Primcount}
 }
 func NewGlDrawBuffersEXT(N GLsizei, Bufs memory.Pointer) *GlDrawBuffersEXT {
-	return &GlDrawBuffersEXT{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
+	return &GlDrawBuffersEXT{N: N, Bufs: GLenumᶜᵖ(Bufs)}
 }
 func NewGlDrawBuffersIndexedEXT(N GLint, Location memory.Pointer, Indices memory.Pointer) *GlDrawBuffersIndexedEXT {
-	return &GlDrawBuffersIndexedEXT{N: N, Location: GLenumᶜᵖ{Pointer: Location}, Indices: GLintᶜᵖ{Pointer: Indices}}
+	return &GlDrawBuffersIndexedEXT{N: N, Location: GLenumᶜᵖ(Location), Indices: GLintᶜᵖ(Indices)}
 }
 func NewGlDrawBuffersNV(N GLsizei, Bufs memory.Pointer) *GlDrawBuffersNV {
-	return &GlDrawBuffersNV{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
+	return &GlDrawBuffersNV{N: N, Bufs: GLenumᶜᵖ(Bufs)}
 }
 func NewGlDrawElementsBaseVertexEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawElementsBaseVertexEXT {
-	return &GlDrawElementsBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawElementsBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Basevertex: Basevertex}
 }
 func NewGlDrawElementsBaseVertexOES(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawElementsBaseVertexOES {
-	return &GlDrawElementsBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawElementsBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedANGLE(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedANGLE {
-	return &GlDrawElementsInstancedANGLE{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedANGLE{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Primcount: Primcount}
 }
 func NewGlDrawElementsInstancedBaseInstanceEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Baseinstance GLuint) *GlDrawElementsInstancedBaseInstanceEXT {
-	return &GlDrawElementsInstancedBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Baseinstance: Baseinstance}
+	return &GlDrawElementsInstancedBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ(Indices), Instancecount: Instancecount, Baseinstance: Baseinstance}
 }
 func NewGlDrawElementsInstancedBaseVertexBaseInstanceEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint, Baseinstance GLuint) *GlDrawElementsInstancedBaseVertexBaseInstanceEXT {
-	return &GlDrawElementsInstancedBaseVertexBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex, Baseinstance: Baseinstance}
+	return &GlDrawElementsInstancedBaseVertexBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ(Indices), Instancecount: Instancecount, Basevertex: Basevertex, Baseinstance: Baseinstance}
 }
 func NewGlDrawElementsInstancedBaseVertexEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint) *GlDrawElementsInstancedBaseVertexEXT {
-	return &GlDrawElementsInstancedBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
+	return &GlDrawElementsInstancedBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Instancecount: Instancecount, Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedBaseVertexOES(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint) *GlDrawElementsInstancedBaseVertexOES {
-	return &GlDrawElementsInstancedBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
+	return &GlDrawElementsInstancedBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Instancecount: Instancecount, Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedEXT {
-	return &GlDrawElementsInstancedEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Primcount: Primcount}
 }
 func NewGlDrawElementsInstancedNV(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedNV {
-	return &GlDrawElementsInstancedNV{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedNV{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Primcount: Primcount}
 }
 func NewGlDrawRangeElementsBaseVertexEXT(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawRangeElementsBaseVertexEXT {
-	return &GlDrawRangeElementsBaseVertexEXT{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawRangeElementsBaseVertexEXT{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Basevertex: Basevertex}
 }
 func NewGlDrawRangeElementsBaseVertexOES(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawRangeElementsBaseVertexOES {
-	return &GlDrawRangeElementsBaseVertexOES{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawRangeElementsBaseVertexOES{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer(Indices), Basevertex: Basevertex}
 }
 func NewGlEGLImageTargetRenderbufferStorageOES(Target GLenum, Image memory.Pointer) *GlEGLImageTargetRenderbufferStorageOES {
-	return &GlEGLImageTargetRenderbufferStorageOES{Target: Target, Image: GLeglImageOES{Pointer: Image}}
+	return &GlEGLImageTargetRenderbufferStorageOES{Target: Target, Image: GLeglImageOES(Image)}
 }
 func NewGlEGLImageTargetTexture2DOES(Target GLenum, Image memory.Pointer) *GlEGLImageTargetTexture2DOES {
-	return &GlEGLImageTargetTexture2DOES{Target: Target, Image: GLeglImageOES{Pointer: Image}}
+	return &GlEGLImageTargetTexture2DOES{Target: Target, Image: GLeglImageOES(Image)}
 }
 func NewGlEnableDriverControlQCOM(DriverControl GLuint) *GlEnableDriverControlQCOM {
 	return &GlEnableDriverControlQCOM{DriverControl: DriverControl}
@@ -55446,34 +55137,34 @@ func NewGlEndTilingQCOM(Preserve_mask GLbitfield) *GlEndTilingQCOM {
 	return &GlEndTilingQCOM{PreserveMask: Preserve_mask}
 }
 func NewGlExtGetBufferPointervQCOM(Target GLenum, Params memory.Pointer) *GlExtGetBufferPointervQCOM {
-	return &GlExtGetBufferPointervQCOM{Target: Target, Params: Voidᵖᵖ{Pointer: Params}}
+	return &GlExtGetBufferPointervQCOM{Target: Target, Params: Voidᵖᵖ(Params)}
 }
 func NewGlExtGetBuffersQCOM(Buffers memory.Pointer, MaxBuffers GLint, NumBuffers memory.Pointer) *GlExtGetBuffersQCOM {
-	return &GlExtGetBuffersQCOM{Buffers: BufferIdᵖ{Pointer: Buffers}, MaxBuffers: MaxBuffers, NumBuffers: GLintᵖ{Pointer: NumBuffers}}
+	return &GlExtGetBuffersQCOM{Buffers: BufferIdᵖ(Buffers), MaxBuffers: MaxBuffers, NumBuffers: GLintᵖ(NumBuffers)}
 }
 func NewGlExtGetFramebuffersQCOM(Framebuffers memory.Pointer, MaxFramebuffers GLint, NumFramebuffers memory.Pointer) *GlExtGetFramebuffersQCOM {
-	return &GlExtGetFramebuffersQCOM{Framebuffers: FramebufferIdᵖ{Pointer: Framebuffers}, MaxFramebuffers: MaxFramebuffers, NumFramebuffers: GLintᵖ{Pointer: NumFramebuffers}}
+	return &GlExtGetFramebuffersQCOM{Framebuffers: FramebufferIdᵖ(Framebuffers), MaxFramebuffers: MaxFramebuffers, NumFramebuffers: GLintᵖ(NumFramebuffers)}
 }
 func NewGlExtGetProgramBinarySourceQCOM(Program ProgramId, Shadertype GLenum, Source memory.Pointer, Length memory.Pointer) *GlExtGetProgramBinarySourceQCOM {
-	return &GlExtGetProgramBinarySourceQCOM{Program: Program, Shadertype: Shadertype, Source: GLcharᵖ{Pointer: Source}, Length: GLintᵖ{Pointer: Length}}
+	return &GlExtGetProgramBinarySourceQCOM{Program: Program, Shadertype: Shadertype, Source: GLcharᵖ(Source), Length: GLintᵖ(Length)}
 }
 func NewGlExtGetProgramsQCOM(Programs memory.Pointer, MaxPrograms GLint, NumPrograms memory.Pointer) *GlExtGetProgramsQCOM {
-	return &GlExtGetProgramsQCOM{Programs: ProgramIdᵖ{Pointer: Programs}, MaxPrograms: MaxPrograms, NumPrograms: GLintᵖ{Pointer: NumPrograms}}
+	return &GlExtGetProgramsQCOM{Programs: ProgramIdᵖ(Programs), MaxPrograms: MaxPrograms, NumPrograms: GLintᵖ(NumPrograms)}
 }
 func NewGlExtGetRenderbuffersQCOM(Renderbuffers memory.Pointer, MaxRenderbuffers GLint, NumRenderbuffers memory.Pointer) *GlExtGetRenderbuffersQCOM {
-	return &GlExtGetRenderbuffersQCOM{Renderbuffers: RenderbufferIdᵖ{Pointer: Renderbuffers}, MaxRenderbuffers: MaxRenderbuffers, NumRenderbuffers: GLintᵖ{Pointer: NumRenderbuffers}}
+	return &GlExtGetRenderbuffersQCOM{Renderbuffers: RenderbufferIdᵖ(Renderbuffers), MaxRenderbuffers: MaxRenderbuffers, NumRenderbuffers: GLintᵖ(NumRenderbuffers)}
 }
 func NewGlExtGetShadersQCOM(Shaders memory.Pointer, MaxShaders GLint, NumShaders memory.Pointer) *GlExtGetShadersQCOM {
-	return &GlExtGetShadersQCOM{Shaders: ShaderIdᵖ{Pointer: Shaders}, MaxShaders: MaxShaders, NumShaders: GLintᵖ{Pointer: NumShaders}}
+	return &GlExtGetShadersQCOM{Shaders: ShaderIdᵖ(Shaders), MaxShaders: MaxShaders, NumShaders: GLintᵖ(NumShaders)}
 }
 func NewGlExtGetTexLevelParameterivQCOM(Texture TextureId, Face GLenum, Level GLint, Pname GLenum, Params memory.Pointer) *GlExtGetTexLevelParameterivQCOM {
-	return &GlExtGetTexLevelParameterivQCOM{Texture: Texture, Face: Face, Level: Level, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlExtGetTexLevelParameterivQCOM{Texture: Texture, Face: Face, Level: Level, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlExtGetTexSubImageQCOM(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Texels memory.Pointer) *GlExtGetTexSubImageQCOM {
-	return &GlExtGetTexSubImageQCOM{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Texels: Voidᵖ{Pointer: Texels}}
+	return &GlExtGetTexSubImageQCOM{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Texels: Voidᵖ(Texels)}
 }
 func NewGlExtGetTexturesQCOM(Textures memory.Pointer, MaxTextures GLint, NumTextures memory.Pointer) *GlExtGetTexturesQCOM {
-	return &GlExtGetTexturesQCOM{Textures: TextureIdᵖ{Pointer: Textures}, MaxTextures: MaxTextures, NumTextures: GLintᵖ{Pointer: NumTextures}}
+	return &GlExtGetTexturesQCOM{Textures: TextureIdᵖ(Textures), MaxTextures: MaxTextures, NumTextures: GLintᵖ(NumTextures)}
 }
 func NewGlExtIsProgramBinaryQCOM(Program ProgramId, Result GLboolean) *GlExtIsProgramBinaryQCOM {
 	return &GlExtIsProgramBinaryQCOM{Program: Program, Result: Result}
@@ -55494,7 +55185,7 @@ func NewGlFragmentCoverageColorNV(Color GLuint) *GlFragmentCoverageColorNV {
 	return &GlFragmentCoverageColorNV{Color: Color}
 }
 func NewGlFramebufferSampleLocationsfvNV(Target GLenum, Start GLuint, Count GLsizei, V memory.Pointer) *GlFramebufferSampleLocationsfvNV {
-	return &GlFramebufferSampleLocationsfvNV{Target: Target, Start: Start, Count: Count, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlFramebufferSampleLocationsfvNV{Target: Target, Start: Start, Count: Count, V: GLfloatᶜᵖ(V)}
 }
 func NewGlFramebufferTexture2DMultisampleEXT(Target GLenum, Attachment GLenum, Textarget GLenum, Texture TextureId, Level GLint, Samples GLsizei) *GlFramebufferTexture2DMultisampleEXT {
 	return &GlFramebufferTexture2DMultisampleEXT{Target: Target, Attachment: Attachment, Textarget: Textarget, Texture: Texture, Level: Level, Samples: Samples}
@@ -55512,43 +55203,43 @@ func NewGlFramebufferTextureOES(Target GLenum, Attachment GLenum, Texture Textur
 	return &GlFramebufferTextureOES{Target: Target, Attachment: Attachment, Texture: Texture, Level: Level}
 }
 func NewGlGenFencesNV(N GLsizei, Fences memory.Pointer) *GlGenFencesNV {
-	return &GlGenFencesNV{N: N, Fences: GLuintᵖ{Pointer: Fences}}
+	return &GlGenFencesNV{N: N, Fences: GLuintᵖ(Fences)}
 }
 func NewGlGenPathsNV(Range GLsizei, Result GLuint) *GlGenPathsNV {
 	return &GlGenPathsNV{Range: Range, Result: Result}
 }
 func NewGlGenPerfMonitorsAMD(N GLsizei, Monitors memory.Pointer) *GlGenPerfMonitorsAMD {
-	return &GlGenPerfMonitorsAMD{N: N, Monitors: GLuintᵖ{Pointer: Monitors}}
+	return &GlGenPerfMonitorsAMD{N: N, Monitors: GLuintᵖ(Monitors)}
 }
 func NewGlGenProgramPipelinesEXT(N GLsizei, Pipelines memory.Pointer) *GlGenProgramPipelinesEXT {
-	return &GlGenProgramPipelinesEXT{N: N, Pipelines: PipelineIdᵖ{Pointer: Pipelines}}
+	return &GlGenProgramPipelinesEXT{N: N, Pipelines: PipelineIdᵖ(Pipelines)}
 }
 func NewGlGenQueriesEXT(Count GLsizei, Queries memory.Pointer) *GlGenQueriesEXT {
-	return &GlGenQueriesEXT{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
+	return &GlGenQueriesEXT{Count: Count, Queries: QueryIdᵖ(Queries)}
 }
 func NewGlGenVertexArraysOES(Count GLsizei, Arrays memory.Pointer) *GlGenVertexArraysOES {
-	return &GlGenVertexArraysOES{Count: Count, Arrays: VertexArrayIdᵖ{Pointer: Arrays}}
+	return &GlGenVertexArraysOES{Count: Count, Arrays: VertexArrayIdᵖ(Arrays)}
 }
 func NewGlGetBufferPointervOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetBufferPointervOES {
-	return &GlGetBufferPointervOES{Target: Target, Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
+	return &GlGetBufferPointervOES{Target: Target, Pname: Pname, Params: Voidᵖᵖ(Params)}
 }
 func NewGlGetCoverageModulationTableNV(Bufsize GLsizei, V memory.Pointer) *GlGetCoverageModulationTableNV {
-	return &GlGetCoverageModulationTableNV{Bufsize: Bufsize, V: GLfloatᵖ{Pointer: V}}
+	return &GlGetCoverageModulationTableNV{Bufsize: Bufsize, V: GLfloatᵖ(V)}
 }
 func NewGlGetDriverControlStringQCOM(DriverControl GLuint, BufSize GLsizei, Length memory.Pointer, DriverControlString memory.Pointer) *GlGetDriverControlStringQCOM {
-	return &GlGetDriverControlStringQCOM{DriverControl: DriverControl, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, DriverControlString: GLcharᵖ{Pointer: DriverControlString}}
+	return &GlGetDriverControlStringQCOM{DriverControl: DriverControl, BufSize: BufSize, Length: GLsizeiᵖ(Length), DriverControlString: GLcharᵖ(DriverControlString)}
 }
 func NewGlGetDriverControlsQCOM(Num memory.Pointer, Size GLsizei, DriverControls memory.Pointer) *GlGetDriverControlsQCOM {
-	return &GlGetDriverControlsQCOM{Num: GLintᵖ{Pointer: Num}, Size: Size, DriverControls: GLuintᵖ{Pointer: DriverControls}}
+	return &GlGetDriverControlsQCOM{Num: GLintᵖ(Num), Size: Size, DriverControls: GLuintᵖ(DriverControls)}
 }
 func NewGlGetFenceivNV(Fence GLuint, Pname GLenum, Params memory.Pointer) *GlGetFenceivNV {
-	return &GlGetFenceivNV{Fence: Fence, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetFenceivNV{Fence: Fence, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetFirstPerfQueryIdINTEL(QueryId memory.Pointer) *GlGetFirstPerfQueryIdINTEL {
-	return &GlGetFirstPerfQueryIdINTEL{QueryId: GLuintᵖ{Pointer: QueryId}}
+	return &GlGetFirstPerfQueryIdINTEL{QueryId: GLuintᵖ(QueryId)}
 }
 func NewGlGetFloati_vNV(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetFloati_vNV {
-	return &GlGetFloati_vNV{Target: Target, Index: Index, Data: GLfloatᵖ{Pointer: Data}}
+	return &GlGetFloati_vNV{Target: Target, Index: Index, Data: GLfloatᵖ(Data)}
 }
 func NewGlGetFragDataIndexEXT(Program ProgramId, Name string, Result GLint) *GlGetFragDataIndexEXT {
 	return &GlGetFragDataIndexEXT{Program: Program, Name: Name, Result: Result}
@@ -55563,121 +55254,121 @@ func NewGlGetImageHandleNV(Texture TextureId, Level GLint, Layered GLboolean, La
 	return &GlGetImageHandleNV{Texture: Texture, Level: Level, Layered: Layered, Layer: Layer, Format: Format, Result: Result}
 }
 func NewGlGetInteger64vAPPLE(Pname GLenum, Params memory.Pointer) *GlGetInteger64vAPPLE {
-	return &GlGetInteger64vAPPLE{Pname: Pname, Params: GLint64ᵖ{Pointer: Params}}
+	return &GlGetInteger64vAPPLE{Pname: Pname, Params: GLint64ᵖ(Params)}
 }
 func NewGlGetIntegeri_vEXT(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetIntegeri_vEXT {
-	return &GlGetIntegeri_vEXT{Target: Target, Index: Index, Data: GLintᵖ{Pointer: Data}}
+	return &GlGetIntegeri_vEXT{Target: Target, Index: Index, Data: GLintᵖ(Data)}
 }
 func NewGlGetInternalformatSampleivNV(Target GLenum, Internalformat GLenum, Samples GLsizei, Pname GLenum, BufSize GLsizei, Params memory.Pointer) *GlGetInternalformatSampleivNV {
-	return &GlGetInternalformatSampleivNV{Target: Target, Internalformat: Internalformat, Samples: Samples, Pname: Pname, BufSize: BufSize, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetInternalformatSampleivNV{Target: Target, Internalformat: Internalformat, Samples: Samples, Pname: Pname, BufSize: BufSize, Params: GLintᵖ(Params)}
 }
 func NewGlGetNextPerfQueryIdINTEL(QueryId GLuint, NextQueryId memory.Pointer) *GlGetNextPerfQueryIdINTEL {
-	return &GlGetNextPerfQueryIdINTEL{QueryId: QueryId, NextQueryId: GLuintᵖ{Pointer: NextQueryId}}
+	return &GlGetNextPerfQueryIdINTEL{QueryId: QueryId, NextQueryId: GLuintᵖ(NextQueryId)}
 }
 func NewGlGetObjectLabelEXT(Type GLenum, Object GLuint, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectLabelEXT {
-	return &GlGetObjectLabelEXT{Type: Type, Object: Object, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+	return &GlGetObjectLabelEXT{Type: Type, Object: Object, BufSize: BufSize, Length: GLsizeiᵖ(Length), Label: GLcharᵖ(Label)}
 }
 func NewGlGetPathCommandsNV(Path GLuint, Commands memory.Pointer) *GlGetPathCommandsNV {
-	return &GlGetPathCommandsNV{Path: Path, Commands: GLubyteᵖ{Pointer: Commands}}
+	return &GlGetPathCommandsNV{Path: Path, Commands: GLubyteᵖ(Commands)}
 }
 func NewGlGetPathCoordsNV(Path GLuint, Coords memory.Pointer) *GlGetPathCoordsNV {
-	return &GlGetPathCoordsNV{Path: Path, Coords: GLfloatᵖ{Pointer: Coords}}
+	return &GlGetPathCoordsNV{Path: Path, Coords: GLfloatᵖ(Coords)}
 }
 func NewGlGetPathDashArrayNV(Path GLuint, DashArray memory.Pointer) *GlGetPathDashArrayNV {
-	return &GlGetPathDashArrayNV{Path: Path, DashArray: GLfloatᵖ{Pointer: DashArray}}
+	return &GlGetPathDashArrayNV{Path: Path, DashArray: GLfloatᵖ(DashArray)}
 }
 func NewGlGetPathLengthNV(Path GLuint, StartSegment GLsizei, NumSegments GLsizei, Result GLfloat) *GlGetPathLengthNV {
 	return &GlGetPathLengthNV{Path: Path, StartSegment: StartSegment, NumSegments: NumSegments, Result: Result}
 }
 func NewGlGetPathMetricRangeNV(MetricQueryMask GLbitfield, FirstPathName GLuint, NumPaths GLsizei, Stride GLsizei, Metrics memory.Pointer) *GlGetPathMetricRangeNV {
-	return &GlGetPathMetricRangeNV{MetricQueryMask: MetricQueryMask, FirstPathName: FirstPathName, NumPaths: NumPaths, Stride: Stride, Metrics: GLfloatᵖ{Pointer: Metrics}}
+	return &GlGetPathMetricRangeNV{MetricQueryMask: MetricQueryMask, FirstPathName: FirstPathName, NumPaths: NumPaths, Stride: Stride, Metrics: GLfloatᵖ(Metrics)}
 }
 func NewGlGetPathMetricsNV(MetricQueryMask GLbitfield, NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, Stride GLsizei, Metrics memory.Pointer) *GlGetPathMetricsNV {
-	return &GlGetPathMetricsNV{MetricQueryMask: MetricQueryMask, NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, Stride: Stride, Metrics: GLfloatᵖ{Pointer: Metrics}}
+	return &GlGetPathMetricsNV{MetricQueryMask: MetricQueryMask, NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, Stride: Stride, Metrics: GLfloatᵖ(Metrics)}
 }
 func NewGlGetPathParameterfvNV(Path GLuint, Pname GLenum, Value memory.Pointer) *GlGetPathParameterfvNV {
-	return &GlGetPathParameterfvNV{Path: Path, Pname: Pname, Value: GLfloatᵖ{Pointer: Value}}
+	return &GlGetPathParameterfvNV{Path: Path, Pname: Pname, Value: GLfloatᵖ(Value)}
 }
 func NewGlGetPathParameterivNV(Path GLuint, Pname GLenum, Value memory.Pointer) *GlGetPathParameterivNV {
-	return &GlGetPathParameterivNV{Path: Path, Pname: Pname, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetPathParameterivNV{Path: Path, Pname: Pname, Value: GLintᵖ(Value)}
 }
 func NewGlGetPathSpacingNV(PathListMode GLenum, NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, AdvanceScale GLfloat, KerningScale GLfloat, TransformType GLenum, ReturnedSpacing memory.Pointer) *GlGetPathSpacingNV {
-	return &GlGetPathSpacingNV{PathListMode: PathListMode, NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, AdvanceScale: AdvanceScale, KerningScale: KerningScale, TransformType: TransformType, ReturnedSpacing: GLfloatᵖ{Pointer: ReturnedSpacing}}
+	return &GlGetPathSpacingNV{PathListMode: PathListMode, NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, AdvanceScale: AdvanceScale, KerningScale: KerningScale, TransformType: TransformType, ReturnedSpacing: GLfloatᵖ(ReturnedSpacing)}
 }
 func NewGlGetPerfCounterInfoINTEL(QueryId GLuint, CounterId GLuint, CounterNameLength GLuint, CounterName memory.Pointer, CounterDescLength GLuint, CounterDesc memory.Pointer, CounterOffset memory.Pointer, CounterDataSize memory.Pointer, CounterTypeEnum memory.Pointer, CounterDataTypeEnum memory.Pointer, RawCounterMaxValue memory.Pointer) *GlGetPerfCounterInfoINTEL {
-	return &GlGetPerfCounterInfoINTEL{QueryId: QueryId, CounterId: CounterId, CounterNameLength: CounterNameLength, CounterName: GLcharᵖ{Pointer: CounterName}, CounterDescLength: CounterDescLength, CounterDesc: GLcharᵖ{Pointer: CounterDesc}, CounterOffset: GLuintᵖ{Pointer: CounterOffset}, CounterDataSize: GLuintᵖ{Pointer: CounterDataSize}, CounterTypeEnum: GLuintᵖ{Pointer: CounterTypeEnum}, CounterDataTypeEnum: GLuintᵖ{Pointer: CounterDataTypeEnum}, RawCounterMaxValue: GLuint64ᵖ{Pointer: RawCounterMaxValue}}
+	return &GlGetPerfCounterInfoINTEL{QueryId: QueryId, CounterId: CounterId, CounterNameLength: CounterNameLength, CounterName: GLcharᵖ(CounterName), CounterDescLength: CounterDescLength, CounterDesc: GLcharᵖ(CounterDesc), CounterOffset: GLuintᵖ(CounterOffset), CounterDataSize: GLuintᵖ(CounterDataSize), CounterTypeEnum: GLuintᵖ(CounterTypeEnum), CounterDataTypeEnum: GLuintᵖ(CounterDataTypeEnum), RawCounterMaxValue: GLuint64ᵖ(RawCounterMaxValue)}
 }
 func NewGlGetPerfMonitorCounterDataAMD(Monitor GLuint, Pname GLenum, DataSize GLsizei, Data memory.Pointer, BytesWritten memory.Pointer) *GlGetPerfMonitorCounterDataAMD {
-	return &GlGetPerfMonitorCounterDataAMD{Monitor: Monitor, Pname: Pname, DataSize: DataSize, Data: GLuintᵖ{Pointer: Data}, BytesWritten: GLintᵖ{Pointer: BytesWritten}}
+	return &GlGetPerfMonitorCounterDataAMD{Monitor: Monitor, Pname: Pname, DataSize: DataSize, Data: GLuintᵖ(Data), BytesWritten: GLintᵖ(BytesWritten)}
 }
 func NewGlGetPerfMonitorCounterInfoAMD(Group GLuint, Counter GLuint, Pname GLenum, Data memory.Pointer) *GlGetPerfMonitorCounterInfoAMD {
-	return &GlGetPerfMonitorCounterInfoAMD{Group: Group, Counter: Counter, Pname: Pname, Data: Voidᵖ{Pointer: Data}}
+	return &GlGetPerfMonitorCounterInfoAMD{Group: Group, Counter: Counter, Pname: Pname, Data: Voidᵖ(Data)}
 }
 func NewGlGetPerfMonitorCounterStringAMD(Group GLuint, Counter GLuint, BufSize GLsizei, Length memory.Pointer, CounterString memory.Pointer) *GlGetPerfMonitorCounterStringAMD {
-	return &GlGetPerfMonitorCounterStringAMD{Group: Group, Counter: Counter, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, CounterString: GLcharᵖ{Pointer: CounterString}}
+	return &GlGetPerfMonitorCounterStringAMD{Group: Group, Counter: Counter, BufSize: BufSize, Length: GLsizeiᵖ(Length), CounterString: GLcharᵖ(CounterString)}
 }
 func NewGlGetPerfMonitorCountersAMD(Group GLuint, NumCounters memory.Pointer, MaxActiveCounters memory.Pointer, CounterSize GLsizei, Counters memory.Pointer) *GlGetPerfMonitorCountersAMD {
-	return &GlGetPerfMonitorCountersAMD{Group: Group, NumCounters: GLintᵖ{Pointer: NumCounters}, MaxActiveCounters: GLintᵖ{Pointer: MaxActiveCounters}, CounterSize: CounterSize, Counters: GLuintᵖ{Pointer: Counters}}
+	return &GlGetPerfMonitorCountersAMD{Group: Group, NumCounters: GLintᵖ(NumCounters), MaxActiveCounters: GLintᵖ(MaxActiveCounters), CounterSize: CounterSize, Counters: GLuintᵖ(Counters)}
 }
 func NewGlGetPerfMonitorGroupStringAMD(Group GLuint, BufSize GLsizei, Length memory.Pointer, GroupString memory.Pointer) *GlGetPerfMonitorGroupStringAMD {
-	return &GlGetPerfMonitorGroupStringAMD{Group: Group, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, GroupString: GLcharᵖ{Pointer: GroupString}}
+	return &GlGetPerfMonitorGroupStringAMD{Group: Group, BufSize: BufSize, Length: GLsizeiᵖ(Length), GroupString: GLcharᵖ(GroupString)}
 }
 func NewGlGetPerfMonitorGroupsAMD(NumGroups memory.Pointer, GroupsSize GLsizei, Groups memory.Pointer) *GlGetPerfMonitorGroupsAMD {
-	return &GlGetPerfMonitorGroupsAMD{NumGroups: GLintᵖ{Pointer: NumGroups}, GroupsSize: GroupsSize, Groups: GLuintᵖ{Pointer: Groups}}
+	return &GlGetPerfMonitorGroupsAMD{NumGroups: GLintᵖ(NumGroups), GroupsSize: GroupsSize, Groups: GLuintᵖ(Groups)}
 }
 func NewGlGetPerfQueryDataINTEL(QueryHandle GLuint, Flag GLuint, DataSize GLsizei, Data memory.Pointer, BytesWritten memory.Pointer) *GlGetPerfQueryDataINTEL {
-	return &GlGetPerfQueryDataINTEL{QueryHandle: QueryHandle, Flag: Flag, DataSize: DataSize, Data: GLvoidᵖ{Pointer: Data}, BytesWritten: GLuintᵖ{Pointer: BytesWritten}}
+	return &GlGetPerfQueryDataINTEL{QueryHandle: QueryHandle, Flag: Flag, DataSize: DataSize, Data: GLvoidᵖ(Data), BytesWritten: GLuintᵖ(BytesWritten)}
 }
 func NewGlGetPerfQueryIdByNameINTEL(QueryName memory.Pointer, QueryId memory.Pointer) *GlGetPerfQueryIdByNameINTEL {
-	return &GlGetPerfQueryIdByNameINTEL{QueryName: GLcharᵖ{Pointer: QueryName}, QueryId: GLuintᵖ{Pointer: QueryId}}
+	return &GlGetPerfQueryIdByNameINTEL{QueryName: GLcharᵖ(QueryName), QueryId: GLuintᵖ(QueryId)}
 }
 func NewGlGetPerfQueryInfoINTEL(QueryId GLuint, QueryNameLength GLuint, QueryName memory.Pointer, DataSize memory.Pointer, NoCounters memory.Pointer, NoInstances memory.Pointer, CapsMask memory.Pointer) *GlGetPerfQueryInfoINTEL {
-	return &GlGetPerfQueryInfoINTEL{QueryId: QueryId, QueryNameLength: QueryNameLength, QueryName: GLcharᵖ{Pointer: QueryName}, DataSize: GLuintᵖ{Pointer: DataSize}, NoCounters: GLuintᵖ{Pointer: NoCounters}, NoInstances: GLuintᵖ{Pointer: NoInstances}, CapsMask: GLuintᵖ{Pointer: CapsMask}}
+	return &GlGetPerfQueryInfoINTEL{QueryId: QueryId, QueryNameLength: QueryNameLength, QueryName: GLcharᵖ(QueryName), DataSize: GLuintᵖ(DataSize), NoCounters: GLuintᵖ(NoCounters), NoInstances: GLuintᵖ(NoInstances), CapsMask: GLuintᵖ(CapsMask)}
 }
 func NewGlGetProgramBinaryOES(Program ProgramId, Buffer_size GLsizei, Bytes_written memory.Pointer, Binary_format memory.Pointer, Binary memory.Pointer) *GlGetProgramBinaryOES {
-	return &GlGetProgramBinaryOES{Program: Program, BufferSize: Buffer_size, BytesWritten: GLsizeiᵖ{Pointer: Bytes_written}, BinaryFormat: GLenumᵖ{Pointer: Binary_format}, Binary: Voidᵖ{Pointer: Binary}}
+	return &GlGetProgramBinaryOES{Program: Program, BufferSize: Buffer_size, BytesWritten: GLsizeiᵖ(Bytes_written), BinaryFormat: GLenumᵖ(Binary_format), Binary: Voidᵖ(Binary)}
 }
 func NewGlGetProgramPipelineInfoLogEXT(Pipeline PipelineId, BufSize GLsizei, Length memory.Pointer, InfoLog memory.Pointer) *GlGetProgramPipelineInfoLogEXT {
-	return &GlGetProgramPipelineInfoLogEXT{Pipeline: Pipeline, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, InfoLog: GLcharᵖ{Pointer: InfoLog}}
+	return &GlGetProgramPipelineInfoLogEXT{Pipeline: Pipeline, BufSize: BufSize, Length: GLsizeiᵖ(Length), InfoLog: GLcharᵖ(InfoLog)}
 }
 func NewGlGetProgramPipelineivEXT(Pipeline PipelineId, Pname GLenum, Params memory.Pointer) *GlGetProgramPipelineivEXT {
-	return &GlGetProgramPipelineivEXT{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetProgramPipelineivEXT{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetProgramResourceLocationIndexEXT(Program ProgramId, ProgramInterface GLenum, Name string, Result GLint) *GlGetProgramResourceLocationIndexEXT {
 	return &GlGetProgramResourceLocationIndexEXT{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
 }
 func NewGlGetProgramResourcefvNV(Program ProgramId, ProgramInterface GLenum, Index GLuint, PropCount GLsizei, Props memory.Pointer, BufSize GLsizei, Length memory.Pointer, Params memory.Pointer) *GlGetProgramResourcefvNV {
-	return &GlGetProgramResourcefvNV{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ{Pointer: Props}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetProgramResourcefvNV{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ(Props), BufSize: BufSize, Length: GLsizeiᵖ(Length), Params: GLfloatᵖ(Params)}
 }
 func NewGlGetQueryObjecti64vEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjecti64vEXT {
-	return &GlGetQueryObjecti64vEXT{Query: Query, Parameter: Parameter, Value: GLint64ᵖ{Pointer: Value}}
+	return &GlGetQueryObjecti64vEXT{Query: Query, Parameter: Parameter, Value: GLint64ᵖ(Value)}
 }
 func NewGlGetQueryObjectivEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectivEXT {
-	return &GlGetQueryObjectivEXT{Query: Query, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetQueryObjectivEXT{Query: Query, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetQueryObjectui64vEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectui64vEXT {
-	return &GlGetQueryObjectui64vEXT{Query: Query, Parameter: Parameter, Value: GLuint64ᵖ{Pointer: Value}}
+	return &GlGetQueryObjectui64vEXT{Query: Query, Parameter: Parameter, Value: GLuint64ᵖ(Value)}
 }
 func NewGlGetQueryObjectuivEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectuivEXT {
-	return &GlGetQueryObjectuivEXT{Query: Query, Parameter: Parameter, Value: GLuintᵖ{Pointer: Value}}
+	return &GlGetQueryObjectuivEXT{Query: Query, Parameter: Parameter, Value: GLuintᵖ(Value)}
 }
 func NewGlGetQueryivEXT(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetQueryivEXT {
-	return &GlGetQueryivEXT{Target: Target, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetQueryivEXT{Target: Target, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetSamplerParameterIivOES(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIivOES {
-	return &GlGetSamplerParameterIivOES{Sampler: Sampler, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIivOES{Sampler: Sampler, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetSamplerParameterIuivOES(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIuivOES {
-	return &GlGetSamplerParameterIuivOES{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIuivOES{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetSyncivAPPLE(Sync GLsync, Pname GLenum, BufSize GLsizei, Length memory.Pointer, Values memory.Pointer) *GlGetSyncivAPPLE {
-	return &GlGetSyncivAPPLE{Sync: Sync, Pname: Pname, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetSyncivAPPLE{Sync: Sync, Pname: Pname, BufSize: BufSize, Length: GLsizeiᵖ(Length), Values: GLintᵖ(Values)}
 }
 func NewGlGetTexParameterIivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIivOES {
-	return &GlGetTexParameterIivOES{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIivOES{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexParameterIuivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIuivOES {
-	return &GlGetTexParameterIuivOES{Target: Target, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIuivOES{Target: Target, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetTextureHandleNV(Texture TextureId, Result GLuint64) *GlGetTextureHandleNV {
 	return &GlGetTextureHandleNV{Texture: Texture, Result: Result}
@@ -55686,25 +55377,25 @@ func NewGlGetTextureSamplerHandleNV(Texture TextureId, Sampler SamplerId, Result
 	return &GlGetTextureSamplerHandleNV{Texture: Texture, Sampler: Sampler, Result: Result}
 }
 func NewGlGetTranslatedShaderSourceANGLE(Shader ShaderId, Bufsize GLsizei, Length memory.Pointer, Source memory.Pointer) *GlGetTranslatedShaderSourceANGLE {
-	return &GlGetTranslatedShaderSourceANGLE{Shader: Shader, Bufsize: Bufsize, Length: GLsizeiᵖ{Pointer: Length}, Source: GLcharᵖ{Pointer: Source}}
+	return &GlGetTranslatedShaderSourceANGLE{Shader: Shader, Bufsize: Bufsize, Length: GLsizeiᵖ(Length), Source: GLcharᵖ(Source)}
 }
 func NewGlGetnUniformfvEXT(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformfvEXT {
-	return &GlGetnUniformfvEXT{Program: Program, Location: Location, BufSize: BufSize, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetnUniformfvEXT{Program: Program, Location: Location, BufSize: BufSize, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetnUniformfvKHR(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformfvKHR {
-	return &GlGetnUniformfvKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetnUniformfvKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetnUniformivEXT(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformivEXT {
-	return &GlGetnUniformivEXT{Program: Program, Location: Location, BufSize: BufSize, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetnUniformivEXT{Program: Program, Location: Location, BufSize: BufSize, Params: GLintᵖ(Params)}
 }
 func NewGlGetnUniformivKHR(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformivKHR {
-	return &GlGetnUniformivKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetnUniformivKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLintᵖ(Params)}
 }
 func NewGlGetnUniformuivKHR(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformuivKHR {
-	return &GlGetnUniformuivKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetnUniformuivKHR{Program: Program, Location: Location, BufSize: BufSize, Params: GLuintᵖ(Params)}
 }
 func NewGlInsertEventMarkerEXT(Length GLsizei, Marker memory.Pointer) *GlInsertEventMarkerEXT {
-	return &GlInsertEventMarkerEXT{Length: Length, Marker: GLcharᶜᵖ{Pointer: Marker}}
+	return &GlInsertEventMarkerEXT{Length: Length, Marker: GLcharᶜᵖ(Marker)}
 }
 func NewGlInterpolatePathsNV(ResultPath GLuint, PathA GLuint, PathB GLuint, Weight GLfloat) *GlInterpolatePathsNV {
 	return &GlInterpolatePathsNV{ResultPath: ResultPath, PathA: PathA, PathB: PathB, Weight: Weight}
@@ -55746,7 +55437,7 @@ func NewGlIsVertexArrayOES(Array VertexArrayId, Result GLboolean) *GlIsVertexArr
 	return &GlIsVertexArrayOES{Array: Array, Result: Result}
 }
 func NewGlLabelObjectEXT(Type GLenum, Object GLuint, Length GLsizei, Label memory.Pointer) *GlLabelObjectEXT {
-	return &GlLabelObjectEXT{Type: Type, Object: Object, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+	return &GlLabelObjectEXT{Type: Type, Object: Object, Length: Length, Label: GLcharᶜᵖ(Label)}
 }
 func NewGlMakeImageHandleNonResidentNV(Handle GLuint64) *GlMakeImageHandleNonResidentNV {
 	return &GlMakeImageHandleNonResidentNV{Handle: Handle}
@@ -55761,91 +55452,91 @@ func NewGlMakeTextureHandleResidentNV(Handle GLuint64) *GlMakeTextureHandleResid
 	return &GlMakeTextureHandleResidentNV{Handle: Handle}
 }
 func NewGlMapBufferOES(Target GLenum, Access GLenum, Result memory.Pointer) *GlMapBufferOES {
-	return &GlMapBufferOES{Target: Target, Access: Access, Result: Voidᵖ{Pointer: Result}}
+	return &GlMapBufferOES{Target: Target, Access: Access, Result: Voidᵖ(Result)}
 }
 func NewGlMapBufferRangeEXT(Target GLenum, Offset GLintptr, Length GLsizeiptr, Access GLbitfield, Result memory.Pointer) *GlMapBufferRangeEXT {
-	return &GlMapBufferRangeEXT{Target: Target, Offset: Offset, Length: Length, Access: Access, Result: Voidᵖ{Pointer: Result}}
+	return &GlMapBufferRangeEXT{Target: Target, Offset: Offset, Length: Length, Access: Access, Result: Voidᵖ(Result)}
 }
 func NewGlMatrixLoad3x2fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixLoad3x2fNV {
-	return &GlMatrixLoad3x2fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixLoad3x2fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMatrixLoad3x3fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixLoad3x3fNV {
-	return &GlMatrixLoad3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixLoad3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMatrixLoadTranspose3x3fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixLoadTranspose3x3fNV {
-	return &GlMatrixLoadTranspose3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixLoadTranspose3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMatrixMult3x2fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixMult3x2fNV {
-	return &GlMatrixMult3x2fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixMult3x2fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMatrixMult3x3fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixMult3x3fNV {
-	return &GlMatrixMult3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixMult3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMatrixMultTranspose3x3fNV(MatrixMode GLenum, M memory.Pointer) *GlMatrixMultTranspose3x3fNV {
-	return &GlMatrixMultTranspose3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMatrixMultTranspose3x3fNV{MatrixMode: MatrixMode, M: GLfloatᶜᵖ(M)}
 }
 func NewGlMultiDrawArraysEXT(Mode GLenum, First memory.Pointer, Count memory.Pointer, Primcount GLsizei) *GlMultiDrawArraysEXT {
-	return &GlMultiDrawArraysEXT{Mode: Mode, First: GLintᶜᵖ{Pointer: First}, Count: GLsizeiᶜᵖ{Pointer: Count}, Primcount: Primcount}
+	return &GlMultiDrawArraysEXT{Mode: Mode, First: GLintᶜᵖ(First), Count: GLsizeiᶜᵖ(Count), Primcount: Primcount}
 }
 func NewGlMultiDrawArraysIndirectEXT(Mode GLenum, Indirect memory.Pointer, Drawcount GLsizei, Stride GLsizei) *GlMultiDrawArraysIndirectEXT {
-	return &GlMultiDrawArraysIndirectEXT{Mode: Mode, Indirect: Voidᶜᵖ{Pointer: Indirect}, Drawcount: Drawcount, Stride: Stride}
+	return &GlMultiDrawArraysIndirectEXT{Mode: Mode, Indirect: Voidᶜᵖ(Indirect), Drawcount: Drawcount, Stride: Stride}
 }
 func NewGlMultiDrawElementsBaseVertexEXT(Mode GLenum, Count memory.Pointer, Type GLenum, Indices memory.Pointer, Primcount GLsizei, Basevertex memory.Pointer) *GlMultiDrawElementsBaseVertexEXT {
-	return &GlMultiDrawElementsBaseVertexEXT{Mode: Mode, Count: GLsizeiᶜᵖ{Pointer: Count}, Type: Type, Indices: Voidᶜᵖᶜᵖ{Pointer: Indices}, Primcount: Primcount, Basevertex: GLintᶜᵖ{Pointer: Basevertex}}
+	return &GlMultiDrawElementsBaseVertexEXT{Mode: Mode, Count: GLsizeiᶜᵖ(Count), Type: Type, Indices: Voidᶜᵖᶜᵖ(Indices), Primcount: Primcount, Basevertex: GLintᶜᵖ(Basevertex)}
 }
 func NewGlMultiDrawElementsBaseVertexOES(Mode GLenum, Count memory.Pointer, Type GLenum, Indices memory.Pointer, Primcount GLsizei, Basevertex memory.Pointer) *GlMultiDrawElementsBaseVertexOES {
-	return &GlMultiDrawElementsBaseVertexOES{Mode: Mode, Count: GLsizeiᶜᵖ{Pointer: Count}, Type: Type, Indices: Voidᶜᵖᶜᵖ{Pointer: Indices}, Primcount: Primcount, Basevertex: GLintᶜᵖ{Pointer: Basevertex}}
+	return &GlMultiDrawElementsBaseVertexOES{Mode: Mode, Count: GLsizeiᶜᵖ(Count), Type: Type, Indices: Voidᶜᵖᶜᵖ(Indices), Primcount: Primcount, Basevertex: GLintᶜᵖ(Basevertex)}
 }
 func NewGlMultiDrawElementsEXT(Mode GLenum, Count memory.Pointer, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlMultiDrawElementsEXT {
-	return &GlMultiDrawElementsEXT{Mode: Mode, Count: GLsizeiᶜᵖ{Pointer: Count}, Type: Type, Indices: Voidᶜᵖᶜᵖ{Pointer: Indices}, Primcount: Primcount}
+	return &GlMultiDrawElementsEXT{Mode: Mode, Count: GLsizeiᶜᵖ(Count), Type: Type, Indices: Voidᶜᵖᶜᵖ(Indices), Primcount: Primcount}
 }
 func NewGlMultiDrawElementsIndirectEXT(Mode GLenum, Type GLenum, Indirect memory.Pointer, Drawcount GLsizei, Stride GLsizei) *GlMultiDrawElementsIndirectEXT {
-	return &GlMultiDrawElementsIndirectEXT{Mode: Mode, Type: Type, Indirect: Voidᶜᵖ{Pointer: Indirect}, Drawcount: Drawcount, Stride: Stride}
+	return &GlMultiDrawElementsIndirectEXT{Mode: Mode, Type: Type, Indirect: Voidᶜᵖ(Indirect), Drawcount: Drawcount, Stride: Stride}
 }
 func NewGlNamedFramebufferSampleLocationsfvNV(Framebuffer FramebufferId, Start GLuint, Count GLsizei, V memory.Pointer) *GlNamedFramebufferSampleLocationsfvNV {
-	return &GlNamedFramebufferSampleLocationsfvNV{Framebuffer: Framebuffer, Start: Start, Count: Count, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlNamedFramebufferSampleLocationsfvNV{Framebuffer: Framebuffer, Start: Start, Count: Count, V: GLfloatᶜᵖ(V)}
 }
 func NewGlPatchParameteriOES(Pname GLenum, Value GLint) *GlPatchParameteriOES {
 	return &GlPatchParameteriOES{Pname: Pname, Value: Value}
 }
 func NewGlPathCommandsNV(Path GLuint, NumCommands GLsizei, Commands memory.Pointer, NumCoords GLsizei, CoordType GLenum, Coords memory.Pointer) *GlPathCommandsNV {
-	return &GlPathCommandsNV{Path: Path, NumCommands: NumCommands, Commands: GLubyteᶜᵖ{Pointer: Commands}, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ{Pointer: Coords}}
+	return &GlPathCommandsNV{Path: Path, NumCommands: NumCommands, Commands: GLubyteᶜᵖ(Commands), NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ(Coords)}
 }
 func NewGlPathCoordsNV(Path GLuint, NumCoords GLsizei, CoordType GLenum, Coords memory.Pointer) *GlPathCoordsNV {
-	return &GlPathCoordsNV{Path: Path, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ{Pointer: Coords}}
+	return &GlPathCoordsNV{Path: Path, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ(Coords)}
 }
 func NewGlPathCoverDepthFuncNV(Func GLenum) *GlPathCoverDepthFuncNV {
 	return &GlPathCoverDepthFuncNV{Func: Func}
 }
 func NewGlPathDashArrayNV(Path GLuint, DashCount GLsizei, DashArray memory.Pointer) *GlPathDashArrayNV {
-	return &GlPathDashArrayNV{Path: Path, DashCount: DashCount, DashArray: GLfloatᶜᵖ{Pointer: DashArray}}
+	return &GlPathDashArrayNV{Path: Path, DashCount: DashCount, DashArray: GLfloatᶜᵖ(DashArray)}
 }
 func NewGlPathGlyphIndexArrayNV(FirstPathName GLuint, FontTarget GLenum, FontName memory.Pointer, FontStyle GLbitfield, FirstGlyphIndex GLuint, NumGlyphs GLsizei, PathParameterTemplate GLuint, EmScale GLfloat, Result GLenum) *GlPathGlyphIndexArrayNV {
-	return &GlPathGlyphIndexArrayNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ{Pointer: FontName}, FontStyle: FontStyle, FirstGlyphIndex: FirstGlyphIndex, NumGlyphs: NumGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, Result: Result}
+	return &GlPathGlyphIndexArrayNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ(FontName), FontStyle: FontStyle, FirstGlyphIndex: FirstGlyphIndex, NumGlyphs: NumGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, Result: Result}
 }
 func NewGlPathGlyphIndexRangeNV(FontTarget GLenum, FontName memory.Pointer, FontStyle GLbitfield, PathParameterTemplate GLuint, EmScale GLfloat, BaseAndCount GLuint, Result GLenum) *GlPathGlyphIndexRangeNV {
-	return &GlPathGlyphIndexRangeNV{FontTarget: FontTarget, FontName: Voidᶜᵖ{Pointer: FontName}, FontStyle: FontStyle, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, BaseAndCount: BaseAndCount, Result: Result}
+	return &GlPathGlyphIndexRangeNV{FontTarget: FontTarget, FontName: Voidᶜᵖ(FontName), FontStyle: FontStyle, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, BaseAndCount: BaseAndCount, Result: Result}
 }
 func NewGlPathGlyphRangeNV(FirstPathName GLuint, FontTarget GLenum, FontName memory.Pointer, FontStyle GLbitfield, FirstGlyph GLuint, NumGlyphs GLsizei, HandleMissingGlyphs GLenum, PathParameterTemplate GLuint, EmScale GLfloat) *GlPathGlyphRangeNV {
-	return &GlPathGlyphRangeNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ{Pointer: FontName}, FontStyle: FontStyle, FirstGlyph: FirstGlyph, NumGlyphs: NumGlyphs, HandleMissingGlyphs: HandleMissingGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale}
+	return &GlPathGlyphRangeNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ(FontName), FontStyle: FontStyle, FirstGlyph: FirstGlyph, NumGlyphs: NumGlyphs, HandleMissingGlyphs: HandleMissingGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale}
 }
 func NewGlPathGlyphsNV(FirstPathName GLuint, FontTarget GLenum, FontName memory.Pointer, FontStyle GLbitfield, NumGlyphs GLsizei, Type GLenum, Charcodes memory.Pointer, HandleMissingGlyphs GLenum, PathParameterTemplate GLuint, EmScale GLfloat) *GlPathGlyphsNV {
-	return &GlPathGlyphsNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ{Pointer: FontName}, FontStyle: FontStyle, NumGlyphs: NumGlyphs, Type: Type, Charcodes: Voidᶜᵖ{Pointer: Charcodes}, HandleMissingGlyphs: HandleMissingGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale}
+	return &GlPathGlyphsNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontName: Voidᶜᵖ(FontName), FontStyle: FontStyle, NumGlyphs: NumGlyphs, Type: Type, Charcodes: Voidᶜᵖ(Charcodes), HandleMissingGlyphs: HandleMissingGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale}
 }
 func NewGlPathMemoryGlyphIndexArrayNV(FirstPathName GLuint, FontTarget GLenum, FontSize GLsizeiptr, FontData memory.Pointer, FaceIndex GLsizei, FirstGlyphIndex GLuint, NumGlyphs GLsizei, PathParameterTemplate GLuint, EmScale GLfloat, Result GLenum) *GlPathMemoryGlyphIndexArrayNV {
-	return &GlPathMemoryGlyphIndexArrayNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontSize: FontSize, FontData: Voidᶜᵖ{Pointer: FontData}, FaceIndex: FaceIndex, FirstGlyphIndex: FirstGlyphIndex, NumGlyphs: NumGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, Result: Result}
+	return &GlPathMemoryGlyphIndexArrayNV{FirstPathName: FirstPathName, FontTarget: FontTarget, FontSize: FontSize, FontData: Voidᶜᵖ(FontData), FaceIndex: FaceIndex, FirstGlyphIndex: FirstGlyphIndex, NumGlyphs: NumGlyphs, PathParameterTemplate: PathParameterTemplate, EmScale: EmScale, Result: Result}
 }
 func NewGlPathParameterfNV(Path GLuint, Pname GLenum, Value GLfloat) *GlPathParameterfNV {
 	return &GlPathParameterfNV{Path: Path, Pname: Pname, Value: Value}
 }
 func NewGlPathParameterfvNV(Path GLuint, Pname GLenum, Value memory.Pointer) *GlPathParameterfvNV {
-	return &GlPathParameterfvNV{Path: Path, Pname: Pname, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlPathParameterfvNV{Path: Path, Pname: Pname, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlPathParameteriNV(Path GLuint, Pname GLenum, Value GLint) *GlPathParameteriNV {
 	return &GlPathParameteriNV{Path: Path, Pname: Pname, Value: Value}
 }
 func NewGlPathParameterivNV(Path GLuint, Pname GLenum, Value memory.Pointer) *GlPathParameterivNV {
-	return &GlPathParameterivNV{Path: Path, Pname: Pname, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlPathParameterivNV{Path: Path, Pname: Pname, Value: GLintᶜᵖ(Value)}
 }
 func NewGlPathStencilDepthOffsetNV(Factor GLfloat, Units GLfloat) *GlPathStencilDepthOffsetNV {
 	return &GlPathStencilDepthOffsetNV{Factor: Factor, Units: Units}
@@ -55854,16 +55545,16 @@ func NewGlPathStencilFuncNV(Func GLenum, Ref GLint, Mask GLuint) *GlPathStencilF
 	return &GlPathStencilFuncNV{Func: Func, Ref: Ref, Mask: Mask}
 }
 func NewGlPathStringNV(Path GLuint, Format GLenum, Length GLsizei, PathString memory.Pointer) *GlPathStringNV {
-	return &GlPathStringNV{Path: Path, Format: Format, Length: Length, PathString: Voidᶜᵖ{Pointer: PathString}}
+	return &GlPathStringNV{Path: Path, Format: Format, Length: Length, PathString: Voidᶜᵖ(PathString)}
 }
 func NewGlPathSubCommandsNV(Path GLuint, CommandStart GLsizei, CommandsToDelete GLsizei, NumCommands GLsizei, Commands memory.Pointer, NumCoords GLsizei, CoordType GLenum, Coords memory.Pointer) *GlPathSubCommandsNV {
-	return &GlPathSubCommandsNV{Path: Path, CommandStart: CommandStart, CommandsToDelete: CommandsToDelete, NumCommands: NumCommands, Commands: GLubyteᶜᵖ{Pointer: Commands}, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ{Pointer: Coords}}
+	return &GlPathSubCommandsNV{Path: Path, CommandStart: CommandStart, CommandsToDelete: CommandsToDelete, NumCommands: NumCommands, Commands: GLubyteᶜᵖ(Commands), NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ(Coords)}
 }
 func NewGlPathSubCoordsNV(Path GLuint, CoordStart GLsizei, NumCoords GLsizei, CoordType GLenum, Coords memory.Pointer) *GlPathSubCoordsNV {
-	return &GlPathSubCoordsNV{Path: Path, CoordStart: CoordStart, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ{Pointer: Coords}}
+	return &GlPathSubCoordsNV{Path: Path, CoordStart: CoordStart, NumCoords: NumCoords, CoordType: CoordType, Coords: Voidᶜᵖ(Coords)}
 }
 func NewGlPointAlongPathNV(Path GLuint, StartSegment GLsizei, NumSegments GLsizei, Distance GLfloat, X memory.Pointer, Y memory.Pointer, TangentX memory.Pointer, TangentY memory.Pointer, Result GLboolean) *GlPointAlongPathNV {
-	return &GlPointAlongPathNV{Path: Path, StartSegment: StartSegment, NumSegments: NumSegments, Distance: Distance, X: GLfloatᵖ{Pointer: X}, Y: GLfloatᵖ{Pointer: Y}, TangentX: GLfloatᵖ{Pointer: TangentX}, TangentY: GLfloatᵖ{Pointer: TangentY}, Result: Result}
+	return &GlPointAlongPathNV{Path: Path, StartSegment: StartSegment, NumSegments: NumSegments, Distance: Distance, X: GLfloatᵖ(X), Y: GLfloatᵖ(Y), TangentX: GLfloatᵖ(TangentX), TangentY: GLfloatᵖ(TangentY), Result: Result}
 }
 func NewGlPolygonModeNV(Face GLenum, Mode GLenum) *GlPolygonModeNV {
 	return &GlPolygonModeNV{Face: Face, Mode: Mode}
@@ -55875,121 +55566,121 @@ func NewGlPrimitiveBoundingBoxOES(MinX GLfloat, MinY GLfloat, MinZ GLfloat, MinW
 	return &GlPrimitiveBoundingBoxOES{MinX: MinX, MinY: MinY, MinZ: MinZ, MinW: MinW, MaxX: MaxX, MaxY: MaxY, MaxZ: MaxZ, MaxW: MaxW}
 }
 func NewGlProgramBinaryOES(Program ProgramId, Binary_format GLenum, Binary memory.Pointer, Binary_size GLint) *GlProgramBinaryOES {
-	return &GlProgramBinaryOES{Program: Program, BinaryFormat: Binary_format, Binary: Voidᶜᵖ{Pointer: Binary}, BinarySize: Binary_size}
+	return &GlProgramBinaryOES{Program: Program, BinaryFormat: Binary_format, Binary: Voidᶜᵖ(Binary), BinarySize: Binary_size}
 }
 func NewGlProgramParameteriEXT(Program ProgramId, Pname GLenum, Value GLint) *GlProgramParameteriEXT {
 	return &GlProgramParameteriEXT{Program: Program, Pname: Pname, Value: Value}
 }
 func NewGlProgramPathFragmentInputGenNV(Program ProgramId, Location GLint, GenMode GLenum, Components GLint, Coeffs memory.Pointer) *GlProgramPathFragmentInputGenNV {
-	return &GlProgramPathFragmentInputGenNV{Program: Program, Location: Location, GenMode: GenMode, Components: Components, Coeffs: GLfloatᶜᵖ{Pointer: Coeffs}}
+	return &GlProgramPathFragmentInputGenNV{Program: Program, Location: Location, GenMode: GenMode, Components: Components, Coeffs: GLfloatᶜᵖ(Coeffs)}
 }
 func NewGlProgramUniform1fEXT(Program ProgramId, Location UniformLocation, V0 GLfloat) *GlProgramUniform1fEXT {
 	return &GlProgramUniform1fEXT{Program: Program, Location: Location, V0: V0}
 }
 func NewGlProgramUniform1fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1fvEXT {
-	return &GlProgramUniform1fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform1fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniform1iEXT(Program ProgramId, Location UniformLocation, V0 GLint) *GlProgramUniform1iEXT {
 	return &GlProgramUniform1iEXT{Program: Program, Location: Location, V0: V0}
 }
 func NewGlProgramUniform1ivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1ivEXT {
-	return &GlProgramUniform1ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform1ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ(Value)}
 }
 func NewGlProgramUniform1uiEXT(Program ProgramId, Location UniformLocation, V0 GLuint) *GlProgramUniform1uiEXT {
 	return &GlProgramUniform1uiEXT{Program: Program, Location: Location, V0: V0}
 }
 func NewGlProgramUniform1uivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1uivEXT {
-	return &GlProgramUniform1uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform1uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ(Value)}
 }
 func NewGlProgramUniform2fEXT(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat) *GlProgramUniform2fEXT {
 	return &GlProgramUniform2fEXT{Program: Program, Location: Location, V0: V0, V1: V1}
 }
 func NewGlProgramUniform2fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2fvEXT {
-	return &GlProgramUniform2fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform2fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniform2iEXT(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint) *GlProgramUniform2iEXT {
 	return &GlProgramUniform2iEXT{Program: Program, Location: Location, V0: V0, V1: V1}
 }
 func NewGlProgramUniform2ivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2ivEXT {
-	return &GlProgramUniform2ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform2ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ(Value)}
 }
 func NewGlProgramUniform2uiEXT(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint) *GlProgramUniform2uiEXT {
 	return &GlProgramUniform2uiEXT{Program: Program, Location: Location, V0: V0, V1: V1}
 }
 func NewGlProgramUniform2uivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2uivEXT {
-	return &GlProgramUniform2uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform2uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ(Value)}
 }
 func NewGlProgramUniform3fEXT(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat, V2 GLfloat) *GlProgramUniform3fEXT {
 	return &GlProgramUniform3fEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
 }
 func NewGlProgramUniform3fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3fvEXT {
-	return &GlProgramUniform3fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform3fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniform3iEXT(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint, V2 GLint) *GlProgramUniform3iEXT {
 	return &GlProgramUniform3iEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
 }
 func NewGlProgramUniform3ivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3ivEXT {
-	return &GlProgramUniform3ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform3ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ(Value)}
 }
 func NewGlProgramUniform3uiEXT(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint) *GlProgramUniform3uiEXT {
 	return &GlProgramUniform3uiEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
 }
 func NewGlProgramUniform3uivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3uivEXT {
-	return &GlProgramUniform3uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform3uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ(Value)}
 }
 func NewGlProgramUniform4fEXT(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat, V2 GLfloat, V3 GLfloat) *GlProgramUniform4fEXT {
 	return &GlProgramUniform4fEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
 }
 func NewGlProgramUniform4fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4fvEXT {
-	return &GlProgramUniform4fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform4fvEXT{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniform4iEXT(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint, V2 GLint, V3 GLint) *GlProgramUniform4iEXT {
 	return &GlProgramUniform4iEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
 }
 func NewGlProgramUniform4ivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4ivEXT {
-	return &GlProgramUniform4ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform4ivEXT{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ(Value)}
 }
 func NewGlProgramUniform4uiEXT(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint, V3 GLuint) *GlProgramUniform4uiEXT {
 	return &GlProgramUniform4uiEXT{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
 }
 func NewGlProgramUniform4uivEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4uivEXT {
-	return &GlProgramUniform4uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+	return &GlProgramUniform4uivEXT{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ(Value)}
 }
 func NewGlProgramUniformHandleui64NV(Program ProgramId, Location UniformLocation, Value GLuint64) *GlProgramUniformHandleui64NV {
 	return &GlProgramUniformHandleui64NV{Program: Program, Location: Location, Value: Value}
 }
 func NewGlProgramUniformHandleui64vNV(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniformHandleui64vNV {
-	return &GlProgramUniformHandleui64vNV{Program: Program, Location: Location, Count: Count, Values: GLuint64ᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformHandleui64vNV{Program: Program, Location: Location, Count: Count, Values: GLuint64ᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix2fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2fvEXT {
-	return &GlProgramUniformMatrix2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix2x3fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2x3fvEXT {
-	return &GlProgramUniformMatrix2x3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix2x3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix2x4fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2x4fvEXT {
-	return &GlProgramUniformMatrix2x4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix2x4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix3fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3fvEXT {
-	return &GlProgramUniformMatrix3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix3x2fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3x2fvEXT {
-	return &GlProgramUniformMatrix3x2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix3x2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix3x4fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3x4fvEXT {
-	return &GlProgramUniformMatrix3x4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix3x4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix4fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4fvEXT {
-	return &GlProgramUniformMatrix4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix4fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix4x2fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4x2fvEXT {
-	return &GlProgramUniformMatrix4x2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix4x2fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlProgramUniformMatrix4x3fvEXT(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4x3fvEXT {
-	return &GlProgramUniformMatrix4x3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlProgramUniformMatrix4x3fvEXT{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlPushGroupMarkerEXT(Length GLsizei, Marker memory.Pointer) *GlPushGroupMarkerEXT {
-	return &GlPushGroupMarkerEXT{Length: Length, Marker: GLcharᶜᵖ{Pointer: Marker}}
+	return &GlPushGroupMarkerEXT{Length: Length, Marker: GLcharᶜᵖ(Marker)}
 }
 func NewGlQueryCounterEXT(Query QueryId, Target GLenum) *GlQueryCounterEXT {
 	return &GlQueryCounterEXT{Query: Query, Target: Target}
@@ -56004,10 +55695,10 @@ func NewGlReadBufferNV(Mode GLenum) *GlReadBufferNV {
 	return &GlReadBufferNV{Mode: Mode}
 }
 func NewGlReadnPixelsEXT(X GLint, Y GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, BufSize GLsizei, Data memory.Pointer) *GlReadnPixelsEXT {
-	return &GlReadnPixelsEXT{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ{Pointer: Data}}
+	return &GlReadnPixelsEXT{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ(Data)}
 }
 func NewGlReadnPixelsKHR(X GLint, Y GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, BufSize GLsizei, Data memory.Pointer) *GlReadnPixelsKHR {
-	return &GlReadnPixelsKHR{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ{Pointer: Data}}
+	return &GlReadnPixelsKHR{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ(Data)}
 }
 func NewGlRenderbufferStorageMultisampleANGLE(Target GLenum, Samples GLsizei, Internalformat GLenum, Width GLsizei, Height GLsizei) *GlRenderbufferStorageMultisampleANGLE {
 	return &GlRenderbufferStorageMultisampleANGLE{Target: Target, Samples: Samples, Internalformat: Internalformat, Width: Width, Height: Height}
@@ -56031,22 +55722,22 @@ func NewGlResolveMultisampleFramebufferAPPLE() *GlResolveMultisampleFramebufferA
 	return &GlResolveMultisampleFramebufferAPPLE{}
 }
 func NewGlSamplerParameterIivOES(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIivOES {
-	return &GlSamplerParameterIivOES{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIivOES{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ(Param)}
 }
 func NewGlSamplerParameterIuivOES(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIuivOES {
-	return &GlSamplerParameterIuivOES{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIuivOES{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ(Param)}
 }
 func NewGlScissorArrayvNV(First GLuint, Count GLsizei, V memory.Pointer) *GlScissorArrayvNV {
-	return &GlScissorArrayvNV{First: First, Count: Count, V: GLintᶜᵖ{Pointer: V}}
+	return &GlScissorArrayvNV{First: First, Count: Count, V: GLintᶜᵖ(V)}
 }
 func NewGlScissorIndexedNV(Index GLuint, Left GLint, Bottom GLint, Width GLsizei, Height GLsizei) *GlScissorIndexedNV {
 	return &GlScissorIndexedNV{Index: Index, Left: Left, Bottom: Bottom, Width: Width, Height: Height}
 }
 func NewGlScissorIndexedvNV(Index GLuint, V memory.Pointer) *GlScissorIndexedvNV {
-	return &GlScissorIndexedvNV{Index: Index, V: GLintᶜᵖ{Pointer: V}}
+	return &GlScissorIndexedvNV{Index: Index, V: GLintᶜᵖ(V)}
 }
 func NewGlSelectPerfMonitorCountersAMD(Monitor GLuint, Enable GLboolean, Group GLuint, NumCounters GLint, CounterList memory.Pointer) *GlSelectPerfMonitorCountersAMD {
-	return &GlSelectPerfMonitorCountersAMD{Monitor: Monitor, Enable: Enable, Group: Group, NumCounters: NumCounters, CounterList: GLuintᵖ{Pointer: CounterList}}
+	return &GlSelectPerfMonitorCountersAMD{Monitor: Monitor, Enable: Enable, Group: Group, NumCounters: NumCounters, CounterList: GLuintᵖ(CounterList)}
 }
 func NewGlSetFenceNV(Fence GLuint, Condition GLenum) *GlSetFenceNV {
 	return &GlSetFenceNV{Fence: Fence, Condition: Condition}
@@ -56055,25 +55746,25 @@ func NewGlStartTilingQCOM(X GLuint, Y GLuint, Width GLuint, Height GLuint, Prese
 	return &GlStartTilingQCOM{X: X, Y: Y, Width: Width, Height: Height, PreserveMask: PreserveMask}
 }
 func NewGlStencilFillPathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, FillMode GLenum, Mask GLuint, TransformType GLenum, TransformValues memory.Pointer) *GlStencilFillPathInstancedNV {
-	return &GlStencilFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, FillMode: FillMode, Mask: Mask, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlStencilFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, FillMode: FillMode, Mask: Mask, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlStencilFillPathNV(Path GLuint, FillMode GLenum, Mask GLuint) *GlStencilFillPathNV {
 	return &GlStencilFillPathNV{Path: Path, FillMode: FillMode, Mask: Mask}
 }
 func NewGlStencilStrokePathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, Reference GLint, Mask GLuint, TransformType GLenum, TransformValues memory.Pointer) *GlStencilStrokePathInstancedNV {
-	return &GlStencilStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, Reference: Reference, Mask: Mask, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlStencilStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, Reference: Reference, Mask: Mask, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlStencilStrokePathNV(Path GLuint, Reference GLint, Mask GLuint) *GlStencilStrokePathNV {
 	return &GlStencilStrokePathNV{Path: Path, Reference: Reference, Mask: Mask}
 }
 func NewGlStencilThenCoverFillPathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, FillMode GLenum, Mask GLuint, CoverMode GLenum, TransformType GLenum, TransformValues memory.Pointer) *GlStencilThenCoverFillPathInstancedNV {
-	return &GlStencilThenCoverFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, FillMode: FillMode, Mask: Mask, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlStencilThenCoverFillPathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, FillMode: FillMode, Mask: Mask, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlStencilThenCoverFillPathNV(Path GLuint, FillMode GLenum, Mask GLuint, CoverMode GLenum) *GlStencilThenCoverFillPathNV {
 	return &GlStencilThenCoverFillPathNV{Path: Path, FillMode: FillMode, Mask: Mask, CoverMode: CoverMode}
 }
 func NewGlStencilThenCoverStrokePathInstancedNV(NumPaths GLsizei, PathNameType GLenum, Paths memory.Pointer, PathBase GLuint, Reference GLint, Mask GLuint, CoverMode GLenum, TransformType GLenum, TransformValues memory.Pointer) *GlStencilThenCoverStrokePathInstancedNV {
-	return &GlStencilThenCoverStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ{Pointer: Paths}, PathBase: PathBase, Reference: Reference, Mask: Mask, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlStencilThenCoverStrokePathInstancedNV{NumPaths: NumPaths, PathNameType: PathNameType, Paths: Voidᶜᵖ(Paths), PathBase: PathBase, Reference: Reference, Mask: Mask, CoverMode: CoverMode, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlStencilThenCoverStrokePathNV(Path GLuint, Reference GLint, Mask GLuint, CoverMode GLenum) *GlStencilThenCoverStrokePathNV {
 	return &GlStencilThenCoverStrokePathNV{Path: Path, Reference: Reference, Mask: Mask, CoverMode: CoverMode}
@@ -56091,16 +55782,16 @@ func NewGlTexBufferRangeOES(Target GLenum, Internalformat GLenum, Buffer BufferI
 	return &GlTexBufferRangeOES{Target: Target, Internalformat: Internalformat, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexImage3DOES {
-	return &GlTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: TexturePointer{Pointer: Pixels}}
+	return &GlTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: TexturePointer(Pixels)}
 }
 func NewGlTexPageCommitmentEXT(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Commit GLboolean) *GlTexPageCommitmentEXT {
 	return &GlTexPageCommitmentEXT{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Commit: Commit}
 }
 func NewGlTexParameterIivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIivOES {
-	return &GlTexParameterIivOES{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIivOES{Target: Target, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexParameterIuivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIuivOES {
-	return &GlTexParameterIuivOES{Target: Target, Pname: Pname, Params: GLuintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIuivOES{Target: Target, Pname: Pname, Params: GLuintᶜᵖ(Params)}
 }
 func NewGlTexStorage1DEXT(Target GLenum, Levels GLsizei, Format GLenum, Width GLsizei) *GlTexStorage1DEXT {
 	return &GlTexStorage1DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width}
@@ -56112,7 +55803,7 @@ func NewGlTexStorage3DEXT(Target GLenum, Levels GLsizei, Format GLenum, Width GL
 	return &GlTexStorage3DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height, Depth: Depth}
 }
 func NewGlTexSubImage3DOES(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexSubImage3DOES {
-	return &GlTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Pixels: TexturePointer{Pointer: Pixels}}
+	return &GlTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Pixels: TexturePointer(Pixels)}
 }
 func NewGlTextureStorage1DEXT(Texture TextureId, Target GLenum, Levels GLsizei, Format GLenum, Width GLsizei) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{Texture: Texture, Target: Target, Levels: Levels, Format: Format, Width: Width}
@@ -56130,31 +55821,31 @@ func NewGlTextureViewOES(Texture TextureId, Target GLenum, Origtexture GLuint, I
 	return &GlTextureViewOES{Texture: Texture, Target: Target, Origtexture: Origtexture, Internalformat: Internalformat, Minlevel: Minlevel, Numlevels: Numlevels, Minlayer: Minlayer, Numlayers: Numlayers}
 }
 func NewGlTransformPathNV(ResultPath GLuint, SrcPath GLuint, TransformType GLenum, TransformValues memory.Pointer) *GlTransformPathNV {
-	return &GlTransformPathNV{ResultPath: ResultPath, SrcPath: SrcPath, TransformType: TransformType, TransformValues: GLfloatᶜᵖ{Pointer: TransformValues}}
+	return &GlTransformPathNV{ResultPath: ResultPath, SrcPath: SrcPath, TransformType: TransformType, TransformValues: GLfloatᶜᵖ(TransformValues)}
 }
 func NewGlUniformHandleui64NV(Location UniformLocation, Value GLuint64) *GlUniformHandleui64NV {
 	return &GlUniformHandleui64NV{Location: Location, Value: Value}
 }
 func NewGlUniformHandleui64vNV(Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlUniformHandleui64vNV {
-	return &GlUniformHandleui64vNV{Location: Location, Count: Count, Value: GLuint64ᶜᵖ{Pointer: Value}}
+	return &GlUniformHandleui64vNV{Location: Location, Count: Count, Value: GLuint64ᶜᵖ(Value)}
 }
 func NewGlUniformMatrix2x3fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix2x3fvNV {
-	return &GlUniformMatrix2x3fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix2x3fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUniformMatrix2x4fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix2x4fvNV {
-	return &GlUniformMatrix2x4fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix2x4fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUniformMatrix3x2fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix3x2fvNV {
-	return &GlUniformMatrix3x2fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix3x2fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUniformMatrix3x4fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix3x4fvNV {
-	return &GlUniformMatrix3x4fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix3x4fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUniformMatrix4x2fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix4x2fvNV {
-	return &GlUniformMatrix4x2fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix4x2fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUniformMatrix4x3fvNV(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix4x3fvNV {
-	return &GlUniformMatrix4x3fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlUniformMatrix4x3fvNV{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlUnmapBufferOES(Target GLenum, Result GLboolean) *GlUnmapBufferOES {
 	return &GlUnmapBufferOES{Target: Target, Result: Result}
@@ -56175,19 +55866,19 @@ func NewGlVertexAttribDivisorNV(Index AttributeLocation, Divisor GLuint) *GlVert
 	return &GlVertexAttribDivisorNV{Index: Index, Divisor: Divisor}
 }
 func NewGlViewportArrayvNV(First GLuint, Count GLsizei, V memory.Pointer) *GlViewportArrayvNV {
-	return &GlViewportArrayvNV{First: First, Count: Count, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlViewportArrayvNV{First: First, Count: Count, V: GLfloatᶜᵖ(V)}
 }
 func NewGlViewportIndexedfNV(Index GLuint, X GLfloat, Y GLfloat, W GLfloat, H GLfloat) *GlViewportIndexedfNV {
 	return &GlViewportIndexedfNV{Index: Index, X: X, Y: Y, W: W, H: H}
 }
 func NewGlViewportIndexedfvNV(Index GLuint, V memory.Pointer) *GlViewportIndexedfvNV {
-	return &GlViewportIndexedfvNV{Index: Index, V: GLfloatᶜᵖ{Pointer: V}}
+	return &GlViewportIndexedfvNV{Index: Index, V: GLfloatᶜᵖ(V)}
 }
 func NewGlWaitSyncAPPLE(Sync GLsync, Flag GLbitfield, Timeout GLuint64) *GlWaitSyncAPPLE {
 	return &GlWaitSyncAPPLE{Sync: Sync, Flag: Flag, Timeout: Timeout}
 }
 func NewGlWeightPathsNV(ResultPath GLuint, NumPaths GLsizei, Paths memory.Pointer, Weights memory.Pointer) *GlWeightPathsNV {
-	return &GlWeightPathsNV{ResultPath: ResultPath, NumPaths: NumPaths, Paths: GLuintᶜᵖ{Pointer: Paths}, Weights: GLfloatᶜᵖ{Pointer: Weights}}
+	return &GlWeightPathsNV{ResultPath: ResultPath, NumPaths: NumPaths, Paths: GLuintᶜᵖ(Paths), Weights: GLfloatᶜᵖ(Weights)}
 }
 func NewGlBlendBarrier() *GlBlendBarrier {
 	return &GlBlendBarrier{}
@@ -56262,13 +55953,13 @@ func NewGlClearBufferfi(Buffer GLenum, Drawbuffer GLint, Depth GLfloat, Stencil 
 	return &GlClearBufferfi{Buffer: Buffer, Drawbuffer: Drawbuffer, Depth: Depth, Stencil: Stencil}
 }
 func NewGlClearBufferfv(Buffer GLenum, Drawbuffer GLint, Value memory.Pointer) *GlClearBufferfv {
-	return &GlClearBufferfv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlClearBufferfv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlClearBufferiv(Buffer GLenum, Drawbuffer GLint, Value memory.Pointer) *GlClearBufferiv {
-	return &GlClearBufferiv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLintᶜᵖ{Pointer: Value}}
+	return &GlClearBufferiv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLintᶜᵖ(Value)}
 }
 func NewGlClearBufferuiv(Buffer GLenum, Drawbuffer GLint, Value memory.Pointer) *GlClearBufferuiv {
-	return &GlClearBufferuiv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLuintᶜᵖ{Pointer: Value}}
+	return &GlClearBufferuiv{Buffer: Buffer, Drawbuffer: Drawbuffer, Value: GLuintᶜᵖ(Value)}
 }
 func NewGlClearColor(R GLfloat, G GLfloat, B GLfloat, A GLfloat) *GlClearColor {
 	return &GlClearColor{R: R, G: G, B: B, A: A}
@@ -56286,16 +55977,16 @@ func NewGlColorMaski(Index DrawBufferIndex, R GLboolean, G GLboolean, B GLboolea
 	return &GlColorMaski{Index: Index, R: R, G: G, B: B, A: A}
 }
 func NewGlDeleteFramebuffers(Count GLsizei, Framebuffers memory.Pointer) *GlDeleteFramebuffers {
-	return &GlDeleteFramebuffers{Count: Count, Framebuffers: FramebufferIdᶜᵖ{Pointer: Framebuffers}}
+	return &GlDeleteFramebuffers{Count: Count, Framebuffers: FramebufferIdᶜᵖ(Framebuffers)}
 }
 func NewGlDeleteRenderbuffers(Count GLsizei, Renderbuffers memory.Pointer) *GlDeleteRenderbuffers {
-	return &GlDeleteRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᶜᵖ{Pointer: Renderbuffers}}
+	return &GlDeleteRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᶜᵖ(Renderbuffers)}
 }
 func NewGlDepthMask(Enabled GLboolean) *GlDepthMask {
 	return &GlDepthMask{Enabled: Enabled}
 }
 func NewGlDrawBuffers(N GLsizei, Bufs memory.Pointer) *GlDrawBuffers {
-	return &GlDrawBuffers{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
+	return &GlDrawBuffers{N: N, Bufs: GLenumᶜᵖ(Bufs)}
 }
 func NewGlFramebufferParameteri(Target GLenum, Pname GLenum, Param GLint) *GlFramebufferParameteri {
 	return &GlFramebufferParameteri{Target: Target, Pname: Pname, Param: Param}
@@ -56313,25 +56004,25 @@ func NewGlFramebufferTextureLayer(Target GLenum, Attachment GLenum, Texture Text
 	return &GlFramebufferTextureLayer{Target: Target, Attachment: Attachment, Texture: Texture, Level: Level, Layer: Layer}
 }
 func NewGlGenFramebuffers(Count GLsizei, Framebuffers memory.Pointer) *GlGenFramebuffers {
-	return &GlGenFramebuffers{Count: Count, Framebuffers: FramebufferIdᵖ{Pointer: Framebuffers}}
+	return &GlGenFramebuffers{Count: Count, Framebuffers: FramebufferIdᵖ(Framebuffers)}
 }
 func NewGlGenRenderbuffers(Count GLsizei, Renderbuffers memory.Pointer) *GlGenRenderbuffers {
-	return &GlGenRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᵖ{Pointer: Renderbuffers}}
+	return &GlGenRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᵖ(Renderbuffers)}
 }
 func NewGlGetFramebufferAttachmentParameteriv(Framebuffer_target GLenum, Attachment GLenum, Parameter GLenum, Value memory.Pointer) *GlGetFramebufferAttachmentParameteriv {
-	return &GlGetFramebufferAttachmentParameteriv{FramebufferTarget: Framebuffer_target, Attachment: Attachment, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetFramebufferAttachmentParameteriv{FramebufferTarget: Framebuffer_target, Attachment: Attachment, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetFramebufferParameteriv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetFramebufferParameteriv {
-	return &GlGetFramebufferParameteriv{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetFramebufferParameteriv{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetRenderbufferParameteriv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetRenderbufferParameteriv {
-	return &GlGetRenderbufferParameteriv{Target: Target, Parameter: Parameter, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetRenderbufferParameteriv{Target: Target, Parameter: Parameter, Values: GLintᵖ(Values)}
 }
 func NewGlInvalidateFramebuffer(Target GLenum, Count GLsizei, Attachments memory.Pointer) *GlInvalidateFramebuffer {
-	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: GLenumᶜᵖ{Pointer: Attachments}}
+	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: GLenumᶜᵖ(Attachments)}
 }
 func NewGlInvalidateSubFramebuffer(Target GLenum, NumAttachments GLsizei, Attachments memory.Pointer, X GLint, Y GLint, Width GLsizei, Height GLsizei) *GlInvalidateSubFramebuffer {
-	return &GlInvalidateSubFramebuffer{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᶜᵖ{Pointer: Attachments}, X: X, Y: Y, Width: Width, Height: Height}
+	return &GlInvalidateSubFramebuffer{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᶜᵖ(Attachments), X: X, Y: Y, Width: Width, Height: Height}
 }
 func NewGlIsFramebuffer(Framebuffer FramebufferId, Result GLboolean) *GlIsFramebuffer {
 	return &GlIsFramebuffer{Framebuffer: Framebuffer, Result: Result}
@@ -56343,10 +56034,10 @@ func NewGlReadBuffer(Src GLenum) *GlReadBuffer {
 	return &GlReadBuffer{Src: Src}
 }
 func NewGlReadPixels(X GLint, Y GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, Data memory.Pointer) *GlReadPixels {
-	return &GlReadPixels{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, Data: Voidᵖ{Pointer: Data}}
+	return &GlReadPixels{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, Data: Voidᵖ(Data)}
 }
 func NewGlReadnPixels(X GLint, Y GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, BufSize GLsizei, Data memory.Pointer) *GlReadnPixels {
-	return &GlReadnPixels{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ{Pointer: Data}}
+	return &GlReadnPixels{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, BufSize: BufSize, Data: Voidᵖ(Data)}
 }
 func NewGlRenderbufferStorage(Target GLenum, Format GLenum, Width GLsizei, Height GLsizei) *GlRenderbufferStorage {
 	return &GlRenderbufferStorage{Target: Target, Format: Format, Width: Width, Height: Height}
@@ -56412,13 +56103,13 @@ func NewGlCreateShader(Type GLenum, Result ShaderId) *GlCreateShader {
 	return &GlCreateShader{Type: Type, Result: Result}
 }
 func NewGlCreateShaderProgramv(Type GLenum, Count GLsizei, Strings memory.Pointer, Result ProgramId) *GlCreateShaderProgramv {
-	return &GlCreateShaderProgramv{Type: Type, Count: Count, Strings: GLcharᶜᵖᶜᵖ{Pointer: Strings}, Result: Result}
+	return &GlCreateShaderProgramv{Type: Type, Count: Count, Strings: GLcharᶜᵖᶜᵖ(Strings), Result: Result}
 }
 func NewGlDeleteProgram(Program ProgramId) *GlDeleteProgram {
 	return &GlDeleteProgram{Program: Program}
 }
 func NewGlDeleteProgramPipelines(N GLsizei, Pipelines memory.Pointer) *GlDeleteProgramPipelines {
-	return &GlDeleteProgramPipelines{N: N, Pipelines: PipelineIdᶜᵖ{Pointer: Pipelines}}
+	return &GlDeleteProgramPipelines{N: N, Pipelines: PipelineIdᶜᵖ(Pipelines)}
 }
 func NewGlDeleteShader(Shader ShaderId) *GlDeleteShader {
 	return &GlDeleteShader{Shader: Shader}
@@ -56433,25 +56124,25 @@ func NewGlDispatchComputeIndirect(Indirect GLintptr) *GlDispatchComputeIndirect 
 	return &GlDispatchComputeIndirect{Indirect: Indirect}
 }
 func NewGlGenProgramPipelines(N GLsizei, Pipelines memory.Pointer) *GlGenProgramPipelines {
-	return &GlGenProgramPipelines{N: N, Pipelines: PipelineIdᵖ{Pointer: Pipelines}}
+	return &GlGenProgramPipelines{N: N, Pipelines: PipelineIdᵖ(Pipelines)}
 }
 func NewGlGetActiveAttrib(Program ProgramId, Location AttributeLocation, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveAttrib {
-	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, VectorCount: GLintᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
+	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ(Buffer_bytes_written), VectorCount: GLintᵖ(Vector_count), Type: GLenumᵖ(Type), Name: GLcharᵖ(Name)}
 }
 func NewGlGetActiveUniform(Program ProgramId, Index UniformIndex, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
-	return &GlGetActiveUniform{Program: Program, Index: Index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, VectorCount: GLintᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
+	return &GlGetActiveUniform{Program: Program, Index: Index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ(Buffer_bytes_written), VectorCount: GLintᵖ(Vector_count), Type: GLenumᵖ(Type), Name: GLcharᵖ(Name)}
 }
 func NewGlGetActiveUniformBlockName(Program ProgramId, Uniform_block_index UniformBlockId, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Name memory.Pointer) *GlGetActiveUniformBlockName {
-	return &GlGetActiveUniformBlockName{Program: Program, UniformBlockIndex: Uniform_block_index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, Name: GLcharᵖ{Pointer: Name}}
+	return &GlGetActiveUniformBlockName{Program: Program, UniformBlockIndex: Uniform_block_index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ(Buffer_bytes_written), Name: GLcharᵖ(Name)}
 }
 func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index UniformBlockId, Parameter_name GLenum, Parameters memory.Pointer) *GlGetActiveUniformBlockiv {
-	return &GlGetActiveUniformBlockiv{Program: Program, UniformBlockIndex: Uniform_block_index, ParameterName: Parameter_name, Parameters: GLintᵖ{Pointer: Parameters}}
+	return &GlGetActiveUniformBlockiv{Program: Program, UniformBlockIndex: Uniform_block_index, ParameterName: Parameter_name, Parameters: GLintᵖ(Parameters)}
 }
 func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count GLsizei, Uniform_indices memory.Pointer, Parameter_name GLenum, Parameters memory.Pointer) *GlGetActiveUniformsiv {
-	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: UniformIndexᶜᵖ{Pointer: Uniform_indices}, ParameterName: Parameter_name, Parameters: GLintᵖ{Pointer: Parameters}}
+	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: UniformIndexᶜᵖ(Uniform_indices), ParameterName: Parameter_name, Parameters: GLintᵖ(Parameters)}
 }
 func NewGlGetAttachedShaders(Program ProgramId, Buffer_length GLsizei, Shaders_length_written memory.Pointer, Shaders memory.Pointer) *GlGetAttachedShaders {
-	return &GlGetAttachedShaders{Program: Program, BufferLength: Buffer_length, ShadersLengthWritten: GLsizeiᵖ{Pointer: Shaders_length_written}, Shaders: ShaderIdᵖ{Pointer: Shaders}}
+	return &GlGetAttachedShaders{Program: Program, BufferLength: Buffer_length, ShadersLengthWritten: GLsizeiᵖ(Shaders_length_written), Shaders: ShaderIdᵖ(Shaders)}
 }
 func NewGlGetAttribLocation(Program ProgramId, Name string, Result GLint) *GlGetAttribLocation {
 	return &GlGetAttribLocation{Program: Program, Name: Name, Result: Result}
@@ -56460,19 +56151,19 @@ func NewGlGetFragDataLocation(Program ProgramId, Name string, Result GLint) *GlG
 	return &GlGetFragDataLocation{Program: Program, Name: Name, Result: Result}
 }
 func NewGlGetProgramBinary(Program ProgramId, BufSize GLsizei, Length memory.Pointer, BinaryFormat memory.Pointer, Binary memory.Pointer) *GlGetProgramBinary {
-	return &GlGetProgramBinary{Program: Program, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, BinaryFormat: GLenumᵖ{Pointer: BinaryFormat}, Binary: Voidᵖ{Pointer: Binary}}
+	return &GlGetProgramBinary{Program: Program, BufSize: BufSize, Length: GLsizeiᵖ(Length), BinaryFormat: GLenumᵖ(BinaryFormat), Binary: Voidᵖ(Binary)}
 }
 func NewGlGetProgramInfoLog(Program ProgramId, Buffer_length GLsizei, String_length_written memory.Pointer, Info memory.Pointer) *GlGetProgramInfoLog {
-	return &GlGetProgramInfoLog{Program: Program, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ{Pointer: String_length_written}, Info: GLcharᵖ{Pointer: Info}}
+	return &GlGetProgramInfoLog{Program: Program, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ(String_length_written), Info: GLcharᵖ(Info)}
 }
 func NewGlGetProgramInterfaceiv(Program ProgramId, ProgramInterface GLenum, Pname GLenum, Params memory.Pointer) *GlGetProgramInterfaceiv {
-	return &GlGetProgramInterfaceiv{Program: Program, ProgramInterface: ProgramInterface, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetProgramInterfaceiv{Program: Program, ProgramInterface: ProgramInterface, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetProgramPipelineInfoLog(Pipeline PipelineId, BufSize GLsizei, Length memory.Pointer, InfoLog memory.Pointer) *GlGetProgramPipelineInfoLog {
-	return &GlGetProgramPipelineInfoLog{Pipeline: Pipeline, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, InfoLog: GLcharᵖ{Pointer: InfoLog}}
+	return &GlGetProgramPipelineInfoLog{Pipeline: Pipeline, BufSize: BufSize, Length: GLsizeiᵖ(Length), InfoLog: GLcharᵖ(InfoLog)}
 }
 func NewGlGetProgramPipelineiv(Pipeline PipelineId, Pname GLenum, Params memory.Pointer) *GlGetProgramPipelineiv {
-	return &GlGetProgramPipelineiv{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetProgramPipelineiv{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetProgramResourceIndex(Program ProgramId, ProgramInterface GLenum, Name string, Result GLuint) *GlGetProgramResourceIndex {
 	return &GlGetProgramResourceIndex{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
@@ -56481,52 +56172,52 @@ func NewGlGetProgramResourceLocation(Program ProgramId, ProgramInterface GLenum,
 	return &GlGetProgramResourceLocation{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
 }
 func NewGlGetProgramResourceName(Program ProgramId, ProgramInterface GLenum, Index GLuint, BufSize GLsizei, Length memory.Pointer, Name memory.Pointer) *GlGetProgramResourceName {
-	return &GlGetProgramResourceName{Program: Program, ProgramInterface: ProgramInterface, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Name: GLcharᵖ{Pointer: Name}}
+	return &GlGetProgramResourceName{Program: Program, ProgramInterface: ProgramInterface, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ(Length), Name: GLcharᵖ(Name)}
 }
 func NewGlGetProgramResourceiv(Program ProgramId, ProgramInterface GLenum, Index GLuint, PropCount GLsizei, Props memory.Pointer, BufSize GLsizei, Length memory.Pointer, Params memory.Pointer) *GlGetProgramResourceiv {
-	return &GlGetProgramResourceiv{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ{Pointer: Props}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetProgramResourceiv{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ(Props), BufSize: BufSize, Length: GLsizeiᵖ(Length), Params: GLintᵖ(Params)}
 }
 func NewGlGetProgramiv(Program ProgramId, Parameter GLenum, Value memory.Pointer) *GlGetProgramiv {
-	return &GlGetProgramiv{Program: Program, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetProgramiv{Program: Program, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetShaderInfoLog(Shader ShaderId, Buffer_length GLsizei, String_length_written memory.Pointer, Info memory.Pointer) *GlGetShaderInfoLog {
-	return &GlGetShaderInfoLog{Shader: Shader, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ{Pointer: String_length_written}, Info: GLcharᵖ{Pointer: Info}}
+	return &GlGetShaderInfoLog{Shader: Shader, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ(String_length_written), Info: GLcharᵖ(Info)}
 }
 func NewGlGetShaderPrecisionFormat(Shader_type GLenum, Precision_type GLenum, Range memory.Pointer, Precision memory.Pointer) *GlGetShaderPrecisionFormat {
-	return &GlGetShaderPrecisionFormat{ShaderType: Shader_type, PrecisionType: Precision_type, Range: GLintᵖ{Pointer: Range}, Precision: GLintᵖ{Pointer: Precision}}
+	return &GlGetShaderPrecisionFormat{ShaderType: Shader_type, PrecisionType: Precision_type, Range: GLintᵖ(Range), Precision: GLintᵖ(Precision)}
 }
 func NewGlGetShaderSource(Shader ShaderId, Buffer_length GLsizei, String_length_written memory.Pointer, Source memory.Pointer) *GlGetShaderSource {
-	return &GlGetShaderSource{Shader: Shader, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ{Pointer: String_length_written}, Source: GLcharᵖ{Pointer: Source}}
+	return &GlGetShaderSource{Shader: Shader, BufferLength: Buffer_length, StringLengthWritten: GLsizeiᵖ(String_length_written), Source: GLcharᵖ(Source)}
 }
 func NewGlGetShaderiv(Shader ShaderId, Parameter GLenum, Value memory.Pointer) *GlGetShaderiv {
-	return &GlGetShaderiv{Shader: Shader, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
+	return &GlGetShaderiv{Shader: Shader, Parameter: Parameter, Value: GLintᵖ(Value)}
 }
 func NewGlGetUniformBlockIndex(Program ProgramId, UniformBlockName string, Result UniformBlockId) *GlGetUniformBlockIndex {
 	return &GlGetUniformBlockIndex{Program: Program, UniformBlockName: UniformBlockName, Result: Result}
 }
 func NewGlGetUniformIndices(Program ProgramId, UniformCount GLsizei, UniformNames memory.Pointer, UniformIndices memory.Pointer) *GlGetUniformIndices {
-	return &GlGetUniformIndices{Program: Program, UniformCount: UniformCount, UniformNames: GLcharᶜᵖᶜᵖ{Pointer: UniformNames}, UniformIndices: UniformIndexᵖ{Pointer: UniformIndices}}
+	return &GlGetUniformIndices{Program: Program, UniformCount: UniformCount, UniformNames: GLcharᶜᵖᶜᵖ(UniformNames), UniformIndices: UniformIndexᵖ(UniformIndices)}
 }
 func NewGlGetUniformLocation(Program ProgramId, Name string, Result UniformLocation) *GlGetUniformLocation {
 	return &GlGetUniformLocation{Program: Program, Name: Name, Result: Result}
 }
 func NewGlGetUniformfv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformfv {
-	return &GlGetUniformfv{Program: Program, Location: Location, Values: GLfloatᵖ{Pointer: Values}}
+	return &GlGetUniformfv{Program: Program, Location: Location, Values: GLfloatᵖ(Values)}
 }
 func NewGlGetUniformiv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformiv {
-	return &GlGetUniformiv{Program: Program, Location: Location, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetUniformiv{Program: Program, Location: Location, Values: GLintᵖ(Values)}
 }
 func NewGlGetUniformuiv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformuiv {
-	return &GlGetUniformuiv{Program: Program, Location: Location, Values: GLuintᵖ{Pointer: Values}}
+	return &GlGetUniformuiv{Program: Program, Location: Location, Values: GLuintᵖ(Values)}
 }
 func NewGlGetnUniformfv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformfv {
-	return &GlGetnUniformfv{Program: Program, Location: Location, BufSize: BufSize, Values: GLfloatᵖ{Pointer: Values}}
+	return &GlGetnUniformfv{Program: Program, Location: Location, BufSize: BufSize, Values: GLfloatᵖ(Values)}
 }
 func NewGlGetnUniformiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformiv {
-	return &GlGetnUniformiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetnUniformiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLintᵖ(Values)}
 }
 func NewGlGetnUniformuiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformuiv {
-	return &GlGetnUniformuiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLuintᵖ{Pointer: Values}}
+	return &GlGetnUniformuiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLuintᵖ(Values)}
 }
 func NewGlIsProgram(Program ProgramId, Result GLboolean) *GlIsProgram {
 	return &GlIsProgram{Program: Program, Result: Result}
@@ -56547,7 +56238,7 @@ func NewGlMemoryBarrierByRegion(Barriers GLbitfield) *GlMemoryBarrierByRegion {
 	return &GlMemoryBarrierByRegion{Barriers: Barriers}
 }
 func NewGlProgramBinary(Program ProgramId, BinaryFormat GLenum, Binary memory.Pointer, Length GLsizei) *GlProgramBinary {
-	return &GlProgramBinary{Program: Program, BinaryFormat: BinaryFormat, Binary: Voidᶜᵖ{Pointer: Binary}, Length: Length}
+	return &GlProgramBinary{Program: Program, BinaryFormat: BinaryFormat, Binary: Voidᶜᵖ(Binary), Length: Length}
 }
 func NewGlProgramParameteri(Program ProgramId, Pname GLenum, Value GLint) *GlProgramParameteri {
 	return &GlProgramParameteri{Program: Program, Pname: Pname, Value: Value}
@@ -56556,211 +56247,211 @@ func NewGlProgramUniform1f(Program ProgramId, Location UniformLocation, Value0 G
 	return &GlProgramUniform1f{Program: Program, Location: Location, Value0: Value0}
 }
 func NewGlProgramUniform1fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1fv {
-	return &GlProgramUniform1fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform1fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniform1i(Program ProgramId, Location UniformLocation, Value0 GLint) *GlProgramUniform1i {
 	return &GlProgramUniform1i{Program: Program, Location: Location, Value0: Value0}
 }
 func NewGlProgramUniform1iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1iv {
-	return &GlProgramUniform1iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform1iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlProgramUniform1ui(Program ProgramId, Location UniformLocation, Value0 GLuint) *GlProgramUniform1ui {
 	return &GlProgramUniform1ui{Program: Program, Location: Location, Value0: Value0}
 }
 func NewGlProgramUniform1uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1uiv {
-	return &GlProgramUniform1uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform1uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlProgramUniform2f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat) *GlProgramUniform2f {
 	return &GlProgramUniform2f{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlProgramUniform2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2fv {
-	return &GlProgramUniform2fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform2fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniform2i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint) *GlProgramUniform2i {
 	return &GlProgramUniform2i{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlProgramUniform2iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2iv {
-	return &GlProgramUniform2iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform2iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlProgramUniform2ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint) *GlProgramUniform2ui {
 	return &GlProgramUniform2ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlProgramUniform2uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2uiv {
-	return &GlProgramUniform2uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform2uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlProgramUniform3f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat) *GlProgramUniform3f {
 	return &GlProgramUniform3f{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlProgramUniform3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3fv {
-	return &GlProgramUniform3fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform3fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniform3i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint) *GlProgramUniform3i {
 	return &GlProgramUniform3i{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlProgramUniform3iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3iv {
-	return &GlProgramUniform3iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform3iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlProgramUniform3ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint) *GlProgramUniform3ui {
 	return &GlProgramUniform3ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlProgramUniform3uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3uiv {
-	return &GlProgramUniform3uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform3uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlProgramUniform4f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat, Value3 GLfloat) *GlProgramUniform4f {
 	return &GlProgramUniform4f{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlProgramUniform4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4fv {
-	return &GlProgramUniform4fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform4fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniform4i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint, Value3 GLint) *GlProgramUniform4i {
 	return &GlProgramUniform4i{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlProgramUniform4iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4iv {
-	return &GlProgramUniform4iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform4iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlProgramUniform4ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint, Value3 GLuint) *GlProgramUniform4ui {
 	return &GlProgramUniform4ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlProgramUniform4uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4uiv {
-	return &GlProgramUniform4uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlProgramUniform4uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2fv {
-	return &GlProgramUniformMatrix2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix2x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2x3fv {
-	return &GlProgramUniformMatrix2x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix2x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix2x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2x4fv {
-	return &GlProgramUniformMatrix2x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix2x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3fv {
-	return &GlProgramUniformMatrix3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix3x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3x2fv {
-	return &GlProgramUniformMatrix3x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix3x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix3x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3x4fv {
-	return &GlProgramUniformMatrix3x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix3x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4fv {
-	return &GlProgramUniformMatrix4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix4x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4x2fv {
-	return &GlProgramUniformMatrix4x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix4x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlProgramUniformMatrix4x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4x3fv {
-	return &GlProgramUniformMatrix4x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlProgramUniformMatrix4x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlReleaseShaderCompiler() *GlReleaseShaderCompiler {
 	return &GlReleaseShaderCompiler{}
 }
 func NewGlShaderBinary(Count GLsizei, Shaders memory.Pointer, Binary_format GLenum, Binary memory.Pointer, Binary_size GLsizei) *GlShaderBinary {
-	return &GlShaderBinary{Count: Count, Shaders: ShaderIdᶜᵖ{Pointer: Shaders}, BinaryFormat: Binary_format, Binary: Voidᶜᵖ{Pointer: Binary}, BinarySize: Binary_size}
+	return &GlShaderBinary{Count: Count, Shaders: ShaderIdᶜᵖ(Shaders), BinaryFormat: Binary_format, Binary: Voidᶜᵖ(Binary), BinarySize: Binary_size}
 }
 func NewGlShaderSource(Shader ShaderId, Count GLsizei, Source memory.Pointer, Length memory.Pointer) *GlShaderSource {
-	return &GlShaderSource{Shader: Shader, Count: Count, Source: GLcharᶜᵖᶜᵖ{Pointer: Source}, Length: GLintᶜᵖ{Pointer: Length}}
+	return &GlShaderSource{Shader: Shader, Count: Count, Source: GLcharᶜᵖᶜᵖ(Source), Length: GLintᶜᵖ(Length)}
 }
 func NewGlUniform1f(Location UniformLocation, Value GLfloat) *GlUniform1f {
 	return &GlUniform1f{Location: Location, Value: Value}
 }
 func NewGlUniform1fv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform1fv {
-	return &GlUniform1fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniform1fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniform1i(Location UniformLocation, Value GLint) *GlUniform1i {
 	return &GlUniform1i{Location: Location, Value: Value}
 }
 func NewGlUniform1iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform1iv {
-	return &GlUniform1iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlUniform1iv{Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlUniform1ui(Location UniformLocation, Value0 GLuint) *GlUniform1ui {
 	return &GlUniform1ui{Location: Location, Value0: Value0}
 }
 func NewGlUniform1uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform1uiv {
-	return &GlUniform1uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlUniform1uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlUniform2f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat) *GlUniform2f {
 	return &GlUniform2f{Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlUniform2fv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform2fv {
-	return &GlUniform2fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniform2fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniform2i(Location UniformLocation, Value0 GLint, Value1 GLint) *GlUniform2i {
 	return &GlUniform2i{Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlUniform2iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform2iv {
-	return &GlUniform2iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlUniform2iv{Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlUniform2ui(Location UniformLocation, Value0 GLuint, Value1 GLuint) *GlUniform2ui {
 	return &GlUniform2ui{Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlUniform2uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform2uiv {
-	return &GlUniform2uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlUniform2uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlUniform3f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat) *GlUniform3f {
 	return &GlUniform3f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlUniform3fv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform3fv {
-	return &GlUniform3fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniform3fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniform3i(Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint) *GlUniform3i {
 	return &GlUniform3i{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlUniform3iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform3iv {
-	return &GlUniform3iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlUniform3iv{Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlUniform3ui(Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint) *GlUniform3ui {
 	return &GlUniform3ui{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlUniform3uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform3uiv {
-	return &GlUniform3uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlUniform3uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlUniform4f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat, Value3 GLfloat) *GlUniform4f {
 	return &GlUniform4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlUniform4fv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform4fv {
-	return &GlUniform4fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniform4fv{Location: Location, Count: Count, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniform4i(Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint, Value3 GLint) *GlUniform4i {
 	return &GlUniform4i{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlUniform4iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform4iv {
-	return &GlUniform4iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlUniform4iv{Location: Location, Count: Count, Values: GLintᶜᵖ(Values)}
 }
 func NewGlUniform4ui(Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint, Value3 GLuint) *GlUniform4ui {
 	return &GlUniform4ui{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlUniform4uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform4uiv {
-	return &GlUniform4uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlUniform4uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index UniformBlockId, Uniform_block_binding GLuint) *GlUniformBlockBinding {
 	return &GlUniformBlockBinding{Program: Program, UniformBlockIndex: Uniform_block_index, UniformBlockBinding: Uniform_block_binding}
 }
 func NewGlUniformMatrix2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2fv {
-	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix2x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2x3fv {
-	return &GlUniformMatrix2x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix2x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix2x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2x4fv {
-	return &GlUniformMatrix2x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix2x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3fv {
-	return &GlUniformMatrix3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix3x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3x2fv {
-	return &GlUniformMatrix3x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix3x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix3x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3x4fv {
-	return &GlUniformMatrix3x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix3x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4fv {
-	return &GlUniformMatrix4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix4x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4x2fv {
-	return &GlUniformMatrix4x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix4x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUniformMatrix4x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4x3fv {
-	return &GlUniformMatrix4x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
+	return &GlUniformMatrix4x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ(Values)}
 }
 func NewGlUseProgram(Program ProgramId) *GlUseProgram {
 	return &GlUseProgram{Program: Program}
@@ -56784,7 +56475,7 @@ func NewGlFrontFace(Orientation GLenum) *GlFrontFace {
 	return &GlFrontFace{Orientation: Orientation}
 }
 func NewGlGetMultisamplefv(Pname GLenum, Index GLuint, Val memory.Pointer) *GlGetMultisamplefv {
-	return &GlGetMultisamplefv{Pname: Pname, Index: Index, Val: GLfloatᵖ{Pointer: Val}}
+	return &GlGetMultisamplefv{Pname: Pname, Index: Index, Val: GLfloatᵖ(Val)}
 }
 func NewGlLineWidth(Width GLfloat) *GlLineWidth {
 	return &GlLineWidth{Width: Width}
@@ -56799,34 +56490,34 @@ func NewGlViewport(X GLint, Y GLint, Width GLsizei, Height GLsizei) *GlViewport 
 	return &GlViewport{X: X, Y: Y, Width: Width, Height: Height}
 }
 func NewGlGetBooleani_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetBooleani_v {
-	return &GlGetBooleani_v{Param: Param, Index: Index, Values: GLbooleanᵖ{Pointer: Values}}
+	return &GlGetBooleani_v{Param: Param, Index: Index, Values: GLbooleanᵖ(Values)}
 }
 func NewGlGetBooleanv(Param GLenum, Values memory.Pointer) *GlGetBooleanv {
-	return &GlGetBooleanv{Param: Param, Values: GLbooleanᵖ{Pointer: Values}}
+	return &GlGetBooleanv{Param: Param, Values: GLbooleanᵖ(Values)}
 }
 func NewGlGetFloatv(Param GLenum, Values memory.Pointer) *GlGetFloatv {
-	return &GlGetFloatv{Param: Param, Values: GLfloatᵖ{Pointer: Values}}
+	return &GlGetFloatv{Param: Param, Values: GLfloatᵖ(Values)}
 }
 func NewGlGetInteger64i_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetInteger64i_v {
-	return &GlGetInteger64i_v{Param: Param, Index: Index, Values: GLint64ᵖ{Pointer: Values}}
+	return &GlGetInteger64i_v{Param: Param, Index: Index, Values: GLint64ᵖ(Values)}
 }
 func NewGlGetInteger64v(Param GLenum, Values memory.Pointer) *GlGetInteger64v {
-	return &GlGetInteger64v{Param: Param, Values: GLint64ᵖ{Pointer: Values}}
+	return &GlGetInteger64v{Param: Param, Values: GLint64ᵖ(Values)}
 }
 func NewGlGetIntegeri_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetIntegeri_v {
-	return &GlGetIntegeri_v{Param: Param, Index: Index, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetIntegeri_v{Param: Param, Index: Index, Values: GLintᵖ(Values)}
 }
 func NewGlGetIntegerv(Param GLenum, Values memory.Pointer) *GlGetIntegerv {
-	return &GlGetIntegerv{Param: Param, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetIntegerv{Param: Param, Values: GLintᵖ(Values)}
 }
 func NewGlGetInternalformativ(Target GLenum, Internalformat GLenum, Pname GLenum, BufSize GLsizei, Params memory.Pointer) *GlGetInternalformativ {
-	return &GlGetInternalformativ{Target: Target, Internalformat: Internalformat, Pname: Pname, BufSize: BufSize, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetInternalformativ{Target: Target, Internalformat: Internalformat, Pname: Pname, BufSize: BufSize, Params: GLintᵖ(Params)}
 }
 func NewGlGetString(Param GLenum, Result memory.Pointer) *GlGetString {
-	return &GlGetString{Param: Param, Result: GLubyteᶜᵖ{Pointer: Result}}
+	return &GlGetString{Param: Param, Result: GLubyteᶜᵖ(Result)}
 }
 func NewGlGetStringi(Name GLenum, Index GLuint, Result memory.Pointer) *GlGetStringi {
-	return &GlGetStringi{Name: Name, Index: Index, Result: GLubyteᶜᵖ{Pointer: Result}}
+	return &GlGetStringi{Name: Name, Index: Index, Result: GLubyteᶜᵖ(Result)}
 }
 func NewGlIsEnabled(Capability GLenum, Result GLboolean) *GlIsEnabled {
 	return &GlIsEnabled{Capability: Capability, Result: Result}
@@ -56844,7 +56535,7 @@ func NewGlFenceSync(Condition GLenum, SyncFlags GLbitfield, Result GLsync) *GlFe
 	return &GlFenceSync{Condition: Condition, SyncFlags: SyncFlags, Result: Result}
 }
 func NewGlGetSynciv(Sync GLsync, Pname GLenum, BufSize GLsizei, Length memory.Pointer, Values memory.Pointer) *GlGetSynciv {
-	return &GlGetSynciv{Sync: Sync, Pname: Pname, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetSynciv{Sync: Sync, Pname: Pname, BufSize: BufSize, Length: GLsizeiᵖ(Length), Values: GLintᵖ(Values)}
 }
 func NewGlIsSync(Sync GLsync, Result GLboolean) *GlIsSync {
 	return &GlIsSync{Sync: Sync, Result: Result}
@@ -56865,16 +56556,16 @@ func NewGlBindTexture(Target GLenum, Texture TextureId) *GlBindTexture {
 	return &GlBindTexture{Target: Target, Texture: Texture}
 }
 func NewGlCompressedTexImage2D(Target GLenum, Level GLint, Format GLenum, Width GLsizei, Height GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage2D {
-	return &GlCompressedTexImage2D{Target: Target, Level: Level, Format: Format, Width: Width, Height: Height, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexImage2D{Target: Target, Level: Level, Format: Format, Width: Width, Height: Height, Border: Border, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCompressedTexImage3D(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage3D {
-	return &GlCompressedTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCompressedTexSubImage2D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Width GLsizei, Height GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage2D {
-	return &GlCompressedTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCompressedTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3D {
-	return &GlCompressedTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
+	return &GlCompressedTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer(Data)}
 }
 func NewGlCopyImageSubData(SrcName GLuint, SrcTarget GLenum, SrcLevel GLint, SrcX GLint, SrcY GLint, SrcZ GLint, DstName GLuint, DstTarget GLenum, DstLevel GLint, DstX GLint, DstY GLint, DstZ GLint, SrcWidth GLsizei, SrcHeight GLsizei, SrcDepth GLsizei) *GlCopyImageSubData {
 	return &GlCopyImageSubData{SrcName: SrcName, SrcTarget: SrcTarget, SrcLevel: SrcLevel, SrcX: SrcX, SrcY: SrcY, SrcZ: SrcZ, DstName: DstName, DstTarget: DstTarget, DstLevel: DstLevel, DstX: DstX, DstY: DstY, DstZ: DstZ, SrcWidth: SrcWidth, SrcHeight: SrcHeight, SrcDepth: SrcDepth}
@@ -56889,49 +56580,49 @@ func NewGlCopyTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset G
 	return &GlCopyTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, X: X, Y: Y, Width: Width, Height: Height}
 }
 func NewGlDeleteSamplers(Count GLsizei, Samplers memory.Pointer) *GlDeleteSamplers {
-	return &GlDeleteSamplers{Count: Count, Samplers: SamplerIdᶜᵖ{Pointer: Samplers}}
+	return &GlDeleteSamplers{Count: Count, Samplers: SamplerIdᶜᵖ(Samplers)}
 }
 func NewGlDeleteTextures(Count GLsizei, Textures memory.Pointer) *GlDeleteTextures {
-	return &GlDeleteTextures{Count: Count, Textures: TextureIdᶜᵖ{Pointer: Textures}}
+	return &GlDeleteTextures{Count: Count, Textures: TextureIdᶜᵖ(Textures)}
 }
 func NewGlGenSamplers(Count GLsizei, Samplers memory.Pointer) *GlGenSamplers {
-	return &GlGenSamplers{Count: Count, Samplers: SamplerIdᵖ{Pointer: Samplers}}
+	return &GlGenSamplers{Count: Count, Samplers: SamplerIdᵖ(Samplers)}
 }
 func NewGlGenTextures(Count GLsizei, Textures memory.Pointer) *GlGenTextures {
-	return &GlGenTextures{Count: Count, Textures: TextureIdᵖ{Pointer: Textures}}
+	return &GlGenTextures{Count: Count, Textures: TextureIdᵖ(Textures)}
 }
 func NewGlGenerateMipmap(Target GLenum) *GlGenerateMipmap {
 	return &GlGenerateMipmap{Target: Target}
 }
 func NewGlGetSamplerParameterIiv(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIiv {
-	return &GlGetSamplerParameterIiv{Sampler: Sampler, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIiv{Sampler: Sampler, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetSamplerParameterIuiv(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterIuiv {
-	return &GlGetSamplerParameterIuiv{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterIuiv{Sampler: Sampler, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetSamplerParameterfv(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameterfv {
-	return &GlGetSamplerParameterfv{Sampler: Sampler, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetSamplerParameterfv{Sampler: Sampler, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetSamplerParameteriv(Sampler SamplerId, Pname GLenum, Params memory.Pointer) *GlGetSamplerParameteriv {
-	return &GlGetSamplerParameteriv{Sampler: Sampler, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetSamplerParameteriv{Sampler: Sampler, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexLevelParameterfv(Target GLenum, Level GLint, Pname GLenum, Params memory.Pointer) *GlGetTexLevelParameterfv {
-	return &GlGetTexLevelParameterfv{Target: Target, Level: Level, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetTexLevelParameterfv{Target: Target, Level: Level, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetTexLevelParameteriv(Target GLenum, Level GLint, Pname GLenum, Params memory.Pointer) *GlGetTexLevelParameteriv {
-	return &GlGetTexLevelParameteriv{Target: Target, Level: Level, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexLevelParameteriv{Target: Target, Level: Level, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexParameterIiv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIiv {
-	return &GlGetTexParameterIiv{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIiv{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexParameterIuiv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIuiv {
-	return &GlGetTexParameterIuiv{Target: Target, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetTexParameterIuiv{Target: Target, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetTexParameterfv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetTexParameterfv {
-	return &GlGetTexParameterfv{Target: Target, Parameter: Parameter, Values: GLfloatᵖ{Pointer: Values}}
+	return &GlGetTexParameterfv{Target: Target, Parameter: Parameter, Values: GLfloatᵖ(Values)}
 }
 func NewGlGetTexParameteriv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetTexParameteriv {
-	return &GlGetTexParameteriv{Target: Target, Parameter: Parameter, Values: GLintᵖ{Pointer: Values}}
+	return &GlGetTexParameteriv{Target: Target, Parameter: Parameter, Values: GLintᵖ(Values)}
 }
 func NewGlIsSampler(Sampler SamplerId, Result GLboolean) *GlIsSampler {
 	return &GlIsSampler{Sampler: Sampler, Result: Result}
@@ -56943,22 +56634,22 @@ func NewGlPixelStorei(Parameter GLenum, Value GLint) *GlPixelStorei {
 	return &GlPixelStorei{Parameter: Parameter, Value: Value}
 }
 func NewGlSamplerParameterIiv(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIiv {
-	return &GlSamplerParameterIiv{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIiv{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ(Param)}
 }
 func NewGlSamplerParameterIuiv(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterIuiv {
-	return &GlSamplerParameterIuiv{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterIuiv{Sampler: Sampler, Pname: Pname, Param: GLuintᶜᵖ(Param)}
 }
 func NewGlSamplerParameterf(Sampler SamplerId, Pname GLenum, Param GLfloat) *GlSamplerParameterf {
 	return &GlSamplerParameterf{Sampler: Sampler, Pname: Pname, Param: Param}
 }
 func NewGlSamplerParameterfv(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameterfv {
-	return &GlSamplerParameterfv{Sampler: Sampler, Pname: Pname, Param: GLfloatᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameterfv{Sampler: Sampler, Pname: Pname, Param: GLfloatᶜᵖ(Param)}
 }
 func NewGlSamplerParameteri(Sampler SamplerId, Pname GLenum, Param GLint) *GlSamplerParameteri {
 	return &GlSamplerParameteri{Sampler: Sampler, Pname: Pname, Param: Param}
 }
 func NewGlSamplerParameteriv(Sampler SamplerId, Pname GLenum, Param memory.Pointer) *GlSamplerParameteriv {
-	return &GlSamplerParameteriv{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ{Pointer: Param}}
+	return &GlSamplerParameteriv{Sampler: Sampler, Pname: Pname, Param: GLintᶜᵖ(Param)}
 }
 func NewGlTexBuffer(Target GLenum, Internalformat GLenum, Buffer BufferId) *GlTexBuffer {
 	return &GlTexBuffer{Target: Target, Internalformat: Internalformat, Buffer: Buffer}
@@ -56967,28 +56658,28 @@ func NewGlTexBufferRange(Target GLenum, Internalformat GLenum, Buffer BufferId, 
 	return &GlTexBufferRange{Target: Target, Internalformat: Internalformat, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlTexImage2D(Target GLenum, Level GLint, Internal_format GLint, Width GLsizei, Height GLsizei, Border GLint, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexImage2D {
-	return &GlTexImage2D{Target: Target, Level: Level, InternalFormat: Internal_format, Width: Width, Height: Height, Border: Border, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
+	return &GlTexImage2D{Target: Target, Level: Level, InternalFormat: Internal_format, Width: Width, Height: Height, Border: Border, Format: Format, Type: Type, Data: TexturePointer(Data)}
 }
 func NewGlTexImage3D(Target GLenum, Level GLint, Internalformat GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexImage3D {
-	return &GlTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
+	return &GlTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Data: TexturePointer(Data)}
 }
 func NewGlTexParameterIiv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIiv {
-	return &GlTexParameterIiv{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIiv{Target: Target, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexParameterIuiv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIuiv {
-	return &GlTexParameterIuiv{Target: Target, Pname: Pname, Params: GLuintᶜᵖ{Pointer: Params}}
+	return &GlTexParameterIuiv{Target: Target, Pname: Pname, Params: GLuintᶜᵖ(Params)}
 }
 func NewGlTexParameterf(Target GLenum, Parameter GLenum, Value GLfloat) *GlTexParameterf {
 	return &GlTexParameterf{Target: Target, Parameter: Parameter, Value: Value}
 }
 func NewGlTexParameterfv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterfv {
-	return &GlTexParameterfv{Target: Target, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlTexParameterfv{Target: Target, Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlTexParameteri(Target GLenum, Parameter GLenum, Value GLint) *GlTexParameteri {
 	return &GlTexParameteri{Target: Target, Parameter: Parameter, Value: Value}
 }
 func NewGlTexParameteriv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameteriv {
-	return &GlTexParameteriv{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexParameteriv{Target: Target, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexStorage2D(Target GLenum, Levels GLsizei, Internalformat GLenum, Width GLsizei, Height GLsizei) *GlTexStorage2D {
 	return &GlTexStorage2D{Target: Target, Levels: Levels, Internalformat: Internalformat, Width: Width, Height: Height}
@@ -57003,10 +56694,10 @@ func NewGlTexStorage3DMultisample(Target GLenum, Samples GLsizei, Internalformat
 	return &GlTexStorage3DMultisample{Target: Target, Samples: Samples, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Fixedsamplelocations: Fixedsamplelocations}
 }
 func NewGlTexSubImage2D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexSubImage2D {
-	return &GlTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
+	return &GlTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, Type: Type, Data: TexturePointer(Data)}
 }
 func NewGlTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexSubImage3D {
-	return &GlTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
+	return &GlTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Data: TexturePointer(Data)}
 }
 func NewGlBeginTransformFeedback(PrimitiveMode GLenum) *GlBeginTransformFeedback {
 	return &GlBeginTransformFeedback{PrimitiveMode: PrimitiveMode}
@@ -57015,16 +56706,16 @@ func NewGlBindTransformFeedback(Target GLenum, Id TransformFeedbackId) *GlBindTr
 	return &GlBindTransformFeedback{Target: Target, Id: Id}
 }
 func NewGlDeleteTransformFeedbacks(N GLsizei, Ids memory.Pointer) *GlDeleteTransformFeedbacks {
-	return &GlDeleteTransformFeedbacks{N: N, Ids: TransformFeedbackIdᶜᵖ{Pointer: Ids}}
+	return &GlDeleteTransformFeedbacks{N: N, Ids: TransformFeedbackIdᶜᵖ(Ids)}
 }
 func NewGlEndTransformFeedback() *GlEndTransformFeedback {
 	return &GlEndTransformFeedback{}
 }
 func NewGlGenTransformFeedbacks(N GLsizei, Ids memory.Pointer) *GlGenTransformFeedbacks {
-	return &GlGenTransformFeedbacks{N: N, Ids: TransformFeedbackIdᵖ{Pointer: Ids}}
+	return &GlGenTransformFeedbacks{N: N, Ids: TransformFeedbackIdᵖ(Ids)}
 }
 func NewGlGetTransformFeedbackVarying(Program ProgramId, Index GLuint, BufSize GLsizei, Length memory.Pointer, Size memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetTransformFeedbackVarying {
-	return &GlGetTransformFeedbackVarying{Program: Program, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Size: GLsizeiᵖ{Pointer: Size}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
+	return &GlGetTransformFeedbackVarying{Program: Program, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ(Length), Size: GLsizeiᵖ(Size), Type: GLenumᵖ(Type), Name: GLcharᵖ(Name)}
 }
 func NewGlIsTransformFeedback(Id TransformFeedbackId, Result GLboolean) *GlIsTransformFeedback {
 	return &GlIsTransformFeedback{Id: Id, Result: Result}
@@ -57036,7 +56727,7 @@ func NewGlResumeTransformFeedback() *GlResumeTransformFeedback {
 	return &GlResumeTransformFeedback{}
 }
 func NewGlTransformFeedbackVaryings(Program ProgramId, Count GLsizei, Varyings memory.Pointer, BufferMode GLenum) *GlTransformFeedbackVaryings {
-	return &GlTransformFeedbackVaryings{Program: Program, Count: Count, Varyings: GLcharᶜᵖᶜᵖ{Pointer: Varyings}, BufferMode: BufferMode}
+	return &GlTransformFeedbackVaryings{Program: Program, Count: Count, Varyings: GLcharᶜᵖᶜᵖ(Varyings), BufferMode: BufferMode}
 }
 func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray {
 	return &GlBindVertexArray{Array: Array}
@@ -57045,7 +56736,7 @@ func NewGlBindVertexBuffer(Binding_index VertexBufferBindingIndex, Buffer Buffer
 	return &GlBindVertexBuffer{BindingIndex: Binding_index, Buffer: Buffer, Offset: Offset, Stride: Stride}
 }
 func NewGlDeleteVertexArrays(Count GLsizei, Arrays memory.Pointer) *GlDeleteVertexArrays {
-	return &GlDeleteVertexArrays{Count: Count, Arrays: VertexArrayIdᶜᵖ{Pointer: Arrays}}
+	return &GlDeleteVertexArrays{Count: Count, Arrays: VertexArrayIdᶜᵖ(Arrays)}
 }
 func NewGlDisableVertexAttribArray(Location AttributeLocation) *GlDisableVertexAttribArray {
 	return &GlDisableVertexAttribArray{Location: Location}
@@ -57054,22 +56745,22 @@ func NewGlEnableVertexAttribArray(Location AttributeLocation) *GlEnableVertexAtt
 	return &GlEnableVertexAttribArray{Location: Location}
 }
 func NewGlGenVertexArrays(Count GLsizei, Arrays memory.Pointer) *GlGenVertexArrays {
-	return &GlGenVertexArrays{Count: Count, Arrays: VertexArrayIdᵖ{Pointer: Arrays}}
+	return &GlGenVertexArrays{Count: Count, Arrays: VertexArrayIdᵖ(Arrays)}
 }
 func NewGlGetVertexAttribIiv(Index AttributeLocation, Pname GLenum, Params memory.Pointer) *GlGetVertexAttribIiv {
-	return &GlGetVertexAttribIiv{Index: Index, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetVertexAttribIiv{Index: Index, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetVertexAttribIuiv(Index AttributeLocation, Pname GLenum, Params memory.Pointer) *GlGetVertexAttribIuiv {
-	return &GlGetVertexAttribIuiv{Index: Index, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
+	return &GlGetVertexAttribIuiv{Index: Index, Pname: Pname, Params: GLuintᵖ(Params)}
 }
 func NewGlGetVertexAttribPointerv(Index AttributeLocation, Pname GLenum, Pointer memory.Pointer) *GlGetVertexAttribPointerv {
-	return &GlGetVertexAttribPointerv{Index: Index, Pname: Pname, Pointer: Voidᵖᵖ{Pointer: Pointer}}
+	return &GlGetVertexAttribPointerv{Index: Index, Pname: Pname, Pointer: Voidᵖᵖ(Pointer)}
 }
 func NewGlGetVertexAttribfv(Index AttributeLocation, Pname GLenum, Params memory.Pointer) *GlGetVertexAttribfv {
-	return &GlGetVertexAttribfv{Index: Index, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetVertexAttribfv{Index: Index, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetVertexAttribiv(Index AttributeLocation, Pname GLenum, Params memory.Pointer) *GlGetVertexAttribiv {
-	return &GlGetVertexAttribiv{Index: Index, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetVertexAttribiv{Index: Index, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlIsVertexArray(Array VertexArrayId, Result GLboolean) *GlIsVertexArray {
 	return &GlIsVertexArray{Array: Array, Result: Result}
@@ -57078,25 +56769,25 @@ func NewGlVertexAttrib1f(Location AttributeLocation, Value0 GLfloat) *GlVertexAt
 	return &GlVertexAttrib1f{Location: Location, Value0: Value0}
 }
 func NewGlVertexAttrib1fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib1fv {
-	return &GlVertexAttrib1fv{Location: Location, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlVertexAttrib1fv{Location: Location, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlVertexAttrib2f(Location AttributeLocation, Value0 GLfloat, Value1 GLfloat) *GlVertexAttrib2f {
 	return &GlVertexAttrib2f{Location: Location, Value0: Value0, Value1: Value1}
 }
 func NewGlVertexAttrib2fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib2fv {
-	return &GlVertexAttrib2fv{Location: Location, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlVertexAttrib2fv{Location: Location, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlVertexAttrib3f(Location AttributeLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat) *GlVertexAttrib3f {
 	return &GlVertexAttrib3f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
 func NewGlVertexAttrib3fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib3fv {
-	return &GlVertexAttrib3fv{Location: Location, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlVertexAttrib3fv{Location: Location, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlVertexAttrib4f(Location AttributeLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat, Value3 GLfloat) *GlVertexAttrib4f {
 	return &GlVertexAttrib4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlVertexAttrib4fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib4fv {
-	return &GlVertexAttrib4fv{Location: Location, Value: GLfloatᶜᵖ{Pointer: Value}}
+	return &GlVertexAttrib4fv{Location: Location, Value: GLfloatᶜᵖ(Value)}
 }
 func NewGlVertexAttribBinding(Index AttributeLocation, Binding_index VertexBufferBindingIndex) *GlVertexAttribBinding {
 	return &GlVertexAttribBinding{Index: Index, BindingIndex: Binding_index}
@@ -57111,91 +56802,91 @@ func NewGlVertexAttribI4i(Index AttributeLocation, X GLint, Y GLint, Z GLint, W 
 	return &GlVertexAttribI4i{Index: Index, X: X, Y: Y, Z: Z, W: W}
 }
 func NewGlVertexAttribI4iv(Index AttributeLocation, Values memory.Pointer) *GlVertexAttribI4iv {
-	return &GlVertexAttribI4iv{Index: Index, Values: GLintᶜᵖ{Pointer: Values}}
+	return &GlVertexAttribI4iv{Index: Index, Values: GLintᶜᵖ(Values)}
 }
 func NewGlVertexAttribI4ui(Index AttributeLocation, X GLuint, Y GLuint, Z GLuint, W GLuint) *GlVertexAttribI4ui {
 	return &GlVertexAttribI4ui{Index: Index, X: X, Y: Y, Z: Z, W: W}
 }
 func NewGlVertexAttribI4uiv(Index AttributeLocation, Values memory.Pointer) *GlVertexAttribI4uiv {
-	return &GlVertexAttribI4uiv{Index: Index, Values: GLuintᶜᵖ{Pointer: Values}}
+	return &GlVertexAttribI4uiv{Index: Index, Values: GLuintᶜᵖ(Values)}
 }
 func NewGlVertexAttribIFormat(Index AttributeLocation, Size GLint, Type GLenum, Relativeoffset GLuint) *GlVertexAttribIFormat {
 	return &GlVertexAttribIFormat{Index: Index, Size: Size, Type: Type, Relativeoffset: Relativeoffset}
 }
 func NewGlVertexAttribIPointer(Location AttributeLocation, Size GLint, Type GLenum, Stride GLsizei, Data memory.Pointer) *GlVertexAttribIPointer {
-	return &GlVertexAttribIPointer{Location: Location, Size: Size, Type: Type, Stride: Stride, Data: VertexPointer{Pointer: Data}}
+	return &GlVertexAttribIPointer{Location: Location, Size: Size, Type: Type, Stride: Stride, Data: VertexPointer(Data)}
 }
 func NewGlVertexAttribPointer(Location AttributeLocation, Size GLint, Type GLenum, Normalized GLboolean, Stride GLsizei, Data memory.Pointer) *GlVertexAttribPointer {
-	return &GlVertexAttribPointer{Location: Location, Size: Size, Type: Type, Normalized: Normalized, Stride: Stride, Data: VertexPointer{Pointer: Data}}
+	return &GlVertexAttribPointer{Location: Location, Size: Size, Type: Type, Normalized: Normalized, Stride: Stride, Data: VertexPointer(Data)}
 }
 func NewGlVertexBindingDivisor(Binding_index VertexBufferBindingIndex, Divisor GLuint) *GlVertexBindingDivisor {
 	return &GlVertexBindingDivisor{BindingIndex: Binding_index, Divisor: Divisor}
 }
 func NewEglInitialize(Dpy memory.Pointer, Major memory.Pointer, Minor memory.Pointer, Result EGLBoolean) *EglInitialize {
-	return &EglInitialize{Dpy: EGLDisplay{Pointer: Dpy}, Major: EGLintᵖ{Pointer: Major}, Minor: EGLintᵖ{Pointer: Minor}, Result: Result}
+	return &EglInitialize{Dpy: EGLDisplay(Dpy), Major: EGLintᵖ(Major), Minor: EGLintᵖ(Minor), Result: Result}
 }
 func NewEglCreateContext(Display memory.Pointer, Config memory.Pointer, Share_context memory.Pointer, Attrib_list memory.Pointer, Result memory.Pointer) *EglCreateContext {
-	return &EglCreateContext{Display: EGLDisplay{Pointer: Display}, Config: EGLConfig{Pointer: Config}, ShareContext: EGLContext{Pointer: Share_context}, AttribList: EGLintᵖ{Pointer: Attrib_list}, Result: EGLContext{Pointer: Result}}
+	return &EglCreateContext{Display: EGLDisplay(Display), Config: EGLConfig(Config), ShareContext: EGLContext(Share_context), AttribList: EGLintᵖ(Attrib_list), Result: EGLContext(Result)}
 }
 func NewEglMakeCurrent(Display memory.Pointer, Draw memory.Pointer, Read memory.Pointer, Context memory.Pointer, Result EGLBoolean) *EglMakeCurrent {
-	return &EglMakeCurrent{Display: EGLDisplay{Pointer: Display}, Draw: EGLSurface{Pointer: Draw}, Read: EGLSurface{Pointer: Read}, Context: EGLContext{Pointer: Context}, Result: Result}
+	return &EglMakeCurrent{Display: EGLDisplay(Display), Draw: EGLSurface(Draw), Read: EGLSurface(Read), Context: EGLContext(Context), Result: Result}
 }
 func NewEglSwapBuffers(Display memory.Pointer, Surface memory.Pointer, Result EGLBoolean) *EglSwapBuffers {
-	return &EglSwapBuffers{Display: EGLDisplay{Pointer: Display}, Surface: Voidᵖ{Pointer: Surface}, Result: Result}
+	return &EglSwapBuffers{Display: EGLDisplay(Display), Surface: Voidᵖ(Surface), Result: Result}
 }
 func NewEglQuerySurface(Display memory.Pointer, Surface memory.Pointer, Attribute EGLint, Value memory.Pointer, Result EGLBoolean) *EglQuerySurface {
-	return &EglQuerySurface{Display: EGLDisplay{Pointer: Display}, Surface: EGLSurface{Pointer: Surface}, Attribute: Attribute, Value: EGLintᵖ{Pointer: Value}, Result: Result}
+	return &EglQuerySurface{Display: EGLDisplay(Display), Surface: EGLSurface(Surface), Attribute: Attribute, Value: EGLintᵖ(Value), Result: Result}
 }
 func NewGlXCreateContext(Dpy memory.Pointer, Vis memory.Pointer, ShareList memory.Pointer, Direct bool, Result memory.Pointer) *GlXCreateContext {
-	return &GlXCreateContext{Dpy: Voidᵖ{Pointer: Dpy}, Vis: Voidᵖ{Pointer: Vis}, ShareList: GLXContext{Pointer: ShareList}, Direct: Direct, Result: GLXContext{Pointer: Result}}
+	return &GlXCreateContext{Dpy: Voidᵖ(Dpy), Vis: Voidᵖ(Vis), ShareList: GLXContext(ShareList), Direct: Direct, Result: GLXContext(Result)}
 }
 func NewGlXCreateNewContext(Display memory.Pointer, Fbconfig memory.Pointer, Type uint32, Shared memory.Pointer, Direct bool, Result memory.Pointer) *GlXCreateNewContext {
-	return &GlXCreateNewContext{Display: Voidᵖ{Pointer: Display}, Fbconfig: Voidᵖ{Pointer: Fbconfig}, Type: Type, Shared: GLXContext{Pointer: Shared}, Direct: Direct, Result: GLXContext{Pointer: Result}}
+	return &GlXCreateNewContext{Display: Voidᵖ(Display), Fbconfig: Voidᵖ(Fbconfig), Type: Type, Shared: GLXContext(Shared), Direct: Direct, Result: GLXContext(Result)}
 }
 func NewGlXMakeContextCurrent(Display memory.Pointer, Draw memory.Pointer, Read memory.Pointer, Ctx memory.Pointer, Result Bool) *GlXMakeContextCurrent {
-	return &GlXMakeContextCurrent{Display: Voidᵖ{Pointer: Display}, Draw: GLXDrawable{Pointer: Draw}, Read: GLXDrawable{Pointer: Read}, Ctx: GLXContext{Pointer: Ctx}, Result: Result}
+	return &GlXMakeContextCurrent{Display: Voidᵖ(Display), Draw: GLXDrawable(Draw), Read: GLXDrawable(Read), Ctx: GLXContext(Ctx), Result: Result}
 }
 func NewGlXMakeCurrent(Display memory.Pointer, Drawable memory.Pointer, Ctx memory.Pointer, Result Bool) *GlXMakeCurrent {
-	return &GlXMakeCurrent{Display: Voidᵖ{Pointer: Display}, Drawable: GLXDrawable{Pointer: Drawable}, Ctx: GLXContext{Pointer: Ctx}, Result: Result}
+	return &GlXMakeCurrent{Display: Voidᵖ(Display), Drawable: GLXDrawable(Drawable), Ctx: GLXContext(Ctx), Result: Result}
 }
 func NewGlXSwapBuffers(Display memory.Pointer, Drawable memory.Pointer) *GlXSwapBuffers {
-	return &GlXSwapBuffers{Display: Voidᵖ{Pointer: Display}, Drawable: GLXDrawable{Pointer: Drawable}}
+	return &GlXSwapBuffers{Display: Voidᵖ(Display), Drawable: GLXDrawable(Drawable)}
 }
 func NewGlXQueryDrawable(Display memory.Pointer, Draw memory.Pointer, Attribute int64, Value memory.Pointer, Result int64) *GlXQueryDrawable {
-	return &GlXQueryDrawable{Display: Voidᵖ{Pointer: Display}, Draw: GLXDrawable{Pointer: Draw}, Attribute: Attribute, Value: Intᵖ{Pointer: Value}, Result: Result}
+	return &GlXQueryDrawable{Display: Voidᵖ(Display), Draw: GLXDrawable(Draw), Attribute: Attribute, Value: Intᵖ(Value), Result: Result}
 }
 func NewWglCreateContext(Hdc memory.Pointer, Result memory.Pointer) *WglCreateContext {
-	return &WglCreateContext{Hdc: HDC{Pointer: Hdc}, Result: HGLRC{Pointer: Result}}
+	return &WglCreateContext{Hdc: HDC(Hdc), Result: HGLRC(Result)}
 }
 func NewWglCreateContextAttribsARB(Hdc memory.Pointer, HShareContext memory.Pointer, AttribList memory.Pointer, Result memory.Pointer) *WglCreateContextAttribsARB {
-	return &WglCreateContextAttribsARB{Hdc: HDC{Pointer: Hdc}, HShareContext: HGLRC{Pointer: HShareContext}, AttribList: Intᵖ{Pointer: AttribList}, Result: HGLRC{Pointer: Result}}
+	return &WglCreateContextAttribsARB{Hdc: HDC(Hdc), HShareContext: HGLRC(HShareContext), AttribList: Intᵖ(AttribList), Result: HGLRC(Result)}
 }
 func NewWglMakeCurrent(Hdc memory.Pointer, Hglrc memory.Pointer, Result BOOL) *WglMakeCurrent {
-	return &WglMakeCurrent{Hdc: HDC{Pointer: Hdc}, Hglrc: HGLRC{Pointer: Hglrc}, Result: Result}
+	return &WglMakeCurrent{Hdc: HDC(Hdc), Hglrc: HGLRC(Hglrc), Result: Result}
 }
 func NewWglSwapBuffers(Hdc memory.Pointer) *WglSwapBuffers {
-	return &WglSwapBuffers{Hdc: HDC{Pointer: Hdc}}
+	return &WglSwapBuffers{Hdc: HDC(Hdc)}
 }
 func NewCGLCreateContext(Pix memory.Pointer, Share memory.Pointer, Ctx memory.Pointer, Result CGLError) *CGLCreateContext {
-	return &CGLCreateContext{Pix: CGLTexelFormatObj{Pointer: Pix}, Share: CGLContextObj{Pointer: Share}, Ctx: CGLContextObjᵖ{Pointer: Ctx}, Result: Result}
+	return &CGLCreateContext{Pix: CGLTexelFormatObj(Pix), Share: CGLContextObj(Share), Ctx: CGLContextObjᵖ(Ctx), Result: Result}
 }
 func NewCGLSetCurrentContext(Ctx memory.Pointer, Result CGLError) *CGLSetCurrentContext {
-	return &CGLSetCurrentContext{Ctx: CGLContextObj{Pointer: Ctx}, Result: Result}
+	return &CGLSetCurrentContext{Ctx: CGLContextObj(Ctx), Result: Result}
 }
 func NewCGLGetSurface(Ctx memory.Pointer, Cid memory.Pointer, Wid memory.Pointer, Sid memory.Pointer, Result int64) *CGLGetSurface {
-	return &CGLGetSurface{Ctx: CGLContextObj{Pointer: Ctx}, Cid: CGSConnectionIDᵖ{Pointer: Cid}, Wid: CGSWindowIDᵖ{Pointer: Wid}, Sid: CGSSurfaceIDᵖ{Pointer: Sid}, Result: Result}
+	return &CGLGetSurface{Ctx: CGLContextObj(Ctx), Cid: CGSConnectionIDᵖ(Cid), Wid: CGSWindowIDᵖ(Wid), Sid: CGSSurfaceIDᵖ(Sid), Result: Result}
 }
 func NewCGSGetSurfaceBounds(Cid memory.Pointer, Wid CGSWindowID, Sid CGSSurfaceID, Bounds memory.Pointer, Result int64) *CGSGetSurfaceBounds {
-	return &CGSGetSurfaceBounds{Cid: CGSConnectionID{Pointer: Cid}, Wid: Wid, Sid: Sid, Bounds: F64ᵖ{Pointer: Bounds}, Result: Result}
+	return &CGSGetSurfaceBounds{Cid: CGSConnectionID(Cid), Wid: Wid, Sid: Sid, Bounds: F64ᵖ(Bounds), Result: Result}
 }
 func NewCGLFlushDrawable(Ctx memory.Pointer, Result CGLError) *CGLFlushDrawable {
-	return &CGLFlushDrawable{Ctx: CGLContextObj{Pointer: Ctx}, Result: Result}
+	return &CGLFlushDrawable{Ctx: CGLContextObj(Ctx), Result: Result}
 }
 func NewGlGetQueryObjecti64v(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjecti64v {
-	return &GlGetQueryObjecti64v{Query: Query, Parameter: Parameter, Value: S64ᵖ{Pointer: Value}}
+	return &GlGetQueryObjecti64v{Query: Query, Parameter: Parameter, Value: S64ᵖ(Value)}
 }
 func NewGlGetQueryObjectui64v(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectui64v {
-	return &GlGetQueryObjectui64v{Query: Query, Parameter: Parameter, Value: U64ᵖ{Pointer: Value}}
+	return &GlGetQueryObjectui64v{Query: Query, Parameter: Parameter, Value: U64ᵖ(Value)}
 }
 func NewGlAlphaFunc(Func GLenum, Ref GLfloat) *GlAlphaFunc {
 	return &GlAlphaFunc{Func: Func, Ref: Ref}
@@ -57243,22 +56934,22 @@ func NewGlClientActiveTexture(Texture GLenum) *GlClientActiveTexture {
 	return &GlClientActiveTexture{Texture: Texture}
 }
 func NewGlClipPlanef(P GLenum, Eqn memory.Pointer) *GlClipPlanef {
-	return &GlClipPlanef{P: P, Eqn: GLfloatᶜᵖ{Pointer: Eqn}}
+	return &GlClipPlanef{P: P, Eqn: GLfloatᶜᵖ(Eqn)}
 }
 func NewGlClipPlanefIMG(P GLenum, Eqn memory.Pointer) *GlClipPlanefIMG {
-	return &GlClipPlanefIMG{P: P, Eqn: GLfloatᶜᵖ{Pointer: Eqn}}
+	return &GlClipPlanefIMG{P: P, Eqn: GLfloatᶜᵖ(Eqn)}
 }
 func NewGlClipPlanefOES(Plane GLenum, Equation memory.Pointer) *GlClipPlanefOES {
-	return &GlClipPlanefOES{Plane: Plane, Equation: GLfloatᶜᵖ{Pointer: Equation}}
+	return &GlClipPlanefOES{Plane: Plane, Equation: GLfloatᶜᵖ(Equation)}
 }
 func NewGlClipPlanex(Plane GLenum, Equation memory.Pointer) *GlClipPlanex {
-	return &GlClipPlanex{Plane: Plane, Equation: GLfixedᶜᵖ{Pointer: Equation}}
+	return &GlClipPlanex{Plane: Plane, Equation: GLfixedᶜᵖ(Equation)}
 }
 func NewGlClipPlanexIMG(P GLenum, Eqn memory.Pointer) *GlClipPlanexIMG {
-	return &GlClipPlanexIMG{P: P, Eqn: GLfixedᶜᵖ{Pointer: Eqn}}
+	return &GlClipPlanexIMG{P: P, Eqn: GLfixedᶜᵖ(Eqn)}
 }
 func NewGlClipPlanexOES(Plane GLenum, Equation memory.Pointer) *GlClipPlanexOES {
-	return &GlClipPlanexOES{Plane: Plane, Equation: GLfixedᶜᵖ{Pointer: Equation}}
+	return &GlClipPlanexOES{Plane: Plane, Equation: GLfixedᶜᵖ(Equation)}
 }
 func NewGlColor4f(Red GLfloat, Green GLfloat, Blue GLfloat, Alpha GLfloat) *GlColor4f {
 	return &GlColor4f{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
@@ -57273,16 +56964,16 @@ func NewGlColor4xOES(Red GLfixed, Green GLfixed, Blue GLfixed, Alpha GLfixed) *G
 	return &GlColor4xOES{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
 }
 func NewGlColorPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlColorPointer {
-	return &GlColorPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlColorPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlCurrentPaletteMatrixOES(Matrixpaletteindex GLuint) *GlCurrentPaletteMatrixOES {
 	return &GlCurrentPaletteMatrixOES{Matrixpaletteindex: Matrixpaletteindex}
 }
 func NewGlDeleteFramebuffersOES(N GLsizei, Framebuffers memory.Pointer) *GlDeleteFramebuffersOES {
-	return &GlDeleteFramebuffersOES{N: N, Framebuffers: GLuintᶜᵖ{Pointer: Framebuffers}}
+	return &GlDeleteFramebuffersOES{N: N, Framebuffers: GLuintᶜᵖ(Framebuffers)}
 }
 func NewGlDeleteRenderbuffersOES(N GLsizei, Renderbuffers memory.Pointer) *GlDeleteRenderbuffersOES {
-	return &GlDeleteRenderbuffersOES{N: N, Renderbuffers: GLuintᶜᵖ{Pointer: Renderbuffers}}
+	return &GlDeleteRenderbuffersOES{N: N, Renderbuffers: GLuintᶜᵖ(Renderbuffers)}
 }
 func NewGlDepthRangefOES(N GLclampf, F GLclampf) *GlDepthRangefOES {
 	return &GlDepthRangefOES{N: N, F: F}
@@ -57300,25 +56991,25 @@ func NewGlDrawTexfOES(X GLfloat, Y GLfloat, Z GLfloat, Width GLfloat, Height GLf
 	return &GlDrawTexfOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
 }
 func NewGlDrawTexfvOES(Coords memory.Pointer) *GlDrawTexfvOES {
-	return &GlDrawTexfvOES{Coords: GLfloatᶜᵖ{Pointer: Coords}}
+	return &GlDrawTexfvOES{Coords: GLfloatᶜᵖ(Coords)}
 }
 func NewGlDrawTexiOES(X GLint, Y GLint, Z GLint, Width GLint, Height GLint) *GlDrawTexiOES {
 	return &GlDrawTexiOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
 }
 func NewGlDrawTexivOES(Coords memory.Pointer) *GlDrawTexivOES {
-	return &GlDrawTexivOES{Coords: GLintᶜᵖ{Pointer: Coords}}
+	return &GlDrawTexivOES{Coords: GLintᶜᵖ(Coords)}
 }
 func NewGlDrawTexsOES(X GLshort, Y GLshort, Z GLshort, Width GLshort, Height GLshort) *GlDrawTexsOES {
 	return &GlDrawTexsOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
 }
 func NewGlDrawTexsvOES(Coords memory.Pointer) *GlDrawTexsvOES {
-	return &GlDrawTexsvOES{Coords: GLshortᶜᵖ{Pointer: Coords}}
+	return &GlDrawTexsvOES{Coords: GLshortᶜᵖ(Coords)}
 }
 func NewGlDrawTexxOES(X GLfixed, Y GLfixed, Z GLfixed, Width GLfixed, Height GLfixed) *GlDrawTexxOES {
 	return &GlDrawTexxOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
 }
 func NewGlDrawTexxvOES(Coords memory.Pointer) *GlDrawTexxvOES {
-	return &GlDrawTexxvOES{Coords: GLfixedᶜᵖ{Pointer: Coords}}
+	return &GlDrawTexxvOES{Coords: GLfixedᶜᵖ(Coords)}
 }
 func NewGlEnableClientState(Array GLenum) *GlEnableClientState {
 	return &GlEnableClientState{Array: Array}
@@ -57327,7 +57018,7 @@ func NewGlFogf(Pname GLenum, Param GLfloat) *GlFogf {
 	return &GlFogf{Pname: Pname, Param: Param}
 }
 func NewGlFogfv(Pname GLenum, Params memory.Pointer) *GlFogfv {
-	return &GlFogfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlFogfv{Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlFogx(Pname GLenum, Param GLfixed) *GlFogx {
 	return &GlFogx{Pname: Pname, Param: Param}
@@ -57336,10 +57027,10 @@ func NewGlFogxOES(Pname GLenum, Param GLfixed) *GlFogxOES {
 	return &GlFogxOES{Pname: Pname, Param: Param}
 }
 func NewGlFogxv(Pname GLenum, Param memory.Pointer) *GlFogxv {
-	return &GlFogxv{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlFogxv{Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlFogxvOES(Pname GLenum, Param memory.Pointer) *GlFogxvOES {
-	return &GlFogxvOES{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlFogxvOES{Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlFramebufferRenderbufferOES(Target GLenum, Attachment GLenum, Renderbuffertarget GLenum, Renderbuffer GLuint) *GlFramebufferRenderbufferOES {
 	return &GlFramebufferRenderbufferOES{Target: Target, Attachment: Attachment, Renderbuffertarget: Renderbuffertarget, Renderbuffer: Renderbuffer}
@@ -57360,82 +57051,82 @@ func NewGlFrustumxOES(L GLfixed, R GLfixed, B GLfixed, T GLfixed, N GLfixed, F G
 	return &GlFrustumxOES{L: L, R: R, B: B, T: T, N: N, F: F}
 }
 func NewGlGenFramebuffersOES(N GLsizei, Framebuffers memory.Pointer) *GlGenFramebuffersOES {
-	return &GlGenFramebuffersOES{N: N, Framebuffers: GLuintᵖ{Pointer: Framebuffers}}
+	return &GlGenFramebuffersOES{N: N, Framebuffers: GLuintᵖ(Framebuffers)}
 }
 func NewGlGenRenderbuffersOES(N GLsizei, Renderbuffers memory.Pointer) *GlGenRenderbuffersOES {
-	return &GlGenRenderbuffersOES{N: N, Renderbuffers: GLuintᵖ{Pointer: Renderbuffers}}
+	return &GlGenRenderbuffersOES{N: N, Renderbuffers: GLuintᵖ(Renderbuffers)}
 }
 func NewGlGenerateMipmapOES(Target GLenum) *GlGenerateMipmapOES {
 	return &GlGenerateMipmapOES{Target: Target}
 }
 func NewGlGetClipPlanef(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanef {
-	return &GlGetClipPlanef{Plane: Plane, Equation: GLfloatᵖ{Pointer: Equation}}
+	return &GlGetClipPlanef{Plane: Plane, Equation: GLfloatᵖ(Equation)}
 }
 func NewGlGetClipPlanefOES(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanefOES {
-	return &GlGetClipPlanefOES{Plane: Plane, Equation: GLfloatᵖ{Pointer: Equation}}
+	return &GlGetClipPlanefOES{Plane: Plane, Equation: GLfloatᵖ(Equation)}
 }
 func NewGlGetClipPlanex(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanex {
-	return &GlGetClipPlanex{Plane: Plane, Equation: GLfixedᵖ{Pointer: Equation}}
+	return &GlGetClipPlanex{Plane: Plane, Equation: GLfixedᵖ(Equation)}
 }
 func NewGlGetClipPlanexOES(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanexOES {
-	return &GlGetClipPlanexOES{Plane: Plane, Equation: GLfixedᵖ{Pointer: Equation}}
+	return &GlGetClipPlanexOES{Plane: Plane, Equation: GLfixedᵖ(Equation)}
 }
 func NewGlGetFixedv(Pname GLenum, Params memory.Pointer) *GlGetFixedv {
-	return &GlGetFixedv{Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetFixedv{Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetFixedvOES(Pname GLenum, Params memory.Pointer) *GlGetFixedvOES {
-	return &GlGetFixedvOES{Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetFixedvOES{Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetFramebufferAttachmentParameterivOES(Target GLenum, Attachment GLenum, Pname GLenum, Params memory.Pointer) *GlGetFramebufferAttachmentParameterivOES {
-	return &GlGetFramebufferAttachmentParameterivOES{Target: Target, Attachment: Attachment, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetFramebufferAttachmentParameterivOES{Target: Target, Attachment: Attachment, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetLightfv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightfv {
-	return &GlGetLightfv{Light: Light, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetLightfv{Light: Light, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetLightxv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightxv {
-	return &GlGetLightxv{Light: Light, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetLightxv{Light: Light, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetLightxvOES(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightxvOES {
-	return &GlGetLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetMaterialfv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialfv {
-	return &GlGetMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetMaterialxv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialxv {
-	return &GlGetMaterialxv{Face: Face, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetMaterialxv{Face: Face, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetMaterialxvOES(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialxvOES {
-	return &GlGetMaterialxvOES{Face: Face, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetMaterialxvOES{Face: Face, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetRenderbufferParameterivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetRenderbufferParameterivOES {
-	return &GlGetRenderbufferParameterivOES{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetRenderbufferParameterivOES{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexEnvfv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvfv {
-	return &GlGetTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetTexEnviv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnviv {
-	return &GlGetTexEnviv{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexEnviv{Target: Target, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexEnvxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvxv {
-	return &GlGetTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetTexEnvxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvxvOES {
-	return &GlGetTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetTexGenfvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenfvOES {
-	return &GlGetTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+	return &GlGetTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᵖ(Params)}
 }
 func NewGlGetTexGenivOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenivOES {
-	return &GlGetTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+	return &GlGetTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᵖ(Params)}
 }
 func NewGlGetTexGenxvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenxvOES {
-	return &GlGetTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetTexParameterxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterxv {
-	return &GlGetTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlGetTexParameterxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterxvOES {
-	return &GlGetTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+	return &GlGetTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ(Params)}
 }
 func NewGlIsFramebufferOES(Framebuffer GLuint, Result GLboolean) *GlIsFramebufferOES {
 	return &GlIsFramebufferOES{Framebuffer: Framebuffer, Result: Result}
@@ -57447,7 +57138,7 @@ func NewGlLightModelf(Pname GLenum, Param GLfloat) *GlLightModelf {
 	return &GlLightModelf{Pname: Pname, Param: Param}
 }
 func NewGlLightModelfv(Pname GLenum, Params memory.Pointer) *GlLightModelfv {
-	return &GlLightModelfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlLightModelfv{Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlLightModelx(Pname GLenum, Param GLfixed) *GlLightModelx {
 	return &GlLightModelx{Pname: Pname, Param: Param}
@@ -57456,16 +57147,16 @@ func NewGlLightModelxOES(Pname GLenum, Param GLfixed) *GlLightModelxOES {
 	return &GlLightModelxOES{Pname: Pname, Param: Param}
 }
 func NewGlLightModelxv(Pname GLenum, Param memory.Pointer) *GlLightModelxv {
-	return &GlLightModelxv{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlLightModelxv{Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlLightModelxvOES(Pname GLenum, Param memory.Pointer) *GlLightModelxvOES {
-	return &GlLightModelxvOES{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlLightModelxvOES{Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlLightf(Light GLenum, Pname GLenum, Param GLfloat) *GlLightf {
 	return &GlLightf{Light: Light, Pname: Pname, Param: Param}
 }
 func NewGlLightfv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightfv {
-	return &GlLightfv{Light: Light, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlLightfv{Light: Light, Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlLightx(Light GLenum, Pname GLenum, Param GLfixed) *GlLightx {
 	return &GlLightx{Light: Light, Pname: Pname, Param: Param}
@@ -57474,10 +57165,10 @@ func NewGlLightxOES(Light GLenum, Pname GLenum, Param GLfixed) *GlLightxOES {
 	return &GlLightxOES{Light: Light, Pname: Pname, Param: Param}
 }
 func NewGlLightxv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightxv {
-	return &GlLightxv{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlLightxv{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlLightxvOES(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightxvOES {
-	return &GlLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlLineWidthx(Width GLfixed) *GlLineWidthx {
 	return &GlLineWidthx{Width: Width}
@@ -57489,13 +57180,13 @@ func NewGlLoadIdentity() *GlLoadIdentity {
 	return &GlLoadIdentity{}
 }
 func NewGlLoadMatrixf(M memory.Pointer) *GlLoadMatrixf {
-	return &GlLoadMatrixf{M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlLoadMatrixf{M: GLfloatᶜᵖ(M)}
 }
 func NewGlLoadMatrixx(M memory.Pointer) *GlLoadMatrixx {
-	return &GlLoadMatrixx{M: GLfixedᶜᵖ{Pointer: M}}
+	return &GlLoadMatrixx{M: GLfixedᶜᵖ(M)}
 }
 func NewGlLoadMatrixxOES(M memory.Pointer) *GlLoadMatrixxOES {
-	return &GlLoadMatrixxOES{M: GLfixedᶜᵖ{Pointer: M}}
+	return &GlLoadMatrixxOES{M: GLfixedᶜᵖ(M)}
 }
 func NewGlLoadPaletteFromModelViewMatrixOES() *GlLoadPaletteFromModelViewMatrixOES {
 	return &GlLoadPaletteFromModelViewMatrixOES{}
@@ -57507,7 +57198,7 @@ func NewGlMaterialf(Face GLenum, Pname GLenum, Param GLfloat) *GlMaterialf {
 	return &GlMaterialf{Face: Face, Pname: Pname, Param: Param}
 }
 func NewGlMaterialfv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlMaterialfv {
-	return &GlMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlMaterialx(Face GLenum, Pname GLenum, Param GLfixed) *GlMaterialx {
 	return &GlMaterialx{Face: Face, Pname: Pname, Param: Param}
@@ -57516,25 +57207,25 @@ func NewGlMaterialxOES(Face GLenum, Pname GLenum, Param GLfixed) *GlMaterialxOES
 	return &GlMaterialxOES{Face: Face, Pname: Pname, Param: Param}
 }
 func NewGlMaterialxv(Face GLenum, Pname GLenum, Param memory.Pointer) *GlMaterialxv {
-	return &GlMaterialxv{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlMaterialxv{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlMaterialxvOES(Face GLenum, Pname GLenum, Param memory.Pointer) *GlMaterialxvOES {
-	return &GlMaterialxvOES{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+	return &GlMaterialxvOES{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ(Param)}
 }
 func NewGlMatrixIndexPointerOES(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlMatrixIndexPointerOES {
-	return &GlMatrixIndexPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlMatrixIndexPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlMatrixMode(Mode GLenum) *GlMatrixMode {
 	return &GlMatrixMode{Mode: Mode}
 }
 func NewGlMultMatrixf(M memory.Pointer) *GlMultMatrixf {
-	return &GlMultMatrixf{M: GLfloatᶜᵖ{Pointer: M}}
+	return &GlMultMatrixf{M: GLfloatᶜᵖ(M)}
 }
 func NewGlMultMatrixx(M memory.Pointer) *GlMultMatrixx {
-	return &GlMultMatrixx{M: GLfixedᶜᵖ{Pointer: M}}
+	return &GlMultMatrixx{M: GLfixedᶜᵖ(M)}
 }
 func NewGlMultMatrixxOES(M memory.Pointer) *GlMultMatrixxOES {
-	return &GlMultMatrixxOES{M: GLfixedᶜᵖ{Pointer: M}}
+	return &GlMultMatrixxOES{M: GLfixedᶜᵖ(M)}
 }
 func NewGlMultiTexCoord4f(Target GLenum, V0 GLfloat, V1 GLfloat, V2 GLfloat, V3 GLfloat) *GlMultiTexCoord4f {
 	return &GlMultiTexCoord4f{Target: Target, V0: V0, V1: V1, V2: V2, V3: V3}
@@ -57555,7 +57246,7 @@ func NewGlNormal3xOES(Nx GLfixed, Ny GLfixed, Nz GLfixed) *GlNormal3xOES {
 	return &GlNormal3xOES{Nx: Nx, Ny: Ny, Nz: Nz}
 }
 func NewGlNormalPointer(Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlNormalPointer {
-	return &GlNormalPointer{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlNormalPointer{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlOrthof(L GLfloat, R GLfloat, B GLfloat, T GLfloat, N GLfloat, F GLfloat) *GlOrthof {
 	return &GlOrthof{L: L, R: R, B: B, T: T, N: N, F: F}
@@ -57573,7 +57264,7 @@ func NewGlPointParameterf(Pname GLenum, Param GLfloat) *GlPointParameterf {
 	return &GlPointParameterf{Pname: Pname, Param: Param}
 }
 func NewGlPointParameterfv(Pname GLenum, Params memory.Pointer) *GlPointParameterfv {
-	return &GlPointParameterfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlPointParameterfv{Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlPointParameterx(Pname GLenum, Param GLfixed) *GlPointParameterx {
 	return &GlPointParameterx{Pname: Pname, Param: Param}
@@ -57582,16 +57273,16 @@ func NewGlPointParameterxOES(Pname GLenum, Param GLfixed) *GlPointParameterxOES 
 	return &GlPointParameterxOES{Pname: Pname, Param: Param}
 }
 func NewGlPointParameterxv(Pname GLenum, Params memory.Pointer) *GlPointParameterxv {
-	return &GlPointParameterxv{Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlPointParameterxv{Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlPointParameterxvOES(Pname GLenum, Params memory.Pointer) *GlPointParameterxvOES {
-	return &GlPointParameterxvOES{Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlPointParameterxvOES{Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlPointSize(Size GLfloat) *GlPointSize {
 	return &GlPointSize{Size: Size}
 }
 func NewGlPointSizePointerOES(Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlPointSizePointerOES {
-	return &GlPointSizePointerOES{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlPointSizePointerOES{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlPointSizex(Size GLfixed) *GlPointSizex {
 	return &GlPointSizex{Size: Size}
@@ -57612,7 +57303,7 @@ func NewGlPushMatrix() *GlPushMatrix {
 	return &GlPushMatrix{}
 }
 func NewGlQueryMatrixxOES(Mantissa memory.Pointer, Exponent memory.Pointer, Result GLbitfield) *GlQueryMatrixxOES {
-	return &GlQueryMatrixxOES{Mantissa: GLfixedᵖ{Pointer: Mantissa}, Exponent: GLintᵖ{Pointer: Exponent}, Result: Result}
+	return &GlQueryMatrixxOES{Mantissa: GLfixedᵖ(Mantissa), Exponent: GLintᵖ(Exponent), Result: Result}
 }
 func NewGlRenderbufferStorageOES(Target GLenum, Internalformat GLenum, Width GLsizei, Height GLsizei) *GlRenderbufferStorageOES {
 	return &GlRenderbufferStorageOES{Target: Target, Internalformat: Internalformat, Width: Width, Height: Height}
@@ -57645,19 +57336,19 @@ func NewGlShadeModel(Mode GLenum) *GlShadeModel {
 	return &GlShadeModel{Mode: Mode}
 }
 func NewGlTexCoordPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlTexCoordPointer {
-	return &GlTexCoordPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlTexCoordPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlTexEnvf(Target GLenum, Pname GLenum, Param GLfloat) *GlTexEnvf {
 	return &GlTexEnvf{Target: Target, Pname: Pname, Param: Param}
 }
 func NewGlTexEnvfv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvfv {
-	return &GlTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlTexEnvi(Target GLenum, Pname GLenum, Param GLint) *GlTexEnvi {
 	return &GlTexEnvi{Target: Target, Pname: Pname, Param: Param}
 }
 func NewGlTexEnviv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnviv {
-	return &GlTexEnviv{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexEnviv{Target: Target, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexEnvx(Target GLenum, Pname GLenum, Param GLfixed) *GlTexEnvx {
 	return &GlTexEnvx{Target: Target, Pname: Pname, Param: Param}
@@ -57666,28 +57357,28 @@ func NewGlTexEnvxOES(Target GLenum, Pname GLenum, Param GLfixed) *GlTexEnvxOES {
 	return &GlTexEnvxOES{Target: Target, Pname: Pname, Param: Param}
 }
 func NewGlTexEnvxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvxv {
-	return &GlTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlTexEnvxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvxvOES {
-	return &GlTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlTexGenfOES(Coord GLenum, Pname GLenum, Param GLfloat) *GlTexGenfOES {
 	return &GlTexGenfOES{Coord: Coord, Pname: Pname, Param: Param}
 }
 func NewGlTexGenfvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenfvOES {
-	return &GlTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+	return &GlTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᶜᵖ(Params)}
 }
 func NewGlTexGeniOES(Coord GLenum, Pname GLenum, Param GLint) *GlTexGeniOES {
 	return &GlTexGeniOES{Coord: Coord, Pname: Pname, Param: Param}
 }
 func NewGlTexGenivOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenivOES {
-	return &GlTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+	return &GlTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᶜᵖ(Params)}
 }
 func NewGlTexGenxOES(Coord GLenum, Pname GLenum, Param GLfixed) *GlTexGenxOES {
 	return &GlTexGenxOES{Coord: Coord, Pname: Pname, Param: Param}
 }
 func NewGlTexGenxvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenxvOES {
-	return &GlTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlTexParameterx(Target GLenum, Pname GLenum, Param GLfixed) *GlTexParameterx {
 	return &GlTexParameterx{Target: Target, Pname: Pname, Param: Param}
@@ -57696,10 +57387,10 @@ func NewGlTexParameterxOES(Target GLenum, Pname GLenum, Param GLfixed) *GlTexPar
 	return &GlTexParameterxOES{Target: Target, Pname: Pname, Param: Param}
 }
 func NewGlTexParameterxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterxv {
-	return &GlTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlTexParameterxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterxvOES {
-	return &GlTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+	return &GlTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ(Params)}
 }
 func NewGlTranslatef(X GLfloat, Y GLfloat, Z GLfloat) *GlTranslatef {
 	return &GlTranslatef{X: X, Y: Y, Z: Z}
@@ -57711,31 +57402,31 @@ func NewGlTranslatexOES(X GLfixed, Y GLfixed, Z GLfixed) *GlTranslatexOES {
 	return &GlTranslatexOES{X: X, Y: Y, Z: Z}
 }
 func NewGlVertexPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlVertexPointer {
-	return &GlVertexPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlVertexPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlWeightPointerOES(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlWeightPointerOES {
-	return &GlWeightPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+	return &GlWeightPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer)}
 }
 func NewGlColorPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlColorPointerBounds {
-	return &GlColorPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlColorPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlNormalPointerBounds(Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlNormalPointerBounds {
-	return &GlNormalPointerBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlNormalPointerBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlTexCoordPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlTexCoordPointerBounds {
-	return &GlTexCoordPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlTexCoordPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlVertexPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlVertexPointerBounds {
-	return &GlVertexPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlVertexPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlPointSizePointerOESBounds(Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlPointSizePointerOESBounds {
-	return &GlPointSizePointerOESBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlPointSizePointerOESBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlMatrixIndexPointerOESBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlMatrixIndexPointerOESBounds {
-	return &GlMatrixIndexPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlMatrixIndexPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewGlWeightPointerOESBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlWeightPointerOESBounds {
-	return &GlWeightPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+	return &GlWeightPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ(Pointer), Count: Count}
 }
 func NewArchitecture(Pointer_alignment uint32, Pointer_size uint32, Integer_size uint32, Little_endian bool) *Architecture {
 	return &Architecture{PointerAlignment: Pointer_alignment, PointerSize: Pointer_size, IntegerSize: Integer_size, LittleEndian: Little_endian}
@@ -57750,7 +57441,7 @@ func NewSwitchThread(ThreadID ThreadID) *SwitchThread {
 	return &SwitchThread{ThreadID: ThreadID}
 }
 func NewContextInfo(Constant_count uint32, Constant_names memory.Pointer, Constant_offsets memory.Pointer, Constant_sizes memory.Pointer, Constant_data memory.Pointer, Backbuffer_width GLsizei, Backbuffer_height GLsizei, Backbuffer_color_fmt GLenum, Backbuffer_depth_fmt GLenum, Backbuffer_stencil_fmt GLenum, Reset_viewport_scissor bool, Preserve_buffers_on_swap bool) *ContextInfo {
-	return &ContextInfo{ConstantCount: Constant_count, ConstantNames: GLenumᵖ{Pointer: Constant_names}, ConstantOffsets: U32ᵖ{Pointer: Constant_offsets}, ConstantSizes: U32ᵖ{Pointer: Constant_sizes}, ConstantData: U8ᵖ{Pointer: Constant_data}, BackbufferWidth: Backbuffer_width, BackbufferHeight: Backbuffer_height, BackbufferColorFmt: Backbuffer_color_fmt, BackbufferDepthFmt: Backbuffer_depth_fmt, BackbufferStencilFmt: Backbuffer_stencil_fmt, ResetViewportScissor: Reset_viewport_scissor, PreserveBuffersOnSwap: Preserve_buffers_on_swap}
+	return &ContextInfo{ConstantCount: Constant_count, ConstantNames: GLenumᵖ(Constant_names), ConstantOffsets: U32ᵖ(Constant_offsets), ConstantSizes: U32ᵖ(Constant_sizes), ConstantData: U8ᵖ(Constant_data), BackbufferWidth: Backbuffer_width, BackbufferHeight: Backbuffer_height, BackbufferColorFmt: Backbuffer_color_fmt, BackbufferDepthFmt: Backbuffer_depth_fmt, BackbufferStencilFmt: Backbuffer_stencil_fmt, ResetViewportScissor: Reset_viewport_scissor, PreserveBuffersOnSwap: Preserve_buffers_on_swap}
 }
 func NewStartTimer(Index uint8) *StartTimer {
 	return &StartTimer{Index: Index}

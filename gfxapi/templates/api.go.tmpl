@@ -164,20 +164,17 @@
   //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
   //    pool identifier.
   {{end}}
-  type {{$ptr_ty}} struct {
-    binary.Generate
-    memory.Pointer
-  }
+  type {{$ptr_ty}} memory.Pointer
 
   // New{{$ptr_ty}} returns a {{$ptr_ty}} that points to addr in the application pool.
   func New{{$ptr_ty}}(addr uint64) {{$ptr_ty}} {
-    return {{$ptr_ty}}{ Pointer: memory.Pointer{ Address: addr, Pool: memory.ApplicationPool } }
+    return {{$ptr_ty}}{ Address: addr, Pool: memory.ApplicationPool }
   }
 
   // ElementSize returns the size in bytes of an element that {{$ptr_ty}} points to.
   func (p {{$ptr_ty}}) ElementSize(ϟs *gfxapi.State) uint64 {
     {{if $el_is_ptr}}
-      if p.Pointer.Pool == memory.ApplicationPool {
+      if p.Pool == memory.ApplicationPool {
         return uint64(ϟs.Architecture.PointerSize)
       } else {
         return 12
@@ -219,7 +216,7 @@
   {{if $el_is_char}}
     // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
     func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-      i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+      i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
       for {
         i++
         if b := d.Uint8(); b == 0 {
@@ -234,7 +231,7 @@
     if start > end {
       panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
     }
-    return {{$slice_ty}}{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start * p.ElementSize(ϟs), Count: end-start}}
+    return {{$slice_ty}}{SliceInfo: SliceInfo{Root: memory.Pointer(p), Base: p.Address + start * p.ElementSize(ϟs), Count: end-start}}
   }
 
   {{if not (GetAnnotation $ "replay_custom_value")}}
@@ -503,7 +500,7 @@
 
   // Index returns a {{$ptr_ty}} to the i'th element in this {{$slice_ty}}.
   func (s {{$slice_ty}}) Index(i uint64, ϟs *gfxapi.State) {{$ptr_ty}} {
-    return {{$ptr_ty}}{ Pointer: memory.Pointer{ Address: s.Base + i * s.ElementSize(ϟs), Pool: s.Root.Pool } }
+    return {{$ptr_ty}}{ Address: s.Base + i * s.ElementSize(ϟs), Pool: s.Root.Pool }
   }
 
   // Slice returns a sub-slice from the {{$slice_ty}} using start and end indices.
@@ -915,7 +912,7 @@
       return &{{$name}} {§
         {{range $p := $c.FullParameters}}
           {{if $p | TypeOf | Underlying | IsPointer}}
-            {{Template "Go.Public" $p.Name}}: {{Template "Go.Type" $p}}{ Pointer: {{Title $p.Name}} },§
+            {{Template "Go.Public" $p.Name}}: {{Template "Go.Type" $p}}({{Title $p.Name}}),§
           {{else}}
             {{Template "Go.Public" $p.Name}}: {{Title $p.Name}},§
           {{end}}

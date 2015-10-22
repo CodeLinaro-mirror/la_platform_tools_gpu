@@ -152,7 +152,7 @@ func (t *tweaker) bindOrSaveVertexArray(version *Version, newArray VertexArrayId
 				} else {
 					t.out.Write(atom.NoID, NewGlDisableVertexAttribArray(location))
 				}
-				t.out.Write(atom.NoID, NewGlVertexAttribPointer(location, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
+				t.out.Write(atom.NoID, NewGlVertexAttribPointer(location, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, memory.Pointer(origVertexAttrib.Pointer)))
 				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID))
 			})
 		}

@@ -269,7 +269,7 @@ func (e externs) stateVariableSize(v GLenum) int32 {
 	case GLenum_GL_GPU_DISJOINT_EXT:
 		return 1
 	default:
-		fmt.Printf("Warning: Unknown size for state variable: %s\n", v.String())
+		fmt.Printf("Warning: Unknown size for state variable: %s\n", v)
 		return 0
 	}
 }

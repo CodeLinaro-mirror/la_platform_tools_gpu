@@ -141,5 +141,5 @@ func imageFormat(format GLenum, ty GLenum) image.Format {
 	case GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC:
 		return image.ETC2_RGBA8_EAC()
 	}
-	panic(fmt.Errorf("Unsupported input format-type pair: (%s, %s)", format.String(), ty.String()))
+	panic(fmt.Errorf("Unsupported input format-type pair: (%s, %s)", format, ty))
 }

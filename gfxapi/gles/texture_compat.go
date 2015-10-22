@@ -33,7 +33,7 @@ func decompressTexImage2D(i atom.ID, a *GlCompressedTexImage2D, s *gfxapi.State,
 
 	data := a.Data
 	if pb := c.BoundBuffers[GLenum_GL_PIXEL_UNPACK_BUFFER]; pb != 0 {
-		base := a.Data.Pointer.Address
+		base := a.Data.Address
 		data = TexturePointer(c.Instances.Buffers[pb].Data.Index(base, s))
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, 0))
 		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, pb))
@@ -82,12 +82,12 @@ func convertTexImage2D(i atom.ID, a *GlTexImage2D, s *gfxapi.State, d database.D
 
 	data := a.Data
 	if pb := c.BoundBuffers[GLenum_GL_PIXEL_UNPACK_BUFFER]; pb != 0 {
-		base := a.Data.Pointer.Address
+		base := a.Data.Address
 		data = TexturePointer(c.Instances.Buffers[pb].Data.Index(base, s))
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, 0))
 		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, pb))
 	} else {
-		if a.Data.Pointer == memory.Nullptr {
+		if memory.Pointer(a.Data) == memory.Nullptr {
 			out.Write(i, NewGlTexImage2D(
 				a.Target,
 				a.Level,
@@ -154,7 +154,7 @@ func convertTexSubImage2D(i atom.ID, a *GlTexSubImage2D, s *gfxapi.State, d data
 
 	data := a.Data
 	if pb := c.BoundBuffers[GLenum_GL_PIXEL_UNPACK_BUFFER]; pb != 0 {
-		base := a.Data.Pointer.Address
+		base := a.Data.Address
 		data = TexturePointer(c.Instances.Buffers[pb].Data.Index(base, s))
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, 0))
 		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_UNPACK_BUFFER, pb))

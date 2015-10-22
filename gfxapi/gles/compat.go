@@ -213,7 +213,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 		case *GlVertexAttribPointer:
 			if a.Type == GLenum_GL_HALF_FLOAT_OES && target.halfFloatOES == unsupported {
 				// Convert GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB.
-				a = NewGlVertexAttribPointer(a.Location, a.Size, GLenum_GL_HALF_FLOAT_ARB, a.Normalized, a.Stride, a.Data.Pointer)
+				a = NewGlVertexAttribPointer(a.Location, a.Size, GLenum_GL_HALF_FLOAT_ARB, a.Normalized, a.Stride, memory.Pointer(a.Data))
 			}
 			if target.vertexArrayObjects == required &&
 				getContext(s).BoundBuffers[GLenum_GL_ARRAY_BUFFER] == 0 {
@@ -257,8 +257,8 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, id))
 
 					// By moving the draw call's observations earlier, populate the element array buffer.
-					size, base := DataTypeSize(a.IndicesType)*int(a.IndicesCount), a.Indices.Pointer
-					glBufferData := NewGlBufferData(GLenum_GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(size), base, GLenum_GL_STATIC_DRAW)
+					size, base := DataTypeSize(a.IndicesType)*int(a.IndicesCount), memory.Pointer(a.Indices)
+					glBufferData := NewGlBufferData(GLenum_GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(size), memory.Pointer(base), GLenum_GL_STATIC_DRAW)
 					glBufferData.extras = a.extras
 					out.Write(atom.NoID, glBufferData)
 
@@ -280,7 +280,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					}
 
 					glDrawElements := *a
-					glDrawElements.Indices.Pointer.Address = 0
+					glDrawElements.Indices.Address = 0
 					glDrawElements.Mutate(s, d, l)
 					out.Write(i, &glDrawElements)
 					return
@@ -291,7 +291,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					// The indices are server-side, so can just be read from the internal
 					// pooled buffer.
 					data := c.Instances.Buffers[ib].Data.Index(0, s)
-					base := uint32(a.Indices.Pointer.Address)
+					base := uint32(a.Indices.Address)
 					limits := e.calcIndexLimits(data, a.IndicesType, base, uint32(a.IndicesCount))
 					defer moveClientVBsToVAs(int(limits.Min), int(limits.Max), i, a, s, c, d, l, out)()
 				}
