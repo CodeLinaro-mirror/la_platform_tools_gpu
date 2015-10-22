@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cyclic
+package cyclic_test
 
 import (
 	"bytes"
@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
@@ -106,20 +107,20 @@ func TestObject(t *testing.T) {
 		},
 	} {
 		b := &bytes.Buffer{}
-		EncodeObject(t, entry, Encoder(vle.Writer(b)), b)
+		EncodeObject(t, entry, cyclic.Encoder(vle.Writer(b)), b)
 		r := bytes.NewReader(entry.Data)
-		DecodeObject(t, entry, Decoder(vle.Reader(r)), r)
+		DecodeObject(t, entry, cyclic.Decoder(vle.Reader(r)), r)
 	}
 }
 
 func EncodeAndDecode(t *testing.T, obj binary.Object) {
 	b := &bytes.Buffer{}
-	e := Encoder(vle.Writer(b))
+	e := cyclic.Encoder(vle.Writer(b))
 	e.Object(obj)
 	if e.Error() != nil {
 		t.Fatal(e.Error())
 	}
-	d := Decoder(vle.Reader(b))
+	d := cyclic.Decoder(vle.Reader(b))
 	got := d.Object()
 	if d.Error() != nil {
 		t.Fatal(d.Error())
@@ -128,9 +129,6 @@ func EncodeAndDecode(t *testing.T, obj binary.Object) {
 		// Note the decoder does not distinguish a nil map or slice from
 		// an empty one. So the tests below confirm nil works.
 		t.Errorf("Expected %v (%T) %p got %v (%T) %p", obj, obj, obj, got, got, got)
-	}
-	if len(d.substack.stack) != 0 {
-		t.Errorf("Stack is not empty after decoding %v", obj)
 	}
 }
 
@@ -210,7 +208,7 @@ func TestNested(t *testing.T) {
 }
 
 func TestUnknownTypeError(t *testing.T) {
-	d := Decoder(vle.Reader(bytes.NewBuffer([]byte{
+	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer([]byte{
 		0x03, // object sid + encoded
 		0x03, // type sid + encoded
 		0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
